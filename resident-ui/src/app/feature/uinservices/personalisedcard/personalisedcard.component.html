@@ -21,27 +21,18 @@
 								<mat-checkbox [disabled]="!data.checked"  id="{{data.maskRequiredLabel[langCode]}}{{i}}" (click)="captureCheckboxValue($event, data,data.maskAttributeName)">{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 							</td>
 							<td *ngIf="data.formatRequired" style="width:50%">
-								<button *ngIf="data.attributeName !== 'addressLine1' " [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
-								<button *ngIf="data.attributeName === 'addressLine1' " [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic2">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
+								<button  [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
 								<mat-menu #basic="matMenu">
-									<!-- <ng-container *ngFor="let data1 of data.formatOption[langCode];"> -->
 									<ng-container *ngFor="let data1 of data.formatOption[langCode];">
-										<!-- (click)="captureCheckboxValue($event, data.label[langCode],data1)" -->
-								  		<button id="{{data1.value}}Btn" mat-menu-item (click)="captureCheckboxValue($event, data,data1)">
-											<mat-checkbox *ngIf="!data1.checked" [checked]="data1.checked" id="{{data1.value}}">{{data1.label}}</mat-checkbox>
-											<span style="display: flex; align-items: center;" *ngIf="data1.checked">
-											<img style="margin-left: -3px;" src="./assets/icons/iconfont/check_box_black_24dp (1).svg"/> &nbsp;
-											{{data1.label}}
-										</span>
+										<button id="{{data1.value}}Btn" mat-menu-item
+											(click)="captureCheckboxValue($event, data,data1)">
+											<div class="check-box-card">
+												<input class="check-box" type="checkbox" [checked]="data1.checked"
+													id="{{data1.value}}" />
+												<label>{{data1.label}}</label>
+											</div>
 										</button>
-								  	</ng-container>
-								</mat-menu>
-								<mat-menu #basic2="matMenu">
-									<ng-container *ngFor="let data1 of data.formatOption[langCode];">
-								  		<button id="{{data1.value}}Btn"  mat-menu-item>
-											<mat-checkbox (click)="captureCheckboxValue($event, data,data1)" id="{{data1.value}}">{{data1.label}}</mat-checkbox>
-										</button>
-								  	</ng-container>
+									</ng-container>
 								</mat-menu>
 							</td>
 						</tr>
@@ -52,16 +43,19 @@
 					<table [style.width] = "width">
 						<tr>
 							<td *ngIf="dataDisplay['photo']">
-								<img [src]="dataDisplay['photo'][0]['value']" alt='' style="margin-left:48%;" width='70px' height='70px'/>
-						   </td>
-						</tr>
-						<tr *ngFor="let value of valuesSelected">
-							<td style='font-weight:600;' *ngIf="dataDisplay[value] && value !== 'photo' ">
-								<!-- <div [innerHTML]="buildHTML | sanitize"></div> -->
-								<p style="margin: 0px; width: 7rem;">{{dataDisplay[value][0]['label']}}:</p>
+								<img [src]="dataDisplay['photo']['value']" alt=''
+									style="margin-left:48%;" width='70px' height='70px' />
 							</td>
-							<td *ngIf="dataDisplay[value] && value !== 'photo' ">
-								<p [style.width] = "attributeWidth" style="margin: 0px;">{{dataDisplay[value][0]['value']}}</p>
+						</tr>
+						<tr *ngFor="let item of valuesSelected">
+							<td style='font-weight:600;'
+								*ngIf="dataDisplay[item] && item !== 'photo' ">
+								<p style="margin: 0px; width: 7rem;">{{dataDisplay[item]['label']}}:
+								</p>
+							</td>
+							<td *ngIf="dataDisplay[item] && item !== 'photo' ">
+								<p [style.width]="attributeWidth" style="margin: 0px;">
+									{{dataDisplay[item]['value']}}</p>
 							</td>
 						</tr>
 					</table>

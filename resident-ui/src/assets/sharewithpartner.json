@@ -15,7 +15,7 @@
 				"eng": "Name Format"
 			},
 			"formatOption":{
-				"eng": [{"label":"Full Name", "value":"fullName","checked":false}]
+				"eng": [{"label":"Full Name", "value":"fullName","checked":true}]
 			},
 			"displaykeyinsharewithpartner":true,
 			"displaykeyinpersonalisedcard":true,
@@ -36,7 +36,7 @@
 				"eng": "Date Format"
 			},
 			"formatOption":{
-				"eng": [{"label":"DD/MM", "value":"DD/MM","checked":false}, {"label":"DD/MM/YYYY", "value":"DD/MM/YYYY","checked":false}]
+				"eng": [{"label":"DD/MM", "value":"DD/MM","checked":false}, {"label":"DD/MM/YYYY", "value":"DD/MM/YYYY","checked":true}]
 			},
 			"displaykeyinsharewithpartner":true,
 			"displaykeyinpersonalisedcard":true,
