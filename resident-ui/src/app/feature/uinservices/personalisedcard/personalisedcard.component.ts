@@ -146,7 +146,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
       });
   }
 
-async  captureCheckboxValue($event: any, data: any, type: any) {
+captureCheckboxValue($event: any, data: any, type: any) {
   this.buildHTML = "";
   if (type === "datacheck") {
     if (data.attributeName.toString() in this.dataDisplay) {
@@ -251,6 +251,7 @@ async  captureCheckboxValue($event: any, data: any, type: any) {
         })
         
         if (data.attributeName === "addressLine1") {
+          let selectedValuesCount = 0;
           if (type["value"] !== 'fullAddress') {
             this.schema.map(eachItem => {
               if (data['attributeName'] === eachItem['attributeName']) {
@@ -279,22 +280,33 @@ async  captureCheckboxValue($event: any, data: any, type: any) {
             }
             value = allValue;
           } else {
-            if(type["checked"]){
               value = this.fullAddress
-            }else{
-              data.checked = false;
-              delete this.dataDisplay[data.attributeName];
-            }
-            data.formatOption[this.langCode].forEach(item =>{
-              item.checked = true;
-            })
+              data.formatOption[this.langCode].forEach(item =>{
+                item.checked = true;
+              })
           }
+
+          for (let eachItem of data.formatOption[this.langCode]){
+            if(!eachItem.checked){
+             selectedValuesCount += 1
+            }
+         }
+         
+         if(selectedValuesCount === data.formatOption[this.langCode].length){
+           data.checked = false;
+           delete this.dataDisplay[data.attributeName];
+           data.formatOption[this.langCode].forEach(item =>{
+            item.checked = true;
+          })
+         $event.closeMenu();
+         }
         }else{
           data.checked = false;
           delete this.dataDisplay[data.attributeName];
           data.formatOption[this.langCode].forEach(item =>{
             item.checked = true;
           })
+         $event.closeMenu();
         }
       }
       if(data.checked){
@@ -302,6 +314,8 @@ async  captureCheckboxValue($event: any, data: any, type: any) {
       }
     }
   }
+
+  $event.stopPropagation()
 
   if (Object.keys(this.dataDisplay).length >= 3) {
     this.downloadBtnDisabled = false

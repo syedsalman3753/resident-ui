@@ -20,16 +20,14 @@
 								<tr>
 									<td style="padding:10px;color: #505050;width: 50%">
 										<mat-checkbox [checked]="data.checked" id="{{data.label[langCode]}}"
-											(click)="stopPropagation($event)"
-											(change)="captureCheckboxValue($event, data, 'datacheck')">{{data.label[langCode]}}
+											(click)="captureCheckboxValue($event, data, 'datacheck')">{{data.label[langCode]}}
 										</mat-checkbox>
 									</td>
 									<td *ngIf="data.maskRequired"
 										style="width:50%;color: #505050;font-size: 16px;padding-left: 1.25rem;">
 										<mat-checkbox [disabled]="!data.checked"
 											id="{{data.maskRequiredLabel[langCode]}}{{i}}"
-											(click)="stopPropagation($event)"
-											(change)="captureCheckboxValue($event, data, data.maskAttributeName)">
+											(click)="captureCheckboxValue($event, data, data.maskAttributeName)">
 											{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 									</td>
 									<td *ngIf="data.formatRequired" style="width:50%">
@@ -39,11 +37,9 @@
 										</button>
 										<mat-menu #basic="matMenu">
 											<ng-container *ngFor="let data1 of data.formatOption[langCode];">
-												<button id="{{data1.value}}Btn" mat-menu-item
-													(click)="captureCheckboxValue($event, data,data1)">
-													<!-- <mat-checkbox [checked]="data1.checked" id="{{data1.value}}">{{data1.label}}</mat-checkbox> -->
+												<button id="{{data1.value}}Btn" mat-menu-item>
 													<div class="check-box-card">
-														<input class="check-box" type="checkbox" [checked]="data1.checked"
+														<input (click)="captureCheckboxValue($event, data,data1)" class="check-box" type="checkbox" [checked]="data1.checked"
 															id="{{data1.value}}" />
 														<label>{{data1.label}}</label>
 													</div>
