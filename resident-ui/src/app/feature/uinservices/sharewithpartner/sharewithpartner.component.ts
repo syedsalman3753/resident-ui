@@ -48,6 +48,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   fullAddress: string = "";
   formatLabels: any;
   isLoading: boolean = true;
+  selectedOprionsFormOptions: object = {};
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
@@ -235,22 +236,16 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       this.schema = this.schema.map(item => {
         if (item.attributeName === data.attributeName) {
           let newItem = { ...item, checked: !item.checked }
-          if (!newItem.checked) {
-            newItem['formatOption'][this.langCode].forEach(eachFormat => {
-              return eachFormat['checked'] = true
-            })
+          if (!newItem.checked && newItem['formatOption']) {
+            newItem['formatOption'][this.langCode] = this.selectedOprionsFormOptions[data.attributeName]
           }
           return newItem
         } else {
           return item
         }
       })
-
-
     } else {
-      console.log("Format1")
       if (!data.formatRequired) {
-        console.log("Format2")
         let value;
         if (this.sharableAttributes[data.attributeName].value === this.userInfo[type]) {
           value = this.userInfo[data.attributeName];
@@ -259,66 +254,98 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         }
         this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": $event.checked, "value": value };
       } else {
-        console.log("Format3")
         let value = "";
+        let allValue = "";
+        let self = this;
         if (typeof this.userInfo[data.attributeName] === "string") {
-          console.log("Format4")
-          value = moment(this.userInfo[data.attributeName]).format(type["value"]);
-        } else {
-          console.log("Format5")
-          let allValue = "";
-          let self = this;
-          if (type["value"] !== 'fullAddress') {
-            this.schema.map(eachItem => {
-              if (data['attributeName'] === eachItem['attributeName']) {
-                eachItem['formatOption'][this.langCode].forEach((item) => {
-                  if (item.checked) {
-                    if (self.userInfo[item.value] !== undefined) {
-                      if (item.value === "postalCode") {
-                        allValue = allValue + self.userInfo[item.value];
-                      } else {
-                        allValue = allValue + self.userInfo[item.value][0].value + ",";
-                      }
-                    }
-                  }
-                  return "";
-                });
-              }
-            });
-            if (allValue.endsWith(',')) {
-              allValue = allValue.replace(/.$/, '')
-            }
-            value = allValue;
-          } else {
-            value = this.fullAddress
-          }
-        }
-        this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": type["value"], "value": value };
-      }
-
-      console.log(this.schema)
-      // if (typeof type !== 'string') {
-      this.schema = this.schema.map(eachItem => {
-        if (data['attributeName'] === eachItem['attributeName']) {
-          eachItem['formatOption'][this.langCode].forEach(item => {
-            if (item.value === type['value']) {
-              return item['checked'] = !item['checked']
-            } else {
-              return item['checked'] = item['checked']
+          // value = moment(this.userInfo[data.attributeName]).format(type["value"]);
+          data.formatOption[this.langCode].forEach(item =>{
+            item.checked = !item.checked
+            if(item.checked){
+              value = moment(this.userInfo[data.attributeName]).format(item["value"]);
             }
           })
+
+        } else {
+          this.schema = this.schema.map(eachItem => {
+            if (data['attributeName'] === eachItem['attributeName']) {
+              eachItem['formatOption'][this.langCode].forEach(item => {
+                if (item.value === type['value']) {
+                  return item['checked'] = !item['checked']
+                } else {
+                  return item['checked'] = item['checked']
+                }
+              })
+            }
+            return eachItem
+          })
+          
+          if (data.attributeName === "addressLine1") {
+            if (type["value"] !== 'fullAddress') {
+              this.schema.map(eachItem => {
+                if (data['attributeName'] === eachItem['attributeName']) {
+                  eachItem['formatOption'][this.langCode].forEach((item) => {
+                    if (item.checked) {
+                      if (self.userInfo[item.value] !== undefined) {
+                        if (item.value === "postalCode") {
+                          allValue = allValue + self.userInfo[item.value];
+                        } else {
+                          allValue = allValue + self.userInfo[item.value][0].value + ",";
+                        }
+                      }
+                    }
+                    return "";
+                  });
+                }
+              });
+              data.formatOption[this.langCode].forEach(item =>{
+                if(item.value === "fullAddress"){
+                  item['checked'] = false;
+                }
+              })
+              
+              if (allValue.endsWith(',')) {
+                allValue = allValue.replace(/.$/, '')
+              }
+              value = allValue;
+            } else {
+              if(type["checked"]){
+                value = this.fullAddress
+              }else{
+                data.checked = false;
+                delete this.sharableAttributes[data.attributeName];
+              }
+              data.formatOption[this.langCode].forEach(item =>{
+                item.checked = true;
+              })
+            }
+          }else{
+            data.checked = false;
+            delete this.sharableAttributes[data.attributeName];
+            data.formatOption[this.langCode].forEach(item =>{
+              item.checked = true;
+            })
+          }
         }
-        return eachItem
-      })
-      console.log(this.schema)
-      console.log(type)
+        if(data.checked){
+          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": type["value"], "value": value };
+        }
+      }
     }
-    // }
 
     if (Object.keys(this.sharableAttributes).length >= 3) {
       this.shareBthDisabled = false
     } else {
       this.shareBthDisabled = true
+    }
+
+    if (!data.checked && typeof type === "string") {
+      if (data.formatRequired) {
+        let formatOptions = data['formatOption'][this.langCode].map(eachItem => {
+          return { ...eachItem }
+        })
+        this.selectedOprionsFormOptions[data['attributeName']] = formatOptions;
+      }
     }
 
     let row = "";
@@ -332,7 +359,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       }
     }
     this.buildHTML = `<html><head></head><body><table>` + rowImage + row + `</table></body></html>`;
-
   }
 
   stopPropagation($event: any) {

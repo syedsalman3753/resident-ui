@@ -504,8 +504,8 @@
         },
         "verifyChannel": {
             "warningMsg": "Your $channel has already been verified.",
-            "emailSuccess": "Dear resident, your $channel has been successfully verified against the the Event ID: $eventId. In order to track the status of the event, you can ",
-            "phoneSuccess": "Dear resident, your $channel has been successfully verified against the the Event ID: $eventId. In order to track the status of the event, you can "
+            "emailSuccess": "Dear resident, your $channel has been successfully verified against the the Event ID: $eventId.",
+            "phoneSuccess": "Dear resident, your $channel has been successfully verified against the the Event ID: $eventId."
         },
         "grievanceRedressal": {
             "successMsg": "Dear resident, your complaint has been successfully sent against the $ticketId.",
