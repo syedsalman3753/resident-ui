@@ -258,14 +258,12 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         let allValue = "";
         let self = this;
         if (typeof this.userInfo[data.attributeName] === "string") {
-          // value = moment(this.userInfo[data.attributeName]).format(type["value"]);
           data.formatOption[this.langCode].forEach(item =>{
             item.checked = !item.checked
             if(item.checked){
               value = moment(this.userInfo[data.attributeName]).format(item["value"]);
             }
           })
-
         } else {
           this.schema = this.schema.map(eachItem => {
             if (data['attributeName'] === eachItem['attributeName']) {
@@ -281,6 +279,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
           })
           
           if (data.attributeName === "addressLine1") {
+            let selectedValuesCount = 0;
             if (type["value"] !== 'fullAddress') {
               this.schema.map(eachItem => {
                 if (data['attributeName'] === eachItem['attributeName']) {
@@ -303,28 +302,39 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                   item['checked'] = false;
                 }
               })
-              
               if (allValue.endsWith(',')) {
                 allValue = allValue.replace(/.$/, '')
               }
               value = allValue;
             } else {
-              if(type["checked"]){
-                value = this.fullAddress
-              }else{
-                data.checked = false;
-                delete this.sharableAttributes[data.attributeName];
-              }
+              value = this.fullAddress
               data.formatOption[this.langCode].forEach(item =>{
                 item.checked = true;
               })
             }
+
+            for (let eachItem of data.formatOption[this.langCode]){
+               if(!eachItem.checked){
+                selectedValuesCount += 1
+               }
+            }
+            
+            if(selectedValuesCount === data.formatOption[this.langCode].length){
+              data.checked = false;
+              delete this.sharableAttributes[data.attributeName];
+              data.formatOption[this.langCode].forEach(item =>{
+                item.checked = true;
+              })
+              $event.closeMenu();
+            }
+
           }else{
             data.checked = false;
             delete this.sharableAttributes[data.attributeName];
             data.formatOption[this.langCode].forEach(item =>{
               item.checked = true;
             })
+            $event.closeMenu();
           }
         }
         if(data.checked){
@@ -332,7 +342,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         }
       }
     }
-
+    $event.stopPropagation();
     if (Object.keys(this.sharableAttributes).length >= 3) {
       this.shareBthDisabled = false
     } else {
@@ -361,9 +371,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.buildHTML = `<html><head></head><body><table>` + rowImage + row + `</table></body></html>`;
   }
 
-  stopPropagation($event: any) {
-    $event.stopPropagation();
-  }
+  // stopPropagation($event: any) {
+  //   $event.stopPropagation();
+  // }
 
   captureDropDownValue(event: any) {
     if (event.source.selected) {
@@ -525,4 +535,5 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   onItemSelected(item: any) {
     this.router.navigate([item]);
   }
+  
 }
