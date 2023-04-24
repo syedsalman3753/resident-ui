@@ -66,11 +66,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     if(item === "UIN Services"){
-      console.log("skipLocationChange false>>>");
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
-       this.router.navigated = false;
+      console.log("LocationChange working>>>");
+      /*this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
+       this.router.navigated = false;*/
        this.router.navigate(["uinservices/dashboard"]);
-      });
+      /*});*/
     }else if(item === "Get Information"){
       this.router.navigate(["regcenter"])
     }else if(item === "Booking an Appointment"){
