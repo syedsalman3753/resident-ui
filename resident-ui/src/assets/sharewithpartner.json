@@ -103,10 +103,10 @@
 			"checked":false
 		},
 		{
-			"attributeName": "addressLine1",
+			"attributeName": "fullAddress",
 			"maskRequired": false,
 			"formatRequired": true,
-			"defaultFormat":"fullAddress",
+			"defaultFormat":"addressLine1,addressLine2,addressLine3,city,region,province,postalCode",
 			"label": {
 				"eng": "Address"
 			},

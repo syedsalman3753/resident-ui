@@ -164,7 +164,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
           value = "Not Available"
         } else {
           if (data.formatRequired) {
-            if (data.attributeName === "addressLine1") {
+            if (data.attributeName === "fullAddress") {
               this.fullAddress = ""
               this.schema.forEach(item => {
                 if (item.attributeName === data.attributeName) {
@@ -250,7 +250,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
           return eachItem
         })
         
-        if (data.attributeName === "addressLine1") {
+        if (data.attributeName === "fullAddress") {
           let selectedValuesCount = 0;
           if (type["value"] !== 'fullAddress') {
             this.schema.map(eachItem => {

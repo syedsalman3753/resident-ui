@@ -194,7 +194,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             value = "Not Available"
           } else {
             if (data.formatRequired) {
-              if (data.attributeName === "addressLine1") {
+              if (data.attributeName === "fullAddress") {
                 this.fullAddress = ""
                 this.schema.forEach(item => {
                   if (item.attributeName === data.attributeName) {
@@ -257,11 +257,13 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         let value = "";
         let allValue = "";
         let self = this;
+        let selectedFormats = "";
         if (typeof this.userInfo[data.attributeName] === "string") {
           data.formatOption[this.langCode].forEach(item =>{
             item.checked = !item.checked
             if(item.checked){
               value = moment(this.userInfo[data.attributeName]).format(item["value"]);
+              selectedFormats = data.attributeName
             }
           })
         } else {
@@ -278,7 +280,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             return eachItem
           })
           
-          if (data.attributeName === "addressLine1") {
+          if (data.attributeName === "fullAddress") {
             let selectedValuesCount = 0;
             if (type["value"] !== 'fullAddress') {
               this.schema.map(eachItem => {
@@ -301,16 +303,22 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 if(item.value === "fullAddress"){
                   item['checked'] = false;
                 }
+                if(item.checked){
+                  selectedFormats += item.value + ",";
+                }
               })
+              selectedFormats = selectedFormats.replace(/.$/, '');
               if (allValue.endsWith(',')) {
-                allValue = allValue.replace(/.$/, '')
+                allValue = allValue.replace(/.$/, '');
               }
+          
               value = allValue;
             } else {
               value = this.fullAddress
               data.formatOption[this.langCode].forEach(item =>{
                 item.checked = true;
               })
+              selectedFormats = data.defaultFormat;
             }
 
             for (let eachItem of data.formatOption[this.langCode]){
@@ -338,7 +346,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
           }
         }
         if(data.checked){
-          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": type["value"], "value": value };
+          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": selectedFormats, "value": value };
         }
       }
     }
