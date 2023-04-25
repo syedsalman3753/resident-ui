@@ -764,10 +764,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    * @param files (Files List)
    */
   prepareFilesList(files: Array<any>, type: string) {
-    var allowedFiles = [".jpg", ".jpeg", ".png", ".pdf"];
+    var allowedFiles = ["image/jpg", "image/jpeg", "image/png", "application/pdf"];
     var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
-    let fileSize = Math.floor(Math.log(files[0].size) / Math.log(1024));
-    if (!regex.test(files[0].name.toLowerCase())) {
+    let fileSize = (files[0].size) / 1048576;
+    if (!allowedFiles.includes(files[0].type)) {
       if (type === "POI") {
         this.isValidFileFormatPOI = true
       } else {
@@ -775,7 +775,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       }
       this.warningMessage = this.popupMessages.updatedemographic.InvalidFormatMsg
     } else {
-      if (fileSize <= 2) {
+      if (fileSize < 2.0) {
         if (type === "POI") {
           this.isValidFileFormatPOI = false;
           for (const item of files) {
