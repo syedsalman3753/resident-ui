@@ -241,6 +241,9 @@ export class DialogComponent implements OnInit {
   logOut(){
     this.redirectService.redirect(window.location.href);
   }
+  logOutBtn(){
+    this.interactionService.sendClickEvent("logOutBtn");
+  }
 }
 
 

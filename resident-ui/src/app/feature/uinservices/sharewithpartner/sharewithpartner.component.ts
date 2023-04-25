@@ -259,9 +259,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         let self = this;
         let selectedFormats = "";
         if (typeof this.userInfo[data.attributeName] === "string") {
-          data.formatOption[this.langCode].forEach(item =>{
+          data.formatOption[this.langCode].forEach(item => {
             item.checked = !item.checked
-            if(item.checked){
+            if (item.checked) {
               value = moment(this.userInfo[data.attributeName]).format(item["value"]);
               selectedFormats = data.attributeName
             }
@@ -279,7 +279,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             }
             return eachItem
           })
-          
           if (data.attributeName === "fullAddress") {
             let selectedValuesCount = 0;
             if (type["value"] !== 'fullAddress') {
@@ -299,11 +298,15 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                   });
                 }
               });
-              data.formatOption[this.langCode].forEach(item =>{
-                if(item.value === "fullAddress"){
+              data.formatOption[this.langCode].forEach(item => {
+                if (item.value === "fullAddress") {
                   item['checked'] = false;
                 }
+
+                if (item.checked) {
+
                 if(item.checked){
+
                   selectedFormats += item.value + ",";
                 }
               })
@@ -311,40 +314,41 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               if (allValue.endsWith(',')) {
                 allValue = allValue.replace(/.$/, '');
               }
-          
+
               value = allValue;
             } else {
               value = this.fullAddress
-              data.formatOption[this.langCode].forEach(item =>{
+              data.formatOption[this.langCode].forEach(item => {
                 item.checked = true;
               })
               selectedFormats = data.defaultFormat;
             }
 
-            for (let eachItem of data.formatOption[this.langCode]){
-               if(!eachItem.checked){
+            for (let eachItem of data.formatOption[this.langCode]) {
+              if (!eachItem.checked) {
                 selectedValuesCount += 1
-               }
+              }
             }
-            
-            if(selectedValuesCount === data.formatOption[this.langCode].length){
+
+            if (selectedValuesCount === data.formatOption[this.langCode].length) {
               data.checked = false;
               delete this.sharableAttributes[data.attributeName];
-              data.formatOption[this.langCode].forEach(item =>{
+              data.formatOption[this.langCode].forEach(item => {
                 item.checked = true;
               })
               $event.closeMenu();
             }
 
-          }else{
+          } else {
             data.checked = false;
             delete this.sharableAttributes[data.attributeName];
-            data.formatOption[this.langCode].forEach(item =>{
+            data.formatOption[this.langCode].forEach(item => {
               item.checked = true;
             })
             $event.closeMenu();
           }
         }
+
         if(data.checked){
           this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": selectedFormats, "value": value };
         }
@@ -393,10 +397,13 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.auditService.audit('RP-033', 'Share credential with partner', 'RP-Share credential with partner', 'Share credential with partner', 'User clicks on "share" button on share credential page');
     if (!this.partnerId) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.needPartner
-      this.showErrorPopup(this.message)
+      this.showValidateMessage(this.message)
     } else if (!this.purpose) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.needPurpose
-      this.showErrorPopup(this.message)
+      this.showValidateMessage(this.message)
+    } else if (!this.purpose.match(/^[0-9a-zA-Z]+$/)) {
+      this.message = this.popupMessages.genericmessage.sharewithpartner.specialCharacters;
+      this.showValidateMessage(this.message)
     } else {
       this.termAndConditions()
     }
@@ -430,11 +437,15 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             if (response["response"]) {
               this.isLoading = false;
               this.aidStatus = response["response"];
-              this.router.navigateByUrl(`uinservices/trackservicerequest?eid=` + this.eventId)
+              this.showMessage();
+              this.router.navigate(["uinservices/dashboard"])
+              // this.router.navigateByUrl(`uinservices/trackservicerequest?eid=` + this.eventId)
               // this.showAcknowledgement = true;
+            } else {
+              this.isLoading = false;
+              this.showErrorPopup(response["errors"])
             }
           });
-        console.log("data>>>" + data);
       },
         err => {
           console.error(err);
@@ -476,13 +487,17 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         });
   }
 
-  showMessage(message: string) {
-    this.message = this.popupMessages.genericmessage.sharewithpartner.successMessage.replace("$eventId", this.aidStatus.eventId)
+  showMessage() {
+    this.message = this.popupMessages.genericmessage.sharewithpartner.sharedSuccessfully.replace("$eventId", this.eventId)
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '550px',
       data: {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
+        clickHere: this.popupMessages.genericmessage.clickHere,
+        clickHere2: this.popupMessages.genericmessage.clickHere2,
+        eventId: this.eventId,
+        trackStatusText: this.popupMessages.genericmessage.trackStatusText,
         message: this.message,
         btnTxt: this.popupMessages.genericmessage.successButton
       }
@@ -496,7 +511,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       if (errorCode === "RES-SER-418") {
         this.dialog
           .open(DialogComponent, {
-            width: '650px',
+            width: '550px',
             data: {
               case: 'accessDenied',
               title: this.popupMessages.genericmessage.errorLabel,
@@ -512,11 +527,11 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       } else {
         this.dialog
           .open(DialogComponent, {
-            width: '650px',
+            width: '550px',
             data: {
               case: 'MESSAGE',
               title: this.popupMessages.genericmessage.errorLabel,
-              message: message,
+              message: this.popupMessages.serverErrors[errorCode],
               btnTxt: this.popupMessages.genericmessage.successButton
             },
             disableClose: true
@@ -524,6 +539,21 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       }
     }, 400)
   }
+
+  showValidateMessage(message: string) {
+    this.dialog
+      .open(DialogComponent, {
+        width: '550px',
+        data: {
+          case: 'MESSAGE',
+          title: this.popupMessages.genericmessage.errorLabel,
+          message: message,
+          btnTxt: this.popupMessages.genericmessage.successButton
+        },
+        disableClose: true
+      });
+  }
+
 
   viewDetails(eventId: any) {
     this.router.navigateByUrl(`uinservices/trackservicerequest?eid=` + eventId);
@@ -543,5 +573,5 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   onItemSelected(item: any) {
     this.router.navigate([item]);
   }
-  
+
 }

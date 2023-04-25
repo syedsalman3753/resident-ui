@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { AuthService } from 'src/app/core/services/authservice.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { InteractionService } from "src/app/core/services/interaction.service";
 
 @Component({
   selector: "app-header",
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   popupMessages:any;
   page = 1;
   selector: string = "#notificationMenu";
+  clickEventSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -50,9 +52,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private headerService: HeaderService,
     private auditService: AuditService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private interactionService: InteractionService
   ) {
-    
+    this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
+      if (id === "logOutBtn") {
+        this.logoutService.logout();
+      }
+    }) 
   }
 
   onScroll() {
@@ -260,7 +267,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   doLogout() {
     this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
-    this.logoutService.logout();
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '500px',
+      data: {
+        case: 'MESSAGE',
+        title: this.popupMessages.genericmessage.warningLabel,
+        message: this.popupMessages.genericmessage.logoutconfirmMessage,
+        clickYesToProceed: this.popupMessages.genericmessage.clickYesToProceed,
+        yesBtnFor:"logOutBtn",
+        btnTxt: this.popupMessages.genericmessage.yesButton,
+        btnTxtNo: this.popupMessages.genericmessage.noButton
+      }
+    });
+    return dialogRef;
   }
 
   showMessage(message:any) {

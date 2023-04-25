@@ -444,6 +444,7 @@
         "dearResident":"Dear Resident,",
         "trackStatusText":"In order to track the status of the event, you can click ",
         "clickYesToProceed":"Click Yes to proceed.",
+        "logoutconfirmMessage":"Are you sure you want to log out.",
         "getMyUin": {
             "downloadedSuccessFully": "Dear resident, your UIN card has been successfully downloaded against the the Event ID: $eventId. The password will be sent to your registered Email ID or phone number. In order to track the status of the event, you can",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
@@ -494,13 +495,11 @@
         "personalisedcardMessages": {
             "downloadedSuccessFully": "Dear resident, your personalized card has been successfully downloaded against the the Event ID: $eventId. The password will be sent to your registered email ID or phone number."
         },
-        "sharewithpartnerMessages": {
-            "choosePartner": "Kindly choose a partner to proceed.",
-            "purpose": "Purpose of sharing your credential is a mandatory field. Kindly mention the purpose of sharing your credential."
-        },
         "sharewithpartner": {
             "needPartner": "Kindly choose a partner to proceed.",
-            "needPurpose": "Purpose of sharing your credential is a mandatory field. Kindly mention the purpose of sharing your credential."
+            "needPurpose": "Purpose of sharing your credential is a mandatory field. Kindly mention the purpose of sharing your credential.",
+            "specialCharacters":"Please enter letters/numbers in order to share.",
+            "sharedSuccessfully":"Dear resident, the data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
         },
         "verifyChannel": {
             "warningMsg": "Your $channel has already been verified.",
@@ -573,6 +572,7 @@
         "RES-SER-461":"Document type is a mandatory field. Kindly choose a document type in order to proceed.",
         "RES-SER-519":"Please enter a different Email ID from the already existing one.",
         "RES-SER-520":"Please enter a different phone number from the already existing one.",
-        "RES-SER-456":"Invalid AID entered. Please enter a valid AID and try again."
+        "RES-SER-456":"Invalid AID entered. Please enter a valid AID and try again.",
+        "RES-SER-515":"Please enter letters/numbers in order to share."
     }
 }
