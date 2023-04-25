@@ -63,7 +63,12 @@ export class AppComponent {
           this.router.navigate(['uinservices/dashboard']); 
         }
       }else{
-        this.router.navigate(['dashboard']); 
+        console.log("response else block>>>"+response["errors"]["length"]);
+        if(response["errors"]["length"]){
+          this.router.navigate(['uinservices/dashboard']); 
+        }else{
+          this.router.navigate(['dashboard']);
+        }
       }
     });
     
