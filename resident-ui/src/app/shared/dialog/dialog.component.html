@@ -133,6 +133,11 @@
           cdkFocusInitial id="confirmmessagepopup" (click)="vidDownload()">
           {{ input.btnTxt }}
         </button></span>
+        <span><button style="background-color:#03A64A; margin-top: 0px;"
+          *ngIf="input.btnTxt === 'Yes' && input.yesBtnFor === 'logOutBtn' " mat-button cdkFocusInitial
+          id="confirmmessagepopup" (click)="logOutBtn()">
+          {{ input.btnTxt }}
+        </button></span>
       <span><button style="margin-top: 0px;" *ngIf="input.btnTxtNo === 'No' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxtNo }}
