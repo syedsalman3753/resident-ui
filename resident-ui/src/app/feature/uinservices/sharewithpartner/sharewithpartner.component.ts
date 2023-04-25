@@ -279,6 +279,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             }
             return eachItem
           })
+
           if (data.attributeName === "fullAddress") {
             let selectedValuesCount = 0;
             if (type["value"] !== 'fullAddress') {
@@ -302,11 +303,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 if (item.value === "fullAddress") {
                   item['checked'] = false;
                 }
-
                 if (item.checked) {
-
-                if(item.checked){
-
                   selectedFormats += item.value + ",";
                 }
               })
@@ -348,8 +345,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             $event.closeMenu();
           }
         }
-
-        if(data.checked){
+        if (data.checked) {
           this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": selectedFormats, "value": value };
         }
       }
