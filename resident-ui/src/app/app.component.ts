@@ -58,17 +58,11 @@ export class AppComponent {
 
     this.dataStorageService.isAuthenticated().subscribe((response) => {
       if(response){
-        console.log("response>>>"+response["errors"]["length"]);
-        if(!response["errors"]["length"]){
-          this.router.navigate(['uinservices/dashboard']); 
-        }
+        console.log("redirect to uinservice>>>>"+JSON.stringify(response));
+        this.router.navigate(['uinservices/dashboard']); 
       }else{
-        console.log("response else block>>>"+response["errors"]["length"]);
-        if(response["errors"]["length"]){
-          this.router.navigate(['uinservices/dashboard']); 
-        }else{
-          this.router.navigate(['dashboard']);
-        }
+        console.log("redirect to dashboard>>>>"+JSON.stringify(response));
+        this.router.navigate(['dashboard']);
       }
     });
     
