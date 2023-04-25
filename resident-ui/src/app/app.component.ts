@@ -58,8 +58,8 @@ export class AppComponent {
 
     this.dataStorageService.isAuthenticated().subscribe((response) => {
       if(response){
-        console.log("response>>>"+response["errors"]);
-        if(!response["errors"]["length"]){
+        console.log("response>>>"+response["response"]);
+        if(response["response"]){
           this.router.navigate(['uinservices/dashboard']); 
         }else{
           console.log("response>>>"+response["errors"]["length"]);
