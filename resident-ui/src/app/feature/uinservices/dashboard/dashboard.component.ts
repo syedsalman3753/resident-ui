@@ -14,7 +14,7 @@ import { HostListener } from '@angular/core';
   templateUrl: "dashboard.component.html",
   styleUrls: ["dashboard.component.css"],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   menuItems: any;
   subscriptions: Subscription[] = [];
   message: any;
@@ -100,10 +100,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         return false;
       }
     }
-  }
-  
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   onItemSelected(item: any) {
