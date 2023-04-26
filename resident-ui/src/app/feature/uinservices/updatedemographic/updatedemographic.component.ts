@@ -733,7 +733,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (index === this.files.length) {
           return;
         } else {
+          if(this.files.length){
           const progressInterval = setInterval(() => {
+            console.log(this.files)
             if (this.files[index].progress === 100) {
               clearInterval(progressInterval);
               this.uploadFilesSimulator(index + 1, type);
@@ -741,6 +743,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               this.files[index].progress += 20;
             }
           }, 200);
+        }
         }
       } else {
         if (index === this.filesPOA.length) {

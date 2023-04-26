@@ -498,7 +498,7 @@
         "sharewithpartner": {
             "needPartner": "Kindly choose a partner to proceed.",
             "needPurpose": "Purpose of sharing your credential is a mandatory field. Kindly mention the purpose of sharing your credential.",
-            "specialCharacters":"Please enter letters/numbers in order to share.",
+            "specialCharacters":"Please enter letters/numbers in order to share your credentials.",
             "sharedSuccessfully":"Dear resident, the data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
         },
         "verifyChannel": {
