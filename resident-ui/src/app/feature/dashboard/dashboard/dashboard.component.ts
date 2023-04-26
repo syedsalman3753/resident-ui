@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { AuditService } from "src/app/core/services/audit.service";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
+import { LoginRedirectService } from 'src/app/core/services/loginredirect.service';
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -26,7 +27,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private appConfigService: AppConfigService,
     private auditService: AuditService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private redirectService: LoginRedirectService
   ) {
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
@@ -66,10 +68,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     if(item === "UIN Services"){
-      console.log("changed the first time auto redirection removed>>>");
+      console.log("using login rediret service>>>");
+      this.redirectService.redirect("uinservices/dashboard");
       /*this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
        this.router.navigated = false;*/
-       this.router.navigateByUrl(`uinservices/dashboard`);
+       //this.router.navigateByUrl(`uinservices/dashboard`);
       /*});*/
     }else if(item === "Get Information"){
       this.router.navigate(["regcenter"])
