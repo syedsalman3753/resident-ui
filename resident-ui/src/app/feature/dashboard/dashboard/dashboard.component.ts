@@ -68,13 +68,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     if(item === "UIN Services"){
-      console.log("using login rediret service>>>");
-      //this.router.navigate(["uinservices/dashboard"]);
       this.redirectService.redirect(window.location.href.split("#")[0]+"#/uinservices/dashboard");
-      /*this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
-       this.router.navigated = false;*/
-       //this.router.navigateByUrl(`uinservices/dashboard`);
-      /*});*/
     }else if(item === "Get Information"){
       this.router.navigate(["regcenter"])
     }else if(item === "Booking an Appointment"){
