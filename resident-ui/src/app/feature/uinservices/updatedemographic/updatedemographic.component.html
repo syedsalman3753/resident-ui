@@ -469,7 +469,7 @@
             <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
               <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
               <mat-card-subtitle><input matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
-                  (blur)="captureValue($event, field.attributeName)" /></mat-card-subtitle>
+                  (input)="captureContactValue($event, field.attributeName)" /></mat-card-subtitle>
             </div>
           </mat-grid-tile>
           <mat-grid-tile class="mat-form1">

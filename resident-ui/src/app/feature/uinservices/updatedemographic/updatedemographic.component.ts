@@ -359,11 +359,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       });
   }
 
-  captureConfirmValue(event: any, id: any) {
-    this.sendOtpDisable = this.userId === event.target.value ? false : true;
-    this.updatedingId = id;
-    this.confirmContact = event.target.value;
-  }
 
   sendOTPBtn(id: any) {
     if (id === "email") {
@@ -461,8 +456,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureValue(event: any, formControlName: string, language: string) {
-    this.userId = event.target.value;
-    this.contactTye = formControlName;
     let self = this;
     if (event.target.value !== '') {
       if (event.target.value === "" && this.userInfoClone[formControlName]) {
@@ -478,7 +471,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             self.userInfo[formControlName] = event.target.value;
           } else {
             let index = self.userInfo[formControlName].findIndex(data => data.language.trim() === language.trim());
-            // self.userInfoClone[formControlName][index]["value"] = event.target.value;
             let newData = { "language": language, "value": event.target.value };
             if (formControlName in this.userInfoClone) {
               this.userInfoClone[formControlName].forEach(item => {
@@ -553,6 +545,18 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         self[formControlName]["documenttype"] = event.source.value;
       }
     }
+  }
+
+  captureContactValue(event:any,formControlName){
+    this.userId = event.target.value;
+    this.contactTye = formControlName;
+    this.sendOtpDisable = this.userId === this.confirmContact ? false : true;
+  }
+
+  captureConfirmValue(event: any, id: any) {
+    this.sendOtpDisable = this.userId === event.target.value ? false : true;
+    this.updatedingId = id;
+    this.confirmContact = event.target.value;
   }
 
   updateBtn() {

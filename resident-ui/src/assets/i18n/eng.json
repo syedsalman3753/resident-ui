@@ -372,7 +372,7 @@
     },
     "personalisedcard": {
         "title": "Get Personalised Card",
-        "mainlabel": "Choose the data you want to include the credential. Kindly choose at least 3 attributes to be able to download the card.",
+        "mainlabel": "Choose the data you want to include the credential. Kindly choose at least 3 attributes to be able to proceed.",
         "downloadbutton": "Download",
         "introDescription": "Residents can select the data to be added to their credential. They can preview the chosen data and download it."
     },
@@ -383,7 +383,7 @@
     },
     "sharewithpartner": {
         "title": "Share My Data",
-        "mainlabel": "Choose the data you want to include the credential",
+        "mainlabel": "Choose the data you want to include the credential. Kindly choose at least 3 attributes to be able to proceed.",
         "partnerName": "Authorization Partner Name",
         "sharingReason": "Purpose of sharing your credential",
         "sharingReasonPlaceholder": "Enter the purpose here",
