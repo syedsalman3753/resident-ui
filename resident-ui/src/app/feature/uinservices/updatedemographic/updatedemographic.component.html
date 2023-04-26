@@ -153,7 +153,7 @@
                         <tr *ngIf="displayPOIUpload">
                           <td width="100%" colspan="3">
                             <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POI')">
-                              <input [disabled]="proofOfIdentity.documenttype === undefined " type="file" #fileDropRef
+                              <input (click)="$event.target.value=null" [disabled]="proofOfIdentity.documenttype === undefined " type="file" #fileDropRef
                                 id="fileDropRef" (change)="fileBrowseHandler($event.target.files, 'POI')"
                                 accept=".pdf, .jpg, .jpeg, .png" />
                               <label style="margin-right: 1rem;display: flex;" for="fileDropRef">
@@ -356,7 +356,7 @@
                           <tr *ngIf="displayPOAUpload">
                             <td width="100%" colspan="3">
                               <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POA')">
-                                <input [disabled]="proofOfAddress.documenttype === undefined " type="file" #fileAddRef
+                                <input (click)="$event.target.value=null" [disabled]="proofOfAddress.documenttype === undefined " type="file" #fileAddRef
                                   id="fileAddRef" (change)="fileBrowseHandler($event.target.files, 'POA')"
                                   accept=".pdf, .jpg, .jpeg, .png" />
                                 <label style="margin-right: 1rem;display: flex;" for="fileAddRef">

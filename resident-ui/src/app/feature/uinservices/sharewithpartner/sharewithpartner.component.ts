@@ -397,7 +397,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     } else if (!this.purpose) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.needPurpose
       this.showValidateMessage(this.message)
-    } else if (!this.purpose.match(/^[0-9a-zA-Z]+$/)) {
+    } else if (!this.purpose.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.specialCharacters;
       this.showValidateMessage(this.message)
     } else {
