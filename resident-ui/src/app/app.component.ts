@@ -52,7 +52,7 @@ export class AppComponent {
   // }
   
   ngOnInit() { 
-    this.dataStorageService.isAuthenticated().subscribe((response) => {
+    /*this.dataStorageService.isAuthenticated().subscribe((response) => {
       if(response){
         console.log("response>>>"+response["response"]);
         if(response["response"]){
@@ -65,7 +65,7 @@ export class AppComponent {
         console.log("else>>>"+response["response"]);
         this.router.navigate(['dashboard']);
       }
-    });
+    });*/
     
     if(!localStorage.getItem("langCode")){
       localStorage.setItem("langCode", "eng");

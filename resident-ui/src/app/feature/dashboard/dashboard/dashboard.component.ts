@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     if(item === "UIN Services"){
-      console.log("LocationChange working>>>");
+      console.log("first time auto redirection removed>>>");
       /*this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>{
        this.router.navigated = false;*/
        this.router.navigate(["uinservices/dashboard"]);
