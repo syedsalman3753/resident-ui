@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
@@ -14,7 +14,7 @@ import { HostListener } from '@angular/core';
   templateUrl: "dashboard.component.html",
   styleUrls: ["dashboard.component.css"],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   menuItems: any;
   subscriptions: Subscription[] = [];
   message: any;
@@ -100,6 +100,10 @@ export class DashboardComponent implements OnInit {
         return false;
       }
     }
+  }
+  
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   onItemSelected(item: any) {
