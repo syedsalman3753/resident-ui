@@ -349,6 +349,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.clickEventSubscription.unsubscribe();
     //window.removeEventListener('scroll', this.scroll, true);
   }
 

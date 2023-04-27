@@ -99,7 +99,7 @@
             </button>
             </div>
             <p *ngIf="showWarningMsg" class="warning-message">Please enter letters/numbers in order to search.</p>
-
+            <h3 *ngIf="showMessage" >{{showMesssageText}}</h3>
           </form>
         </div>
         <span class="search-text" *ngIf="searchTextFlag">{{ displayMessage }}</span>
