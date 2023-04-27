@@ -477,6 +477,7 @@
               <mat-card-header><mat-card-title>{{field.labelName[langCode][2]}}</mat-card-title></mat-card-header>
               <mat-card-subtitle><input (input)="captureConfirmValue($event,field.attributeName)" matInput
                   #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" /></mat-card-subtitle>
+                  <p *ngIf="sendOtpDisable && (field.attributeName === updatedingId)" class="warning-message-for-contact">The entered values do not match.</p>
             </div>
           </mat-grid-tile>
           <mat-grid-tile class="mat-form1">

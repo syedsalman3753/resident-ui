@@ -302,3 +302,10 @@ mat-select {
   font-size: 11px;
   margin-top: 5px;
 }
+.warning-message-for-contact{
+  margin: 0px; 
+  color: red; 
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: -14px;
+}

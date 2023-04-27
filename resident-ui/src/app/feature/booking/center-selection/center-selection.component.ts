@@ -58,6 +58,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   centerSelection: any;
   isBlankSpace:boolean = true;
   showWarningMsg:boolean = false;
+  showMesssageText:string=""
 
   constructor(
     public dialog: MatDialog,
@@ -339,6 +340,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
             } else {
               this.totalItems = 0;
               this.showMessage = true;
+              this.showMesssageText = response['errors'][0].message
               this.selectedCentre = null;
             }
           },
