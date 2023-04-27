@@ -184,15 +184,8 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       } else {
         let value = "";
         if (typeof this.userInfo[data.attributeName] === "string") {
-          if (this.userInfo[data.attributeName]) {
-            value = this.userInfo[data.attributeName];
-          } else {
-            value = "Not Available"
-          }
+          value = this.userInfo[data.attributeName];
         } else {
-          if (this.userInfo[data.attributeName] === undefined || this.userInfo[data.attributeName].length < 1) {
-            value = "Not Available"
-          } else {
             if (data.formatRequired) {
               if (data.attributeName === "fullAddress") {
                 this.fullAddress = ""
@@ -222,8 +215,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             } else {
               value = this.userInfo[data.attributeName][0].value;
             }
-
-          }
         }
 
         if (data.formatRequired) {
@@ -291,7 +282,11 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                         if (item.value === "postalCode") {
                           allValue = allValue + self.userInfo[item.value];
                         } else {
-                          allValue = allValue + self.userInfo[item.value][0].value + ",";
+                          this.userInfo[item.value].forEach(eachLang => {
+                              if (eachLang.language === this.langCode) {
+                                allValue = allValue + eachLang.value + ",";
+                              }
+                          })
                         }
                       }
                     }
@@ -299,6 +294,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                   });
                 }
               });
+
               data.formatOption[this.langCode].forEach(item => {
                 if (item.value === "fullAddress") {
                   item['checked'] = false;
@@ -378,10 +374,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     }
     this.buildHTML = `<html><head></head><body><table>` + rowImage + row + `</table></body></html>`;
   }
-
-  // stopPropagation($event: any) {
-  //   $event.stopPropagation();
-  // }
 
   captureDropDownValue(event: any) {
     if (event.source.selected) {

@@ -232,6 +232,7 @@
         "description": "Description",
         "timestamp": "Timestamp",
         "selectAll": "All",
+        "noData":"No results to show",
         "serviceTypeFilter": {
             "ALL": "All",
             "AUTHENTICATION_REQUEST": "Authentication Request",
