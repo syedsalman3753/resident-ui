@@ -114,6 +114,9 @@
 				</mat-expansion-panel>
 			</tr>
 		</table>
+		<div *ngIf="dataAvailable">
+			<h3>{{'viewhistory.noData' | translate}}</h3>
+		</div>
 		<div dir="ltr">
 			<span id="pageSizeOptions" *ngIf="this.totalItems !== 0">
 				<mat-paginator class="demo-paginator" #paginator  (page)="capturePageValue(pageEvent = $event)"

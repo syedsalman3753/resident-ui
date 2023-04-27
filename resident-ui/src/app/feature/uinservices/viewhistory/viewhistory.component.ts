@@ -61,6 +61,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   serviceHistorySelectedValue:any;
   statusHistorySelectedValue:any;
   isLoading:boolean = true;
+  dataAvailable:boolean = false;
 
   constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
     this.dateAdapter.setLocale('en-GB'); 
@@ -137,6 +138,11 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
         this.statusTypeFilter2 = this.appConfigService.getConfig()["resident.view.history.status.filters"].split(',');
         this.pageSize = response["response"]['pageSize']
         this.parsedrodowndata();
+        if(this.responselist.length){
+          this.dataAvailable = false;
+        }else{
+          this.dataAvailable = true;
+        }
       }else{
         this.isLoading = false;
         this.showErrorPopup(response["errors"])

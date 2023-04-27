@@ -160,9 +160,6 @@ captureCheckboxValue($event: any, data: any, type: any) {
           value = "Not Available"
         }
       } else {
-        if (this.userInfo[data.attributeName] === undefined || this.userInfo[data.attributeName].length < 1) {
-          value = "Not Available"
-        } else {
           if (data.formatRequired) {
             if (data.attributeName === "fullAddress") {
               this.fullAddress = ""
@@ -193,7 +190,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
             value = this.userInfo[data.attributeName][0].value;
           }
 
-        }
+        
       }
 
       if (data.formatRequired) {
@@ -228,7 +225,6 @@ captureCheckboxValue($event: any, data: any, type: any) {
       let allValue = "";
       let self = this;
       if (typeof this.userInfo[data.attributeName] === "string") {
-        // value = moment(this.userInfo[data.attributeName]).format(type["value"]);
         data.formatOption[this.langCode].forEach(item =>{
           item.checked = !item.checked
           if(item.checked){
@@ -249,7 +245,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
           }
           return eachItem
         })
-        
+
         if (data.attributeName === "fullAddress") {
           let selectedValuesCount = 0;
           if (type["value"] !== 'fullAddress') {
@@ -261,7 +257,11 @@ captureCheckboxValue($event: any, data: any, type: any) {
                       if (item.value === "postalCode") {
                         allValue = allValue + self.userInfo[item.value];
                       } else {
-                        allValue = allValue + self.userInfo[item.value][0].value + ",";
+                        this.userInfo[item.value].forEach(eachLang => {
+                            if (eachLang.language === this.langCode) {
+                              allValue = allValue + eachLang.value + ",";
+                            }
+                        })
                       }
                     }
                   }
@@ -269,6 +269,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
                 });
               }
             });
+            
             data.formatOption[this.langCode].forEach(item =>{
               if(item.value === "fullAddress"){
                 item['checked'] = false;
