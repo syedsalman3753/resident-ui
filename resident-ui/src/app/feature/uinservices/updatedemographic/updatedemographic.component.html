@@ -477,14 +477,14 @@
               <mat-card-header><mat-card-title>{{field.labelName[langCode][2]}}</mat-card-title></mat-card-header>
               <mat-card-subtitle><input (input)="captureConfirmValue($event,field.attributeName)" matInput
                   #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" /></mat-card-subtitle>
-                  <p *ngIf="sendOtpDisable && (field.attributeName === updatedingId)" class="warning-message-for-contact">The entered values do not match.</p>
+                  <p *ngIf="sendOtpDisable && (field.attributeName === contactTye)" class="warning-message-for-contact">The entered values do not match.</p>
             </div>
           </mat-grid-tile>
           <mat-grid-tile class="mat-form1">
             <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
               <mat-card-header></mat-card-header>
               <mat-card-subtitle style="margin-top: 14px;"><button
-                  [disabled]="sendOtpDisable || !(field.attributeName === updatedingId)"
+                  [disabled]="sendOtpDisable || !(field.attributeName === contactTye)"
                   (click)="sendOTPBtn(field.attributeName)" mat-raised-button color="primary"
                   id="sendOTP{{field.attributeName}}">{{field.labelName[langCode][3]
                   |translate}}</button></mat-card-subtitle>
