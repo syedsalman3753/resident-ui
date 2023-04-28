@@ -47,7 +47,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         this.updateAuthlockStatus()
       }
     });
-    console.log(this.clickEventSubscription)
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -92,17 +91,13 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
     );
-    console.log(this.message2)
-
     this.subscriptions.push(subs);
 
     if (!this.message2["timerFired"]) {
-      console.log(this.message2)
       this.autoLogout.getValues(this.userPreferredLangCode);
       this.autoLogout.setValues();
       this.autoLogout.keepWatching();
     } else {
-      console.log(this.message2)
       this.autoLogout.getValues(this.userPreferredLangCode);
       this.autoLogout.continueWatching();
     }
@@ -155,6 +150,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
             this.authlist.push(authTypesJSON);
           }
         }
+        localStorage.setItem("authList", JSON.stringify(this.authlist));
         this.showSpinner = false;
       }else{
           this.showErrorPopup(response["errors"])
@@ -170,7 +166,11 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
 
   setAuthlockStatus(authTypes: any){  
     let authTypeValidate = "";
-    this.changedItems[authTypes.authSubType] = !this.changedItems[authTypes.authSubType]
+    if(authTypes.authSubType){
+      this.changedItems[authTypes.authSubType] = !this.changedItems[authTypes.authSubType]
+    }else{
+      this.changedItems[authTypes.authType] = !this.changedItems[authTypes.authType]
+    }
     for(let item in this.changedItems){
       if(this.changedItems[item]){
         this.submitBtnDisable = false
@@ -179,8 +179,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         this.submitBtnDisable = true
       }
     }
-    console.log(this.changedItems)
-
     // old code
     if(authTypes.authSubType){
       authTypeValidate = authTypes.authType+"-"+authTypes.authSubType;
@@ -223,18 +221,32 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
 
   updateAuthlockStatus(){
     this.showSpinner = true;
+    let buildfinaldata = [];
+    for(let item in this.changedItems){
+      for(var i=0; i < this.authlist.length; i++){
+        if(item === this.authlist[i].authSubType){
+          if(JSON.parse(localStorage.getItem("authList"))[i].locked !== this.authlist[i].locked){
+            buildfinaldata.push(this.authlist[i]);
+          }
+          break;
+        }else if(item === this.authlist[i].authType){
+          if(JSON.parse(localStorage.getItem("authList"))[i].locked !== this.authlist[i].locked){
+            buildfinaldata.push(this.authlist[i]);
+          }
+          break;
+        }
+      }
+    }
     const request = {
       "id": "mosip.resident.auth.lock.unlock",
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
       "requesttime": Utils.getCurrentDate(),
       "request":{
         "individualId": "",      
-        "authTypes": this.authlist
+        "authTypes": buildfinaldata
       }
     };
-    console.log("Tesing1")
     this.dataStorageService.updateAuthlockStatus(request).subscribe(response => {
-      console.log("Tesing2")
         this.getAuthlockStatus();  
         if(!response["errors"]){
           this.submitBtnDisable = true;
