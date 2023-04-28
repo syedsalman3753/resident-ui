@@ -321,6 +321,24 @@
     </div>
   </div>
 
+  <!-- Track service login after verify phone Number -->
+  <div class="pop-up trackService-log-in-popup" *ngIf="input.case === 'logInForTrackService'">
+    <div class="infro-card">
+      <img src="./assets/sucess_icon.png" height="35px" width="35px" class="success-img" />
+      <div style="margin-left: 8px;">
+        <div mat-dialog-content>
+            <p>{{input.dearResident}}</p>
+            <p>{{input.message}}</p>
+            <p>{{input.trackStatusForLogin}} <span (click)="openLoginPage()"
+                class="navigate-link">{{input.clickHere}}</span>{{input.relogin}}</p>
+          </div>
+      </div>
+    </div>
+    <div mat-dialog-actions class="pop-up-footer">
+      <button mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+    </div>
+  </div>
+
   <!-- OTP Message-->
   <div class="pop-up" *ngIf="input.case === 'OTP'">
     <div class="pop-up-header otp-popup">

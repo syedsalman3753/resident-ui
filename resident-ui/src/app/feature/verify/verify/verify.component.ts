@@ -308,19 +308,33 @@ export class VerifyComponent implements OnInit, OnDestroy {
       this.message = this.popupMessages.genericmessage.verifyChannel.emailSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
     }
 
+    // const dialogRef = this.dialog.open(DialogComponent, {
+    //   width: '550px',
+    //   data: {
+    //     case: 'MESSAGE',
+    //     title: this.popupMessages.genericmessage.successLabel,
+    //     responseData: message,
+    //     message: this.message,
+    //     eventId:eventId,
+    //     clickHere: this.popupMessages.genericmessage.clickHere,
+    //     endMsg: this.popupMessages.genericmessage.successRemainMsg,
+    //     btnTxt: this.popupMessages.genericmessage.successButton,
+    //     trackStatusText: this.popupMessages.genericmessage.trackStatusText,
+    //     dearResident:this.popupMessages.genericmessage.dearResident,
+    //   }
+    // });
+    // return dialogRef;
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '550px',
       data: {
-        case: 'MESSAGE',
-        title: this.popupMessages.genericmessage.successLabel,
-        responseData: message,
+        case: 'logInForTrackService',
+        title: this.popupMessages.genericmessage.errorLabel,
         message: this.message,
-        eventId:eventId,
         clickHere: this.popupMessages.genericmessage.clickHere,
-        endMsg: this.popupMessages.genericmessage.successRemainMsg,
-        btnTxt: this.popupMessages.genericmessage.successButton,
-        trackStatusText: this.popupMessages.genericmessage.trackStatusText,
         dearResident:this.popupMessages.genericmessage.dearResident,
+        trackStatusForLogin:this.popupMessages.genericmessage.trackStatusForLogin,
+        relogin: this.popupMessages.genericmessage.login,
+        btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
     return dialogRef;
@@ -349,11 +363,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
   showErrorPopup(message: string) {
     this.errorCode = message[0]["errorCode"]
     if (this.errorCode === "RES-SER-410") {
-      if (message[0]["message"] === "Invalid Input Parameter- individualId") {
-        this.message = this.popupMessages.serverErrors[this.errorCode].individualIdError
-      } else {
-        this.message = this.popupMessages.serverErrors[this.errorCode].channelError
-      }
+      let messageType = message[0]["message"].split("-")[1].trim();
+      this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
     } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }

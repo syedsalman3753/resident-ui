@@ -248,6 +248,7 @@ td.mat-footer-cell:last-child {
   border: 2px solid;
   padding: 1rem;
   border-radius: 8px;
+  overflow-wrap: break-word;
 }
 
 .infro-card {
@@ -383,4 +384,9 @@ p{
   color: #C90500;
   background-color: #FFD9D8;
   border-color: #C90500;
+}
+.trackService-log-in-popup{
+  color: #03A64A;
+  background-color: #E8FDF2;
+  border-color: #03A64A;
 }

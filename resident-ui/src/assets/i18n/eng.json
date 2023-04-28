@@ -436,6 +436,7 @@
         "clickHere": "here",
         "clickHere2":"click ",
         "relogin": " to login again.",
+        "login":" to log in.",
         "loginSuccessfully": "Dear resident, you logged in complected successfully",
         "successRemainMsg": "to track service request with pre-filled EID.",
         "passwordCombinationHeading": "Password combination: ",
@@ -444,6 +445,7 @@
         "successLogout": "You have successfully logged out. ",
         "dearResident":"Dear Resident,",
         "trackStatusText":"In order to track the status of the event, you can click ",
+        "trackStatusForLogin":"This Event ID can be used to view details about the event. Click",
         "clickYesToProceed":"Click Yes to proceed.",
         "logoutconfirmMessage":"Are you sure you want to log out.",
         "getMyUin": {
@@ -556,7 +558,8 @@
             "PHONE": "The phone number you have entered is invalid. Please enter a valid phone number.",
             "eventId": "The event ID you have entered is invalid. Please enter a valid event ID",
             "userId": "The email ID/ phone number you have entered is invalid. Please enter a valid email ID/ phone number.",
-            "otp": "Invalid OTP entered. Please try again with a valid OTP."
+            "otp": "Invalid OTP entered. Please try again with a valid OTP.",
+            "channel":"Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again."
         },
         "RES-SER-459": "The entered EID is not associated with the UIN/ VID used to log in.",
         "RES-SER-412": "Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
@@ -574,6 +577,8 @@
         "RES-SER-519":"Please enter a different Email ID from the already existing one.",
         "RES-SER-520":"Please enter a different phone number from the already existing one.",
         "RES-SER-456":"Invalid AID entered. Please enter a valid AID and try again.",
-        "RES-SER-515":"Please enter letters/numbers in order to share."
+        "RES-SER-515":"Please enter letters/numbers in order to share.",
+        "RES-SER-425":"While generating otp error is occured.",
+        "RES-SER-514":"Invalid UIN/VID entered. Please enter a valid UIN/VID and try again."
     }
 }
