@@ -44,27 +44,33 @@
 				<tr>
 					<td style="width:25%"><label>{{'trackservicerequest.eventId' | translate}}</label></td>
 					<td style="width:25%"><label>{{'trackservicerequest.eventType' | translate}}</label></td>
-					<td style="width:25%"><label>{{'trackservicerequest.description' | translate}}</label></td>
+					<!-- <td style="width:25%"><label>{{'trackservicerequest.description' | translate}}</label></td> -->
 					<td style="width:25%"><label>{{'trackservicerequest.eventStatus' | translate}}</label></td>
+					<td style="width:25%"><label>{{'trackservicerequest.timestamp' | translate}}</label></td>
 				</tr>
 				<tr style="border-bottom: 1px solid silver;">
 					<td style="width:25%">{{eidStatus.eventId}}</td>
 					<td style="width:25%">{{eidStatus.eventType}}</td>
-					<td style="width:25%">{{eidStatus.info.description}}</td>
+					<!-- <td style="width:25%">{{eidStatus.info.description}}</td> -->
 					<td style="width:25%">{{eidStatus.eventStatus}}</td>
+					<td style="width:25%">{{eidStatus.timestamp}}</td>
+					
 
 				</tr>
 				<tr style="padding:10px;">
 					<td style="width:25%"><label>{{'trackservicerequest.individualId' | translate}}</label></td>
-					<td style="width:25%"><label>{{'trackservicerequest.summary' | translate}}</label></td>
-					<td style="width:25%"><label>{{'trackservicerequest.timestamp' | translate}}</label></td>
+					<!-- <td style="width:25%"><label>{{'trackservicerequest.summary' | translate}}</label></td> -->
+					<!-- <td style="width:25%"><label>{{'trackservicerequest.timestamp' | translate}}</label></td> -->
 					<td style="width:25%"><label>{{'trackservicerequest.authenticationMode' | translate}} </label></td>
+					<td style="width:25%"><label>{{'trackservicerequest.summary' | translate}}</label></td>
 				</tr>
 				<tr style="padding:10px;">
 					<td style="width:25%">{{eidStatus.individualId}}</td>
-					<td style="width:25%">{{eidStatus.summary.replace("$attributes",eidStatus.info.attributeList)}}</td>
-					<td style="width:25%">{{eidStatus.timestamp}}</td>
+					<!-- <td style="width:25%">{{eidStatus.summary.replace("$attributes",eidStatus.info.attributeList)}}</td> -->
+					<!-- <td style="width:25%">{{eidStatus.timestamp}}</td> -->
 					<td style="width:25%">{{eidStatus.info.authenticationMode}}</td>
+					<td style="width:25%">{{eidStatus.summary.replace("$attributes",eidStatus.info.attributeList)}}</td>
+
 				</tr>
 				<!-- Download Personalized Card and Update my data -->
 				<tr *ngIf="eidStatus.eventType === 'Download Personalized Card' || eidStatus.eventType === 'Update UIN Data' "
