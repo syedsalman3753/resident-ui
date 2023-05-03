@@ -150,7 +150,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
 
   getUserInfo() {
     this.dataStorageService
-      .getUserInfo('personalized-card')
+      .getUserInfo('share-credential')
       .subscribe((response) => {
         if (response['response']) {
           this.userInfo = response["response"];

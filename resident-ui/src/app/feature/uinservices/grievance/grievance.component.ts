@@ -57,9 +57,6 @@ export class GrievanceComponent implements OnInit {
     .subscribe((response) => {
       if(response["response"]){  
         this.userInfo = response["response"]
-        // this.name = response["response"].fullName ? response["response"].fullName : null;
-        // this.emailId = response["response"].email ? response["response"].email : null;
-        // this.phoneNo = response["response"].phone ? response["response"].phone : null;
         this.alternateEmailId = response["response"].alternateEmailId ? response["response"].alternateEmailId : null;
         this.alternatePhoneNo = response["response"].alternatePhoneNo ?response["response"].alternatePhoneNo:  null;
       }
@@ -117,6 +114,7 @@ export class GrievanceComponent implements OnInit {
       }
      
       this.dataStorageService.sendGrievanceRedressal(request).subscribe(response =>{
+        console.log("responsse>>>"+ response)
         if(response["response"]){
           this.showMessage(response["response"])
           this.router.navigate(["/uinservices/dashboard"])
@@ -147,13 +145,14 @@ export class GrievanceComponent implements OnInit {
   }
 
   showErrorPopup(message: string) {
-    this.errorCode = message[0]["errorCode"]
-    this.errorMessage = message[0]["message"].split("-")[1].trim()
-    if(this.errorMessage !== 'message'){
-    this.message = this.popupMessages.serverErrors[this.errorCode][this.errorMessage]
-    }else{
+    this.errorCode = message[0]["errorCode"];
+    if (this.errorCode === "RES-SER-410") {
+      let messageType = message[0]["message"].split("-")[1].trim();
+      this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
+    } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }
+
     this.dialog
       .open(DialogComponent, {
         width: '550px',
