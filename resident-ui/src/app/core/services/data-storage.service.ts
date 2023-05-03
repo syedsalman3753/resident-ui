@@ -333,4 +333,8 @@ export class DataStorageService {
   isAuthenticated(){
     return this.httpClient.get(this.BASE_URL+'/authorize/admin/validateToken');
   }
+
+  getUpdateMyDataSchema(schemaType:any){
+    return this.httpClient.get(this.BASE_URL+'/auth-proxy/config/ui-schema/'+schemaType)
+  }
 }

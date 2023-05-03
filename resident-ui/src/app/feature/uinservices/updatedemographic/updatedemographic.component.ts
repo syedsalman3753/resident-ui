@@ -24,23 +24,7 @@ import { lang } from "moment";
 export class UpdatedemographicComponent implements OnInit, OnDestroy {
   userInfo: any;
   static actualData: any;
-  schema: any = {
-    "identity": [
-      { "attributeName": "fullName", "description": "", "labelName": { "eng": ["Current Name", "New Name"], "ara": ["Current Name_ara", "New Name_ara"], "fra": ["Current Name_fra", "New Name_fra"] }, "controlType": "textbox", "tabgroup": "identity","dataType":"notString" },
-      { "attributeName": "dateOfBirth", "description": "", "labelName": { "eng": ["Current DOB", "New DOB"], "ara": ["Current DOB_ara", "New DOB_ara"], "fra": ["Current DOB_fra", "New DOB_fra"] }, "controlType": "calendar", "tabgroup": "identity","dataType":"string" },
-      { "attributeName": "gender", "description": "", "labelName": { "eng": ["Current Gender", "New Gender"], "ara": ["Current Gender_ara", "New Gender_ara"], "fra": ["Current Gender_fra", "New Gender_fra"] }, "controlType": "dropdown", "tabgroup": "identity","dataType":"notString" },
-      { "attributeName": "proofOfIdentity", "description": "", "labelName": { "eng": ["Identity Proof", "Document Type", "Document Reference ID", "Proof Of Document", "Allowed file type : pdf,jpeg,png,jpg and allowed file size : 2mb"], "ara": ["Identity Proof_ara", "Document Type_ara", "Document Reference ID_ara", "Proof Of Document_ara", "Allowed file type_ara : pdf,jpeg,png,jpg and allowed file size : 2mb"], "fra": ["Identity Proof_fra", "Document Type_fra", "Document Reference ID_fra", "Proof Of Document_fra", "Allowed file type_fra : pdf,jpeg,png,jpg and allowed file size : 2mb"] }, "controlType": "fileupload", "tabgroup": "identity","dataType":"notString" },
-      { "attributeName": "addressLine1", "description": "", "labelName": { "eng": ["Current Address Line1", "New Address Line1"], "ara": ["Current Address Line1_ara", "New Address Line1_ara"], "fra": ["Current Address Line1_fra", "New Address Line1_fra"] }, "controlType": "textbox", "tabgroup": "address","dataType":"notString" },
-      { "attributeName": "region", "name": "Region", "description": "", "labelName": { "eng": ["Current Region", "New Region"], "ara": ["Current Region_ara", "New Region_ara"], "fra": ["Current Region_fra", "New Region_fra"] }, "controlType": "dropdown", "tabgroup": "address", "locationHierarchyLevel": 1,"dataType":"notString" },
-      { "attributeName": "province", "name": "Province", "description": "", "labelName": { "eng": ["Current Province", "New Province"], "ara": ["Current Province_ara", "New Province_ara"], "fra": ["Current Province_fra", "New Province_fra"] }, "controlType": "dropdown", "tabgroup": "address", "locationHierarchyLevel": 2,"dataType":"notString" },
-      { "attributeName": "city", "name": "City", "description": "", "labelName": { "eng": ["Current City", "New City"], "ara": ["Current City_ara", "New City_ara"], "fra": ["Current City_fra", "New City_fra"] }, "controlType": "dropdown", "tabgroup": "address", "locationHierarchyLevel": 3, "dataType":"notString" },
-      { "attributeName": "zone", "name": "Zone", "description": "", "labelName": { "eng": ["Current Zone", "New Zone"], "ara": ["Current Zone_ara", "New Zone_ara"], "fra": ["Current Zone_fra", "New Zone_fra"] }, "controlType": "dropdown", "tabgroup": "address", "locationHierarchyLevel": 4, "dataType":"string" },
-      { "attributeName": "postalCode", "name": "Postal Code", "description": "", "labelName": { "eng": ["Current Postal Code", "New Postal Code"], "ara": ["Current Postal Code_ara", "New Postal Code_ara"], "fra": ["Current Postal Code_fra", "New Postal Code_fra"] }, "controlType": "dropdown", "tabgroup": "address", "locationHierarchyLevel": 5,"dataType":"notString" },
-      { "attributeName": "proofOfAddress", "description": "", "labelName": { "eng": ["Address Proof", "Document Type", "Document Reference ID", "Proof Of Document", "Allowed file type : pdf,jpeg,png,jpg and allowed file size : 2mb"], "ara": ["Address Proof_ara", "Document Type_ara", "Document Reference ID_ara", "Proof Of Document_ara", "Allowed file type_ara : pdf,jpeg,png,jpg and allowed file size : 2mb"], "fra": ["Address Proof_fra", "Document Type_fra", "Document Reference ID_fra", "Proof Of Document_fra", "Allowed file type_fra : pdf,jpeg,png,jpg and allowed file size : 2mb"] }, "controlType": "fileupload", "tabgroup": "address","dataType":"notString" },
-      { "attributeName": "email", "description": "", "labelName": { "eng": ["Current email ID", "New email ID", "Confirm New email ID", "Send OTP"], "ara": ["Current email ID_ara", "New email ID_ara", "Confirm New email ID_ara", "Send OTP_ara"], "fra": ["Current email ID_fra", "New email ID_fra", "Confirm New email ID_fra", "Send OTP_fra"] }, "controlType": "textbox", "tabgroup": "contact", "dataType":"string" },
-      { "attributeName": "phone", "description": "", "labelName": { "eng": ["Current Phone Number", "New Phone Number", "Confirm New Phone Number", "Send OTP"], "ara": ["Current Phone Number_ara", "New Phone Number_ara", "Confirm New Phone Number_ara", "Send OTP_ara"], "fra": ["Current Phone Number_fra", "New Phone Number_fra", "Confirm New Phone Number_fra", "Send OTP_fra"] }, "controlType": "textbox", "tabgroup": "contact", "dataType":"string" },
-      { "attributeName": "preferredLang", "description": "", "labelName": { "eng": ["Current Notification Language", "New Notification Language"], "ara": ["Current Notification Language_ara", "New Notification Language_ara"], "fra": ["Current Notification Language_fra", "New Notification Language_fra"] }, "controlType": "dropdown", "tabgroup": "notificationLanguage", "dataType":"string" }]
-  };
+  schema: any;
   subscriptions: Subscription[] = [];
   buildJSONData: any = {};
   langCode: string = localStorage.getItem("langCode");
@@ -146,10 +130,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.initialLocationCode = "MOR";
     this.locCode = 5;
     this.translateService.use(localStorage.getItem("langCode"));
-    /*this.dataStorageService.getSchema().subscribe((response) => {
-      if(response)
-        this.schema = response["identity"];        
-    });*/
     this.supportedLanguages = ["eng"];
     this.translateService
       .getTranslation(localStorage.getItem("langCode"))
@@ -164,19 +144,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.newNotificationLanguages.push(newObj)
     })
 
-    // setTimeout(()=>{        
-    //   if(!localStorage.getItem("langCode")){
-    //     localStorage.setItem("langCode", "eng");
-    //     this.selectedLanguage = defaultJson["languages"][0].nativeName;
-    //   }else{
-    //     Object.keys(defaultJson["languages"]).forEach(function(key) {
-    //       if(localStorage.getItem("langCode") === key){
-    //         this.selectedLanguage = defaultJson["languages"][key].nativeName;
-    //       }
-    //     });                
-    //   }
-    //  } ,400)
     this.getUserInfo();
+    this.getUpdateMyDataSchema();
 
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -192,6 +161,15 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.autoLogout.getValues(this.langCode);
       this.autoLogout.continueWatching();
     }
+    
+  }
+
+  getUpdateMyDataSchema(){
+    this.dataStorageService
+    .getUpdateMyDataSchema('update-demographics')
+    .subscribe((response) => {
+      this.schema = response;
+    });
   }
 
   getUserInfo() {
@@ -556,11 +534,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   captureContactValue(event:any,formControlName){
     this.contactTye = formControlName;
     if(formControlName === "email"){
-       this.userIdEmail= event.target.value;
-       this.userId = this.userIdEmail;
+       this.userIdEmail = event.target.value.toLowerCase();
+       this.userId = event.target.value;
        this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
     }else{
-      this.userIdPhone= event.target.value;
+      this.userIdPhone = event.target.value;
       this.userId = this.userIdPhone;
       this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
     }
@@ -569,7 +547,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   captureConfirmValue(event: any, id: any) {
     this.contactTye = id;
     if(id === "email"){
-      this.confirmEmailContact = event.target.value;
+      this.confirmEmailContact = event.target.value.toLowerCase();
       this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
    }else{
     this.confirmPhoneContact = event.target.value;
