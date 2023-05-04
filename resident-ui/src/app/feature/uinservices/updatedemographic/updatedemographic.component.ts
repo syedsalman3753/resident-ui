@@ -80,6 +80,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   langJson: any;
   selectedPOIFileForPreview:string = "";
   selectedPOAFileForPreview:string = "";
+  selectedFileInPreviewPage:string = "";
   isLoading:boolean = true;
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
@@ -165,9 +166,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   getUpdateMyDataSchema(){
+    this.isLoading = true;
     this.dataStorageService
     .getUpdateMyDataSchema('update-demographics')
     .subscribe((response) => {
+      this.isLoading = false;
       this.schema = response;
     });
   }
@@ -177,12 +180,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .getUserInfo('update-demographics')
       .subscribe((response) => {
         if (response["response"]) {
-          this.isLoading = false;
           this.userInfo = response["response"];
           UpdatedemographicComponent.actualData = response["response"];
           this.buildData();
         } else {
-          this.isLoading = false;
           this.showErrorPopup(response['errors'])
         }
       });
@@ -696,12 +697,18 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }
   }
 
-  previewFileInPreviewPage(index: number) {
+  previewFileInPreviewPage(index: number,filename:string) {
+    this.selectedFileInPreviewPage = filename;
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.pdfSrcInPreviewPage = e.target.result;
     };
     reader.readAsDataURL(this.uploadedFiles[index]);
+  }
+
+  closePreviewPageImage(){
+    this.selectedFileInPreviewPage = '';
+    this.pdfSrcInPreviewPage = '';
   }
 
   /**
@@ -716,9 +723,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
+      this.selectedPOIFileForPreview = "";
     }
     if (this.filesPOA.length < 1) {
       this.previewDisabledInAddress = true;
+      this.selectedPOAFileForPreview = "";
     }
     this.pdfSrc = "";
     this.uploadedFiles = this.files.concat(this.filesPOA)
@@ -911,7 +920,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   backBtn() {
-    this.showPreviewPage = false
+    this.showPreviewPage = false;
+    this.selectedFileInPreviewPage = '';
+    this.pdfSrcInPreviewPage = '';
   }
 
   logChange(event: any) {
