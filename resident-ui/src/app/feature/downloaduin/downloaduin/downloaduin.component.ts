@@ -198,15 +198,15 @@ export class DownloadUinComponent implements OnInit {
   showMessage(message: string, eventId: any) {
     this.message = this.popupMessages.genericmessage.getMyUin.downloadedSuccessFully.replace("$eventId", eventId)
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '650px',
+      width: '550px',
       data: {
-        case: 'MESSAGE',
-        title: this.popupMessages.genericmessage.successLabel,
+        case: 'logInForTrackService',
+        title: this.popupMessages.genericmessage.errorLabel,
         message: this.message,
-        passwordCombinationHeading:this.popupMessages.genericmessage.passwordCombinationHeading,
-        passwordCombination: this.popupMessages.genericmessage.passwordCombination,
-        eventId: eventId,
         clickHere: this.popupMessages.genericmessage.clickHere,
+        dearResident:this.popupMessages.genericmessage.dearResident,
+        trackStatusForLogin:this.popupMessages.genericmessage.trackStatusForLogin,
+        relogin: this.popupMessages.genericmessage.login,
         btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
@@ -214,13 +214,20 @@ export class DownloadUinComponent implements OnInit {
   }
 
   showErrorPopup(message: string) {
+    this.errorCode = message[0]["errorCode"]
+    if (this.errorCode === "RES-SER-410") {
+      let messageType = message[0]["message"].split("-")[1].trim();
+      this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
+    } else {
+      this.message = this.popupMessages.serverErrors[this.errorCode]
+    }
     this.dialog
       .open(DialogComponent, {
-        width: '650px',
+        width: '550px',
         data: {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
-          message: message,
+          message: this.message,
           btnTxt: this.popupMessages.genericmessage.successButton
         },
         disableClose: true
