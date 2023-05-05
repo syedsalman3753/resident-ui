@@ -145,7 +145,7 @@
     "uinservices": {
         "login": "Login",
         "title": "Enter your AID/UIN/VID",
-        "description": "Please enter the AID you received during registration",
+        "description": "Enter your AID/UIN/VID to proceed.",
         "plaginLabel": "I'm not a robot",
         "buttonText": "Send OTP",
         "home": "Home",
@@ -449,7 +449,7 @@
         "clickYesToProceed":"Click Yes to proceed.",
         "logoutconfirmMessage":"Are you sure you want to log out.",
         "getMyUin": {
-            "downloadedSuccessFully": "Dear resident, your UIN card has been successfully downloaded against the the Event ID: $eventId. The password will be sent to your registered Email ID or phone number. In order to track the status of the event, you can",
+            "downloadedSuccessFully": "Dear resident, your UIN card has been successfully downloaded against the the Event ID: $eventId.",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
         },
         "termsAndConditionsDescription": [

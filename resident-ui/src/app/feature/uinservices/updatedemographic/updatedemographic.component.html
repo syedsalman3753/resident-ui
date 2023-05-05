@@ -36,11 +36,11 @@
                             <td width="10%"></td>
                             <td width="45%">
                               <!-- <mat-form-field style="min-width: 100%;"> -->
-                              <input [max]="maxdate" style="width: 85%;" matInput placeholder="DD/MM/YYYY"
+                              <input [max]="maxdate" style="width:75%;" matInput placeholder="DD/MM/YYYY"
                                 [matDatepicker]="picker" readonly id="{{field.attributeName}}"
                                 (dateChange)="captureDatePickerValue($event, field.attributeName)"
                                 [(ngModel)]="selectedDate" (click)="picker.open()" />
-                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker-toggle style="width:20%;" matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
                               <!-- </mat-form-field> -->
                               <p class="warning-message"
