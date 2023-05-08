@@ -65,8 +65,7 @@
 	            <mat-card-header><span class="label"></span></mat-card-header>
 	            <mat-card-subtitle style="display: flex;margin-top: 15px;"><span class="datepicker-card" style="display: contents;">
 					<button id="searchbtn" mat-raised-button color="primary"
-						(click)="search()">{{'viewhistory.searchBtn' |
-						translate}}</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="downloadbtn" mat-raised-button
+						(click)="search()">{{'viewhistory.searchBtn' | translate}}</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="downloadbtn" mat-raised-button
 						color="default" (click)="downloadServiceHistory()"><img class="save-icon"
 							src="./assets/images/save.png" /></button>
 					</span></mat-card-subtitle>
@@ -86,8 +85,7 @@
 						<td style="width: 39%;padding: 10px;"><span>{{'viewhistory.description' | translate}} :
 							</span>{{data.description}}</td>
 						<td style="width: 13%;padding: 10px;">
-							<!-- <span>{{'viewhistory.timestamp' | translate}} : </span> -->{{data.timeStamp |
-							date:'dd/MM/yyyy H:mm'}}</td>
+							<!-- <span>{{'viewhistory.timestamp' | translate}} : </span> -->{{data.timeStamp | date:'dd/MMM/yyyy H:mm'}}</td>
 						<td style="width: 13%;padding: 10px;">
 							<!-- <span>{{'viewhistory.inputStatus' | translate}} : </span> -->{{data.eventStatus}}</td>
 					</mat-expansion-panel-header>

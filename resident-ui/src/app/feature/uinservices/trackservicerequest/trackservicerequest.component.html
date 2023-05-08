@@ -1,5 +1,4 @@
 <span class="breadcrumb">
-	<!-- <a (click)="onItemSelected('dashboard')">{{'dashboard.home' | translate}} &nbsp;&nbsp;</a> > &nbsp;&nbsp; -->
 	<a (click)="onItemSelected('uinservices/dashboard')">{{'dashboard.uinservices' | translate}} &nbsp;&nbsp;</a> >
 	&nbsp;&nbsp;<a (click)="onItemSelected('uinservices/viewhistory')" *ngIf="source">{{"trackservicerequest.source" | translate}}&nbsp;&nbsp;></a> 
 	&nbsp;&nbsp;<span class="active">{{'trackservicerequest.title' | translate}}</span>
@@ -53,7 +52,7 @@
 					<td style="width:25%">{{eidStatus.eventType}}</td>
 					<!-- <td style="width:25%">{{eidStatus.info.description}}</td> -->
 					<td style="width:25%">{{eidStatus.eventStatus}}</td>
-					<td style="width:25%">{{eidStatus.timestamp}}</td>
+					<td style="width:25%">{{eidStatus.timestamp | date:'dd/MMM/yyyy H:mm:ss'}}</td>
 					
 
 				</tr>

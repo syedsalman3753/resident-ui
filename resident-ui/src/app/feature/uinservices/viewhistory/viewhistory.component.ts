@@ -96,6 +96,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   //   this.paginator.pageIndex = 2;
   // }
   async ngOnInit() {
+    console.log(this.startdate)
     this.translateService.use(localStorage.getItem("langCode"));      
 
     this.translateService
@@ -235,6 +236,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     }else if(formControlName === "statusFilter"){
       this.auditService.audit('RP-010', 'View history', 'RP-View history', 'View history', 'User chooses the "status filter" from the drop-down');
       this.statusFilter = this.statusFilter.replace(/ALL,/ig, '');
+      console.log(this.statusFilter)
     }
   }
 
