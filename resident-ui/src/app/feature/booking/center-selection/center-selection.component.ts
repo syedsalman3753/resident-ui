@@ -301,7 +301,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   }
   
   searchInput(){
-    if(this.searchText.length > 2 && !this.searchText.startsWith(" ")){
+    if(this.searchText.length > 2 && this.searchText.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
       this.isBlankSpace = false;
     }else{
       this.isBlankSpace = true;
