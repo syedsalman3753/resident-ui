@@ -25,7 +25,7 @@
 			"attributeName": "dateOfBirth",
 			"maskRequired": false,
 			"formatRequired": true,
-			"defaultFormat":"DD/MM/YYYY",
+			"defaultFormat":"DD/MMM/YYYY",
 			"label": {
 				"eng": "DOB"
 			},

@@ -58,8 +58,8 @@
               </mat-select>
             </mat-card>
             <mat-card class="search-card" >
-              <input
-                *ngIf="locationType !== null"
+              <!-- <input
+                *ngIf="locationType"
                 mat-input
                 type="search"
                 placeholder="{{ 'centerSelection.text_enter' | translate }} {{ locationType.hierarchyLevelName }}"
@@ -67,9 +67,9 @@
                 class="search-input"
                 [(ngModel)]="searchText"
                 (keyup)="searchInput()"
-              />
+              /> -->
               <input
-                *ngIf="locationType === null"
+                [disabled]="!locationType"
                 mat-input
                 type="search"
                 placeholder="{{ 'centerSelection.text_search' | translate }}"
