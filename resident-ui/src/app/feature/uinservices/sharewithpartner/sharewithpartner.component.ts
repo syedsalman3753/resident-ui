@@ -184,7 +184,11 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       } else {
         let value = "";
         if (typeof this.userInfo[data.attributeName] === "string") {
-          value = this.userInfo[data.attributeName];
+          if(data.attributeName === "dateOfBirth"){
+            value = moment(this.userInfo[data.attributeName]).format(data["defaultFormat"]);
+          }else{
+            value = this.userInfo[data.attributeName];
+          }
         } else {
             if (data.formatRequired) {
               if (data.attributeName === "fullAddress") {

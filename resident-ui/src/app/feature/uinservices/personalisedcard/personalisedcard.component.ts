@@ -154,10 +154,10 @@ captureCheckboxValue($event: any, data: any, type: any) {
     } else {
       let value = "";
       if (typeof this.userInfo[data.attributeName] === "string") {
-        if (this.userInfo[data.attributeName]) {
+        if(data.attributeName === "dateOfBirth"){
+          value = moment(this.userInfo[data.attributeName]).format(data["defaultFormat"]);
+        }else{
           value = this.userInfo[data.attributeName];
-        } else {
-          value = "Not Available"
         }
       } else {
           if (data.formatRequired) {

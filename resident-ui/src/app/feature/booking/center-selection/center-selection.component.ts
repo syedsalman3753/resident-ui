@@ -306,7 +306,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     }else{
       this.isBlankSpace = true;
     }
-    if(this.searchText.startsWith(" ")){
+    if(!this.searchText.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
       this.showWarningMsg = true;
     }else{
       this.showWarningMsg = false;
@@ -316,7 +316,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   showResults(pageEvent) {
     this.auditService.audit('RP-040', 'Locate registration center', 'RP-Locate registration center', 'Locate registration center', 'User clicks on "search" button on locate registration center page');
     this.REGISTRATION_CENTRES = [];
-    if (this.locationType !== null && this.searchText !== null) {
+    if (this.locationType !== null && this.searchText) {
       this.showMap = false;
       if (pageEvent) {
         this.pageSize = pageEvent.pageSize;
