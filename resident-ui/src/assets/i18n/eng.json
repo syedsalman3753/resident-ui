@@ -445,7 +445,7 @@
         "successLogout": "You have successfully logged out. ",
         "dearResident":"Dear Resident,",
         "trackStatusText":"In order to track the status of the event, you can click ",
-        "trackStatusForLogin":"This Event ID can be used to view details about the event. Click",
+        "trackStatusForLogin":"This Event ID can be used to view details about the event. Click ",
         "clickYesToProceed":"Click Yes to proceed.",
         "logoutconfirmMessage":"Are you sure you want to log out.",
         "getMyUin": {

@@ -384,6 +384,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
             }
             saveAs(data.body, fileName);
             this.showMessage()
+            this.router.navigate(['uinservices/dashboard']);
           } catch (error) {
             this.isLoading = false;
             console.log(error)

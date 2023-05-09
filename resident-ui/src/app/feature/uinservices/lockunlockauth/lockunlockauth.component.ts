@@ -253,6 +253,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
           let eventId = response.headers.get("eventid")
           this.showMessage(JSON.stringify(response["response"]),eventId);
           this.changedItems = {}
+          this.router.navigate(['uinservices/dashboard']);
         }else{
           this.showErrorPopup(response["errors"]);
         }

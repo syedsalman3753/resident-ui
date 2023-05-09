@@ -429,6 +429,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.showMessage(this.message, eventId);
         this.sendOtpDisable = true;
         this.contactTye = "";
+        this.router.navigate(['uinservices/dashboard']);
       } else {
          this.isLoading = false;
         this.showErrorPopup(response.body["errors"]);
@@ -603,6 +604,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (response.body["response"]) {
           this.isLoading = false;
           this.showMessage(this.message, eventId);
+          this.router.navigate(['uinservices/dashboard']);
         } else {
           this.isLoading = false;
           this.showErrorPopup(response.body["errors"])
@@ -628,7 +630,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       let eventId = response.headers.get("eventid")
       this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
       if (response.body["response"]) {
-        this.showMessage(this.message, eventId)
+        this.showMessage(this.message, eventId);
+        this.router.navigate(['uinservices/dashboard']);
       } else {
         this.showErrorPopup(response.body["errors"])
       }
