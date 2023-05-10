@@ -41,7 +41,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   proofOfAddress: any = {};
   transactionID: any;
   userId: any;
-  confirmUserId:string = "";
   userIdEmail: string = "";
   userIdPhone: string = "";
   clickEventSubscription: Subscription;
@@ -83,7 +82,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   selectedPOAFileForPreview:string = "";
   selectedFileInPreviewPage:string = "";
   isLoading:boolean = true;
-  showNotMatchedMessage:boolean = false;
+  showNotMatchedMessageEmail:boolean = false;
+  showNotMatchedMessagePhone:boolean = false;
+  email:any;
+  phone:any;
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
@@ -347,12 +349,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     if (id === "email") {
       this.userIdPhone = "";
       this.confirmPhoneContact = "";
-      this.confirmUserId = "";
       this.auditService.audit('RP-029', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update email Id');
     } else if (id === "phone") {
       this.userIdEmail = "";
       this.confirmEmailContact = "";
-      this.confirmUserId = "";
       this.auditService.audit('RP-030', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update phone number');
     }
 
@@ -553,26 +553,26 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
     }
 
-    if(this.confirmUserId){
+    if(this[formControlName]){
       if(formControlName === "email"){
-        this.showNotMatchedMessage = this.userIdEmail === this.confirmEmailContact ? false : true;
+        this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
       }else{
-        this.showNotMatchedMessage = this.userIdPhone === this.confirmPhoneContact ? false : true;
+        this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
       }
     }
   }
 
-  captureConfirmValue(event: any, id: any) {
-    this.confirmUserId = event.target.value;
-    this.contactTye = id;
-
-    if(id === "email"){
-      this.confirmEmailContact = this.confirmUserId.toLowerCase();
-      this.showNotMatchedMessage = this.userIdEmail === this.confirmEmailContact ? false : true;
+  captureConfirmValue(event: any, formControlName: any) {
+    this[formControlName] = event.target.value;
+    this.contactTye = formControlName;
+    
+    if(formControlName === "email"){
+      this.confirmEmailContact = event.target.value.toLowerCase();
+      this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
       this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-   }else if (id === "phone"){
-     this.confirmPhoneContact = this.confirmUserId;
-     this.showNotMatchedMessage = this.userIdPhone === this.confirmPhoneContact ? false : true;
+   }else if (formControlName === "phone"){
+     this.confirmPhoneContact = event.target.value;
+     this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
      this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
    }
   }
