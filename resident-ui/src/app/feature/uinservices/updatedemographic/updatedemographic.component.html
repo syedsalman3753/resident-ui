@@ -500,7 +500,9 @@
                   <input *ngIf="field.attributeName === 'phone'" [value]="confirmPhoneContact" (input)="captureConfirmValue($event,field.attributeName)" matInput
                     #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" />
                 </mat-card-subtitle>
-                <p *ngIf="showNotMatchedMessage && (field.attributeName === contactTye)" class="warning-message-for-contact">
+                <p *ngIf="showNotMatchedMessageEmail && (field.attributeName === contactTye) && field.attributeName === 'email' " class="warning-message-for-contact">
+                  The entered values do not match.</p>
+                <p *ngIf="showNotMatchedMessagePhone && (field.attributeName === contactTye) && field.attributeName === 'phone' " class="warning-message-for-contact">
                   The entered values do not match.</p>
               </div>
             </mat-grid-tile>
