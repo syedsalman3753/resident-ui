@@ -483,16 +483,24 @@
             <mat-grid-tile class="mat-form1">
               <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
                 <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
-                <mat-card-subtitle><input matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
-                    (input)="captureContactValue($event, field.attributeName)" /></mat-card-subtitle>
+                <mat-card-subtitle>
+                  <input *ngIf="field.attributeName === 'email'" [value]="userIdEmail" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
+                    (input)="captureContactValue($event, field.attributeName)" />
+                  <input *ngIf="field.attributeName === 'phone'" [value]="userIdPhone" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
+                    (input)="captureContactValue($event, field.attributeName)" />
+                  </mat-card-subtitle>
               </div>
             </mat-grid-tile>
             <mat-grid-tile class="mat-form1">
               <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
                 <mat-card-header><mat-card-title>{{field.labelName[langCode][2]}}</mat-card-title></mat-card-header>
-                <mat-card-subtitle><input (input)="captureConfirmValue($event,field.attributeName)" matInput
-                    #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" /></mat-card-subtitle>
-                <p *ngIf="sendOtpDisable && (field.attributeName === contactTye)" class="warning-message-for-contact">
+                <mat-card-subtitle>
+                  <input *ngIf="field.attributeName === 'email'" [value]="confirmEmailContact" (input)="captureConfirmValue($event,field.attributeName)" matInput
+                    #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" />
+                  <input *ngIf="field.attributeName === 'phone'" [value]="confirmPhoneContact" (input)="captureConfirmValue($event,field.attributeName)" matInput
+                    #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" />
+                </mat-card-subtitle>
+                <p *ngIf="showNotMatchedMessage && (field.attributeName === contactTye)" class="warning-message-for-contact">
                   The entered values do not match.</p>
               </div>
             </mat-grid-tile>

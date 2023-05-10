@@ -41,14 +41,15 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   proofOfAddress: any = {};
   transactionID: any;
   userId: any;
-  userIdEmail: any;
-  userIdPhone: any;
+  confirmUserId:string = "";
+  userIdEmail: string = "";
+  userIdPhone: string = "";
   clickEventSubscription: Subscription;
   popupMessages: any;
   pdfSrc = "";
   pdfSrcPOA = "";
-  confirmEmailContact: any;
-  confirmPhoneContact: any;
+  confirmEmailContact: string = "";
+  confirmPhoneContact: string = "";
   sendOtpDisable: boolean = true;
   showPreviewPage: boolean = false;
   userInfoClone: any = {};
@@ -82,6 +83,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   selectedPOAFileForPreview:string = "";
   selectedFileInPreviewPage:string = "";
   isLoading:boolean = true;
+  showNotMatchedMessage:boolean = false;
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
@@ -343,8 +345,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   sendOTPBtn(id: any) {
     if (id === "email") {
+      this.userIdPhone = "";
+      this.confirmPhoneContact = "";
+      this.confirmUserId = "";
       this.auditService.audit('RP-029', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update email Id');
     } else if (id === "phone") {
+      this.userIdEmail = "";
+      this.confirmEmailContact = "";
+      this.confirmUserId = "";
       this.auditService.audit('RP-030', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update phone number');
     }
 
@@ -534,25 +542,37 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureContactValue(event:any,formControlName){
+    this.userId = event.target.value;
     this.contactTye = formControlName;
-    if(formControlName === "email"){
-       this.userIdEmail = event.target.value.toLowerCase();
-       this.userId = event.target.value;
+    
+    if(formControlName === "email" && this.userId){
+       this.userIdEmail = this.userId.toLowerCase();
        this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-    }else{
-      this.userIdPhone = event.target.value;
-      this.userId = this.userIdPhone;
+    }else if (formControlName === "phone" && this.userId){
+      this.userIdPhone = this.userId;
       this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
+    }
+
+    if(this.confirmUserId){
+      if(formControlName === "email"){
+        this.showNotMatchedMessage = this.userIdEmail === this.confirmEmailContact ? false : true;
+      }else{
+        this.showNotMatchedMessage = this.userIdPhone === this.confirmPhoneContact ? false : true;
+      }
     }
   }
 
   captureConfirmValue(event: any, id: any) {
+    this.confirmUserId = event.target.value;
     this.contactTye = id;
+
     if(id === "email"){
-      this.confirmEmailContact = event.target.value.toLowerCase();
+      this.confirmEmailContact = this.confirmUserId.toLowerCase();
+      this.showNotMatchedMessage = this.userIdEmail === this.confirmEmailContact ? false : true;
       this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-   }else{
-    this.confirmPhoneContact = event.target.value;
+   }else if (id === "phone"){
+     this.confirmPhoneContact = this.confirmUserId;
+     this.showNotMatchedMessage = this.userIdPhone === this.confirmPhoneContact ? false : true;
      this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
    }
   }
