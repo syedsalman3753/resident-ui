@@ -83,6 +83,7 @@ label {
     background: #E8FDF2 0% 0% no-repeat padding-box;
     border-radius: 10px;
     opacity: 1;
+    word-wrap: break-word;
 }
 
 .otp-infromation-text {
