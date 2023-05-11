@@ -116,7 +116,7 @@ input {
 
 .otp-infromation-card {
   width: 305px;
-  min-height: 96px;
+  min-height: auto;
   background: #E8FDF2 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 1;
