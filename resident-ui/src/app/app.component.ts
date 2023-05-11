@@ -59,7 +59,10 @@ export class AppComponent {
     this.dataStorageService.isAuthenticated().subscribe((response) => {
       if(response){
         if(response["response"]){
-          this.router.navigate(['uinservices/dashboard']); 
+          if (window.location.href.includes('uinservices')) {
+          }else{
+            this.router.navigate(['uinservices/dashboard']); 
+          }
         }else{
           this.router.navigate(['dashboard']);
         }

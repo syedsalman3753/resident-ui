@@ -25,8 +25,8 @@
 								<mat-menu #basic="matMenu">
 									<ng-container *ngFor="let data1 of data.formatOption[langCode];">
 										<button id="{{data1.value}}Btn" mat-menu-item>
-											<div class="check-box-card">
-												<input (click)="captureCheckboxValue($event, data,data1)" class="check-box" type="checkbox" [checked]="data1.checked"
+											<div class="check-box-card" (click)="captureCheckboxValue($event, data,data1)">
+												<input class="check-box" type="checkbox" [checked]="data1.checked"
 													id="{{data1.value}}" />
 												<label>{{data1.label}}</label>
 											</div>
