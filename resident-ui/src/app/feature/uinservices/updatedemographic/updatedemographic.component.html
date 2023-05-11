@@ -38,7 +38,7 @@
                               <!-- <mat-form-field style="min-width: 100%;"> -->
                               <input [max]="maxdate" style="width:75%;" matInput placeholder="DD/MM/YYYY"
                                 [matDatepicker]="picker" readonly id="{{field.attributeName}}"
-                                (dateChange)="captureDatePickerValue($event, field.attributeName)"
+                                (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName])"
                                 [(ngModel)]="selectedDate" (click)="picker.open()" />
                               <mat-datepicker-toggle style="width:20%;" matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
@@ -65,7 +65,7 @@
                             <td width="10%"></td>
                             <td width="45%" *ngIf="buildCloneJsonData[field.attributeName]">
                               <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                (blur)="captureValue($event, field.attributeName, language)"
+                                (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
                                 [value]="buildCloneJsonData[field.attributeName][language]" />
                               <span *ngIf="userInfoClone[field.attributeName]">
                                 <p class="warning-message"
@@ -75,7 +75,7 @@
                             </td>
                             <td width="45%" *ngIf="!buildCloneJsonData[field.attributeName]">
                               <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                (blur)="captureValue($event, field.attributeName, language)" />
+                                (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
                               <span *ngIf="userInfoClone[field.attributeName]">
                                 <p class="warning-message"
                                   *ngIf="userInfoClone[field.attributeName][0]['value'] === buildJSONData[field.attributeName][language]">
@@ -144,7 +144,7 @@
                               <input
                                 [value]="proofOfIdentity['documentreferenceId'] ? proofOfIdentity['documentreferenceId'] : '' "
                                 matInput #{{field.attributeName}} id="{{field.attributeName}}value"
-                                (blur)="captureValue($event, field.attributeName, language)" />
+                                (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
                             </td>
                           </tr>
                           <tr *ngIf="displayPOIUpload">
@@ -284,12 +284,12 @@
                               <td width="10%"></td>
                               <td width="45%" *ngIf="buildCloneJsonData[field.attributeName]">
                                 <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureValue($event, field.attributeName, language)"
+                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
                                   [value]="buildCloneJsonData[field.attributeName][language]" />
                               </td>
                               <td width="45%" *ngIf="!buildCloneJsonData[field.attributeName]">
                                 <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureValue($event, field.attributeName, language)" />
+                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
                               </td>
                             </tr>
                           </table>
@@ -354,7 +354,7 @@
                                 <input
                                   [value]="proofOfAddress['documentreferenceId'] ? proofOfAddress['documentreferenceId'] : '' "
                                   matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureValue($event, field.attributeName, language)" />
+                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
                               </td>
                             </tr>
                             <tr *ngIf="displayPOAUpload">
@@ -540,7 +540,7 @@
                   <mat-card-header><mat-card-title>{{field.labelName[language][1]}}</mat-card-title></mat-card-header>
                   <mat-card-subtitle><mat-select [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
-                        (onSelectionChange)="captureDropDownValue($event, field.attributeName, langCode, field.dataType)"
+                        (onSelectionChange)="capturePerfLang($event, field.attributeName, langCode, field.dataType)"
                         [value]="data.code">{{ data.name }}</mat-option>
                     </mat-select></mat-card-subtitle>
                 </div>

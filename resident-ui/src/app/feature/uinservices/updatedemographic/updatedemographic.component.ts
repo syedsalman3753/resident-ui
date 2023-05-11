@@ -52,6 +52,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   sendOtpDisable: boolean = true;
   showPreviewPage: boolean = false;
   userInfoClone: any = {};
+  userPrefLang:any={};
   buildCloneJsonData: any = {};
   uploadedFiles: any[] = [];
   previewDisabled: boolean = true;
@@ -449,9 +450,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     })
   }
 
-  captureValue(event: any, formControlName: string, language: string) {
+  captureValue(event: any, formControlName: string, language: string, currentValue:any) {
     let self = this;
-    if (event.target.value !== '') {
+    if (event.target.value !== '' && event.target.value !== currentValue) {
       if (event.target.value === "" && this.userInfoClone[formControlName]) {
         this.userInfoClone[formControlName].forEach(item => {
           if (item.language === language) {
@@ -491,17 +492,19 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }
   }
 
-  captureDatePickerValue(event: any, formControlName: string) {
+  captureDatePickerValue(event: any, formControlName: string, currentValue:any) {
     let self = this;
     let dateFormat = new Date(event.target.value);
     let formattedDate = dateFormat.getFullYear() + "/" + ("0" + (dateFormat.getMonth() + 1)).slice(-2) + "/" + ("0" + dateFormat.getDate()).slice(-2);
     this.selectedDate = dateFormat;
+    if(formattedDate !== currentValue){
     if (event.target.value === null && this.userInfoClone["dateOfBirth"]) {
       delete this.userInfoClone["dateOfBirth"]
     } else {
       self.userInfoClone[formControlName] = formattedDate;
     }
-    console.log(this.userInfoClone)
+  }
+  console.log(this.userInfoClone)
   }
 
   captureDropDownValue(event: any, formControlName: string, language: string, dataType:string) {
@@ -577,6 +580,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    }
   }
 
+  capturePerfLang(event: any, formControlName: string, language: string){
+    this.userPrefLang[formControlName] = event.source.viewValue
+  }
+
   updateBtn() {
     this.conditionsForupdateDemographicData();
   }
@@ -643,7 +650,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       "request": {
         "transactionID": null,
         "consent": "Accepted",
-        "identity": this.userInfoClone
+        "identity": this.userPrefLang
       }
     };
     this.dataStorageService.updateuin(request).subscribe(response => {

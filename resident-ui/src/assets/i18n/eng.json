@@ -559,7 +559,8 @@
             "eventId": "The event ID you have entered is invalid. Please enter a valid event ID",
             "userId": "The email ID/ phone number you have entered is invalid. Please enter a valid email ID/ phone number.",
             "otp": "Invalid OTP entered. Please try again with a valid OTP.",
-            "channel":"Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again."
+            "channel":"Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
+            "identity/preferredLang":"Invalid preferred language. please give valid data"
         },
         "RES-SER-459": "The entered EID is not associated with the UIN/ VID used to log in.",
         "RES-SER-412": "Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
