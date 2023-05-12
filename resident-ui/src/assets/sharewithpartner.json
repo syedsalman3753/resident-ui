@@ -106,7 +106,7 @@
 			"attributeName": "fullAddress",
 			"maskRequired": false,
 			"formatRequired": true,
-			"defaultFormat":"addressLine1,addressLine2,addressLine3,city,region,province,postalCode",
+			"defaultFormat":"addressLine1,addressLine2,addressLine3,region,province,city,zone,postalCode",
 			"label": {
 				"eng": "Address"
 			},
@@ -117,7 +117,7 @@
 				"eng": "Address Format"
 			},
 			"formatOption":{
-				"eng": [{"label":"Address line1", "value":"addressLine1","checked":true},{"label":"Address line2", "value":"addressLine2","checked":true},{"label":"Address line3", "value":"addressLine3","checked":true}, {"label":"Region", "value":"region","checked":true}, {"label":"Province", "value":"province","checked":true}, {"label":"City", "value":"city","checked":true},{"label":"Postal code", "value":"postalCode","checked":true}, {"label":"Full Address", "value":"fullAddress","checked":true}]
+				"eng": [{"label":"Address line1", "value":"addressLine1","checked":true},{"label":"Address line2", "value":"addressLine2","checked":true},{"label":"Address line3", "value":"addressLine3","checked":true}, {"label":"Region", "value":"region","checked":true}, {"label":"Province", "value":"province","checked":true}, {"label":"City", "value":"city","checked":true}, {"label":"Zone", "value":"zone","checked":true},{"label":"Postal code", "value":"postalCode","checked":true}, {"label":"Full Address", "value":"fullAddress","checked":true}]
 			},
 			"displaykeyinsharewithpartner":true,
 			"displaykeyinpersonalisedcard":true,
