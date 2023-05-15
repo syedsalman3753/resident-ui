@@ -324,7 +324,7 @@
         "lockLabel": "Lock"
     },
     "updatedemographic": {
-        "title": "Demographic Data",
+        "title": "Update My Data",
         "identity": "Identity",
         "address": "Address",
         "contact": "Contact",

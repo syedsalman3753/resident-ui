@@ -348,20 +348,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (response['response'])
           self.dynamicDropDown[fieldName] = response['response']['locations'];
       });
-
-    // Object.keys(this.dynamicFieldValue).forEach(item =>{
-    //   if(this.dynamicFieldValue[item]){
-    //     console.log(this.dynamicFieldValue[item])
-    //   }
-    // })
-
-    // Object.keys(this.userInfo).forEach(data => {
-    //   let changedItem = data === "Postal Code" ? "postalCode" : data.split(" ").join("").toLowerCase();
-    //   console.log(changedItem)
-    // })
-    // console.log(this.dynamicFieldValue)
     this.addingAddessData()
-
   }
 
 
