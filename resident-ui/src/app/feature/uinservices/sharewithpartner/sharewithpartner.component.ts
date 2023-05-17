@@ -299,14 +299,29 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 }
               });
 
-              data.formatOption[this.langCode].forEach(item => {
-                if (item.value === "fullAddress") {
-                  item['checked'] = false;
+              let unCheckFullAddress = () =>{
+                data.formatOption[this.langCode].forEach(item =>{
+                  if(item.value === "fullAddress"){
+                    item['checked'] = false;
+                  }
+                })
+              }
+              
+              for(let item of data.formatOption[this.langCode]){
+                if(!item.checked && item.value !== "fullAddress"){
+                    unCheckFullAddress();
+                    break;
+                }else{
+                  item.checked = true;
                 }
+              }
+
+              data.formatOption[this.langCode].forEach(item =>{
                 if (item.checked) {
                   selectedFormats += item.value + ",";
                 }
               })
+
               selectedFormats = selectedFormats.replace(/.$/, '');
               if (allValue.endsWith(',')) {
                 allValue = allValue.replace(/.$/, '');
