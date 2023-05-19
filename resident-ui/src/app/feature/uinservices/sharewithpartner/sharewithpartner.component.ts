@@ -106,18 +106,20 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         this.popupMessages = response;
       });
 
-    this.dataStorageService
-      .getConfigFiles("sharewithpartner")
-      .subscribe((response) => {
-        this.schema = response["identity"];
-        this.schema.forEach(data => {
-          this.valuesSelected.push(data.attributeName)
-        })
-      });
+    // this.dataStorageService
+    //   .getConfigFiles("sharewithpartner")
+    //   .subscribe((response) => {
+    //     this.schema = response["identity"];
+    //     this.schema.forEach(data => {
+    //       this.valuesSelected.push(data.attributeName)
+    //     })
+    //   });
+    
 
     this.getPartnerDetails();
     this.getUserInfo()
     this.getMappingData()
+    this.getshareMyDataSchema()
 
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -140,6 +142,17 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     }, 400)
   }
 
+  getshareMyDataSchema(){
+    this.dataStorageService
+    .getUpdateMyDataSchema('share-credential')
+    .subscribe((response) => {
+      this.schema = response["identity"];
+      this.schema.forEach(data => {
+        this.valuesSelected.push(data.attributeName)
+      })
+    });
+
+  }
   getMappingData() {
     this.dataStorageService
       .getMappingData()

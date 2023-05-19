@@ -96,16 +96,9 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
         this.popupMessages = response;
       });
 
-    this.dataStorageService
-      .getConfigFiles("sharewithpartner")
-      .subscribe((response) => {
-        this.schema = response["identity"];
-        this.schema.forEach(data =>{
-          this.valuesSelected.push(data.attributeName)
-        })
-      });
     this.getUserInfo();
     this.getMappingData();
+    this.getPersonalizedCardSchema()
 
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -131,6 +124,17 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
       })
   }
 
+
+  getPersonalizedCardSchema(){
+    this.dataStorageService
+    .getUpdateMyDataSchema('personalized-card')
+    .subscribe((response) => {
+      this.schema = response["identity"];
+      this.schema.forEach(data =>{
+        this.valuesSelected.push(data.attributeName)
+      })
+    });
+  }
 
   getUserInfo() {
     this.dataStorageService
