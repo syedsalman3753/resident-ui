@@ -22,7 +22,7 @@
                     "displayName": "Manage My VID",
                     "icon": "assets/images/managemyvid.png",
                     "route": "uinservices/managemyvid",
-                    "description": "View details of the existing VIDs, generate new VID, revoke existing VID or download a VID card.",
+                    "description": "View details of the existing VIDs, create new VID, delete existing VID or download a VID card.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -284,7 +284,7 @@
         "create": "Create",
         "generatevidtoggle": "Generate VID",
         "revokevidtoggle": "Revoke VID",
-        "introDescription": "View details of the existing VIDs, generate new VID, revoke existing VID or download a VID card.",
+        "introDescription": "View details of the existing VIDs, create new VID, delete existing VID or download a VID card.",
         "generatedOn": "Generated On",
         "expiry": "Expiry",
         "vid": "VID",
@@ -577,7 +577,7 @@
         "RES-SER-461":"Document type is a mandatory field. Kindly choose a document type in order to proceed.",
         "RES-SER-519":"Please enter a different Email ID from the already existing one.",
         "RES-SER-520":"Please enter a different phone number from the already existing one.",
-        "RES-SER-456":"Invalid AID entered. Please enter a valid AID and try again.",
+        "RES-SER-456":"AID not found. Please try again later.",
         "RES-SER-515":"Please enter letters/numbers in order to share.",
         "RES-SER-425":"While generating otp error is occured.",
         "RES-SER-514":"Invalid UIN/VID entered. Please enter a valid UIN/VID and try again.",
