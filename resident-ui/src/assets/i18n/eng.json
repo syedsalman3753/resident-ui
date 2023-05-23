@@ -234,18 +234,18 @@
         "selectAll": "All",
         "noData":"No results to show",
         "serviceTypeFilter": {
-            "ALL": "All",
-            "AUTHENTICATION_REQUEST": "Authentication Request",
-            "SERVICE_REQUEST": "Service Request",
-            "DATA_UPDATE_REQUEST": "Data Update Request",
-            "ID_MANAGEMENT_REQUEST": "ID Management Request",
-            "DATA_SHARE_REQUEST": "Data Share Request"
+            "ALL": {"serviceType":"All","checked":false},
+            "AUTHENTICATION_REQUEST": {"serviceType":"Authentication Request", "checked":false},
+            "SERVICE_REQUEST": {"serviceType":"Service Request","checked":false},
+            "DATA_UPDATE_REQUEST": {"serviceType":"Data Update Request","checked":false},
+            "ID_MANAGEMENT_REQUEST": {"serviceType":"ID Management Request","checked":false},
+            "DATA_SHARE_REQUEST": {"serviceType":"Data Share Request","checked":false}
         },
         "statusTypeFilter": {
-            "all": "All",
-            "Success": "Success",
-            "In Progress": "In Progress",
-            "Failed": "Failed"
+            "all": {"statusType":"All", "checked":false},
+            "Success": {"statusType":"Success", "checked":false},
+            "In Progress": {"statusType":"In Progress", "checked":false},
+            "Failed": {"statusType":"Failed", "checked":false}
         },
         "reportIssueLabel": "Report an issue",
         "pinToTopLabel": "Pin to top",
