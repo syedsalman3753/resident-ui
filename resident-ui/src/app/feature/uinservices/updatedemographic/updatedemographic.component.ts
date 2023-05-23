@@ -232,7 +232,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     perfLangs.forEach(data => {
       this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
     })
-    this.buildJSONData['preferredLang'] = this.perfLangArr;
+    this.buildJSONData['preferredLang'] = this.perfLangArr[localStorage.getItem("langCode")];
   }
 
   changedBuildData(finaluserInfoClone:any) {

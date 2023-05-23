@@ -83,11 +83,11 @@
 				<!-- Authentication request -->
 				<tr *ngIf="eidStatus.eventType === 'Authentication request' "
 					style="padding:10px; padding:10px; border-top: 1px solid silver;">
-					<td style="height: 40px; width: 40px;">image</td>
+					<td><label>{{'trackservicerequest.partnerLogo' | translate}} </label></td>
 					<td><label>{{'trackservicerequest.partnerName' | translate}} </label></td>
 				</tr>
 				<tr *ngIf="eidStatus.eventType === 'Authentication request' ">
-					<td>{{eidStatus.info.partnerLogo}}</td>
+					<td><img alt="logo" style="width:130px;height: 60px;" [src]=eidStatus.info.partnerLogo /></td>
 					<td>{{eidStatus.info.partnerName}}</td>
 				</tr>
 				<!-- Manage my VID	 -->
@@ -109,7 +109,7 @@
 					<td style="width:25%"><label>{{'trackservicerequest.purpose' | translate}} </label></td>
 				</tr>
 				<tr *ngIf="eidStatus.eventType === 'Share Credential With Partner' ">
-					<td style="width:25%">image</td>
+					<td style="width:25%"><img alt="logo" style="width:130px;height: 60px;" [src]=eidStatus.info.partnerLogo /></td>
 					<td style="width:25%">{{eidStatus.info.partnerName}}</td>
 					<td style="width:25%">{{eidStatus.info.attributeList}}</td>
 					<td style="width:25%">{{eidStatus.info.purpose}}</td>
