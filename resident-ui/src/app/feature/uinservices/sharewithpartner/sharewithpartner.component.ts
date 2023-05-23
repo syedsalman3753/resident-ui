@@ -106,18 +106,20 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         this.popupMessages = response;
       });
 
-    this.dataStorageService
-      .getConfigFiles("sharewithpartner")
-      .subscribe((response) => {
-        this.schema = response["identity"];
-        this.schema.forEach(data => {
-          this.valuesSelected.push(data.attributeName)
-        })
-      });
+    // this.dataStorageService
+    //   .getConfigFiles("sharewithpartner")
+    //   .subscribe((response) => {
+    //     this.schema = response["identity"];
+    //     this.schema.forEach(data => {
+    //       this.valuesSelected.push(data.attributeName)
+    //     })
+    //   });
+    
 
     this.getPartnerDetails();
     this.getUserInfo()
     this.getMappingData()
+    this.getshareMyDataSchema()
 
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -140,6 +142,17 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     }, 400)
   }
 
+  getshareMyDataSchema(){
+    this.dataStorageService
+    .getUpdateMyDataSchema('share-credential')
+    .subscribe((response) => {
+      this.schema = response["identity"];
+      this.schema.forEach(data => {
+        this.valuesSelected.push(data.attributeName)
+      })
+    });
+
+  }
   getMappingData() {
     this.dataStorageService
       .getMappingData()
@@ -299,14 +312,29 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 }
               });
 
-              data.formatOption[this.langCode].forEach(item => {
-                if (item.value === "fullAddress") {
-                  item['checked'] = false;
+              let unCheckFullAddress = () =>{
+                data.formatOption[this.langCode].forEach(item =>{
+                  if(item.value === "fullAddress"){
+                    item['checked'] = false;
+                  }
+                })
+              }
+              
+              for(let item of data.formatOption[this.langCode]){
+                if(!item.checked && item.value !== "fullAddress"){
+                    unCheckFullAddress();
+                    break;
+                }else{
+                  item.checked = true;
                 }
+              }
+
+              data.formatOption[this.langCode].forEach(item =>{
                 if (item.checked) {
                   selectedFormats += item.value + ",";
                 }
               })
+
               selectedFormats = selectedFormats.replace(/.$/, '');
               if (allValue.endsWith(',')) {
                 allValue = allValue.replace(/.$/, '');

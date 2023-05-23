@@ -52,6 +52,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   sendOtpDisable: boolean = true;
   showPreviewPage: boolean = false;
   userInfoClone: any = {};
+  userInfoAddressClone:any ={};
+  userPrefLang:any={};
   buildCloneJsonData: any = {};
   uploadedFiles: any[] = [];
   previewDisabled: boolean = true;
@@ -86,6 +88,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   showNotMatchedMessagePhone:boolean = false;
   email:any;
   phone:any;
+  userInputValues:any={};
+  finalUserCloneData:any;
+  updatingtype:string;
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
@@ -227,19 +232,20 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     perfLangs.forEach(data => {
       this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
     })
-    this.buildJSONData['preferredLang'] = this.perfLangArr;
+    this.buildJSONData['preferredLang'] = this.perfLangArr[localStorage.getItem("langCode")];
   }
 
-  changedBuildData() {
+  changedBuildData(finaluserInfoClone:any) {
+    this.buildCloneJsonData = {};
     let self = this;
     for (var schema of self.schema['identity']) {
-      if (self.userInfoClone[schema.attributeName]) {
-        if (typeof self.userInfoClone[schema.attributeName] === "string") {
-          self.buildCloneJsonData[schema.attributeName] = self.userInfoClone[schema.attributeName];
+      if (finaluserInfoClone[schema.attributeName]) {
+        if (typeof finaluserInfoClone[schema.attributeName] === "string") {
+          self.buildCloneJsonData[schema.attributeName] = finaluserInfoClone[schema.attributeName];
         } else {
           self.buildCloneJsonData[schema.attributeName] = {};
           self.supportedLanguages.map((language) => {
-            let value = self.userInfoClone[schema.attributeName].filter(
+            let value = finaluserInfoClone[schema.attributeName].filter(
               function (data) {
                 if (data.language) {
                   if (data.language.trim() === language.trim()) {
@@ -263,35 +269,35 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (changedItem === data) {
           if (this.dynamicFieldValue[item] !== "") {
             if (typeof this.userInfo[data] === "string") {
-              this.userInfoClone[changedItem] = this.dynamicFieldValue[item]
+              this.userInfoAddressClone[changedItem] = this.dynamicFieldValue[item]
             } else {
               let newData = this.userInfo[changedItem].map(newItem => {
                 newItem["value"] = this.dynamicFieldValue[item]
                 return newItem
               })
-              this.userInfoClone[changedItem] = newData
+              this.userInfoAddressClone[changedItem] = newData
             }
 
           }
         }
       })
     })
-    this.changedBuildData()
-    this.showPreviewPage = true
   }
 
   previewBtn(issue: any) {
     if (issue === "address") {
       this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address');
-    } else if (issue === "languagePreference") {
-      this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language');
+      this.changedBuildData(this.userInfoAddressClone);
+      this.finalUserCloneData = this.userInfoAddressClone;
+      this.uploadedFiles = this.filesPOA;
     } else if (issue === "identity") {
+      this.changedBuildData(this.userInfoClone);
+      this.finalUserCloneData = this.userInfoClone;
+      this.uploadedFiles = this.files;
       this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data');
     }
-    this.addingAddessData()
-    // this.showPreviewPage = true
-    this.uploadedFiles = this.files.concat(this.filesPOA);
-    // this.matTabLabel = "Identity";
+    this.showPreviewPage = true;
+    this.updatingtype = issue;
   }
 
 
@@ -342,6 +348,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (response['response'])
           self.dynamicDropDown[fieldName] = response['response']['locations'];
       });
+    this.addingAddessData()
   }
 
 
@@ -449,9 +456,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     })
   }
 
-  captureValue(event: any, formControlName: string, language: string) {
+  captureValue(event: any, formControlName: string, language: string, currentValue:any) {
     let self = this;
-    if (event.target.value !== '') {
+    if (event.target.value !== '' && event.target.value !== currentValue) { 
       if (event.target.value === "" && this.userInfoClone[formControlName]) {
         this.userInfoClone[formControlName].forEach(item => {
           if (item.language === language) {
@@ -489,24 +496,27 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         }
       }
     }
+    this.userInputValues[formControlName] = event.target.value;
   }
 
-  captureDatePickerValue(event: any, formControlName: string) {
+  captureDatePickerValue(event: any, formControlName: string, currentValue:any) {
     let self = this;
     let dateFormat = new Date(event.target.value);
     let formattedDate = dateFormat.getFullYear() + "/" + ("0" + (dateFormat.getMonth() + 1)).slice(-2) + "/" + ("0" + dateFormat.getDate()).slice(-2);
     this.selectedDate = dateFormat;
+    if(formattedDate !== currentValue){
     if (event.target.value === null && this.userInfoClone["dateOfBirth"]) {
       delete this.userInfoClone["dateOfBirth"]
     } else {
       self.userInfoClone[formControlName] = formattedDate;
     }
-    console.log(this.userInfoClone)
+  }
+  this.userInputValues[formControlName] = formattedDate;
   }
 
-  captureDropDownValue(event: any, formControlName: string, language: string, dataType:string) {
+  captureDropDownValue(event: any, formControlName: string, language: string, dataType:string, currentValue:any) {
     let self = this;
-    if (event.source.selected) {
+    if (event.source.selected && event.source.viewValue !== currentValue) {
       if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
         if (dataType === "string") {
           this.userInfoClone[formControlName] = event.source.viewValue;
@@ -539,6 +549,90 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         self[formControlName]["documenttype"] = event.source.value;
       }
     }
+    this.userInputValues[formControlName] = event.source.viewValue;
+  }
+
+  captureAddressValue(event: any, formControlName: string, language: string, currentValue:any) {
+    let self = this;
+    if (event.target.value !== '' && event.target.value !== currentValue) { 
+      if (event.target.value === "" && this.userInfoAddressClone[formControlName]) {
+        this.userInfoAddressClone[formControlName].forEach(item => {
+          if (item.language === language) {
+            let index = this.userInfoAddressClone[formControlName].findIndex(data => data === item)
+            this.userInfoAddressClone[formControlName].splice(index, 1)
+          }
+        })
+      } else {
+        if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
+          if (typeof self.userInfo[formControlName] === "string") {
+            self.userInfo[formControlName] = event.target.value;
+          } else {
+            let index = self.userInfo[formControlName].findIndex(data => data.language.trim() === language.trim());
+            let newData = { "language": language, "value": event.target.value };
+            if (formControlName in this.userInfoAddressClone) {
+              this.userInfoAddressClone[formControlName].forEach(item => {
+                if (item['language'] === language) {
+                  item['value'] = event.target.value;
+                } else {
+                  if (item['language']) {
+                    if (this.userInfoAddressClone[formControlName]) {
+                      this.userInfoAddressClone[formControlName] = this.userInfoAddressClone[formControlName].concat(newData);
+                    } else {
+                      this.userInfoAddressClone[formControlName] = [].concat(newData);
+                    }
+                  }
+                }
+              })
+            } else {
+              this.userInfoAddressClone[formControlName] = [].concat(newData);
+            }
+          }
+        } else {
+          self[formControlName]["documentreferenceId"] = event.target.value;
+        }
+      }
+    }
+    this.userInputValues[formControlName] = event.target.value;
+  }
+
+
+  captureAddressDropDownValue(event: any, formControlName: string, language: string, dataType:string, currentValue:any) {
+    let self = this;
+    if (event.source.selected && event.source.viewValue !== currentValue) {
+      if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
+        if (dataType === "string") {
+          this.userInfoAddressClone[formControlName] = event.source.viewValue;
+        } else {
+          let newData = { "language": language, "value": event.source.viewValue }
+          if (formControlName in this.userInfoAddressClone) {
+            this.userInfoAddressClone[formControlName].forEach(item => {
+              if (item['language'] === language) {
+                item['value'] = event.source.viewValue;
+              } else {
+                if (item['language']) {
+                  if (this.userInfoAddressClone[formControlName]) {
+                    this.userInfoAddressClone[formControlName] = this.userInfoAddressClone[formControlName].concat(newData);
+                  } else {
+                    this.userInfoAddressClone[formControlName] = [].concat(newData);
+                  }
+                }
+              }
+            })
+          } else {
+            this.userInfoAddressClone[formControlName] = [].concat(newData);
+          }
+        }
+      } else {
+        if (formControlName === "proofOfIdentity") {
+          this.displayPOIUpload = true;
+        } else if (formControlName === "proofOfAddress") {
+          this.displayPOAUpload = true;
+        }
+        self[formControlName]["documenttype"] = event.source.value;
+      }
+    }
+    this.userInputValues[formControlName] = event.source.viewValue;
+    
   }
 
   captureContactValue(event:any,formControlName){
@@ -577,6 +671,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    }
   }
 
+  capturePerfLang(event: any, formControlName: string, language: string){
+    this.userInputValues[formControlName] = event.source.viewValue;
+    this.userPrefLang[formControlName] = event.source.viewValue;
+  }
+
   updateBtn() {
     this.conditionsForupdateDemographicData();
   }
@@ -596,15 +695,19 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         transactionID = transactionID + i
       }
     }
-    if (this.proofOfIdentity['documenttype']) {
-      const formData = new FormData();
-      formData.append('file', this.files[0]);
-      this.uploadFiles(formData, transactionID, 'POI', this.proofOfIdentity['documenttype'], this.proofOfIdentity['documentreferenceId']);
+    if (this.updatingtype === "identity") {
+      this.files.forEach((eachFile) =>{
+        const formData = new FormData();
+        formData.append('file', eachFile);
+        this.uploadFiles(formData, transactionID, 'POI', this.proofOfIdentity['documenttype'], this.proofOfIdentity['documentreferenceId']);
+      })
     }
-    if (this.proofOfAddress['documenttype']) {
-      const formData = new FormData();
-      formData.append('file', this.filesPOA[0]);
-      this.uploadFiles(formData, transactionID, 'POA', this.proofOfAddress['documenttype'], this.proofOfAddress['documentreferenceId']);
+    if (this.updatingtype === "address") {
+      this.filesPOA.forEach(eachFile =>{
+        const formData = new FormData();
+        formData.append('file', eachFile);
+        this.uploadFiles(formData, transactionID, 'POA', this.proofOfAddress['documenttype'], this.proofOfAddress['documentreferenceId']);
+      })
     }
 
     setTimeout(() => {
@@ -615,7 +718,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         "request": {
           "transactionID": transactionID,
           "consent": "Accepted",
-          "identity": this.userInfoClone
+          "identity": this.finalUserCloneData
         }
       };
       this.dataStorageService.updateuin(request).subscribe(response => {
@@ -636,6 +739,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   updatenotificationLanguage(){
+    this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language');
     const request = {
       "id": this.appConfigService.getConfig()["resident.updateuin.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
@@ -643,7 +747,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       "request": {
         "transactionID": null,
         "consent": "Accepted",
-        "identity": this.userInfoClone
+        "identity": this.userPrefLang
       }
     };
     this.dataStorageService.updateuin(request).subscribe(response => {
@@ -741,8 +845,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   deleteFile(index: number, type: string) {
     if (type === "POI") {
       this.files.splice(index, 1);
+      this.uploadedFiles = this.files
     } else {
       this.filesPOA.splice(index, 1);
+      this.uploadedFiles = this.filesPOA
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
@@ -753,7 +859,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.selectedPOAFileForPreview = "";
     }
     this.pdfSrc = "";
-    this.uploadedFiles = this.files.concat(this.filesPOA)
   }
 
   /**
@@ -767,7 +872,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         } else {
           if(this.files.length){
           const progressInterval = setInterval(() => {
-            console.log(this.files)
             if (this.files[index].progress === 100) {
               clearInterval(progressInterval);
               this.uploadFilesSimulator(index + 1, type);
