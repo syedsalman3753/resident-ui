@@ -271,7 +271,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             item.checked = !item.checked
             if (item.checked) {
               value = moment(this.userInfo[data.attributeName]).format(item["value"]);
-              selectedFormats = data.attributeName
+              selectedFormats = type['label']
             }
           })
         } else {
