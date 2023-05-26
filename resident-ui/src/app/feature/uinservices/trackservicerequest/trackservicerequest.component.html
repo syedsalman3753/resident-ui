@@ -26,11 +26,12 @@
 					<div *ngIf="isPopUpShow" class="info-box">
 						<p style="margin-top: 0px;">{{infoText}}</p>
 					</div>
-					<input type="text" id="appIdValue" name="appIdValue" value={{eidVal}}
-						(input)="captureValue($event, 'eidVal', 'textbox')"
+					<input style="outline: none;" type="text" id="appIdValue" name="appIdValue" value={{eidVal}}
+						(input)="captureValue($event)"
 						placeholder="{{'trackservicerequest.searchPlaceholder' | translate}}" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<button [disabled]="disableTrackBtn" id="getEIDStatusbtn" mat-raised-button class="track-btn"
 						(click)="getEIDStatus()">{{'trackservicerequest.searchButton' | translate}}</button>
+					<p *ngIf="showWarningMessage" class="warning-message">{{'trackservicerequest.warningMsg' | translate}}</p>
 				</td>
 			</tr>
 		</table>

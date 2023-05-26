@@ -369,7 +369,8 @@
         "downloadUINCard": "Download UIN card",
         "purpose": "Purpose",
         "raiseSupportRequest": "To raise a support request against this EID",
-        "clickHere": "click here."
+        "clickHere": "click here.",
+        "warningMsg":"Please enter a valid 16-digits EID."
     },
     "personalisedcard": {
         "title": "Get Personalised Card",

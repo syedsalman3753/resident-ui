@@ -330,7 +330,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               }
 
               data.formatOption[this.langCode].forEach(item =>{
-                if (item.checked) {
+                if (item.checked && item.value !== 'fullAddress') {
                   selectedFormats += item.value + ",";
                 }
               })
