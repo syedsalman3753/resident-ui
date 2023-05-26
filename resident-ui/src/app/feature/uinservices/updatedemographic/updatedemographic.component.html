@@ -144,7 +144,7 @@
                               <input
                                 [value]="proofOfIdentity['documentreferenceId'] ? proofOfIdentity['documentreferenceId'] : '' "
                                 matInput #{{field.attributeName}} id="{{field.attributeName}}value"
-                                (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
+                                (blur)="captureValue($event, field.attributeName, language, '')" />
                             </td>
                           </tr>
                           <tr *ngIf="displayPOIUpload">
