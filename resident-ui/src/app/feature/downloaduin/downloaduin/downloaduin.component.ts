@@ -167,12 +167,14 @@ export class DownloadUinComponent implements OnInit {
     
     self.dataStorageService.validateUinCardOtp(request).subscribe(response => {
       this.eventId = response.headers.get("eventid")
-      console.log(response)
       if (response.body.type === "application/json") {
-        self.showErrorPopup(this.popupMessages.genericmessage.getMyUin.invalidOtp);
-        this.router.navigate(["dashboard"])
-        // this.resetBtnDisable = false;
-        this.submitBtnDisable = true;
+        self.dataStorageService.validateUinCardOtpCheckResponse(request).subscribe(response => {
+          self.showErrorPopup(response.body["errors"]);
+          //self.showErrorPopup(this.popupMessages.genericmessage.getMyUin.invalidOtp);
+          this.router.navigate(["dashboard"])
+          // this.resetBtnDisable = false;
+          this.submitBtnDisable = true;
+        });        
       } else {
         clearInterval(this.interval)
         var fileName = self.data + ".pdf";
