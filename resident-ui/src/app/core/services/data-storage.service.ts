@@ -244,6 +244,10 @@ export class DataStorageService {
     return this.httpClient.post<Blob>(this.BASE_URL + '/download-card', reqData, { observe: 'response', responseType: 'blob' as 'json' });
   }
 
+  validateUinCardOtpCheckResponse(reqData: any) {
+    return this.httpClient.post<Blob>(this.BASE_URL + '/download-card', reqData, { observe: 'response'});
+  }
+
   downloadpdf(request: any) {
     return this.httpClient.get<Blob>(this.BASE_URL + '/download/personalized-card', { observe: 'response', responseType: 'blob' as 'json' });
   }
