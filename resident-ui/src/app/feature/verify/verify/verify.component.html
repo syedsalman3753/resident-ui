@@ -57,7 +57,7 @@
       </mat-card-subtitle>
       <label for="otp-input">{{verifyChannelData.inputLabel | translate}}</label>
       <br />
-      <input id="otpValue" #box (keyup)="captureOtpValue(box.value)" placeholder="Enter OTP here" id="otp-input"
+      <input id="otpValue" #box [value]="otp" [disabled]="inputDisabled" (keyup)="captureOtpValue(box.value)" placeholder="Enter OTP here" id="otp-input"
         class="enter-opt-input" type="text" />
       <div class="otp-infromation-card">
         <p *ngIf="otpChannel[0] === 'PHONE'" class="otp-infromation-text">{{verifyChannelData.otpDescriptionPhone |
