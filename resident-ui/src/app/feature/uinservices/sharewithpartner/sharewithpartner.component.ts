@@ -45,6 +45,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   message2: any;
   totalCommentCount: number;
   remainingChars: number;
+  purposeValidation:string;
   fullAddress: string = "";
   formatLabels: any;
   isLoading: boolean = true;
@@ -137,7 +138,8 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     }
 
     setTimeout(() => {
-      this.totalCommentCount = this.appConfigService.getConfig()["resident.grievance-redressal.comments.chars.limit"]
+      this.totalCommentCount = this.appConfigService.getConfig()["resident.grievance-redressal.comments.chars.limit"];
+      this.purposeValidation = this.appConfigService.getConfig()["resident.purpose.allowed.special.char.regex"];
       this.remainingChars = this.totalCommentCount;
     }, 400)
   }
@@ -417,15 +419,15 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.auditService.audit('RP-033', 'Share credential with partner', 'RP-Share credential with partner', 'Share credential with partner', 'User clicks on "share" button on share credential page');
     if (!this.partnerId) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.needPartner
-      this.showValidateMessage(this.message)
+      this.showValidateMessage(this.message);
     } else if (!this.purpose) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.needPurpose
-      this.showValidateMessage(this.message)
-    } else if (!this.purpose.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)) {
+      this.showValidateMessage(this.message);
+    } else if (!this.purpose.match(this.purposeValidation)) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.specialCharacters;
-      this.showValidateMessage(this.message)
+      this.showValidateMessage(this.message);
     } else {
-      this.termAndConditions()
+      this.termAndConditions();
     }
   }
 
