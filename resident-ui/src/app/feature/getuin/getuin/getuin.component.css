@@ -214,6 +214,17 @@
     justify-content: center;
 }
 
+.failure-position-icon {
+    color: red;
+    background-color: red;
+     height: 40px;
+     width: 40px;
+     border-radius: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
 .progress-card{
     min-height: 350px;
     display: flex;
@@ -249,30 +260,42 @@ ul li{
    position: relative;
 }
 
-.completed-stage-bar{
+.stage-bar{
     height: 20px; 
-    width: 100%; 
-    background-color: #03A64A; 
+    width: 100%;  
     position: absolute; 
     left: 0; 
     top: 9px; 
     border: none;
+    z-index: 0;
+}
+
+.completed-stage-bar{ 
+    background-color: #03A64A; 
 }
 .incompleted-stage-bar{
-    height: 20px; 
-    width: 100%; 
     background-color: #FAF8F8; 
-    position: absolute;
-    left: 0; 
-    top: 9px; 
-    border: none;
 }
-
+.failure-position-icon{
+    background-color: red;
+}
+.failure-stage-bar:before{ 
+    background-color: red; 
+}
 
 ul li:first-child hr{
-    width: 44%;
-    left: 57%;
+    right: -100%;
+    border-radius: 10px;
+}
+
+ul li:not(:first-child, :last-child) hr{
+    width: 200%;
+    left: -42.3%;
+    border-radius: 10px;
 }
 ul li:last-child hr{
-    width: 46%;
+    width: 88%;
+    left: -41.8%;
+    border-radius: 10px;
 }
+
