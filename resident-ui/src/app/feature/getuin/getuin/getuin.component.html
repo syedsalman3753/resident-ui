@@ -18,10 +18,10 @@
         <div *ngIf="infoPopUpShow" class="info-box">
           <p>{{infoText}}</p>
         </div>
-        <input id="aidValue" class="input-text" type="text" ngModel name="AID" />
+        <input id="aidValue" class="input-text" type="text" ngModel name="AID" (blur)="getCaptchaToken($event.target.value)"/>
         <br />
         <label class="label-text" >{{getUinData.description | translate}}</label>
-        <div *ngIf="siteKey">
+        <div *ngIf="siteKey && captchaEnable">
           <app-captcha [captchaSiteKey]="siteKey" [resetCaptcha]="resetCaptcha"
             (captchaEvent)="getCaptchaToken($event)"></app-captcha>
         </div>
