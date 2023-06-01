@@ -48,6 +48,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   captchaChecked:boolean = false;
   width : string;
   deviceSize:string = "";
+  inputDisabled:boolean = false;
 
   constructor(
     private router: Router,
@@ -186,7 +187,9 @@ export class VerifyComponent implements OnInit, OnDestroy {
         clearInterval(this.interval)
         this.displaySeconds = "00";
         this.resetBtnDisable = false;
+        this.inputDisabled = true;
         this.submitBtnDisable = true;
+        this.otp = "";
       }
       if (this.otpTimeSeconds < 10) {
         this.displaySeconds = "0" + this.otpTimeSeconds.toString()
@@ -245,6 +248,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
         }
         self.showOtpPanel = true;
         self.setOtpTime();
+        this.inputDisabled = false;
       } else {
         self.showErrorPopup(response["errors"]);
         self.showOtpPanel = false;
@@ -308,22 +312,6 @@ export class VerifyComponent implements OnInit, OnDestroy {
       this.message = this.popupMessages.genericmessage.verifyChannel.emailSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
     }
 
-    // const dialogRef = this.dialog.open(DialogComponent, {
-    //   width: '550px',
-    //   data: {
-    //     case: 'MESSAGE',
-    //     title: this.popupMessages.genericmessage.successLabel,
-    //     responseData: message,
-    //     message: this.message,
-    //     eventId:eventId,
-    //     clickHere: this.popupMessages.genericmessage.clickHere,
-    //     endMsg: this.popupMessages.genericmessage.successRemainMsg,
-    //     btnTxt: this.popupMessages.genericmessage.successButton,
-    //     trackStatusText: this.popupMessages.genericmessage.trackStatusText,
-    //     dearResident:this.popupMessages.genericmessage.dearResident,
-    //   }
-    // });
-    // return dialogRef;
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '550px',
       data: {

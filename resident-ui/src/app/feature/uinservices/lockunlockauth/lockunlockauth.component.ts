@@ -34,7 +34,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   submitBtnDisable:boolean = true;
   message:any;
   clickEventSubscription: Subscription; 
-  changedItems:any = {};
+  changedItems:any = [];
   showSpinner:boolean = true;
   cols : number;
   userPreferredLangCode = localStorage.getItem("langCode");
@@ -167,19 +167,25 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   setAuthlockStatus(authTypes: any){  
     let authTypeValidate = "";
     if(authTypes.authSubType){
-      this.changedItems[authTypes.authSubType] = !this.changedItems[authTypes.authSubType]
-    }else{
-      this.changedItems[authTypes.authType] = !this.changedItems[authTypes.authType]
-    }
-    for(let item in this.changedItems){
-      if(this.changedItems[item]){
-        this.submitBtnDisable = false
-        break
+      if(this.changedItems.includes(authTypes.authSubType)){
+          this.changedItems = this.changedItems.filter(item => item !== authTypes.authSubType)
       }else{
-        this.submitBtnDisable = true
+        this.changedItems.push(authTypes.authSubType)
       }
+    }else{
+      if(this.changedItems.includes(authTypes.authType)){
+        this.changedItems = this.changedItems.filter(item => item !== authTypes.authType)
+    }else{
+      this.changedItems.push(authTypes.authType)
     }
-    // old code
+    }
+    
+    if(this.changedItems.length){
+      this.submitBtnDisable = false;
+    }else{
+      this.submitBtnDisable = true;
+    }
+
     if(authTypes.authSubType){
       authTypeValidate = authTypes.authType+"-"+authTypes.authSubType;
     }else{
@@ -222,21 +228,33 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   updateAuthlockStatus(){
     this.showSpinner = true;
     let buildfinaldata = [];
-    for(let item in this.changedItems){
-      for(var i=0; i < this.authlist.length; i++){
-        if(item === this.authlist[i].authSubType){
-          if(JSON.parse(localStorage.getItem("authList"))[i].locked !== this.authlist[i].locked){
-            buildfinaldata.push(this.authlist[i]);
-          }
-          break;
-        }else if(item === this.authlist[i].authType){
-          if(JSON.parse(localStorage.getItem("authList"))[i].locked !== this.authlist[i].locked){
-            buildfinaldata.push(this.authlist[i]);
-          }
-          break;
+    this.authlist.forEach(item =>{
+      if(item.authSubType){
+        if(this.changedItems.includes(item.authSubType)){
+            buildfinaldata.push(item)
+        }
+      }else{
+        if(this.changedItems.includes(item.authType)){
+          buildfinaldata.push(item)
         }
       }
-    }
+    })
+  //  for(let item in this.changedItems){
+  //     for(var i=0; i < this.authlist.length; i++){
+  //       console.log(this.authlist[i].authSubType)
+  //       if(item === this.authlist[i].authSubType){
+  //         if(JSON.parse(localStorage.getItem("authList"))[i].locked !== this.authlist[i].locked){
+  //           buildfinaldata.push(this.authlist[i]);
+  //         }
+  //         break;
+  //       }else if(item === this.authlist[i].authType){
+  //         if(JSON.parse(localStorage.getItem("authList"))[i].locked !== this.authlist[i].locked){
+  //           buildfinaldata.push(this.authlist[i]);
+  //         }
+  //         break;
+  //       }
+  //     }
+  //   }
     const request = {
       "id": "mosip.resident.auth.lock.unlock",
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
@@ -314,23 +332,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   showErrorPopup(message: string) {
       let errorCode = message[0]['errorCode']
       setTimeout(() => {
-      if(errorCode === "RES-SER-418"){
-      this.dialog
-        .open(DialogComponent, {
-          width: '650px',
-          data: {
-            case: 'accessDenied',
-            title: this.popupMessages.genericmessage.errorLabel,
-            message: this.popupMessages.serverErrors[errorCode],
-            btnTxt: this.popupMessages.genericmessage.successButton,
-            clickHere: this.popupMessages.genericmessage.clickHere,
-            clickHere2: this.popupMessages.genericmessage.clickHere2,
-            dearResident: this.popupMessages.genericmessage.dearResident,
-            relogin: this.popupMessages.genericmessage.relogin
-          },
-          disableClose: true
-        });
-      }else{
         this.dialog
         .open(DialogComponent, {
           width: '650px',
@@ -342,7 +343,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
           },
           disableClose: true
         });
-      }
     },400)
   }
 

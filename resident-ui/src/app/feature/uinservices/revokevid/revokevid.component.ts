@@ -442,25 +442,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
   showErrorPopup(message: string) {
     this.errorCode = message[0]['errorCode']
     setTimeout(() => {
-      this.message = this.popupMessages.serverErrors[this.errorCode]
-   
-    if(this.errorCode === "RES-SER-418"){
-    this.dialog
-      .open(DialogComponent, {
-        width: '650px',
-        data: {
-          case: 'accessDenied',
-          title: this.popupMessages.genericmessage.errorLabel,
-          message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          clickHere: this.popupMessages.genericmessage.clickHere,
-          clickHere2: this.popupMessages.genericmessage.clickHere2,
-          dearResident: this.popupMessages.genericmessage.dearResident,
-          relogin: this.popupMessages.genericmessage.relogin
-        },
-        disableClose: true
-      });
-    }else{
+      this.message = this.popupMessages.serverErrors[this.errorCode];
       this.dialog
       .open(DialogComponent, {
         width: '650px',
@@ -472,7 +454,6 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         },
         disableClose: true
       });
-    }
   },400)
   }
 

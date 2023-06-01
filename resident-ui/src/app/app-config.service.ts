@@ -58,7 +58,9 @@ export class AppConfigService {
         this.appConfig["mosip.kernel.otp.expiry-time"] = responseData["mosip.kernel.otp.expiry-time"];
         this.appConfig["resident.grievance-redressal.comments.chars.limit"] = responseData["resident.grievance-redressal.comments.chars.limit"];
         this.appConfig["resident.grievance-redressal.alt-email.chars.limit"] = responseData["resident.grievance-redressal.alt-email.chars.limit"];  
-        this.appConfig["resident.grievance-redressal.alt-phone.chars.limit"] = responseData["resident.grievance-redressal.alt-phone.chars.limit"];  
+        this.appConfig["resident.grievance-redressal.alt-phone.chars.limit"] = responseData["resident.grievance-redressal.alt-phone.chars.limit"]; 
+        this.appConfig["resident.validation.event-id.regex"] = responseData["resident.validation.event-id.regex"];
+        this.appConfig["resident.purpose.allowed.special.char.regex"] = responseData["resident.purpose.allowed.special.char.regex"];
       },
       (error) => {
         console.log(error);

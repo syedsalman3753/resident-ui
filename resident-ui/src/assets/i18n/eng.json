@@ -234,18 +234,18 @@
         "selectAll": "All",
         "noData":"No results to show",
         "serviceTypeFilter": {
-            "ALL": "All",
-            "AUTHENTICATION_REQUEST": "Authentication Request",
-            "SERVICE_REQUEST": "Service Request",
-            "DATA_UPDATE_REQUEST": "Data Update Request",
-            "ID_MANAGEMENT_REQUEST": "ID Management Request",
-            "DATA_SHARE_REQUEST": "Data Share Request"
+            "ALL": {"serviceType":"All","checked":false},
+            "AUTHENTICATION_REQUEST": {"serviceType":"Authentication Request", "checked":false},
+            "SERVICE_REQUEST": {"serviceType":"Service Request","checked":false},
+            "DATA_UPDATE_REQUEST": {"serviceType":"Data Update Request","checked":false},
+            "ID_MANAGEMENT_REQUEST": {"serviceType":"ID Management Request","checked":false},
+            "DATA_SHARE_REQUEST": {"serviceType":"Data Share Request","checked":false}
         },
         "statusTypeFilter": {
-            "all": "All",
-            "Success": "Success",
-            "In Progress": "In Progress",
-            "Failed": "Failed"
+            "all": {"statusType":"All", "checked":false},
+            "Success": {"statusType":"Success", "checked":false},
+            "In Progress": {"statusType":"In Progress", "checked":false},
+            "Failed": {"statusType":"Failed", "checked":false}
         },
         "reportIssueLabel": "Report an issue",
         "pinToTopLabel": "Pin to top",
@@ -369,7 +369,8 @@
         "downloadUINCard": "Download UIN card",
         "purpose": "Purpose",
         "raiseSupportRequest": "To raise a support request against this EID",
-        "clickHere": "click here."
+        "clickHere": "click here.",
+        "warningMsg":"Please enter a valid 16-digits EID."
     },
     "personalisedcard": {
         "title": "Get Personalised Card",
@@ -448,6 +449,7 @@
         "trackStatusForLogin":"This Event ID can be used to view details about the event. Click ",
         "clickYesToProceed":"Click Yes to proceed.",
         "logoutconfirmMessage":"Are you sure you want to log out.",
+        "accessDenied":"You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
         "getMyUin": {
             "downloadedSuccessFully": "Dear resident, your UIN card has been successfully downloaded against the the Event ID: $eventId.",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
@@ -573,7 +575,6 @@
         "RES-OTP-007": "Invalid OTP entered. Please try again with a valid OTP.",
         "RES-SER-415": "Template exceptionServiceError.",
         "RES-SER-463": "Failed to send OTP. Retry again in sometime.",
-        "RES-SER-418": "You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
         "RES-SER-461":"Document type is a mandatory field. Kindly choose a document type in order to proceed.",
         "RES-SER-519":"Please enter a different Email ID from the already existing one.",
         "RES-SER-520":"Please enter a different phone number from the already existing one.",

@@ -32,6 +32,9 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
   source:string;
   userPreferredLangCode = localStorage.getItem("langCode");
   isLoading:boolean = true;
+  eventIdValidation:any;
+  showWarningMessage:boolean = false;
+
   constructor(private autoLogout: AutoLogoutService,private renderer:Renderer2 ,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private route: ActivatedRoute,private auditService: AuditService) {
     this.renderer.listen('window','click',(e:Event) =>{
        if(!this.iconBtnClicked){
@@ -43,7 +46,7 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.translateService.use(localStorage.getItem("langCode"));
-
+    this.eventIdValidation =this.appConfigService.getConfig()["resident.validation.event-id.regex"];
     this.route.queryParams
       .subscribe(params => {
         this.source = params.source
@@ -59,7 +62,6 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     .getTranslation(localStorage.getItem("langCode"))
     .subscribe(response => {
       this.langJSON = response;
-      console.log(this.langJSON)
       this.popupMessages = response;
       this.infoText = response.InfomationContent.trackStatus
     }); 
@@ -80,9 +82,15 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     }
   }
 
-  captureValue(event: any, formControlName: string) {
-    this[formControlName] = event.target.value;
-    this.disableTrackBtn = event.target.value.length === 16 ? false : true;
+  captureValue(event: any) {
+    this.eidVal = event.target.value;
+    if(event.target.value.match(this.eventIdValidation)){
+        this.disableTrackBtn = false;
+        this.showWarningMessage = false;
+    }else{
+      this.disableTrackBtn = true;
+        this.showWarningMessage = true;
+    }
   }
 
   getEIDStatus(){
