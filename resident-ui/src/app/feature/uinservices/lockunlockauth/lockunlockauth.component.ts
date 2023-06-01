@@ -332,23 +332,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   showErrorPopup(message: string) {
       let errorCode = message[0]['errorCode']
       setTimeout(() => {
-      if(errorCode === "RES-SER-418"){
-      this.dialog
-        .open(DialogComponent, {
-          width: '650px',
-          data: {
-            case: 'accessDenied',
-            title: this.popupMessages.genericmessage.errorLabel,
-            message: this.popupMessages.serverErrors[errorCode],
-            btnTxt: this.popupMessages.genericmessage.successButton,
-            clickHere: this.popupMessages.genericmessage.clickHere,
-            clickHere2: this.popupMessages.genericmessage.clickHere2,
-            dearResident: this.popupMessages.genericmessage.dearResident,
-            relogin: this.popupMessages.genericmessage.relogin
-          },
-          disableClose: true
-        });
-      }else{
         this.dialog
         .open(DialogComponent, {
           width: '650px',
@@ -360,7 +343,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
           },
           disableClose: true
         });
-      }
     },400)
   }
 
