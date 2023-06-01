@@ -14,7 +14,7 @@
 	        <mat-grid-tile>
 	          <div class="mini-card">
 	            <mat-card-header><span class="label">{{'viewhistory.inputsearch' |translate}}</span></mat-card-header>
-	            <mat-card-subtitle><span class="input"><input type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
+	            <mat-card-subtitle><span class="input"><input [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
 	          </div>
 	        </mat-grid-tile>
 	        <mat-grid-tile>

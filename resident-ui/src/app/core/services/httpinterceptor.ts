@@ -35,7 +35,16 @@ export class AuthInterceptor implements HttpInterceptor {
     private translateService: TranslateService,
     private appService: AppConfigService,
     public headerService: HeaderService,
-  ) { }
+  ) {}
+
+  ngOnInit(){
+   this.translateService
+    .getTranslation(localStorage.getItem("langCode"))
+    .subscribe(response => {
+      this.popupMessages = response;
+    });
+  }
+
   // function which will be called for all http calls
   intercept(
     request: HttpRequest<any>,
@@ -77,6 +86,7 @@ export class AuthInterceptor implements HttpInterceptor {
           }
         },
         err => {
+          this.ngOnInit();
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
               if (this.router.url.includes('uinservices')) {
@@ -85,23 +95,8 @@ export class AuthInterceptor implements HttpInterceptor {
               } else {
                 this.router.navigateByUrl(`dashboard`);
               }
-            }else if (err.status === 403) {
-              this.translateService
-                .getTranslation(localStorage.getItem("langCode"))
-                .subscribe(response => {
-                  this.errorMessages = response.errorPopup;
-                  this.dialog.open(DialogComponent, {
-                    width: '868px',
-                    height: '190px',
-                    data: {
-                      case: 'MESSAGE',
-                      title: this.errorMessages.unauthorized.title,
-                      message: this.errorMessages.unauthorized.message,
-                      btnTxt: this.errorMessages.unauthorized.btnTxt
-                    },
-                    disableClose: true
-                  });
-                });
+            }else if (err.status === 403 && err.statusText === "Forbidden") {
+              this.showMessage()
             } else if (err.status === 413) {
               this.translateService
                 .getTranslation(localStorage.getItem("langCode"))
@@ -181,24 +176,23 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 
-  async ngOnInit(){
-    this.translateService
-    .getTranslation(localStorage.getItem("langCode"))
-    .subscribe(response => {
-      this.popupMessages = response;
-    });
-  }
-
   showMessage(){
-    const dialogRef = this.dialog.open(DialogComponent, {
+    setTimeout(() => {
+    this.dialog
+    .open(DialogComponent, {
       width: '650px',
       data: {
-        case: 'MESSAGE',
-        title: this.popupMessages.genericmessage.successLabel,
-        message: this.popupMessages.genericmessage.loginSuccessfully,
-        btnTxt: this.popupMessages.genericmessage.successButton
-      }
+        case: 'accessDenied',
+        title: this.popupMessages.genericmessage.errorLabel,
+        message: this.popupMessages.genericmessage.accessDenied,
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        clickHere: this.popupMessages.genericmessage.clickHere,
+        clickHere2: this.popupMessages.genericmessage.clickHere2,
+        dearResident: this.popupMessages.genericmessage.dearResident,
+        relogin: this.popupMessages.genericmessage.relogin
+      },
+      disableClose: true
     });
-    return dialogRef;
+  }, 400)  
   }
 }
