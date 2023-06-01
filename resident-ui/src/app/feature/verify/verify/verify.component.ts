@@ -49,6 +49,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   width : string;
   deviceSize:string = "";
   inputDisabled:boolean = false;
+  captchaEnable: boolean = false;
 
   constructor(
     private router: Router,
@@ -105,8 +106,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
         this.infoText = response.InfomationContent.verifyChannel
       });
     setTimeout(() => {
-      console.log("osip.resident.api.version.auth>>>"+self.appConfigService.getConfig()["mosip.resident.api.version.auth"]);
       self.siteKey = self.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
+      self.captchaEnable = self.appConfigService.getConfig()["mosip.resident.captcha.enable"]; 
     }, 1000);  
     /*this.captchaService.captchStatus.subscribe((status)=>{
       this.captchaStatus = status;
@@ -149,8 +150,14 @@ export class VerifyComponent implements OnInit, OnDestroy {
       this.mailIcon = true
       this.phoneIcon = false
     }
-    if (this.captchaChecked &&  this.channelSelected && this.individualId) {
-      this.disableSendOtp = false
+    if (this.channelSelected && this.individualId) {
+      if(this.captchaEnable){
+        if(this.captchaChecked){
+          this.disableSendOtp = false
+        }        
+      }else{
+        this.disableSendOtp = false
+      }
     } else {
       this.disableSendOtp = true
     }
@@ -158,8 +165,14 @@ export class VerifyComponent implements OnInit, OnDestroy {
 
   getCaptchaToken(event: Event) {
     this.captchaChecked = true
-    if (this.captchaChecked &&  this.channelSelected && this.individualId) {
-      this.disableSendOtp = false
+    if (this.channelSelected && this.individualId) {
+      if(this.captchaEnable){
+        if(this.captchaChecked){
+          this.disableSendOtp = false
+        }        
+      }else{
+        this.disableSendOtp = false
+      }
     } else {
       this.disableSendOtp = true
     }
@@ -167,8 +180,14 @@ export class VerifyComponent implements OnInit, OnDestroy {
   
   captureValue(event: any, formControlName: string) {
     this[formControlName] = event.target.value;
-    if (this.captchaChecked &&  this.channelSelected && this.individualId) {
-      this.disableSendOtp = false
+    if (this.channelSelected && this.individualId) {
+      if(this.captchaEnable){
+        if(this.captchaChecked){
+          this.disableSendOtp = false
+        }        
+      }else{
+        this.disableSendOtp = false
+      }
     } else {
       this.disableSendOtp = true
     }

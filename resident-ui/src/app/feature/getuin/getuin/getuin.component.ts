@@ -37,6 +37,7 @@ export class GetuinComponent implements OnInit {
   stageKeys:any = [];
   disableSendOtp: boolean = true;
   aidStatus:string;
+  captchaEnable: boolean = false;
 
   constructor(
     private router: Router,
@@ -80,6 +81,7 @@ export class GetuinComponent implements OnInit {
     let self = this;
     setTimeout(() => {
       self.siteKey = self.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
+      self.captchaEnable = self.appConfigService.getConfig()["mosip.resident.captcha.enable"];      
     }, 1000);  
     this.translateService.use(localStorage.getItem("langCode"));    
     this.translateService
@@ -111,9 +113,15 @@ export class GetuinComponent implements OnInit {
   //   }
   // }
   
-  getCaptchaToken(event: Event) {
-    if (event !== undefined && event != null) {
-      this.disableSendOtp = false;
+  getCaptchaToken(event: any) {
+    if (event) {
+      if(this.captchaEnable){
+        if(grecaptcha.getResponse().length){
+          this.disableSendOtp = false;
+        }
+      }else{
+        this.disableSendOtp = false;
+      }      
     } else {
       this.disableSendOtp = true;
     }

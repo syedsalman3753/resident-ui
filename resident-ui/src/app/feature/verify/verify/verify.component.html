@@ -30,7 +30,7 @@
       </div>
       <input id="uidValue" type="text" id="uin" name="uin" (input)="captureValue($event, 'individualId')"
         value={{individualId}} placeholder="{{verifyChannelData.uid | translate}}" />
-      <div class="not-robot-verifing-card" *ngIf="siteKey">
+      <div class="not-robot-verifing-card" *ngIf="siteKey && captchaEnable">
         <app-captcha [captchaSiteKey]="siteKey" [resetCaptcha]="resetCaptcha"
           (captchaEvent)="getCaptchaToken($event)"></app-captcha>
       </div>

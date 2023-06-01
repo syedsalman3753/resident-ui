@@ -64,15 +64,15 @@ public class BaseClass {
 		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", configFilePath);	
 		ChromeOptions options = new ChromeOptions();
-//		try {
-//			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-//			if(headless.equalsIgnoreCase("yes")) {
-//				options.addArguments("--headless=new");
-//			}
-//		} catch (Exception e1) {
-//			
-//			e1.printStackTrace();
-//		}
+		try {
+			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+			if(headless.equalsIgnoreCase("yes")) {
+				options.addArguments("--headless=new");
+			}
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
 		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
@@ -81,6 +81,8 @@ public class BaseClass {
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		LoginTest.loginTest(driver);
+		
+		
 //		String language1 = null;
 //		try {
 //			language1 = Commons.getFieldData("langcode");
@@ -104,7 +106,7 @@ public class BaseClass {
 	@AfterMethod
 	public void tearDown() {
 
-		//driver.quit();
+		driver.quit();
 	}
 
 	@DataProvider(name = "data-provider")

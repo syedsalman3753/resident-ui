@@ -9,7 +9,7 @@ import io.mosip.test.residentTest.utility.Commons;
 
 public class ManageMyVid extends BaseClass {
 	
-	@Test(groups = "mv")	
+	@Test(groups = "MMV",priority = 2)	
 public void manageMyVid() throws Exception {
 		LoginTest.loginTest1(driver);
 		
@@ -22,26 +22,29 @@ public void manageMyVid() throws Exception {
 	    Commons.click(driver, By.xpath("(//img[@id='download0'])[1]"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
+	   
 	    Commons.click(driver, By.id("Temporary"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));    
+	    Commons.click(driver, By.xpath("(//img[@id='download0'])[2]"));
+	    Commons.click(driver, By.id("confirmmessagepopup"));
+	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[2]"));
 	    Commons.click(driver, By.xpath("//span[text()=' Delete ']"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Thread.sleep(3000);
-	    Commons.click(driver, By.xpath("(//img[@id='download0'])[2]"));
-	    Commons.click(driver, By.id("confirmmessagepopup"));
-	    Commons.click(driver, By.id("confirmmessagepopup"));
+	    
 	    Commons.click(driver, By.id("OneTimeUse"));
-	    Commons.click(driver, By.id("confirmmessagepopup"));
-	    Commons.click(driver, By.id("confirmmessagepopup"));
-	    Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[3]"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.xpath("(//img[@id='download0'])[3]"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
-	    Commons.click(driver, By.className("mat-card-header-text"));
+	    Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[3]"));
+	    Commons.click(driver, By.id("confirmmessagepopup"));
+	    Commons.click(driver, By.id("confirmmessagepopup"));
+	    
+//	    
 }
 		
 		

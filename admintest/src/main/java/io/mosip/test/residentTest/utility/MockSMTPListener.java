@@ -46,7 +46,9 @@ public class MockSMTPListener{
 	public void run() {
 		try {
 				String a1="wss://smtp.";
-				String externalurlvar =System.getProperty("externalurl");
+				//String externalurlvar="https://iam.dev3.mosip.net";
+				//String externalurlvar="https://iam.qatriple.mosip.net";
+				String externalurlvar =System.getProperty("KeyclockURL");
 			    String a2=	externalurlvar.substring(externalurlvar.indexOf(".")+1);
 			    String a3="/mocksmtp/websocket"; 
 				  

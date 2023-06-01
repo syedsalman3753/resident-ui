@@ -2,6 +2,7 @@ package io.mosip.test.residentTest.utility;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -17,7 +18,7 @@ import org.testng.Assert;
 public class Commons {
 	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(Commons.class);
 
-	public static String appendDate="Z"+getDateTime();
+	public static String appendDate="0"+getDateTime();
 	
 	public static String getDateTime()
 	  {
@@ -72,6 +73,26 @@ public class Commons {
 	  }}
   
 	public static void enter(WebDriver driver, By by,String value) {
+		logger.info("Entering " + by +value);
+			try {
+				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
+				driver.findElement(by).clear();
+				driver.findElement(by).sendKeys(value);
+				try {
+					Thread.sleep(8);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}catch (StaleElementReferenceException sere) {
+				// simply retry finding the element in the refreshed DOM
+				driver.findElement(by).sendKeys(value);
+			}
+			catch (TimeoutException toe) {
+				driver.findElement(by).sendKeys(value);
+				System.out.println( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+			} }
+	public static void enterdate(WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
 				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -344,5 +365,74 @@ public class Commons {
 	public static void explicitWait(WebDriver driver, WebElement element, int timeOut ) {
 		WebDriverWait wait = new WebDriverWait(driver,timeOut);
 		wait.until(ExpectedConditions.visibilityOf(element));}
+	
+	public static boolean switchToNewWindow(WebDriver driver) {
+		boolean flag = false;
+		try {
+
+			Set<String> s=driver.getWindowHandles();
+			Object popup[]=s.toArray();
+			driver.switchTo().window(popup[1].toString());
+			flag = true;
+			return flag;
+		} catch (Exception e) {
+			flag = false;
+			return flag;
+		} finally {
+			if (flag) {
+				System.out.println("Window is Navigated with title");				
+			} else {
+				System.out.println("The Window with title: is not Selected");
+			}
+		}
+	}
+	
+	public static boolean switchToOldWindow(WebDriver driver) {
+		boolean flag = false;
+		try {
+
+			Set<String> s=driver.getWindowHandles();
+			Object popup[]=s.toArray();
+			driver.switchTo().window(popup[0].toString());
+			flag = true;
+			return flag;
+		} catch (Exception e) {
+			flag = false;
+			return flag;
+		} finally {
+			if (flag) {
+				System.out.println("Focus navigated to the window with title");			
+			} else {
+				System.out.println("The Window with title: is not Selected");
+			}
+		}
+	}
+	
+	public static boolean switchWindowByTitle(WebDriver driver,String windowTitle, int count) {
+		boolean flag = false;
+		try {
+			Set<String> windowList = driver.getWindowHandles();
+
+			String[] array = windowList.toArray(new String[0]);
+
+			driver.switchTo().window(array[count-1]);
+
+			if (driver.getTitle().contains(windowTitle)){
+				flag = true;
+			}else{
+				flag = false;
+			}
+			return flag;
+		} catch (Exception e) {
+			//flag = true;
+			return false;
+		} finally {
+			if (flag) {
+				System.out.println("Navigated to the window with title");
+			} else {
+				System.out.println("The Window with title is not Selected");
+			}
+		}
+	}
 	
 }

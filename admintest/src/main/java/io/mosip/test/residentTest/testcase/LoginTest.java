@@ -26,31 +26,22 @@ import org.testng.annotations.Test;
 
 import io.mosip.test.residentTest.utility.BaseClass;
 import io.mosip.test.residentTest.utility.Commons;
+import io.mosip.test.residentTest.utility.JsonUtil;
 import io.mosip.test.residentTest.utility.MockSMTPListener;
-
+@Test(groups = "LWTV")
 public class LoginTest extends BaseClass{
  
-  @Test(priority = 0)
+	    @Test(priority = 0)
   public static void loginTest(WebDriver driver) throws Exception {
 	  String envPath = System.getProperty("path");
 	  String vid = System.getProperty("vid");
-	  String otp = "111111";
-	  
+	  String otp = "00000";
+	  String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
 	
-	 // password = System.getProperty("password");
-	  String language = null;
+	
+	 
     driver.get(envPath);
     driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-   // driver.findElement(By.linkText("Admin")).click();
-    
-//    try {
-//		 language=Commons.getFieldData("langcode");
-//	
-//    System.out.println(language);
-//    } catch (Exception e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
     
     Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
     Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
@@ -58,12 +49,8 @@ public class LoginTest extends BaseClass{
     Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
    
     Commons.enter(driver, By.id("Otp_mosip-vid"), vid);
-    Commons.switchToFrameByIndex(driver, 0);
-    Commons.click(driver, By.xpath("//span[@id='recaptcha-anchor']"));
-    driver.switchTo().parentFrame();
-    Thread.sleep(3000);
     Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
-   // otp = MockSMTPListener.getOtp(10, "ieptqaqwsshjdajcjlkessdfdtho.kctsencdisfjerafjmmshfygoqqg.1278@mailinator.com");
+    otp = MockSMTPListener.getOtp(10, externalemail);
     System.out.println(otp);
     for(int i=0;i<=otp.length()-1;i++) {
     Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
@@ -83,25 +70,49 @@ public class LoginTest extends BaseClass{
     
     
     
-//    Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
-//    Commons.click(driver, By.id("Perpetual"));
-//    Commons.click(driver, By.id("confirmmessagepopup"));
-//    Commons.click(driver, By.id("confirmmessagepopup"));
-//    Commons.click(driver, By.id("Temporary"));
-//    Commons.click(driver, By.id("confirmmessagepopup"));
-//    Commons.click(driver, By.id("confirmmessagepopup"));    
-//    Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[2]"));
-//    Commons.click(driver, By.xpath("//span[text()=' Delete ']"));
-    
-    
-    
     
     
   }
 
-public static void loginTest1(WebDriver driver) {
+  public static void loginTest1(WebDriver driver) {
 	// TODO Auto-generated method stub
 	
+}
+  
+ @Test(groups = "LWTV")
+  public void LoginWIthTempVid(WebDriver driver) throws Exception {
+	
+	  String envPath = System.getProperty("path");
+	  String temporaryvid=JsonUtil.JsonObjParsing(Commons.getTestData(),"temporaryvid");
+	  String otp = "00000";
+	  String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+	  
+	  driver.get(envPath);
+	    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	    
+	    Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
+	    Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
+	    Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
+	    Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
+	   
+	    Commons.enter(driver, By.id("Otp_mosip-vid"), temporaryvid);
+	    Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+	    otp = MockSMTPListener.getOtp(10, externalemail);
+	    System.out.println(otp);
+	    for(int i=0;i<=otp.length()-1;i++) {
+	    Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+	    Thread.sleep(4000);
+	    Commons.click(driver, By.xpath("//button[text()='Verify']"));
+	    Commons.click(driver, By.id("Manage-Identity-Data"));
+	    Commons.click(driver, By.id("Manage-VID"));
+	    Commons.click(driver, By.id("Manage-Authentication"));
+	    Commons.click(driver, By.id("Manage-Service-Requests"));
+	    Commons.click(driver, By.id("Manage-Credentials"));
+	    Commons.click(driver, By.id("birthdate"));
+	    Commons.click(driver, By.id("address"));
+	    Commons.click(driver, By.id("gender"));
+	    Commons.click(driver, By.xpath("//button[text()='Allow']"));
+	    Commons.click(driver, By.id("confirmmessagepopup"));
 }
 }
 
