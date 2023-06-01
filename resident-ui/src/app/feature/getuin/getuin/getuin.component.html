@@ -33,6 +33,8 @@
   </mat-card>
 </div>
 
+<!-- UIN in progress card -->
+
 <div class="main-container" *ngIf="isUinNotReady">
   <span class="breadcrumb">
     <a (click)="onItemSelected('home')">{{'uinservices.home' | translate}} &nbsp;&nbsp;</a>
@@ -42,8 +44,12 @@
   </span>
   <div class="status-title-card">
     <mat-card-subtitle
-      class="status-title-text" *ngIf="aid">{{getStatusData.uinTitleDescription.replace("$AID",aid)}}</mat-card-subtitle>
-    <mat-card-subtitle class="req-msg-text">{{getStatusData.requestMsg}}</mat-card-subtitle>
+      class="status-title-text" *ngIf="aid && aidStatus === 'SUCCESS' ">{{getStatusData.uinTitleDescription.replace("$AID",aid)}}
+    </mat-card-subtitle>
+    <mat-card-subtitle
+      class="status-title-text" *ngIf="aid && aidStatus === 'FAILURE' ">{{getStatusData.uinTitleDescription2.replace("$AID",aid)}}
+    </mat-card-subtitle>
+      <mat-card-subtitle class="req-msg-text">{{getStatusData.requestMsg}}</mat-card-subtitle>
   </div>
   <mat-card class="status-details-card">
     <mat-card-title class="uin-title">{{getStatusData.UINCardStatus}}</mat-card-title>
@@ -51,12 +57,21 @@
       <ul class="progressbar">
         <li *ngFor="let item of stageKeys; let i = index">
           <div class="stages-card">
-            <div [ngClass]=" i <= orderStatusIndex ? 'active-position-icon icon':'icon' ">
-              <img *ngIf="i === orderStatusIndex" src="./assets/icons/iconfont/Path 7837.svg" />
+            <div *ngIf="i < orderStatusIndex" class="active-position-icon icon">
+              <!-- <img src="./assets/icons/iconfont/Path 7837.svg" /> -->
             </div>
-            <hr [ngClass]=" i <= orderStatusIndex ? 'completed-stage-bar':'incompleted-stage-bar' " />
+            <div *ngIf="i === orderStatusIndex"  [ngClass]="{ 'active-position-icon icon' : aidStatus === 'SUCCESS', 'failure-position-icon icon' : aidStatus === 'FAILURE' }">
+              <!-- <img src="./assets/icons/iconfont/Path 7837.svg" /> -->
+            </div>
+            <div *ngIf="i > orderStatusIndex"  class="icon">
+              <!-- <img  src="./assets/icons/iconfont/Path 7837.svg" /> -->
+            </div>
+            <hr *ngIf="i < orderStatusIndex" class="completed-stage-bar stage-bar" />
+            <hr *ngIf="i === orderStatusIndex" [ngClass]="{ 'completed-stage-bar stage-bar' : aidStatus === 'SUCCESS', 'failure-stage-bar stage-bar' : aidStatus === 'FAILURE' }" />
+            <hr *ngIf="i > orderStatusIndex" class="incompleted-stage-bar stage-bar" />
             <mat-card-subtitle
-              [ngClass]="orderStatus === item ? 'active-position-text':'inactive-position-text' ">{{getStatusData.statusStages[item]}}</mat-card-subtitle>
+              [ngClass]="orderStatus === item ? 'active-position-text':'inactive-position-text' ">{{getStatusData.statusStages[item]}}
+            </mat-card-subtitle>
           </div>
         </li>
       </ul>

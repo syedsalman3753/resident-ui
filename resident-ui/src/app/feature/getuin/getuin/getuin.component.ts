@@ -36,6 +36,7 @@ export class GetuinComponent implements OnInit {
   width : string;
   stageKeys:any = [];
   disableSendOtp: boolean = true;
+  aidStatus:string;
 
   constructor(
     private router: Router,
@@ -133,15 +134,16 @@ export class GetuinComponent implements OnInit {
   getStatus(data:any){
     this.dataStorageService.getStatus(data["AID"]).subscribe(response =>{
       if(response["response"]){
-        if(response["response"].transactionStage === "CARD_READY_TO_DOWNLOAD"){
-          this.generateOTP(data)
+        if(response["response"].transactionStage === "CARD_READY_TO_DOWNLOAD" && response["response"].aidStatus === "SUCCESS"){
+          this.generateOTP(data);
         }else{
           this.isUinNotReady = true
-          this.orderStatus = response["response"].transactionStage
-          this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus)
+          this.orderStatus = response["response"].transactionStage;
+          this.aidStatus = response["response"].aidStatus;
+          this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus);
         }
       }else{
-        this.showErrorPopup(response["errors"])
+        this.showErrorPopup(response["errors"]);
       }
      
     })
