@@ -36,6 +36,8 @@ export class GetuinComponent implements OnInit {
   width : string;
   stageKeys:any = [];
   disableSendOtp: boolean = true;
+  aidStatus:string;
+  captchaEnable: boolean = false;
 
   constructor(
     private router: Router,
@@ -79,6 +81,7 @@ export class GetuinComponent implements OnInit {
     let self = this;
     setTimeout(() => {
       self.siteKey = self.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
+      self.captchaEnable = self.appConfigService.getConfig()["mosip.resident.captcha.enable"];      
     }, 1000);  
     this.translateService.use(localStorage.getItem("langCode"));    
     this.translateService
@@ -110,9 +113,15 @@ export class GetuinComponent implements OnInit {
   //   }
   // }
   
-  getCaptchaToken(event: Event) {
-    if (event !== undefined && event != null) {
-      this.disableSendOtp = false;
+  getCaptchaToken(event: any) {
+    if (event) {
+      if(this.captchaEnable){
+        if(grecaptcha.getResponse().length){
+          this.disableSendOtp = false;
+        }
+      }else{
+        this.disableSendOtp = false;
+      }      
     } else {
       this.disableSendOtp = true;
     }
@@ -133,15 +142,16 @@ export class GetuinComponent implements OnInit {
   getStatus(data:any){
     this.dataStorageService.getStatus(data["AID"]).subscribe(response =>{
       if(response["response"]){
-        if(response["response"].transactionStage === "CARD_READY_TO_DOWNLOAD"){
-          this.generateOTP(data)
+        if(response["response"].transactionStage === "CARD_READY_TO_DOWNLOAD" && response["response"].aidStatus === "SUCCESS"){
+          this.generateOTP(data);
         }else{
           this.isUinNotReady = true
-          this.orderStatus = response["response"].transactionStage
-          this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus)
+          this.orderStatus = response["response"].transactionStage;
+          this.aidStatus = response["response"].aidStatus;
+          this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus);
         }
       }else{
-        this.showErrorPopup(response["errors"])
+        this.showErrorPopup(response["errors"]);
       }
      
     })

@@ -403,7 +403,8 @@
     },
     "uinStatus": {
         "status": "Status",
-        "uinTitleDescription": "Your UIN against the AID: $AID is still in progress.",
+        "uinTitleDescription": "Your UIN generation against the AID: $AID is still in progress.",
+        "uinTitleDescription2": "Your UIN generation against the AID: $AID has failed.",
         "requestMsg": "Please try again after a few days.",
         "UINCardStatus": "UIN Card Status",
         "statusTime": "Completion Expected Date : $date",
