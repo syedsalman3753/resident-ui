@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
 public class BaseClass {
 	protected static  WebDriver driver;
 	protected Map<String, Object> vars;
-	protected JavascriptExecutor js;
+	protected static JavascriptExecutor js;
 	protected String langcode;
 	
 	protected String envPath = System.getProperty("path");
@@ -105,7 +105,8 @@ public class BaseClass {
 
 	@AfterMethod
 	public void tearDown() {
-
+		MockSMTPListener mockSMTPListener = new MockSMTPListener();
+		mockSMTPListener.bTerminate = true;
 		driver.quit();
 	}
 

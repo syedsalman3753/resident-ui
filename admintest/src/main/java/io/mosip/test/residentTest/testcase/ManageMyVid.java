@@ -37,10 +37,10 @@ public void manageMyVid() throws Exception {
 	    Commons.click(driver, By.id("OneTimeUse"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
-	    Commons.click(driver, By.xpath("(//img[@id='download0'])[3]"));
+	    Commons.click(driver, By.xpath("(//img[@id='download0'])[2]"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
-	    Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[3]"));
+	    Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[2]"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    Commons.click(driver, By.id("confirmmessagepopup"));
 	    
