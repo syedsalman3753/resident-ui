@@ -15,7 +15,7 @@ public class ViewMyHistory extends BaseClass {
 	
 	@Test(groups = "VMH")
 	public void viewMyHistory() throws Exception {
-		LoginTest.loginTest1(driver);
+		LoginTest.loginTest();
 		String date = "12/04/2022";
 		
 		

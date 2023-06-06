@@ -1,5 +1,6 @@
 package io.mosip.test.residentTest.testcase;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,25 +33,23 @@ import io.mosip.test.residentTest.utility.Commons;
 import io.mosip.test.residentTest.utility.JsonUtil;
 import io.mosip.test.residentTest.utility.MockSMTPListener;
 
+
+@Test(priority = 0)
 public class LoginTest extends BaseClass{
  
 	    @Test(priority = 0)
-  public static void loginTest(WebDriver driver) throws Exception {
+  public static void loginTest() throws Exception {
+	    	//WebDriver driver = BaseClass.driver;
 	  String envPath = System.getProperty("path");
 	  String vid = System.getProperty("vid");
 	  String otp = "00000";
 	  String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
-	
-	
-	 
     driver.get(envPath);
     driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-    
     Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
     Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
     Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
     Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
-   
     Commons.enter(driver, By.id("Otp_mosip-vid"), vid);
     Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
     otp = MockSMTPListener.getOtp(10, externalemail);
@@ -58,38 +58,19 @@ public class LoginTest extends BaseClass{
     Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
     Thread.sleep(4000);
     Commons.click(driver, By.xpath("//button[text()='Verify']"));
-//    Commons.click(driver, By.id("Manage-Identity-Data"));
-//    Commons.click(driver, By.id("Manage-VID"));
-//    Commons.click(driver, By.id("Manage-Authentication"));
-//    Commons.click(driver, By.id("Manage-Service-Requests"));
-//    Commons.click(driver, By.id("Manage-Credentials"));
-//    Commons.click(driver, By.id("birthdate"));
-//    Commons.click(driver, By.id("address"));
-//    Commons.click(driver, By.id("gender"));
-//    Commons.click(driver, By.xpath("//button[text()='Allow']"));
-//    Commons.click(driver, By.id("confirmmessagepopup"));
-    
     List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
-    
     List<String> ids =new ArrayList<>();
-    
     for(WebElement checkbox: checkboxes) {
-    	String id = checkbox.getAttribute("id");
-    	
+    	String id = checkbox.getAttribute("id");	
     	ids.add(id);
     }
-    
     System.out.println(ids);
     for(String id :ids) {
     WebElement checkbox= driver.findElement(By.id(id));
-    js.executeScript("arguments[0].click();", checkbox);
-    
+    js.executeScript("arguments[0].click();", checkbox); 
     }
-    
      Commons.click(driver, By.xpath("//button[text()='Allow']"));
      Commons.click(driver, By.id("confirmmessagepopup"));
-  
-//    	
     //	Commons.click(driver, By.xpath("//input[@type='checkbox']"));
 //    	 Commons.click(driver, By.id("Manage-Identity-Data"));
 //       Commons.click(driver, By.id("Manage-VID"));
@@ -104,21 +85,223 @@ public class LoginTest extends BaseClass{
        
     	//Commons.click(driver, By.xpath("//input[@type='checkbox']"));
     }
-//}
-//    List<WebElement> checkbox = driver.findElements(By.xpath("//input[@type='checkbox']"));
-//	for(int i=0;i<checkbox.size();i++) {
-//		checkbox.get(i).click();
+
+  
+
+  
+  
+
+
+	    @Test(priority = 0) 
+public static void loginTestWithTempraryVID() throws Exception {
+	//WebDriver driver = BaseClass.driver;
+String envPath = System.getProperty("path");
+String vid = System.getProperty("vid");
+String otp = "00000";
+String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+String temporaryvid=JsonUtil.JsonObjParsing(Commons.getTestData(),"temporaryvid");
+driver.get(envPath);
+driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
+Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
+Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
+Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
+Commons.enter(driver, By.id("Otp_mosip-vid"), temporaryvid);
+Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+otp = MockSMTPListener.getOtp(10, externalemail);
+System.out.println(otp);
+for(int i=0;i<=otp.length()-1;i++) {
+Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+Thread.sleep(4000);
+Commons.click(driver, By.xpath("//button[text()='Verify']"));
+List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+List<String> ids =new ArrayList<>();
+for(WebElement checkbox: checkboxes) {
+String id = checkbox.getAttribute("id");
+ids.add(id);
+}
+System.out.println(ids);
+for(String id :ids) {
+WebElement checkbox= driver.findElement(By.id(id));
+js.executeScript("arguments[0].click();", checkbox);
+}
+Commons.click(driver, By.xpath("//button[text()='Allow']"));
+Commons.click(driver, By.id("confirmmessagepopup"));
+Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[2]"));
+Commons.click(driver, By.id("confirmmessagepopup"));
+Commons.click(driver, By.id("confirmmessagepopup")); 
+}
+
+
+  
+  public static void loginTestWithOneTimeVID() throws Exception {
+		//WebDriver driver = BaseClass.driver;
+	String envPath = System.getProperty("path");
+	String vid = System.getProperty("vid");
+	String otp = "00000";
+	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+	String onetimevid=JsonUtil.JsonObjParsing(Commons.getTestData(),"onetimevid");
+	driver.get(envPath);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
+	Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
+	Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
+	Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
+	Commons.enter(driver, By.id("Otp_mosip-vid"), onetimevid);
+	Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+	otp = MockSMTPListener.getOtp(10, externalemail);
+	System.out.println(otp);
+	for(int i=0;i<=otp.length()-1;i++) {
+	Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+	Thread.sleep(4000);
+	Commons.click(driver, By.xpath("//button[text()='Verify']"));
+	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+	List<String> ids =new ArrayList<>();
+	for(WebElement checkbox: checkboxes) {
+	String id = checkbox.getAttribute("id");
+	ids.add(id);
+	}
+	System.out.println(ids);
+	for(String id :ids) {
+	WebElement checkbox= driver.findElement(By.id(id));
+	js.executeScript("arguments[0].click();", checkbox);
+	}
+	Commons.click(driver, By.xpath("//button[text()='Allow']"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+	Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[3]"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.id("confirmmessagepopup")); 
+	}
+//  
+//  
+//   
+  public static void loginTestWithUINRevokeVID() throws Exception {
+		//WebDriver driver = BaseClass.driver;
+	String envPath = System.getProperty("path");
+	String vid = System.getProperty("vid");
+	String otp = "00000";
+	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+	String UIN=JsonUtil.JsonObjParsing(Commons.getTestData(),"UIN");
+	driver.get(envPath);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
+	Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
+	Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
+	Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
+	Commons.enter(driver, By.id("Otp_mosip-vid"), UIN);
+	Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+	otp = MockSMTPListener.getOtp(10, externalemail);
+	System.out.println(otp);
+	for(int i=0;i<=otp.length()-1;i++) {
+	Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+	Thread.sleep(4000);
+	Commons.click(driver, By.xpath("//button[text()='Verify']"));
+	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+	List<String> ids =new ArrayList<>();
+	for(WebElement checkbox: checkboxes) {
+	String id = checkbox.getAttribute("id");
+	ids.add(id);
+	}
+	System.out.println(ids);
+	for(String id :ids) {
+	WebElement checkbox= driver.findElement(By.id(id));
+	js.executeScript("arguments[0].click();", checkbox);
+
+	}
+	Commons.click(driver, By.xpath("//button[text()='Allow']"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+	Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[1]"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.id("confirmmessagepopup")); 
+	}
+//  
+//  
+  @Test(priority = 0)
+  public static void loginTestWithUINCreatVID() throws Exception {
+		//WebDriver driver = BaseClass.driver;
+	String envPath = System.getProperty("path");
+	String vid = System.getProperty("vid");
+	String otp = "00000";
+	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+	String UIN=JsonUtil.JsonObjParsing(Commons.getTestData(),"UIN");
+	driver.get(envPath);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
+	Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
+	Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
+	Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
+	Commons.enter(driver, By.id("Otp_mosip-vid"), UIN);
+	Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+	otp = MockSMTPListener.getOtp(10, externalemail);
+	System.out.println(otp);
+	for(int i=0;i<=otp.length()-1;i++) {
+	Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+	Thread.sleep(4000);
+	Commons.click(driver, By.xpath("//button[text()='Verify']"));
+	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+	List<String> ids =new ArrayList<>();
+	for(WebElement checkbox: checkboxes) {
+	String id = checkbox.getAttribute("id");
+	ids.add(id);
+	}
+	System.out.println(ids);
+	for(String id :ids) {
+	WebElement checkbox= driver.findElement(By.id(id));
+	js.executeScript("arguments[0].click();", checkbox);
+	}
+	Commons.click(driver, By.xpath("//button[text()='Allow']"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+	Commons.click(driver, By.id("Perpetual"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.id("confirmmessagepopup")); 
+	}
 //
-	
-//    
-//	    }
+//  
+//  
+  public static void loginTestWithVidRevokeVid() throws Exception {
+		//WebDriver driver = BaseClass.driver;
+	String envPath = System.getProperty("path");
+	String vid = System.getProperty("vid");
+	String otp = "00000";
+	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+	String perpetualvid=JsonUtil.JsonObjParsing(Commons.getTestData(),"perpetualvid");
+	driver.get(envPath);
+	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	Commons.click(driver,By.xpath("//div[@id='dashboardCard1']"));
+	Commons.click(driver,By.xpath("(//a[@href='#link1'])[2]"));
+	Commons.click(driver,By.xpath("//button[text()='More Ways to Login']"));
+	Commons.click(driver,By.xpath("//span[text()='Login with OTP']"));
+	Commons.enter(driver, By.id("Otp_mosip-vid"), perpetualvid);
+	Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+	otp = MockSMTPListener.getOtp(10, externalemail);
+	System.out.println(otp);
+	for(int i=0;i<=otp.length()-1;i++) {
+	Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+	Thread.sleep(4000);
+	Commons.click(driver, By.xpath("//button[text()='Verify']"));
+	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+	List<String> ids =new ArrayList<>();
+	for(WebElement checkbox: checkboxes) {
+	String id = checkbox.getAttribute("id");
+	ids.add(id);
+	}
+	System.out.println(ids);
+	for(String id :ids) {
+	WebElement checkbox= driver.findElement(By.id(id));
+	js.executeScript("arguments[0].click();", checkbox);
+	}
+	Commons.click(driver, By.xpath("//button[text()='Allow']"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+	Commons.click(driver, By.xpath("(//mat-icon[@id='delete0'])[1]"));
+	Commons.click(driver, By.id("confirmmessagepopup"));
+	Commons.click(driver, By.id("confirmmessagepopup")); 
+	}
   
 
-  public static void loginTest1(WebDriver driver) {
-	// TODO Auto-generated method stub
-	
-}
-  
 
 }
-

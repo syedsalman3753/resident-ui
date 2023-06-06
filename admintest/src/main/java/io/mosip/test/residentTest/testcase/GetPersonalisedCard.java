@@ -9,8 +9,8 @@ import io.mosip.test.residentTest.utility.Commons;
 public class GetPersonalisedCard extends BaseClass {
 	
 	@Test(groups = "GPC")
-	public void GetPersonalisedCard() throws InterruptedException {
-		LoginTest.loginTest1(driver);
+	public void GetPersonalisedCard() throws Exception {
+		LoginTest.loginTest();
 		
 		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[5]"));
 		

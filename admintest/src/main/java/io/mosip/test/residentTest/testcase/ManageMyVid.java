@@ -11,7 +11,7 @@ public class ManageMyVid extends BaseClass {
 	
 	@Test(groups = "MMV",priority = 2)	
 public void manageMyVid() throws Exception {
-		LoginTest.loginTest1(driver);
+		LoginTest.loginTest();
 		
 		
 		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));

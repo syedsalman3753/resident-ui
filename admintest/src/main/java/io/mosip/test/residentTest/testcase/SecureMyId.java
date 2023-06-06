@@ -10,8 +10,8 @@ public class SecureMyId extends BaseClass{
 
 	
 	@Test(groups = "SMI")
-	public void SecureMyId() {
-		LoginTest.loginTest1(driver);
+	public void SecureMyId() throws Exception {
+		LoginTest.loginTest();
 		
 		
 		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[3]"));

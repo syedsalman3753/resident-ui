@@ -9,8 +9,8 @@ import io.mosip.test.residentTest.utility.Commons;
 public class ShareMyData extends BaseClass {
 
 	@Test(groups = "SMD")
-	public void shareMyData() throws InterruptedException {
-		LoginTest.loginTest1(driver);
+	public void shareMyData() throws Exception {
+		LoginTest.loginTest();
 		
 		
 		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[6]"));

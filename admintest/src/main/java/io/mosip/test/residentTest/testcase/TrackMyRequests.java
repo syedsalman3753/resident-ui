@@ -14,7 +14,7 @@ import io.mosip.test.residentTest.utility.JsonUtil;
 		 String Eid="";
 		 
 		//(//span[text()='Event ID : '])[1]
-		LoginTest.loginTest1(driver);
+		 LoginTest.loginTest();
 		
 //		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
 //		Commons.enter(driver, By.id("appIdValue"),Eid );
@@ -40,8 +40,8 @@ import io.mosip.test.residentTest.utility.JsonUtil;
 	}
 
 	
-	public void TrackMyRequestsInvalidEId() {
-		LoginTest.loginTest1(driver);
+	public void TrackMyRequestsInvalidEId() throws Exception {
+		LoginTest.loginTest();
 		 Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
 		 Commons.enter(driver, By.id("appIdValue"), data+"345");
 		 Commons.click(driver, By.id("getEIDStatusbtn"));
@@ -50,7 +50,7 @@ import io.mosip.test.residentTest.utility.JsonUtil;
 	
 	public void TrackMyRequestsWithDiffEId() throws Exception {
 		String tempEID=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempEID");
-		LoginTest.loginTest1(driver);
+		LoginTest.loginTest();
 		 Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
 		 Commons.enter(driver, By.id("appIdValue"), tempEID);
 		 Commons.click(driver, By.id("getEIDStatusbtn"));

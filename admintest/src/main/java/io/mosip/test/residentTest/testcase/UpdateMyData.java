@@ -12,7 +12,7 @@ public class UpdateMyData extends BaseClass {
 	
 	public void updateMyData() throws Exception {
 		String tempemail1=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail1");
-    LoginTest.loginTest1(driver);
+		LoginTest.loginTest();
 		
 		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[7]"));
 		Commons.enter(driver, By.id("fullName"), data);
@@ -125,8 +125,8 @@ public class UpdateMyData extends BaseClass {
 	}
 	
 	
-     public void UpdateDataWithNameAndDOB() {
-	      LoginTest.loginTest1(driver);
+     public void UpdateDataWithNameAndDOB() throws Exception {
+    	 LoginTest.loginTest();
 	      Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[7]"));
 	      Commons.enter(driver, By.id("fullName"), data);
 	      Commons.click(driver, By.id("dateOfBirth"));
@@ -139,8 +139,8 @@ public class UpdateMyData extends BaseClass {
 	
 }
 	
-	public void UpdateDataWithNameAndGender() {
-		 LoginTest.loginTest1(driver);
+	public void UpdateDataWithNameAndGender() throws Exception {
+		LoginTest.loginTest();
 		  Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[7]"));
 	      Commons.enter(driver, By.id("fullName"), data);
 		  Commons.dropdown(driver, By.id("gender"), "Female");
@@ -150,8 +150,8 @@ public class UpdateMyData extends BaseClass {
 		  Commons.click(driver, By.id("submit"));
 	}
 	
-	public void UpdateDataWithoutAddressLine() {
-		LoginTest.loginTest1(driver);
+	public void UpdateDataWithoutAddressLine() throws Exception {
+		LoginTest.loginTest();
 		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[7]"));
 		Commons.click(driver, By.xpath("//div[text()='Address']"));
 		Commons.dropdown(driver, By.id("Region"));
