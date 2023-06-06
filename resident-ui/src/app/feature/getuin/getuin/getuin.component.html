@@ -69,9 +69,8 @@
             <hr *ngIf="i < orderStatusIndex" class="completed-stage-bar stage-bar" />
             <hr *ngIf="i === orderStatusIndex" [ngClass]="{ 'completed-stage-bar stage-bar' : aidStatus === 'SUCCESS', 'failure-stage-bar stage-bar' : aidStatus === 'FAILURE' }" />
             <hr *ngIf="i > orderStatusIndex" class="incompleted-stage-bar stage-bar" />
-            <mat-card-subtitle
-              [ngClass]="orderStatus === item ? 'active-position-text':'inactive-position-text' ">{{getStatusData.statusStages[item]}}
-            </mat-card-subtitle>
+            <mat-card-subtitle *ngIf="orderStatus !== item" class="inactive-position-text">{{getStatusData.statusStages[item]}}</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="orderStatus === item" [ngClass]="{'active-position-text' : aidStatus === 'SUCCESS', 'failure-position-text' : aidStatus === 'FAILURE'}">{{getStatusData.statusStages[item]}}</mat-card-subtitle>
           </div>
         </li>
       </ul>
