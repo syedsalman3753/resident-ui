@@ -237,7 +237,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   submitOtp() {
     this.auditService.audit('RP-038', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on the "submit button" on verify phone number/email Id page');
     this.verifyOTP()
-    clearInterval(this.interval)
+  
   }
 
   generateOTP() {
@@ -298,7 +298,6 @@ export class VerifyComponent implements OnInit, OnDestroy {
 
   verifyOTP() {
     let self = this;
-    clearInterval(this.interval)
     const request = {
       "id": self.appConfigService.getConfig()['mosip.resident.api.id.otp.request'],
       "version": self.appConfigService.getConfig()["mosip.resident.api.version.otp.request"],
@@ -314,6 +313,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
       if (!response.body["errors"]) {
         this.router.navigate(["dashboard"])
         self.showMessage(response.body["response"],this.eventId);
+        clearInterval(this.interval)
       } else {
         self.showErrorPopup(response.body["errors"]);
       }

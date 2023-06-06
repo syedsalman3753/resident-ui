@@ -247,6 +247,10 @@
     color: #505050;
     font-weight: 600;
 }
+.failure-position-text {
+    color: red;
+    font-weight: 600;
+}
 .inactive-position-text{
     color: #D3D3D3;
 }
