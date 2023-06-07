@@ -49,7 +49,8 @@
     <mat-card-subtitle
       class="status-title-text" *ngIf="aid && aidStatus === 'FAILURE' ">{{getStatusData.uinTitleDescription2.replace("$AID",aid)}}
     </mat-card-subtitle>
-      <mat-card-subtitle class="req-msg-text">{{getStatusData.requestMsg}}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="aidStatus === 'SUCCESS' " class="req-msg-text">{{getStatusData.requestMsg}}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="aidStatus === 'FAILURE' " class="req-msg-text">{{getStatusData.requestMsg2}}</mat-card-subtitle>
   </div>
   <mat-card class="status-details-card">
     <mat-card-title class="uin-title">{{getStatusData.UINCardStatus}}</mat-card-title>
