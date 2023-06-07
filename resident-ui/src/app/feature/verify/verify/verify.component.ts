@@ -268,6 +268,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
         self.showOtpPanel = true;
         self.setOtpTime();
         this.inputDisabled = false;
+        this.disableSendOtp = true;
       } else {
         self.showErrorPopup(response["errors"]);
         self.showOtpPanel = false;
@@ -394,6 +395,9 @@ export class VerifyComponent implements OnInit, OnDestroy {
       this.router.navigate(["dashboard"]);
     } else if ("back") {
       this.showOtpPanel = false;
+      this.resetBtnDisable = true;
+      this.submitBtnDisable = true;
+      this.otp="";
     }
     clearInterval(this.interval)
     this.displaySeconds = "00"
