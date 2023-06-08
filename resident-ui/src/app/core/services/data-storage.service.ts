@@ -325,6 +325,10 @@ export class DataStorageService {
     return this.httpClient.get<Blob>(this.BASE_URL + `/download/registration-centers-list?langcode=${langcode}&hierarchylevel=${hierarchylevel}&name=${name}`, { observe: 'response', responseType: 'blob' as 'json' })
   }
 
+  nearByRegistrationCentersList(langcode:any, coords:any){
+    return this.httpClient.get<Blob>(this.BASE_URL + `/download/nearestRegistrationcenters?langcode=${langcode}&longitude=${coords.longitude}&latitude=${coords.latitude}&proximitydistance=${this.appConfigService.getConfig()["resident.nearby.centers.distance.meters"]}`, {observe: 'response',responseType: 'blob' as 'json'})
+  }
+
   updateuin(request: any){
     return this.httpClient.patch(this.BASE_URL + '/update-uin', request,{ observe: 'response' });
   }
