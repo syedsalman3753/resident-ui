@@ -4,10 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import io.mosip.test.residentTest.utility.BaseClass;
 import io.mosip.test.residentTest.utility.Commons;
 import io.mosip.test.residentTest.utility.JsonUtil;
- //  @Test(groups = "TMR")
+   @Test(groups = "TMR")
    public class TrackMyRequests extends BaseClass{
 	@Test(groups = "TMR",priority = 1)
 	public void trackMyRequest() throws Exception {
@@ -16,44 +18,54 @@ import io.mosip.test.residentTest.utility.JsonUtil;
 		//(//span[text()='Event ID : '])[1]
 		 LoginTest.loginTest();
 		
-//		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+//		Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
 //		Commons.enter(driver, By.id("appIdValue"),Eid );
-//		Commons.click(driver, By.id("getEIDStatusbtn"));
-//		Commons.click(driver, By.id("downloadAcknowledgementbtn"));
+//		Commons.click(test,driver, By.id("getEIDStatusbtn"));
+//		Commons.click(test,driver, By.id("downloadAcknowledgementbtn"));
 		//String eid=driver.findElement(By.xpath("(//span[@class='mat-button-wrapper'])")).getText();
-//		Commons.click(driver, By.className("mat-card-header-text"));
+//		Commons.click(test,driver, By.className("mat-card-header-text"));
 //		String eid=driver.findElement(By.xpath("//span[text()='Event ID : ']")).getText();
 //		System.out.println(eid);
-		Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
-		 Commons.click(driver, By.id("Temporary"));
-		 Commons.click(driver, By.id("confirmmessagepopup"));
+		 test=extent.createTest("TrackMyRequests", "verify Login");
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+		 Commons.click(test,driver, By.id("Temporary"));
+		 test.log(Status.INFO, "Click on Temporary VID");
+		 Commons.click(test,driver, By.id("confirmmessagepopup"));
 	     String eid	= driver.findElement(By.className("pop-up-header")).getText();
 		 System.out.println(eid);
 		  Eid = eid.replaceAll("[^0-9]", "");
 		 System.out.println(Eid);
-		 Commons.click(driver, By.id("confirmmessagepopup"));
-		 Commons.click(driver, By.xpath("//a[text()]"));
-		 Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
-		 Commons.enter(driver, By.id("appIdValue"), Eid);
-		 Commons.click(driver, By.id("getEIDStatusbtn"));
-		 Commons.click(driver, By.id("downloadAcknowledgementbtn"));
+		 
+		 
+		 Commons.click(test,driver, By.id("confirmmessagepopup"));
+		 Commons.click(test,driver, By.xpath("//a[text()]"));
+		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+		 Commons.enter(test,driver, By.id("appIdValue"), Eid);
+		 test.log(Status.INFO, "EID Extracted");
+		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
+		 test.log(Status.INFO, "Click on Track");
+		 Commons.click(test,driver, By.id("downloadAcknowledgementbtn"));
 	}
 
 	
 	public void TrackMyRequestsInvalidEId() throws Exception {
 		LoginTest.loginTest();
-		 Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
-		 Commons.enter(driver, By.id("appIdValue"), data+"345");
-		 Commons.click(driver, By.id("getEIDStatusbtn"));
-		 Commons.click(driver, By.id("confirmmessagepopup"));
+		test=extent.createTest("TrackMyRequestsInvalidEId", "verify Login");
+		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+		 Commons.enter(test,driver, By.id("appIdValue"), data+"345");
+		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
+		 test.log(Status.INFO, "Click on Track");
+		 Commons.click(test,driver, By.id("confirmmessagepopup"));
 	}
 	
 	public void TrackMyRequestsWithDiffEId() throws Exception {
 		String tempEID=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempEID");
 		LoginTest.loginTest();
-		 Commons.click(driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
-		 Commons.enter(driver, By.id("appIdValue"), tempEID);
-		 Commons.click(driver, By.id("getEIDStatusbtn"));
-		 Commons.click(driver, By.id("confirmmessagepopup"));
+		test=extent.createTest("TrackMyRequestsInvalidEId", "verify Login");
+		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+		 Commons.enter(test,driver, By.id("appIdValue"), tempEID);
+		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
+		 test.log(Status.INFO, "Click on Track");
+		 Commons.click(test,driver, By.id("confirmmessagepopup"));
 	}
 }

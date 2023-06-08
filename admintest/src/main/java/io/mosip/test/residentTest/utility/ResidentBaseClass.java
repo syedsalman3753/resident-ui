@@ -13,6 +13,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
 import io.mosip.test.residentTest.testcase.LoginTest;
 
 public class ResidentBaseClass {
@@ -27,13 +31,22 @@ public class ResidentBaseClass {
 	protected String externalurl = System.getProperty("externalurl");
 	protected String password = System.getProperty("password");
 	protected String data = Commons.appendDate;
-
+	public static ExtentSparkReporter html;
+    public static    ExtentReports extent;
+    public static    ExtentTest test;
 
 	public void setLangcode(String langcode) throws Exception {
 		this.langcode = Commons.getFieldData("langcode");
 	}
 
+@BeforeMethod
 	
+    public void set() {
+        extent=ExtentReportManager.getReports();
+
+ 
+
+    }
 	@BeforeMethod
 	public void setUp() throws Exception {
 		System.out.println(System.getProperty("user.dir"));
@@ -63,9 +76,9 @@ public class ResidentBaseClass {
 //
 //			System.out.println(language1);
 //			if(!language1.equals("sin"))
-//			{Commons.click(driver, By.xpath("//*[@id='kc-locale-dropdown']"));
+//			{Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
 //			String var = "//li/a[contains(text(),'" + language1 + "')]";
-//			Commons.click(driver, By.xpath(var));
+//			Commons.click(test,driver, By.xpath(var));
 //			}
 //
 //		} catch (Exception e) {
@@ -80,7 +93,7 @@ public class ResidentBaseClass {
 	@AfterMethod
 	public void tearDown() {
 
-		//driver.quit();
+		driver.quit();
 	}
 
 	@DataProvider(name = "data-provider")

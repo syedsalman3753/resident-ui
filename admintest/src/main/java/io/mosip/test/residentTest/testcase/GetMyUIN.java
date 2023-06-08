@@ -1,7 +1,11 @@
 package io.mosip.test.residentTest.testcase;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.Status;
 
 import io.mosip.test.residentTest.utility.Commons;
 import io.mosip.test.residentTest.utility.JsonUtil;
@@ -16,83 +20,87 @@ public class GetMyUIN extends ResidentBaseClass{
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
 		
-		
-		Commons.click(driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
-		Commons.enter(driver, By.id("aidValue"), aid);//
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.xpath("//div[@id='rc-anchor-container']"));
+		test=extent.createTest("getMyUIN", "verify Login");
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.enter(test,driver, By.id("aidValue"), aid);//
+		test.log(Status.INFO, "AID Entered");
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("getUinSendOtpBtn"));
+		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 		String otp = MockSMTPListener.getOtp(10, tempemail);
-		Commons.enter(driver, By.id("otp-input"), otp);
-		   Commons.click(driver, By.xpath("//button[@id='getUinsubmitBtn']"));
-		   Commons.click(driver, By.id("confirmmessagepopup"));
+		Commons.enter(test,driver, By.id("otp-input"), otp);
+		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
+		   test.log(Status.INFO, "Click on submit");
+		   Commons.click(test,driver, By.id("confirmmessagepopup"));
 		
 		
 		
 	}
 	
-	public void getMyUINWithoutAID() throws InterruptedException {
-		
-		Commons.click(driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.xpath("//div[@id='rc-anchor-container']"));
+	public void getMyUINWithoutAID() throws InterruptedException, IOException {
+		test=extent.createTest("get MyUIN Without AID", "verify Login");
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("getUinSendOtpBtn"));
+		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 	}
 	
 	
 	public void getMyUINWithInvalidOtp() throws Exception {
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
-		
-		Commons.click(driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
-		Commons.enter(driver, By.id("aidValue"), aid);//
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.xpath("//div[@id='rc-anchor-container']"));
+		test=extent.createTest("get My UIN With Invalid Otp", "verify Login");
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.enter(test,driver, By.id("aidValue"), aid);//
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("getUinSendOtpBtn"));
+		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 		String otp = MockSMTPListener.getOtp(10, tempemail);
 		
-		Commons.enter(driver, By.id("otp-input"), otp+"56");
-		   Commons.click(driver, By.xpath("//button[@id='getUinsubmitBtn']"));
-		   Commons.click(driver, By.id("confirmmessagepopup"));
+		Commons.enter(test,driver, By.id("otp-input"), otp+"56");
+		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
+		   Commons.click(test,driver, By.id("confirmmessagepopup"));
 		
 	}
 	
 	public void getMyUINWithExpiredOtp() throws Exception {
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
-		Commons.click(driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
-		Commons.enter(driver, By.id("aidValue"), aid);//
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.xpath("//div[@id='rc-anchor-container']"));
+		test=extent.createTest("get My UIN With Expired Otp", "verify Login");
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.enter(test,driver, By.id("aidValue"), aid);//
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("getUinSendOtpBtn"));
+		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 		String otp = MockSMTPListener.getOtp(10, tempemail);
 		Thread.sleep(180020);
-		Commons.enter(driver, By.id("otp-input"), otp);
-		   Commons.click(driver, By.xpath("//button[@id='getUinsubmitBtn']"));
-		   Commons.click(driver, By.id("confirmmessagepopup"));
+		Commons.enter(test,driver, By.id("otp-input"), otp);
+		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
+		   Commons.click(test,driver, By.id("confirmmessagepopup"));
 		   
 	}
 	
 	
 	public void getMyUINWithoutOtp() throws Exception {
+		test=extent.createTest("get My UIN Without Otp", "verify Login");
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
-		Commons.click(driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
-		Commons.enter(driver, By.id("aidValue"), aid);//
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.xpath("//div[@id='rc-anchor-container']"));
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.enter(test,driver, By.id("aidValue"), aid);//
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("getUinSendOtpBtn"));
-		   Commons.click(driver, By.xpath("//button[@id='getUinsubmitBtn']"));
+		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
+		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
 		   
 	}
 }

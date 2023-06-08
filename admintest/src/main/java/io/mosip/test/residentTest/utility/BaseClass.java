@@ -34,6 +34,10 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
 import io.mosip.test.residentTest.testcase.LoginTest;
 
 import org.testng.annotations.DataProvider;
@@ -46,18 +50,29 @@ public class BaseClass {
 	protected Map<String, Object> vars;
 	protected static JavascriptExecutor js;
 	protected String langcode;
-	
+	public static LoginTest login;
 	protected String envPath = System.getProperty("path");
 	protected String vid = System.getProperty("vid");
 	protected String externalurl = System.getProperty("externalurl");
 	protected String password = System.getProperty("password");
 	protected String data = Commons.appendDate;
-
+	public static ExtentSparkReporter html;
+    public static    ExtentReports extent;
+    public static    ExtentTest test;
 
 	public void setLangcode(String langcode) throws Exception {
 		this.langcode = Commons.getFieldData("langcode");
 	}
+   
+	
+	@BeforeMethod
+	
+    public void set() {
+        extent=ExtentReportManager.getReports();
 
+ 
+
+    }
 	@BeforeMethod
 	public void setUp() throws Exception {
 		System.out.println(System.getProperty("user.dir"));
@@ -80,7 +95,7 @@ public class BaseClass {
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		LoginTest.loginTest(driver);
+		login = new LoginTest();
 		
 		
 //		String language1 = null;
@@ -89,9 +104,9 @@ public class BaseClass {
 //
 //			System.out.println(language1);
 //			if(!language1.equals("sin"))
-//			{Commons.click(driver, By.xpath("//*[@id='kc-locale-dropdown']"));
+//			{Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
 //			String var = "//li/a[contains(text(),'" + language1 + "')]";
-//			Commons.click(driver, By.xpath(var));
+//			Commons.click(test,driver, By.xpath(var));
 //			}
 //
 //		} catch (Exception e) {
@@ -107,7 +122,9 @@ public class BaseClass {
 	public void tearDown() {
 		MockSMTPListener mockSMTPListener = new MockSMTPListener();
 		mockSMTPListener.bTerminate = true;
+		
 		driver.quit();
+		extent.flush();
 	}
 
 	@DataProvider(name = "data-provider")
