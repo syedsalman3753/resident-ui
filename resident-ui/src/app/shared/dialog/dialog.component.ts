@@ -96,8 +96,8 @@ export class DialogComponent implements OnInit {
       this.icon = "./assets/cancel_icon.png";
     } else if (this.data.warningForChannel === "warningForChannel") {
       this.popMsgbgColor = "#FFF9DB";
-      this.popMsgColor = "#F2CC0C";
-      this.icon = "./assets/sucess_icon.png";
+      this.popMsgColor = "#89730B";
+      this.icon = "./assets/icons/iconfont/Group 130.svg";
     }
     else if (this.data.title === "Warning") {
       this.popMsgbgColor = "#FFF9DB";

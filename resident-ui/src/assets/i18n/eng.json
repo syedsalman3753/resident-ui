@@ -177,7 +177,11 @@
         "action_book_later": "Book Later",
         "action_continue": "Continue",
         "noResult_found": "No results Found",
-        "lunch_hours": "Lunch"
+        "lunch_hours": "Lunch",
+        "helpText":"Registration centers based on your geo-location",
+        "noRegCentersNearby":"No nearby Registration Centers found. Please enter text manually to look for Registration Centers.",
+        "noRegCenters":"No Registration Center found.",
+        "warnMessage":"Please enter letters/numbers in order to search."
     },
     "downloadDocument": {
         "downloadbutton": "Download"
@@ -356,7 +360,7 @@
         "authenticationMode": "Authentication Mode",
         "vidType": "VID Type",
         "vid": "VID",
-        "timestamp": "Time stamp",
+        "timestamp": "Time Stamp",
         "descriptionText": "Track the status of an EID associated with the logged-in UIN/ VID. You can also view the detailed information about the entered EID.",
         "transactionTitle": "Transaction Details",
         "partnerName": "Partner name",
@@ -406,6 +410,7 @@
         "uinTitleDescription": "Your UIN generation against the AID: $AID is still in progress.",
         "uinTitleDescription2": "Your UIN generation against the AID: $AID has failed.",
         "requestMsg": "Please try again after a few days.",
+        "requestMsg2":"For further information, please visit the nearest registration center.",
         "UINCardStatus": "UIN Card Status",
         "statusTime": "Completion Expected Date : $date",
         "statusStages": {
@@ -442,7 +447,7 @@
         "loginSuccessfully": "Dear resident, you logged in complected successfully",
         "successRemainMsg": "to track service request with pre-filled EID.",
         "passwordCombinationHeading": "Password combination: ",
-        "passwordCombination": "First four letters of your first name in block letters and your year of birth. E.g.: If your name is Johnny Depp born on 09/06/1963, your password will be JOHN1963.",
+        "passwordCombination": "First four letters of your first name in capital letters and your year of birth. E.g.: If your name is Johnny Depp born on 09/06/1963, your password will be JOHN1963.",
         "SuccessLogin": "You have successfully logged in.",
         "successLogout": "You have successfully logged out. ",
         "dearResident":"Dear Resident,",
@@ -452,7 +457,7 @@
         "logoutconfirmMessage":"Are you sure you want to log out.",
         "accessDenied":"You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
         "getMyUin": {
-            "downloadedSuccessFully": "Dear resident, your UIN card has been successfully downloaded against the the Event ID: $eventId.",
+            "downloadedSuccessFully": "Your UIN card has been successfully downloaded against the Event ID: $eventId.",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
         },
         "termsAndConditionsDescription": [
@@ -493,13 +498,13 @@
                 "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen One-time VID?",
                 "confirmationMessageForDownloadVid": "Are you sure you want to download One-time VID?"
             },
-            "createdSuccessfully": "Your VID has been successfully generated against the the Event ID: $eventId.",
+            "createdSuccessfully": "Your VID has been successfully generated against the Event ID: $eventId.",
             "downloadedSuccessFully": "Your request to download the VID card has been successfully processed against the Event ID: $eventId.",
             "downloadedSuccessFully2":"It will take some time to get the card ready. You will be sent a link on your registered email ID and/or phone number using which you can download the requested VID card. Alternatively, it can also be downloaded from the Track Request once you receive a notification stating the card is ready.",
             "deletedSuccessfully": "Your VID has been successfully deleted against the Event ID: $eventId."
         },
         "personalisedcardMessages": {
-            "downloadedSuccessFully": "Dear resident, your personalized card has been successfully downloaded against the the Event ID: $eventId. The password will be sent to your registered email ID or phone number."
+            "downloadedSuccessFully": "Dear resident, your personalized card has been successfully downloaded against the Event ID: $eventId. The password will be sent to your registered email ID or phone number."
         },
         "sharewithpartner": {
             "needPartner": "Kindly choose a partner to proceed.",
@@ -509,11 +514,11 @@
         },
         "verifyChannel": {
             "warningMsg": "Your $channel has already been verified.",
-            "emailSuccess": "Dear resident, your $channel has been successfully verified against the the Event ID: $eventId.",
-            "phoneSuccess": "Dear resident, your $channel has been successfully verified against the the Event ID: $eventId."
+            "emailSuccess": "Your email ID: $channel has been successfully verified against the Event ID: $eventId.",
+            "phoneSuccess": "Your phone number: $channel has been successfully verified against the Event ID: $eventId."
         },
         "grievanceRedressal": {
-            "successMsg": "Dear resident, your complaint has been successfully sent against the $ticketId.",
+            "successMsg": "Dear resident, your complaint has been successfully sent against the ticket ID $ticketId.",
             "warningMsg": "Dear resident, your complaint could not be sent. Please try again later."
         },
         "secureMyId": {

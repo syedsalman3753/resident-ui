@@ -194,38 +194,53 @@
 }
 
 .icon{
-    color: #FAF8F8;
+    color: #B5B5B5;
     font-size: 43px;
     margin-bottom: 2rem !important;
-    background-color: #FAF8F8;
+    background-color: #B5B5B5;
     height: 40px;
     width: 40px;
     border-radius: 100%; 
  }
 
-.active-position-icon {
-   color: #03A64A;
-   background-color: #03A64A;
+.position-icon{
     height: 40px;
     width: 40px;
     border-radius: 100%;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+    margin-bottom: 2rem !important
+}
+
+.active-position-icon {
+    color: #03A64A;
+    background-color: #03A64A;
+}
+
+.processing-position-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    margin-bottom: 2rem !important;
+    border: 2px solid #03A64A;
+    background-color: #ffffff;
+}
+
+.inactive-position-icon{
+    color: #B5B5B5;
+    background-color: #B5B5B5;
 }
 
 .failure-position-icon {
     color: red;
     background-color: red;
-     height: 40px;
-     width: 40px;
-     border-radius: 100%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
- }
+}
 
-.progress-card{
+.progress-card {
     min-height: 350px;
     display: flex;
     flex-direction: column;
@@ -244,12 +259,24 @@
 }
 
 .active-position-text {
-    color: #505050;
+    color: #2c8838;
     font-weight: 600;
 }
-.inactive-position-text{
-    color: #D3D3D3;
+
+.completed-position-text{
+    color: #4D4D4D;
+    font-weight: 600;
 }
+
+.failure-position-text {
+    color: red;
+    font-weight: 600;
+}
+
+.incomplete-position-text{
+    color: #B5B5B5;
+}
+
 .stages-card{
     display: flex; 
     flex-direction: column; 
@@ -261,7 +288,7 @@ ul li{
 }
 
 .stage-bar{
-    height: 20px; 
+    height: 10px; 
     width: 100%;  
     position: absolute; 
     left: 0; 
@@ -274,7 +301,7 @@ ul li{
     background-color: #03A64A; 
 }
 .incompleted-stage-bar{
-    background-color: #FAF8F8; 
+    background-color: #B5B5B5;
 }
 .failure-position-icon{
     background-color: red;
@@ -293,9 +320,9 @@ ul li:not(:first-child, :last-child) hr{
     left: -42.3%;
     border-radius: 10px;
 }
+
 ul li:last-child hr{
     width: 88%;
     left: -41.8%;
     border-radius: 10px;
 }
-

@@ -58,7 +58,8 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   centerSelection: any;
   isBlankSpace:boolean = true;
   showWarningMsg:boolean = false;
-  showMesssageText:string=""
+  showMesssageText:string="";
+  popupMessages: any;
 
   constructor(
     public dialog: MatDialog,
@@ -97,7 +98,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         //get all location types from db
         this.allLocationTypes = response[appConstants.RESPONSE]["locationHierarchyLevels"];
-        console.log(this.allLocationTypes);
         //get the recommended loc hierachy code to which booking centers are mapped        
         //now filter out only those hierachies which are higher than the recommended loc hierachy code
         //ex: if locHierachy is ["Country","Region","Province","City","PostalCode"] and the
@@ -107,7 +107,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
           (locType) =>
             locType.hierarchyLevel <= this.recommendedCenterLocCode
         );
-        console.log(this.locationTypes);
         //sort the filtered array in ascending order of hierarchyLevel
         this.locationTypes.sort(function (a, b) {
           return a.hierarchyLevel - b.hierarchylevel;
@@ -115,7 +114,8 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
         this.getRecommendedCenters();
       });
     this.subscriptions.push(subs);
-
+    this.getLocation();
+    this.getErrorLabels();
   }
 
   /*getUserInfo(preRegId) {
@@ -148,6 +148,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     this.dataService.getI18NLanguageFiles(localStorage.getItem('langCode')).subscribe((response) => {
       this.errorlabels = response["error"];
       this.apiErrorCodes = response[appConstants.API_ERROR_CODES];
+      this.popupMessages = response;
     });
   }
   /**
@@ -190,7 +191,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     /* if (!uiFieldName) {
        //this.showErrorMessage(null, this.errorlabels.error);
      } else {*/
-    console.log(`uiFieldName: ${uiFieldName}`);
     /*this.users.forEach((user) => {
       //console.log(typeof user.request.demographicDetails.identity[uiFieldName]);
       if (
@@ -340,7 +340,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
             } else {
               this.totalItems = 0;
               this.showMessage = true;
-              this.showMesssageText = response['errors'][0].message
+              this.showMesssageText = this.popupMessages.centerSelection.noRegCenters;
               this.selectedCentre = null;
             }
           },
@@ -390,17 +390,18 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     if (navigator.geolocation) {
       this.showMap = false;
       navigator.geolocation.getCurrentPosition((position) => {
-        //this.searchClick = true;
         const subs = this.dataService
           .getNearbyRegistrationCenters(position.coords)
           .subscribe(
             (response) => {
-              //console.log(response[appConstants.RESPONSE]["registrationCenters"].length);
               if (!response["errors"]) {
-                //this.searchClick = false;
                 this.displayResults(response[appConstants.RESPONSE]);
+                this.showMessage = false;
               } else {
-                //this.searchClick = false;
+                if (response['errors'][0].errorCode === "RES-SER-418") {
+                  this.showMesssageText = this.popupMessages.centerSelection.noRegCentersNearby;
+                }
+                this.searchClick = false;
                 this.showMessage = true;
                 this.selectedCentre = null;
               }
@@ -582,25 +583,51 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
 
   downloadCentersPdf() {
     this.auditService.audit('RP-041', 'Locate registration center', 'RP-Locate registration center', 'Locate registration center', 'User clicks on "download" button on locate registration center page');
-    this.dataService.registrationCentersList(this.langCode, this.locationType.hierarchyLevel, this.searchText)
-      .subscribe(response => {
-        if (response.headers.get('Content-Type') === 'application/pdf') {
-          var fileName = "";
-          const contentDisposition = response.headers.get('Content-Disposition');
-          if (contentDisposition) {
-            const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-            const matches = fileNameRegex.exec(contentDisposition);
-            if (matches != null && matches[1]) {
-              fileName = matches[1].replace(/['"]/g, '');
+    if (this.locationType && this.searchText) {
+      this.dataService.registrationCentersList(this.langCode, this.locationType.hierarchyLevel, this.searchText)
+        .subscribe(response => {
+          if (response.headers.get('Content-Type') === 'application/pdf') {
+            var fileName = "";
+            const contentDisposition = response.headers.get('Content-Disposition');
+            if (contentDisposition) {
+              const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+              const matches = fileNameRegex.exec(contentDisposition);
+              if (matches != null && matches[1]) {
+                fileName = matches[1].replace(/['"]/g, '');
+              }
             }
+            saveAs(response.body, fileName);
+          } else {
+            console.log("")
           }
-          saveAs(response.body, fileName);
-        }else{
-          console.log("")
-        }
-      }, error => {
-        console.log(error)
-      })
+        }, error => {
+          console.log(error)
+        })
+    } else {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.dataService.nearByRegistrationCentersList(this.langCode, position.coords)
+          .subscribe(response =>{
+            if (response.headers.get('Content-Type') === 'application/pdf') {
+              var fileName = "";
+            const contentDisposition = response.headers.get('Content-Disposition');
+            if (contentDisposition) {
+              const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+              const matches = fileNameRegex.exec(contentDisposition);
+              if (matches != null && matches[1]) {
+                fileName = matches[1].replace(/['"]/g, '');
+              }
+            }
+            saveAs(response.body, fileName);
+          } else {
+            console.log("");
+            }
+          }, error =>{
+              console.log(error);
+          })
+        })
+      }
+    }
   }
 
   // showErrorPopup(message: string) {
