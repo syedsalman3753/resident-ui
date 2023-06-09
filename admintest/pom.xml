@@ -196,7 +196,11 @@
   <!-- You might want to delete the following line if you get "package com.paulhammant.ngwebdriver does not exist" errors -->
 
 </dependency>
-
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.0.9</version>
+</dependency>
 <!-- you still need to have a dependency for preferred version of
   Selenium/WebDriver. That should be 3.3.1 or above -->
   

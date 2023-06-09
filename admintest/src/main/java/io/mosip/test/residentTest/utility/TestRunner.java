@@ -17,9 +17,12 @@ public class TestRunner {
 	public static void main(String[] args) throws Exception {
 	
 		testNg=new TestNG();
-		//testNg.set
+		testNg.setDefaultSuiteName("resident");
 		MockSMTPListener mockSMTPListener = new MockSMTPListener();
 		mockSMTPListener.run();
+//		TestListenerAdapter listenerAdapter = new TestListenerAdapter();
+//		testNg.addListener(listenerAdapter);
+//		testNg.addListener(new ExtendReportsListeners());
 		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
 		testNg.setExcludedGroups(listExcludedGroups);
 		testNg.setTestClasses(new Class[] {
@@ -38,7 +41,7 @@ public class TestRunner {
        VerifyPhoneNumberEmailID.class,
 //       BookinganAppointment.class
 		});
-	//	testNg.addListener(tla);
+//		testNg.addListener(tla);
 		testNg.run();
 		
 	}

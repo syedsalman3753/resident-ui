@@ -15,9 +15,9 @@ public class BookinganAppointment extends ResidentBaseClass {
 		
 		
 		
-		Commons.click(driver, By.id("dashboardCard3"));
-		Commons.click(driver, By.xpath("(//div[text()=' LOGIN'])[2]"));
-		Commons.click(driver, By.xpath("//mat-select[@role='listbox']"));
+		Commons.click(test,driver, By.id("dashboardCard3"));
+		Commons.click(test,driver, By.xpath("(//div[text()=' LOGIN'])[2]"));
+		Commons.click(test,driver, By.xpath("//mat-select[@role='listbox']"));
 		//Commons.dropdown(driver, By.id("mat-select-0"));
 		//Commons.dropdown(driver, By.id("mat-select-0"), "français");
 		//Commons.enter(driver, By.id("inputFieldContact"), "Resident_AddIdentity_ValidParam_smoke_Pos@mosip.net");

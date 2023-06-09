@@ -1,5 +1,7 @@
 package io.mosip.test.residentTest.testcase;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -15,79 +17,79 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
 		
 		
-    Commons.click(driver, By.id("dashboardCard4"));
-    Commons.click(driver, By.id("emailChannelBtn-button"));
-    Commons.enter(driver, By.id("uin"), vid);
-    Commons.switchToFrameByIndex(driver, 0);
-    Commons.click(driver, By.id("recaptcha-anchor"));
+    Commons.click(test,driver, By.id("dashboardCard4"));
+    Commons.click(test,driver, By.id("emailChannelBtn-button"));
+    Commons.enter(test,driver, By.id("uin"), vid);
+    Commons.switchToFrameByIndex(test, driver, 0);
+    Commons.click(test,driver, By.id("recaptcha-anchor"));
     driver.switchTo().parentFrame();
     Thread.sleep(3000);
-    Commons.click(driver, By.id("sendOtpBtn"));
-   // Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+    Commons.click(test,driver, By.id("sendOtpBtn"));
+   // Commons.click(test,driver, By.xpath("//button[text()='Get OTP']")); 
    String otp = MockSMTPListener.getOtp(10, externalemail);
     
-   Commons.enter(driver, By.id("otp-input"), otp);
-   Commons.click(driver, By.id("submitOtpBtn"));
-   Commons.click(driver, By.id("confirmmessagepopup"));
+   Commons.enter(test,driver, By.id("otp-input"), otp);
+   Commons.click(test,driver, By.id("submitOtpBtn"));
+   Commons.click(test,driver, By.id("confirmmessagepopup"));
 	}
 
 	
-	public void VerifyEmailIDWIthInvalidVid() {
-		Commons.click(driver, By.id("dashboardCard4"));
-		Commons.click(driver, By.id("emailChannelBtn-button"));
-		Commons.enter(driver, By.id("uin"), data);
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.id("recaptcha-anchor"));
+	public void VerifyEmailIDWIthInvalidVid() throws IOException {
+		Commons.click(test,driver, By.id("dashboardCard4"));
+		Commons.click(test,driver, By.id("emailChannelBtn-button"));
+		Commons.enter(test,driver, By.id("uin"), data);
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.id("recaptcha-anchor"));
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("sendOtpBtn"));
-		Commons.click(driver, By.id("confirmmessagepopup"));
+		Commons.click(test,driver, By.id("sendOtpBtn"));
+		Commons.click(test,driver, By.id("confirmmessagepopup"));
 	}
 	
-	public void VerifyPhoneWIthInvalidVid() {
+	public void VerifyPhoneWIthInvalidVid() throws IOException {
 		
-		Commons.click(driver, By.id("dashboardCard4"));
-		Commons.click(driver, By.id("phoneChannelBtn"));
-		Commons.enter(driver, By.id("uin"), data);
-		Commons.switchToFrameByIndex(driver, 0);
-		Commons.click(driver, By.id("recaptcha-anchor"));
+		Commons.click(test,driver, By.id("dashboardCard4"));
+		Commons.click(test,driver, By.id("phoneChannelBtn"));
+		Commons.enter(test,driver, By.id("uin"), data);
+		Commons.switchToFrameByIndex(test,driver, 0);
+		Commons.click(test,driver, By.id("recaptcha-anchor"));
 		driver.switchTo().parentFrame();
-		Commons.click(driver, By.id("sendOtpBtn"));
-		Commons.click(driver, By.id("confirmmessagepopup"));
+		Commons.click(test,driver, By.id("sendOtpBtn"));
+		Commons.click(test,driver, By.id("confirmmessagepopup"));
 		
 	}
 	
 	public void VerifyEmailIDWIthInvalidOtp() throws Exception {
 		String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
-		 Commons.click(driver, By.id("dashboardCard4"));
-		    Commons.click(driver, By.id("emailChannelBtn-button"));
-		    Commons.enter(driver, By.id("uin"), vid);
-		    Commons.switchToFrameByIndex(driver, 0);
-		    Commons.click(driver, By.id("recaptcha-anchor"));
+		 Commons.click(test,driver, By.id("dashboardCard4"));
+		    Commons.click(test,driver, By.id("emailChannelBtn-button"));
+		    Commons.enter(test,driver, By.id("uin"), vid);
+		    Commons.switchToFrameByIndex(test,driver, 0);
+		    Commons.click(test,driver, By.id("recaptcha-anchor"));
 		    driver.switchTo().parentFrame();
 		    Thread.sleep(3000);
-		    Commons.click(driver, By.id("sendOtpBtn"));
-		   // Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+		    Commons.click(test,driver, By.id("sendOtpBtn"));
+		   // Commons.click(test,driver, By.xpath("//button[text()='Get OTP']")); 
 		   String otp = MockSMTPListener.getOtp(10, externalemail);
 		    
-		   Commons.enter(driver, By.id("otp-input"), otp+"23");
-		   Commons.click(driver, By.id("submitOtpBtn"));
-		   Commons.click(driver, By.id("confirmmessagepopup"));
+		   Commons.enter(test,driver, By.id("otp-input"), otp+"23");
+		   Commons.click(test,driver, By.id("submitOtpBtn"));
+		   Commons.click(test,driver, By.id("confirmmessagepopup"));
 	}
 	
 	
 	public void VerifyEmailIDWIthoutOtp() throws Exception {
 		String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
-		 Commons.click(driver, By.id("dashboardCard4"));
-		    Commons.click(driver, By.id("emailChannelBtn-button"));
-		    Commons.enter(driver, By.id("uin"), vid);
-		    Commons.switchToFrameByIndex(driver, 0);
-		    Commons.click(driver, By.id("recaptcha-anchor"));
+		 Commons.click(test,driver, By.id("dashboardCard4"));
+		    Commons.click(test,driver, By.id("emailChannelBtn-button"));
+		    Commons.enter(test,driver, By.id("uin"), vid);
+		    Commons.switchToFrameByIndex(test,driver, 0);
+		    Commons.click(test,driver, By.id("recaptcha-anchor"));
 		    driver.switchTo().parentFrame();
 		    Thread.sleep(3000);
-		    Commons.click(driver, By.id("sendOtpBtn"));
-		   // Commons.click(driver, By.xpath("//button[text()='Get OTP']")); 
+		    Commons.click(test,driver, By.id("sendOtpBtn"));
+		   // Commons.click(test,driver, By.xpath("//button[text()='Get OTP']")); 
 		 
-		   Commons.click(driver, By.id("submitOtpBtn"));
+		   Commons.click(test,driver, By.id("submitOtpBtn"));
 		  
 	}
 }
