@@ -49,11 +49,6 @@ public class GetInformation extends ResidentBaseClass{
 		
 		
 		
-		//Commons.dropdown(driver, By.id("mat-select-0"), " Region ");
-		//Commons.enter(driver, By.xpath("//input[@type='search']"), "10104");
-		//Commons.click(test,driver, By.xpath("(//span[@class='mat-button-wrapper'])[7]"));
-		//Commons.click(test,driver, By.xpath("(//span[@class='mat-button-wrapper'])[8]"));
-		
 		//province
 		test=extent.createTest("Get Information of province", "verify province");
 		Commons.dropdown(test,driver, By.id("mat-select-0"), By.id("mat-option-2"));
