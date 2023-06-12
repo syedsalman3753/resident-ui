@@ -53,7 +53,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({ withCredentials: true });
     request = request.clone({
       // setHeaders: { 'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN') }
-      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset }
+      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': navigator.languages[0] }
     });
     return next.handle(request).pipe(
       tap(
