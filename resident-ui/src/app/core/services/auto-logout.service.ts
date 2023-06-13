@@ -25,6 +25,8 @@ export class AutoLogoutService {
   private messageAutoLogout = new BehaviorSubject({});
   currentMessageAutoLogout = this.messageAutoLogout.asObservable();
   isActive = false;
+  activeTimerStart:number = 0;
+
 
   timer = new UserIdleConfig();
   languagelabels: any;
@@ -44,8 +46,8 @@ export class AutoLogoutService {
     private router: Router,
     private logoutService: LogoutService,
     private appConfigService: AppConfigService,
-  ) {  
-   
+  ) {
+
   }
 
   /**
@@ -74,7 +76,11 @@ export class AutoLogoutService {
 
   setisActive(value: boolean) {
     this.isActive = value;
-    
+    if (this.isActive) {
+      if (this.dialogref) {
+        this.dialogref.close();
+      }
+    }
   }
   getisActive() {
     return this.isActive;
@@ -94,6 +100,7 @@ export class AutoLogoutService {
     this.timer.ping = this.ping;
     this.timer.timeout = this.timeout;
     this.userIdle.setConfigValues(this.timer);
+    // this.userIdle.setConfigValues({idle:60,timeout:10,ping:30});
   }
 
   /**
@@ -105,29 +112,47 @@ export class AutoLogoutService {
    * @memberof AutoLogoutService
    */
 
-  public keepWatching() {
+
+  keepWatching() {
     this.userIdle.startWatching();
     this.changeMessage({ timerFired: true });
     this.userIdle.onTimerStart().subscribe(
       res => {
-        if (res == 1) {
+        console.log(res)
+        if(!res && this.activeTimerStart == 0){
+          this.openPopUp();
+          this.setisActive(false);
+          setTimeout(() =>{
+            this.onLogOut();
+            this.userIdle.resetTimer();
+          },(this.timer.timeout)*1000)
+        }else{
+          this.activeTimerStart = this.activeTimerStart + 1;
+        }
+        
+        if (this.activeTimerStart == 1) {
           this.setisActive(false);
           this.openPopUp();
-        } else {
+        }else {
           if (this.isActive) {
-            if (this.dialogref) this.dialogref.close();
+            if (this.dialogref) {
+              this.dialogref.close();
+            }
           }
         }
-      },
-      () => { },
-      () => { }
+      //  if(res === null){
+      //   this.activeTimerStart = 0;
+      //  }
+      }
     );
+
 
     this.userIdle.onTimeout().subscribe(() => {
       if (!this.isActive) {
         this.onLogOut();
       } else {
         this.userIdle.resetTimer();
+        this.activeTimerStart = 0;
       }
     });
   }
@@ -142,15 +167,14 @@ export class AutoLogoutService {
    * @memberof AutoLogoutService
    */
   onLogOut() {
-    // this.dialogref.close();
+    this.dialogref.close();
     this.dialog.closeAll();
     this.userIdle.stopWatching();
     // this.popUpPostLogOut();
-    this.router.navigate(["dashboard"])
-    // this.dataStorageService.onLogout().subscribe();
-    localStorage.setItem("InactiveLogOut","true")
-    this.logoutService.logout()
-    // this.authService.onLogout();
+    // this.router.navigate(["dashboard"])
+    this.dataStorageService.onLogout().subscribe();
+    localStorage.setItem("InactiveLogOut", "true")
+    this.logoutService.logout();
   }
 
   /**

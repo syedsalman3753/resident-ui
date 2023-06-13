@@ -397,8 +397,11 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
           if (matches != null && matches[1]) {
             fileName = matches[1].replace(/['"]/g, '');
           }
+          saveAs(data.body, fileName);
+        }else{
+          this.isLoading = false;
         }
-        saveAs(data.body, fileName);
+        
       },
         err => {
           console.error(err);
