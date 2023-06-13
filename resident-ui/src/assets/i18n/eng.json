@@ -164,7 +164,7 @@
     },
     "centerSelection": {
         "title": " Book Appointment ",
-        "action_nearBy": "Nearby",
+        "action_nearBy": "Locations near me",
         "display_recommended": "Recommended Centres",
         "text_found": "Found",
         "text_centers": "centers",
