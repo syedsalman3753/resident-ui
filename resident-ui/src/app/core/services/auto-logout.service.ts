@@ -67,6 +67,7 @@ export class AutoLogoutService {
       (this.ping = Number(
         this.appConfigService.getConfig()['mosip.webui.auto.logout.ping']
       ));
+
     this.dataStorageService
       .getI18NLanguageFiles(langCode)
       .subscribe((response) => {
@@ -82,6 +83,7 @@ export class AutoLogoutService {
       }
     }
   }
+  
   getisActive() {
     return this.isActive;
   }
@@ -122,10 +124,8 @@ export class AutoLogoutService {
         if(!res && this.activeTimerStart == 0){
           this.openPopUp();
           this.setisActive(false);
-          setTimeout(() =>{
             this.onLogOut();
             this.userIdle.resetTimer();
-          },(this.timer.timeout)*1000)
         }else{
           this.activeTimerStart = this.activeTimerStart + 1;
         }
@@ -140,9 +140,6 @@ export class AutoLogoutService {
             }
           }
         }
-      //  if(res === null){
-      //   this.activeTimerStart = 0;
-      //  }
       }
     );
 
