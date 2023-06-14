@@ -14,7 +14,7 @@ public class ExtentReportManager {
 		if(extent==null) {
 			extent=new ExtentReports();
 			extent=new ExtentReports();
-			String path=System.getProperty("user.dir")+"/Reports/"+Commons.getDateTime()+".html";
+			String path=System.getProperty("user.dir")+"Resident"+"/Reports/"+Commons.getDateTime()+".html";
 			html=new ExtentSparkReporter(path);
 			  extent.attachReporter(html);
 		}
