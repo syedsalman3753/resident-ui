@@ -13,6 +13,7 @@ import { I18nModule } from 'src/app/i18n.module';
 /*import {NgxCaptchaModule} from '@binssoft/ngx-captcha';*/
 import { CoreModule } from './core/core.module';
 import { DndDirective } from './dnd.directive';
+import { UserIdleModule } from 'angular-user-idle';
 
 const appInitialization = (appConfig: AppConfigService) => {
   return () => {
@@ -36,7 +37,8 @@ const appInitialization = (appConfig: AppConfigService) => {
     HttpClientModule,
     CommonModule,
     I18nModule,
-    CoreModule
+    CoreModule,
+    UserIdleModule.forRoot({})
   ],
   providers: [
     {
