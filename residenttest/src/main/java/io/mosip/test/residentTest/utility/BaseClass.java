@@ -38,6 +38,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.mosip.test.residentTest.testcase.LoginTest;
 
 import org.testng.annotations.DataProvider;
@@ -75,19 +76,27 @@ public class BaseClass {
     }
 	@BeforeMethod
 	public void setUp() throws Exception {
-		System.out.println(System.getProperty("user.dir"));
-		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", configFilePath);	
+		
+		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-		try {
-			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-			if(headless.equalsIgnoreCase("yes")) {
-				options.addArguments("--headless=new");
-			}
-		} catch (Exception e1) {
-			
-			e1.printStackTrace();
+		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		if(headless.equalsIgnoreCase("yes")) {
+			options.addArguments("--headless=new");
 		}
+		
+//		System.out.println(System.getProperty("user.dir"));
+//		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
+//		System.setProperty("webdriver.chrome.driver", configFilePath);	
+//		ChromeOptions options = new ChromeOptions();
+//		try {
+//			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+//			if(headless.equalsIgnoreCase("yes")) {
+//				options.addArguments("--headless=new");
+//			}
+//		} catch (Exception e1) {
+//			
+//			e1.printStackTrace();
+//		}
 		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
