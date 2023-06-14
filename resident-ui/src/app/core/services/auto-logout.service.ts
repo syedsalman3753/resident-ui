@@ -102,7 +102,6 @@ export class AutoLogoutService {
     this.timer.ping = this.ping;
     this.timer.timeout = this.timeout;
     this.userIdle.setConfigValues(this.timer);
-    // this.userIdle.setConfigValues({idle:60,timeout:10,ping:30});
   }
 
   /**
@@ -124,8 +123,8 @@ export class AutoLogoutService {
         if(!res && this.activeTimerStart == 0){
           this.openPopUp();
           this.setisActive(false);
-            this.onLogOut();
-            this.userIdle.resetTimer();
+          this.onLogOut();
+          this.userIdle.resetTimer();
         }else{
           this.activeTimerStart = this.activeTimerStart + 1;
         }
