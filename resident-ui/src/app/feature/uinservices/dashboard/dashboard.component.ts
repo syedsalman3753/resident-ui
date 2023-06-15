@@ -35,13 +35,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     history.pushState(null, null, window.location.href);  
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
-      if (confirm("Are you sure want to leave the page. you will be logged out automatically if you press OK?")) {
+      /*if (confirm("Are you sure want to leave the page. you will be logged out automatically if you press OK?")) {
         this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
         this.logoutService.logout();
       } else {
         this.router.navigate([this.router.url]);
         return false;
-      }
+      }*/
     });  
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
