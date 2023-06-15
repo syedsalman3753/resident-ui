@@ -109,7 +109,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
         this.logoutService.logout();
       } else {
-        this.router.navigate([this.router.url]);
+        history.pushState(null, null, window.location.href);
+        //this.router.navigate([this.router.url]);
         return false;
       }
     }
