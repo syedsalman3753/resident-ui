@@ -12,7 +12,7 @@
 </div>
 <div *ngIf="!isLoading">
   <mat-card style="margin:1rem 4rem 0 4rem; min-height: 100%;" *ngIf="userInfo && !showPreviewPage">
-    <h1 style="font-weight: 500; font-size: 20px;color: #505050;">Update My Data</h1>
+    <h1 style="font-weight: 500; font-size: 20px;color: #505050;">{{langJson.title}}</h1>
     <mat-tab-group animationDuration="0ms" [selectedIndex]="matTabIndex" (selectedTabChange)="logChange($event)">
       <mat-tab label="{{'updatedemographic.identity' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.identityHeading' | translate}}</h3>
@@ -172,12 +172,11 @@
                                     <path id="Path_989" data-name="Path 989" d="M0,24.042H24V0H0Z" fill="none" />
                                   </svg>
                                   <span
-                                    style="margin-top: 4px;padding-left: 5px; font-size: 14px; font-weight: 600;">Upload
-                                    Image</span>
+                                    style="margin-top: 4px;padding-left: 5px; font-size: 14px; font-weight: 600;">{{langJson.uploadImage}}</span>
                                 </label>
-                                <h3>or</h3>
+                                <h3>{{langJson.or}}</h3>
                                 &nbsp;
-                                <h3>Drop Image</h3>
+                                <h3>{{langJson.dropImage}}</h3>
                               </div>
                               <p *ngIf="isValidFileFormatPOI" class="warning-message">{{warningMessage}}</p>
                             </td>
@@ -255,7 +254,7 @@
         </table>
         <div style="text-align: end;margin-right: 2rem; margin-top: none;">
           <button [disabled]="previewDisabled" (click)="previewBtn('identity')" mat-raised-button color="primary"
-            id="submit">Preview</button>
+            id="submit">{{langJson.preview}}</button>
         </div>
       </mat-tab>
       <mat-tab label="{{'updatedemographic.address' | translate}}">
@@ -382,12 +381,11 @@
                                       <path id="Path_989" data-name="Path 989" d="M0,24.042H24V0H0Z" fill="none" />
                                     </svg>
                                     <span
-                                      style="margin-top: 4px;padding-left: 5px; font-size: 14px; font-weight: 600;">Upload
-                                      Image</span>
+                                      style="margin-top: 4px;padding-left: 5px; font-size: 14px; font-weight: 600;">{{langJson.uploadImage}}</span>
                                   </label>
-                                  <h3>or</h3>
+                                  <h3>{{langJson.or}}</h3>
                                   &nbsp;
-                                  <h3>Drop Image</h3>
+                                  <h3>{{langJson.dropImage}}</h3>
                                 </div>
                                 <p *ngIf="isValidFileFormatPOA" class="warning-message">{{warningMessage}}</p>
                               </td>
@@ -465,7 +463,7 @@
         </div>
         <div style="text-align: end;margin-right: 2rem; margin-top: none;">
           <button [disabled]="previewDisabledInAddress" mat-raised-button (click)="previewBtn('address')"
-            color="primary" id="submit">Preview</button>
+            color="primary" id="submit">{{langJson.preview}}</button>
         </div>
       </mat-tab>
       <mat-tab label="{{'updatedemographic.contact' | translate}}">
@@ -501,9 +499,9 @@
                     #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" />
                 </mat-card-subtitle>
                 <p *ngIf="showNotMatchedMessageEmail && (field.attributeName === contactTye) && field.attributeName === 'email' " class="warning-message-for-contact">
-                  The entered values do not match.</p>
+                  {{langJson.enteredValuesNotMatch}}</p>
                 <p *ngIf="showNotMatchedMessagePhone && (field.attributeName === contactTye) && field.attributeName === 'phone' " class="warning-message-for-contact">
-                  The entered values do not match.</p>
+                  {{langJson.enteredValuesNotMatch}}</p>
               </div>
             </mat-grid-tile>
             <mat-grid-tile class="mat-form1">
@@ -548,7 +546,7 @@
               <mat-grid-tile>
                 <div style="text-align: end;margin-right: 2rem; margin-top: none;">
                   <button mat-raised-button (click)="updatenotificationLanguage()" color="primary"
-                    id="submit">Submit</button>
+                    id="submit">{{langJson.submit}}</button>
                 </div>
               </mat-grid-tile>
             </mat-grid-list>
@@ -559,7 +557,7 @@
   </mat-card>
 
   <mat-card style="margin:1rem 4rem 0 4rem; padding: 16px;" *ngIf="showPreviewPage">
-    <mat-card-subtitle style="font-size: 20px;" class="preview-heading">Preview</mat-card-subtitle>
+    <mat-card-subtitle style="font-size: 20px;" class="preview-heading">{{langJson.preview}}</mat-card-subtitle>
     <div class="identity-card">
       <mat-card-subtitle style="color: #000000; font-size: 14px;">{{matTabLabel}}</mat-card-subtitle>
       <button (click)="backBtn()" mat-button-toggle class="edit-btn">
@@ -590,7 +588,7 @@
           </div>
         </div>
         <div style="margin-left: 13px; margin-top: 0px;">
-          <mat-card-title style="font-size: 16px; color: #000000;">Document Uploaded</mat-card-title>
+          <mat-card-title style="font-size: 16px; color: #000000;">{{langJson.documentUploaded}}</mat-card-title>
           <!-- <mat-card-subtitle style="font-size: 14px; color: #000000;">Identity Proof</mat-card-subtitle> -->
           <div class="files-list" style="width: 80%;">
             <div class="uploaded-single-file" *ngFor="let file of uploadedFiles; let i = index">
@@ -641,8 +639,8 @@
 
     <div class="preview-agree-card">
       <div>
-        <button *ngIf="updatingtype === 'identity' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)" (click)="updateBtn()" mat-raised-button color="primary">Update</button>
-        <button *ngIf="updatingtype === 'address' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)" (click)="updateBtn()" mat-raised-button color="primary">Update</button>
+        <button *ngIf="updatingtype === 'identity' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)" (click)="updateBtn()" mat-raised-button color="primary">{{langJson.update}}</button>
+        <button *ngIf="updatingtype === 'address' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)" (click)="updateBtn()" mat-raised-button color="primary">{{langJson.update}}</button>
       </div>
     </div>
   </mat-card>
