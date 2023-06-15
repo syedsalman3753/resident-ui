@@ -211,7 +211,9 @@ export class DownloadUinComponent implements OnInit {
         dearResident:this.popupMessages.genericmessage.dearResident,
         trackStatusForLogin:this.popupMessages.genericmessage.trackStatusForLogin,
         relogin: this.popupMessages.genericmessage.login,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        passwordCombinationHeading: this.popupMessages.genericmessage.passwordCombinationHeading,
+        passwordCombination: this.popupMessages.genericmessage.passwordCombination
       }
     });
     return dialogRef;
