@@ -219,7 +219,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     if (typeof this.userInfo[item.value] !== "string") {
                       this.userInfo[item.value].forEach(eachLang => {
                         if (eachLang.language === this.langCode) {
-                          this.fullAddress = eachLang.value + "," + this.fullAddress
+                          this.fullAddress = this.fullAddress + "," + eachLang.value
                         }
                       })
                     } else {
@@ -227,6 +227,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     }
                   }
                 })
+                this.fullAddress = this.fullAddress.replace(/^./, "");
                 value = this.fullAddress
               } else {
                 value = this.userInfo[data.attributeName][0].value;
