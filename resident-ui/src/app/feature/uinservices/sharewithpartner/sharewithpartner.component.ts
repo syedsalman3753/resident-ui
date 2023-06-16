@@ -230,10 +230,18 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 this.fullAddress = this.fullAddress.replace(/^./, "");
                 value = this.fullAddress
               } else {
-                value = this.userInfo[data.attributeName][0].value;
+                this.userInfo[data.attributeName].forEach(item =>{
+                  if(item.language === this.langCode){
+                    value = item.value
+                  }
+                });
               }
             } else {
-              value = this.userInfo[data.attributeName][0].value;
+              this.userInfo[data.attributeName].forEach(item =>{
+                if(item.language === this.langCode){
+                  value = item.value
+                }
+              });
             }
         }
 
