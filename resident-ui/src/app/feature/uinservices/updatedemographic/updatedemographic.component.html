@@ -221,10 +221,10 @@
                                   <div class="preview">
                                     <img *ngIf="file.name !== selectedPOIFileForPreview" (click)="previewFile(i, 'POI')"
                                       mat-card-xs-image style="margin: 0 0 -5px 0;"
-                                      src='./assets/icons/iconfont/visibility_on.svg' />
+                                      src='./assets/icons/iconfont/visibility_on.svg' alt="" />
                                     <img *ngIf="file.name === selectedPOIFileForPreview" mat-card-xs-image
                                       (click)="closePreview('POI')" style="margin: 0 0 -5px 0;"
-                                      src='./assets/icons/iconfont/visibility_off.svg' />
+                                      src='./assets/icons/iconfont/visibility_off.svg' alt="" />
                                   </div>
 
                                   <div class="delete" (click)="deleteFile(i, 'POI')">
@@ -429,10 +429,10 @@
                                     <div class="preview">
                                       <img *ngIf="file.name !== selectedPOAFileForPreview"
                                         (click)="previewFile(i, 'POA')" mat-card-xs-image style="margin: 0 0 -5px 0;"
-                                        src='./assets/icons/iconfont/visibility_on.svg' />
+                                        src='./assets/icons/iconfont/visibility_on.svg' alt="" />
                                       <img *ngIf="file.name === selectedPOAFileForPreview" mat-card-xs-image
                                         (click)="closePreview('POA')" style="margin: 0 0 -5px 0;"
-                                        src='./assets/icons/iconfont/visibility_off.svg' />
+                                        src='./assets/icons/iconfont/visibility_off.svg' alt="" />
                                     </div>
                                     <div class="delete" (click)="deleteFile(i, 'POA')">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
@@ -561,7 +561,7 @@
     <div class="identity-card">
       <mat-card-subtitle style="color: #000000; font-size: 14px;">{{matTabLabel}}</mat-card-subtitle>
       <button (click)="backBtn()" mat-button-toggle class="edit-btn">
-        <img alt="" src="./assets/icons/iconfont/edit_black_24dp (2).svg" />
+        <img alt="" src="./assets/icons/iconfont/edit_black_24dp (2).svg" alt="" />
       </button>
     </div>
     <div style="display: flex;">
@@ -624,9 +624,9 @@
 
               <div class="preview" >
                 <img *ngIf="file.name !== selectedFileInPreviewPage" (click)="previewFileInPreviewPage(i,file.name)" mat-card-xs-image
-                  style="margin: 0 0 -5px 0;" src='./assets/icons/iconfont/visibility_on.svg' />
+                  style="margin: 0 0 -5px 0;" src='./assets/icons/iconfont/visibility_on.svg' alt="" />
                 <img *ngIf="file.name === selectedFileInPreviewPage" mat-card-xs-image (click)="closePreviewPageImage()"
-                  style="margin: 0 0 -5px 0;" src='./assets/icons/iconfont/visibility_off.svg' />
+                  style="margin: 0 0 -5px 0;" src='./assets/icons/iconfont/visibility_off.svg' alt="" />
               </div>
             </div>
           </div>
