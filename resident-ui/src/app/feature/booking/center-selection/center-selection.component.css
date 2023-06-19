@@ -199,7 +199,7 @@ input[type="radio"] {
 .center_selection-center_recommendation-display {
   color: #30badd;
   opacity: 100%;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   white-space: nowrap;
   cursor: pointer;
   display: inline-flex;
@@ -208,7 +208,7 @@ input[type="radio"] {
 
 .center_selection-nearby-btn {
   color: #6e6e6e;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   opacity: 100%;
   font-size: 14px;
   border: 2px solid #707070;
@@ -235,7 +235,7 @@ input[type="radio"] {
 .center_selection-center-available-text {
   color: #6e6e6e;
   opacity: 100%;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   font-size: 10px;
 }
 
@@ -282,7 +282,7 @@ input[type="radio"] {
 .search-input {
   outline: none;
   color: #707070;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   opacity: 100%;
   background-color: white;
   border: none;
@@ -291,7 +291,7 @@ input[type="radio"] {
 
 .select-input {
   outline: none;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   color: #000000;
   opacity: 100%;
   background-color: white;
@@ -317,7 +317,7 @@ input[type="radio"] {
 
 .search-text {
   display: flex;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   color: #707070;
   width: 80%;
