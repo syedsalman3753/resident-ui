@@ -218,6 +218,6 @@ mat-select {
 }
 .filter-lable{
   font-size: 14px;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   width: 90%;
 }
