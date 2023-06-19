@@ -94,7 +94,7 @@
   <div class="pop-up" *ngIf="input.case === 'MESSAGE'" [style.backgroundColor]="popMsgbgColor"
     [style.color]="popMsgColor" [style.borderColor]="popMsgColor">
     <div class="infro-card">
-      <img [src]="icon" height="35px" width="35px" class="pop-up-icon" />
+      <img alt="" [src]="icon" height="35px" width="35px" class="pop-up-icon" />
       <div class="pop-up-header">
         <div mat-dialog-content>
           <div>
@@ -149,7 +149,7 @@
   <div *ngIf="input.case === 'accessDenied'"
     style="padding: 12px; border: 1px solid red; background-color: #FFD9D8; color: red; border-radius: 8px;">
     <div style="display: flex; align-items: start;">
-      <img src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
+      <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
       <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
         <p>{{input.dearResident}}</p>
         <p>{{input.message}}</p>
@@ -166,7 +166,7 @@
   <div class="pop-up" *ngIf="input.case === 'LoginLogoutSuccessMessages'" [style.backgroundColor]="popMsgbgColor"
     [style.color]="popMsgColor" [style.borderColor]="popMsgColor">
     <div class="infro-card">
-      <img [src]="icon" height="35px" width="35px" class="pop-up-icon" />
+      <img alt="" [src]="icon" height="35px" width="35px" class="pop-up-icon" />
       <div class="pop-up-header">
         <div mat-dialog-content>
           <div>
@@ -189,7 +189,7 @@
 
   <div class="pop-up" *ngIf="input.case === 'ERROR'">
     <div class="infro-card">
-      <img [src]="icon" height="35px" width="35px" class="success-img" />
+      <img alt="" [src]="icon" height="35px" width="35px" class="success-img" />
       <div class="pop-up-header">
         <b mat-dialog-title>{{ input.title }}</b>
         <div mat-dialog-content>
@@ -238,7 +238,7 @@
     </ol>
     <div class="agree-card">
       <div class="agree-test-card">
-        <!-- <img src="./assets/images/checkbox_sel.png" /> -->
+        <!-- <img alt="" src="./assets/images/checkbox_sel.png" /> -->
         <input (change)="agreeConditions()" name="isChecked" class="conditions-checkbox" type="checkbox" />
         &nbsp;
         <p class="agree-text">{{input.agreeLabel}}</p>
@@ -258,7 +258,7 @@
     </ol>
     <div class="agree-card">
       <div class="agree-test-card">
-        <!-- <img src="./assets/images/checkbox_sel.png" /> -->
+        <!-- <img alt="" src="./assets/images/checkbox_sel.png" /> -->
         <input (change)="agreeConditions()" name="isChecked" class="conditions-checkbox" type="checkbox" />
         &nbsp;
         <p class="agree-text">{{input.agreeLabel}}</p>
@@ -279,13 +279,13 @@
       <mat-card-subtitle class="permission-card-text"
         style="margin-bottom: 0px;">{{input.description.sendVid}}</mat-card-subtitle>
       <div class="personalised-agree-card">
-        <img src="./assets/images/checkbox_sel.png" />
+        <img alt="" src="./assets/images/checkbox_sel.png" />
         &nbsp;
         <mat-card-subtitle class="permission-card-text"
           style="margin-top: 1rem;">{{input.description.agreeLabel1}}</mat-card-subtitle>
       </div>
       <div class="personalised-agree-card">
-        <img src="./assets/images/checkbox_sel.png" />
+        <img alt="" src="./assets/images/checkbox_sel.png" />
         &nbsp;
         <mat-card-subtitle class="permission-card-text"
           style="margin-top: 1rem;">{{input.description.agreeLabel1}}</mat-card-subtitle>
@@ -324,7 +324,7 @@
   <!-- Track service login after verify phone Number -->
   <div class="pop-up trackService-log-in-popup" *ngIf="input.case === 'logInForTrackService'">
     <div class="infro-card">
-      <img src="./assets/sucess_icon.png" height="35px" width="35px" class="success-img" />
+      <img alt="" src="./assets/sucess_icon.png" height="35px" width="35px" class="success-img" />
       <div style="margin-left: 8px;">
         <div mat-dialog-content>
             <p>{{input.dearResident}}</p>

@@ -24,7 +24,7 @@
           class="search-btn"
           (click)="setSearchClick(false)"
         >
-          <img src="assets\search.png" />
+          <img alt="" src="assets\search.png" />
         </button> -->
       </div>
       <ng-template #elseBlock>
@@ -84,17 +84,17 @@
                 type="submit"
                 (click)="showResults()"
               >
-                <img src="assets\search_grey.png" />
+                <img alt="" src="assets\search_grey.png" />
               </button> -->
               <!-- <button mat-icon-button class="search-cancel-btn" type="button" (click)="setSearchClick(true);resetPagination();">
-                <img src="assets\close.png" />
+                <img alt="" src="assets\close.png" />
               </button> -->
             </mat-card>
             <button [disabled]="isBlankSpace" mat-raised-button  (click)="showResults()" class="search-btn">
               <mat-icon>search</mat-icon>
             </button>
             <button *ngIf="REGISTRATION_CENTRES.length >0" mat-raised-button (click)="downloadCentersPdf()" class="download-btn">
-              <img class="save-icon"
+              <img alt="" class="save-icon"
 							src="./assets/icons/iconfont/download-1.svg" />
             </button>
             </div>
@@ -127,7 +127,7 @@
             <div  [ngClass]="REGISTRATION_CENTRES.length === i+1 ? 'center-card item' :'center-card'">
               <div style="width: 50%;">
                 <div class="inline-flex" [dir]="textDir">
-                  <img src="assets\address.png" (click)="selectedRow(center)" style="cursor:pointer;" />                  
+                  <img alt="" src="assets\address.png" (click)="selectedRow(center)" style="cursor:pointer;" />                  
                   <div>
                     <strong>{{center.name}}</strong>
                     <strong *ngIf="center.addressLine1 != null && center.addressLine1 != ''">
@@ -142,7 +142,7 @@
                   </div>
                 </div>
                 <div class="inline-flex2" >
-                  <span *ngIf="center.contactPerson !== ''"><img src="assets\contact number.png"/></span>
+                  <span *ngIf="center.contactPerson !== ''"><img alt="" src="assets\contact number.png"/></span>
                   <span  *ngIf="center.contactPerson !== ''">
                     {{ center.contactPerson}}, <span  *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">{{ center.contactPhone }}</span>
                   </span>
@@ -158,7 +158,7 @@
               <div style="width: 40%;">
                 <div >
                   <span>
-                    <!-- <div><img src="assets\address.png" (click)="selectedRow(center)" style="cursor:pointer;" /></div> -->
+                    <!-- <div><img alt="" src="assets\address.png" (click)="selectedRow(center)" style="cursor:pointer;" /></div> -->
                     <!-- <div><span  *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">{{ center.contactPhone }}</span><span *ngIf="center.contactPerson == '' && center.contactPhone !== ''">{{ center.contactPhone }}</span></div> -->
                     <div [dir]="textDir">
                       {{ 'centerSelection.text_timing' | translate }} :
