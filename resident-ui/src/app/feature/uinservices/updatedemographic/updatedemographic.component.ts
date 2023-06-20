@@ -200,7 +200,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             if(this.schema && this.userInfo){
               this.buildData()
             }else{
-              console.log("hello")
+              console.log("Testing")
               this.getUpdateMyDataSchema();
               this.getUserInfo();
             }

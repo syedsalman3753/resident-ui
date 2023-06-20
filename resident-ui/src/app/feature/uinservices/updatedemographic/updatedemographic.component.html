@@ -181,7 +181,10 @@
                             </td>
                           </tr>
                           <tr *ngIf="displayPOIUpload">
-                            <td width="100%" colspan="3"><label>{{field.labelName[langCode][4]}}</label></td>
+                            <td width="100%" colspan="3">
+                              <label style="display: block;">{{field.labelName[langCode][4]}}</label>
+                              <label >{{field.labelName[langCode][5]}}</label>
+                            </td>
                           </tr>
                           <tr>
                             <td width="100%" colspan="3">
@@ -389,8 +392,11 @@
                                 <p *ngIf="isValidFileFormatPOA" class="warning-message">{{warningMessage}}</p>
                               </td>
                             </tr>
-                            <tr *ngIf="displayPOAUpload">
-                              <td width="100%" colspan="3"><label>{{field.labelName[langCode][4]}}</label></td>
+                            <tr *ngIf="displayPOAUpload" >
+                              <td width="100%" colspan="3">
+                                <label style="display: block;">{{field.labelName[langCode][4]}}</label>
+                                <label>{{field.labelName[langCode][5]}}</label>
+                              </td>
                             </tr>
                             <tr>
                               <td width="100%" colspan="3">
