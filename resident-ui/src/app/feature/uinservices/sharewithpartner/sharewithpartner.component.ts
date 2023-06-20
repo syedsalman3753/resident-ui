@@ -529,6 +529,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         clickHere2: this.popupMessages.genericmessage.clickHere2,
         eventId: this.eventId,
         trackStatusText: this.popupMessages.genericmessage.trackStatusText,
+        dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
         btnTxt: this.popupMessages.genericmessage.successButton
       }

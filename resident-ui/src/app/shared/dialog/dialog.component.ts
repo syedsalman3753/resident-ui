@@ -69,6 +69,7 @@ export class DialogComponent implements OnInit {
   resendBtnDisabled: boolean = true;
   submitBtnBgColor: string = "#BCBCBC";
   resendBtnBgColor: string = "#BCBCBC";
+  disableInput:boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -118,6 +119,7 @@ export class DialogComponent implements OnInit {
 
   setOtpTime() {
     this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60;
+    this.disableInput = false;
     this.interval = setInterval(() => {
       if (this.otpTimeSeconds < 0 || this.displaySeconds === "00") {
         this.otpTimeSeconds = 59
@@ -130,6 +132,7 @@ export class DialogComponent implements OnInit {
         this.displaySeconds = "00";
         this.submitBtnDisabled = true;
         this.resendBtnDisabled = false;
+        this.disableInput = true;
         this.submitBtnBgColor = "#BCBCBC";
         this.resendBtnBgColor = "#03A64A";
       }
