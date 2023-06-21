@@ -1,14 +1,11 @@
 import {
   Component,
   Input,
-  OnInit,
-  OnChanges,
-  OnDestroy,
   Output,
   EventEmitter
 } from '@angular/core';
 
-import { PDFDocumentProxy, PDFPageProxy } from 'pdfjs-dist';
+import { PDFPageProxy } from 'pdfjs-dist';
 
 let PDFJS: any;
 

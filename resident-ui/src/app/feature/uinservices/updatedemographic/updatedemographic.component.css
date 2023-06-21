@@ -220,7 +220,7 @@ label{
   margin: .5rem 0 0 .5rem;
 }
 ::ng-deep .mat-form-field-wrapper{
-  padding-bottom: 0.01em !important;;
+  padding-bottom: 0.01em !important;
 }
 ::ng-deep .mat-form-field-flex {
   display: block;
