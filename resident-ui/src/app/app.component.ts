@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AppConfigService } from './app-config.service';
-import { HostListener } from '@angular/core';
 import { AutoLogoutService } from 'src/app/core/services/auto-logout.service';
 import { Subscription } from 'rxjs';
-import { Event as NavigationEvent, Router } from '@angular/router';
-import { filter, pairwise } from 'rxjs/operators';
-import { NavigationEnd, NavigationStart } from '@angular/router';
+import { Event as NavigationEvent, Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { DataStorageService } from 'src/app/core/services/data-storage.service';

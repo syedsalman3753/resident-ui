@@ -157,6 +157,7 @@ export class GrievanceComponent implements OnInit {
         responseData: message,
         message: this.message,
         endMsg: this.popupMessages.genericmessage.successRemainMsg,
+        dearResident: this.popupMessages.genericmessage.dearResident,
         btnTxt: this.popupMessages.genericmessage.successButton
       }
     });

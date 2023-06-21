@@ -178,7 +178,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   if (typeof this.userInfo[item.value] !== "string") {
                     this.userInfo[item.value].forEach(eachLang => {
                       if (eachLang.language === this.langCode) {
-                        this.fullAddress = eachLang.value + "," + this.fullAddress
+                        this.fullAddress = this.fullAddress + "," +  eachLang.value
                       }
                     })
                   } else {
@@ -186,15 +186,22 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   }
                 }
               })
+              this.fullAddress = this.fullAddress.replace(/^./, "");
               value = this.fullAddress
             } else {
-              value = this.userInfo[data.attributeName][0].value;
+              this.userInfo[data.attributeName].forEach(item =>{
+                if(item.language === this.langCode){
+                  value = item.value
+                }
+              });
             }
           } else {
-            value = this.userInfo[data.attributeName][0].value;
+            this.userInfo[data.attributeName].forEach(item =>{
+              if(item.language === this.langCode){
+                value = item.value
+              }
+            });
           }
-
-        
       }
 
       if (data.formatRequired) {
@@ -439,6 +446,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
         passwordCombinationHeading: this.popupMessages.genericmessage.passwordCombinationHeading,
         passwordCombination: this.popupMessages.genericmessage.passwordCombination,
         trackStatusText:this.popupMessages.genericmessage.trackStatusText,
+        dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
         btnTxt: this.popupMessages.genericmessage.successButton
       }

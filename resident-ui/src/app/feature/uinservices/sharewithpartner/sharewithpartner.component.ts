@@ -219,7 +219,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     if (typeof this.userInfo[item.value] !== "string") {
                       this.userInfo[item.value].forEach(eachLang => {
                         if (eachLang.language === this.langCode) {
-                          this.fullAddress = eachLang.value + "," + this.fullAddress
+                          this.fullAddress = this.fullAddress + "," + eachLang.value
                         }
                       })
                     } else {
@@ -227,12 +227,21 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     }
                   }
                 })
+                this.fullAddress = this.fullAddress.replace(/^./, "");
                 value = this.fullAddress
               } else {
-                value = this.userInfo[data.attributeName][0].value;
+                this.userInfo[data.attributeName].forEach(item =>{
+                  if(item.language === this.langCode){
+                    value = item.value
+                  }
+                });
               }
             } else {
-              value = this.userInfo[data.attributeName][0].value;
+              this.userInfo[data.attributeName].forEach(item =>{
+                if(item.language === this.langCode){
+                  value = item.value
+                }
+              });
             }
         }
 
@@ -520,6 +529,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         clickHere2: this.popupMessages.genericmessage.clickHere2,
         eventId: this.eventId,
         trackStatusText: this.popupMessages.genericmessage.trackStatusText,
+        dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
         btnTxt: this.popupMessages.genericmessage.successButton
       }

@@ -8,6 +8,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { HostListener } from '@angular/core';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: "app-uindashboard",
@@ -28,8 +29,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router,
     private breakpointObserver: BreakpointObserver,
     private logoutService: LogoutService,
-    private auditService: AuditService
+    private auditService: AuditService,
+    private location: LocationStrategy
   ) {
+    history.pushState(null, null, window.location.href);  
+    this.location.onPopState(() => {
+      history.pushState(null, null, window.location.href);
+      /*if (confirm("Are you sure want to leave the page. you will be logged out automatically if you press OK?")) {
+        this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
+        this.logoutService.logout();
+      } else {
+        this.router.navigate([this.router.url]);
+        return false;
+      }*/
+    });  
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -96,7 +109,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
         this.logoutService.logout();
       } else {
-        this.router.navigate([this.router.url]);
+        history.pushState(null, null, window.location.href);
+        //this.router.navigate([this.router.url]);
         return false;
       }
     }

@@ -2,7 +2,7 @@
     "menuItems": [
         {
             "displayName": "UIN Services",
-            "displaydescription": "Residents can use these services to view, update, change, manage or share their data. They can also report an issue in case of a grievance.",
+            "displaydescription": "Residents can use these services to view, update, manage or share their data. They can also report an issue in case of a grievance.",
             "availableServicesDescription":"Following are the available services:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
             "activeIcon": "./assets/images/UIN Services.png",
@@ -22,28 +22,28 @@
                     "displayName": "Manage My VID",
                     "icon": "assets/images/managemyvid.png",
                     "route": "uinservices/managemyvid",
-                    "description": "View details of the existing VIDs, create new VID, delete existing VID or download a VID card.",
+                    "description": "View details of the existing VIDs, create new VIDs, delete an existing VID or download a VID card.",
                     "auditEventId": "ADM-004"
                 },
                 {
                     "displayName": "Secure My ID",
                     "icon": "assets/images/lockunlockauth.png",
                     "route": "uinservices/lockunlockauth",
-                    "description": " View the status of all the authentication types. You can choose to lock or unlock authentication types like iris authentication, email authentication, etc.",
+                    "description": " View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
                     "auditEventId": "ADM-004"
                 },
                 {
                     "displayName": "Track My Requests",
                     "icon": "assets/images/trackservicerequest.png",
                     "route": "uinservices/trackservicerequest",
-                    "description": " Track the status of an EID associated with the logged-in UIN/ VID. You can also view the detailed information about the entered EID.",
+                    "description": " Track the status of an event ID (EID) associated with the logged-in UIN/ VID. You can also view the detailed information about the entered EID.",
                     "auditEventId": "ADM-004"
                 },
                 {
                     "displayName": "Get Personalised Card",
                     "icon": "assets/images/personalisedcard.png",
                     "route": "uinservices/personalisedcard",
-                    "description": "Residents can select the data to be added to their credential. They can preview the chosen data and download it.",
+                    "description": "Residents can select the data to be added to their credential. They can also preview the chosen data and download it.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -70,15 +70,16 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "availableServicesDescription":"Click here to search for",
             "subMenus": [
                 {
-                    "displayName": "Click here to search for registration centers",
+                    "displayName": "Registration Centers",
                     "icon": "",
                     "route": "regcenter",
                     "auditEventId": "ADM-004"
                 },
                 {
-                    "displayName": "Click here to search for supporting documents",
+                    "displayName": "Supporting Documents",
                     "icon": "",
                     "route": "document",
                     "auditEventId": "ADM-004"
@@ -117,7 +118,7 @@
             ]
         },
         {
-            "displayName": "Verify Phone Number / Email ID",
+            "displayName": "Verify Phone Number/ Email ID",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
             "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
             "route": "verify",
@@ -126,7 +127,7 @@
             "rows": 1,
             "subMenus": [
                 {
-                    "displayName": "Click here to verify your email ID or phone number"
+                    "displayName": "Click here to verify your  phone number/ email ID"
                 }
             ]
         }
@@ -138,7 +139,7 @@
         "getinformation": "Get Information",
         "regcenter": "Find a Registration Center",
         "document": "List of Supporting Documents",
-        "verify": "Verify Phone Number / Email ID",
+        "verify": "Verify Phone Number/ Email ID",
         "uinservices": "UIN Services",
         "uindescription": "Residents can use these services to view, update, change, manage or share their data. They can also report an issue in case of a grievance."
     },
@@ -195,9 +196,9 @@
         "alternatephonenumberlabel": "Alternate phone number",
         "eventidlabel": "Event ID",
         "commentlabel": "Comment",
-        "alternateEmailPlaceholder": "Enter alternate Email",
-        "alternatePhoneNoPlaceholder": "Enter alternate Phone number",
-        "EnterMsgPlaceholder": "Please Enter message",
+        "alternateEmailPlaceholder": "Enter alternate email ID",
+        "alternatePhoneNoPlaceholder": "Enter alternate phone number",
+        "EnterMsgPlaceholder": "Please enter your comment",
         "submitBtn": "Submit",
         "TotalCharacters": "Total Characters",
         "remainingCharacters": "Remaining"
@@ -208,9 +209,9 @@
     },
     "verifyuinvid": {
         "title": "",
-        "mobileno": "Verify mobile number",
+        "mobileno": "Verify phone number",
         "email": "Verify email ID",
-        "uid": "Enter UIN / VID",
+        "uid": "Enter UIN/ VID",
         "captcha": "Enter Captcha",
         "sendotp": "Send OTP",
         "otp": "Enter OTP",
@@ -251,7 +252,7 @@
             "In Progress": {"statusType":"In Progress", "checked":false},
             "Failed": {"statusType":"Failed", "checked":false}
         },
-        "reportIssueLabel": "Report an issue",
+        "reportIssueLabel": "Report an Issue",
         "pinToTopLabel": "Pin to top",
         "unpinToToplabel": "Unpin from top",
         "viewhistoryLabel": "View Details"
@@ -288,7 +289,7 @@
         "create": "Create",
         "generatevidtoggle": "Generate VID",
         "revokevidtoggle": "Revoke VID",
-        "introDescription": "View details of the existing VIDs, create new VID, delete existing VID or download a VID card.",
+        "introDescription": "View details of the existing VIDs, create new VIDs, delete an existing VID or download a VID card.",
         "generatedOn": "Generated On",
         "expiry": "Expiry",
         "vid": "VID",
@@ -323,7 +324,7 @@
             "otp-email": "Email OTP Authentication",
             "otp-phone": "Mobile OTP Authentication"
         },
-        "introDescription": "View the status of all the authentication types. You can choose to lock or unlock authentication types like iris authentication, email authentication, etc.",
+        "introDescription": "View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
         "unlockLabel": "Unlock",
         "lockLabel": "Lock"
     },
@@ -336,6 +337,14 @@
         "identityHeading":"My Identity",
         "addressHeading":"My Address",
         "contactHeading":"My Contact",
+        "uploadImage":"Upload Image",
+        "dropImage":"Drop Image",
+        "or":"or",
+        "preview":"Preview",
+        "enteredValuesNotMatch":"The entered values do not match.",
+        "submit":"Submit",
+        "update":"Update",
+        "documentUploaded":"Document Uploaded",
         "languageHeading":"My Language Preference",
         "InvalidFormatMsg":"The file type that you are trying to upload is not supported. Please upload a different file type.",
         "InvalidFileSize":"The document you are trying to upload exceeds the file size limit of 2mb. Please upload a document within 2mb.",
@@ -360,8 +369,8 @@
         "authenticationMode": "Authentication Mode",
         "vidType": "VID Type",
         "vid": "VID",
-        "timestamp": "Time Stamp",
-        "descriptionText": "Track the status of an EID associated with the logged-in UIN/ VID. You can also view the detailed information about the entered EID.",
+        "timestamp": "Timestamp",
+        "descriptionText": "Track the status of an event ID (EID) associated with the logged-in UIN/ VID. You can also view the detailed information about the entered EID.",
         "transactionTitle": "Transaction Details",
         "partnerName": "Partner name",
         "partnerLogo": "Partner logo",
@@ -372,15 +381,15 @@
         "downloadVIDCard": "Download VID card",
         "downloadUINCard": "Download UIN card",
         "purpose": "Purpose",
-        "raiseSupportRequest": "To raise a support request against this EID",
+        "raiseSupportRequest": "To raise a support request against this EID,",
         "clickHere": "click here.",
         "warningMsg":"Please enter a valid 16-digits EID."
     },
     "personalisedcard": {
         "title": "Get Personalised Card",
-        "mainlabel": "Choose the data you want to include the credential. Kindly choose at least 3 attributes to be able to proceed.",
+        "mainlabel": "Kindly select at least three attributes to proceed.",
         "downloadbutton": "Download",
-        "introDescription": "Residents can select the data to be added to their credential. They can preview the chosen data and download it."
+        "introDescription": "Residents can select the data to be added to their credential. They can also preview the chosen data and download it."
     },
     "physicalcard": {
         "title": "Order A Physical Card",
@@ -389,7 +398,7 @@
     },
     "sharewithpartner": {
         "title": "Share My Data",
-        "mainlabel": "Choose the data you want to include the credential. Kindly choose at least 3 attributes to be able to proceed.",
+        "mainlabel": "Kindly select at least three attributes to proceed.",
         "partnerName": "Authorization Partner Name",
         "sharingReason": "Purpose of sharing your credential",
         "sharingReasonPlaceholder": "Enter the purpose here",
@@ -397,7 +406,7 @@
         "sharePartnerSuccessMsg": "Your data has been successfully shared with the chosen partner",
         "successIcon": "./assets/sucess_icon.png",
         "introDescription": "Residents can choose the data to be shared with any of the registered partners to avail various third party services.",
-        "messageDescription1": "Dear Resident, Your data has been successfully share with the chosen partner against the EID : ",
+        "messageDescription1": "Your data has been successfully share with the chosen partner against the EID : ",
         "messageDescription2": ". In order to track the status of the transaction use the above EID in ",
         "trackMyserviceLink": "Track My Service Request",
         "orin": "or in",
@@ -444,14 +453,15 @@
         "clickHere2":"click ",
         "relogin": " to login again.",
         "login":" to log in.",
+        "otpPopupDescription":"One Time Password (OTP) has been sent to",
         "loginSuccessfully": "Dear resident, you logged in complected successfully",
         "successRemainMsg": "to track service request with pre-filled EID.",
         "passwordCombinationHeading": "Password combination: ",
-        "passwordCombination": "First four letters of your first name in capital letters and your year of birth. E.g.: If your name is Johnny Depp born on 09/06/1963, your password will be JOHN1963.",
+        "passwordCombination": "First four letters of your first name in capital letters and your year of birth. E.g.: If your name is Johnny Depp and your birthdate is 09/06/1963, your password will be JOHN1963.",
         "SuccessLogin": "You have successfully logged in.",
         "successLogout": "You have successfully logged out. ",
         "dearResident":"Dear Resident,",
-        "trackStatusText":"In order to track the status of the event, you can click ",
+        "trackStatusText":"In order to track the status of the event, click ",
         "trackStatusForLogin":"This Event ID can be used to view details about the event. Click ",
         "clickYesToProceed":"Click Yes to proceed.",
         "logoutconfirmMessage":"Are you sure you want to log out.",
@@ -486,7 +496,7 @@
                 "WarningMessageLabel": "Generating a new perpetual VID will revoke the already existing VID.",
                 "confirmationMessageForCreateVid": "Are you sure you want to create a perpetual VID?",
                 "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen Perpetual VID?",
-                "confirmationMessageForDownloadVid": "Are you sure you want to download Perpetual VID?"
+                "confirmationMessageForDownloadVid": "Are you sure you want to download Perpetual VID card?"
             },
             "Temporary": {
                 "confirmationMessageForCreateVid": "Are you sure you want to create a temporary VID?",
@@ -504,13 +514,13 @@
             "deletedSuccessfully": "Your VID has been successfully deleted against the Event ID: $eventId."
         },
         "personalisedcardMessages": {
-            "downloadedSuccessFully": "Dear resident, your personalized card has been successfully downloaded against the Event ID: $eventId. The password will be sent to your registered email ID or phone number."
+            "downloadedSuccessFully": "Your personalized card has been successfully downloaded against the Event ID: $eventId. The password will be sent to your registered email ID or phone number."
         },
         "sharewithpartner": {
             "needPartner": "Kindly choose a partner to proceed.",
             "needPurpose": "Purpose of sharing your credential is a mandatory field. Kindly mention the purpose of sharing your credential.",
             "specialCharacters":"Please enter letters/numbers in order to share your credentials.",
-            "sharedSuccessfully":"Dear resident, the data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
+            "sharedSuccessfully":"The data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
         },
         "verifyChannel": {
             "warningMsg": "Your $channel has already been verified.",
@@ -518,12 +528,12 @@
             "phoneSuccess": "Your phone number: $channel has been successfully verified against the Event ID: $eventId."
         },
         "grievanceRedressal": {
-            "successMsg": "Dear resident, your complaint has been successfully sent against the ticket ID $ticketId.",
-            "warningMsg": "Dear resident, your complaint could not be sent. Please try again later."
+            "successMsg": "Your complaint has been successfully sent against the ticket ID $ticketId.",
+            "warningMsg": "Your complaint could not be sent. Please try again later."
         },
         "secureMyId": {
-            "successMsg":"Your request to change the authentication type(s) has been saved successfully against the Event ID: $eventId.",
-            "confirmationMessage": " Are you sure you want to save the changes made in authentication types?"
+            "successMsg":"Your request to change the Authentication type(s) has been saved successfully against the Event ID: $eventId.",
+            "confirmationMessage": " Are you sure you want to save the changes made in Authentication types?"
         },
         "updateMyData": {
             "emailSuccessMsg": "Your Email ID has been successfully updated against the Event ID:: $eventId.",
@@ -544,16 +554,16 @@
             "OneTimeUse": "A one-time VID's has no expiry date but only one transaction can be performed using this VID. One UIN can be associated with multiple one-time VID at a time."
         },
         "secureMyID": {
-            "Email OTP Authentication": "On locking/unlocking 'Email OTP Authentication', any authentication attempt made using an email OTP will be disabled/enabled.",
-            "Mobile OTP Authentication": "On locking/unlocking 'Mobile OTP Authentication', any authentication attempt made using a mobile OTP will be disabled/enabled.",
-            "Demographic Authentication": "On locking/unlocking 'Demographic Authentication', any authentication attempt made using demographic details (name, age, address, or any combination of those) will be disabled/enabled.",
-            "Fingerprint Authentication": "On locking/unlocking 'Fingerprint Authentication', any authentication attempt made using a fingerprint will be disabled/enabled.",
-            "Iris Authentication": "On locking/unlocking 'Iris Authentication', any authentication attempt made using an iris will be disabled/enabled.",
-            "Face Authentication": "On locking/unlocking 'Face Authentication', any authentication attempt made using face will be disabled/enabled."
+            "Email OTP Authentication": "On locking/unlocking 'Email OTP Authentication', any Authentication attempt made using an email OTP will be disabled/ enabled.",
+            "Mobile OTP Authentication": "On locking/unlocking 'Mobile OTP Authentication', any Authentication attempt made using a mobile OTP will be disabled/ enabled.",
+            "Demographic Authentication": "On locking/unlocking 'Demographic Authentication', any Authentication attempt made using demographic details (name, age, address, or any combination of those) will be disabled/ enabled.",
+            "Fingerprint Authentication": "On locking/unlocking 'Fingerprint Authentication', any Authentication attempt made using a fingerprint will be disabled/ enabled.",
+            "Iris Authentication": "On locking/unlocking 'Iris Authentication', any Authentication attempt made using an iris will be disabled/ enabled.",
+            "Face Authentication": "On locking/unlocking 'Face Authentication', any Authentication attempt made using face will be disabled/ enabled."
         },
         "trackStatus": "Please enter the EID (Event ID) associated with the event that you want to track. It is important that the EID you enter is associated with the logged-in UIN.",
         "getUin": "An AID is your 16-digit Application ID which was provided to you after registration. A UIN is your 10-digit Unique Identity Number. A VID is your 16-digit Virtual ID.",
-        "verifyChannel": "A UIN is your 10-digit Unique Identity Number. A VID is your 16-digit Virtual ID."
+        "verifyChannel": "A UIN is your 10-digit Unique Identity Number. VID is your 16-digit Virtual ID."
     },
     "serverErrors": {
         "IDA-MLC-009": "No registered email ID/ phone number found with the entered UIN/ VID. To add an email ID/ phone number, visit the nearest registration center. Click here to find the registration centres.",
