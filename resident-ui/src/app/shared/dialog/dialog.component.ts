@@ -5,20 +5,15 @@ import {
 } from '@angular/material/dialog';
 import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import * as appConstants from '../../app.constants';
+/*import * as appConstants from '../../app.constants';*/
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { LoginRedirectService } from 'src/app/core/services/loginredirect.service';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { RequestModel } from 'src/app/core/models/request.model';
 /*import { FilterRequest } from 'src/app/core/models/filter-request.model';
 import { FilterValuesModel } from 'src/app/core/models/filter-values.model';*/
 import { AppConfigService } from 'src/app/app-config.service';
-import Utils from 'src/app/app.utils';
+/*import Utils from 'src/app/app.utils';*/
 /*import { FilterModel } from 'src/app/core/models/filter.model';
 import { AuditService } from 'src/app/core/services/audit.service';*/
 import { TranslateService } from '@ngx-translate/core';
