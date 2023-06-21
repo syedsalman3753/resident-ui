@@ -10,7 +10,7 @@
 	<mat-card *ngIf="!isLoading">
 		<h3 style="color: #505050;">{{'personalisedcard.title' | translate}}</h3>
 		<p class="intro-description">{{'personalisedcard.introDescription' | translate}}</p>
-		<label style="color: #505050;padding:10px;line-height: 2.5;">{{'personalisedcard.mainlabel' | translate}}</label>
+		<p class="intro-description">{{'personalisedcard.mainlabel' | translate}}</p>
 		<table style="width:100%;">
 			<tr><mat-grid-list [cols]="cols" rowHeight="490px" gutterSize="10px"><mat-grid-tile>
 				<td [style.width] = "width">

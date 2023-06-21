@@ -152,8 +152,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.newNotificationLanguages.push(newObj)
     })
 
-    this.getUserInfo();
     this.getUpdateMyDataSchema();
+    this.getUserInfo();
 
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -172,25 +172,37 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   }
 
-  getUpdateMyDataSchema() {
-    this.isLoading = true;
-    this.dataStorageService
-      .getUpdateMyDataSchema('update-demographics')
-      .subscribe((response) => {
-        this.isLoading = false;
-        this.schema = response;
-      });
+
+  async getUpdateMyDataSchema() {
+      this.isLoading = true;
+    await new Promise((resolve) =>{  
+      this.dataStorageService
+        .getUpdateMyDataSchema('update-demographics')
+        .subscribe((response) => {
+          this.schema = response;
+          if(this.schema){
+            this.isLoading = false;
+          }
+        });
+    })
   }
 
+
   getUserInfo() {
-    this.dataStorageService
-      .getUserInfo('update-demographics')
-      .subscribe((response) => {
-        if (response["response"]) {
-          this.userInfo = response["response"];
-          UpdatedemographicComponent.actualData = response["response"];
-          this.buildData();
-        } else {
+      this.dataStorageService
+        .getUserInfo('update-demographics')
+        .subscribe((response) => {
+          if (response["response"]) {
+            this.userInfo = response["response"];
+            UpdatedemographicComponent.actualData = response["response"];
+            if(this.schema && this.userInfo){
+              this.buildData()
+            }else{
+              console.log("Testing")
+              this.getUpdateMyDataSchema();
+              this.getUserInfo();
+            }
+          } else {
           this.showErrorPopup(response['errors'])
         }
       });
@@ -223,14 +235,18 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.getGender();
       this.getLocationHierarchyLevel();
       this.getDocumentType("POI", "proofOfIdentity"); this.getDocumentType("POA", "proofOfAddress");
+      this.isLoading = false;
     } catch (ex) {
+      console.log(this.buildJSONData)
       console.log("Exception>>>" + ex.message);
     }
-    let perfLangs = this.buildJSONData['preferredLang'].split(',');
-    perfLangs.forEach(data => {
-      this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
-    })
-    this.buildJSONData['preferredLang'] = this.perfLangArr[localStorage.getItem("langCode")];
+    if(this.buildJSONData['preferredLang']){
+      let perfLangs = this.buildJSONData['preferredLang'].split(',');
+      perfLangs.forEach(data => {
+        this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
+      })
+      this.buildJSONData['preferredLang'] = this.perfLangArr[localStorage.getItem("langCode")];
+    }
   }
 
   changedBuildData(finaluserInfoClone: any) {
@@ -963,7 +979,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       width: '550px',
       data: {
         case: 'OTP',
-        message: "One Time Password (OTP) has been sent to your new channel ",
+        message:this.popupMessages.genericmessage.otpPopupDescription,
         newContact: this.userId,
         submitBtnTxt: this.popupMessages.genericmessage.submitButton,
         resentBtnTxt: this.popupMessages.genericmessage.resentBtn

@@ -35,6 +35,7 @@ export class DownloadUinComponent implements OnInit {
   message: string = "";
   pdfSrc = "";
   eventId: any;
+  isLoading:boolean = false;
 
   userPreferredLangCode = localStorage.getItem("langCode");
 
@@ -57,7 +58,7 @@ export class DownloadUinComponent implements OnInit {
     }
 
   }
-
+  
   ngOnInit() {
     this.translateService.getTranslation(this.userPreferredLangCode).subscribe(response => {
       this.downloadUinData = response.downloadUin,
@@ -153,6 +154,7 @@ export class DownloadUinComponent implements OnInit {
   }
 
   validateUinCardOtp() {
+    this.isLoading = true;
     let self = this;
     const request = {
       "id": "mosip.resident.download.uin.card",
@@ -165,17 +167,14 @@ export class DownloadUinComponent implements OnInit {
       }
     };
     
-    self.dataStorageService.validateUinCardOtp(request).subscribe(response => {
-      this.eventId = response.headers.get("eventid")
-      if (response.body.type === "application/json") {
-        self.dataStorageService.validateUinCardOtpCheckResponse(request).subscribe(response => {
-          self.showErrorPopup(response.body["errors"]);
-          //self.showErrorPopup(this.popupMessages.genericmessage.getMyUin.invalidOtp);
-          this.router.navigate(["dashboard"])
-          // this.resetBtnDisable = false;
-          this.submitBtnDisable = true;
-        });        
-      } else {
+    self.dataStorageService.validateUinCardOtp(request)
+    .subscribe(async (response: any) => {
+      this.isLoading = false;
+      const isJsonBlob = (data: any) => data instanceof Blob && data.type === "application/json";
+      const responseData = isJsonBlob(response) ? await response.text() : response || {};
+      const responseJson = (typeof responseData === "string") ? JSON.parse(responseData) : responseData;
+      if (responseJson.body.type === "application/pdf") {
+        this.eventId = response.headers.get("eventid")
         clearInterval(this.interval)
         var fileName = self.data + ".pdf";
         const contentDisposition = response.headers.get('Content-Disposition');
@@ -189,14 +188,18 @@ export class DownloadUinComponent implements OnInit {
         saveAs(response.body, fileName);
         this.router.navigate(["dashboard"])
         this.showMessage(response["response"], this.eventId);
+      }else{
+        var reader = new FileReader();
+          reader.onloadend = function(e) {
+          let failureResponse = JSON.parse((<any>e.target).result)
+          self.showErrorPopup(failureResponse.errors);
+        }
+        reader.readAsText(responseJson.body);
       }
-
     },
-      error => {
-        console.log(error)
-
-      }
-    )
+    error => {
+      console.log(error)
+    });   
   }
 
   showMessage(message: string, eventId: any) {

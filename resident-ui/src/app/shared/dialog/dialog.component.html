@@ -349,7 +349,7 @@
       <br />
       <label class="label-text" for="otp-input">{{'verifyuinvid.inputLabel' | translate}}</label>
       <br />
-      <input #box (keyup)="getInputValues(box.value)" placeholder="Enter OTP here" id="otp-input"
+      <input [disabled]="disableInput" #box (keyup)="getInputValues(box.value)" placeholder="Enter OTP here" id="otp-input"
         class="enter-opt-input" type="text" />
       <div class="otp-infromation-card">
         <p class="otp-infromation-text">{{input.message}}<span class="mobile-number">

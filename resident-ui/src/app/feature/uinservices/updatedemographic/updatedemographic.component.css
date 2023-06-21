@@ -280,7 +280,7 @@ mat-select {
 .tab-headings{
   font-size:17px;
   color: #505050;
-  margin-bottom: 0px;
+  /* margin-bottom: 0px; */
   font-weight: 500;
   margin-left: 1.5rem;
 }

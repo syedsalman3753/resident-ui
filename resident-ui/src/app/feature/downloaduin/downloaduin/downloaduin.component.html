@@ -2,7 +2,10 @@
   <span class="breadcrumb">
     <a (click)="onItemSelected('home')">{{'downloadUin.home' | translate}} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<span class="active">{{'downloadUin.label' | translate}}</span>
   </span>
-  <mat-card class="uin-appointment-card" *ngIf="downloadUinData">
+  <div class="spinner" *ngIf="isLoading">
+		<mat-spinner></mat-spinner>
+   </div>
+  <mat-card class="uin-appointment-card" *ngIf="downloadUinData && !isLoading">
     <button mat-button-toggle id="getUinBackBtn" (click)="onItemSelected('back')" class="book-appointment-back-btn"><img src="./assets/images/arrow_back_black_24dp.png"
         alt="" />Back</button>
     <hr class="line" />
@@ -11,7 +14,7 @@
       </mat-card-subtitle>
       <label for="otp-input">{{downloadUinData.inputLabel }}</label>
       <br />
-      <input id="getUinOtpValue" #box (keyup)="captureValue(box.value)" placeholder="Enter OTP here" id="otp-input" class="enter-opt-input" type="text" />
+      <input id="getUinOtpValue" #box (input)="captureValue(box.value)" placeholder="Enter OTP here" id="otp-input" class="enter-opt-input" type="text" />
       <div class="otp-infromation-card">
         <p class="otp-infromation-text">{{downloadUinData.otpDescription}} <span
             class="mobile-number"> {{phoneNumber}}</span> {{downloadUinData.otpDescriptionEmail}} <span
