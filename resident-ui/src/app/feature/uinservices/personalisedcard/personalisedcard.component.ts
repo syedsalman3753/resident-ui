@@ -358,15 +358,16 @@ captureCheckboxValue($event: any, data: any, type: any) {
   let row = "";
   let rowImage = ""
 
-  for (const key in this.dataDisplay) {
-    if (key === "photo") {
-      rowImage = "<tr><td><img src=' " + this.dataDisplay[key].value + "' alt='' style='margin-left:48%;' width='70px' height='70px'/></td></tr>";
-    } else {
-      row = row + "<tr><td style='font-weight:600;'>" + this.dataDisplay[key].attributeName + ":</td><td>" + this.dataDisplay[key].value + "</td></tr>";
+  for (let key of this.valuesSelected) {
+    if(this.dataDisplay[key]){
+      if (key === "photo") {
+        rowImage = "<tr><td><img src=' " + this.dataDisplay[key].value + "' alt='' style='margin-left:48%;' width='70px' height='70px'/></td></tr>";
+      } else {
+        row = row + "<tr><td style='font-weight:600; font-family:Roboto;'>" + this.dataDisplay[key].label + ":</td><td style='font-weight:500; font-family:Roboto;'>" + this.dataDisplay[key].value + "</td></tr>";
+      }
     }
   }
   this.buildHTML = `<html><head></head><body><table>` + rowImage + row + `</table></body></html>`;
-
   }
 
   downloadFile() {
@@ -401,7 +402,6 @@ captureCheckboxValue($event: any, data: any, type: any) {
               const matches = fileNameRegex.exec(contentDisposition);
               if (matches != null && matches[1]) {
                 fileName = matches[1].replace(/['"]/g, '');
-                console.log(matches[1].replace(/['"]/g, '') + "filename")
               }
             }
             saveAs(data.body, fileName);
