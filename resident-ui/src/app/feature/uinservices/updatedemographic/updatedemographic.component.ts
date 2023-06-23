@@ -180,9 +180,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         .getUpdateMyDataSchema('update-demographics')
         .subscribe((response) => {
           this.schema = response;
-          // if(this.schema){
-          //   this.isLoading = false;
-          // }
         });
     })
   }
