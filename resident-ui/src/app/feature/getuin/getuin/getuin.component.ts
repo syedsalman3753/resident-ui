@@ -150,6 +150,7 @@ export class GetuinComponent implements OnInit {
           this.aidStatus = response["response"].aidStatus;
           this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus);
         }
+        this.disableSendOtp = true;
       }else{
         this.showErrorPopup(response["errors"]);
       }

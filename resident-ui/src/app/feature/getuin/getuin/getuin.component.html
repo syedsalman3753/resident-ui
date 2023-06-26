@@ -61,7 +61,7 @@
             <div *ngIf="i < orderStatusIndex" class="active-position-icon position-icon">
               <!-- <img src="./assets/icons/iconfont/Path 7837.svg" /> -->
             </div>
-            <div *ngIf="i === orderStatusIndex"  [ngClass]="{ 'processing-position-icon ' : aidStatus === 'SUCCESS', 'failure-position-icon position-icon' : aidStatus === 'FAILURE' }">
+            <div *ngIf="i === orderStatusIndex"  [ngClass]="{ 'processing-position-icon ' : aidStatus === 'SUCCESS', 'failure-position-icon position-icon' : aidStatus === 'FAILURE', 'inactive-position-icon position-icon' : aidStatus === 'IN-PROGRESS' }">
               <!-- <img src="./assets/icons/iconfont/Path 7837.svg" /> -->
             </div>
             <div *ngIf="i > orderStatusIndex"  class="inactive-position-icon position-icon">
