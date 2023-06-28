@@ -6,9 +6,6 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
-      <div class="sidenav-button">
-        <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-      </div>
       <div class="hearder-logo" (click)="godashboard()">
         <img class="img-fluid" src="/assets/MOSIP Vertical Black.png"  alt=""/>
       </div>
@@ -30,10 +27,10 @@
       </mat-menu>
 
       <mat-list-item *ngIf="fullName">
-        <button mat-menu-item [matMenuTriggerFor]="notificationMenu" (click)="loadNotificationData()">
-          <mat-icon style="margin-right: 0px;color: white; margin-top: 8px;" matBadge="{{notificationCount}}"
+        <button class="notification-btn" mat-menu-item [matMenuTriggerFor]="notificationMenu" (click)="loadNotificationData()">
+          <mat-icon class="notification-icon" matBadge="{{notificationCount}}"
             matBadgeColor="warn" matBadgeSize="small" *ngIf="notificationCount">notifications</mat-icon>
-          <mat-icon style="margin-right: 0px;color: white; margin-top: 8px;"
+          <mat-icon class="notification-icon"
             *ngIf="!notificationCount">notifications</mat-icon>
         </button>
       </mat-list-item>&nbsp;&nbsp;&nbsp;
