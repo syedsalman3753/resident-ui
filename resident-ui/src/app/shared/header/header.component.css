@@ -104,25 +104,13 @@
 ::ng-deep .mat-menu-panel.myMenu {
   height: 80%;
   min-width: 303px!important;
-  /*margin-right:-90px !important;*/
-  /* top: 140px !important; */
   border-radius: 0% !important;
   background-color: white;
   font-size: 13px;
   padding-bottom: 12px;
-  /*margin-left: -10.1rem;*/
   overflow-y: scroll;
   overflow-x: hidden;
 }
-
-/* .each-notification{
-  width: 200px !important;
-  margin: 8px;
-} */
-
-/* ::ng-deep .cdk-overlay-pane{
-  top: 80px !important;
-} */
 
 ::ng-deep .mat-menu-panel.myMenu > .mat-menu-content {
   width: 300px !important;
@@ -180,4 +168,21 @@
   height: 100%;
   width: 150px;
   text-align: center;
+}
+
+.notification-icon{
+  color: white; 
+}
+
+@media screen and (max-width:550px){
+  .notification-icon{
+    margin-left: 2rem;
+    color: white;
+  }
+  .mat-menu-item{
+    padding: 0;
+  }
+  .notification-btn{
+    width: 60px;
+  }
 }
