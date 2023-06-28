@@ -15,6 +15,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
 import { lang } from "moment";
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-demographic",
@@ -92,7 +93,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   finalUserCloneData: any;
   updatingtype: string;
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private dateAdapter: DateAdapter<Date>, private breakPointService:BreakpointService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -102,36 +103,30 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.verifyupdatedData(id.otp);
       }
     })
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.cols = 1;
-          this.width = "95%";
-        }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = 2;
-          this.width = "90%";
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.cols = 2;
-          this.width = "75%";
-        }
-        if (result.breakpoints[Breakpoints.Large]) {
-          this.cols = 4;
-          this.width = "50%";
-        }
-        if (result.breakpoints[Breakpoints.XLarge]) {
-          this.cols = 4;
-          this.width = "40%";
-        }
+
+    this.breakPointService.isBreakpointActive().subscribe(active =>{
+      if(active === "extraSmall"){
+        this.cols = 1;
+        this.width = "95%";
       }
-    });
+      if(active === "small"){
+        this.cols = 2;
+        this.width = "90%";
+      }
+      if(active === "medium"){
+        this.cols = 2;
+        this.width = "75%";
+      }
+      if(active === "large"){
+        this.cols = 4;
+        this.width = "50%";
+      }
+      if(active === "ExtraLarge"){
+        this.cols = 4;
+        this.width = "40%";
+      }
+    })
+
     this.dateAdapter.setLocale('en-GB');
   }
 

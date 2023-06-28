@@ -10,9 +10,9 @@ import { DateAdapter } from '@angular/material/core';
 import { saveAs } from 'file-saver';
 import { HeaderService } from 'src/app/core/services/header.service';
 import { AuditService } from "src/app/core/services/audit.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { MatPaginator } from '@angular/material/paginator';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-viewhistory",
@@ -62,33 +62,25 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   isLoading:boolean = true;
   dataAvailable:boolean = false;
 
-  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
+  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakPointService:BreakpointService) {
     this.dateAdapter.setLocale('en-GB');
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.cols = 1;
-        }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = 2;
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.cols = 4;
-        }
-        if (result.breakpoints[Breakpoints.Large]) {
-          this.cols = 6;
-        }
-        if (result.breakpoints[Breakpoints.XLarge]) {
-          this.cols = 6;
-        }
+    this.breakPointService.isBreakpointActive().subscribe(active =>{
+      if(active === "extraSmall"){
+        this.cols = 1;
       }
-    });
+      if(active === "small"){
+        this.cols = 2;
+      }
+      if(active === "medium"){
+        this.cols = 4;
+      }
+      if(active === "large"){
+        this.cols = 6;
+      }
+      if(active === "ExtraLarge"){
+        this.cols = 6;
+      }
+    })
   }
 
   async ngOnInit() {
