@@ -24,7 +24,7 @@ const copyanddisable = async (context, args, uiField) => {
               const fromId = uiField1.id + "_" + language;
               const fromFieldValue = context.userForm.controls[fromId].value;
               const toId = uiField2.id + "_" + language;
-              if (checkboxVal == true) {
+              if (checkboxVal) {
                 context.userForm.controls[toId].setValue(fromFieldValue);
                 context.userForm.controls[toId].disable();
               } else {
@@ -38,7 +38,7 @@ const copyanddisable = async (context, args, uiField) => {
             ) {
               const fromFieldValue =
                 context.userForm.controls[uiField1.id].value;
-              if (checkboxVal == true) {
+              if (checkboxVal) {
                 context.userForm.controls[uiField2.id].setValue(fromFieldValue);
                 context.userForm.controls[uiField2.id].disable();
                 if (

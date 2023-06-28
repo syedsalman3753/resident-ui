@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { BehaviorSubject } from 'rxjs';
 import { ConfigService } from 'src/app/core/services/config.service';
-import * as appConstants from 'src/app/app.constants';
 import { DataStorageService } from './data-storage.service';
 import { Router } from "@angular/router";
 import { LogoutService } from './logout.service';

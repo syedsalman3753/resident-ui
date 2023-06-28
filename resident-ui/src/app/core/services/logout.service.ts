@@ -1,14 +1,7 @@
 import { LoginRedirectService } from './loginredirect.service';
 import { Router } from '@angular/router';
-import { ResponseModel } from './../models/response.model';
-import { LogoutResponse } from './../models/logoutresponse';
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import {
-  HttpClient,
-  HttpResponse,
-  HttpErrorResponse
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from 'src/app/app-config.service';
 
 @Injectable({
@@ -29,24 +22,5 @@ export class LogoutService {
     }
     window.location.href = `${this.appService.getConfig().baseUrl}/logout/user?redirecturi=`+btoa(window.location.href.split("#")[0]+"#/dashboard");
     localStorage.setItem("logOut",'true')
-    /*let adminUrl = this.appService.getConfig().adminUrl;
-    this.http
-      .get(`${this.appService.getConfig().baseUrl}${this.appService.getConfig().logout}`, {
-        observe: 'response'
-      })
-      .subscribe(
-        (res: HttpResponse<ResponseModel<LogoutResponse>>) => {
-          if (res.body.response.status === 'Success') {
-            this.redirectService.redirect(
-              window.location.origin + adminUrl
-            );
-          } else {
-            window.alert(res.body.response.message);
-          }
-        },
-        (error: HttpErrorResponse) => {
-          window.alert(error.message);
-        }
-      );*/
   }
 }
