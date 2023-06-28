@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
@@ -6,7 +6,6 @@ import { Router } from "@angular/router";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
-import { HostListener } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
 

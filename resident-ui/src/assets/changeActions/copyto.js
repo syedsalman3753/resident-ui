@@ -5,7 +5,7 @@ const copyto = async (context, args, uiField) => {
       control2 = args[1],
       checkboxId = args[2];
     let checkboxVal = context.userForm.controls[`${checkboxId}`].value;
-    if (checkboxVal == true) {
+    if (checkboxVal) {
       let filteredList1 = context.uiFields.filter(
         (uiField) => uiField.id == control1
       );

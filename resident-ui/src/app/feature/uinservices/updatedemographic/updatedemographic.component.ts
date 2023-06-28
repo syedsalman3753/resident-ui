@@ -14,6 +14,7 @@ import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
+
 @Component({
   selector: "app-demographic",
   templateUrl: "updatedemographic.component.html",
