@@ -12,7 +12,7 @@ import { AuditService } from "src/app/core/services/audit.service";
 import defaultJson from "src/assets/i18n/default.json";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 @Component({
@@ -91,7 +91,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   finalUserCloneData: any;
   updatingtype: string;
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private dateAdapter: DateAdapter<Date>, private breakPointService:BreakpointService) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private dateAdapter: DateAdapter<Date>, private breakpointObserver: BreakpointObserver) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -102,28 +102,36 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       }
     })
 
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if(active === "extraSmall"){
-        this.cols = 1;
-        this.width = "95%";
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.cols = 1;
+          this.width = "95%";
+        }
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 2;
+          this.width = "90%";
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
+          this.cols = 2;
+          this.width = "75%";
+        }
+        if (result.breakpoints[Breakpoints.Large]) {
+          this.cols = 4;
+          this.width = "50%";
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = 4;
+          this.width = "40%";
+        }
       }
-      if(active === "small"){
-        this.cols = 2;
-        this.width = "90%";
-      }
-      if(active === "medium"){
-        this.cols = 2;
-        this.width = "75%";
-      }
-      if(active === "large"){
-        this.cols = 4;
-        this.width = "50%";
-      }
-      if(active === "ExtraLarge"){
-        this.cols = 4;
-        this.width = "40%";
-      }
-    })
+    });
 
     this.dateAdapter.setLocale('en-GB');
   }
