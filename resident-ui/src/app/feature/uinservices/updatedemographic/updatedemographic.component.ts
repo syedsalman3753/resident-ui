@@ -10,10 +10,8 @@ import Utils from "src/app/app.utils";
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import defaultJson from "src/assets/i18n/default.json";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
-import { lang } from "moment";
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 
