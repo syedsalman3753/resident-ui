@@ -7,7 +7,7 @@ import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { LocationStrategy } from '@angular/common';
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: "app-uindashboard",
@@ -29,30 +29,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private logoutService: LogoutService,
     private auditService: AuditService,
     private location: LocationStrategy,
-    private breakPointService:BreakpointService
+    private breakpointObserver: BreakpointObserver
   ) {
     history.pushState(null, null, window.location.href);  
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
     });  
 
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if(active === "extraSmall"){
-        this.cols = 1;
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.cols = 1;
+        }
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 1;
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
+          this.cols = 2;
+        }
+        if (result.breakpoints[Breakpoints.Large]) {
+          this.cols = 3;
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = 4;
+        }
       }
-      if(active === "small"){
-        this.cols = 1;
-      }
-      if(active === "medium"){
-        this.cols = 2;
-      }
-      if(active === "large"){
-        this.cols = 3;
-      }
-      if(active === "ExtraLarge"){
-        this.cols = 4;
-      }
-    })
+    });
   }
 
   async ngOnInit() {

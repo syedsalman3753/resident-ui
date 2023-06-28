@@ -11,7 +11,7 @@ import { saveAs } from 'file-saver';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import moment from 'moment';
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 
 @Component({
@@ -51,40 +51,48 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   selectedOprionsFormOptions: object = {};
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakPointService:BreakpointService) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "shareWithPartner") {
         this.shareInfo()
       }
     });
 
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if(active === "extraSmall"){
-        this.cols = 1;
-        this.width = "19em";
-        this.attributeWidth = "10em";
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.cols = 1;
+          this.width = "19em";
+          this.attributeWidth = "10em";
+        }
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 1;
+          this.width = "35em";
+          this.attributeWidth = "20em";
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
+          this.cols = 2;
+          this.width = "25em";
+          this.attributeWidth = "12em";
+        }
+        if (result.breakpoints[Breakpoints.Large]) {
+          this.cols = 2;
+          this.width = "29em";
+          this.attributeWidth = "18em";
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = 2;
+          this.width = "40em";
+          this.attributeWidth = "25em";
+        }
       }
-      if(active === "small"){
-        this.cols = 1;
-        this.width = "35em";
-        this.attributeWidth = "20em";
-      }
-      if(active === "medium"){
-        this.cols = 2;
-        this.width = "25em";
-        this.attributeWidth = "12em";
-      }
-      if(active === "large"){
-        this.cols = 2;
-        this.width = "29em";
-        this.attributeWidth = "18em";
-      }
-      if(active === "ExtraLarge"){
-        this.cols = 2;
-        this.width = "40em";
-        this.attributeWidth = "25em";
-      }
-    })
+      });
   }
 
   async ngOnInit() {
@@ -99,16 +107,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         this.langJSON = response;
         this.popupMessages = response;
       });
-
-    // this.dataStorageService
-    //   .getConfigFiles("sharewithpartner")
-    //   .subscribe((response) => {
-    //     this.schema = response["identity"];
-    //     this.schema.forEach(data => {
-    //       this.valuesSelected.push(data.attributeName)
-    //     })
-    //   });
-    
 
     this.getPartnerDetails();
     this.getUserInfo()

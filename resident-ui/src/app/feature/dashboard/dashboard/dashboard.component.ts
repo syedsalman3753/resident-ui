@@ -5,9 +5,9 @@ import { DataStorageService } from "src/app/core/services/data-storage.service";
 import { AppConfigService } from 'src/app/app-config.service';
 import { Subscription } from "rxjs";
 import { AuditService } from "src/app/core/services/audit.service";
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { LoginRedirectService } from 'src/app/core/services/loginredirect.service'
 
-import { LoginRedirectService } from 'src/app/core/services/loginredirect.service';
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -27,26 +27,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private appConfigService: AppConfigService,
     private auditService: AuditService,
-    private breakPointService: BreakpointService,
+    private breakpointObserver: BreakpointObserver,
     private redirectService: LoginRedirectService
   ) {
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if(active === "extraSmall"){
-        this.cols = 1;
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.cols = 1;
+        }
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 1;
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
+          this.cols = 2;
+        }
+        if (result.breakpoints[Breakpoints.Large]) {
+          this.cols = 3;
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = 3;
+        }
       }
-      if(active === "small"){
-        this.cols = 1;
-      }
-      if(active === "medium"){
-        this.cols = 2;
-      }
-      if(active === "large"){
-        this.cols = 3;
-      }
-      if(active === "ExtraLarge"){
-        this.cols = 3;
-      }
-    })
+    });
   }
 
   async ngOnInit() {
