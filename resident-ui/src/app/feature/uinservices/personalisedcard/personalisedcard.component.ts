@@ -175,27 +175,27 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   if (typeof this.userInfo[item.value] !== "string") {
                     this.userInfo[item.value].forEach(eachLang => {
                       if (eachLang.language === this.langCode) {
-                        this.fullAddress = this.fullAddress + "," +  eachLang.value
+                        this.fullAddress = this.fullAddress + "," +  eachLang.value;
                       }
                     })
                   } else {
-                    this.fullAddress = this.fullAddress + this.userInfo[item.value]
+                    this.fullAddress = this.fullAddress + this.userInfo[item.value];
                   }
                 }
               })
               this.fullAddress = this.fullAddress.replace(/^./, "");
               value = this.fullAddress
             } else {
-              this.userInfo[data.attributeName].forEach(item =>{
-                if(item.language === this.langCode){
-                  value = item.value
+              this.userInfo[data.attributeName].forEach(eachItem =>{
+                if(eachItem.language === this.langCode){
+                  value = eachItem.value
                 }
               });
             }
           } else {
-            this.userInfo[data.attributeName].forEach(item =>{
-              if(item.language === this.langCode){
-                value = item.value
+            this.userInfo[data.attributeName].forEach(eachItem =>{
+              if(eachItem.language === this.langCode){
+                value = eachItem.value
               }
             });
           }
@@ -219,6 +219,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
         return item
       }
     })
+
   } else {
     if (!data.formatRequired) {
       let value;
@@ -241,17 +242,17 @@ captureCheckboxValue($event: any, data: any, type: any) {
         })
 
       } else {
-        this.schema = this.schema.map(eachItem => {
-          if (data['attributeName'] === eachItem['attributeName']) {
-            eachItem['formatOption'][this.langCode].forEach(item => {
-              if (item.value === type['value']) {
-                return item['checked'] = !item['checked']
+        this.schema = this.schema.map(item => {
+          if (data['attributeName'] === item['attributeName']) {
+            item['formatOption'][this.langCode].forEach(eachItem => {
+              if (eachItem.value === type['value']) {
+                return eachItem['checked'] = !eachItem['checked']
               } else {
-                return item['checked'] = item['checked']
+                return eachItem['checked'] = eachItem['checked']
               }
             })
           }
-          return eachItem
+          return item
         })
 
         if (data.attributeName === "fullAddress") {
@@ -416,7 +417,22 @@ captureCheckboxValue($event: any, data: any, type: any) {
         });
   }
 
-
+  showErrorPopup(message: string) {
+    let errorCode = message[0]['errorCode']
+    setTimeout(() => {
+      this.dialog
+      .open(DialogComponent, {
+        width: '650px',
+        data: {
+          case: 'MESSAGE',
+          title: this.popupMessages.genericmessage.errorLabel,
+          message: this.popupMessages.serverErrors[errorCode],
+          btnTxt: this.popupMessages.genericmessage.successButton
+        },
+        disableClose: true
+      });
+  },400)
+  }
 
   conditionsForPersonalisedCard() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -449,23 +465,6 @@ captureCheckboxValue($event: any, data: any, type: any) {
       }
     });
     return dialogRef;
-  }
-
-  showErrorPopup(message: string) {
-    let errorCode = message[0]['errorCode']
-    setTimeout(() => {
-      this.dialog
-      .open(DialogComponent, {
-        width: '650px',
-        data: {
-          case: 'MESSAGE',
-          title: this.popupMessages.genericmessage.errorLabel,
-          message: this.popupMessages.serverErrors[errorCode],
-          btnTxt: this.popupMessages.genericmessage.successButton
-        },
-        disableClose: true
-      });
-  },400)
   }
 
   ngOnDestroy(): void {

@@ -194,11 +194,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
             if (data.formatRequired) {
               if (data.attributeName === "fullAddress") {
                 this.fullAddress = ""
-                this.schema.forEach(item => {
-                  if (item.attributeName === data.attributeName) {
-                    this.formatLabels = item.formatOption[this.langCode]
-                  }
-                })
 
                 this.formatLabels.forEach(item => {
                   if (this.userInfo[item.value] !== undefined) {
@@ -213,6 +208,13 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     }
                   }
                 })
+
+                this.schema.forEach(item => {
+                  if (item.attributeName === data.attributeName) {
+                    this.formatLabels = item.formatOption[this.langCode]
+                  }
+                })
+
                 this.fullAddress = this.fullAddress.replace(/^./, "");
                 value = this.fullAddress
               } else {
@@ -238,17 +240,18 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         }
       }
 
-      this.schema = this.schema.map(item => {
-        if (item.attributeName === data.attributeName) {
-          let newItem = { ...item, checked: !item.checked }
-          if (!newItem.checked && newItem['formatOption']) {
-            newItem['formatOption'][this.langCode] = this.selectedOprionsFormOptions[data.attributeName]
+      this.schema = this.schema.map(eachItem => {
+        if (eachItem.attributeName === data.attributeName) {
+          let newObj = { ...eachItem, checked: !eachItem.checked }
+          if (!newObj.checked && newObj['formatOption']) {
+            newObj['formatOption'][this.langCode] = this.selectedOprionsFormOptions[data.attributeName]
           }
-          return newItem
+          return newObj
         } else {
-          return item
+          return eachItem
         }
       })
+
     } else {
       if (!data.formatRequired) {
         let value;
@@ -260,14 +263,14 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": $event.checked, "value": value };
       } else {
         let value = "";
-        let allValue = "";
+        let allValues = "";
         let self = this;
         let selectedFormats = "";
         if (typeof this.userInfo[data.attributeName] === "string") {
-          data.formatOption[this.langCode].forEach(item => {
-            item.checked = !item.checked
-            if (item.checked) {
-              value = moment(this.userInfo[data.attributeName]).format(item["value"]);
+          data.formatOption[this.langCode].forEach(eachItem => {
+            eachItem.checked = !eachItem.checked
+            if (eachItem.checked) {
+              value = moment(this.userInfo[data.attributeName]).format(eachItem["value"]);
               selectedFormats = type['label']
             }
           })
@@ -294,11 +297,11 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     if (item.checked) {
                       if (self.userInfo[item.value] !== undefined) {
                         if (item.value === "postalCode") {
-                          allValue = allValue + self.userInfo[item.value];
+                          allValues = allValues + self.userInfo[item.value];
                         } else {
                           this.userInfo[item.value].forEach(eachLang => {
                               if (eachLang.language === this.langCode) {
-                                allValue = allValue + eachLang.value + ",";
+                                allValues = allValues + eachLang.value + ",";
                               }
                           })
                         }
@@ -310,9 +313,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               });
 
               let unCheckFullAddress = () =>{
-                data.formatOption[this.langCode].forEach(item =>{
-                  if(item.value === "fullAddress"){
-                    item['checked'] = false;
+                data.formatOption[this.langCode].forEach(eachItem =>{
+                  if(eachItem.value === "fullAddress"){
+                    eachItem['checked'] = false;
                   }
                 })
               }
@@ -333,11 +336,11 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               })
 
               selectedFormats = selectedFormats.replace(/.$/, '');
-              if (allValue.endsWith(',')) {
-                allValue = allValue.replace(/.$/, '');
+              if (allValues.endsWith(',')) {
+                allValues = allValues.replace(/.$/, '');
               }
 
-              value = allValue;
+              value = allValues;
             } else {
               value = this.fullAddress
               data.formatOption[this.langCode].forEach(item => {
@@ -511,8 +514,8 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       data: {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
-        clickHere: this.popupMessages.genericmessage.clickHere,
         clickHere2: this.popupMessages.genericmessage.clickHere2,
+        clickHere: this.popupMessages.genericmessage.clickHere,
         eventId: this.eventId,
         trackStatusText: this.popupMessages.genericmessage.trackStatusText,
         dearResident: this.popupMessages.genericmessage.dearResident,
