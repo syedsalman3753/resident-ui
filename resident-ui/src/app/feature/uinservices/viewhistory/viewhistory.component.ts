@@ -5,14 +5,14 @@ import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { AppConfigService } from 'src/app/app-config.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { MatOption, MatDialog, MatSelect  } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { DateAdapter } from '@angular/material/core';
 import { saveAs } from 'file-saver';
 import { HeaderService } from 'src/app/core/services/header.service';
 import { AuditService } from "src/app/core/services/audit.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { MatPaginator } from '@angular/material/paginator';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: "app-viewhistory",
@@ -62,8 +62,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   isLoading:boolean = true;
   dataAvailable:boolean = false;
 
-  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
+  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, 
+    private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
     this.dateAdapter.setLocale('en-GB');
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,

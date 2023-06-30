@@ -6,8 +6,8 @@ import { AppConfigService } from 'src/app/app-config.service';
 import { Subscription } from "rxjs";
 import { AuditService } from "src/app/core/services/audit.service";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { LoginRedirectService } from 'src/app/core/services/loginredirect.service'
 
-import { LoginRedirectService } from 'src/app/core/services/loginredirect.service';
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.cols = 3;
         }
       }
-    });  
+    });
   }
 
   async ngOnInit() {

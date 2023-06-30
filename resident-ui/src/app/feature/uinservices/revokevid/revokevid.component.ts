@@ -10,8 +10,8 @@ import { MatDialog } from '@angular/material';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import {saveAs} from 'file-saver';
 import { AuditService } from "src/app/core/services/audit.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: "app-revokevid",
@@ -54,6 +54,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         this.vidDownloadStatus(this.newVidValue)
       }
     })
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,

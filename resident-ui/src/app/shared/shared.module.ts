@@ -6,7 +6,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { HeaderComponent } from './header/header.component';
 import { CaptchaComponent } from './captcha/captcha.component';
 import { I18nModule } from 'src/app/i18n.module';
-import { RecaptchaModule, RECAPTCHA_LANGUAGE } from "ng-recaptcha";
+import { RecaptchaModule } from "ng-recaptcha";
 import { SanitizePipe } from './pipes/sanitize.pipe';
 import { SanitizepdfPipe } from './pipes/sanitizepdf.pipe';
 import { PDFViewerComponent } from './pdf-viewer/pdf-viewer.component';

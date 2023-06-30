@@ -57,6 +57,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         this.shareInfo()
       }
     });
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -91,7 +92,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
           this.attributeWidth = "25em";
         }
       }
-    });
+      });
   }
 
   async ngOnInit() {
@@ -106,16 +107,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         this.langJSON = response;
         this.popupMessages = response;
       });
-
-    // this.dataStorageService
-    //   .getConfigFiles("sharewithpartner")
-    //   .subscribe((response) => {
-    //     this.schema = response["identity"];
-    //     this.schema.forEach(data => {
-    //       this.valuesSelected.push(data.attributeName)
-    //     })
-    //   });
-    
 
     this.getPartnerDetails();
     this.getUserInfo()

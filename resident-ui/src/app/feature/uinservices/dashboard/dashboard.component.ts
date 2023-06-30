@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
-import { HostListener } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: "app-uindashboard",
@@ -27,22 +26,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private dataStorageService: DataStorageService,
     private translateService: TranslateService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver,
     private logoutService: LogoutService,
     private auditService: AuditService,
-    private location: LocationStrategy
+    private location: LocationStrategy,
+    private breakpointObserver: BreakpointObserver
   ) {
     history.pushState(null, null, window.location.href);  
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
-      /*if (confirm("Are you sure want to leave the page. you will be logged out automatically if you press OK?")) {
-        this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
-        this.logoutService.logout();
-      } else {
-        this.router.navigate([this.router.url]);
-        return false;
-      }*/
     });  
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,

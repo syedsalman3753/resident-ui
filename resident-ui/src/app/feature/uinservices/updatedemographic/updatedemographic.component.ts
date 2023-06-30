@@ -9,12 +9,11 @@ import { MatDialog } from '@angular/material';
 import Utils from "src/app/app.utils";
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
-import { isNgTemplate } from "@angular/compiler";
 import defaultJson from "src/assets/i18n/default.json";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
-import { lang } from "moment";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 
 @Component({
   selector: "app-demographic",
@@ -92,7 +91,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   finalUserCloneData: any;
   updatingtype: string;
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private dateAdapter: DateAdapter<Date>, private breakpointObserver: BreakpointObserver) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -102,6 +101,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.verifyupdatedData(id.otp);
       }
     })
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -132,6 +132,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         }
       }
     });
+
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -182,9 +183,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         .getUpdateMyDataSchema('update-demographics')
         .subscribe((response) => {
           this.schema = response;
-          if(this.schema){
-            this.isLoading = false;
-          }
         });
     })
   }
@@ -199,6 +197,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             UpdatedemographicComponent.actualData = response["response"];
             if(this.schema && this.userInfo){
               this.buildData()
+              this.isLoading = false;
             }else{
               console.log("Testing")
               this.getUpdateMyDataSchema();
@@ -220,6 +219,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               self.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName];
             } else {
               self.buildJSONData[schema.attributeName] = {};
+             
               if (self.userInfo[schema.attributeName].length) {
                 self.supportedLanguages.map((language) => {
                   let value = self.userInfo[schema.attributeName].filter(function (data) {
@@ -227,21 +227,25 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
                       return data.value.trim()
                     }
                   });
-                  self.buildJSONData[schema.attributeName][language] = value[0].value;
+                  if(value[0]){
+                    self.buildJSONData[schema.attributeName][language] = value[0].value;
+                 }
                 });
               }
             }
           }
         }
       }
+      
+     
       this.getGender();
       this.getLocationHierarchyLevel();
       this.getDocumentType("POI", "proofOfIdentity"); this.getDocumentType("POA", "proofOfAddress");
       this.isLoading = false;
     } catch (ex) {
-      console.log(this.buildJSONData)
       console.log("Exception>>>" + ex.message);
     }
+
     if(this.buildJSONData['preferredLang']){
       let perfLangs = this.buildJSONData['preferredLang'].split(',');
       perfLangs.forEach(data => {
@@ -285,10 +289,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (changedItem === data) {
           if (this.dynamicFieldValue[item] !== "") {
             if (typeof this.userInfo[data] === "string") {
-              this.userInfoAddressClone[changedItem] = this.dynamicFieldValue[item]
+              this.userInfoAddressClone[changedItem] = this.dynamicFieldValue[item].name
             } else {
               let newData = this.userInfo[changedItem].map(newItem => {
-                newItem["value"] = this.dynamicFieldValue[item]
+                newItem["value"] = this.dynamicFieldValue[item].name
                 return newItem
               })
               this.userInfoAddressClone[changedItem] = newData
@@ -356,7 +360,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       locationCode = this.initialLocationCode;
     } else {
       fieldName = this.locationFieldNameList[parseInt(index)];
-      locationCode = event.value;
+      locationCode = event.value.code;
       this.dynamicFieldValue[this.locationFieldNameList[parseInt(index) - 1]] = event.value;
     }
     this.dataStorageService.getImmediateChildren(locationCode, this.langCode)

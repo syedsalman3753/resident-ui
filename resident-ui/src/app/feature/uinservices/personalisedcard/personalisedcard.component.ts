@@ -11,8 +11,8 @@ import { saveAs } from 'file-saver';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import moment from 'moment';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: "app-personalisedcard",
@@ -46,42 +46,46 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
   isLoading:boolean = true;
   selectedOprionsFormOptions: object = {};
 
-  constructor(private autoLogout: AutoLogoutService,private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.cols = 1;
-          this.width = "19em";
-          this.attributeWidth = "10em";
+  constructor(private autoLogout: AutoLogoutService,private interactionService: InteractionService, 
+    private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, 
+    private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
+   
+      this.breakpointObserver.observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ]).subscribe(result => {
+        if (result.matches) {
+          if (result.breakpoints[Breakpoints.XSmall]) {
+            this.cols = 1;
+            this.width = "19em";
+            this.attributeWidth = "10em";
+          }
+          if (result.breakpoints[Breakpoints.Small]) {
+            this.cols = 1;
+            this.width = "40em";
+            this.attributeWidth = "20em";
+          }
+          if (result.breakpoints[Breakpoints.Medium]) {
+            this.cols = 2;
+            this.width = "25em";
+            this.attributeWidth = "12em";
+          }
+          if (result.breakpoints[Breakpoints.Large]) {
+            this.cols = 2;
+            this.width = "29em";
+            this.attributeWidth = "12em";
+          }
+          if (result.breakpoints[Breakpoints.XLarge]) {
+            this.cols = 2;
+            this.width = "35rem";
+            this.attributeWidth = "18em";
+          }
         }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = 1;
-          this.width = "40em";
-          this.attributeWidth = "20em";
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.cols = 2;
-          this.width = "25em";
-          this.attributeWidth = "12em";
-        }
-        if (result.breakpoints[Breakpoints.Large]) {
-          this.cols = 2;
-          this.width = "29em";
-          this.attributeWidth = "12em";
-        }
-        if (result.breakpoints[Breakpoints.XLarge]) {
-          this.cols = 2;
-          this.width = "35rem";
-          this.attributeWidth = "18em";
-        }
-      }
-    });
+      });
+
   }
 
   async ngOnInit() {
@@ -358,15 +362,16 @@ captureCheckboxValue($event: any, data: any, type: any) {
   let row = "";
   let rowImage = ""
 
-  for (const key in this.dataDisplay) {
-    if (key === "photo") {
-      rowImage = "<tr><td><img src=' " + this.dataDisplay[key].value + "' alt='' style='margin-left:48%;' width='70px' height='70px'/></td></tr>";
-    } else {
-      row = row + "<tr><td style='font-weight:600;'>" + this.dataDisplay[key].attributeName + ":</td><td>" + this.dataDisplay[key].value + "</td></tr>";
+  for (let key of this.valuesSelected) {
+    if(this.dataDisplay[key]){
+      if (key === "photo") {
+        rowImage = "<tr><td><img src=' " + this.dataDisplay[key].value + "' alt='' style='margin-left:48%;' width='70px' height='70px'/></td></tr>";
+      } else {
+        row = row + "<tr><td style='font-weight:600; font-family:Roboto;'>" + this.dataDisplay[key].label + ":</td><td style='font-weight:500; font-family:Roboto;'>" + this.dataDisplay[key].value + "</td></tr>";
+      }
     }
   }
   this.buildHTML = `<html><head></head><body><table>` + rowImage + row + `</table></body></html>`;
-
   }
 
   downloadFile() {
@@ -401,7 +406,6 @@ captureCheckboxValue($event: any, data: any, type: any) {
               const matches = fileNameRegex.exec(contentDisposition);
               if (matches != null && matches[1]) {
                 fileName = matches[1].replace(/['"]/g, '');
-                console.log(matches[1].replace(/['"]/g, '') + "filename")
               }
             }
             saveAs(data.body, fileName);

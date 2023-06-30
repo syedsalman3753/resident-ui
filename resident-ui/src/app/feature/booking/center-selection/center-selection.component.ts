@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { DataStorageService } from "src/app/core/services/data-storage.service";
 import { RegistrationCentre } from "./registration-center-details.model";
@@ -181,7 +181,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
       if (
         obj.inputRequired === true &&
         obj.controlType !== null &&
-        !(obj.controlType === "fileupload")
+        (obj.controlType !== "fileupload")
       ) {
         if (obj.locationHierarchyLevel && this.recommendedCenterLocCode == obj.locationHierarchyLevel) {
           uiFieldName = obj.id;
@@ -417,7 +417,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeTimeFormat(time: string): string | Number {
+  changeTimeFormat(time: string): string | number {
     let inputTime = time.split(":");
     let formattedTime: any;
     if (Number(inputTime[0]) < 12 && Number(inputTime[0]) > 0) {
@@ -436,7 +436,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     return formattedTime;
   }
 
-  showTime(startTime: string, endTime: string): string | Number {
+  showTime(startTime: string, endTime: string): string | number {
     let formattedStartTime = this.changeTimeFormat(startTime);
     let formattedEndTime = this.changeTimeFormat(endTime);
     let formattedTime = formattedStartTime + ' - ' + formattedEndTime;

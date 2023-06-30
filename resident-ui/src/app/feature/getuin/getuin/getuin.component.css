@@ -219,13 +219,6 @@
 }
 
 .processing-position-icon {
-    height: 40px;
-    width: 40px;
-    border-radius: 100%;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    margin-bottom: 2rem !important;
     border: 2px solid #03A64A;
     background-color: #ffffff;
 }
@@ -325,4 +318,21 @@ ul li:last-child hr{
     width: 88%;
     left: -41.8%;
     border-radius: 10px;
+}
+
+
+@media screen and ((min-width:1000px) and (max-width:1450px)){
+    ul li:last-child hr{
+        width: 88%;
+        left: -40%;
+        border-radius: 10px;
+    }
+}
+
+@media screen and ((min-width:700px) and (max-width:999px)){
+    ul li:last-child hr{
+        width: 88%;
+        left: -34%;
+        border-radius: 10px;
+    }
 }

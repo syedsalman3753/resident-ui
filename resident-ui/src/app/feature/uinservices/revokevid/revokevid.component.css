@@ -98,3 +98,14 @@ mat-card-subtitle{
   column-gap: 15px;
   margin-bottom: 0px;
 }
+
+.empty-vid-card{
+  width: 56%; 
+  background-color: #F4F4F4;
+}
+
+@media screen and (max-width: 550px){
+  .empty-vid-card{
+    width: 100%;
+  }
+}

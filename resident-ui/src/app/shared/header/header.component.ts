@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription, timer } from "rxjs";
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators'
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { AuthService } from 'src/app/core/services/authservice.service';
-import { MatMenuModule } from '@angular/material/menu';
+/*import { MatMenuModule } from '@angular/material/menu';*/
 import { InteractionService } from "src/app/core/services/interaction.service";
 
 @Component({

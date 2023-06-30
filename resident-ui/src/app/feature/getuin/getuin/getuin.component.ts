@@ -38,6 +38,11 @@ export class GetuinComponent implements OnInit {
   disableSendOtp: boolean = true;
   aidStatus:string;
   captchaEnable: boolean = false;
+  classes:any ={
+    "SUCCESS": "processing-position-icon position-icon",
+    "FAILURE":"failure-position-icon position-icon",
+    "IN-PROGRESS":"inactive-position-icon position-icon"
+  }
 
   constructor(
     private router: Router,
@@ -74,7 +79,7 @@ export class GetuinComponent implements OnInit {
           this.width = "30%";
         }
       }
-    });
+      });
   }
 
   ngOnInit() {
@@ -150,6 +155,7 @@ export class GetuinComponent implements OnInit {
           this.aidStatus = response["response"].aidStatus;
           this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus);
         }
+        this.disableSendOtp = true;
       }else{
         this.showErrorPopup(response["errors"]);
       }

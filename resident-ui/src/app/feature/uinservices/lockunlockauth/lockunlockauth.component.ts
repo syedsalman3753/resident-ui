@@ -9,8 +9,8 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: "app-lockunlockauth",
@@ -47,6 +47,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         this.updateAuthlockStatus()
       }
     });
+
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,

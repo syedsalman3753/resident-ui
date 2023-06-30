@@ -309,7 +309,7 @@
                                 <input *ngIf="field.attributeName === 'postalCode'" type="text" class="readonly"
                                   readonly="true" disabled="true" value="{{buildJSONData[field.attributeName]}}">
                                 <input
-                                  *ngIf="field.attributeName !== 'postalCode' && buildJSONData[field.attributeName][langCode] "
+                                  *ngIf="field.attributeName !== 'postalCode' && buildJSONData[field.attributeName] "
                                   type="text" class="readonly" readonly="true" disabled="true"
                                   value="{{buildJSONData[field.attributeName][langCode]}}">
                               </td>
@@ -317,7 +317,7 @@
                               <td width="45%">
                                 <mat-select [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
                                   (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);">
-                                  <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data.code">
+                                  <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
                                     {{ data.name }}
                                   </mat-option>
                                 </mat-select>
