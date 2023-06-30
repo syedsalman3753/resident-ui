@@ -192,7 +192,7 @@ export class DownloadUinComponent implements OnInit {
         var reader = new FileReader();
           reader.onloadend = function(e) {
           let failureResponse = JSON.parse((<any>e.target).result)
-          self.showErrorPopup(failureResponse.errors);
+          self.showErrorMsgPopup(failureResponse.errors);
         }
         reader.readAsText(responseJson.body);
       }
@@ -222,7 +222,7 @@ export class DownloadUinComponent implements OnInit {
     return dialogRef;
   }
 
-  showErrorPopup(message: string) {
+  showErrorMsgPopup(message: string) {
     this.errorCode = message[0]["errorCode"]
     if (this.errorCode === "RES-SER-410") {
       let messageType = message[0]["message"].split("-")[1].trim();

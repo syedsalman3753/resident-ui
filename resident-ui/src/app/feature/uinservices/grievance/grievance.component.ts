@@ -138,7 +138,7 @@ export class GrievanceComponent implements OnInit {
         this.showMessage(response["response"])
         this.router.navigate(["/uinservices/dashboard"])
       } else {
-        this.showErrorPopup(response["errors"])
+        this.showErrorPopupMessage(response["errors"])
       }
     },
       error => {
@@ -164,7 +164,7 @@ export class GrievanceComponent implements OnInit {
     return dialogRef;
   }
 
-  showErrorPopup(message: string) {
+  showErrorPopupMessage(message: string) {
     this.errorCode = message[0]["errorCode"];
     if (this.errorCode === "RES-SER-410") {
       let messageType = message[0]["message"].split("-")[1].trim();
