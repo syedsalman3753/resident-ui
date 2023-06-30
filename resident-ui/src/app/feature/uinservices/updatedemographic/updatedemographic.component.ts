@@ -112,9 +112,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.cols = 1;
           this.width = "95%";
         }
-        if(active === "small"){
-          this.cols = 2;
-          this.width = "90%";
+        if(active === "ExtraLarge"){
+          this.cols = 4;
+          this.width = "40%";
         }
         if(active === "medium"){
           this.cols = 2;
@@ -124,9 +124,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.cols = 4;
           this.width = "50%";
         }
-        if(active === "ExtraLarge"){
-          this.cols = 4;
-          this.width = "40%";
+        if(active === "small"){
+          this.cols = 2;
+          this.width = "90%";
         }
       }
     });

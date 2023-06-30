@@ -50,19 +50,13 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
 
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
-        if(active === "extraSmall"){
-          this.cols = 1;
-        }
-        if(active === "small"){
+        if(active === "extraSmall" || active === "small"){
           this.cols = 1;
         }
         if(active === "medium"){
           this.cols = 2;
         }
-        if(active === "large"){
-          this.cols = 3;
-        }
-        if(active === "ExtraLarge"){
+        if(active === "ExtraLarge" || active === "large"){
           this.cols = 3;
         }
       }

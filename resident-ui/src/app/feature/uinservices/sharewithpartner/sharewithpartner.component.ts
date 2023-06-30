@@ -61,30 +61,30 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
 
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
-        if(active === "extraSmall"){
-          this.cols = 1;
-          this.width = "19em";
-          this.attributeWidth = "10em";
-        }
-        if(active === "small"){
-          this.cols = 1;
-          this.width = "35em";
-          this.attributeWidth = "20em";
-        }
-        if(active === "medium"){
+        if(active === "ExtraLarge"){
           this.cols = 2;
-          this.width = "25em";
-          this.attributeWidth = "12em";
+          this.width = "40em";
+          this.attributeWidth = "25em";
         }
         if(active === "large"){
           this.cols = 2;
           this.width = "29em";
           this.attributeWidth = "18em";
         }
-        if(active === "ExtraLarge"){
+        if(active === "medium"){
           this.cols = 2;
-          this.width = "40em";
-          this.attributeWidth = "25em";
+          this.width = "25em";
+          this.attributeWidth = "12em";
+        }
+        if(active === "small"){
+          this.cols = 1;
+          this.width = "35em";
+          this.attributeWidth = "20em";
+        }
+        if(active === "extraSmall"){
+          this.cols = 1;
+          this.width = "19em";
+          this.attributeWidth = "10em";
         }
       }
     });
