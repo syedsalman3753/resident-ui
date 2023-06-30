@@ -134,7 +134,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
           }
         } else {
           this.isLoading = false;
-          this.showErrorPopup(response["errors"])
+          this.showErrorMessagePopup(response["errors"])
         }
       });
   }
@@ -414,9 +414,12 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     return dialogRef;
   }
 
-  showErrorPopup(message: string) {
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  showErrorMessagePopup(message: string) {
     let errorCode = message[0]['errorCode']
-    console.log(errorCode)
     setTimeout(() => {
         this.dialog
           .open(DialogComponent, {
@@ -429,11 +432,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
             },
             disableClose: true
           });
-    }, 400)
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    }, 500)
   }
 
   onItemSelected(item: any) {
