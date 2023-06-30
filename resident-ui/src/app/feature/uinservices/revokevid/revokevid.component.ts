@@ -58,20 +58,17 @@ export class RevokevidComponent implements OnInit, OnDestroy {
 
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
-        if(active === "extraSmall"){
+        if(active === "extraSmall" || active === "small"){
           this.cols = 1;
         }
-        if(active === "small"){
-          this.cols = 1;
+        if(active === "ExtraLarge"){
+          this.cols = 4;
         }
         if(active === "medium"){
           this.cols = 2;
         }
         if(active === "large"){
           this.cols = 3;
-        }
-        if(active === "ExtraLarge"){
-          this.cols = 4;
         }
       }
     });

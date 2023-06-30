@@ -51,24 +51,24 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     private auditService: AuditService, private breakPointService: BreakpointService) {
       this.breakPointService.isBreakpointActive().subscribe(active =>{
         if (active) {
-          if(active === "extraSmall"){
-            this.cols = 1;
-            this.width = "19em";
-            this.attributeWidth = "10em";
-          }
           if(active === "small"){
             this.cols = 1;
             this.width = "40em";
             this.attributeWidth = "20em";
           }
-          if(active === "medium"){
-            this.cols = 2;
-            this.width = "25em";
-            this.attributeWidth = "12em";
+          if(active === "extraSmall"){
+            this.cols = 1;
+            this.width = "19em";
+            this.attributeWidth = "10em";
           }
           if(active === "large"){
             this.cols = 2;
             this.width = "29em";
+            this.attributeWidth = "12em";
+          }
+          if(active === "medium"){
+            this.cols = 2;
+            this.width = "25em";
             this.attributeWidth = "12em";
           }
           if(active === "ExtraLarge"){
