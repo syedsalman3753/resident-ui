@@ -11,7 +11,7 @@ import { InteractionService } from "src/app/core/services/interaction.service";
 import {saveAs} from 'file-saver';
 import { AuditService } from "src/app/core/services/audit.service";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-revokevid",
@@ -44,7 +44,8 @@ export class RevokevidComponent implements OnInit, OnDestroy {
   userPreferredLangCode = localStorage.getItem("langCode");
   isLoading:boolean = true;
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,
+    private auditService: AuditService, private breakPointService: BreakpointService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "confirmBtnForVid") {
         this.generateVID(this.newVidType)
@@ -53,29 +54,23 @@ export class RevokevidComponent implements OnInit, OnDestroy {
       }else if(id === "downloadVID"){
         this.vidDownloadStatus(this.newVidValue)
       }
-    })
+    });
 
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
+    this.breakPointService.isBreakpointActive().subscribe(active =>{
+      if (active) {
+        if(active === "extraSmall"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Small]) {
+        if(active === "small"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Medium]) {
+        if(active === "medium"){
           this.cols = 2;
         }
-        if (result.breakpoints[Breakpoints.Large]) {
+        if(active === "large"){
           this.cols = 3;
         }
-        if (result.breakpoints[Breakpoints.XLarge]) {
+        if(active === "ExtraLarge"){
           this.cols = 4;
         }
       }

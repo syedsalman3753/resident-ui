@@ -7,7 +7,7 @@ import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { LocationStrategy } from '@angular/common';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-uindashboard",
@@ -29,34 +29,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private logoutService: LogoutService,
     private auditService: AuditService,
     private location: LocationStrategy,
-    private breakpointObserver: BreakpointObserver
+    private breakPointService: BreakpointService
   ) {
     history.pushState(null, null, window.location.href);  
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
     });  
 
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
+    this.breakPointService.isBreakpointActive().subscribe(active =>{
+      if (active) {
+        if(active === "extraSmall"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Small]) {
+        if(active === "small"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Medium]) {
+        if(active === "medium"){
           this.cols = 2;
         }
-        if (result.breakpoints[Breakpoints.Large]) {
+        if(active === "large"){
           this.cols = 3;
         }
-        if (result.breakpoints[Breakpoints.XLarge]) {
+        if(active === "ExtraLarge"){
           this.cols = 4;
         }
       }
