@@ -167,10 +167,10 @@ export class GrievanceComponent implements OnInit {
   showErrorPopup(message: string) {
     this.errorCode = message[0]["errorCode"];
     if (this.errorCode === "RES-SER-410") {
-      let messageType = message[0]["message"].split("-")[1].trim();
-      this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
+      let errorMessage = message[0]["message"].split("-")[1].trim();
+      this.message = this.popupMessages.serverErrors[this.errorCode][errorMessage];
     } else {
-      this.message = this.popupMessages.serverErrors[this.errorCode]
+      this.message = this.popupMessages.serverErrors[this.errorCode];
     }
 
     this.dialog
