@@ -221,21 +221,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   zoom(item:any) {
     if(item.fontSize === "12"){
-      document.body.style["zoom"]= "90%";
-      // localStorage.setItem("zoomLevel","90%");
-      // location.reload();
+      document.body.style["zoom"] = "90%";
     }else if(item.fontSize === "14"){
       document.body.style["zoom"]= "100%";
-      // localStorage.setItem("zoomLevel","100%");
-      // location.reload()
+      
     }else if(item.fontSize === "16"){
       document.body.style["zoom"]= "110%";
-      // localStorage.setItem("zoomLevel","110%");
-      // location.reload()
     }else if(item.fontSize === "18"){
-      // localStorage.setItem("zoomLevel","120%");
       document.body.style["zoom"]= "120%";
-      // location.reload()
     }    
   }
 
