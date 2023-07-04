@@ -131,3 +131,7 @@ mat-card-header,
   cursor: pointer;
 }
 
+.auth-type-text{
+  font-size: 14px;
+  font-weight: 600;
+}
