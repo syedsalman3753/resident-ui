@@ -359,7 +359,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
         title: this.popupMessages.genericmessage.warningLabel,
         warningForChannel:this.popupMessages.genericmessage.warningForChannel,
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -380,7 +381,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOk:"OK"
         },
         disableClose: true
       });

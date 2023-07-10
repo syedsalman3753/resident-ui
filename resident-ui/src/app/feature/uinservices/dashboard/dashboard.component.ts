@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   message: any;
   cols: number;
   userPreferredLangCode = localStorage.getItem("langCode");
+  sitealignment:string = localStorage.getItem('direction');
+
 
   constructor(
     private autoLogout: AutoLogoutService,

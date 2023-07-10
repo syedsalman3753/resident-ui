@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   defaultJsonValue: any;
   selectedLanguage: any;
   supportedLanguages: Array<string>;
-  selectLanguagesArr: any;
+  selectLanguagesArr: any = [];
   zoomLevel:any = [{"fontSize":"12", "label":"Small"},{"fontSize":"14", "label":"Normal"},{"fontSize":"16", "label":"Large"},{"fontSize":"18", "label":"Huge"}];
   fullName: string;
   lastLogin: string;
@@ -86,8 +86,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
  async ngOnInit() {
     this.defaultJsonValue = defaultJson;
-    this.supportedLanguages = [];
-    this.selectLanguagesArr = []; 
     let self = this;       
     setTimeout(()=>{        
       if(!localStorage.getItem("langCode")){
@@ -101,21 +99,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });                
       }
 
-      let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
+      let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
+      
       if(supportedLanguages.length > 1){
-        this.selectLanguagesArr = [];
         supportedLanguages.map((language) => {
-          if (defaultJson.languages && defaultJson.languages[language.trim()]) {
-            if(language === "eng"){
-              this.selectLanguagesArr.push({
-                code: language.trim(),
-                value: defaultJson.languages[language.trim()].name,
-              });
-            }
-          }
+          this.selectLanguagesArr.push({
+           code: language.trim(),
+           value: defaultJson.languages[language.trim()].name,
+          });
         });
       }
-
       self.translateService.use(localStorage.getItem("langCode")); 
       self.textDir = localStorage.getItem("dir");
     }, 1000);    
@@ -269,7 +262,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         clickYesToProceed: this.popupMessages.genericmessage.clickYesToProceed,
         yesBtnFor:"logOutBtn",
         btnTxt: this.popupMessages.genericmessage.yesButton,
-        btnTxtNo: this.popupMessages.genericmessage.noButton
+        isYes:"Yes",
+        btnTxtNo: this.popupMessages.genericmessage.noButton,
+        isNo:"No"
       }
     });
     return dialogRef;

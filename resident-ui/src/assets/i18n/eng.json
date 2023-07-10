@@ -150,6 +150,7 @@
         "plaginLabel": "I'm not a robot",
         "buttonText": "Send OTP",
         "home": "Home",
+        "enterHere":"Enter Here",
         "label": "Get My UIN",
         "icon": "assets/images/info_black_24dp (1).png"
     },
@@ -215,15 +216,14 @@
         "captcha": "Enter Captcha",
         "sendotp": "Send OTP",
         "otp": "Enter OTP",
-        "submit": "Submit",
-        "resendotp": "Resend OTP",
         "phoneicon": "assets/images/phone_iphone_black_24dp.png",
         "subTitle": "The OTP will expire in",
         "inputLabel": "Enter One Time Password (OTP)",
         "otpDescriptionEmail": "Please enter the OTP that has been sent to your registered email ID ",
         "otpDescriptionPhone": "Please enter the OTP that has been sent to your registered phone number ",
         "resendBtnLabel": "Resend OTP",
-        "submitBtnLabel": "Submit"
+        "submitBtnLabel": "Submit",
+        "back":"Back"
     },
     "viewhistory": {
         "title": "View My History",
@@ -317,12 +317,12 @@
         "generatevidtoggle": "Generate VID",
         "revokevidtoggle": "Revoke VID",
         "labelmap": {
-            "demo": "Demographic Authentication",
-            "bio-FINGER": "Fingerprint Authentication",
-            "bio-IRIS": "Iris Authentication",
-            "bio-FACE": "Face Authentication",
-            "otp-email": "Email OTP Authentication",
-            "otp-phone": "Mobile OTP Authentication"
+            "demo": {"label":"Demographic Authentication","icon":"Demographic Authentication"},
+            "bio-FINGER": {"label":"Fingerprint Authentication","icon":"Fingerprint Authentication"},
+            "bio-IRIS": {"label":"Iris Authentication","icon":"Iris Authentication"},
+            "bio-FACE": {"label":"Face Authentication","icon":"Face Authentication"},
+            "otp-email": {"label":"Email OTP Authentication","icon":"Email OTP Authentication"},
+            "otp-phone": {"label":"Mobile OTP Authentication","icon":"Mobile OTP Authentication"}
         },
         "introDescription": "View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
         "unlockLabel": "Unlock",

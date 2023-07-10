@@ -1004,7 +1004,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         eventId: eventId,
         clickHere2: this.popupMessages.genericmessage.clickHere2,
         dearResident: this.popupMessages.genericmessage.dearResident,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -1026,7 +1027,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             case: 'MESSAGE',
             title: this.popupMessages.genericmessage.errorLabel,
             message: this.message,
-            btnTxt: this.popupMessages.genericmessage.successButton
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk:'OK'
           },
           disableClose: true
         });

@@ -11,6 +11,10 @@ ul, li{
   border: 1px solid silver;
   background: #FAF8F8 0% 0% no-repeat padding-box;
 }
+.mat-card-header-text{
+  display: flex;
+  margin: 0px;
+}
 .tp-radio-group {  
   display: inline-flex;  
   flex-direction: column;  

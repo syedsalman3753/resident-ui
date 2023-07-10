@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   userPreferredLangCode = localStorage.getItem("langCode");
   cols : number;
+  sitealignment:string = localStorage.getItem('direction');
   
   constructor(
     private router: Router,

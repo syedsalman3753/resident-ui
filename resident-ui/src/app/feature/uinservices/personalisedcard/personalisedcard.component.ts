@@ -427,7 +427,8 @@ captureCheckboxValue($event: any, data: any, type: any) {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.popupMessages.serverErrors[errorCode],
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOK:'OK'
         },
         disableClose: true
       });
@@ -461,7 +462,8 @@ captureCheckboxValue($event: any, data: any, type: any) {
         trackStatusText:this.popupMessages.genericmessage.trackStatusText,
         dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
