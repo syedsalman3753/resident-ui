@@ -88,7 +88,7 @@ input {
 }
 
 .button2 {
-  width: 108px;
+  min-width: 108px;
   height: 36px;
   /* background: #909090 0% 0% no-repeat padding-box; */
   border:none;
@@ -202,4 +202,8 @@ input{
   left: calc(50% - 10px);
   text-align: start !important;
   /* box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5); */
+}
+.label-for-otp{
+  margin: 0;
+  font-size: 10px;
 }

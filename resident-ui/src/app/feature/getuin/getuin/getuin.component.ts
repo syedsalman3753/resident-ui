@@ -38,6 +38,7 @@ export class GetuinComponent implements OnInit {
   disableSendOtp: boolean = true;
   aidStatus:string;
   captchaEnable: boolean = false;
+  sitealignment:string = localStorage.getItem('direction');
   classes:any ={
     "SUCCESS": "processing-position-icon position-icon",
     "FAILURE":"failure-position-icon position-icon",
@@ -210,7 +211,8 @@ export class GetuinComponent implements OnInit {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOk:"OK"
         },
         disableClose: true
       });

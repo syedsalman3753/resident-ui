@@ -61,6 +61,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   statusHistorySelectedValue: string = "Status";
   isLoading:boolean = true;
   dataAvailable:boolean = false;
+  sitealignment:string = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, 
     private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakPointService: BreakpointService) {
@@ -297,7 +298,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       this.auditService.audit('RP-010', 'View history', 'RP-View history', 'View history', 'User chooses the "status filter" from the drop-down');
       this.statusFilter = this.statusFilter.replace(/ALL,/ig, '').replace(/,\s*$/, "");
     }
-   
     if(event){
       event.stopPropagation()
     }
@@ -408,7 +408,8 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
         message: message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -428,7 +429,8 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
               case: 'MESSAGE',
               title: this.popupMessages.genericmessage.errorLabel,
               message: this.popupMessages.serverErrors[errorCode],
-              btnTxt: this.popupMessages.genericmessage.successButton
+              btnTxt: this.popupMessages.genericmessage.successButton,
+              isOk:"OK"
             },
             disableClose: true
           });

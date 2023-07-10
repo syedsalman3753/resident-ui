@@ -158,7 +158,8 @@ export class GrievanceComponent implements OnInit {
         message: this.message,
         endMsg: this.popupMessages.genericmessage.successRemainMsg,
         dearResident: this.popupMessages.genericmessage.dearResident,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -180,7 +181,8 @@ export class GrievanceComponent implements OnInit {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOk:"OK"
         },
         disableClose: true
       });

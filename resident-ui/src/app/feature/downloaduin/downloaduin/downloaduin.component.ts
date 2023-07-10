@@ -215,6 +215,7 @@ export class DownloadUinComponent implements OnInit {
         trackStatusForLogin:this.popupMessages.genericmessage.trackStatusForLogin,
         relogin: this.popupMessages.genericmessage.login,
         btnTxt: this.popupMessages.genericmessage.successButton,
+        isok:"OK",
         passwordCombinationHeading: this.popupMessages.genericmessage.passwordCombinationHeading,
         passwordCombination: this.popupMessages.genericmessage.passwordCombination
       }
@@ -237,7 +238,8 @@ export class DownloadUinComponent implements OnInit {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOK:'OK'
         },
         disableClose: true
       });

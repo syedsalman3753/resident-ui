@@ -195,6 +195,12 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               if (data.attributeName === "fullAddress") {
                 this.fullAddress = ""
 
+                this.schema.forEach(item => {
+                  if (item.attributeName === data.attributeName) {
+                    this.formatLabels = item.formatOption[this.langCode]
+                  }
+                })
+                
                 this.formatLabels.forEach(item => {
                   if (this.userInfo[item.value] !== undefined) {
                     if (typeof this.userInfo[item.value] !== "string") {
@@ -209,11 +215,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                   }
                 })
 
-                this.schema.forEach(item => {
-                  if (item.attributeName === data.attributeName) {
-                    this.formatLabels = item.formatOption[this.langCode]
-                  }
-                })
 
                 this.fullAddress = this.fullAddress.replace(/^./, "");
                 value = this.fullAddress
@@ -520,7 +521,8 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         trackStatusText: this.popupMessages.genericmessage.trackStatusText,
         dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -536,7 +538,8 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               case: 'MESSAGE',
               title: this.popupMessages.genericmessage.errorLabel,
               message: this.popupMessages.serverErrors[errorCode],
-              btnTxt: this.popupMessages.genericmessage.successButton
+              btnTxt: this.popupMessages.genericmessage.successButton,
+              isOk:'OK'
             },
             disableClose: true
           });
@@ -551,7 +554,8 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOk:'OK'
         },
         disableClose: true
       });

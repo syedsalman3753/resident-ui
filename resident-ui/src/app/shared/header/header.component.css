@@ -98,9 +98,9 @@
   height: 40px;
 }
 
-::ng-deep .mat-menu-panel.zoommenu {
-  min-width: 320px!important;
-}
+/* ::ng-deep .mat-menu-panel.zoommenu {
+  min-width: 320px !important;
+} */
 
 ::ng-deep .mat-menu-panel.myMenu {
   height: 80%;

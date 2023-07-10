@@ -39,6 +39,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   cols : number;
   userPreferredLangCode = localStorage.getItem("langCode");
   message2:any;
+  sitealignment:any = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService,private interactionService: InteractionService,private dialog: MatDialog,private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, 
     private router: Router,private auditService: AuditService, private breakPointService: BreakpointService) {
@@ -133,7 +134,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
                 }                    
               })
             }   
-            authTypesJSON["label"] = this.langJSON.lockunlockauth.labelmap[authTypes[i]];         
+            authTypesJSON["label"] = this.langJSON.lockunlockauth.labelmap[authTypes[i]];       
             authTypesJSON["recorddirty"] = false;
             authTypesJSON["unlockForSeconds"] = null;
             this.authlist.push(authTypesJSON);
@@ -295,6 +296,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         message: this.message,
         eventId,
         btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:"OK",
         clickHere:this.popupMessages.genericmessage.clickHere,
         dearResident:this.popupMessages.genericmessage.dearResident,
         trackStatusText:this.popupMessages.genericmessage.trackStatusText
@@ -311,8 +313,10 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         title: this.popupMessages.genericmessage.warningLabel,
         message: this.popupMessages.genericmessage.secureMyId.confirmationMessage,
         btnTxt: this.popupMessages.genericmessage.yesButton,
+        isYes:"Yes",
         yesBtnFor:"lockunlockauth",
-        btnTxtNo: this.popupMessages.genericmessage.noButton
+        btnTxtNo: this.popupMessages.genericmessage.noButton,
+        isNo:"No"
       }
     });
     return dialogRef;
@@ -328,7 +332,8 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
             case: 'MESSAGE',
             title: this.popupMessages.genericmessage.errorLabel,
             message: this.popupMessages.serverErrors[errorCode],
-            btnTxt: this.popupMessages.genericmessage.successButton
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk:'OK'
           },
           disableClose: true
         });
