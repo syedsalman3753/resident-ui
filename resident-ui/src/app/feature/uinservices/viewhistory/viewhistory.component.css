@@ -256,7 +256,7 @@ input[dir=rtl]::placeholder {
     flex-direction: column;
     justify-content: space-between; 
     width: 100%;
-    align-items: start;
+    align-items: flex-start;
     padding: 10px 2px 10px 2px;
   }
   .event-id-text{
