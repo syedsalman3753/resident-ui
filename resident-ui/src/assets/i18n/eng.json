@@ -29,7 +29,7 @@
                     "displayName": "Secure My ID",
                     "icon": "assets/images/lockunlockauth.png",
                     "route": "uinservices/lockunlockauth",
-                    "description": " View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
+                    "description": "View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
                     "auditEventId": "ADM-004"
                 },
                 {

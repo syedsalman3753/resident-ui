@@ -100,15 +100,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
 
       let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
-      
       if(supportedLanguages.length > 1){
         supportedLanguages.map((language) => {
           this.selectLanguagesArr.push({
            code: language.trim(),
-           value: defaultJson.languages[language.trim()].name,
+           value: defaultJson.languages[language.trim()].nativeName,
           });
         });
       }
+      console.log(this.selectLanguagesArr)
       self.translateService.use(localStorage.getItem("langCode")); 
       self.textDir = localStorage.getItem("dir");
     }, 1000);    
