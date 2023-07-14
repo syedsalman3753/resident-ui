@@ -9,7 +9,8 @@ on:
       - 1.1.*
       - MOSIP-11719
       - 1.2.*
-
+      - release-1*
+      
 jobs:
   build-resident-ui:
     runs-on: ubuntu-latest
