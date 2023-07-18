@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   page = 1;
   selector: string = "#notificationMenu";
   clickEventSubscription: Subscription;
+  sitealignment:string = localStorage.getItem('direction');
 
   constructor(
     private router: Router,

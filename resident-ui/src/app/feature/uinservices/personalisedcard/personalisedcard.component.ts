@@ -183,8 +183,12 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   }
                 }
               })
-              this.fullAddress = this.fullAddress.replace(/^./, "");
-              value = this.fullAddress
+
+              if (this.fullAddress.endsWith(',')) {
+                this.fullAddress = this.fullAddress.replace(/^./, "");
+              };
+              value = this.fullAddress;
+              
             } else {
               this.userInfo[data.attributeName].forEach(eachItem =>{
                 if(eachItem.language === this.langCode){

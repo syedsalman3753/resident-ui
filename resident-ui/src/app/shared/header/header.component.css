@@ -87,7 +87,7 @@
 }
 
 ::ng-deep .mat-menu-content {
-  width: 250px !important;
+  /* width: 250px !important; */
   /* height: auto !important; */
   padding-top: 0px !important;
   padding-bottom: 0px !important;
@@ -122,13 +122,13 @@
   right: 30px !important;
 } 
 
-::ng-deep #cdk-overlay-0{
+/* ::ng-deep #cdk-overlay-0{
   right: 90px !important;
-} 
+}  */
 
-::ng-deep #cdk-overlay-1{
+/* ::ng-deep #cdk-overlay-1{
   right: 90px !important;
-}
+} */
 
 ::ng-deep #cdk-overlay-3{
   right: 90px !important;
