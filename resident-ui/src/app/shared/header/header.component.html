@@ -72,7 +72,7 @@
         </div>
       </mat-menu>
 
-      <mat-list-item *ngIf="fullName">
+      <mat-list-item *ngIf="fullName" dir="{{sitealignment}}">
         <button mat-menu-item [matMenuTriggerFor]="profilemenu"
           style="border: 1px solid white;border-radius: 5px;padding: 0px 8px;line-height: 36px;height: 36px;background-color: white;"><mat-icon
             style="margin: 0px;color: green;">person</mat-icon></button>

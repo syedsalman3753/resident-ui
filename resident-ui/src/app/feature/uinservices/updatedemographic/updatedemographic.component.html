@@ -54,9 +54,9 @@
                       <td width="100%">
                         <table width="100%" *ngFor="let language of supportedLanguages;">
                           <tr>
-                            <td width="45%"><label>{{field.labelName[language][0]}}</label></td>
+                            <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                             <td width="10%"></td>
-                            <td width="45%"><label>{{field.labelName[language][1]}}</label></td>
+                            <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr>
                             <td width="45%"><input type="text" class="readonly" readonly="true" disabled="true"
@@ -278,9 +278,9 @@
                         <td width="100%">
                           <table width="100%" *ngFor="let language of supportedLanguages;">
                             <tr>
-                              <td width="45%"><label>{{field.labelName[language][0]}}</label></td>
+                              <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                               <td width="10%"></td>
-                              <td width="45%"><label>{{field.labelName[language][1]}}</label></td>
+                              <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
                             <tr>
                               <td width="45%">
@@ -485,7 +485,7 @@
       </mat-tab>
       <mat-tab label="{{'updatedemographic.contact' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.contactHeading' | translate}}</h3>
-        <div *ngFor="let field of schema['identity']; let i = index">
+        <div *ngFor="let field of schema['identity']; let i = index" dir="{{sitealignment}}">
           <mat-grid-list *ngIf="field.tabgroup === 'contact'" [cols]="cols" rowHeight="100px" gutterSize="7px"
             style="margin-top: 15px;">
             <mat-grid-tile class="mat-form1">
@@ -536,7 +536,7 @@
       </mat-tab>
       <mat-tab label="{{'updatedemographic.languagePreference' | translate}}" class="language-card">
         <h3 class="tab-headings">{{'updatedemographic.languageHeading' | translate}}</h3>
-        <div *ngFor="let field of schema['identity']; let i = index">
+        <div *ngFor="let field of schema['identity']; let i = index" dir="{{sitealignment}}">
           <div *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
             <mat-grid-list *ngFor="let language of supportedLanguages;" [cols]="cols" rowHeight="100px"
               gutterSize="7px">
@@ -553,11 +553,13 @@
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
                   <mat-card-header><mat-card-title>{{field.labelName[language][1]}}</mat-card-title></mat-card-header>
-                  <mat-card-subtitle><mat-select [(ngModel)]="selected2" id="{{field.attributeName}}">
+                  <!-- <mat-card-subtitle> -->
+                    <mat-select [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
                         (onSelectionChange)="capturePerfLang($event, field.attributeName, langCode, field.dataType)"
                         [value]="data.code">{{ data.name }}</mat-option>
-                    </mat-select></mat-card-subtitle>
+                    </mat-select>
+                  <!-- </mat-card-subtitle> -->
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
