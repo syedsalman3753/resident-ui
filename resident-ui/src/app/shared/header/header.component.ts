@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   selector: string = "#notificationMenu";
   clickEventSubscription: Subscription;
   sitealignment:string = localStorage.getItem('direction');
+  activeUrl:string;
 
   constructor(
     private router: Router,
@@ -103,6 +104,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
       if(supportedLanguages.length > 1){
         supportedLanguages.map((language) => {
+          console.log(language)
           this.selectLanguagesArr.push({
            code: language.trim(),
            value: defaultJson.languages[language.trim()].nativeName,
@@ -138,7 +140,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.showMessage("logout")
       localStorage.removeItem('logOut');
     }
-    
+    this.activeUrl = window.location.hash
     // if(localStorage.getItem("zoomLevel")){
     //   document.body.style["zoom"] = localStorage.getItem("zoomLevel");
     // }

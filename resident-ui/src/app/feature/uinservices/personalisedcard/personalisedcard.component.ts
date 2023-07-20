@@ -175,7 +175,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   if (typeof this.userInfo[item.value] !== "string") {
                     this.userInfo[item.value].forEach(eachLang => {
                       if (eachLang.language === this.langCode) {
-                        this.fullAddress = this.fullAddress + "," +  eachLang.value;
+                        this.fullAddress = eachLang.value  + "," + this.fullAddress ;
                       }
                     })
                   } else {
@@ -188,7 +188,6 @@ captureCheckboxValue($event: any, data: any, type: any) {
                 this.fullAddress = this.fullAddress.replace(/^./, "");
               };
               value = this.fullAddress;
-              
             } else {
               this.userInfo[data.attributeName].forEach(eachItem =>{
                 if(eachItem.language === this.langCode){
