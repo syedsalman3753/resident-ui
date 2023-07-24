@@ -63,6 +63,7 @@ export class AppComponent {
     };
 
     this.dataStorageService.isAuthenticated().subscribe((response) => {
+      console.log("Testing>>>>>>>>")
       if(response){
         if(response["response"]){
           if (window.location.href.includes('uinservices')) {
@@ -70,7 +71,12 @@ export class AppComponent {
             this.router.navigate(['uinservices/dashboard']); 
           }
         }else{
-          this.router.navigate(['dashboard']);
+          let isExpried = window.location.href.split('?').length;
+          if(isExpried > 1){
+            this.router.navigate(['error']);
+          }else{
+            this.router.navigate(['dashboard']);
+          };
         }
       }else{
         this.router.navigate(['dashboard']);
