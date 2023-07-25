@@ -132,6 +132,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"ಕೊನೆಯ ಲಾಗಿನ್",
+        "logout":"ಲಾಗ್ ಔಟ್"
+    },
     "dashboard": {
         "welcomeMessage": "ಮೋಸಿಪ್ ಭಾಗಿಗ ಪೋರ್ಟಲ್‌ಗೆ ಸ್ವಾಗತ!",
         "Logout": "ಲಾಗ್ ಔಟ್",
@@ -162,7 +166,8 @@
         "otpDescription": "ಒಂದು ಸಮಯ ಪಾಸ್ವರ್ಡ್ (OTP) ನಮೂದಿಸಲಾಗಿದೆ ನೀವು ನೋಂದಾಯಿತ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗೆ",
         "otpDescriptionEmail": " ಮತ್ತು ನೀವು ನೋಂದಾಯಿತ ಇಮೇಲ್ ಐಡಿಗೆ",
         "resendBtnLabel": "OTP ಮರುಹೊಂದಿಸಿ",
-        "submitBtnLabel": "ಸಲ್ಲಿಸಿ"
+        "submitBtnLabel": "ಸಲ್ಲಿಸಿ",
+        "enterOtp":"ಇಲ್ಲಿ OTP ನಮೂದಿಸಿ"
     },
     "centerSelection": {
         "title": "ನೇಮಕಾತಿ ಬುಕ್ ಮಾಡಿ",
@@ -238,6 +243,8 @@
         "timestamp": "ಟೈಮ್‌ಸ್ಟ್ಯಾಂಪ್",
         "selectAll": "ಎಲ್ಲವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
         "noData": "ತೋರಿಸಲು ಯಾವುದೇ ಫಲಿತಾಂಶಗಳಿಲ್ಲ",
+        "historyType":"ಇತಿಹಾಸ ಪ್ರಕಾರ",
+        "status":"ಸ್ಥಿತಿ",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "ಎಲ್ಲಾ",
@@ -392,6 +399,7 @@
         "enteredValuesNotMatch": "ನಮೂದಿಸಿದ ಮೌಲ್ಯಗಳು ಹೊಂದಿಕೊಳ್ಳುವುದಿಲ್ಲ.",
         "submit": "ಸಲ್ಲಿಸಿ",
         "update": "ಅಪ್ಡೇಟ್ ಮಾಡಿ",
+        "calendarPlaceHolder":"DD/MMM/YYYY",
         "documentUploaded": "ಡಾಕ್ಯುಮೆಂಟ್ ಅಪ್ಲೋಡ್ ಆಗಿದೆ",
         "languageHeading": "ನನ್ನ ಭಾಷಾ ಆದಾಯ",
         "InvalidFormatMsg": "ನೀವು ಅಪ್ಲೋಡ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸುವ ಫೈಲ್ ಪ್ರಕಾರವು ಬೆಂಬಲಿಸಲ್ಪಡುವುದಿಲ್ಲ. ದಯವಿಟ್ಟು ಬೇರೆ ಫೈಲ್ ಪ್ರಕಾರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ.",
@@ -478,6 +486,10 @@
             "CARD_READY_TO_DOWNLOAD": "ಕಾರ್ಡ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಸಿದ್ಧವಾಗಿದೆ"
         },
         "trackDetailsHeading": "ಟ್ರ್ಯಾಕಿಂಗ್ ವಿವರಗಳು"
+    },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "ಪ್ರತಿ ಪುಟಕ್ಕೆ ಐಟಂಗಳು",
+        "of":"ನ"
     },
     "genericmessage": {
         "successLabel": "Success",

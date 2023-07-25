@@ -5,7 +5,7 @@ import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { AppConfigService } from 'src/app/app-config.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginatorIntl } from '@angular/material';
 import { DateAdapter } from '@angular/material/core';
 import { saveAs } from 'file-saver';
 import { HeaderService } from 'src/app/core/services/header.service';
@@ -57,14 +57,18 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   searchParam:string;
   message2:any;
   langCode = localStorage.getItem("langCode");
-  serviceHistorySelectedValue: string = "History type";
+  serviceHistorySelectedValue: string;
   statusHistorySelectedValue: string = "Status";
   isLoading:boolean = true;
   dataAvailable:boolean = false;
   sitealignment:string = localStorage.getItem('direction');
 
-  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, 
-    private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakPointService: BreakpointService) {
+  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, 
+    private translateService: TranslateService, private router: Router, 
+    private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, 
+    private breakPointService: BreakpointService,
+    private paginator2: MatPaginatorIntl
+    ) {
     this.dateAdapter.setLocale('en-GB');
 
     this.breakPointService.isBreakpointActive().subscribe(active =>{
@@ -93,6 +97,14 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.langJSON = response;
         this.popupMessages = response;
+        this.serviceHistorySelectedValue = response.viewhistory.historyType;
+        this.statusHistorySelectedValue = response.viewhistory.status;
+        this.paginator2.itemsPerPageLabel = response['paginatorIntl'].itemsPerPageLabel;
+        const originalGetRangeLabel = this.paginator2.getRangeLabel;
+        this.paginator2.getRangeLabel = (page: number, size: number, len: number) => {
+          return originalGetRangeLabel(page, size, len)
+              .replace('of', response['paginatorIntl'].of);
+      }; 
       });
 
     this.getServiceHistory("","","");

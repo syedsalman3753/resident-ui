@@ -95,7 +95,7 @@
 
 .mat-menu-item {
   overflow-wrap: break-word;
-  height: 40px;
+  /* height: 40px; */
 }
 
 /* ::ng-deep .mat-menu-panel.zoommenu {
@@ -177,13 +177,14 @@
 
 @media screen and (max-width:550px){
   .notification-icon{
-    margin-left: 2rem;
+    margin: 0px;
     color: white;
   }
-  .mat-menu-item{
-    padding: 0;
+  .notification-btn{
+    padding: 0 6px;
+    width: 40px;
   }
-  /* .notification-btn{
-    width: 56px;
-  } */
+  .selected-lang{
+    display: none;
+  }
 }

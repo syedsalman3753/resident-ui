@@ -132,6 +132,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"आखरी लॉगइन",
+        "logout":"लॉग आउट"
+    },
     "dashboard": {
         "welcomeMessage": "मोसिप साथी पोर्टल में आपका स्वागत है!",
         "Logout": "लॉगआउट",
@@ -162,7 +166,8 @@
         "otpDescription": "एक समय पासवर्ड (ओटीपी) आपके पंजीकृत मोबाइल नंबर पर भेजा गया है",
         "otpDescriptionEmail": " और आपके पंजीकृत ईमेल आईडी पर",
         "resendBtnLabel": "ओटीपी फिर से भेजें",
-        "submitBtnLabel": "सबमिट करें"
+        "submitBtnLabel": "सबमिट करें",
+        "enterOtp":"यहां ओटीपी दर्ज करें"
     },
     "centerSelection": {
         "title": "अपॉइंटमेंट बुक करें",
@@ -238,6 +243,8 @@
         "timestamp": "टाइमस्टैम्प",
         "selectAll": "सभी",
         "noData": "कोई परिणाम नहीं हैं",
+        "historyType":"इतिहास प्रकार",
+        "status":"दर्जा",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "सभी",
@@ -392,6 +399,7 @@
         "enteredValuesNotMatch": "दर्ज किए गए मान मेल नहीं खाते हैं।",
         "submit": "प्रस्तुत करें",
         "update": "अपडेट करें",
+        "calendarPlaceHolder":"DD/MMM/YYYY",
         "documentUploaded": "दस्तावेज़ अपलोड किया गया",
         "languageHeading": "मेरी भाषा प्राथमिकता",
         "InvalidFormatMsg": "आप अपलोड करने की कोशिश कर रहे हैं वह फ़ाइल प्रकार समर्थित नहीं है। कृपया एक अलग फ़ाइल प्रकार अपलोड करें।",
@@ -478,6 +486,10 @@
             "CARD_READY_TO_DOWNLOAD": "कार्ड डाउनलोड के लिए तैयार"
         },
         "trackDetailsHeading": "ट्रैकिंग विवरण"
+    },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "आइटम प्रति पेज",
+        "of":"का"
     },
     "genericmessage": {
         "successLabel": "Success",

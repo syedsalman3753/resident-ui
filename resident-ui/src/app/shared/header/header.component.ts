@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           });
         });
       }
-      console.log(this.selectLanguagesArr)
+      
       self.translateService.use(localStorage.getItem("langCode")); 
       self.textDir = localStorage.getItem("dir");
     }, 1000);    
@@ -172,7 +172,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     .subscribe((response) => {
       if(response["response"])     
         this.notificationList = response["response"]["data"];
-        console.log(this.notificationList)
     });
 
     this.auditService.audit('RP-001', 'Notification section', 'RP-Notification', 'Notification section', 'User clicks on "notification" icon after logging in to UIN services');

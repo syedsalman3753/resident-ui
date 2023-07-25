@@ -132,6 +132,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"Dernière connexion",
+        "logout":"Se déconnecter"
+    },
     "dashboard": {
         "welcomeMessage": "Bienvenue sur le portail Mosip Partner !",
         "Logout": "Déconnexion",
@@ -162,7 +166,8 @@
         "otpDescription": "Un mot de passe à usage unique (OTP) a été envoyé à votre numéro de mobile enregistré",
         "otpDescriptionEmail": " et à votre adresse e-mail enregistrée",
         "resendBtnLabel": "Renvoyer le OTP",
-        "submitBtnLabel": "Soumettre"
+        "submitBtnLabel": "Soumettre",
+        "enterOtp":"Entrez OTP ici"
     },
     "centerSelection": {
         "title": "Prendre rendez-vous",
@@ -238,6 +243,8 @@
         "timestamp": "Horodatage",
         "selectAll": "Tout sélectionner",
         "noData": "Aucun résultat à afficher",
+        "historyType":"Type d'historique",
+        "status":"Statut",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "Tous",
@@ -392,6 +399,7 @@
         "enteredValuesNotMatch": "Les valeurs saisies ne correspondent pas.",
         "submit": "Soumettre",
         "update": "Mettre à jour",
+        "calendarPlaceHolder":"JJ/MMM/AAAA",
         "documentUploaded": "Document téléchargé",
         "languageHeading": "Ma préférence de langue",
         "InvalidFormatMsg": "Le type de fichier que vous essayez de télécharger n'est pas pris en charge. Veuillez télécharger un autre type de fichier.",
@@ -479,9 +487,13 @@
         },
         "trackDetailsHeading": "Détails de suivi"
     },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "objets par page",
+        "of":"de"
+    },
     "genericmessage": {
         "successLabel": "Success",
-        "successButton": "OK",
+        "successButton": "D'ACCORD",
         "submitButton": "Soumettre",
         "resentBtn": "Renvoyer OTP",
         "yesButton": "Oui",

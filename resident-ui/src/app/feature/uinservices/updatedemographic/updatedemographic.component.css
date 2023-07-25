@@ -306,6 +306,10 @@ mat-select {
   margin-top: -14px;
 }
 
+::ng-deep .mat-grid-tile .mat-figure{
+  align-items: flex-start;
+}
+
 .main-contianer{
   padding:1rem 4rem 0 4rem; 
 }
