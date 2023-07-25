@@ -132,6 +132,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"آخر تسجيل دخول",
+        "logout":"تسجيل خروج"
+    },
     "dashboard": {
         "welcomeMessage": "مرحبًا بك في بوابة شريك Mosip!",
         "Logout": "تسجيل الخروج",
@@ -162,7 +166,8 @@
         "otpDescription": "تم إرسال رمز التحقق لمرة واحدة (OTP) إلى رقم هاتفك المسجل",
         "otpDescriptionEmail": " وعنوان البريد الإلكتروني المسجل",
         "resendBtnLabel": "إعادة إرسال OTP",
-        "submitBtnLabel": "إرسال"
+        "submitBtnLabel": "إرسال",
+        "enterOtp":"أدخل OTP هنا"
     },
     "centerSelection": {
         "title": "حجز موعد",
@@ -238,6 +243,8 @@
         "timestamp": "الطابع الزمني",
         "selectAll": "الكل",
         "noData": "لا توجد نتائج لعرضها",
+        "historyType":"نوع التاريخ",
+        "status":"حالة",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "الكل",
@@ -374,6 +381,7 @@
         "enteredValuesNotMatch": "القيم المدخلة غير متطابقة.",
         "submit": "إرسال",
         "update": "تحديث",
+        "calendarPlaceHolder":"اليوم / الشهر / السنة",
         "documentUploaded": "تم تحميل المستند",
         "languageHeading": "تفضيل لغتي",
         "InvalidFormatMsg": "نوع الملف الذي تحاول تحميله غير مدعوم. يرجى تحميل نوع ملف مختلف.",
@@ -460,6 +468,10 @@
             "CARD_READY_TO_DOWNLOAD": "البطاقة جاهزة للتنزيل"
         },
         "trackDetailsHeading": "تفاصيل التتبع"
+    },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "مواد لكل صفحة",
+        "of":"ل"
     },
     "genericmessage": {
         "successLabel": "Success",

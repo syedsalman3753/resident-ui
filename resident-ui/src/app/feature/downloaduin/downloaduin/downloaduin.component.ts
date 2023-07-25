@@ -239,7 +239,7 @@ export class DownloadUinComponent implements OnInit {
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
           btnTxt: this.popupMessages.genericmessage.successButton,
-          isOK:'OK'
+          isOk:'OK'
         },
         disableClose: true
       });

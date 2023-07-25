@@ -90,7 +90,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   userInputValues: any = {};
   finalUserCloneData: any;
   updatingtype: string;
-  sitealignment:string = localStorage.getItem('direction');
+  sitealignment: string = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
     private dialog: MatDialog, private dataStorageService: DataStorageService,
@@ -177,8 +177,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
 
   async getUpdateMyDataSchema() {
-      this.isLoading = true;
-    await new Promise((resolve) =>{  
+    this.isLoading = true;
+    await new Promise((resolve) => {
       this.dataStorageService
         .getUpdateMyDataSchema('update-demographics')
         .subscribe((response) => {
@@ -274,7 +274,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
                 }
               });
             if (value.length > 0) {
-              self.buildCloneJsonData[schema.attributeName][language] = value[0].value;
+              self.buildCloneJsonData[schema.attributeName][this.supportedLanguages[0]] = value[0].value;
             }
           });
         }

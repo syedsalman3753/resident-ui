@@ -104,7 +104,7 @@ label {
 }
 
 .button {
-    width: 108px;
+    min-width: 108px;
     height: 36px;
     background-color: #03A64A;
     border-radius: 5px;

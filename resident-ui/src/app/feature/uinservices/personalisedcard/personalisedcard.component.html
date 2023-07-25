@@ -14,14 +14,15 @@
 		<table style="width:100%;">
 			<tr><mat-grid-list [cols]="cols" rowHeight="490px" gutterSize="10px"><mat-grid-tile>
 				<td [style.width] = "width">
-					<table *ngFor="let data of schema; let i = index" style="width:100%;">
+					<table class="fixed" *ngFor="let data of schema; let i = index" style="width:100%;">
 						<tr>
-							<td style="padding:10px;color: #505050;width: 50%"><mat-checkbox [checked]="data.checked" *ngIf="data.label[langCode] !== 'undefiend'" (click)="captureCheckboxValue($event, data,'datacheck')">{{data.label[langCode]}}</mat-checkbox></td>
-							<td *ngIf="data.maskRequired" style="width:50%;color: #505050;font-size: 16px;padding-left: 1.25rem;">
+							<td class="each-property"><mat-checkbox [checked]="data.checked" *ngIf="data.label[langCode] !== 'undefiend'" (click)="captureCheckboxValue($event, data,'datacheck')" >
+								{{data.label[langCode]}}</mat-checkbox></td>
+							<td *ngIf="data.maskRequired" class="each-masked-property">
 								<mat-checkbox [disabled]="!data.checked"  id="{{data.maskRequiredLabel[langCode]}}{{i}}" (click)="captureCheckboxValue($event, data,data.maskAttributeName)">{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 							</td>
-							<td *ngIf="data.formatRequired" style="width:50%">
-								<button  [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
+							<td *ngIf="data.formatRequired" style="width:40%">
+								<button [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
 								<mat-menu #basic="matMenu">
 									<ng-container *ngFor="let data1 of data.formatOption[langCode];">
 										<button id="{{data1.value}}Btn" mat-menu-item>
@@ -37,9 +38,9 @@
 						</tr>
 					</table>					
 				</td></mat-grid-tile><mat-grid-tile>
-				<td style="vertical-align: top;" [style.width] = "width">
-					<div class="seleted-details-card" [style.width] = "width">
-					<table [style.width] = "width">
+				<td style="vertical-align: top;" [style.width] = "previewWidth">
+					<div class="seleted-details-card" [style.width] = "previewWidth">
+					<table [style.width] = "previewWidth">
 						<tr>
 							<td *ngIf="dataDisplay['photo']">
 								<img [src]="dataDisplay['photo']['value']" alt=''

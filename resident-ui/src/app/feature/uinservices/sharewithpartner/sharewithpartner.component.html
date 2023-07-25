@@ -16,21 +16,20 @@
 		<table style="width:100%;">
 			<tr><mat-grid-list [cols]="cols" rowHeight="690px" gutterSize="10px"><mat-grid-tile>
 						<td [style.width]="width">
-							<table *ngFor="let data of schema; let i = index" style="width:100%;">
+							<table class="fixed" *ngFor="let data of schema; let i = index" style="width:100%;">
 								<tr>
-									<td style="padding:10px;color: #505050;width: 50%">
+									<td class="each-property">
 										<mat-checkbox [checked]="data.checked" id="{{data.label[langCode]}}"
 											(click)="captureCheckboxValue($event, data, 'datacheck')">{{data.label[langCode]}}
 										</mat-checkbox>
 									</td>
-									<td *ngIf="data.maskRequired"
-										style="width:50%;color: #505050;font-size: 16px;padding-left: 1.25rem;">
+									<td *ngIf="data.maskRequired" class="each-masked-property">
 										<mat-checkbox [disabled]="!data.checked"
 											id="{{data.maskRequiredLabel[langCode]}}{{i}}"
 											(click)="captureCheckboxValue($event, data, data.maskAttributeName)">
 											{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 									</td>
-									<td *ngIf="data.formatRequired" style="width:50%">
+									<td *ngIf="data.formatRequired" style="width:40%">
 										<button [disabled]="!data.checked" id="matIcon" mat-button
 											[matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}
 											<mat-icon>keyboard_arrow_down</mat-icon>
@@ -52,9 +51,9 @@
 						</td>
 					</mat-grid-tile>
 					<mat-grid-tile style="width: 400px;">
-						<td style="vertical-align: top;" [style.width]="width">
-							<div class="attribute-card" [style.width]="width">
-								<table [style.width]="width">
+						<td style="vertical-align: top;" [style.width]="previewWidth">
+							<div class="attribute-card" [style.width]="previewWidth">
+								<table [style.width]="previewWidth">
 									<tr>
 										<td *ngIf="sharableAttributes['photo']">
 											<img [src]="sharableAttributes['photo']['value']" alt=''

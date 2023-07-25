@@ -39,3 +39,44 @@
     accent-color: #03A64A;
     margin-right: 5px;
 }
+
+.each-property{
+    padding:10px 0 10px 0;
+    color: #505050;
+    width: 60%;
+    word-wrap: break-word;
+}
+table.fixed { 
+    table-layout:fixed; 
+}
+
+table.fixed td {
+    overflow:hidden;
+}
+
+.each-masked-property{
+    width:40%;
+    color: #505050;
+    font-size: 16px;
+    padding-left: 1.25rem;
+}
+
+@media screen and (max-width:465px){
+    .each-property{
+        width: 65%;
+        padding:10px 0 10px 0;
+        color: #505050;
+    }
+    .each-masked-property{
+        width:40%;
+        color: #505050;
+        font-size: 16px;
+        padding-left: .5rem;
+    }
+    .mat-card{
+        padding: 5px;
+    }
+    .mat-button{
+        padding: 0;
+    }
+}

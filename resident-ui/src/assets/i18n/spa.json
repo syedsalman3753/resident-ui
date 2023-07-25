@@ -132,6 +132,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"Último acceso",
+        "logout":"Cerrar sesión"
+    },
     "dashboard": {
         "welcomeMessage": "¡Bienvenido al portal de socios de Mosip!",
         "Logout": "Cerrar sesión",
@@ -162,7 +166,8 @@
         "otpDescription": "Se ha enviado una Contraseña de un Solo Uso (OTP) a su número de teléfono móvil registrado",
         "otpDescriptionEmail": " y a su correo electrónico registrado",
         "resendBtnLabel": "Reenviar OTP",
-        "submitBtnLabel": "Enviar"
+        "submitBtnLabel": "Enviar",
+        "enterOtp":"Ingrese OTP aquí"
     },
     "centerSelection": {
         "title": "Reservar cita",
@@ -238,6 +243,8 @@
         "timestamp": "Marca de tiempo",
         "selectAll": "Todos",
         "noData": "No hay resultados para mostrar",
+        "historyType":"tipo de historial",
+        "status":"Estado",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "Todos",
@@ -392,6 +399,7 @@
         "enteredValuesNotMatch": "Los valores ingresados no coinciden.",
         "submit": "Enviar",
         "update": "Actualizar",
+        "calendarPlaceHolder":"DD/MMM/AAAA",
         "documentUploaded": "Documento cargado",
         "languageHeading": "Mi preferencia de idioma",
         "InvalidFormatMsg": "El tipo de archivo que estás intentando cargar no es compatible. Por favor, carga un tipo de archivo diferente.",
@@ -479,9 +487,13 @@
         },
         "trackDetailsHeading": "Detalles de seguimiento"
     },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "Artículos por página",
+        "of":"de"
+    },
     "genericmessage": {
         "successLabel": "Success",
-        "successButton": "OK",
+        "successButton": "DE ACUERDO",
         "submitButton": "Enviar",
         "resentBtn": "Reenviar OTP",
         "yesButton": "Sí",

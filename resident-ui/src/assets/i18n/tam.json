@@ -132,6 +132,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"கடைசி உள்நுழைவு",
+        "logout":"வெளியேறு"
+    },
     "dashboard": {
         "welcomeMessage": "மோசிப் பங்குபக்கத்திற்கு வரவேற்கின்றது வரவேற்கின்றோம்!",
         "Logout": "வெளியேறு",
@@ -162,7 +166,8 @@
         "otpDescription": "ஒரு நேர கடவுச்சொல் (OTP) உங்கள் பதிவுசெய்யப்பட்ட மொபைல் எண்ணிற்கு அனுப்பப்பட்டுள்ளது",
         "otpDescriptionEmail": " மற்றும் உங்கள் பதிவுசெய்யப்பட்ட மின்னஞ்சல் ஐடிக்கு",
         "resendBtnLabel": "OTP ஐ மீண்டும் அனுப்பு",
-        "submitBtnLabel": "சமர்ப்பிக்க"
+        "submitBtnLabel": "சமர்ப்பிக்க",
+        "enterOtp":"இங்கே OTP ஐ உள்ளிடவும்"
     },
     "centerSelection": {
         "title": "சரிபார்ப்பை முதல் செய்யவும்",
@@ -238,6 +243,8 @@
         "timestamp": "நேரம்",
         "selectAll": "அனைத்தும்",
         "noData": "காட்ட முடியவில்லை",
+        "historyType":"வரலாற்று வகை",
+        "status":"நிலை",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "அனைத்து",
@@ -392,6 +399,7 @@
         "enteredValuesNotMatch": "உள்ளீட்டுகள் பொருந்தவில்லை.",
         "submit": "சமர்ப்பிக்கவும்",
         "update": "புதுப்பிக்கவும்",
+        "calendarPlaceHolder":"DD/MMM/YYYY",
         "documentUploaded": "ஆவணம் பதிவேற்றப்பட்டது",
         "languageHeading": "எனது மொழி விருப்பம்",
         "InvalidFormatMsg": "நீங்கள் பதிவேற்ற முயற்சிக்கும் கோப்பு வகை ஆதரிக்கப்படவில்லை. தயவுசெய்து வேறு கோப்பு வகையை பதிவேற்றுக.",
@@ -478,6 +486,10 @@
             "CARD_READY_TO_DOWNLOAD": "அட்டை பதிவிறக்குக readyப்பட்டுள்ளது"
         },
         "trackDetailsHeading": "கண்காணிக்கும் விவரங்கள்"
+    },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "ஒரு பக்கத்திற்கு உருப்படிகள்",
+        "of":"இன்"
     },
     "genericmessage": {
         "successLabel": "Success",

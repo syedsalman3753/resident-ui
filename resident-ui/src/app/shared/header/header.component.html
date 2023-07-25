@@ -22,7 +22,7 @@
 
       <mat-list-item *ngIf="activeUrl !== '#/dashboard/expired' ">
         <button mat-button [matMenuTriggerFor]="languages"> <span class="mat-button-wrapper"><mat-icon>g_translate</mat-icon>
-          {{selectedLanguage}} <mat-icon>keyboard_arrow_down</mat-icon></span></button>
+          <span class="selected-lang">{{selectedLanguage}}</span> <mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
 
       <mat-menu #languages="matMenu" [overlapTrigger]="false" id="languages">
@@ -84,12 +84,12 @@
             style="color:white; width: 80%;">{{fullName}}</span></div>
         <mat-divider></mat-divider>
         <div style="height: 10px;"></div>
-        <div style="height: 30px;"><span style="font-size: 12px;padding: 30px;color: rgba(0,0,0,.87);">Last Login</span>
+        <div style="height: 30px;"><span style="font-size: 12px;padding: 30px;color: rgba(0,0,0,.87);">{{'header.lastLogin' | translate}}</span>
         </div>
         <div style="height: 30px;"><span style="font-size: 14px;padding: 28px;color: rgba(0,0,0,.87);">{{lastLogin}}</span></div>
         <mat-divider></mat-divider>
         <button (click)="doLogout()" mat-menu-item
-          style="padding-left: 27px;"><mat-icon>power_settings_new</mat-icon><span>Logout</span>
+          style="padding-left: 27px;"><mat-icon>power_settings_new</mat-icon><span>{{'header.logout' | translate}}</span>
         </button>
       </mat-menu>
 

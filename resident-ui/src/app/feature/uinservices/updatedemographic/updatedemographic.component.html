@@ -35,7 +35,7 @@
                             <td width="10%"></td>
                             <td width="45%">
                               <!-- <mat-form-field style="min-width: 100%;"> -->
-                              <input [max]="maxdate" style="width:75%;" matInput placeholder="DD/MM/YYYY"
+                              <input [max]="maxdate" style="width:75%;" matInput [placeholder]="langJson.calendarPlaceHolder"
                                 [matDatepicker]="picker" readonly id="{{field.attributeName}}"
                                 (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName])"
                                 [(ngModel)]="selectedDate" (click)="picker.open()" />
@@ -101,7 +101,7 @@
                               <mat-form-field style="min-width: 73%;">
                                 <mat-select [(ngModel)]="selected" id="{{field.attributeName}}">
                                   <mat-option *ngFor="let data of dropDownValues[field.attributeName]"
-                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, langCode, field.dataType, buildJSONData[field.attributeName][langCode])"
+                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, buildJSONData[field.attributeName][langCode])"
                                     [value]="data.code">{{ data.value }}</mat-option>
                                 </mat-select>
                               </mat-form-field>
@@ -134,7 +134,7 @@
                                 id="{{field.attributeName}}">
                                 <mat-option style="min-width: 25.2rem;"
                                   *ngFor="let data of dropDownValues[field.attributeName]"
-                                  (onSelectionChange)="captureDropDownValue($event, field.attributeName, langCode, field.dataType, '')"
+                                  (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, '')"
                                   [value]="data.code">{{ data.name }}</mat-option>
                               </mat-select>
                             </td>
@@ -543,7 +543,7 @@
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
-                  <mat-card-header><mat-card-title>{{field.labelName[language][0]}}</mat-card-title></mat-card-header>
+                  <mat-card-header><mat-card-title>{{field.labelName[langCode][0]}}</mat-card-title></mat-card-header>
                   <mat-card-subtitle *ngIf="buildJSONData[field.attributeName]"><input
                       style="border: none; background-color: #F7F7F7" type="text" class="readonly" readonly="true"
                       disabled="true" value="{{buildJSONData[field.attributeName]}}"></mat-card-subtitle>
@@ -552,7 +552,7 @@
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
-                  <mat-card-header><mat-card-title>{{field.labelName[language][1]}}</mat-card-title></mat-card-header>
+                  <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
                   <!-- <mat-card-subtitle> -->
                     <mat-select [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
@@ -590,7 +590,7 @@
             <div *ngFor="let field of schema['identity']">
               <table width="100%" *ngFor="let language of supportedLanguages;">
                 <tr *ngIf="buildCloneJsonData[field.attributeName]">
-                  <td width="75%">{{field.labelName[language][1]}}</td>
+                  <td width="75%">{{field.labelName[langCode][1]}}</td>
                 </tr>
                 <tr
                   *ngIf="typeOf(buildCloneJsonData[field.attributeName]) !== 'string' && buildCloneJsonData[field.attributeName]">
