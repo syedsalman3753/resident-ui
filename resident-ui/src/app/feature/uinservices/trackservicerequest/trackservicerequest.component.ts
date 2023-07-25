@@ -140,7 +140,8 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
         message: message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -163,7 +164,8 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOk:"OK"
         },
         disableClose: true
       });

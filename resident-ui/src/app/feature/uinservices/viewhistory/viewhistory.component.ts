@@ -12,7 +12,7 @@ import { HeaderService } from 'src/app/core/services/header.service';
 import { AuditService } from "src/app/core/services/audit.service";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { MatPaginator } from '@angular/material/paginator';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-viewhistory",
@@ -61,33 +61,25 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   statusHistorySelectedValue: string = "Status";
   isLoading:boolean = true;
   dataAvailable:boolean = false;
+  sitealignment:string = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, 
-    private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
+    private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakPointService: BreakpointService) {
     this.dateAdapter.setLocale('en-GB');
 
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
+    this.breakPointService.isBreakpointActive().subscribe(active =>{
+      if (active) {
+        if(active === "extraSmall"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = 2;
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
+        if(active === "medium"){
           this.cols = 4;
         }
-        if (result.breakpoints[Breakpoints.Large]) {
+        if(active === "large" || active === "ExtraLarge"){
           this.cols = 6;
         }
-        if (result.breakpoints[Breakpoints.XLarge]) {
-          this.cols = 6;
+        if(active === "small"){
+          this.cols = 2;
         }
       }
     });
@@ -143,7 +135,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
           }
         } else {
           this.isLoading = false;
-          this.showErrorPopup(response["errors"])
+          this.showErrorMessagePopup(response["errors"])
         }
       });
   }
@@ -306,7 +298,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       this.auditService.audit('RP-010', 'View history', 'RP-View history', 'View history', 'User chooses the "status filter" from the drop-down');
       this.statusFilter = this.statusFilter.replace(/ALL,/ig, '').replace(/,\s*$/, "");
     }
-   
     if(event){
       event.stopPropagation()
     }
@@ -417,15 +408,19 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
         message: message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
   }
 
-  showErrorPopup(message: string) {
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+  showErrorMessagePopup(message: string) {
     let errorCode = message[0]['errorCode']
-    console.log(errorCode)
     setTimeout(() => {
         this.dialog
           .open(DialogComponent, {
@@ -434,15 +429,12 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
               case: 'MESSAGE',
               title: this.popupMessages.genericmessage.errorLabel,
               message: this.popupMessages.serverErrors[errorCode],
-              btnTxt: this.popupMessages.genericmessage.successButton
+              btnTxt: this.popupMessages.genericmessage.successButton,
+              isOk:"OK"
             },
             disableClose: true
           });
-    }, 400)
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    }, 500)
   }
 
   onItemSelected(item: any) {

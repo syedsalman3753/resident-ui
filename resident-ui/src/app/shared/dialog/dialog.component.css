@@ -205,12 +205,12 @@ td.mat-footer-cell:last-child {
 }
 
 
-.mat-menu-item{
+/* .mat-menu-item{
   line-height:20px;
   height:30px;
   font-size: x-small;
   font-family: "Roboto", sans-serif;
-}
+} */
 
 .sort-icon {
   padding-top: 3px;

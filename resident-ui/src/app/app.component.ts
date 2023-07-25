@@ -18,6 +18,8 @@ export class AppComponent {
   title = 'resident-ui';
   subscriptions: Subscription[] = [];
   previousUrl: string;
+  primaryLangCode: string = localStorage.getItem("langCode");
+  sitealignment;
 
   constructor(
     private appConfigService: AppConfigService,
@@ -28,7 +30,13 @@ export class AppComponent {
     private dataStorageService: DataStorageService
   ) {
     this.appConfigService.getConfig();
-    
+    if (this.primaryLangCode === "ara") {
+      localStorage.setItem('direction','rtl')
+    }else{
+      localStorage.setItem('direction','ltr')
+    }
+    this.sitealignment = localStorage.getItem('direction');
+    document.body.dir = this.sitealignment
   }
   
   // @HostListener('window:popstate', ['$event'])
@@ -55,6 +63,7 @@ export class AppComponent {
     };
 
     this.dataStorageService.isAuthenticated().subscribe((response) => {
+      console.log("Testing>>>>>>>>")
       if(response){
         if(response["response"]){
           if (window.location.href.includes('uinservices')) {
@@ -62,7 +71,12 @@ export class AppComponent {
             this.router.navigate(['uinservices/dashboard']); 
           }
         }else{
-          this.router.navigate(['dashboard']);
+          let isExpried = window.location.href.split('?').length;
+          if(isExpried > 1){
+            this.router.navigate(['error']);
+          }else{
+            this.router.navigate(['dashboard']);
+          };
         }
       }else{
         this.router.navigate(['dashboard']);

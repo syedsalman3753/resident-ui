@@ -10,11 +10,11 @@
    </div>
 	<mat-card *ngIf="!isLoading">
 		<h3 class="main-heading">{{'viewhistory.title' | translate}}</h3>
-		<mat-grid-list *ngIf="responselist" [cols]="cols" rowHeight="100px" gutterSize="7px">
+		<mat-grid-list *ngIf="responselist" [cols]="cols" rowHeight="100px" gutterSize="7px" dir="{{sitealignment}}">
 	        <mat-grid-tile>
 	          <div class="mini-card">
-	            <mat-card-header><span class="label">{{'viewhistory.inputsearch' |translate}}</span></mat-card-header>
-	            <mat-card-subtitle><span class="input"><input [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
+	            <mat-card-header><span class="label" >{{'viewhistory.inputsearch' |translate}}</span></mat-card-header>
+	            <mat-card-subtitle><span class="input" ><input dir="{{sitealignment}}" [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
 	          </div>
 	        </mat-grid-tile>
 	        <mat-grid-tile>

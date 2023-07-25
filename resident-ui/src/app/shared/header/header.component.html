@@ -1,4 +1,4 @@
-<mat-sidenav-container [dir]="textDirection()">
+<mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation" position="start" mode="push">
     <mat-nav-list class="sidenav-list">
 
@@ -11,19 +11,23 @@
       </div>
       <span class="spacer"></span>
 
-
-      <button mat-button [matMenuTriggerFor]="menu2"> <span
+      <mat-list-item *ngIf="activeUrl !== '#/dashboard/expired' ">
+        <button mat-button [matMenuTriggerFor]="zoomItem"> <span
           class="mat-button-wrapper">Aa<mat-icon>keyboard_arrow_down</mat-icon></span></button>
-      <mat-menu class="zoommenu" #menu2="matMenu" [overlapTrigger]="false" xPosition="before">
+      </mat-list-item>
+      <mat-menu class="zoommenu" #zoomItem="matMenu" [overlapTrigger]="false" id="zoomItem">
         <button mat-menu-item (click)="zoom(item)" *ngFor="let item of zoomLevel"><span
             [style.font-size.px]="item.fontSize">{{item.label}}</span></button>
       </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="menu1"> <span class="mat-button-wrapper"><mat-icon>g_translate</mat-icon>
+      <mat-list-item *ngIf="activeUrl !== '#/dashboard/expired' ">
+        <button mat-button [matMenuTriggerFor]="languages"> <span class="mat-button-wrapper"><mat-icon>g_translate</mat-icon>
           {{selectedLanguage}} <mat-icon>keyboard_arrow_down</mat-icon></span></button>
-      <mat-menu #menu1="matMenu" [overlapTrigger]="false" xPosition="before">
+      </mat-list-item>
+
+      <mat-menu #languages="matMenu" [overlapTrigger]="false" id="languages">
         <button mat-menu-item (click)="onlanguagechange(item)"
-          *ngFor="let item of selectLanguagesArr">{{item.value}}</button>
+          *ngFor="let item of selectLanguagesArr" >{{item.value}}</button>
       </mat-menu>
 
       <mat-list-item *ngIf="fullName">
@@ -68,10 +72,10 @@
         </div>
       </mat-menu>
 
-      <mat-list-item *ngIf="fullName">
+      <mat-list-item *ngIf="fullName" dir="{{sitealignment}}">
         <button mat-menu-item [matMenuTriggerFor]="profilemenu"
           style="border: 1px solid white;border-radius: 5px;padding: 0px 8px;line-height: 36px;height: 36px;background-color: white;"><mat-icon
-            style="margin-right: 0px;color: green;">person</mat-icon></button>
+            style="margin: 0px;color: green;">person</mat-icon></button>
       </mat-list-item>
       <mat-menu class="profile-menu" #profilemenu="matMenu" [overlapTrigger]="false" xPosition="before" id="profileMenu">
         <div style="width: 250px;padding: 15px 20px;background: #03A64A;display: flex;align-items: center; overflow-wrap: break-word;"><img

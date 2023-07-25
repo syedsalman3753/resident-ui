@@ -48,15 +48,15 @@
 
   <mat-card class="show-opt-panel-card" *ngIf="showOtpPanel">
     <button id="backBtn" (click)="onItemSelected('back')" class="book-appointment-back-btn"><img
-        src="./assets/images/arrow_back_black_24dp.png" alt="" />Back</button>
+        src="./assets/images/arrow_back_black_24dp.png" alt="" />{{verifyChannelData.back}}</button>
     <div class="send-otp-container">
       <mat-card-subtitle class="otp-time-heading">{{verifyChannelData.subTitle | translate}}<span
           class="otp-expire-time">
           0{{otpTimeMinutes}}:{{displaySeconds}}</span>
       </mat-card-subtitle>
-      <label for="otp-input">{{verifyChannelData.inputLabel | translate}}</label>
+      <label for="otp-input" class="label-for-otp">{{verifyChannelData.inputLabel | translate}}</label>
       <br />
-      <input id="otpValue" #box [value]="otp" [disabled]="inputDisabled" (keyup)="captureOtpValue(box.value)" placeholder="Enter OTP here" id="otp-input"
+      <input id="otpValue" #box [value]="otp" [disabled]="inputDisabled" (keyup)="captureOtpValue(box.value)" placeholder="{{verifyChannelData.inputLabel}}" id="otp-input"
         class="enter-opt-input" type="text" />
       <div class="otp-infromation-card">
         <p *ngIf="otpChannel[0] === 'PHONE'" class="otp-infromation-text">{{verifyChannelData.otpDescriptionPhone |

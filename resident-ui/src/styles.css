@@ -60,10 +60,12 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: "source_sans_pro_lightregular", Helvetica, sans-serif;
+  /* font-family: 'Roboto', 'Helvetica Neue', sans-serif; */
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -ms-overflow-style: none;
   background-color: #F4F4F4;
+  -moz-osx-font-smoothing: grayscale;
 }
 .btn_axn-pri {
   min-width: 158px;

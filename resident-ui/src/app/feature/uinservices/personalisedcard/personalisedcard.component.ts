@@ -12,7 +12,7 @@ import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import moment from 'moment';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-personalisedcard",
@@ -48,37 +48,30 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
 
   constructor(private autoLogout: AutoLogoutService,private interactionService: InteractionService, 
     private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, 
-    private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
-   
-      this.breakpointObserver.observe([
-        Breakpoints.XSmall,
-        Breakpoints.Small,
-        Breakpoints.Medium,
-        Breakpoints.Large,
-        Breakpoints.XLarge,
-      ]).subscribe(result => {
-        if (result.matches) {
-          if (result.breakpoints[Breakpoints.XSmall]) {
-            this.cols = 1;
-            this.width = "19em";
-            this.attributeWidth = "10em";
-          }
-          if (result.breakpoints[Breakpoints.Small]) {
+    private auditService: AuditService, private breakPointService: BreakpointService) {
+      this.breakPointService.isBreakpointActive().subscribe(active =>{
+        if (active) {
+          if(active === "small"){
             this.cols = 1;
             this.width = "40em";
             this.attributeWidth = "20em";
           }
-          if (result.breakpoints[Breakpoints.Medium]) {
-            this.cols = 2;
-            this.width = "25em";
-            this.attributeWidth = "12em";
+          if(active === "extraSmall"){
+            this.cols = 1;
+            this.width = "19em";
+            this.attributeWidth = "10em";
           }
-          if (result.breakpoints[Breakpoints.Large]) {
+          if(active === "large"){
             this.cols = 2;
             this.width = "29em";
             this.attributeWidth = "12em";
           }
-          if (result.breakpoints[Breakpoints.XLarge]) {
+          if(active === "medium"){
+            this.cols = 2;
+            this.width = "25em";
+            this.attributeWidth = "12em";
+          }
+          if(active === "ExtraLarge"){
             this.cols = 2;
             this.width = "35rem";
             this.attributeWidth = "18em";
@@ -182,27 +175,30 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   if (typeof this.userInfo[item.value] !== "string") {
                     this.userInfo[item.value].forEach(eachLang => {
                       if (eachLang.language === this.langCode) {
-                        this.fullAddress = this.fullAddress + "," +  eachLang.value
+                        this.fullAddress = eachLang.value  + "," + this.fullAddress ;
                       }
                     })
                   } else {
-                    this.fullAddress = this.fullAddress + this.userInfo[item.value]
+                    this.fullAddress = this.fullAddress + this.userInfo[item.value];
                   }
                 }
               })
-              this.fullAddress = this.fullAddress.replace(/^./, "");
-              value = this.fullAddress
+
+              if (this.fullAddress.endsWith(',')) {
+                this.fullAddress = this.fullAddress.replace(/^./, "");
+              };
+              value = this.fullAddress;
             } else {
-              this.userInfo[data.attributeName].forEach(item =>{
-                if(item.language === this.langCode){
-                  value = item.value
+              this.userInfo[data.attributeName].forEach(eachItem =>{
+                if(eachItem.language === this.langCode){
+                  value = eachItem.value
                 }
               });
             }
           } else {
-            this.userInfo[data.attributeName].forEach(item =>{
-              if(item.language === this.langCode){
-                value = item.value
+            this.userInfo[data.attributeName].forEach(eachItem =>{
+              if(eachItem.language === this.langCode){
+                value = eachItem.value
               }
             });
           }
@@ -226,6 +222,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
         return item
       }
     })
+
   } else {
     if (!data.formatRequired) {
       let value;
@@ -248,17 +245,17 @@ captureCheckboxValue($event: any, data: any, type: any) {
         })
 
       } else {
-        this.schema = this.schema.map(eachItem => {
-          if (data['attributeName'] === eachItem['attributeName']) {
-            eachItem['formatOption'][this.langCode].forEach(item => {
-              if (item.value === type['value']) {
-                return item['checked'] = !item['checked']
+        this.schema = this.schema.map(item => {
+          if (data['attributeName'] === item['attributeName']) {
+            item['formatOption'][this.langCode].forEach(eachItem => {
+              if (eachItem.value === type['value']) {
+                return eachItem['checked'] = !eachItem['checked']
               } else {
-                return item['checked'] = item['checked']
+                return eachItem['checked'] = eachItem['checked']
               }
             })
           }
-          return eachItem
+          return item
         })
 
         if (data.attributeName === "fullAddress") {
@@ -423,7 +420,23 @@ captureCheckboxValue($event: any, data: any, type: any) {
         });
   }
 
-
+  showErrorPopup(message: string) {
+    let errorCode = message[0]['errorCode']
+    setTimeout(() => {
+      this.dialog
+      .open(DialogComponent, {
+        width: '650px',
+        data: {
+          case: 'MESSAGE',
+          title: this.popupMessages.genericmessage.errorLabel,
+          message: this.popupMessages.serverErrors[errorCode],
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOK:'OK'
+        },
+        disableClose: true
+      });
+  },400)
+  }
 
   conditionsForPersonalisedCard() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -452,27 +465,11 @@ captureCheckboxValue($event: any, data: any, type: any) {
         trackStatusText:this.popupMessages.genericmessage.trackStatusText,
         dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
-  }
-
-  showErrorPopup(message: string) {
-    let errorCode = message[0]['errorCode']
-    setTimeout(() => {
-      this.dialog
-      .open(DialogComponent, {
-        width: '650px',
-        data: {
-          case: 'MESSAGE',
-          title: this.popupMessages.genericmessage.errorLabel,
-          message: this.popupMessages.serverErrors[errorCode],
-          btnTxt: this.popupMessages.genericmessage.successButton
-        },
-        disableClose: true
-      });
-  },400)
   }
 
   ngOnDestroy(): void {

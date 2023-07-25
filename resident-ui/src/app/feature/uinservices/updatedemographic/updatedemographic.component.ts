@@ -12,7 +12,7 @@ import { AuditService } from "src/app/core/services/audit.service";
 import defaultJson from "src/assets/i18n/default.json";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 
 @Component({
@@ -66,7 +66,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   newLangArr: any = [];
   perfLangArr: any = {};
   newNotificationLanguages: any = [];
-  matTabLabel: string = "Identity";
+  matTabLabel: string;
   matTabIndex: number = 0;
   contactTye: string = "";
   width: string;
@@ -90,8 +90,13 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   userInputValues: any = {};
   finalUserCloneData: any;
   updatingtype: string;
+  sitealignment:string = localStorage.getItem('direction');
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private dateAdapter: DateAdapter<Date>, private breakpointObserver: BreakpointObserver) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
+    private dialog: MatDialog, private dataStorageService: DataStorageService,
+    private translateService: TranslateService, private router: Router,
+    private appConfigService: AppConfigService, private auditService: AuditService,
+    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -100,35 +105,29 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       } else if (id !== 'string' && id.type === 'otp') {
         this.verifyupdatedData(id.otp);
       }
-    })
+    });
 
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
+    this.breakPointService.isBreakpointActive().subscribe(active => {
+      if (active) {
+        if (active === "extraSmall") {
           this.cols = 1;
-          this.width = "95%";
+          this.width = "99%";
         }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = 2;
-          this.width = "90%";
+        if (active === "ExtraLarge") {
+          this.cols = 4;
+          this.width = "40%";
         }
-        if (result.breakpoints[Breakpoints.Medium]) {
+        if (active === "medium") {
           this.cols = 2;
           this.width = "75%";
         }
-        if (result.breakpoints[Breakpoints.Large]) {
+        if (active === "large") {
           this.cols = 4;
           this.width = "50%";
         }
-        if (result.breakpoints[Breakpoints.XLarge]) {
-          this.cols = 4;
-          this.width = "40%";
+        if (active === "small") {
+          this.cols = 2;
+          this.width = "95%";
         }
       }
     });
@@ -147,6 +146,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.langJson = response.updatedemographic
         this.popupMessages = response;
+        this.matTabLabel = response.updatedemographic.identity;
       });
 
     let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
@@ -189,21 +189,21 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
 
   getUserInfo() {
-      this.dataStorageService
-        .getUserInfo('update-demographics')
-        .subscribe((response) => {
-          if (response["response"]) {
-            this.userInfo = response["response"];
-            UpdatedemographicComponent.actualData = response["response"];
-            if(this.schema && this.userInfo){
-              this.buildData()
-              this.isLoading = false;
-            }else{
-              console.log("Testing")
-              this.getUpdateMyDataSchema();
-              this.getUserInfo();
-            }
+    this.dataStorageService
+      .getUserInfo('update-demographics')
+      .subscribe((response) => {
+        if (response["response"]) {
+          this.userInfo = response["response"];
+          UpdatedemographicComponent.actualData = response["response"];
+          if (this.schema && this.userInfo) {
+            this.buildData()
+            this.isLoading = false;
           } else {
+            console.log("Testing")
+            this.getUpdateMyDataSchema();
+            this.getUserInfo();
+          }
+        } else {
           this.showErrorPopup(response['errors'])
         }
       });
@@ -219,7 +219,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               self.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName];
             } else {
               self.buildJSONData[schema.attributeName] = {};
-             
+
               if (self.userInfo[schema.attributeName].length) {
                 self.supportedLanguages.map((language) => {
                   let value = self.userInfo[schema.attributeName].filter(function (data) {
@@ -227,17 +227,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
                       return data.value.trim()
                     }
                   });
-                  if(value[0]){
+                  if (value[0]) {
                     self.buildJSONData[schema.attributeName][language] = value[0].value;
-                 }
+                  }
                 });
               }
             }
           }
         }
       }
-      
-     
+
+
       this.getGender();
       this.getLocationHierarchyLevel();
       this.getDocumentType("POI", "proofOfIdentity"); this.getDocumentType("POA", "proofOfAddress");
@@ -246,7 +246,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       console.log("Exception>>>" + ex.message);
     }
 
-    if(this.buildJSONData['preferredLang']){
+    if (this.buildJSONData['preferredLang']) {
       let perfLangs = this.buildJSONData['preferredLang'].split(',');
       perfLangs.forEach(data => {
         this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
@@ -985,7 +985,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       width: '550px',
       data: {
         case: 'OTP',
-        message:this.popupMessages.genericmessage.otpPopupDescription,
+        message: this.popupMessages.genericmessage.otpPopupDescription,
         newContact: this.userId,
         submitBtnTxt: this.popupMessages.genericmessage.submitButton,
         resentBtnTxt: this.popupMessages.genericmessage.resentBtn
@@ -1006,7 +1006,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         eventId: eventId,
         clickHere2: this.popupMessages.genericmessage.clickHere2,
         dearResident: this.popupMessages.genericmessage.dearResident,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk: 'OK'
       }
     });
     return dialogRef;
@@ -1028,7 +1029,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             case: 'MESSAGE',
             title: this.popupMessages.genericmessage.errorLabel,
             message: this.message,
-            btnTxt: this.popupMessages.genericmessage.successButton
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk: 'OK'
           },
           disableClose: true
         });

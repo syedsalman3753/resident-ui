@@ -3,11 +3,11 @@
 	<span class="active">{{'dashboard.uinservices' | translate}}</span>
 
 </span>
-<div class="main-div">
+<div class="main-div" dir="{{sitealignment}}">
 	<mat-card  class="main-card">
 		<mat-card-title class="uin-heading">{{'dashboard.uinservices' | translate}}</mat-card-title>
 		<mat-card-subtitle class="services-description">{{'dashboard.uindescription' | translate}}</mat-card-subtitle>
-		<mat-grid-list *ngIf="menuItems" [cols]="cols" rowHeight="190px" gutterSize="7px">
+		<mat-grid-list *ngIf="menuItems" [cols]="cols" [rowHeight]="userPreferredLangCode === 'tam' ? '220px' :'190px' ">
 			<mat-grid-tile *ngFor="let item of menuItems[0].subMenus">
 				<mat-card class="mini-card" (click)="onItemSelected(item.route)" [id]="item.route">
 				  <span><img mat-card-xs-image [src]=item.icon/></span>

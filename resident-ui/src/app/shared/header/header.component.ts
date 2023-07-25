@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   defaultJsonValue: any;
   selectedLanguage: any;
   supportedLanguages: Array<string>;
-  selectLanguagesArr: any;
+  selectLanguagesArr: any = [];
   zoomLevel:any = [{"fontSize":"12", "label":"Small"},{"fontSize":"14", "label":"Normal"},{"fontSize":"16", "label":"Large"},{"fontSize":"18", "label":"Huge"}];
   fullName: string;
   lastLogin: string;
@@ -41,6 +41,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   page = 1;
   selector: string = "#notificationMenu";
   clickEventSubscription: Subscription;
+  sitealignment:string = localStorage.getItem('direction');
+  activeUrl:string;
 
   constructor(
     private router: Router,
@@ -86,8 +88,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
  async ngOnInit() {
     this.defaultJsonValue = defaultJson;
-    this.supportedLanguages = [];
-    this.selectLanguagesArr = []; 
     let self = this;       
     setTimeout(()=>{        
       if(!localStorage.getItem("langCode")){
@@ -101,21 +101,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });                
       }
 
-      let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
+      let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
       if(supportedLanguages.length > 1){
-        this.selectLanguagesArr = [];
         supportedLanguages.map((language) => {
-          if (defaultJson.languages && defaultJson.languages[language.trim()]) {
-            if(language === "eng"){
-              this.selectLanguagesArr.push({
-                code: language.trim(),
-                value: defaultJson.languages[language.trim()].name,
-              });
-            }
-          }
+          console.log(language)
+          this.selectLanguagesArr.push({
+           code: language.trim(),
+           value: defaultJson.languages[language.trim()].nativeName,
+          });
         });
       }
-
+      console.log(this.selectLanguagesArr)
       self.translateService.use(localStorage.getItem("langCode")); 
       self.textDir = localStorage.getItem("dir");
     }, 1000);    
@@ -144,7 +140,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.showMessage("logout")
       localStorage.removeItem('logOut');
     }
-    
+    this.activeUrl = window.location.hash
     // if(localStorage.getItem("zoomLevel")){
     //   document.body.style["zoom"] = localStorage.getItem("zoomLevel");
     // }
@@ -221,21 +217,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   zoom(item:any) {
     if(item.fontSize === "12"){
-      document.body.style["zoom"]= "90%";
-      // localStorage.setItem("zoomLevel","90%");
-      // location.reload();
+      //document.body.style["zoom"]= "90%";
+      document.body.style["transform"] = "scale(1, .9)";
+      document.body.style["margin-top"] = "-2.5%";
     }else if(item.fontSize === "14"){
-      document.body.style["zoom"]= "100%";
-      // localStorage.setItem("zoomLevel","100%");
-      // location.reload()
+      //document.body.style["zoom"]= "100%";
+      document.body.style["transform"] = "scale(1, 1.0)";
+      document.body.style["margin-top"] = "0%";
     }else if(item.fontSize === "16"){
-      document.body.style["zoom"]= "110%";
-      // localStorage.setItem("zoomLevel","110%");
-      // location.reload()
+      //document.body.style["zoom"]= "110%";
+      document.body.style["transform"] = "scale(1, 1.1)";
+      document.body.style["margin-top"] = "2.1%";
     }else if(item.fontSize === "18"){
-      // localStorage.setItem("zoomLevel","120%");
-      document.body.style["zoom"]= "120%";
-      // location.reload()
+      //document.body.style["zoom"]= "120%";
+      document.body.style["transform"] = "scale(1, 1.2)";
+      document.body.style["margin-top"] = "4.5%";
     }    
   }
 
@@ -276,7 +272,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         clickYesToProceed: this.popupMessages.genericmessage.clickYesToProceed,
         yesBtnFor:"logOutBtn",
         btnTxt: this.popupMessages.genericmessage.yesButton,
-        btnTxtNo: this.popupMessages.genericmessage.noButton
+        isYes:"Yes",
+        btnTxtNo: this.popupMessages.genericmessage.noButton,
+        isNo:"No"
       }
     });
     return dialogRef;
