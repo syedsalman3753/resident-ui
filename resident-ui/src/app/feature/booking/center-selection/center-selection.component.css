@@ -450,9 +450,9 @@ input[type="radio"] {
   height: auto !important;
 } */
 
-::ng-deep .cdk-overlay-connected-position-bounding-box{
+/* ::ng-deep .cdk-overlay-connected-position-bounding-box{
   right: auto !important;
-} 
+}  */
 
 ::ng-deep #cdk-overlay-0{
   right: auto !important;

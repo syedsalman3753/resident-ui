@@ -118,9 +118,9 @@
   height: auto !important;
 }
 
-::ng-deep .cdk-overlay-connected-position-bounding-box{
+/* ::ng-deep .cdk-overlay-connected-position-bounding-box{
   right: 30px !important;
-} 
+}  */
 
 /* ::ng-deep #cdk-overlay-0{
   right: 90px !important;
@@ -135,9 +135,9 @@
 } 
 
 
-/*::ng-deep .cdk-overlay-pane{
+/* ::ng-deep .cdk-overlay-pane{
   position: relative !important;
-}*/
+} */
 
 .dot{
   height: 10px;
