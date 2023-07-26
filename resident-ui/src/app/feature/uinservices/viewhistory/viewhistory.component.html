@@ -61,12 +61,6 @@
 	            <mat-card-header><span class="label">{{'viewhistory.inputStatus' | translate}}</span></mat-card-header>
 	            <!-- <mat-card-subtitle style="display: flex;"> -->
 					<span class="input">
-						<!-- <mat-select multiple #statusFilterSelectAll id="statusFilter"  placeholder="{{'viewhistory.inputStatus' | translate}}"
-						(selectionChange)="captureValue($event, 'statusFilter', 'dropdown')">
-						<mat-option [disabled]="statusHistorySelectedValue === 'all' && status.label !== 'All' " *ngFor="let status of statusTypeFilter" [id]="status.value" [value]="status.value"
-							>
-							{{status.label}}</mat-option>
-						</mat-select> -->
 						<button class="dropdown-btn" [matMenuTriggerFor]="basic2">{{statusHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
 						<mat-menu #basic2="matMenu">
 							<ng-container *ngFor="let status of statusTypeFilter">

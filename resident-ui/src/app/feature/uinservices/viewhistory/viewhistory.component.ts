@@ -169,10 +169,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  tosslePerOne(event:string, isStatusAllValue:boolean, formControlName:string){
+  tosslePerOne(isStatusAllValue:boolean, formControlName:string){
     if (isStatusAllValue) {
       this[formControlName] = this.statusTypeFilter2.join(",");
-      this.statusHistorySelectedValue = event;
+      this.statusHistorySelectedValue = this.langJSON.viewhistory.selectAll;
       this.statusTypeFilter = this.statusTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = true;
         return eachServiceType
@@ -214,15 +214,15 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     
     if(count === 3){
       this.isStatusAllValue = !this.isStatusAllValue;
-      this.tosslePerOne('All', this.isStatusAllValue, formControlName);
+      this.tosslePerOne(this.isStatusAllValue, formControlName);
     }
 
   }
 
-  historyTosslePerOne(event:string, isHistoryAllValue: boolean, formControlName: string) {
+  historyTosslePerOne(isHistoryAllValue: boolean, formControlName: string) {
     if (isHistoryAllValue) {
       this[formControlName] = this.serviceTypeFilter2.join(",");
-      this.serviceHistorySelectedValue = event;
+      this.serviceHistorySelectedValue = this.langJSON.viewhistory.selectAll;
       this.serviceTypeFilter = this.serviceTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = true;
         return eachServiceType
@@ -263,7 +263,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
     if(count === 5){
       this.isHistoryAllValue = !this.isHistoryAllValue;
-      this.historyTosslePerOne("All", this.isHistoryAllValue, formControlName);
+      this.historyTosslePerOne(this.isHistoryAllValue, formControlName);
     }
   }
 
@@ -273,10 +273,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       if (selectedValue === "ALL" || selectedValue === "all") {
         if (formControlName === "serviceType") {
           this.isHistoryAllValue = !this.isHistoryAllValue;
-          this.historyTosslePerOne(selectedValue, this.isHistoryAllValue, formControlName);
+          this.historyTosslePerOne(this.isHistoryAllValue, formControlName);
         } else {
           this.isStatusAllValue = !this.isStatusAllValue;
-          this.tosslePerOne(selectedValue,this.isStatusAllValue,formControlName);
+          this.tosslePerOne(this.isStatusAllValue,formControlName);
         }
       } else {
         if (formControlName === "serviceType") {
