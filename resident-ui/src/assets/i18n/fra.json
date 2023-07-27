@@ -241,7 +241,7 @@
         "searchBtn": "Rechercher",
         "description": "Description",
         "timestamp": "Horodatage",
-        "selectAll": "Tout sélectionner",
+        "selectAll": "Tout",
         "noData": "Aucun résultat à afficher",
         "historyType":"Type d'historique",
         "status":"Statut",
