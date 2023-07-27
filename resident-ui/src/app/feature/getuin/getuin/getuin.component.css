@@ -57,8 +57,14 @@
     opacity: 1;
 }
 
+.form-card{
+    width: 70%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
 .input-text {
-    width: 75%;
+    width: 60%;
     height: 36px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #909090;

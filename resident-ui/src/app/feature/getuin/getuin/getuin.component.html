@@ -8,7 +8,7 @@
       translate}}</mat-card-subtitle>
     <hr class="line" /> -->
     <div *ngIf="getUinData" class="form-container" [style.width]="width">
-      <form #basicForm="ngForm" (submit)="submitUserID(basicForm.value)">
+      <form class="form-card" #basicForm="ngForm" (submit)="submitUserID(basicForm.value)">
         <div class="uin-login-title-card">
           <mat-card-subtitle class="login-Input-heading">{{getUinData.title |
             translate}}</mat-card-subtitle>
