@@ -58,7 +58,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   message2:any;
   langCode = localStorage.getItem("langCode");
   serviceHistorySelectedValue: string;
-  statusHistorySelectedValue: string = "Status";
+  statusHistorySelectedValue: string;
   isLoading:boolean = true;
   dataAvailable:boolean = false;
   sitealignment:string = localStorage.getItem('direction');
@@ -179,7 +179,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       })
     } else {
       this[formControlName] = "";
-      this.statusHistorySelectedValue = 'Status';
+      this.statusHistorySelectedValue = this.langJSON.viewhistory.status;
       this.statusTypeFilter = this.statusTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = false;
         return eachServiceType
@@ -205,7 +205,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     });
 
     if(!this.statusHistorySelectedValue){
-      this.statusHistorySelectedValue = "Status";
+      this.statusHistorySelectedValue = this.langJSON.viewhistory.status;
     }else if(this.statusHistorySelectedValue.length > 26){
       this.statusHistorySelectedValue = this.statusHistorySelectedValue.substring(0,24) + "...";
     }else{
@@ -229,7 +229,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       })
     } else {
       this[formControlName] = "";
-      this.serviceHistorySelectedValue = 'History Type';
+      this.serviceHistorySelectedValue = this.langJSON.viewhistory.historyType;
       this.serviceTypeFilter = this.serviceTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = false;
         return eachServiceType
@@ -254,7 +254,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     });
   
     if(!this.serviceHistorySelectedValue){
-      this.serviceHistorySelectedValue = "History type";
+      this.serviceHistorySelectedValue = this.langJSON.viewhistory.historyType;
     }else if(this.serviceHistorySelectedValue.length > 26){
       this.serviceHistorySelectedValue = this.serviceHistorySelectedValue.substring(0,24) + "...";
     }else{
