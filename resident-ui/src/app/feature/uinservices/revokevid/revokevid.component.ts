@@ -258,7 +258,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
           // },120000)
         }else{
           this.isLoading = false;
-          console.log("error>>"+response.body['errors'])
+          this.showErrorPopup(response.body['errors'])
         }
       },
       error =>{
