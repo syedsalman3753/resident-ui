@@ -68,7 +68,7 @@ public class TestRunner {
 	
 	public static String getGlobalResourcePath() {
 		if (checkRunType().equalsIgnoreCase("JAR")) {
-			return new File(jarUrl).getParentFile().getAbsolutePath() + "/MosipTestResource".toString();
+			return new File(jarUrl).getParentFile().getAbsolutePath()+"/MosipTestResource".toString();
 		} else if (checkRunType().equalsIgnoreCase("IDE")) {
 			String path = new File(TestRunner.class.getClassLoader().getResource("").getPath()).getAbsolutePath()
 					.toString();

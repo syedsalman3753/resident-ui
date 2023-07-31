@@ -24,7 +24,7 @@ public class GetInformation extends ResidentBaseClass{
 		
 		 test=extent.createTest("GetInformation test", "verify Login"); 
         Commons.click(test,driver, By.id("dashboardCard2"));
-		Commons.click(test,driver, By.id("downloadAcknowledgementbtn"));
+//		Commons.click(test,driver, By.id("downloadAcknowledgementbtn"));
 		
 		Commons.click(test,driver, By.id("mat-tab-label-0-0"));
 		//Commons.dropdown(driver, By.id("mat-select-0"));
