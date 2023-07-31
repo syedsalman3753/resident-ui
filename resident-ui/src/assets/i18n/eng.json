@@ -96,7 +96,7 @@
             "rows": 1,
             "subMenus": [
                 {
-                    "displayName": "Click here for new enrolment",
+                    "displayName": "Click here for new enrollment",
                     "icon": "",
                     "route": "redirect",
                     "auditEventId": "ADM-004"

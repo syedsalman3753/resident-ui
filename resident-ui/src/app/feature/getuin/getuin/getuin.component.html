@@ -21,7 +21,7 @@
         <input id="aidValue" class="input-text" type="text" ngModel name="AID" (blur)="getCaptchaToken($event.target.value)" placeholder="{{getUinData.enterHere}}"/>
         <br />
         <label class="label-text" >{{getUinData.description | translate}}</label>
-        <div *ngIf="siteKey && captchaEnable">
+        <div *ngIf="siteKey && captchaEnable" id="recaptcha-container">
           <app-captcha [captchaSiteKey]="siteKey" [resetCaptcha]="resetCaptcha"
             (captchaEvent)="getCaptchaToken($event)"></app-captcha>
         </div>
