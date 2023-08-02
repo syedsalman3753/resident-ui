@@ -352,7 +352,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     let self = this;
     let fieldNameData = {};
     self.locationFieldNameList = [];
-    self.dataStorageService.getLocationHierarchyLevel(self.langCode).subscribe(response => {
+    self.dataStorageService.getLocationHierarchyLevel('eng').subscribe(response => {
       response["response"]["locationHierarchyLevels"].forEach(function (value) {
         if (value.hierarchyLevel != 0)
           if (value.hierarchyLevel <= self.locCode)
@@ -926,7 +926,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
     let fileSize = (files[0].size) / 1048576;
     if (!allowedFiles.includes(files[0].type)) {
-      console.log("invalid file")
       if (type === "POI") {
         this.isValidFileFormatPOI = true
       } else {
@@ -969,7 +968,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.warningMessage = this.popupMessages.updatedemographic.InvalidFileSize
       }
     }
-    console.log(this.files)
   }
 
   /**
