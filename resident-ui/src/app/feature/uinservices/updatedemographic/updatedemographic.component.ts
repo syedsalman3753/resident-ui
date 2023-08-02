@@ -91,6 +91,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   finalUserCloneData: any;
   updatingtype: string;
   sitealignment: string = localStorage.getItem('direction');
+  transactionIDForPOI:string = "";
+  transactionIDForPOA:string = "";
+  getAllDocIds:any = {};
+
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
     private dialog: MatDialog, private dataStorageService: DataStorageService,
@@ -173,6 +177,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.autoLogout.continueWatching();
     }
 
+  }
+
+  createTransactionIds(){
+    let transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
+    if (transactionID.length < 10) {
+      let diffrence = 10 - transactionID.length;
+      for (let i = 0; i < diffrence; i++) {
+        transactionID = transactionID + i
+      }
+    }
+    return transactionID
   }
 
 
@@ -387,13 +402,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   generateOtp() {
-    this.transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
-    if (this.transactionID.length < 10) {
-      let diffrence = 10 - this.transactionID.length;
-      for (let i = 0; i < diffrence; i++) {
-        this.transactionID = this.transactionID + i
-      }
-    }
+    this.transactionID = this.createTransactionIds()
     const request = {
       "id": "mosip.resident.contact.details.send.otp.id",
       "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
@@ -415,13 +424,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   reGenerateOtp() {
-    this.transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
-    if (this.transactionID.length < 10) {
-      let diffrence = 10 - this.transactionID.length;
-      for (let i = 0; i < diffrence; i++) {
-        this.transactionID = this.transactionID + i
-      }
-    }
+    this.transactionID = this.createTransactionIds();
 
     const request = {
       "id": "mosip.resident.contact.details.send.otp.id",
@@ -702,60 +705,52 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   uploadFiles(files, transactionID, docCatCode, docTypCode, referenceId) {
     this.dataStorageService.uploadfile(files, transactionID, docCatCode, docTypCode, referenceId).subscribe(response => {
-      console.log(response)
+      if(response['response']){
+        this.getAllDocIds[response['response'].docName] = response['response'].docId
+      }
     });
+  }
+
+  deleteUploadedFile(docId, transactionID){
+    this.dataStorageService.deleteUploadedFile(docId, transactionID).subscribe(response =>{
+      console.log(response)
+    })
+  }
+
+  finalUpdateDemographicData(transactionID:any){
+    const request = {
+      "id": this.appConfigService.getConfig()["resident.updateuin.id"],
+      "version": this.appConfigService.getConfig()["resident.vid.version.new"],
+      "requesttime": Utils.getCurrentDate(),
+      "request": {
+        "transactionID": transactionID,
+        "consent": "Accepted",
+        "identity": this.finalUserCloneData
+      }
+    };
+    this.dataStorageService.updateuin(request).subscribe(response => {
+      let eventId = response.headers.get("eventid");
+      this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
+      if (response.body["response"]) {
+        this.isLoading = false;
+        this.showMessage(this.message, eventId);
+        this.router.navigate(['uinservices/dashboard']);
+      } else {
+        this.isLoading = false;
+        this.showErrorPopup(response.body["errors"])
+      }
+    }, error => {
+      console.log(error)
+    })
   }
 
   updateDemographicData() {
     this.isLoading = true;
-    let transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
-    if (transactionID.length < 10) {
-      let diffrence = 10 - transactionID.length;
-      for (let i = 0; i < diffrence; i++) {
-        transactionID = transactionID + i
-      }
+    if(this.updatingtype === 'identity'){
+      this.finalUpdateDemographicData(this.transactionIDForPOI)
+    }else{
+      this.finalUpdateDemographicData(this.transactionIDForPOA)
     }
-    if (this.updatingtype === "identity") {
-      this.files.forEach((eachFile) => {
-        const formData = new FormData();
-        formData.append('file', eachFile);
-        this.uploadFiles(formData, transactionID, 'POI', this.proofOfIdentity['documenttype'], this.proofOfIdentity['documentreferenceId']);
-      })
-    }
-    if (this.updatingtype === "address") {
-      this.filesPOA.forEach(eachFile => {
-        const formData = new FormData();
-        formData.append('file', eachFile);
-        this.uploadFiles(formData, transactionID, 'POA', this.proofOfAddress['documenttype'], this.proofOfAddress['documentreferenceId']);
-      })
-    }
-
-    setTimeout(() => {
-      const request = {
-        "id": this.appConfigService.getConfig()["resident.updateuin.id"],
-        "version": this.appConfigService.getConfig()["resident.vid.version.new"],
-        "requesttime": Utils.getCurrentDate(),
-        "request": {
-          "transactionID": transactionID,
-          "consent": "Accepted",
-          "identity": this.finalUserCloneData
-        }
-      };
-      this.dataStorageService.updateuin(request).subscribe(response => {
-        let eventId = response.headers.get("eventid")
-        this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
-        if (response.body["response"]) {
-          this.isLoading = false;
-          this.showMessage(this.message, eventId);
-          this.router.navigate(['uinservices/dashboard']);
-        } else {
-          this.isLoading = false;
-          this.showErrorPopup(response.body["errors"])
-        }
-      }, error => {
-        console.log(error)
-      })
-    }, 4000)
   }
 
   updatenotificationLanguage() {
@@ -863,12 +858,16 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    * @param index (File index)
    */
   deleteFile(index: number, type: string) {
+    let documentName = this.files[index].name;
+    let documentID = this.getAllDocIds[documentName]
     if (type === "POI") {
       this.files.splice(index, 1);
       this.uploadedFiles = this.files
+      this.deleteUploadedFile(documentID, this.transactionIDForPOI)
     } else {
       this.filesPOA.splice(index, 1);
       this.uploadedFiles = this.filesPOA
+      this.deleteUploadedFile(documentID, this.transactionIDForPOA)
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
@@ -927,6 +926,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
     let fileSize = (files[0].size) / 1048576;
     if (!allowedFiles.includes(files[0].type)) {
+      console.log("invalid file")
       if (type === "POI") {
         this.isValidFileFormatPOI = true
       } else {
@@ -936,18 +936,26 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     } else {
       if (fileSize < 2.0) {
         if (type === "POI") {
+          this.transactionIDForPOI = this.transactionIDForPOI || this.createTransactionIds();
           this.isValidFileFormatPOI = false;
           for (const item of files) {
             item.progress = 0;
             this.files.push(item);
+            const formData = new FormData()
+            formData.append('file', item);
+            this.uploadFiles(formData, this.transactionIDForPOI, 'POI', this.proofOfIdentity['documenttype'], this.proofOfIdentity['documentreferenceId']);
           }
           this.uploadFilesSimulator(0, type);
           this.previewDisabled = false
         } else {
+          this.transactionIDForPOA = this.transactionIDForPOA || this.createTransactionIds()
           this.isValidFileFormatPOA = false;
           for (const item of files) {
             item.progress = 0;
             this.filesPOA.push(item);
+            const formData = new FormData()
+            formData.append('file', item);
+            this.uploadFiles(formData, this.transactionIDForPOA, 'POA', this.proofOfAddress['documenttype'], this.proofOfAddress['documentreferenceId']);
           }
           this.uploadFilesSimulator(0, type);
           this.previewDisabledInAddress = false
@@ -961,6 +969,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.warningMessage = this.popupMessages.updatedemographic.InvalidFileSize
       }
     }
+    console.log(this.files)
   }
 
   /**

@@ -34,7 +34,7 @@ export class CaptchaComponent implements OnInit {
               )
           );
       // }
-    }, 180);
+    }, 200);
   }
 
   ngOnChanges(): void {
