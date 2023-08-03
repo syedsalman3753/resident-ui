@@ -120,8 +120,9 @@ export class RevokevidComponent implements OnInit, OnDestroy {
     let results = [];
     self.finalTypeList = {};
     this.dataStorageService.getPolicy().subscribe(response => {
-      if (response["response"]) {
-        this.policyType = JSON.parse(response["response"]);
+      console.log(response)
+      if (response) {
+        this.policyType = response;
         this.isLoading = false;
         for (var i = 0; i < this.policyType.vidPolicies.length; i++) {
           results = [];
