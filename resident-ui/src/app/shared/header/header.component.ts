@@ -104,7 +104,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
       if(supportedLanguages.length > 1){
         supportedLanguages.map((language) => {
-          console.log(language)
           this.selectLanguagesArr.push({
            code: language.trim(),
            value: defaultJson.languages[language.trim()].nativeName,
@@ -283,13 +282,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if(message === "logIn"){
         const dialogRef = this.dialog.open(DialogComponent, {
-          width: '550px',
+          width: '550px', 
           data: {
             case: 'LoginLogoutSuccessMessages',
             title: this.popupMessages.genericmessage.successLabel,
             message: this.popupMessages.genericmessage.SuccessLogin,
             dearResident:this.popupMessages.genericmessage.dearResident,
-            btnTxt: this.popupMessages.genericmessage.successButton
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk:'OK'
           }
         });
         return dialogRef;
@@ -304,7 +304,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
             dearResident:this.popupMessages.genericmessage.dearResident,
             clickHere2: this.popupMessages.genericmessage.clickHere2,
             relogin: this.popupMessages.genericmessage.relogin,
-            btnTxt: this.popupMessages.genericmessage.successButton
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk:'OK'
           }
         });
         return dialogRef;
