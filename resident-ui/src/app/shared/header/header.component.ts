@@ -237,7 +237,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(item){
       this.selectedLanguage = item.nativeName;
       localStorage.setItem("langCode", item.code);
-      location.reload();
+      window.location.reload();
     }    
   }
 

@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.router.navigate(["regcenter"])
     }else if(item === "Booking an Appointment"){
       this.auditService.audit('RP-043', 'Book an appointment', 'RP-Book an appointment', 'Book an appointment', 'User clicks on "book an appointment" card');
-      window.open(this.appConfigService.getConfig()["mosip-prereg-ui-url"], "_blank");
+      window.open(this.appConfigService.getConfig()["mosip-prereg-ui-url"]+"#/"+localStorage.getItem("langCode"), "_blank");
     }else{
      this.router.navigate([item]); 
    }    
