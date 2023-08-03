@@ -272,19 +272,19 @@
             }
         },
         "statusTypeFilter": {
-            "all": {
+            "ALL": {
                 "statusType": "All",
                 "checked": false
             },
-            "Success": {
+            "SUCCESS": {
                 "statusType": "Success",
                 "checked": false
             },
-            "In Progress": {
+            "IN_PROGRESS": {
                 "statusType": "In Progress",
                 "checked": false
             },
-            "Failed": {
+            "FAILED": {
                 "statusType": "Failed",
                 "checked": false
             }
