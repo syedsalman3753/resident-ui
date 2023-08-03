@@ -272,19 +272,19 @@
             }
         },
         "statusTypeFilter": {
-            "all": {
+            "ALL": {
                 "statusType": "الكل",
                 "checked": false
             },
-            "Success": {
+            "SUCCESS": {
                 "statusType": "نجاح",
                 "checked": false
             },
-            "In Progress": {
+            "IN_PROGRESS": {
                 "statusType": "قيد التقدم",
                 "checked": false
             },
-            "Failed": {
+            "FAILED": {
                 "statusType": "فشل",
                 "checked": false
             }
