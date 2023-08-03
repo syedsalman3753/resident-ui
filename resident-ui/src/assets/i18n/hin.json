@@ -272,19 +272,19 @@
             }
         },
         "statusTypeFilter": {
-            "all": {
+            "ALL": {
                 "statusType": "सभी",
                 "checked": false
             },
-            "Success": {
+            "SUCCESS": {
                 "statusType": "सफलता",
                 "checked": false
             },
-            "In Progress": {
+            "IN_PROGRESS": {
                 "statusType": "प्रगति में",
                 "checked": false
             },
-            "Failed": {
+            "FAILED": {
                 "statusType": "असफल",
                 "checked": false
             }

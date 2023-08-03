@@ -272,19 +272,19 @@
             }
         },
         "statusTypeFilter": {
-            "all": {
+            "ALL": {
                 "statusType": "ಎಲ್ಲಾ",
                 "checked": false
             },
-            "Success": {
+            "SUCCESS": {
                 "statusType": "ಯಶಸ್ವಿ",
                 "checked": false
             },
-            "In Progress": {
+            "IN_PROGRESS": {
                 "statusType": "ನಡೆಯುತ್ತಿದೆ",
                 "checked": false
             },
-            "Failed": {
+            "FAILED": {
                 "statusType": "ವಿಫಲವಾಗಿದೆ",
                 "checked": false
             }

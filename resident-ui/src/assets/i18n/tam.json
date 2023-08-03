@@ -272,19 +272,19 @@
             }
         },
         "statusTypeFilter": {
-            "all": {
+            "ALL": {
                 "statusType": "அனைத்து",
                 "checked": false
             },
-            "Success": {
+            "SUCCESS": {
                 "statusType": "வெற்றி",
                 "checked": false
             },
-            "In Progress": {
+            "IN_PROGRESS": {
                 "statusType": "செயலாக்கம் செலுத்தப்படுகின்றது",
                 "checked": false
             },
-            "Failed": {
+            "FAILED": {
                 "statusType": "தோல்வி",
                 "checked": false
             }
