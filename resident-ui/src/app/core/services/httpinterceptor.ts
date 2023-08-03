@@ -93,7 +93,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 this.redirectService.redirect(window.location.href);
                 this.showMessage()
               } else {
-                this.router.navigateByUrl(`dashboard`);
+                console.log("window.location.href>>>"+window.location.href);
+                //this.router.navigateByUrl(`dashboard`);
               }
             }else if (err.status === 403 && err.statusText === "Forbidden") {
               this.showMessage()
