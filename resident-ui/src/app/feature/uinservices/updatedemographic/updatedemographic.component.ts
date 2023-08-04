@@ -858,16 +858,20 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    * @param index (File index)
    */
   deleteFile(index: number, type: string) {
-    let documentName = this.files[index].name;
-    let documentID = this.getAllDocIds[documentName]
     if (type === "POI") {
+      let documentName = this.files[index].name;
+      let documentID = this.getAllDocIds[documentName]
       this.files.splice(index, 1);
       this.uploadedFiles = this.files
       this.deleteUploadedFile(documentID, this.transactionIDForPOI)
+      this.pdfSrc = "";
     } else {
+      let documentName = this.filesPOA[index].name;
+      let documentID = this.getAllDocIds[documentName]
       this.filesPOA.splice(index, 1);
       this.uploadedFiles = this.filesPOA
       this.deleteUploadedFile(documentID, this.transactionIDForPOA)
+      this.pdfSrcPOA = ""
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
@@ -877,7 +881,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.previewDisabledInAddress = true;
       this.selectedPOAFileForPreview = "";
     }
-    this.pdfSrc = "";
   }
 
   /**
