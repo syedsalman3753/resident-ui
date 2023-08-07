@@ -456,23 +456,17 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     };
     this.dataStorageService
       .shareInfo(request)
-      .subscribe(data => {
-        this.eventId = data.headers.get("eventid")
-        this.dataStorageService
-          .getEIDStatus(this.eventId)
-          .subscribe((response) => {
-            if (response["response"]) {
-              this.isLoading = false;
-              this.aidStatus = response["response"];
-              this.showMessage();
-              this.router.navigate(["uinservices/dashboard"])
-              // this.router.navigateByUrl(`uinservices/trackservicerequest?eid=` + this.eventId)
-              // this.showAcknowledgement = true;
-            } else {
-              this.isLoading = false;
-              this.showErrorPopup(response["errors"])
-            }
-          });
+      .subscribe(response => {
+        this.eventId = response.headers.get("eventid")
+        console.log(response.body)
+        if (response.body["response"]) {
+          this.isLoading = false;
+          this.showMessage();
+          this.router.navigate(["uinservices/dashboard"])
+        } else {
+          this.isLoading = false;
+          this.showErrorPopup(response["errors"])
+        }
       },
         err => {
           console.error(err);
