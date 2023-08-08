@@ -526,6 +526,7 @@
         "clickYesToProceed": "Haz clic en Sí para continuar.",
         "logoutconfirmMessage": "¿Estás seguro de que deseas cerrar sesión?",
         "accessDenied": "No puedes acceder a este servicio ya que no has aceptado el consentimiento al iniciar sesión. Te solicitamos que vuelvas a iniciar sesión y aceptes el consentimiento relevante para continuar.",
+        "toFindRegCen":" para encontrar los centros de registro.",
         "getMyUin": {
             "downloadedSuccessFully": "Tu tarjeta UIN se ha descargado exitosamente para el ID de evento: $eventId.",
             "invalidOtp": "Se ingresó un OTP no válido. Por favor, haz clic en reenviar OTP e intenta nuevamente con un OTP válido."
@@ -626,7 +627,7 @@
         "verifyChannel": "Un UIN es tu Número de Identidad Única de 10 dígitos. Un VID es tu ID Virtual de 16 dígitos."
     },
     "serverErrors": {
-        "IDA-MLC-009": "No se encontró ningún correo electrónico o número de teléfono registrado con el UIN/VID ingresado. Para agregar un correo electrónico o número de teléfono, visita el centro de registro más cercano. Haz clic aquí para encontrar los centros de registro.",
+        "IDA-MLC-009": "No se encontró ningún correo electrónico o número de teléfono registrado con el UIN/VID ingresado. Para agregar un correo electrónico o número de teléfono, visita el centro de registro más cercano.",
         "IDA-MLC-018": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
         "RES-SER-422": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido.",
         "RES-SER-410": {

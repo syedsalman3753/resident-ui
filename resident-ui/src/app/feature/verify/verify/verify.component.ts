@@ -374,18 +374,37 @@ export class VerifyComponent implements OnInit, OnDestroy {
     } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }
-    this.dialog
+    if (this.errorCode === "IDA-MLC-009") {
+      this.dialog
       .open(DialogComponent, {
         width: '550px',
         data: {
-          case: 'MESSAGE',
+          case: 'errorMessageWithClickHere',
           title: this.popupMessages.genericmessage.errorLabel,
+          dearResident: this.popupMessages.genericmessage.dearResident,
           message: this.message,
+          clickHere2:this.popupMessages.genericmessage.clickHere2,
+          clickHere:this.popupMessages.genericmessage.clickHere,
           btnTxt: this.popupMessages.genericmessage.successButton,
-          isOk:"OK"
+          toFindRegCen:this.popupMessages.genericmessage.toFindRegCen,
+          isOk: "OK"
         },
         disableClose: true
       });
+    } else {
+      this.dialog
+        .open(DialogComponent, {
+          width: '550px',
+          data: {
+            case: 'MESSAGE',
+            title: this.popupMessages.genericmessage.errorLabel,
+            message: this.message,
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk: "OK"
+          },
+          disableClose: true
+        });
+    }
   }
 
 
