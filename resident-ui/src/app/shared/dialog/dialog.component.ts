@@ -210,6 +210,11 @@ export class DialogComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  regCenters(){
+    this.router.navigate(['regcenter'])
+    this.dialog.closeAll();
+  }
+
   sendResponse(value: any) {
     if (value.length > 0) {
       this.submitBtnDisabled = true

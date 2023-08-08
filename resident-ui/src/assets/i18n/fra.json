@@ -526,6 +526,7 @@
         "clickYesToProceed": "Cliquez sur Oui pour continuer.",
         "logoutconfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter.",
         "accessDenied": "Vous ne pouvez pas accéder à ce service car vous n'avez pas accepté le consentement lors de votre connexion. Veuillez vous reconnecter et accepter le consentement correspondant pour continuer.",
+        "toFindRegCen":" pour trouver les centres d'inscription.",
         "getMyUin": {
             "downloadedSuccessFully": "Votre carte UIN a été téléchargée avec succès pour l'ID d'événement : $eventId.",
             "invalidOtp": "Le code OTP saisi est invalide. Veuillez cliquer sur Renvoyer OTP et réessayer avec un code OTP valide."
@@ -626,7 +627,7 @@
         "verifyChannel": "Un UIN est votre numéro d'identification unique à 10 chiffres. Un VID est votre identifiant virtuel à 16 chiffres."
     },
     "serverErrors": {
-        "IDA-MLC-009": "Aucun e-mail ou numéro de téléphone enregistré n'a été trouvé avec le UIN/VID saisi. Pour ajouter une adresse e-mail ou un numéro de téléphone, veuillez vous rendre au centre d'enregistrement le plus proche. Cliquez ici pour trouver les centres d'enregistrement.",
+        "IDA-MLC-009": "Aucun e-mail ou numéro de téléphone enregistré n'a été trouvé avec le UIN/VID saisi. Pour ajouter une adresse e-mail ou un numéro de téléphone, veuillez vous rendre au centre d'enregistrement le plus proche.",
         "IDA-MLC-018": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer.",
         "RES-SER-422": "OTP invalide saisi. Veuillez réessayer avec un OTP valide.",
         "RES-SER-410": {

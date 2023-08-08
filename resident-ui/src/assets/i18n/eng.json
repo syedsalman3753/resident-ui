@@ -526,6 +526,7 @@
         "clickYesToProceed": "Click Yes to proceed.",
         "logoutconfirmMessage": "Are you sure you want to log out.",
         "accessDenied": "You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
+        "toFindRegCen":" to find the registration centres.",
         "getMyUin": {
             "downloadedSuccessFully": "Your UIN card has been successfully downloaded against the Event ID: $eventId.",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
@@ -626,7 +627,7 @@
         "verifyChannel": "A UIN is your 10-digit Unique Identity Number. VID is your 16-digit Virtual ID."
     },
     "serverErrors": {
-        "IDA-MLC-009": "No registered email ID/ phone number found with the entered UIN/ VID. To add an email ID/ phone number, visit the nearest registration center. Click here to find the registration centres.",
+        "IDA-MLC-009": "No registered email ID/ phone number found with the entered UIN/ VID. To add an email ID/ phone number, visit the nearest registration center.",
         "IDA-MLC-018": "Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
         "RES-SER-422": "Invalid OTP entered. Please try again with a valid OTP.",
         "RES-SER-410": {

@@ -145,9 +145,25 @@
     </div>
   </div>
 
+  <!-- errorMessageWithClickHere -->
+  <div *ngIf="input.case === 'errorMessageWithClickHere'" class="warning-message-container">
+    <div style="display: flex; align-items: start;">
+      <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
+      <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
+        <p>{{input.dearResident}}</p>
+        <p>{{input.message}}</p>
+        <p>{{input.clickHere2}} <span (click)="regCenters()"
+            class="navigate-link">{{input.clickHere.replace(".","")}}</span>{{input.toFindRegCen}}
+        </p>
+      </div>
+    </div>
+    <div mat-dialog-actions class="pop-up-footer">
+      <button mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+    </div>
+  </div>
+
   <!-- Access denied -->
-  <div *ngIf="input.case === 'accessDenied'"
-    style="padding: 12px; border: 1px solid red; background-color: #FFD9D8; color: red; border-radius: 8px;">
+  <div *ngIf="input.case === 'accessDenied'" class="warning-message-container">
     <div style="display: flex; align-items: start;">
       <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
       <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
