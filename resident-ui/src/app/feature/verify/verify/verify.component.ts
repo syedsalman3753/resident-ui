@@ -323,7 +323,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   showMessage(message: string,eventId:any) {
-    if (this.channelType === "PHONE") {
+    console.log(this.channelType)
+    if (this.otpChannel[0] === "PHONE") {
       this.message = this.popupMessages.genericmessage.verifyChannel.phoneSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
     } else {
       this.message = this.popupMessages.genericmessage.verifyChannel.emailSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
