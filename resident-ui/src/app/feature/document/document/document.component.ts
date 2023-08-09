@@ -22,17 +22,8 @@ export class DocumentComponent implements OnInit, OnDestroy {
     this.translateService.use(localStorage.getItem("langCode"));
 
     this.dataStorageService
-    .getDocuments(localStorage.getItem("langCode"))
-    .subscribe((response) => {
-      if(response["response"])
-        this.documentInfo = response["response"]["documentcategories"];
-    });
-
-    this.dataStorageService
     .getSupportingDocument()
     .subscribe((response:Blob) => {
-      console.log("response>>>");
-
       let blob = new Blob([response], { type: 'application/pdf' })
       let fileURL = URL.createObjectURL(blob);
 

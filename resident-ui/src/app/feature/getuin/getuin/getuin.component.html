@@ -1,7 +1,7 @@
 <div class="main-container" *ngIf="!isUinNotReady">
   <span class="breadcrumb">
-    <a (click)="onItemSelected('home')">{{'uinservices.home' | translate}} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<span
-      class="active">{{'uinservices.label' | translate}}</span>
+    <a (click)="onItemSelected('home')">{{popupMessages.uinservices.home }} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<span
+      class="active">{{popupMessages.uinservices.label}}</span>
   </span>
   <mat-card class="login-card">
     <!-- <mat-card-subtitle class="login-heading" *ngIf="getUinData.login">{{getUinData.login |
