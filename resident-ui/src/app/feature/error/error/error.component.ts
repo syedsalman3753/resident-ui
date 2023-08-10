@@ -7,14 +7,16 @@ import { LoginRedirectService } from 'src/app/core/services/loginredirect.servic
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
-
+  redirectUrl:string;
   constructor(
     private redirectService: LoginRedirectService
   ) { }
 
   ngOnInit() {
+   let urlData = window.location.href.split('#', )
+   this.redirectUrl = urlData[0] + "/#/" + "uinservices/dashboard"
   }
   login(){
-    this.redirectService.redirect(window.location.href);
+    this.redirectService.redirect(this.redirectUrl);
   }
 }
