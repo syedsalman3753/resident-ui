@@ -322,6 +322,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.getServiceHistory("","","");
     });
+    this.paginator.pageIndex = 0;
   }
 
   unpinData(data:any){
@@ -330,6 +331,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.getServiceHistory("", "", "");
       });
+      this.paginator.pageIndex = 0;
   }
 
   viewDetails(data: any) {

@@ -406,7 +406,8 @@
         "InvalidFileSize": "El documento que estás intentando cargar excede el límite de tamaño de archivo de 2 MB. Por favor, carga un documento dentro de 2 MB.",
         "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
-        "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar."
+        "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
+        "EnterAllAddress":"Por favor, dé la dirección completa"
     },
     "preview": {
         "title": "Avance"

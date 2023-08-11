@@ -94,6 +94,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   transactionIDForPOI:string = "";
   transactionIDForPOA:string = "";
   getAllDocIds:any = {};
+  isSelectedAllAddress:boolean = true;
 
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
@@ -214,7 +215,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             this.buildData()
             this.isLoading = false;
           } else {
-            console.log("Testing")
             this.getUpdateMyDataSchema();
             this.getUserInfo();
           }
@@ -367,6 +367,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   loadLocationDataDynamically(event: any, index: any) {
+    let unSelectedItems = this.locationFieldNameList.slice(index, this.locationFieldNameList.length)
     let locationCode = "";
     let fieldName = "";
     let self = this;
@@ -377,15 +378,19 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       fieldName = this.locationFieldNameList[parseInt(index)];
       locationCode = event.value.code;
       this.dynamicFieldValue[this.locationFieldNameList[parseInt(index) - 1]] = event.value;
+      this.isSelectedAllAddress = unSelectedItems.length ? false : true
     }
     this.dataStorageService.getImmediateChildren(locationCode, this.langCode)
       .subscribe(response => {
         if (response['response'])
           self.dynamicDropDown[fieldName] = response['response']['locations'];
       });
-    this.addingAddessData()
+    this.addingAddessData();
+    unSelectedItems.forEach(item =>{
+      this.dynamicDropDown[item] = [];
+    });
+    
   }
-
 
   sendOTPBtn(id: any) {
     if (id === "email") {

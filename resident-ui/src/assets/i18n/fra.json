@@ -406,7 +406,8 @@
         "InvalidFileSize": "Le document que vous essayez de télécharger dépasse la limite de taille de fichier de 2 Mo. Veuillez télécharger un document de taille inférieure à 2 Mo.",
         "sameNameInputErrorMsg": "Le nom que vous avez saisi existe déjà. Veuillez saisir un nouveau nom pour continuer.",
         "sameDobInputErrorMsg": "La date de naissance que vous avez saisie existe déjà. Veuillez saisir une nouvelle date de naissance pour continuer.",
-        "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer."
+        "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer.",
+        "EnterAllAddress":"Merci de donner l'adresse complète"
     },
     "preview": {
         "title": "Aperçu"
