@@ -95,7 +95,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   transactionIDForPOA:string = "";
   getAllDocIds:any = {};
   isSelectedAllAddress:boolean = true;
-
+  fieldName:string;
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
     private dialog: MatDialog, private dataStorageService: DataStorageService,
@@ -378,7 +378,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       fieldName = this.locationFieldNameList[parseInt(index)];
       locationCode = event.value.code;
       this.dynamicFieldValue[this.locationFieldNameList[parseInt(index) - 1]] = event.value;
-      this.isSelectedAllAddress = unSelectedItems.length ? false : true
+      this.isSelectedAllAddress = unSelectedItems.length ? false : true;
+      this.fieldName = fieldName;
     }
     this.dataStorageService.getImmediateChildren(locationCode, this.langCode)
       .subscribe(response => {
