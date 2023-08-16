@@ -311,7 +311,7 @@
                               <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
                             <tr>
-                              <td width="45%">
+                              <td width="45%" class="each-Hierarchy-td">
                                 <input *ngIf="field.attributeName === 'postalCode'" type="text" class="readonly"
                                   readonly="true" disabled="true" value="{{buildJSONData[field.attributeName]}}">
                                 <input
@@ -320,13 +320,16 @@
                                   value="{{buildJSONData[field.attributeName][langCode]}}">
                               </td>
                               <td width="10%"></td>
-                              <td width="45%">
+                              <td width="45%" class="each-Hierarchy-td">
                                 <mat-select [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
-                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);">
+                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);" >
                                   <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
                                     {{ data.name }}
                                   </mat-option>
                                 </mat-select>
+                                <span *ngIf="dynamicDropDown[field.name][0]">
+                                  <p *ngIf="dynamicDropDown[field.name][0].hierarchyName === fieldName" class="warning-message">{{langJson.EnterAllAddress}} {{fieldName}}</p>
+                                </span>
                               </td>
                             </tr>
                           </table>
@@ -396,7 +399,6 @@
                                   <h3>{{langJson.dropImage}}</h3>
                                 </div>
                                 <p *ngIf="isValidFileFormatPOA" class="warning-message">{{warningMessage}}</p>
-                                <p *ngIf="!isSelectedAllAddress" class="warning-message">{{langJson.EnterAllAddress}}</p>
                               </td>
                             </tr>
                             <tr *ngIf="displayPOAUpload" >

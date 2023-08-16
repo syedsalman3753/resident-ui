@@ -407,7 +407,7 @@
         "sameNameInputErrorMsg": "The name you have entered already exists. Please enter a new name to proceed.",
         "sameDobInputErrorMsg": "The DOB you have entered already exists. Please enter a new DOB to proceed.",
         "sameGenderInputErrorMsg": "The gender you have chosen already exists. Please choose a new gender to proceed.",
-        "EnterAllAddress":"Please give full address"
+        "EnterAllAddress":"Please select"
     },
     "preview": {
         "title": "Preview"

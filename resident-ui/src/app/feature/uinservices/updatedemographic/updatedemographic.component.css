@@ -293,10 +293,9 @@ mat-select {
 }
 
 .warning-message{
-  margin: 0px; 
+  margin: 2px 0 0 0; 
   color: red; 
   font-size: 11px;
-  margin-top: 5px;
 }
 .warning-message-for-contact{
   margin: 0px; 
@@ -331,6 +330,12 @@ mat-select {
 
 .preview-image{
   width: 50%
+}
+
+.each-Hierarchy-td{
+  text-align: start; 
+  vertical-align: text-top; 
+  height: 72px;
 }
 
 @media screen and (min-width:989px) {
