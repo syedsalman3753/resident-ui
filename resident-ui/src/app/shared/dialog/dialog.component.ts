@@ -238,7 +238,6 @@ export class DialogComponent implements OnInit {
     }
   }
   dismissPage(){
-    this.router.navigate(["/uinservices/dashboard"])
     this.dialog.closeAll()
   }
   logOut(){
