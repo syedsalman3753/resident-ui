@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { AppConfigService } from './app-config.service';
 import { AutoLogoutService } from 'src/app/core/services/auto-logout.service';
 import { Subscription } from 'rxjs';
-import { Event as NavigationEvent, Router, NavigationStart } from '@angular/router';
+import { Event as NavigationEvent, Router, NavigationStart, ActivatedRoute  } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
@@ -27,7 +27,8 @@ export class AppComponent {
     private router: Router,
     private logoutService: LogoutService,
     private auditService: AuditService,
-    private dataStorageService: DataStorageService
+    private dataStorageService: DataStorageService,
+    private route: ActivatedRoute
   ) {
     this.appConfigService.getConfig();
     if (this.primaryLangCode === "ara") {
@@ -36,7 +37,7 @@ export class AppComponent {
       localStorage.setItem('direction','ltr')
     }
     this.sitealignment = localStorage.getItem('direction');
-    document.body.dir = this.sitealignment
+    document.body.dir = this.sitealignment;
   }
   
   // @HostListener('window:popstate', ['$event'])
@@ -63,14 +64,16 @@ export class AppComponent {
     };
 
     this.dataStorageService.isAuthenticated().subscribe((response) => {
-      console.log("Testing>>>>>>>>")
       if(response){
+        console.log(response)
         if(response["response"]){
+          console.log("testing1")
           if (window.location.href.includes('uinservices')) {
           }else{
             this.router.navigate(['uinservices/dashboard']); 
           }
         }else{
+          console.log("testing2")
           let isExpried = window.location.href.split('?').length;
           if(isExpried > 1){
             this.router.navigate(['error']);
@@ -79,9 +82,11 @@ export class AppComponent {
           };
         }
       }else{
+        console.log("testing2")
         this.router.navigate(['dashboard']);
       }
     });
+    console.log(window.location.href.includes('error=invalid_transaction'))
     
     if(!localStorage.getItem("langCode")){
       localStorage.setItem("langCode", "eng");
