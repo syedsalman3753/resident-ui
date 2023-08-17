@@ -252,15 +252,6 @@ label{
   width: 100% !important;
 }
 
-mat-select {
-  outline: 1px solid !important;
-  outline-color: #ccc !important;
-  outline-width: thin;
-  border-radius: 5px;
-  color: white !important;
-  background: white;
-}
-
 /* ::ng-deep .mat-tab-label{
   border: 1px solid black;
 } */
@@ -336,6 +327,11 @@ mat-select {
   text-align: start; 
   vertical-align: text-top; 
   height: 72px;
+}
+
+.disable-dropdown{
+  background-color: #F4F4F4;
+  border-radius: 5px;
 }
 
 @media screen and (min-width:989px) {
