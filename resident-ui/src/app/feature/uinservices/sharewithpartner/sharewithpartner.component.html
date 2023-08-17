@@ -82,7 +82,7 @@
 								</tr>
 								<tr>
 									<td>
-										<mat-select id="partnerDetails" [style.width]="width">
+										<mat-select class="enable-dropdown" id="partnerDetails" [style.width]="width">
 											<mat-option (onSelectionChange)="captureDropDownValue($event)"
 												*ngFor="let partnerDetail of partnerDetails"
 												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">

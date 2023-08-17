@@ -99,7 +99,7 @@
                             <td width="10%"></td>
                             <td width="45%">
                               <mat-form-field style="min-width: 73%;">
-                                <mat-select [(ngModel)]="selected" id="{{field.attributeName}}">
+                                <mat-select class="enable-dropdown" [(ngModel)]="selected" id="{{field.attributeName}}">
                                   <mat-option *ngFor="let data of dropDownValues[field.attributeName]"
                                     (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, buildJSONData[field.attributeName][langCode])"
                                     [value]="data.code">{{ data.value }}</mat-option>
@@ -129,7 +129,7 @@
                           </tr>
                           <tr>
                             <td width="45%">
-                              <mat-select
+                              <mat-select class="enable-dropdown"
                                 [value]="proofOfIdentity['documenttype'] ? proofOfIdentity['documenttype'] : '' "
                                 id="{{field.attributeName}}">
                                 <mat-option style="min-width: 25.2rem;"
@@ -320,8 +320,8 @@
                                   value="{{buildJSONData[field.attributeName][langCode]}}">
                               </td>
                               <td width="10%"></td>
-                              <td width="45%" class="each-Hierarchy-td">
-                                <mat-select [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
+                              <td width="45%" class="each-Hierarchy-td" >
+                                <mat-select  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
                                   (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);" >
                                   <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
                                     {{ data.name }}
@@ -349,7 +349,7 @@
                             </tr>
                             <tr>
                               <td width="45%">
-                                <mat-select
+                                <mat-select class="enable-dropdown"
                                   [value]="proofOfAddress['documenttype'] ? proofOfAddress['documenttype'] : '' "
                                   id="{{field.attributeName}}">
                                   <mat-option style="min-width: 25.2rem;"
@@ -558,7 +558,7 @@
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
                   <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
                   <!-- <mat-card-subtitle> -->
-                    <mat-select [(ngModel)]="selected2" id="{{field.attributeName}}">
+                    <mat-select class="enable-dropdown" [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
                         (onSelectionChange)="capturePerfLang($event, field.attributeName, langCode, field.dataType)"
                         [value]="data.code">{{ data.name }}</mat-option>

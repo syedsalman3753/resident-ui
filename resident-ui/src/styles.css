@@ -398,7 +398,7 @@ app-document > ul{
   background-color: transparent !important;
 }
 
-mat-select {
+.enable-dropdown{
   outline: 1px solid !important;
   outline-color: #909090 !important;
   outline-width: thin;
