@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { AppConfigService } from './app-config.service';
 import { AutoLogoutService } from 'src/app/core/services/auto-logout.service';
 import { Subscription } from 'rxjs';
-import { Event as NavigationEvent, Router, NavigationStart, ActivatedRoute  } from '@angular/router';
+import { Event as NavigationEvent, Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
@@ -27,8 +27,7 @@ export class AppComponent {
     private router: Router,
     private logoutService: LogoutService,
     private auditService: AuditService,
-    private dataStorageService: DataStorageService,
-    private route: ActivatedRoute
+    private dataStorageService: DataStorageService
   ) {
     this.appConfigService.getConfig();
     if (this.primaryLangCode === "ara") {
@@ -65,28 +64,25 @@ export class AppComponent {
 
     this.dataStorageService.isAuthenticated().subscribe((response) => {
       if(response){
-        console.log(response)
         if(response["response"]){
-          console.log("testing1")
           if (window.location.href.includes('uinservices')) {
           }else{
             this.router.navigate(['uinservices/dashboard']); 
           }
         }else{
-          console.log("testing2")
-          let isExpried = window.location.href.split('?').length;
-          if(isExpried > 1){
+          if(window.location.href.includes('error=invalid_transaction')){
             this.router.navigate(['error']);
           }else{
             this.router.navigate(['dashboard']);
           };
         }
       }else{
-        console.log("testing2")
         this.router.navigate(['dashboard']);
       }
     });
-    console.log(window.location.href.includes('error=invalid_transaction'))
+    if(window.location.href.includes('error=invalid_transaction')){
+      this.router.navigate(['error']);
+    }
     
     if(!localStorage.getItem("langCode")){
       localStorage.setItem("langCode", "eng");
