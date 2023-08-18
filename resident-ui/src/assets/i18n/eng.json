@@ -513,7 +513,7 @@
         "clickHere": "here",
         "clickHere2": "click ",
         "relogin": " to login again.",
-        "login": " to log in.",
+        "login": " to login.",
         "otpPopupDescription": "One Time Password (OTP) has been sent to",
         "loginSuccessfully": "Dear resident, you logged in complected successfully",
         "successRemainMsg": "to track service request with pre-filled EID.",
@@ -528,6 +528,7 @@
         "logoutconfirmMessage": "Are you sure you want to log out.",
         "accessDenied": "You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
         "toFindRegCen":" to find the registration centres.",
+        "sessionExpired":"Session expired",
         "getMyUin": {
             "downloadedSuccessFully": "Your UIN card has been successfully downloaded against the Event ID: $eventId.",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
