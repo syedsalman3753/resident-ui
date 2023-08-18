@@ -407,7 +407,7 @@
         "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
-        "EnterAllAddress":"Por favor, dé la dirección completa"
+        "EnterAllAddress":"Por favor selecciona"
     },
     "preview": {
         "title": "Avance"
@@ -528,6 +528,7 @@
         "logoutconfirmMessage": "¿Estás seguro de que deseas cerrar sesión?",
         "accessDenied": "No puedes acceder a este servicio ya que no has aceptado el consentimiento al iniciar sesión. Te solicitamos que vuelvas a iniciar sesión y aceptes el consentimiento relevante para continuar.",
         "toFindRegCen":" para encontrar los centros de registro.",
+        "sessionExpired":"Sesión expirada",
         "getMyUin": {
             "downloadedSuccessFully": "Tu tarjeta UIN se ha descargado exitosamente para el ID de evento: $eventId.",
             "invalidOtp": "Se ingresó un OTP no válido. Por favor, haz clic en reenviar OTP e intenta nuevamente con un OTP válido."

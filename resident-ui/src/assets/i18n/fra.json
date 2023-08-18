@@ -407,7 +407,7 @@
         "sameNameInputErrorMsg": "Le nom que vous avez saisi existe déjà. Veuillez saisir un nouveau nom pour continuer.",
         "sameDobInputErrorMsg": "La date de naissance que vous avez saisie existe déjà. Veuillez saisir une nouvelle date de naissance pour continuer.",
         "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer.",
-        "EnterAllAddress":"Merci de donner l'adresse complète"
+        "EnterAllAddress":"Veuillez sélectionner"
     },
     "preview": {
         "title": "Aperçu"
@@ -528,6 +528,7 @@
         "logoutconfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter.",
         "accessDenied": "Vous ne pouvez pas accéder à ce service car vous n'avez pas accepté le consentement lors de votre connexion. Veuillez vous reconnecter et accepter le consentement correspondant pour continuer.",
         "toFindRegCen":" pour trouver les centres d'inscription.",
+        "sessionExpired":"La session a expiré",
         "getMyUin": {
             "downloadedSuccessFully": "Votre carte UIN a été téléchargée avec succès pour l'ID d'événement : $eventId.",
             "invalidOtp": "Le code OTP saisi est invalide. Veuillez cliquer sur Renvoyer OTP et réessayer avec un code OTP valide."
