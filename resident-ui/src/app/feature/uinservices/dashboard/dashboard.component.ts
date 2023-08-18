@@ -88,8 +88,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   @HostListener('window:popstate', ['$event'])
   PopState(event) {
-    console.log("Testing1")
-    console.log(window.location.hash)
     if (window.location.hash.includes("uinservices")) {
       console.log("Testing2")
     } else {
