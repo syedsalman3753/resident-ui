@@ -89,7 +89,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         if(active === "extraSmall"){
           this.cols = 1;
           this.width = "25em";
-          this.previewWidth = "19rem"
+          this.previewWidth = "21rem"
           this.attributeWidth = "10em";
         }
       }
