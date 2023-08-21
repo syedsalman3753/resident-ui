@@ -52,13 +52,6 @@
                     "route": "uinservices/sharewithpartner",
                     "description": " Residents can choose the data to be shared with any of the registered partners to avail various third party services.",
                     "auditEventId": "ADM-004"
-                },
-                {
-                    "displayName": "Update My Data",
-                    "icon": "assets/images/updatedemographic.png",
-                    "route": "uinservices/updatedemographic",
-                    "description": "Residents can update the already existing data associated with their UIN/ VID. The data that can be updated includes name, gender, DOB, address, documents uploaded, phone number, email ID, preferred language, etc.",
-                    "auditEventId": "ADM-004"
                 }
             ]
         },
