@@ -12,7 +12,7 @@
 }
 
 .button {
-  min-width: 225px;
+  width: 225px;
   height: 55px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 10px #00000014;
@@ -78,7 +78,7 @@ input {
 }
 
 .show-opt-panel-card{
-  min-width: 100%;
+  width: 100%;
   height: 628px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 5px #00000014;
@@ -88,7 +88,7 @@ input {
 }
 
 .button2 {
-  min-width: 108px;
+  width: 108px;
   height: 36px;
   /* background: #909090 0% 0% no-repeat padding-box; */
   border:none;
@@ -202,8 +202,4 @@ input{
   left: calc(50% - 10px);
   text-align: start !important;
   /* box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5); */
-}
-.label-for-otp{
-  margin: 0;
-  font-size: 10px;
 }

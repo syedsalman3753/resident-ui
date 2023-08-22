@@ -192,7 +192,7 @@ export class DownloadUinComponent implements OnInit {
         var reader = new FileReader();
           reader.onloadend = function(e) {
           let failureResponse = JSON.parse((<any>e.target).result)
-          self.showErrorMsgPopup(failureResponse.errors);
+          self.showErrorPopup(failureResponse.errors);
         }
         reader.readAsText(responseJson.body);
       }
@@ -215,7 +215,6 @@ export class DownloadUinComponent implements OnInit {
         trackStatusForLogin:this.popupMessages.genericmessage.trackStatusForLogin,
         relogin: this.popupMessages.genericmessage.login,
         btnTxt: this.popupMessages.genericmessage.successButton,
-        isok:"OK",
         passwordCombinationHeading: this.popupMessages.genericmessage.passwordCombinationHeading,
         passwordCombination: this.popupMessages.genericmessage.passwordCombination
       }
@@ -223,11 +222,11 @@ export class DownloadUinComponent implements OnInit {
     return dialogRef;
   }
 
-  showErrorMsgPopup(message: string) {
+  showErrorPopup(message: string) {
     this.errorCode = message[0]["errorCode"]
     if (this.errorCode === "RES-SER-410") {
-      let errorType = message[0]["message"].split("-")[1].trim();
-      this.message = this.popupMessages.serverErrors[this.errorCode][errorType]
+      let messageType = message[0]["message"].split("-")[1].trim();
+      this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
     } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }
@@ -238,8 +237,7 @@ export class DownloadUinComponent implements OnInit {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          isOk:'OK'
+          btnTxt: this.popupMessages.genericmessage.successButton
         },
         disableClose: true
       });

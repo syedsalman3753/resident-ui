@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   defaultJsonValue: any;
   selectedLanguage: any;
   supportedLanguages: Array<string>;
-  selectLanguagesArr: any = [];
+  selectLanguagesArr: any;
   zoomLevel:any = [{"fontSize":"12", "label":"Small"},{"fontSize":"14", "label":"Normal"},{"fontSize":"16", "label":"Large"},{"fontSize":"18", "label":"Huge"}];
   fullName: string;
   lastLogin: string;
@@ -41,8 +41,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   page = 1;
   selector: string = "#notificationMenu";
   clickEventSubscription: Subscription;
-  sitealignment:string = localStorage.getItem('direction');
-  activeUrl:string;
 
   constructor(
     private router: Router,
@@ -88,6 +86,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
  async ngOnInit() {
     this.defaultJsonValue = defaultJson;
+    this.supportedLanguages = [];
+    this.selectLanguagesArr = []; 
     let self = this;       
     setTimeout(()=>{        
       if(!localStorage.getItem("langCode")){
@@ -101,16 +101,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });                
       }
 
-      let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
+      let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
       if(supportedLanguages.length > 1){
+        this.selectLanguagesArr = [];
         supportedLanguages.map((language) => {
-          this.selectLanguagesArr.push({
-           code: language.trim(),
-           value: defaultJson.languages[language.trim()].nativeName,
-          });
+          if (defaultJson.languages && defaultJson.languages[language.trim()]) {
+            if(language === "eng"){
+              this.selectLanguagesArr.push({
+                code: language.trim(),
+                value: defaultJson.languages[language.trim()].name,
+              });
+            }
+          }
         });
       }
-      
+
       self.translateService.use(localStorage.getItem("langCode")); 
       self.textDir = localStorage.getItem("dir");
     }, 1000);    
@@ -139,7 +144,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.showMessage("logout")
       localStorage.removeItem('logOut');
     }
-    this.activeUrl = window.location.hash
+    
     // if(localStorage.getItem("zoomLevel")){
     //   document.body.style["zoom"] = localStorage.getItem("zoomLevel");
     // }
@@ -171,6 +176,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     .subscribe((response) => {
       if(response["response"])     
         this.notificationList = response["response"]["data"];
+        console.log(this.notificationList)
     });
 
     this.auditService.audit('RP-001', 'Notification section', 'RP-Notification', 'Notification section', 'User clicks on "notification" icon after logging in to UIN services');
@@ -215,21 +221,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   zoom(item:any) {
     if(item.fontSize === "12"){
-      //document.body.style["zoom"]= "90%";
-      document.body.style["transform"] = "scale(1, .9)";
-      document.body.style["margin-top"] = "-2.5%";
+      document.body.style["zoom"]= "90%";
+      // localStorage.setItem("zoomLevel","90%");
+      // location.reload();
     }else if(item.fontSize === "14"){
-      //document.body.style["zoom"]= "100%";
-      document.body.style["transform"] = "scale(1, 1.0)";
-      document.body.style["margin-top"] = "0%";
+      document.body.style["zoom"]= "100%";
+      // localStorage.setItem("zoomLevel","100%");
+      // location.reload()
     }else if(item.fontSize === "16"){
-      //document.body.style["zoom"]= "110%";
-      document.body.style["transform"] = "scale(1, 1.1)";
-      document.body.style["margin-top"] = "2.1%";
+      document.body.style["zoom"]= "110%";
+      // localStorage.setItem("zoomLevel","110%");
+      // location.reload()
     }else if(item.fontSize === "18"){
-      //document.body.style["zoom"]= "120%";
-      document.body.style["transform"] = "scale(1, 1.2)";
-      document.body.style["margin-top"] = "4.5%";
+      // localStorage.setItem("zoomLevel","120%");
+      document.body.style["zoom"]= "120%";
+      // location.reload()
     }    
   }
 
@@ -237,7 +243,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(item){
       this.selectedLanguage = item.nativeName;
       localStorage.setItem("langCode", item.code);
-      window.location.reload();
+      location.reload();
     }    
   }
 
@@ -270,9 +276,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         clickYesToProceed: this.popupMessages.genericmessage.clickYesToProceed,
         yesBtnFor:"logOutBtn",
         btnTxt: this.popupMessages.genericmessage.yesButton,
-        isYes:"Yes",
-        btnTxtNo: this.popupMessages.genericmessage.noButton,
-        isNo:"No"
+        btnTxtNo: this.popupMessages.genericmessage.noButton
       }
     });
     return dialogRef;
@@ -282,14 +286,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       if(message === "logIn"){
         const dialogRef = this.dialog.open(DialogComponent, {
-          width: '550px', 
+          width: '550px',
           data: {
             case: 'LoginLogoutSuccessMessages',
             title: this.popupMessages.genericmessage.successLabel,
             message: this.popupMessages.genericmessage.SuccessLogin,
             dearResident:this.popupMessages.genericmessage.dearResident,
-            btnTxt: this.popupMessages.genericmessage.successButton,
-            isOk:'OK'
+            btnTxt: this.popupMessages.genericmessage.successButton
           }
         });
         return dialogRef;
@@ -304,8 +307,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             dearResident:this.popupMessages.genericmessage.dearResident,
             clickHere2: this.popupMessages.genericmessage.clickHere2,
             relogin: this.popupMessages.genericmessage.relogin,
-            btnTxt: this.popupMessages.genericmessage.successButton,
-            isOk:'OK'
+            btnTxt: this.popupMessages.genericmessage.successButton
           }
         });
         return dialogRef;

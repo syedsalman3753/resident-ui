@@ -439,9 +439,6 @@ input[type="radio"] {
   height: 38px !important;
   border: 1px solid black;
   width: 160px;
-  outline: #909090 solid 1px!important;
-  border-radius: 5px;
-  color: #fff!important;
 }
 
 .mat-select-value{
@@ -453,9 +450,9 @@ input[type="radio"] {
   height: auto !important;
 } */
 
-/* ::ng-deep .cdk-overlay-connected-position-bounding-box{
+::ng-deep .cdk-overlay-connected-position-bounding-box{
   right: auto !important;
-}  */
+} 
 
 ::ng-deep #cdk-overlay-0{
   right: auto !important;

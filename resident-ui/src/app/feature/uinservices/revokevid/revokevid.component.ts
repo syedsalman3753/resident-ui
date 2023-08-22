@@ -10,8 +10,8 @@ import { MatDialog } from '@angular/material';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import {saveAs} from 'file-saver';
 import { AuditService } from "src/app/core/services/audit.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-revokevid",
@@ -43,10 +43,8 @@ export class RevokevidComponent implements OnInit, OnDestroy {
   message2:any;
   userPreferredLangCode = localStorage.getItem("langCode");
   isLoading:boolean = true;
-  sitealignment:string = localStorage.getItem('direction');
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,
-    private auditService: AuditService, private breakPointService: BreakpointService) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "confirmBtnForVid") {
         this.generateVID(this.newVidType)
@@ -55,21 +53,29 @@ export class RevokevidComponent implements OnInit, OnDestroy {
       }else if(id === "downloadVID"){
         this.vidDownloadStatus(this.newVidValue)
       }
-    });
-
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if (active) {
-        if(active === "extraSmall" || active === "small"){
+    })
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
           this.cols = 1;
         }
-        if(active === "ExtraLarge"){
-          this.cols = 4;
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 1;
         }
-        if(active === "medium"){
+        if (result.breakpoints[Breakpoints.Medium]) {
           this.cols = 2;
         }
-        if(active === "large"){
+        if (result.breakpoints[Breakpoints.Large]) {
           this.cols = 3;
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = 4;
         }
       }
     });
@@ -120,9 +126,8 @@ export class RevokevidComponent implements OnInit, OnDestroy {
     let results = [];
     self.finalTypeList = {};
     this.dataStorageService.getPolicy().subscribe(response => {
-      console.log(response)
-      if (response) {
-        this.policyType = response;
+      if (response["response"]) {
+        this.policyType = JSON.parse(response["response"]);
         this.isLoading = false;
         for (var i = 0; i < this.policyType.vidPolicies.length; i++) {
           results = [];
@@ -259,7 +264,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
           // },120000)
         }else{
           this.isLoading = false;
-          this.showErrorPopup(response.body['errors'])
+          console.log("error>>"+response.body['errors'])
         }
       },
       error =>{
@@ -349,8 +354,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         trackStatusText: this.popupMessages.genericmessage.trackStatusText,
         dearResident: this.popupMessages.genericmessage.dearResident,
         clickHere:this.popupMessages.genericmessage.clickHere,
-        btnTxt: this.popupMessages.genericmessage.successButton,
-        isOk:'OK'
+        btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
     return dialogRef;
@@ -370,8 +374,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         downloadedSuccessFully2: this.popupMessages.genericmessage.manageMyVidMessages.downloadedSuccessFully2,
         trackStatusText:this.popupMessages.genericmessage.trackStatusText,
         clickHere:this.popupMessages.genericmessage.clickHere,
-        btnTxt: this.popupMessages.genericmessage.successButton,
-        isOk:'OK'
+        btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
     return dialogRef;
@@ -385,10 +388,8 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.warningLabel,
         btnTxtNo: this.popupMessages.genericmessage.noButton,
-        isNo:"No",
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.deleteButton,
-        isDelete:"Delete"
+        btnTxt: this.popupMessages.genericmessage.deleteButton
       }
     });
     return dialogRef;
@@ -402,10 +403,9 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.warningLabel,
         btnTxtNo: this.popupMessages.genericmessage.noButton,
-        isNo:"No",
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.downloadLabel,
-        isDownload:"Download"
+
+        btnTxt: this.popupMessages.genericmessage.downloadLabel
       }
     });
     return dialogRef;
@@ -433,9 +433,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         clickYesToProceed: this.popupMessages.genericmessage.clickYesToProceed,
         yesBtnFor:"Vid",
         btnTxt: this.popupMessages.genericmessage.yesButton,
-        isYes:'Yes',
-        btnTxtNo: this.popupMessages.genericmessage.noButton,
-        isNo:"No"
+        btnTxtNo: this.popupMessages.genericmessage.noButton
       }
     });
     return dialogRef;
@@ -452,8 +450,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          isOk:'OK'
+          btnTxt: this.popupMessages.genericmessage.successButton
         },
         disableClose: true
       });

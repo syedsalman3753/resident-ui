@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
-import { MatDialog, MatPaginator,MatPaginatorIntl } from "@angular/material";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { MatDialog } from "@angular/material";
 import { DataStorageService } from "src/app/core/services/data-storage.service";
 import { RegistrationCentre } from "./registration-center-details.model";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -11,15 +11,12 @@ import { Subscription } from "rxjs";
 import { saveAs } from 'file-saver';
 import { AuditService } from "src/app/core/services/audit.service";
 
-
 @Component({
   selector: "app-center-selection",
   templateUrl: "./center-selection.component.html",
   styleUrls: ["./center-selection.component.css"]
 })
 export class CenterSelectionComponent implements OnInit, OnDestroy {
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-
   REGISTRATION_CENTRES: RegistrationCentre[] = [];
   searchClick: boolean = false;
   isWorkingDaysAvailable = false;
@@ -72,10 +69,9 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private translate: TranslateService,
     private activatedRoute: ActivatedRoute,
-    private auditService: AuditService,
-    private paginator: MatPaginatorIntl
+    private auditService: AuditService
   ) {
-    this.translate.use(this.langCode); 
+    this.translate.use(this.langCode);
   }
 
   async ngOnInit() {
@@ -98,7 +94,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     //this.openDialog();
     this.recommendedCenterLocCode = 5;
     const subs = this.dataService
-      .getLocationHierarchyLevel(this.langCode)
+      .getLocationHierarchyLevel("eng")
       .subscribe((response) => {
         //get all location types from db
         this.allLocationTypes = response[appConstants.RESPONSE]["locationHierarchyLevels"];
@@ -153,12 +149,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
       this.errorlabels = response["error"];
       this.apiErrorCodes = response[appConstants.API_ERROR_CODES];
       this.popupMessages = response;
-      this.paginator.itemsPerPageLabel = response['paginatorIntl'].itemsPerPageLabel;
-      const originalGetRangeLabel = this.paginator.getRangeLabel;
-        this.paginator.getRangeLabel = (page: number, size: number, len: number) => {
-          return originalGetRangeLabel(page, size, len)
-              .replace('of', response['paginatorIntl'].of);
-      }; 
     });
   }
   /**

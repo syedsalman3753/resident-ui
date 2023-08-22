@@ -55,39 +55,16 @@
 * {
   box-sizing: border-box;
 }
-::-webkit-input-placeholder {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
-}
-
-::-ms-input-placeholder {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
-}
-
-::-moz-placeholder {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
-}
 
 html,
 body {
   height: 100%;
   margin: 0;
-  font-family: "source_sans_pro_lightregular", Helvetica, sans-serif;
-  /* font-family: 'Roboto', 'Helvetica Neue', sans-serif; */
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   -ms-overflow-style: none;
   background-color: #F4F4F4;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
 }
-
-@-moz-document url-prefix() {
-  body {
-    font-weight: lighter !important;
-  }
-}
-
-
 .btn_axn-pri {
   min-width: 158px;
   min-height: 50px;
@@ -398,7 +375,7 @@ app-document > ul{
   background-color: transparent !important;
 }
 
-.enable-dropdown{
+mat-select {
   outline: 1px solid !important;
   outline-color: #909090 !important;
   outline-width: thin;

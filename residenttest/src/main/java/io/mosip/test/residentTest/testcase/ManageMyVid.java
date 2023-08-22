@@ -18,7 +18,7 @@ public void manageMyVid() throws Exception {
 		LoginTest.loginTest();
 		
 		test=extent.createTest(" Test ManageMyVid", "verify Login");
-		Commons.click(test,driver, By.id("uinservices/managemyvid"));
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
 	    Commons.click(test,driver, By.id("Perpetual"));
 	    test.log(Status.INFO, "Click on Perpetual");
 	    Commons.click(test,driver, By.id("confirmmessagepopup"));
@@ -29,7 +29,7 @@ public void manageMyVid() throws Exception {
 	    Commons.click(test,driver, By.id("confirmmessagepopup"));
 	    
 
-	   // Commons.click(test,driver, By.id("uinservices/managemyvid"));
+	    
 	    Commons.click(test,driver, By.id("Temporary"));
 	    test.log(Status.INFO, "Click on Temporary");
 	    Commons.click(test,driver, By.id("confirmmessagepopup"));
@@ -44,7 +44,6 @@ public void manageMyVid() throws Exception {
 	    Commons.click(test,driver, By.id("confirmmessagepopup"));
 	    Thread.sleep(3000);
 	    
-	  //  Commons.click(test,driver, By.id("uinservices/managemyvid"));
 	    Commons.click(test,driver, By.id("OneTimeUse"));
 	    test.log(Status.INFO, "Click on OneTimeUse");
 	    Commons.click(test,driver, By.id("confirmmessagepopup"));

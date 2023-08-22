@@ -5,14 +5,14 @@ import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { AppConfigService } from 'src/app/app-config.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
-import { MatDialog, MatPaginatorIntl } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { DateAdapter } from '@angular/material/core';
 import { saveAs } from 'file-saver';
 import { HeaderService } from 'src/app/core/services/header.service';
 import { AuditService } from "src/app/core/services/audit.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { MatPaginator } from '@angular/material/paginator';
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-viewhistory",
@@ -57,33 +57,35 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   searchParam:string;
   message2:any;
   langCode = localStorage.getItem("langCode");
-  serviceHistorySelectedValue: string;
-  statusHistorySelectedValue: string;
+  serviceHistorySelectedValue: string = "History type";
+  statusHistorySelectedValue: string = "Status";
   isLoading:boolean = true;
   dataAvailable:boolean = false;
-  sitealignment:string = localStorage.getItem('direction');
 
-  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, 
-    private translateService: TranslateService, private router: Router, 
-    private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, 
-    private breakPointService: BreakpointService,
-    private paginator2: MatPaginatorIntl
-    ) {
+  constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
     this.dateAdapter.setLocale('en-GB');
-
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if (active) {
-        if(active === "extraSmall"){
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
           this.cols = 1;
         }
-        if(active === "medium"){
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 2;
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
           this.cols = 4;
         }
-        if(active === "large" || active === "ExtraLarge"){
+        if (result.breakpoints[Breakpoints.Large]) {
           this.cols = 6;
         }
-        if(active === "small"){
-          this.cols = 2;
+        if (result.breakpoints[Breakpoints.XLarge]) {
+          this.cols = 6;
         }
       }
     });
@@ -97,14 +99,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.langJSON = response;
         this.popupMessages = response;
-        this.serviceHistorySelectedValue = response.viewhistory.historyType;
-        this.statusHistorySelectedValue = response.viewhistory.status;
-        this.paginator2.itemsPerPageLabel = response['paginatorIntl'].itemsPerPageLabel;
-        const originalGetRangeLabel = this.paginator2.getRangeLabel;
-        this.paginator2.getRangeLabel = (page: number, size: number, len: number) => {
-          return originalGetRangeLabel(page, size, len)
-              .replace('of', response['paginatorIntl'].of);
-      }; 
       });
 
     this.getServiceHistory("","","");
@@ -147,7 +141,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
           }
         } else {
           this.isLoading = false;
-          this.showErrorMessagePopup(response["errors"])
+          this.showErrorPopup(response["errors"])
         }
       });
   }
@@ -169,17 +163,17 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  tosslePerOne(isStatusAllValue:boolean, formControlName:string){
+  tosslePerOne(event:string, isStatusAllValue:boolean, formControlName:string){
     if (isStatusAllValue) {
       this[formControlName] = this.statusTypeFilter2.join(",");
-      this.statusHistorySelectedValue = this.langJSON.viewhistory.selectAll;
+      this.statusHistorySelectedValue = event;
       this.statusTypeFilter = this.statusTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = true;
         return eachServiceType
       })
     } else {
       this[formControlName] = "";
-      this.statusHistorySelectedValue = this.langJSON.viewhistory.status;
+      this.statusHistorySelectedValue = 'Status';
       this.statusTypeFilter = this.statusTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = false;
         return eachServiceType
@@ -205,7 +199,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     });
 
     if(!this.statusHistorySelectedValue){
-      this.statusHistorySelectedValue = this.langJSON.viewhistory.status;
+      this.statusHistorySelectedValue = "Status";
     }else if(this.statusHistorySelectedValue.length > 26){
       this.statusHistorySelectedValue = this.statusHistorySelectedValue.substring(0,24) + "...";
     }else{
@@ -214,22 +208,22 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     
     if(count === 3){
       this.isStatusAllValue = !this.isStatusAllValue;
-      this.tosslePerOne(this.isStatusAllValue, formControlName);
+      this.tosslePerOne('All', this.isStatusAllValue, formControlName);
     }
 
   }
 
-  historyTosslePerOne(isHistoryAllValue: boolean, formControlName: string) {
+  historyTosslePerOne(event:string, isHistoryAllValue: boolean, formControlName: string) {
     if (isHistoryAllValue) {
       this[formControlName] = this.serviceTypeFilter2.join(",");
-      this.serviceHistorySelectedValue = this.langJSON.viewhistory.selectAll;
+      this.serviceHistorySelectedValue = event;
       this.serviceTypeFilter = this.serviceTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = true;
         return eachServiceType
       })
     } else {
       this[formControlName] = "";
-      this.serviceHistorySelectedValue = this.langJSON.viewhistory.historyType;
+      this.serviceHistorySelectedValue = 'History Type';
       this.serviceTypeFilter = this.serviceTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = false;
         return eachServiceType
@@ -254,7 +248,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     });
   
     if(!this.serviceHistorySelectedValue){
-      this.serviceHistorySelectedValue = this.langJSON.viewhistory.historyType;
+      this.serviceHistorySelectedValue = "History type";
     }else if(this.serviceHistorySelectedValue.length > 26){
       this.serviceHistorySelectedValue = this.serviceHistorySelectedValue.substring(0,24) + "...";
     }else{
@@ -263,7 +257,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
     if(count === 5){
       this.isHistoryAllValue = !this.isHistoryAllValue;
-      this.historyTosslePerOne(this.isHistoryAllValue, formControlName);
+      this.historyTosslePerOne("All", this.isHistoryAllValue, formControlName);
     }
   }
 
@@ -273,10 +267,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       if (selectedValue === "ALL" || selectedValue === "all") {
         if (formControlName === "serviceType") {
           this.isHistoryAllValue = !this.isHistoryAllValue;
-          this.historyTosslePerOne(this.isHistoryAllValue, formControlName);
+          this.historyTosslePerOne(selectedValue, this.isHistoryAllValue, formControlName);
         } else {
           this.isStatusAllValue = !this.isStatusAllValue;
-          this.tosslePerOne(this.isStatusAllValue,formControlName);
+          this.tosslePerOne(selectedValue,this.isStatusAllValue,formControlName);
         }
       } else {
         if (formControlName === "serviceType") {
@@ -310,6 +304,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       this.auditService.audit('RP-010', 'View history', 'RP-View history', 'View history', 'User chooses the "status filter" from the drop-down');
       this.statusFilter = this.statusFilter.replace(/ALL,/ig, '').replace(/,\s*$/, "");
     }
+   
     if(event){
       event.stopPropagation()
     }
@@ -322,7 +317,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.getServiceHistory("","","");
     });
-    this.paginator.pageIndex = 0;
   }
 
   unpinData(data:any){
@@ -331,7 +325,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.getServiceHistory("", "", "");
       });
-      this.paginator.pageIndex = 0;
   }
 
   viewDetails(data: any) {
@@ -422,19 +415,15 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
         message: message,
-        btnTxt: this.popupMessages.genericmessage.successButton,
-        isOk:'OK'
+        btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
     return dialogRef;
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
-
-  showErrorMessagePopup(message: string) {
+  showErrorPopup(message: string) {
     let errorCode = message[0]['errorCode']
+    console.log(errorCode)
     setTimeout(() => {
         this.dialog
           .open(DialogComponent, {
@@ -443,12 +432,15 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
               case: 'MESSAGE',
               title: this.popupMessages.genericmessage.errorLabel,
               message: this.popupMessages.serverErrors[errorCode],
-              btnTxt: this.popupMessages.genericmessage.successButton,
-              isOk:"OK"
+              btnTxt: this.popupMessages.genericmessage.successButton
             },
             disableClose: true
           });
-    }, 500)
+    }, 400)
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   onItemSelected(item: any) {

@@ -58,7 +58,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
     private auditService: AuditService, 
     private breakpointObserver: BreakpointObserver
   ) {
-    this.appConfigService = this.appConfigService.getConfig();
+    this.translateService.use(localStorage.getItem("langCode"));
+    this.appConfigService.getConfig();
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -68,7 +69,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     ]).subscribe(result => {
       if (result.matches) {
         if (result.breakpoints[Breakpoints.XSmall]) {
-          this.width = "100%";
+          this.width = "90%";
           this.deviceSize = "XSmall";
         }
         if (result.breakpoints[Breakpoints.Small]) {
@@ -92,18 +93,18 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     let self = this;
     this.translateService
       .getTranslation(localStorage.getItem("langCode"))
       .subscribe(response => {
-        this.verifyChannelData = response.verifyuinvid;
+        this.verifyChannelData = response.verifyuinvid
+        console.log(this.verifyChannelData)
         this.popupMessages = response;
         this.infoText = response.InfomationContent.verifyChannel
       });
     setTimeout(() => {
-      self.siteKey = self.appConfigService["mosip.resident.captcha.sitekey"];
-      self.captchaEnable = self.appConfigService["mosip.resident.captcha.enable"]; 
+      self.siteKey = self.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
+      self.captchaEnable = self.appConfigService.getConfig()["mosip.resident.captcha.enable"]; 
     }, 1000);  
     /*this.captchaService.captchStatus.subscribe((status)=>{
       this.captchaStatus = status;
@@ -190,7 +191,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   setOtpTime() {
-    this.otpTimeMinutes = this.appConfigService['mosip.kernel.otp.expiry-time']/60;
+    this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60;
     this.interval = setInterval(() => {
       if (this.otpTimeSeconds < 0 || this.otpTimeSeconds === "00") {
         this.otpTimeSeconds = 59
@@ -224,7 +225,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.auditService.audit('RP-039', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on "resend OTP" button on verify phone number/email Id page');
     clearInterval(this.interval)
     this.otpTimeSeconds = "00"
-    this.otpTimeMinutes = this.appConfigService['mosip.kernel.otp.expiry-time']/60
+    this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60
     setInterval(this.interval)
     this.resetBtnDisable = true;
     this.generateOTP()
@@ -246,8 +247,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
     } 
     let self = this;
     const request = {
-      "id": self.appConfigService['mosip.resident.api.id.otp.request'],
-      "version": self.appConfigService["mosip.resident.api.version.otp.request"],
+      "id": self.appConfigService.getConfig()['mosip.resident.api.id.otp.request'],
+      "version": self.appConfigService.getConfig()["mosip.resident.api.version.otp.request"],
       "transactionID": self.transactionID,
       "requestTime": Utils.getCurrentDate(),
       "individualId": self.individualId,
@@ -281,12 +282,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
       if (!response["errors"]) {
         if (response["response"].verificationStatus) {
           this.showMessageWarning(JSON.stringify(response["response"]));
-          this.router.navigate(["dashboard"]);
+          this.router.navigate(["dashboard"])
         } else {
           this.generateOTP()
-          this.otpTimeMinutes = this.appConfigService['mosip.kernel.otp.expiry-time']/60
+          this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60
           this.otpTimeSeconds = "00"
-          this.disableSendOtp = true;
         }
       } else {
         this.showErrorPopup(response["errors"])
@@ -297,8 +297,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
   verifyOTP() {
     let self = this;
     const request = {
-      "id": self.appConfigService['mosip.resident.api.id.otp.request'],
-      "version": self.appConfigService["mosip.resident.api.version.otp.request"],
+      "id": self.appConfigService.getConfig()['mosip.resident.api.id.otp.request'],
+      "version": self.appConfigService.getConfig()["mosip.resident.api.version.otp.request"],
       "requesttime": Utils.getCurrentDate(),
       "request": {
         "transactionId": self.transactionID,
@@ -323,8 +323,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   showMessage(message: string,eventId:any) {
-    console.log(this.channelType)
-    if (this.otpChannel[0] === "PHONE") {
+    if (this.channelType === "PHONE") {
       this.message = this.popupMessages.genericmessage.verifyChannel.phoneSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
     } else {
       this.message = this.popupMessages.genericmessage.verifyChannel.emailSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
@@ -360,8 +359,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
         title: this.popupMessages.genericmessage.warningLabel,
         warningForChannel:this.popupMessages.genericmessage.warningForChannel,
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.successButton,
-        isOk:'OK'
+        btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
     return dialogRef;
@@ -375,37 +373,17 @@ export class VerifyComponent implements OnInit, OnDestroy {
     } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }
-    if (this.errorCode === "IDA-MLC-009") {
-      this.dialog
+    this.dialog
       .open(DialogComponent, {
         width: '550px',
         data: {
-          case: 'errorMessageWithClickHere',
+          case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
-          dearResident: this.popupMessages.genericmessage.dearResident,
           message: this.message,
-          clickHere2:this.popupMessages.genericmessage.clickHere2,
-          clickHere:this.popupMessages.genericmessage.clickHere,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          toFindRegCen:this.popupMessages.genericmessage.toFindRegCen,
-          isOk: "OK"
+          btnTxt: this.popupMessages.genericmessage.successButton
         },
         disableClose: true
       });
-    } else {
-      this.dialog
-        .open(DialogComponent, {
-          width: '550px',
-          data: {
-            case: 'MESSAGE',
-            title: this.popupMessages.genericmessage.errorLabel,
-            message: this.message,
-            btnTxt: this.popupMessages.genericmessage.successButton,
-            isOk: "OK"
-          },
-          disableClose: true
-        });
-    }
   }
 
 
