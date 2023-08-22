@@ -13,6 +13,16 @@
     overflow-wrap: break-word;
 }
 
+.detailinfo{
+    color: #000000; 
+    font-weight: 400; 
+    font-size: 14px;
+}
+
+tr {
+    word-break: break-word;
+}
+
 /*@media screen and (max-width:1480px) {
     .seleted-details-card{ 
         width: 70%;
