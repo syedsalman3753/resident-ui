@@ -14,7 +14,7 @@
 		<label class="main-label">{{'sharewithpartner.mainlabel' |
 			translate}}</label>
 		<table style="width:100%;">
-			<tr><mat-grid-list [cols]="cols" rowHeight="690px" gutterSize="10px"><mat-grid-tile>
+			<tr><mat-grid-list [cols]="cols" rowHeight="660px" gutterSize="10px"><mat-grid-tile>
 						<td [style.width]="width">
 							<table class="fixed" *ngFor="let data of schema; let i = index" style="width:100%;">
 								<tr>
@@ -53,23 +53,23 @@
 					<mat-grid-tile >
 						<td  [style.width]="previewWidth">
 							<div class="attribute-card" [style.width]="previewWidth">
-									<table  style="min-width: 339px; max-height: 217px;">
-										<tr>
-											<td rowspan='2' colspan='1' *ngIf="sharableAttributes['photo']"><img [src]="sharableAttributes['photo']['value']" alt='' width='70px' height='70px' /></td>
-											<td *ngIf="sharableAttributes['fullName']" colspan='2'>
+									<table  style="min-width: 100%; max-height: 217px;">
+										<tr style="word-break: break-word;">
+											<td rowspan='2' *ngIf="sharableAttributes['photo']"><img [src]="sharableAttributes['photo']['value']" alt='' width='70px' height='70px' /></td>
+											<td *ngIf="sharableAttributes['fullName']" >
 												<label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['fullName']['value']}}</span>
 											</td>
-											<td align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
+											<td colspan='2' align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
 										</tr>
-										<tr *ngIf="sharableAttributes['dateOfBirth'] || sharableAttributes['gender']">
+										<tr *ngIf="sharableAttributes['dateOfBirth'] || sharableAttributes['gender']" style="word-break: break-word;">
 											<td *ngIf="sharableAttributes['dateOfBirth']" colspan='1'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['dateOfBirth']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['dateOfBirth']['value']}}</span></td>
 											<td *ngIf="sharableAttributes['gender']"><label style="font-size: 12px;color: #666666;">{{sharableAttributes['gender']['label']}}</label><br> <span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['gender']['value']}}</span></td>
 										</tr>
-										<tr *ngIf="sharableAttributes['UIN'] || sharableAttributes['perpetualVID']">
+										<tr *ngIf="sharableAttributes['UIN'] || sharableAttributes['perpetualVID']" style="word-break: break-word;">
 											<td *ngIf="sharableAttributes['UIN']" colspan='2'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['UIN']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['UIN']['value']}}</span></td>
 											<td *ngIf="sharableAttributes['perpetualVID']"><label style="font-size: 12px;color: #666666;">{{sharableAttributes['perpetualVID']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['perpetualVID']['value']}}</span></td>
 										</tr>
-										<tr *ngIf="sharableAttributes['phone']">
+										<tr *ngIf="sharableAttributes['phone']" style="word-break: break-word;">
 											<td  colspan='3'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['phone']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['phone']['value']}}</span></td>
 										</tr>
 										<tr *ngIf="sharableAttributes['email']" style="word-break: break-word;">
@@ -91,7 +91,7 @@
 								</tr>
 								<tr>
 									<td>
-										<mat-select class="enable-dropdown" id="partnerDetails" [style.width]="width">
+										<mat-select class="enable-dropdown" id="partnerDetails" [style.width]="previewWidth">
 											<mat-option (onSelectionChange)="captureDropDownValue($event)"
 												*ngFor="let partnerDetail of partnerDetails"
 												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">
@@ -107,7 +107,7 @@
 								</tr>
 								<tr>
 									<td>
-										<textarea [attr.maxlength]="totalCommentCount" [style.width]="width"
+										<textarea [attr.maxlength]="totalCommentCount" [style.width]="previewWidth"
 											id="sharingReasonPlaceholder" class="purpose-input-box" matInput
 											placeholder="{{'sharewithpartner.sharingReasonPlaceholder' | translate}}"
 											(input)="getpurpose($event)"></textarea>

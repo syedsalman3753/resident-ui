@@ -40,23 +40,23 @@
 				</td></mat-grid-tile><mat-grid-tile>
 				<td style="vertical-align: top;" [style.width] = "previewWidth">
 					<div class="seleted-details-card" [style.width]="previewWidth">
-					<table style="min-width: 339px; max-height: 217px;">
-						<tr>
-							<td rowspan='2' colspan='1' *ngIf="dataDisplay['photo']"><img [src]="dataDisplay['photo']['value']" alt='' width='70px' height='70px' /></td>
-							<td *ngIf="dataDisplay['fullName']" colspan='2'>
+					<table style="min-width: 100%; max-height: 217px;">
+						<tr style="word-break: break-word;">
+							<td rowspan='2'  *ngIf="dataDisplay['photo']"><img [src]="dataDisplay['photo']['value']" alt='' width='70px' height='70px' /></td>
+							<td *ngIf="dataDisplay['fullName']" >
 								<label style="font-size: 12px;color: #666666;">{{dataDisplay['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{dataDisplay['fullName']['value']}}</span>
 							</td>
-							<td align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
+							<td colspan='2' align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
 						</tr>
-						<tr *ngIf="dataDisplay['dateOfBirth'] || dataDisplay['gender']">
+						<tr *ngIf="dataDisplay['dateOfBirth'] || dataDisplay['gender']" style="word-break: break-word;">
 							<td *ngIf="dataDisplay['dateOfBirth']" colspan='1'><label style="font-size: 12px;color: #666666;">{{dataDisplay['dateOfBirth']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{dataDisplay['dateOfBirth']['value']}}</span></td>
 							<td *ngIf="dataDisplay['gender']"><label style="font-size: 12px;color: #666666;">{{dataDisplay['gender']['label']}}</label><br> <span style="color: #000000; font-weight: 600; font-size: 15px;">{{dataDisplay['gender']['value']}}</span></td>
 						</tr>
-						<tr *ngIf="dataDisplay['UIN'] || dataDisplay['perpetualVID']">
+						<tr *ngIf="dataDisplay['UIN'] || dataDisplay['perpetualVID']" style="word-break: break-word;">
 							<td *ngIf="dataDisplay['UIN']" colspan='2'><label style="font-size: 12px;color: #666666;">{{dataDisplay['UIN']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{dataDisplay['UIN']['value']}}</span></td>
 							<td *ngIf="dataDisplay['perpetualVID']"><label style="font-size: 12px;color: #666666;">{{dataDisplay['perpetualVID']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{dataDisplay['perpetualVID']['value']}}</span></td>
 						</tr>
-						<tr *ngIf="dataDisplay['phone']">
+						<tr *ngIf="dataDisplay['phone']" style="word-break: break-word;">
 							<td  colspan='3'><label style="font-size: 12px;color: #666666;">{{dataDisplay['phone']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{dataDisplay['phone']['value']}}</span></td>
 						</tr>
 						<tr *ngIf="dataDisplay['email']" style="word-break: break-word;">
