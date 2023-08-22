@@ -5,9 +5,9 @@ import { DataStorageService } from "src/app/core/services/data-storage.service";
 import { AppConfigService } from 'src/app/app-config.service';
 import { Subscription } from "rxjs";
 import { AuditService } from "src/app/core/services/audit.service";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { LoginRedirectService } from 'src/app/core/services/loginredirect.service'
 
-import { LoginRedirectService } from 'src/app/core/services/loginredirect.service';
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   userPreferredLangCode = localStorage.getItem("langCode");
   cols : number;
+  sitealignment:string = localStorage.getItem('direction');
   
   constructor(
     private router: Router,
@@ -27,34 +28,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private appConfigService: AppConfigService,
     private auditService: AuditService,
-    private breakpointObserver: BreakpointObserver,
+    private breakPointService: BreakpointService,
     private redirectService: LoginRedirectService
   ) {
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
+    this.breakPointService.isBreakpointActive().subscribe(active =>{
+      if (active) {
+        if(active === "extraSmall"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Small]) {
+        if(active === "small"){
           this.cols = 1;
         }
-        if (result.breakpoints[Breakpoints.Medium]) {
+        if(active === "medium"){
           this.cols = 2;
         }
-        if (result.breakpoints[Breakpoints.Large]) {
+        if(active === "large"){
           this.cols = 3;
         }
-        if (result.breakpoints[Breakpoints.XLarge]) {
+        if(active === "ExtraLarge"){
           this.cols = 3;
         }
       }
-    });  
+    });
   }
 
   async ngOnInit() {
@@ -73,7 +68,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.router.navigate(["regcenter"])
     }else if(item === "Booking an Appointment"){
       this.auditService.audit('RP-043', 'Book an appointment', 'RP-Book an appointment', 'Book an appointment', 'User clicks on "book an appointment" card');
-      window.open(this.appConfigService.getConfig()["mosip-prereg-ui-url"], "_blank");
+      window.open(this.appConfigService.getConfig()["mosip-prereg-ui-url"]+"#/"+localStorage.getItem("langCode"), "_blank");
     }else{
      this.router.navigate([item]); 
    }    

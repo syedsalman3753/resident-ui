@@ -11,6 +11,10 @@ ul, li{
   border: 1px solid silver;
   background: #FAF8F8 0% 0% no-repeat padding-box;
 }
+.mat-card-header-text{
+  display: flex;
+  margin: 0px;
+}
 .tp-radio-group {  
   display: inline-flex;  
   flex-direction: column;  
@@ -97,4 +101,15 @@ mat-card-subtitle{
   margin-top: .3rem;
   column-gap: 15px;
   margin-bottom: 0px;
+}
+
+.empty-vid-card{
+  width: 56%; 
+  background-color: #F4F4F4;
+}
+
+@media screen and (max-width: 550px){
+  .empty-vid-card{
+    width: 100%;
+  }
 }

@@ -33,6 +33,7 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
   isLoading:boolean = true;
   eventIdValidation:any;
   showWarningMessage:boolean = false;
+  disableDownloadVidBtn:boolean = false;
 
   constructor(private autoLogout: AutoLogoutService,private renderer:Renderer2 ,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private route: ActivatedRoute,private auditService: AuditService) {
     this.renderer.listen('window','click',(e:Event) =>{
@@ -140,7 +141,8 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
         case: 'MESSAGE',
         title: this.popupMessages.genericmessage.successLabel,
         message: message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk:'OK'
       }
     });
     return dialogRef;
@@ -163,7 +165,8 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton
+          btnTxt: this.popupMessages.genericmessage.successButton,
+          isOk:"OK"
         },
         disableClose: true
       });
@@ -173,8 +176,8 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     this.dataStorageService.downloadVidCardStatus(eventId).subscribe(response =>{
      let fileName = ""
      const contentDisposition = response.headers.get('Content-Disposition');
-     console.log(contentDisposition)
      if (contentDisposition) {
+      this.disableDownloadVidBtn = true;
        const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
        const matches = fileNameRegex.exec(contentDisposition);
        if (matches != null && matches[1]) {

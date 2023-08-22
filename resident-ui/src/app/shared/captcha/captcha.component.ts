@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+
 @Component({
   selector: "app-captcha",
   templateUrl: "./captcha.component.html",
@@ -9,14 +11,30 @@ export class CaptchaComponent implements OnInit {
   @Input() captchaSiteKey: string;
   @Input() resetCaptcha: boolean;
   @Output() captchaEvent = new EventEmitter<string>();
-  langCode: string;
-  constructor(private activatedRoute: ActivatedRoute) {}
+  langCode: string = localStorage.getItem("langCode");
+  captchaLangCode:any;
+  constructor(private activatedRoute: ActivatedRoute,private translateService: TranslateService,) {}
 
   ngOnInit() {
-    this.langCode = localStorage.getItem("langCode");
-    /*this.activatedRoute.paramMap.subscribe((param) => {
-      this.langCode = param.get("lang").substr(0, 2);
-    });*/
+    this.translateService
+    .getTranslation('default')
+      .subscribe(response => {
+          this.captchaLangCode = response.keyboardMapping[this.langCode]
+      })
+    
+    setTimeout(() => {
+      const iframeGoogleCaptcha = document.getElementById("recaptcha-container").querySelector('iframe');
+      // const currentLang = iframeGoogleCaptcha.getAttribute("src").match(/hl=(.*?)&/).pop();
+      // if (currentLang !== lang) {
+          iframeGoogleCaptcha.setAttribute(
+              "src",
+              iframeGoogleCaptcha.getAttribute("src").replace(
+                  /hl=(.*?)&/,
+                  'hl=' + this.captchaLangCode + '&'
+              )
+          );
+      // }
+    }, 200);
   }
 
   ngOnChanges(): void {

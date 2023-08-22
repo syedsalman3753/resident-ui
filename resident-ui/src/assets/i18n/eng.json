@@ -3,7 +3,7 @@
         {
             "displayName": "UIN Services",
             "displaydescription": "Residents can use these services to view, update, manage or share their data. They can also report an issue in case of a grievance.",
-            "availableServicesDescription":"Following are the available services:",
+            "availableServicesDescription": "Following are the available services:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
             "activeIcon": "./assets/images/UIN Services.png",
             "route": "",
@@ -29,7 +29,7 @@
                     "displayName": "Secure My ID",
                     "icon": "assets/images/lockunlockauth.png",
                     "route": "uinservices/lockunlockauth",
-                    "description": " View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
+                    "description": "View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -52,13 +52,6 @@
                     "route": "uinservices/sharewithpartner",
                     "description": " Residents can choose the data to be shared with any of the registered partners to avail various third party services.",
                     "auditEventId": "ADM-004"
-                },
-                {
-                    "displayName": "Update My Data",
-                    "icon": "assets/images/updatedemographic.png",
-                    "route": "uinservices/updatedemographic",
-                    "description": "Residents can update the already existing data associated with their UIN/ VID. The data that can be updated includes name, gender, DOB, address, documents uploaded, phone number, email ID, preferred language, etc.",
-                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -70,7 +63,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
-            "availableServicesDescription":"Click here to search for",
+            "availableServicesDescription": "Click here to search for",
             "subMenus": [
                 {
                     "displayName": "Registration Centers",
@@ -96,7 +89,7 @@
             "rows": 1,
             "subMenus": [
                 {
-                    "displayName": "Click here for new enrolment",
+                    "displayName": "Click here for new enrollment",
                     "icon": "",
                     "route": "redirect",
                     "auditEventId": "ADM-004"
@@ -132,6 +125,10 @@
             ]
         }
     ],
+    "header":{
+        "lastLogin":"Last Login",
+        "logout":"Logout"
+    },
     "dashboard": {
         "welcomeMessage": "Welcome to Mosip Partner portal !",
         "Logout": "Logout",
@@ -150,6 +147,7 @@
         "plaginLabel": "I'm not a robot",
         "buttonText": "Send OTP",
         "home": "Home",
+        "enterHere": "Enter Here",
         "label": "Get My UIN",
         "icon": "assets/images/info_black_24dp (1).png"
     },
@@ -161,7 +159,8 @@
         "otpDescription": "One Time Password (OTP) has been sent to your registered Mobile Number",
         "otpDescriptionEmail": " and your registered Email ID",
         "resendBtnLabel": "Resend OTP",
-        "submitBtnLabel": "Submit"
+        "submitBtnLabel": "Submit",
+        "enterOtp": "Enter OTP here"
     },
     "centerSelection": {
         "title": " Book Appointment ",
@@ -179,10 +178,10 @@
         "action_continue": "Continue",
         "noResult_found": "No results Found",
         "lunch_hours": "Lunch",
-        "helpText":"Registration centers based on your geo-location",
-        "noRegCentersNearby":"No nearby Registration Centers found. Please enter text manually to look for Registration Centers.",
-        "noRegCenters":"No Registration Center found.",
-        "warnMessage":"Please enter letters/numbers in order to search."
+        "helpText": "Registration centers based on your geo-location",
+        "noRegCentersNearby": "No nearby Registration Centers found. Please enter text manually to look for Registration Centers.",
+        "noRegCenters": "No Registration Center found.",
+        "warnMessage": "Please enter letters/numbers in order to search."
     },
     "downloadDocument": {
         "downloadbutton": "Download"
@@ -203,9 +202,9 @@
         "TotalCharacters": "Total Characters",
         "remainingCharacters": "Remaining"
     },
-    "breadCrumbNames":{
-        "trackMyRequest":"Track My Request",
-        "viewMyHistory":"View My History"
+    "breadCrumbNames": {
+        "trackMyRequest": "Track My Request",
+        "viewMyHistory": "View My History"
     },
     "verifyuinvid": {
         "title": "",
@@ -215,15 +214,14 @@
         "captcha": "Enter Captcha",
         "sendotp": "Send OTP",
         "otp": "Enter OTP",
-        "submit": "Submit",
-        "resendotp": "Resend OTP",
         "phoneicon": "assets/images/phone_iphone_black_24dp.png",
         "subTitle": "The OTP will expire in",
         "inputLabel": "Enter One Time Password (OTP)",
         "otpDescriptionEmail": "Please enter the OTP that has been sent to your registered email ID ",
         "otpDescriptionPhone": "Please enter the OTP that has been sent to your registered phone number ",
         "resendBtnLabel": "Resend OTP",
-        "submitBtnLabel": "Submit"
+        "submitBtnLabel": "Submit",
+        "back": "Back"
     },
     "viewhistory": {
         "title": "View My History",
@@ -237,20 +235,52 @@
         "description": "Description",
         "timestamp": "Timestamp",
         "selectAll": "All",
-        "noData":"No results to show",
+        "noData": "No results to show",
+        "historyType": "History type",
+        "status": "Status",
         "serviceTypeFilter": {
-            "ALL": {"serviceType":"All","checked":false},
-            "AUTHENTICATION_REQUEST": {"serviceType":"Authentication Request", "checked":false},
-            "SERVICE_REQUEST": {"serviceType":"Service Request","checked":false},
-            "DATA_UPDATE_REQUEST": {"serviceType":"Data Update Request","checked":false},
-            "ID_MANAGEMENT_REQUEST": {"serviceType":"ID Management Request","checked":false},
-            "DATA_SHARE_REQUEST": {"serviceType":"Data Share Request","checked":false}
+            "ALL": {
+                "serviceType": "All",
+                "checked": false
+            },
+            "AUTHENTICATION_REQUEST": {
+                "serviceType": "Authentication Request",
+                "checked": false
+            },
+            "SERVICE_REQUEST": {
+                "serviceType": "Service Request",
+                "checked": false
+            },
+            "DATA_UPDATE_REQUEST": {
+                "serviceType": "Data Update Request",
+                "checked": false
+            },
+            "ID_MANAGEMENT_REQUEST": {
+                "serviceType": "ID Management Request",
+                "checked": false
+            },
+            "DATA_SHARE_REQUEST": {
+                "serviceType": "Data Share Request",
+                "checked": false
+            }
         },
         "statusTypeFilter": {
-            "all": {"statusType":"All", "checked":false},
-            "Success": {"statusType":"Success", "checked":false},
-            "In Progress": {"statusType":"In Progress", "checked":false},
-            "Failed": {"statusType":"Failed", "checked":false}
+            "ALL": {
+                "statusType": "All",
+                "checked": false
+            },
+            "SUCCESS": {
+                "statusType": "Success",
+                "checked": false
+            },
+            "IN_PROGRESS": {
+                "statusType": "In Progress",
+                "checked": false
+            },
+            "FAILED": {
+                "statusType": "Failed",
+                "checked": false
+            }
         },
         "reportIssueLabel": "Report an Issue",
         "pinToTopLabel": "Pin to top",
@@ -294,8 +324,8 @@
         "expiry": "Expiry",
         "vid": "VID",
         "transactionLeft": "Transaction Left",
-        "noVidsText":"You do not have any $VIDTYPE at present. Please click on ",
-        "noVidsText2":" button to generate a new one."
+        "noVidsText": "You do not have any $VIDTYPE at present. Please click on ",
+        "noVidsText2": " button to generate a new one."
     },
     "lockunlockauth": {
         "title": "Secure My ID",
@@ -317,12 +347,30 @@
         "generatevidtoggle": "Generate VID",
         "revokevidtoggle": "Revoke VID",
         "labelmap": {
-            "demo": "Demographic Authentication",
-            "bio-FINGER": "Fingerprint Authentication",
-            "bio-IRIS": "Iris Authentication",
-            "bio-FACE": "Face Authentication",
-            "otp-email": "Email OTP Authentication",
-            "otp-phone": "Mobile OTP Authentication"
+            "demo": {
+                "label": "Demographic Authentication",
+                "icon": "Demographic Authentication"
+            },
+            "bio-FINGER": {
+                "label": "Fingerprint Authentication",
+                "icon": "Fingerprint Authentication"
+            },
+            "bio-IRIS": {
+                "label": "Iris Authentication",
+                "icon": "Iris Authentication"
+            },
+            "bio-FACE": {
+                "label": "Face Authentication",
+                "icon": "Face Authentication"
+            },
+            "otp-email": {
+                "label": "Email OTP Authentication",
+                "icon": "Email OTP Authentication"
+            },
+            "otp-phone": {
+                "label": "Mobile OTP Authentication",
+                "icon": "Mobile OTP Authentication"
+            }
         },
         "introDescription": "View the status of all the Authentication types. You can choose to lock or unlock Authentication types like iris Authentication, email Authentication, etc.",
         "unlockLabel": "Unlock",
@@ -334,30 +382,32 @@
         "address": "Address",
         "contact": "Contact",
         "languagePreference": "Language Preference",
-        "identityHeading":"My Identity",
-        "addressHeading":"My Address",
-        "contactHeading":"My Contact",
-        "uploadImage":"Upload Image",
-        "dropImage":"Drop Image",
-        "or":"or",
-        "preview":"Preview",
-        "enteredValuesNotMatch":"The entered values do not match.",
-        "submit":"Submit",
-        "update":"Update",
-        "documentUploaded":"Document Uploaded",
-        "languageHeading":"My Language Preference",
-        "InvalidFormatMsg":"The file type that you are trying to upload is not supported. Please upload a different file type.",
-        "InvalidFileSize":"The document you are trying to upload exceeds the file size limit of 2mb. Please upload a document within 2mb.",
-        "sameNameInputErrorMsg":"The name you have entered already exists. Please enter a new name to proceed.",
-        "sameDobInputErrorMsg":"The DOB you have entered already exists. Please enter a new DOB to proceed.",
-        "sameGenderInputErrorMsg":"The gender you have chosen already exists. Please choose a new gender to proceed."
+        "identityHeading": "My Identity",
+        "addressHeading": "My Address",
+        "contactHeading": "My Contact",
+        "uploadImage": "Upload Image",
+        "dropImage": "Drop Image",
+        "or": "or",
+        "preview": "Preview",
+        "enteredValuesNotMatch": "The entered values do not match.",
+        "submit": "Submit",
+        "update": "Update",
+        "calendarPlaceHolder":"DD/MMM/YYYY",
+        "documentUploaded": "Document Uploaded",
+        "languageHeading": "My Language Preference",
+        "InvalidFormatMsg": "The file type that you are trying to upload is not supported. Please upload a different file type.",
+        "InvalidFileSize": "The document you are trying to upload exceeds the file size limit of 2mb. Please upload a document within 2mb.",
+        "sameNameInputErrorMsg": "The name you have entered already exists. Please enter a new name to proceed.",
+        "sameDobInputErrorMsg": "The DOB you have entered already exists. Please enter a new DOB to proceed.",
+        "sameGenderInputErrorMsg": "The gender you have chosen already exists. Please choose a new gender to proceed.",
+        "EnterAllAddress":"Please select"
     },
     "preview": {
         "title": "Preview"
     },
     "trackservicerequest": {
         "title": "Track My Requests",
-        "source":"View My History",
+        "source": "View My History",
         "searchLabel": "Enter the Event ID that you want to track",
         "searchPlaceholder": "Enter the 16-digit EID",
         "searchButton": "Track",
@@ -383,7 +433,7 @@
         "purpose": "Purpose",
         "raiseSupportRequest": "To raise a support request against this EID,",
         "clickHere": "click here.",
-        "warningMsg":"Please enter a valid 16-digits EID."
+        "warningMsg": "Please enter a valid 16-digits EID."
     },
     "personalisedcard": {
         "title": "Get Personalised Card",
@@ -419,17 +469,21 @@
         "uinTitleDescription": "Your UIN generation against the AID: $AID is still in progress.",
         "uinTitleDescription2": "Your UIN generation against the AID: $AID has failed.",
         "requestMsg": "Please try again after a few days.",
-        "requestMsg2":"For further information, please visit the nearest registration center.",
+        "requestMsg2": "For further information, please visit the nearest registration center.",
         "UINCardStatus": "UIN Card Status",
         "statusTime": "Completion Expected Date : $date",
         "statusStages": {
-            "REQUEST_RECEIVED":"Request received",
-            "VALIDATION_STAGE":"Validation stage",
-            "VERIFICATION_STAGE":"Verification stage",
-            "UIN_GENERATION_STAGE":"UIN generation stage",
-            "CARD_READY_TO_DOWNLOAD":"Card ready to download"
+            "REQUEST_RECEIVED": "Request received",
+            "VALIDATION_STAGE": "Validation stage",
+            "VERIFICATION_STAGE": "Verification stage",
+            "UIN_GENERATION_STAGE": "UIN generation stage",
+            "CARD_READY_TO_DOWNLOAD": "Card ready to download"
         },
         "trackDetailsHeading": "Tracking Details"
+    },
+    "paginatorIntl": {
+        "itemsPerPageLabel": "Items per page: ",
+        "of":"of"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -450,22 +504,24 @@
         "mappingMessage": " Mapped Successfully",
         "termsAndConditionsLabel": "Terms and Conditions",
         "clickHere": "here",
-        "clickHere2":"click ",
+        "clickHere2": "click ",
         "relogin": " to login again.",
-        "login":" to log in.",
-        "otpPopupDescription":"One Time Password (OTP) has been sent to",
+        "login": " to login.",
+        "otpPopupDescription": "One Time Password (OTP) has been sent to",
         "loginSuccessfully": "Dear resident, you logged in complected successfully",
         "successRemainMsg": "to track service request with pre-filled EID.",
         "passwordCombinationHeading": "Password combination: ",
         "passwordCombination": "First four letters of your first name in capital letters and your year of birth. E.g.: If your name is Johnny Depp and your birthdate is 09/06/1963, your password will be JOHN1963.",
         "SuccessLogin": "You have successfully logged in.",
         "successLogout": "You have successfully logged out. ",
-        "dearResident":"Dear Resident,",
-        "trackStatusText":"In order to track the status of the event, click ",
-        "trackStatusForLogin":"This Event ID can be used to view details about the event. Click ",
-        "clickYesToProceed":"Click Yes to proceed.",
-        "logoutconfirmMessage":"Are you sure you want to log out.",
-        "accessDenied":"You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
+        "dearResident": "Dear Resident,",
+        "trackStatusText": "In order to track the status of the event, click ",
+        "trackStatusForLogin": "This Event ID can be used to view details about the event. Click ",
+        "clickYesToProceed": "Click Yes to proceed.",
+        "logoutconfirmMessage": "Are you sure you want to log out.",
+        "accessDenied": "You cannot access this service since you have not accepted the consent while logging in. Request you to re-login and accept the relevant consent to proceed.",
+        "toFindRegCen":" to find the registration centres.",
+        "sessionExpired":"Session expired",
         "getMyUin": {
             "downloadedSuccessFully": "Your UIN card has been successfully downloaded against the Event ID: $eventId.",
             "invalidOtp": " Invalid OTP was entered. Please click resend OTP and try again with a valid OTP "
@@ -508,9 +564,9 @@
                 "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen One-time VID?",
                 "confirmationMessageForDownloadVid": "Are you sure you want to download One-time VID?"
             },
-            "createdSuccessfully": "Your VID has been successfully generated against the Event ID: $eventId.",
+            "createdSuccessfully": "Your VID has been successfully created against the Event ID: $eventId.",
             "downloadedSuccessFully": "Your request to download the VID card has been successfully processed against the Event ID: $eventId.",
-            "downloadedSuccessFully2":"It will take some time to get the card ready. You will be sent a link on your registered email ID and/or phone number using which you can download the requested VID card. Alternatively, it can also be downloaded from the Track Request once you receive a notification stating the card is ready.",
+            "downloadedSuccessFully2": "It will take some time to get the card ready. You will be sent a link on your registered email ID and/or phone number using which you can download the requested VID card. Alternatively, it can also be downloaded from the Track Request once you receive a notification stating the card is ready.",
             "deletedSuccessfully": "Your VID has been successfully deleted against the Event ID: $eventId."
         },
         "personalisedcardMessages": {
@@ -519,8 +575,8 @@
         "sharewithpartner": {
             "needPartner": "Kindly choose a partner to proceed.",
             "needPurpose": "Purpose of sharing your credential is a mandatory field. Kindly mention the purpose of sharing your credential.",
-            "specialCharacters":"Please enter letters/numbers in order to share your credentials.",
-            "sharedSuccessfully":"The data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
+            "specialCharacters": "Please enter letters/numbers in order to share your credentials.",
+            "sharedSuccessfully": "The data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
         },
         "verifyChannel": {
             "warningMsg": "Your $channel has already been verified.",
@@ -532,13 +588,13 @@
             "warningMsg": "Your complaint could not be sent. Please try again later."
         },
         "secureMyId": {
-            "successMsg":"Your request to change the Authentication type(s) has been saved successfully against the Event ID: $eventId.",
+            "successMsg": "Your request to change the Authentication type(s) has been saved successfully against the Event ID: $eventId.",
             "confirmationMessage": " Are you sure you want to save the changes made in Authentication types?"
         },
         "updateMyData": {
             "emailSuccessMsg": "Your Email ID has been successfully updated against the Event ID:: $eventId.",
             "phoneNumberSuccessMsg": "your phone number has been successfully updated against the event ID: $eventId.",
-            "newDataUpdatedSuccessMsg":"Your request to change your data has been submitted against the Event ID: $eventId."
+            "newDataUpdatedSuccessMsg": "Your request to change your data has been submitted against the Event ID: $eventId."
         }
     },
     "autologout": {
@@ -566,23 +622,23 @@
         "verifyChannel": "A UIN is your 10-digit Unique Identity Number. VID is your 16-digit Virtual ID."
     },
     "serverErrors": {
-        "IDA-MLC-009": "No registered email ID/ phone number found with the entered UIN/ VID. To add an email ID/ phone number, visit the nearest registration center. Click here to find the registration centres.",
+        "IDA-MLC-009": "No registered email ID/ phone number found with the entered UIN/ VID. To add an email ID/ phone number, visit the nearest registration center.",
         "IDA-MLC-018": "Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
         "RES-SER-422": "Invalid OTP entered. Please try again with a valid OTP.",
         "RES-SER-410": {
             "individualIdError": "Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
-            "individualId":"Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
+            "individualId": "Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
             "EMAIL": "The email ID you have entered is invalid. Please enter a valid email ID.",
             "PHONE": "The phone number you have entered is invalid. Please enter a valid phone number.",
             "eventId": "The event ID you have entered is invalid. Please enter a valid event ID",
             "userId": "The email ID/ phone number you have entered is invalid. Please enter a valid email ID/ phone number.",
             "otp": "Invalid OTP entered. Please try again with a valid OTP.",
-            "channel":"Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
-            "identity/preferredLang":"Invalid preferred language. please give valid data"
+            "channel": "Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
+            "identity/preferredLang": "Invalid preferred language. please give valid data"
         },
         "RES-SER-459": "The entered EID is not associated with the UIN/ VID used to log in.",
         "RES-SER-412": "Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
-        "RES-SER-405": "Maximum allowed VIDs are active. Deactivate VID(s) to generate a new one.",
+        "RES-SER-405": "Maximum allowed VIDs are active. Deactivate VID(s) to create a new one.",
         "RES-SER-511": "The entered EID is not associated with the UIN/ VID used to log in.",
         "RES-SER-449": "Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
         "RES-SER-414": "Comment section cannot be blank. Please enter your comments in order to proceed.",
@@ -591,15 +647,15 @@
         "RES-OTP-007": "Invalid OTP entered. Please try again with a valid OTP.",
         "RES-SER-415": "Template exceptionServiceError.",
         "RES-SER-463": "Failed to send OTP. Retry again in sometime.",
-        "RES-SER-461":"Document type is a mandatory field. Kindly choose a document type in order to proceed.",
-        "RES-SER-519":"Please enter a different Email ID from the already existing one.",
-        "RES-SER-520":"Please enter a different phone number from the already existing one.",
-        "RES-SER-456":"AID not found. Please try again later.",
-        "RES-SER-515":"Please enter letters/numbers in order to share.",
-        "RES-SER-425":"While generating otp error is occured.",
-        "RES-SER-514":"Invalid UIN/VID entered. Please enter a valid UIN/VID and try again.",
-        "IDA-MLC-019":"otp-email Auth Type is Locked for the UIN",
-        "RES-SER-522":"Invalid UIN/VID entered. Please enter a valid UIN/VID and try again.",
-        "RES_SER_509":"The card is not ready for download."
+        "RES-SER-461": "Document type is a mandatory field. Kindly choose a document type in order to proceed.",
+        "RES-SER-519": "Please enter a different Email ID from the already existing one.",
+        "RES-SER-520": "Please enter a different phone number from the already existing one.",
+        "RES-SER-456": "AID not found. Please try again later.",
+        "RES-SER-515": "Please enter letters/numbers in order to share.",
+        "RES-SER-425": "While generating otp error is occured.",
+        "RES-SER-514": "Invalid UIN/VID entered. Please enter a valid UIN/VID and try again.",
+        "IDA-MLC-019": "otp-email Auth Type is Locked for the UIN",
+        "RES-SER-522": "Invalid UIN/VID entered. Please enter a valid UIN/VID and try again.",
+        "RES_SER_509": "The card is not ready for download."
     }
 }

@@ -1,7 +1,7 @@
-<div class="main-div" *ngIf="menuItems">
+<div class="main-div" *ngIf="menuItems" dir="{{sitealignment}}">
   <mat-grid-list #grid [cols]="cols" rowHeight="200px" gutterSize="5px">
     <mat-grid-tile colspan="1" rowspan="2">
-    <div class="item1 item-card" id="dashboardCard1" (click)="onItemSelected(menuItems[0].displayName)">
+    <div class="item1 item-card" id="dashboardCard1" (click)="onItemSelected('UIN Services')">
       <mat-card>
         <div class="title">
           <span class="icon"><img mat-card-xs-image class="dashboard-icons" [src]='menuItems[0].icon' /></span>
@@ -11,17 +11,15 @@
             <br/>
            
           </mat-card-title>
-          <mat-card-title class="mat-card-title" [id]="menuItems[0].displayName" *ngIf="menuItems[0].route"
-            (click)="onItemSelected(menuItems[0].route)">{{
-            menuItems[0].displayName | translate }}</mat-card-title>
+          <mat-card-title class="mat-card-title" [id]="menuItems[0].displayName" *ngIf="menuItems[0].route">
+            {{ menuItems[0].displayName | translate }}</mat-card-title>
         </div>
         <mat-card-subtitle class="display-description">{{menuItems[0].displaydescription}}</mat-card-subtitle>
         <mat-card-subtitle class="display-description" style="margin-bottom: 0px;">{{menuItems[0].availableServicesDescription}}</mat-card-subtitle>
         <mat-card-header>
           <ul  class="uin-service-list">
-          <li *ngFor="let subMenu of menuItems[0].subMenus"
-            (click)="onItemSelected(subMenu.route)" >{{
-            subMenu.displayName | translate }}</li>
+          <li *ngFor="let subMenu of menuItems[0].subMenus">
+            {{ subMenu.displayName | translate }}</li>
           </ul>
           <div style="flex-grow: 1"></div>
         </mat-card-header>
@@ -29,7 +27,7 @@
     </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
-    <div class="item2 item-card" id="dashboardCard2" (click)="onItemSelected(menuItems[1].displayName)">
+    <div class="item2 item-card" id="dashboardCard2" (click)="onItemSelected('Get Information')">
       <mat-card>
         <div class="title">
           <span class="icon"><img mat-card-xs-image class="dashboard-icons" [src]='menuItems[1].icon' /></span>
@@ -38,8 +36,7 @@
           <mat-card-title class="mat-card-title" *ngIf="!menuItems[1].route">{{ menuItems[1].displayName | translate }}
           </mat-card-title>
           
-          <mat-card-title class="mat-card-title" [id]="menuItems[1].displayName" *ngIf="menuItems[1].route"
-            (click)="onItemSelected(menuItems[1].route)">{{
+          <mat-card-title class="mat-card-title" [id]="menuItems[1].displayName" *ngIf="menuItems[1].route">{{
             menuItems[1].displayName | translate }}</mat-card-title>
         </div>
         <mat-card-subtitle class="display-description" style="margin-bottom: 0px;">{{menuItems[1].availableServicesDescription}}:</mat-card-subtitle>
@@ -55,7 +52,7 @@
     </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1">
-    <div class="item3 item-card" id="dashboardCard3"  (click)="onItemSelected(menuItems[2].displayName)">
+    <div class="item3 item-card" id="dashboardCard3"  (click)="onItemSelected('Booking an Appointment')">
       <mat-card >
         <div class="title">
           <span class="icon"><img mat-card-xs-image  class="dashboard-icons" [src]='menuItems[2].icon' /></span>

@@ -97,7 +97,7 @@
       <img alt="" [src]="icon" height="35px" width="35px" class="pop-up-icon" />
       <div class="pop-up-header">
         <div mat-dialog-content>
-          <div>
+          <div style="word-break: break-word;">
             <p>{{input.dearResident}}</p>
             <p>{{input.message}}</p>
             <p *ngIf="input.downloadedSuccessFully2">{{input.downloadedSuccessFully2}}</p>
@@ -111,43 +111,59 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <span><button style="background-color:#03A64A; margin-top: 0px;" *ngIf="input.btnTxt === 'OK' " mat-button
+      <span><button style="background-color:#03A64A; margin-top: 0px;" *ngIf="input.isOk === 'OK' " mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxt }}
         </button></span>
       <span><button style="background-color:#03A64A; margin-top: 0px;"
-          *ngIf="input.btnTxt === 'Yes' && input.yesBtnFor === 'Vid' " mat-button cdkFocusInitial
+          *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'Vid' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="vidWarning()">
           {{ input.btnTxt }}
         </button></span>
       <span><button style="background-color:#03A64A; margin-top: 0px;"
-          *ngIf="input.btnTxt === 'Yes' && input.yesBtnFor === 'lockunlockauth' " mat-button cdkFocusInitial
+          *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'lockunlockauth' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="lockunlockauthWarning()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button *ngIf="input.btnTxt === 'Delete'" style="background-color:red; margin-top: 0px;" mat-button
+      <span><button *ngIf="input.isDelete === 'Delete'" style="background-color:red; margin-top: 0px;" mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="vidDelete()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button *ngIf="input.btnTxt === 'Download'" style="background-color:#03A64A; margin-top: 0px;" mat-button
+      <span><button *ngIf="input.isDownload === 'Download'" style="background-color:#03A64A; margin-top: 0px;" mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="vidDownload()">
           {{ input.btnTxt }}
         </button></span>
         <span><button style="background-color:#03A64A; margin-top: 0px;"
-          *ngIf="input.btnTxt === 'Yes' && input.yesBtnFor === 'logOutBtn' " mat-button cdkFocusInitial
+          *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'logOutBtn' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="logOutBtn()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button style="margin-top: 0px;" *ngIf="input.btnTxtNo === 'No' " mat-button cdkFocusInitial
+      <span><button style="margin-top: 0px;" *ngIf="input.isNo === 'No' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxtNo }}
         </button></span>
     </div>
   </div>
 
+  <!-- errorMessageWithClickHere -->
+  <div *ngIf="input.case === 'errorMessageWithClickHere'" class="warning-message-container">
+    <div style="display: flex; align-items: start;">
+      <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
+      <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
+        <p>{{input.dearResident}}</p>
+        <p>{{input.message}}</p>
+        <p>{{input.clickHere2}} <span (click)="regCenters()"
+            class="navigate-link">{{input.clickHere.replace(".","")}}</span>{{input.toFindRegCen}}
+        </p>
+      </div>
+    </div>
+    <div mat-dialog-actions class="pop-up-footer">
+      <button mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+    </div>
+  </div>
+
   <!-- Access denied -->
-  <div *ngIf="input.case === 'accessDenied'"
-    style="padding: 12px; border: 1px solid red; background-color: #FFD9D8; color: red; border-radius: 8px;">
+  <div *ngIf="input.case === 'accessDenied'" class="warning-message-container">
     <div style="display: flex; align-items: start;">
       <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
       <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
@@ -178,7 +194,7 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <span><button style="background-color:#03A64A; margin-top: 0px;" *ngIf="input.btnTxt === 'OK' " mat-button
+      <span><button style="background-color:#03A64A; margin-top: 0px;" *ngIf="input.isOk === 'OK' " mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxt }}
         </button></span>
@@ -326,7 +342,7 @@
     <div class="infro-card">
       <img alt="" src="./assets/sucess_icon.png" height="35px" width="35px" class="success-img" />
       <div style="margin-left: 8px;">
-        <div mat-dialog-content>
+        <div mat-dialog-content style="word-break: break-word;">
             <p>{{input.dearResident}}</p>
             <p>{{input.message}}</p>
             <p>{{input.trackStatusForLogin}} <span (click)="openLoginPage()"
@@ -336,7 +352,7 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <button mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+      <button style="background-color:#03A64A;" mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
     </div>
   </div>
 

@@ -14,23 +14,22 @@
 		<label class="main-label">{{'sharewithpartner.mainlabel' |
 			translate}}</label>
 		<table style="width:100%;">
-			<tr><mat-grid-list [cols]="cols" rowHeight="690px" gutterSize="10px"><mat-grid-tile>
+			<tr><mat-grid-list [cols]="cols" rowHeight="660px" gutterSize="10px"><mat-grid-tile>
 						<td [style.width]="width">
-							<table *ngFor="let data of schema; let i = index" style="width:100%;">
+							<table class="fixed" *ngFor="let data of schema; let i = index" style="width:100%;">
 								<tr>
-									<td style="padding:10px;color: #505050;width: 50%">
+									<td class="each-property">
 										<mat-checkbox [checked]="data.checked" id="{{data.label[langCode]}}"
 											(click)="captureCheckboxValue($event, data, 'datacheck')">{{data.label[langCode]}}
 										</mat-checkbox>
 									</td>
-									<td *ngIf="data.maskRequired"
-										style="width:50%;color: #505050;font-size: 16px;padding-left: 1.25rem;">
+									<td *ngIf="data.maskRequired" class="each-masked-property">
 										<mat-checkbox [disabled]="!data.checked"
 											id="{{data.maskRequiredLabel[langCode]}}{{i}}"
 											(click)="captureCheckboxValue($event, data, data.maskAttributeName)">
 											{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 									</td>
-									<td *ngIf="data.formatRequired" style="width:50%">
+									<td *ngIf="data.formatRequired" style="width:40%">
 										<button [disabled]="!data.checked" id="matIcon" mat-button
 											[matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}
 											<mat-icon>keyboard_arrow_down</mat-icon>
@@ -51,27 +50,36 @@
 							</table>
 						</td>
 					</mat-grid-tile>
-					<mat-grid-tile style="width: 400px;">
-						<td style="vertical-align: top;" [style.width]="width">
-							<div class="attribute-card" [style.width]="width">
-								<table [style.width]="width">
-									<tr>
-										<td *ngIf="sharableAttributes['photo']">
-											<img [src]="sharableAttributes['photo']['value']" alt=''
-												style="margin-left:48%;" width='70px' height='70px' />
-										</td>
-									</tr>
-									<tr *ngFor="let item of valuesSelected">
-										<td style='font-weight:600;'
-											*ngIf="sharableAttributes[item] && item !== 'photo' ">
-											<p style="margin: 0px; width: 7rem;">{{sharableAttributes[item]['label']}}:
-											</p>
-										</td>
-										<td *ngIf="sharableAttributes[item] && item !== 'photo' ">
-											<p [style.width]="attributeWidth" style="margin: 0px;">
-												{{sharableAttributes[item]['value']}}</p>
-										</td>
-									</tr>
+					<mat-grid-tile >
+						<td  [style.width]="previewWidth">
+							<div class="attribute-card" [style.width]="previewWidth">
+									<table  style="min-width: 100%; max-height: 217px;">
+										<tr style="word-break: break-word;">
+											<td rowspan='2' *ngIf="sharableAttributes['photo']"><img [src]="sharableAttributes['photo']['value']" alt='' width='70px' height='70px' /></td>
+											<td *ngIf="sharableAttributes['fullName']" >
+												<label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['fullName']['value']}}</span>
+											</td>
+											<td colspan='2' align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
+										</tr>
+										<tr *ngIf="sharableAttributes['dateOfBirth'] || sharableAttributes['gender']" style="word-break: break-word;">
+											<td *ngIf="sharableAttributes['dateOfBirth']" colspan='1'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['dateOfBirth']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['dateOfBirth']['value']}}</span></td>
+											<td *ngIf="sharableAttributes['gender']"><label style="font-size: 12px;color: #666666;">{{sharableAttributes['gender']['label']}}</label><br> <span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['gender']['value']}}</span></td>
+										</tr>
+										<tr *ngIf="sharableAttributes['UIN'] || sharableAttributes['perpetualVID']" style="word-break: break-word;">
+											<td *ngIf="sharableAttributes['UIN']" colspan='2'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['UIN']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['UIN']['value']}}</span></td>
+											<td *ngIf="sharableAttributes['perpetualVID']"><label style="font-size: 12px;color: #666666;">{{sharableAttributes['perpetualVID']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['perpetualVID']['value']}}</span></td>
+										</tr>
+										<tr *ngIf="sharableAttributes['phone']" style="word-break: break-word;">
+											<td  colspan='3'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['phone']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['phone']['value']}}</span></td>
+										</tr>
+										<tr *ngIf="sharableAttributes['email']" style="word-break: break-word;">
+											<td colspan='3' >
+												<label style="font-size: 12px;color: #666666;">{{sharableAttributes['email']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['email']['value']}}</span>
+											</td>
+										</tr>
+										<tr *ngIf="sharableAttributes['fullAddress']" style="word-break: break-word;">
+											<td colspan='3'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullAddress']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['fullAddress']['value']}}</span></td>
+										</tr>
 								</table>
 							</div>
 							<table [style.width]="width">
@@ -83,7 +91,7 @@
 								</tr>
 								<tr>
 									<td>
-										<mat-select id="partnerDetails" [style.width]="width">
+										<mat-select class="enable-dropdown" id="partnerDetails" [style.width]="previewWidth">
 											<mat-option (onSelectionChange)="captureDropDownValue($event)"
 												*ngFor="let partnerDetail of partnerDetails"
 												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">
@@ -99,7 +107,7 @@
 								</tr>
 								<tr>
 									<td>
-										<textarea [attr.maxlength]="totalCommentCount" [style.width]="width"
+										<textarea [attr.maxlength]="totalCommentCount" [style.width]="previewWidth"
 											id="sharingReasonPlaceholder" class="purpose-input-box" matInput
 											placeholder="{{'sharewithpartner.sharingReasonPlaceholder' | translate}}"
 											(input)="getpurpose($event)"></textarea>
@@ -124,72 +132,3 @@
 	</mat-card>
 </div>
 
-<!-- <div class="main-div" *ngIf="showAcknowledgement">
-	<mat-card class="successMsg-card">
-		<div class="succcess-title-card">
-			<img src="./assets/sucess_icon.png" />
-			&nbsp;&nbsp;
-			<p class="success-msg-text">{{'sharewithpartner.sharePartnerSuccessMsg' | translate}}</p>
-		</div>
-		<p class="success-msg-description">{{'sharewithpartner.messageDescription1' | translate}}
-			<span>{{aidStatus.eventId}}</span>{{'sharewithpartner.messageDescription2' | translate}} <span class="navigate-link"
-				 (click)="viewDetails(aidStatus.eventId)">{{'sharewithpartner.trackMyserviceLink' | translate}}</span> {{'sharewithpartner.orin' |
-			translate}} <span class="navigate-link" (click)="viewDetails2()">{{'sharewithpartner.viewHistoryLink' | translate}}</span>.
-		</p>
-	</mat-card>
-	&nbsp;
-	<mat-card>
-		<h4 class="transaction-title">{{'trackservicerequest.transactionTitle' | translate}}</h4>
-		<div class="translation-details">
-			<div class="partner-logo">
-				<p>{{'trackservicerequest.partnerLogo' | translate}}</p>
-			</div>
-			&nbsp;
-			&nbsp;
-			<div class="translation-details-card">
-				<div style="width: 25%;">
-					<p style="margin-bottom: 6px;">{{'trackservicerequest.eventId' | translate}}</p>
-					<h5 style="margin-top: 0px;">{{aidStatus.eventId}}</h5>
-				</div>
-				<div style="width: 25%;">
-					<p style="margin-bottom: 6px;">{{'trackservicerequest.eventType' | translate}}</p>
-					<h5 style="margin-top: 0px;">{{aidStatus.eventType}}</h5>
-				</div>
-				<div style="width: 25%;">
-					<p style="margin-bottom: 6px;">{{'trackservicerequest.eventStatus' | translate}}</p>
-					<h5 style="margin-top: 0px;">{{aidStatus.eventStatus}}</h5>
-				</div>
-				<div style="width: 25%;">
-					<p style="margin-bottom: 6px;">{{'trackservicerequest.partnerName' | translate}}</p>
-					<h5 style="margin-top: 0px;">{{aidStatus.info.partnerName}}</h5>
-				</div>
-				<div style="width: 25%;">
-					<p style="margin-bottom: 6px;">{{'trackservicerequest.transactionDate' | translate}}</p>
-					<h5 style="margin-top: 0px;">{{aidStatus.timestamp}}</h5>
-				</div>
-			</div>
-		</div>
-		<div style="text-align: right; margin-top: 1rem;">
-			<button mat-raised-button color="primary" id="downloadBtn"
-				(click)="downloadAcknowledgement(aidStatus.eventId)">{{'personalisedcard.downloadbutton' |
-				translate}}</button>
-		</div>
-		<table style="width: 100%;">
-			<tr>
-				<td><label>{{'trackservicerequest.eventId' | translate}}</label></td>
-				<td><label>{{'trackservicerequest.eventType' | translate}}</label></td>
-				<td><label>{{'trackservicerequest.eventStatus' | translate}}</label></td>
-			</tr>
-			<tr>
-				<td>{{aidStatus.eventId}}</td>
-				<td>{{aidStatus.eventType}}</td>
-				<td>{{aidStatus.eventStatus}}</td>
-			</tr>
-			<tr>
-				<td style="float:right;width: 100%" colspan="3"><button mat-raised-button color="primary"
-						(click)="downloadAcknowledgement(aidStatus.eventId)">{{'personalisedcard.downloadbutton' |
-						translate}}</button></td>
-			</tr>
-		</table>
-	</mat-card>
-</div> -->

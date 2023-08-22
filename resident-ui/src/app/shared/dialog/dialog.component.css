@@ -205,12 +205,12 @@ td.mat-footer-cell:last-child {
 }
 
 
-.mat-menu-item{
+/* .mat-menu-item{
   line-height:20px;
   height:30px;
   font-size: x-small;
   font-family: "Roboto", sans-serif;
-}
+} */
 
 .sort-icon {
   padding-top: 3px;
@@ -390,4 +390,11 @@ p{
   color: #03A64A;
   background-color: #E8FDF2;
   border-color: #03A64A;
+}
+.warning-message-container{
+  padding: 12px; 
+  border: 1px solid red; 
+  background-color: #FFD9D8; 
+  color: red; 
+  border-radius: 8px;
 }

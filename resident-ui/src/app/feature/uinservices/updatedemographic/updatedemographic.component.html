@@ -1,4 +1,4 @@
-<span class="breadcrumb" style="margin-left: 15px;">
+<span class="breadcrumb breadcrumb-two">
   <a (click)="onItemSelected('uinservices/dashboard')">{{'dashboard.uinservices' | translate}} &nbsp;&nbsp;</a> >
   &nbsp;&nbsp;<span style="cursor: pointer;"
     (click)="onItemSelected('uinservices/updatedemographic')">{{'updatedemographic.title' | translate}}</span>
@@ -9,14 +9,14 @@
 <div class="spinner" *ngIf="isLoading">
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!isLoading">
-  <mat-card style="margin:1rem 4rem 0 4rem; min-height: 100%;" *ngIf="userInfo && !showPreviewPage && (buildJSONData | json) != '{}'">
+<div *ngIf="!isLoading" class="main-contianer">
+  <mat-card *ngIf="userInfo && !showPreviewPage && (buildJSONData | json) != '{}'">
     <h1 style="font-weight: 500; font-size: 20px;color: #505050;">{{langJson.title}}</h1>
     <mat-tab-group animationDuration="0ms" [selectedIndex]="matTabIndex" (selectedTabChange)="logChange($event)">
       <mat-tab label="{{'updatedemographic.identity' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.identityHeading' | translate}}</h3>
         <table width="100%">
-          <tr style="display: flex;">
+          <tr class="table-main-card">
             <td [style.width]="width">
               <div *ngFor="let field of schema['identity']; let i = index" class="mat-form1">
                 <div layout="row" *ngIf="field.tabgroup === 'identity'">
@@ -35,7 +35,7 @@
                             <td width="10%"></td>
                             <td width="45%">
                               <!-- <mat-form-field style="min-width: 100%;"> -->
-                              <input [max]="maxdate" style="width:75%;" matInput placeholder="DD/MM/YYYY"
+                              <input [max]="maxdate" style="width:75%;" matInput [placeholder]="langJson.calendarPlaceHolder"
                                 [matDatepicker]="picker" readonly id="{{field.attributeName}}"
                                 (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName])"
                                 [(ngModel)]="selectedDate" (click)="picker.open()" />
@@ -54,9 +54,9 @@
                       <td width="100%">
                         <table width="100%" *ngFor="let language of supportedLanguages;">
                           <tr>
-                            <td width="45%"><label>{{field.labelName[language][0]}}</label></td>
+                            <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                             <td width="10%"></td>
-                            <td width="45%"><label>{{field.labelName[language][1]}}</label></td>
+                            <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr>
                             <td width="45%"><input type="text" class="readonly" readonly="true" disabled="true"
@@ -99,9 +99,9 @@
                             <td width="10%"></td>
                             <td width="45%">
                               <mat-form-field style="min-width: 73%;">
-                                <mat-select [(ngModel)]="selected" id="{{field.attributeName}}">
+                                <mat-select class="enable-dropdown" [(ngModel)]="selected" id="{{field.attributeName}}">
                                   <mat-option *ngFor="let data of dropDownValues[field.attributeName]"
-                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, langCode, field.dataType, buildJSONData[field.attributeName][langCode])"
+                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, buildJSONData[field.attributeName][langCode])"
                                     [value]="data.code">{{ data.value }}</mat-option>
                                 </mat-select>
                               </mat-form-field>
@@ -129,12 +129,12 @@
                           </tr>
                           <tr>
                             <td width="45%">
-                              <mat-select
+                              <mat-select class="enable-dropdown"
                                 [value]="proofOfIdentity['documenttype'] ? proofOfIdentity['documenttype'] : '' "
                                 id="{{field.attributeName}}">
                                 <mat-option style="min-width: 25.2rem;"
                                   *ngFor="let data of dropDownValues[field.attributeName]"
-                                  (onSelectionChange)="captureDropDownValue($event, field.attributeName, langCode, field.dataType, '')"
+                                  (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, '')"
                                   [value]="data.code">{{ data.name }}</mat-option>
                               </mat-select>
                             </td>
@@ -154,7 +154,7 @@
                             <td width="100%" colspan="3">
                               <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POI')">
                                 <input (click)="$event.target.value=null"
-                                  [disabled]="proofOfIdentity.documenttype === undefined " type="file" #fileDropRef
+                                  [disabled]="proofOfIdentity.documenttype === undefined || files?.length === 1 " type="file" #fileDropRef
                                   id="fileDropRef" (change)="fileBrowseHandler($event.target.files, 'POI')"
                                   accept=".pdf, .jpg, .jpeg, .png" />
                                 <label style="margin-right: 1rem;display: flex;" for="fileDropRef">
@@ -246,15 +246,21 @@
                 </div>
               </div>
             </td>
-            <td width="50%" height="550px">
+            <td class="show-preview-image">
               <div *ngIf="pdfSrc" (click)="closePreview('POI')" width="100%" style="float: right;cursor: pointer;">
                 <mat-icon matTooltip="Close Preview">clear</mat-icon>
               </div>
               <embed *ngIf="pdfSrc" [src]="pdfSrc | sanitizepdf" height="100%" width="100%">
             </td>
           </tr>
+          <tr class="show-preview-image-mobile">
+            <div *ngIf="pdfSrc" (click)="closePreview('POI')" width="100%" style="float: right;cursor: pointer;">
+              <mat-icon matTooltip="Close Preview">clear</mat-icon>
+            </div>
+            <embed *ngIf="pdfSrc" [src]="pdfSrc | sanitizepdf" height="100%" width="100%">
+          </tr>
         </table>
-        <div style="text-align: end;margin-right: 2rem; margin-top: none;">
+        <div class="submit-btn-card" >
           <button [disabled]="previewDisabled" (click)="previewBtn('identity')" mat-raised-button color="primary"
             id="submit">{{langJson.preview}}</button>
         </div>
@@ -263,7 +269,7 @@
         <h3 class="tab-headings">{{'updatedemographic.addressHeading' | translate}}</h3>
         <div class="address-page">
           <table width="100%">
-            <tr style="display: flex;">
+            <tr class="table-main-card">
               <td [style.width]="width">
                 <div *ngFor="let field of schema['identity']; let i = index" class="mat-form1">
                   <div layout="row" *ngIf="field.tabgroup === 'address'">
@@ -272,9 +278,9 @@
                         <td width="100%">
                           <table width="100%" *ngFor="let language of supportedLanguages;">
                             <tr>
-                              <td width="45%"><label>{{field.labelName[language][0]}}</label></td>
+                              <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                               <td width="10%"></td>
-                              <td width="45%"><label>{{field.labelName[language][1]}}</label></td>
+                              <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
                             <tr>
                               <td width="45%">
@@ -305,7 +311,7 @@
                               <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
                             <tr>
-                              <td width="45%">
+                              <td width="45%" class="each-Hierarchy-td">
                                 <input *ngIf="field.attributeName === 'postalCode'" type="text" class="readonly"
                                   readonly="true" disabled="true" value="{{buildJSONData[field.attributeName]}}">
                                 <input
@@ -314,13 +320,16 @@
                                   value="{{buildJSONData[field.attributeName][langCode]}}">
                               </td>
                               <td width="10%"></td>
-                              <td width="45%">
-                                <mat-select [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
-                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);">
+                              <td width="45%" class="each-Hierarchy-td" >
+                                <mat-select  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
+                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);" >
                                   <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
                                     {{ data.name }}
                                   </mat-option>
                                 </mat-select>
+                                <span *ngIf="dynamicDropDown[field.name][0]">
+                                  <p *ngIf="dynamicDropDown[field.name][0].hierarchyName === fieldName" class="warning-message">{{langJson.EnterAllAddress}} {{fieldName}}</p>
+                                </span>
                               </td>
                             </tr>
                           </table>
@@ -340,7 +349,7 @@
                             </tr>
                             <tr>
                               <td width="45%">
-                                <mat-select
+                                <mat-select class="enable-dropdown"
                                   [value]="proofOfAddress['documenttype'] ? proofOfAddress['documenttype'] : '' "
                                   id="{{field.attributeName}}">
                                   <mat-option style="min-width: 25.2rem;"
@@ -366,7 +375,7 @@
                               <td width="100%" colspan="3">
                                 <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POA')">
                                   <input (click)="$event.target.value=null"
-                                    [disabled]="proofOfAddress.documenttype === undefined " type="file" #fileAddRef
+                                    [disabled]="proofOfAddress.documenttype === undefined || filesPOA?.length === 1" type="file" #fileAddRef
                                     id="fileAddRef" (change)="fileBrowseHandler($event.target.files, 'POA')"
                                     accept=".pdf, .jpg, .jpeg, .png" />
                                   <label style="margin-right: 1rem;display: flex;" for="fileAddRef">
@@ -457,23 +466,30 @@
                   </div>
                 </div>
               </td>
-              <td width="50%" height="850px">
+              <td class="show-preview-image">
                 <div *ngIf="pdfSrcPOA" (click)="closePreview('POA')" width="100%" style="float: right;cursor: pointer;">
                   <mat-icon matTooltip="Close Preview">clear</mat-icon>
                 </div>
                 <embed *ngIf="pdfSrcPOA" [src]="pdfSrcPOA | sanitizepdf" height="100%" width="100%">
               </td>
             </tr>
+            <tr class="show-preview-image-mobile">
+              <div *ngIf="pdfSrcPOA" (click)="closePreview('POA')" width="100%" style="float: right;cursor: pointer;">
+                <mat-icon matTooltip="Close Preview">clear</mat-icon>
+              </div>
+              <embed *ngIf="pdfSrcPOA" [src]="pdfSrcPOA | sanitizepdf" height="100%" width="100%">
+            </tr>
           </table>
         </div>
-        <div style="text-align: end;margin-right: 2rem; margin-top: none;">
-          <button [disabled]="previewDisabledInAddress" mat-raised-button (click)="previewBtn('address')"
+        
+        <div class="submit-btn-card">
+          <button [disabled]="previewDisabledInAddress || !isSelectedAllAddress" mat-raised-button (click)="previewBtn('address')"
             color="primary" id="submit">{{langJson.preview}}</button>
         </div>
       </mat-tab>
       <mat-tab label="{{'updatedemographic.contact' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.contactHeading' | translate}}</h3>
-        <div *ngFor="let field of schema['identity']; let i = index">
+        <div *ngFor="let field of schema['identity']; let i = index" dir="{{sitealignment}}">
           <mat-grid-list *ngIf="field.tabgroup === 'contact'" [cols]="cols" rowHeight="100px" gutterSize="7px"
             style="margin-top: 15px;">
             <mat-grid-tile class="mat-form1">
@@ -524,14 +540,14 @@
       </mat-tab>
       <mat-tab label="{{'updatedemographic.languagePreference' | translate}}" class="language-card">
         <h3 class="tab-headings">{{'updatedemographic.languageHeading' | translate}}</h3>
-        <div *ngFor="let field of schema['identity']; let i = index">
+        <div *ngFor="let field of schema['identity']; let i = index" dir="{{sitealignment}}">
           <div *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
             <mat-grid-list *ngFor="let language of supportedLanguages;" [cols]="cols" rowHeight="100px"
               gutterSize="7px">
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
-                  <mat-card-header><mat-card-title>{{field.labelName[language][0]}}</mat-card-title></mat-card-header>
+                  <mat-card-header><mat-card-title>{{field.labelName[langCode][0]}}</mat-card-title></mat-card-header>
                   <mat-card-subtitle *ngIf="buildJSONData[field.attributeName]"><input
                       style="border: none; background-color: #F7F7F7" type="text" class="readonly" readonly="true"
                       disabled="true" value="{{buildJSONData[field.attributeName]}}"></mat-card-subtitle>
@@ -540,12 +556,14 @@
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
-                  <mat-card-header><mat-card-title>{{field.labelName[language][1]}}</mat-card-title></mat-card-header>
-                  <mat-card-subtitle><mat-select [(ngModel)]="selected2" id="{{field.attributeName}}">
+                  <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
+                  <!-- <mat-card-subtitle> -->
+                    <mat-select class="enable-dropdown" [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
                         (onSelectionChange)="capturePerfLang($event, field.attributeName, langCode, field.dataType)"
                         [value]="data.code">{{ data.name }}</mat-option>
-                    </mat-select></mat-card-subtitle>
+                    </mat-select>
+                  <!-- </mat-card-subtitle> -->
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
@@ -561,7 +579,7 @@
     </mat-tab-group>
   </mat-card>
 
-  <mat-card style="margin:1rem 4rem 0 4rem; padding: 16px;" *ngIf="showPreviewPage">
+  <mat-card style="padding: 16px;" *ngIf="showPreviewPage">
     <mat-card-subtitle style="font-size: 20px;" class="preview-heading">{{langJson.preview}}</mat-card-subtitle>
     <div class="identity-card">
       <mat-card-subtitle style="color: #000000; font-size: 14px;">{{matTabLabel}}</mat-card-subtitle>
@@ -569,14 +587,14 @@
         <img alt="" src="./assets/icons/iconfont/edit_black_24dp (2).svg" alt="" />
       </button>
     </div>
-    <div style="display: flex;">
+    <div class="table-main-card">
       <div [style.width]="width">
         <div class="input-values-main-card">
           <div>
             <div *ngFor="let field of schema['identity']">
               <table width="100%" *ngFor="let language of supportedLanguages;">
                 <tr *ngIf="buildCloneJsonData[field.attributeName]">
-                  <td width="75%">{{field.labelName[language][1]}}</td>
+                  <td width="75%">{{field.labelName[langCode][1]}}</td>
                 </tr>
                 <tr
                   *ngIf="typeOf(buildCloneJsonData[field.attributeName]) !== 'string' && buildCloneJsonData[field.attributeName]">
@@ -637,8 +655,8 @@
           </div>
         </div>
       </div>
-      <div style="width: 50%">
-        <embed *ngIf="pdfSrcInPreviewPage" [src]="pdfSrcInPreviewPage | sanitizepdf" height="auto" width="100%">
+      <div class="preview-image">
+        <embed *ngIf="pdfSrcInPreviewPage" [src]="pdfSrcInPreviewPage | sanitizepdf" height="100%" width="100%">
       </div>
     </div>
 

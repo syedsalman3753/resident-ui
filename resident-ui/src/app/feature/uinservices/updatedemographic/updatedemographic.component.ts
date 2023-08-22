@@ -10,9 +10,10 @@ import Utils from "src/app/app.utils";
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import defaultJson from "src/assets/i18n/default.json";
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
+
 
 @Component({
   selector: "app-demographic",
@@ -65,7 +66,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   newLangArr: any = [];
   perfLangArr: any = {};
   newNotificationLanguages: any = [];
-  matTabLabel: string = "Identity";
+  matTabLabel: string;
   matTabIndex: number = 0;
   contactTye: string = "";
   width: string;
@@ -89,8 +90,18 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   userInputValues: any = {};
   finalUserCloneData: any;
   updatingtype: string;
+  sitealignment: string = localStorage.getItem('direction');
+  transactionIDForPOI:string = "";
+  transactionIDForPOA:string = "";
+  getAllDocIds:any = {};
+  isSelectedAllAddress:boolean = true;
+  fieldName:string;
 
-  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private appConfigService: AppConfigService, private auditService: AuditService, private breakpointObserver: BreakpointObserver, private dateAdapter: DateAdapter<Date>) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
+    private dialog: MatDialog, private dataStorageService: DataStorageService,
+    private translateService: TranslateService, private router: Router,
+    private appConfigService: AppConfigService, private auditService: AuditService,
+    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -99,37 +110,33 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       } else if (id !== 'string' && id.type === 'otp') {
         this.verifyupdatedData(id.otp);
       }
-    })
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
+    });
+
+    this.breakPointService.isBreakpointActive().subscribe(active => {
+      if (active) {
+        if (active === "extraSmall") {
           this.cols = 1;
-          this.width = "95%";
+          this.width = "99%";
         }
-        if (result.breakpoints[Breakpoints.Small]) {
-          this.cols = 2;
-          this.width = "90%";
-        }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.cols = 2;
-          this.width = "75%";
-        }
-        if (result.breakpoints[Breakpoints.Large]) {
-          this.cols = 4;
-          this.width = "50%";
-        }
-        if (result.breakpoints[Breakpoints.XLarge]) {
+        if (active === "ExtraLarge") {
           this.cols = 4;
           this.width = "40%";
         }
+        if (active === "medium") {
+          this.cols = 2;
+          this.width = "75%";
+        }
+        if (active === "large") {
+          this.cols = 4;
+          this.width = "50%";
+        }
+        if (active === "small") {
+          this.cols = 2;
+          this.width = "95%";
+        }
       }
     });
+
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -144,6 +151,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.langJson = response.updatedemographic
         this.popupMessages = response;
+        this.matTabLabel = response.updatedemographic.identity;
       });
 
     let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
@@ -172,10 +180,21 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   }
 
+  createTransactionIds(){
+    let transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
+    if (transactionID.length < 10) {
+      let diffrence = 10 - transactionID.length;
+      for (let i = 0; i < diffrence; i++) {
+        transactionID = transactionID + i
+      }
+    }
+    return transactionID
+  }
+
 
   async getUpdateMyDataSchema() {
-      this.isLoading = true;
-    await new Promise((resolve) =>{  
+    this.isLoading = true;
+    await new Promise((resolve) => {
       this.dataStorageService
         .getUpdateMyDataSchema('update-demographics')
         .subscribe((response) => {
@@ -186,21 +205,20 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
 
   getUserInfo() {
-      this.dataStorageService
-        .getUserInfo('update-demographics')
-        .subscribe((response) => {
-          if (response["response"]) {
-            this.userInfo = response["response"];
-            UpdatedemographicComponent.actualData = response["response"];
-            if(this.schema && this.userInfo){
-              this.buildData()
-              this.isLoading = false;
-            }else{
-              console.log("Testing")
-              this.getUpdateMyDataSchema();
-              this.getUserInfo();
-            }
+    this.dataStorageService
+      .getUserInfo('update-demographics')
+      .subscribe((response) => {
+        if (response["response"]) {
+          this.userInfo = response["response"];
+          UpdatedemographicComponent.actualData = response["response"];
+          if (this.schema && this.userInfo) {
+            this.buildData()
+            this.isLoading = false;
           } else {
+            this.getUpdateMyDataSchema();
+            this.getUserInfo();
+          }
+        } else {
           this.showErrorPopup(response['errors'])
         }
       });
@@ -216,7 +234,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               self.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName];
             } else {
               self.buildJSONData[schema.attributeName] = {};
-             
+
               if (self.userInfo[schema.attributeName].length) {
                 self.supportedLanguages.map((language) => {
                   let value = self.userInfo[schema.attributeName].filter(function (data) {
@@ -224,17 +242,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
                       return data.value.trim()
                     }
                   });
-                  if(value[0]){
+                  if (value[0]) {
                     self.buildJSONData[schema.attributeName][language] = value[0].value;
-                 }
+                  }
                 });
               }
             }
           }
         }
       }
-      
-     
+
+
       this.getGender();
       this.getLocationHierarchyLevel();
       this.getDocumentType("POI", "proofOfIdentity"); this.getDocumentType("POA", "proofOfAddress");
@@ -243,7 +261,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       console.log("Exception>>>" + ex.message);
     }
 
-    if(this.buildJSONData['preferredLang']){
+    if (this.buildJSONData['preferredLang']) {
       let perfLangs = this.buildJSONData['preferredLang'].split(',');
       perfLangs.forEach(data => {
         this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
@@ -271,7 +289,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
                 }
               });
             if (value.length > 0) {
-              self.buildCloneJsonData[schema.attributeName][language] = value[0].value;
+              self.buildCloneJsonData[schema.attributeName][this.supportedLanguages[0]] = value[0].value;
             }
           });
         }
@@ -334,7 +352,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     let self = this;
     let fieldNameData = {};
     self.locationFieldNameList = [];
-    self.dataStorageService.getLocationHierarchyLevel(self.langCode).subscribe(response => {
+    self.dataStorageService.getLocationHierarchyLevel('eng').subscribe(response => {
       response["response"]["locationHierarchyLevels"].forEach(function (value) {
         if (value.hierarchyLevel != 0)
           if (value.hierarchyLevel <= self.locCode)
@@ -349,6 +367,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   loadLocationDataDynamically(event: any, index: any) {
+    let unSelectedItems = this.locationFieldNameList.slice(index, this.locationFieldNameList.length)
     let locationCode = "";
     let fieldName = "";
     let self = this;
@@ -359,15 +378,20 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       fieldName = this.locationFieldNameList[parseInt(index)];
       locationCode = event.value.code;
       this.dynamicFieldValue[this.locationFieldNameList[parseInt(index) - 1]] = event.value;
+      this.isSelectedAllAddress = unSelectedItems.length ? false : true;
+      this.fieldName = fieldName;
     }
     this.dataStorageService.getImmediateChildren(locationCode, this.langCode)
       .subscribe(response => {
         if (response['response'])
           self.dynamicDropDown[fieldName] = response['response']['locations'];
       });
-    this.addingAddessData()
+    this.addingAddessData();
+    unSelectedItems.forEach(item =>{
+      this.dynamicDropDown[item] = [];
+    });
+    
   }
-
 
   sendOTPBtn(id: any) {
     if (id === "email") {
@@ -384,13 +408,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   generateOtp() {
-    this.transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
-    if (this.transactionID.length < 10) {
-      let diffrence = 10 - this.transactionID.length;
-      for (let i = 0; i < diffrence; i++) {
-        this.transactionID = this.transactionID + i
-      }
-    }
+    this.transactionID = this.createTransactionIds()
     const request = {
       "id": "mosip.resident.contact.details.send.otp.id",
       "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
@@ -412,13 +430,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   reGenerateOtp() {
-    this.transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
-    if (this.transactionID.length < 10) {
-      let diffrence = 10 - this.transactionID.length;
-      for (let i = 0; i < diffrence; i++) {
-        this.transactionID = this.transactionID + i
-      }
-    }
+    this.transactionID = this.createTransactionIds();
 
     const request = {
       "id": "mosip.resident.contact.details.send.otp.id",
@@ -699,60 +711,52 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   uploadFiles(files, transactionID, docCatCode, docTypCode, referenceId) {
     this.dataStorageService.uploadfile(files, transactionID, docCatCode, docTypCode, referenceId).subscribe(response => {
-      console.log(response)
+      if(response['response']){
+        this.getAllDocIds[response['response'].docName] = response['response'].docId
+      }
     });
+  }
+
+  deleteUploadedFile(docId, transactionID){
+    this.dataStorageService.deleteUploadedFile(docId, transactionID).subscribe(response =>{
+      console.log(response)
+    })
+  }
+
+  finalUpdateDemographicData(transactionID:any){
+    const request = {
+      "id": this.appConfigService.getConfig()["resident.updateuin.id"],
+      "version": this.appConfigService.getConfig()["resident.vid.version.new"],
+      "requesttime": Utils.getCurrentDate(),
+      "request": {
+        "transactionID": transactionID,
+        "consent": "Accepted",
+        "identity": this.finalUserCloneData
+      }
+    };
+    this.dataStorageService.updateuin(request).subscribe(response => {
+      let eventId = response.headers.get("eventid");
+      this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
+      if (response.body["response"]) {
+        this.isLoading = false;
+        this.showMessage(this.message, eventId);
+        this.router.navigate(['uinservices/dashboard']);
+      } else {
+        this.isLoading = false;
+        this.showErrorPopup(response.body["errors"])
+      }
+    }, error => {
+      console.log(error)
+    })
   }
 
   updateDemographicData() {
     this.isLoading = true;
-    let transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
-    if (transactionID.length < 10) {
-      let diffrence = 10 - transactionID.length;
-      for (let i = 0; i < diffrence; i++) {
-        transactionID = transactionID + i
-      }
+    if(this.updatingtype === 'identity'){
+      this.finalUpdateDemographicData(this.transactionIDForPOI)
+    }else{
+      this.finalUpdateDemographicData(this.transactionIDForPOA)
     }
-    if (this.updatingtype === "identity") {
-      this.files.forEach((eachFile) => {
-        const formData = new FormData();
-        formData.append('file', eachFile);
-        this.uploadFiles(formData, transactionID, 'POI', this.proofOfIdentity['documenttype'], this.proofOfIdentity['documentreferenceId']);
-      })
-    }
-    if (this.updatingtype === "address") {
-      this.filesPOA.forEach(eachFile => {
-        const formData = new FormData();
-        formData.append('file', eachFile);
-        this.uploadFiles(formData, transactionID, 'POA', this.proofOfAddress['documenttype'], this.proofOfAddress['documentreferenceId']);
-      })
-    }
-
-    setTimeout(() => {
-      const request = {
-        "id": this.appConfigService.getConfig()["resident.updateuin.id"],
-        "version": this.appConfigService.getConfig()["resident.vid.version.new"],
-        "requesttime": Utils.getCurrentDate(),
-        "request": {
-          "transactionID": transactionID,
-          "consent": "Accepted",
-          "identity": this.finalUserCloneData
-        }
-      };
-      this.dataStorageService.updateuin(request).subscribe(response => {
-        let eventId = response.headers.get("eventid")
-        this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
-        if (response.body["response"]) {
-          this.isLoading = false;
-          this.showMessage(this.message, eventId);
-          this.router.navigate(['uinservices/dashboard']);
-        } else {
-          this.isLoading = false;
-          this.showErrorPopup(response.body["errors"])
-        }
-      }, error => {
-        console.log(error)
-      })
-    }, 4000)
   }
 
   updatenotificationLanguage() {
@@ -861,11 +865,19 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    */
   deleteFile(index: number, type: string) {
     if (type === "POI") {
+      let documentName = this.files[index].name;
+      let documentID = this.getAllDocIds[documentName]
       this.files.splice(index, 1);
       this.uploadedFiles = this.files
+      this.deleteUploadedFile(documentID, this.transactionIDForPOI)
+      this.pdfSrc = "";
     } else {
+      let documentName = this.filesPOA[index].name;
+      let documentID = this.getAllDocIds[documentName]
       this.filesPOA.splice(index, 1);
       this.uploadedFiles = this.filesPOA
+      this.deleteUploadedFile(documentID, this.transactionIDForPOA)
+      this.pdfSrcPOA = ""
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
@@ -875,7 +887,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.previewDisabledInAddress = true;
       this.selectedPOAFileForPreview = "";
     }
-    this.pdfSrc = "";
   }
 
   /**
@@ -933,18 +944,26 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     } else {
       if (fileSize < 2.0) {
         if (type === "POI") {
+          this.transactionIDForPOI = this.transactionIDForPOI || this.createTransactionIds();
           this.isValidFileFormatPOI = false;
           for (const item of files) {
             item.progress = 0;
             this.files.push(item);
+            const formData = new FormData()
+            formData.append('file', item);
+            this.uploadFiles(formData, this.transactionIDForPOI, 'POI', this.proofOfIdentity['documenttype'], this.proofOfIdentity['documentreferenceId']);
           }
           this.uploadFilesSimulator(0, type);
           this.previewDisabled = false
         } else {
+          this.transactionIDForPOA = this.transactionIDForPOA || this.createTransactionIds()
           this.isValidFileFormatPOA = false;
           for (const item of files) {
             item.progress = 0;
             this.filesPOA.push(item);
+            const formData = new FormData()
+            formData.append('file', item);
+            this.uploadFiles(formData, this.transactionIDForPOA, 'POA', this.proofOfAddress['documenttype'], this.proofOfAddress['documentreferenceId']);
           }
           this.uploadFilesSimulator(0, type);
           this.previewDisabledInAddress = false
@@ -982,7 +1001,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       width: '550px',
       data: {
         case: 'OTP',
-        message:this.popupMessages.genericmessage.otpPopupDescription,
+        message: this.popupMessages.genericmessage.otpPopupDescription,
         newContact: this.userId,
         submitBtnTxt: this.popupMessages.genericmessage.submitButton,
         resentBtnTxt: this.popupMessages.genericmessage.resentBtn
@@ -1003,7 +1022,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         eventId: eventId,
         clickHere2: this.popupMessages.genericmessage.clickHere2,
         dearResident: this.popupMessages.genericmessage.dearResident,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk: 'OK'
       }
     });
     return dialogRef;
@@ -1025,7 +1045,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             case: 'MESSAGE',
             title: this.popupMessages.genericmessage.errorLabel,
             message: this.message,
-            btnTxt: this.popupMessages.genericmessage.successButton
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk: 'OK'
           },
           disableClose: true
         });

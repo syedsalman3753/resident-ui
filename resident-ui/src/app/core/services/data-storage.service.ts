@@ -216,7 +216,7 @@ export class DataStorageService {
   }
 
   shareInfo(request: any) {
-    return this.httpClient.post(this.BASE_URL + '/share-credential', request, { observe: 'response', responseType: 'blob' as 'json' });
+    return this.httpClient.post(this.BASE_URL + '/share-credential', request, { observe: 'response' });
   }
 
   downloadAcknowledgement(eventId: string) {
@@ -332,6 +332,10 @@ export class DataStorageService {
 
   uploadfile(request, transactionID, docCatCode, docTypCode, referenceId){
     return this.httpClient.post(this.BASE_URL + '/documents/'+transactionID+'?docCatCode='+docCatCode+'&docTypCode='+docTypCode+'&langCode='+localStorage.getItem("langCode")+'&referenceId='+referenceId, request);
+  }
+
+  deleteUploadedFile(docId:string, transactionID:string){
+    return this.httpClient.delete(this.BASE_URL + '/documents/'+docId + "?transactionId=" + transactionID)
   }
 
   isAuthenticated(){

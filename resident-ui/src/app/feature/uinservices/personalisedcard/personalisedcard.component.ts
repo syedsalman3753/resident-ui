@@ -11,8 +11,8 @@ import { saveAs } from 'file-saver';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import moment from 'moment';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-personalisedcard",
@@ -36,52 +36,55 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
   givenNameBox: boolean = false;
   downloadBtnDisabled: boolean = true;
   valuesSelected: any = [];
-  width : string;
-  cols : number;
-  message2:any;
-  attributeWidth:string;
-  fullAddress:string = "";
-  formatLabels:any;
-  formatCheckBoxClicked:boolean = false;
-  isLoading:boolean = true;
+  width: string;
+  previewWidth:string;
+  cols: number;
+  message2: any;
+  attributeWidth: string;
+  fullAddress: string = "";
+  formatLabels: any;
+  formatCheckBoxClicked: boolean = false;
+  isLoading: boolean = true;
   selectedOprionsFormOptions: object = {};
 
-  constructor(private autoLogout: AutoLogoutService,private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small,
-      Breakpoints.Medium,
-      Breakpoints.Large,
-      Breakpoints.XLarge,
-    ]).subscribe(result => {
-      if (result.matches) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.cols = 1;
-          this.width = "19em";
-          this.attributeWidth = "10em";
-        }
-        if (result.breakpoints[Breakpoints.Small]) {
+  constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
+    private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,
+    private auditService: AuditService, private breakPointService: BreakpointService) {
+    this.breakPointService.isBreakpointActive().subscribe(active => {
+      if (active) {
+        if (active === "small") {
           this.cols = 1;
           this.width = "40em";
+          this.previewWidth = "40em"
           this.attributeWidth = "20em";
         }
-        if (result.breakpoints[Breakpoints.Medium]) {
-          this.cols = 2;
+        if (active === "extraSmall") {
+          this.cols = 1;
           this.width = "25em";
-          this.attributeWidth = "12em";
+          this.previewWidth = "20em"
+          this.attributeWidth = "10em";
         }
-        if (result.breakpoints[Breakpoints.Large]) {
+        if (active === "large") {
           this.cols = 2;
           this.width = "29em";
+          this.previewWidth = "29em"
           this.attributeWidth = "12em";
         }
-        if (result.breakpoints[Breakpoints.XLarge]) {
+        if (active === "medium") {
+          this.cols = 2;
+          this.width = "25em";
+          this.previewWidth = "25em"
+          this.attributeWidth = "12em";
+        }
+        if (active === "ExtraLarge") {
           this.cols = 2;
           this.width = "35rem";
+          this.previewWidth = "35em"
           this.attributeWidth = "18em";
         }
       }
     });
+
   }
 
   async ngOnInit() {
@@ -140,30 +143,30 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     this.dataStorageService
       .getUserInfo('personalized-card')
       .subscribe((response) => {
-        if(response['response']){
+        if (response['response']) {
           this.userInfo = response["response"];
           this.isLoading = false;
-        }else{
+        } else {
           this.showErrorPopup(response['errors'])
         }
-        
+
       });
   }
 
-captureCheckboxValue($event: any, data: any, type: any) {
-  this.buildHTML = "";
-  if (type === "datacheck") {
-    if (data.attributeName.toString() in this.dataDisplay) {
-      delete this.dataDisplay[data.attributeName];
-    } else {
-      let value = "";
-      if (typeof this.userInfo[data.attributeName] === "string") {
-        if(data.attributeName === "dateOfBirth"){
-          value = moment(this.userInfo[data.attributeName]).format(data["defaultFormat"]);
-        }else{
-          value = this.userInfo[data.attributeName];
-        }
+  captureCheckboxValue($event: any, data: any, type: any) {
+    this.buildHTML = "";
+    if (type === "datacheck") {
+      if (data.attributeName.toString() in this.dataDisplay) {
+        delete this.dataDisplay[data.attributeName];
       } else {
+        let value = "";
+        if (typeof this.userInfo[data.attributeName] === "string") {
+          if (data.attributeName === "dateOfBirth") {
+            value = moment(this.userInfo[data.attributeName]).format(data["defaultFormat"]);
+          } else {
+            value = this.userInfo[data.attributeName];
+          }
+        } else {
           if (data.formatRequired) {
             if (data.attributeName === "fullAddress") {
               this.fullAddress = ""
@@ -178,196 +181,186 @@ captureCheckboxValue($event: any, data: any, type: any) {
                   if (typeof this.userInfo[item.value] !== "string") {
                     this.userInfo[item.value].forEach(eachLang => {
                       if (eachLang.language === this.langCode) {
-                        this.fullAddress = this.fullAddress + "," +  eachLang.value
+                        this.fullAddress = eachLang.value + "," + this.fullAddress;
                       }
                     })
                   } else {
-                    this.fullAddress = this.fullAddress + this.userInfo[item.value]
+                    this.fullAddress = this.fullAddress + this.userInfo[item.value];
                   }
                 }
               })
-              this.fullAddress = this.fullAddress.replace(/^./, "");
-              value = this.fullAddress
+
+              if (this.fullAddress.endsWith(',')) {
+                this.fullAddress = this.fullAddress.replace(/^./, "");
+              };
+              value = this.fullAddress;
             } else {
-              this.userInfo[data.attributeName].forEach(item =>{
-                if(item.language === this.langCode){
-                  value = item.value
+              this.userInfo[data.attributeName].forEach(eachItem => {
+                if (eachItem.language === this.langCode) {
+                  value = eachItem.value
                 }
               });
             }
           } else {
-            this.userInfo[data.attributeName].forEach(item =>{
-              if(item.language === this.langCode){
-                value = item.value
+            this.userInfo[data.attributeName].forEach(eachItem => {
+              if (eachItem.language === this.langCode) {
+                value = eachItem.value
               }
             });
           }
-      }
-
-      if (data.formatRequired) {
-        this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": data['maskRequired'], "format": data['defaultFormat'], "value": value };
-      } else {
-        this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": data['maskRequired'], "value": value };
-      }
-    }
-
-    this.schema = this.schema.map(item => {
-      if (item.attributeName === data.attributeName) {
-        let newItem = { ...item, checked: !item.checked }
-        if (!newItem.checked && newItem['formatOption']) {
-          newItem['formatOption'][this.langCode] = this.selectedOprionsFormOptions[data.attributeName]
         }
-        return newItem
-      } else {
-        return item
+
+        if (data.formatRequired) {
+          this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": data['maskRequired'], "format": data['defaultFormat'], "value": value };
+        } else {
+          this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": data['maskRequired'], "value": value };
+        }
       }
-    })
-  } else {
-    if (!data.formatRequired) {
-      let value;
-      if (this.dataDisplay[data.attributeName].value === this.userInfo[type]) {
-        value = this.userInfo[data.attributeName];
-      } else {
-        value = this.userInfo[type];
-      }
-      this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": $event.checked, "value": value };
+
+      this.schema = this.schema.map(item => {
+        if (item.attributeName === data.attributeName) {
+          let newItem = { ...item, checked: !item.checked }
+          if (!newItem.checked && newItem['formatOption']) {
+            newItem['formatOption'][this.langCode] = this.selectedOprionsFormOptions[data.attributeName]
+          }
+          return newItem
+        } else {
+          return item
+        }
+      })
+
     } else {
-      let value = "";
-      let allValue = "";
-      let self = this;
-      if (typeof this.userInfo[data.attributeName] === "string") {
-        data.formatOption[this.langCode].forEach(item =>{
-          item.checked = !item.checked
-          if(item.checked){
-            value = moment(this.userInfo[data.attributeName]).format(item["value"]);
-          }
-        })
-
+      if (!data.formatRequired) {
+        let value;
+        if (this.dataDisplay[data.attributeName].value === this.userInfo[type]) {
+          value = this.userInfo[data.attributeName];
+        } else {
+          value = this.userInfo[type];
+        }
+        this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": $event.checked, "value": value };
       } else {
-        this.schema = this.schema.map(eachItem => {
-          if (data['attributeName'] === eachItem['attributeName']) {
-            eachItem['formatOption'][this.langCode].forEach(item => {
-              if (item.value === type['value']) {
-                return item['checked'] = !item['checked']
-              } else {
-                return item['checked'] = item['checked']
-              }
-            })
-          }
-          return eachItem
-        })
+        let value = "";
+        let allValue = "";
+        let self = this;
+        if (typeof this.userInfo[data.attributeName] === "string") {
+          data.formatOption[this.langCode].forEach(item => {
+            item.checked = !item.checked
+            if (item.checked) {
+              value = moment(this.userInfo[data.attributeName]).format(item["value"]);
+            }
+          })
 
-        if (data.attributeName === "fullAddress") {
-          let selectedValuesCount = 0;
-          if (type["value"] !== 'fullAddress') {
-            this.schema.map(eachItem => {
-              if (data['attributeName'] === eachItem['attributeName']) {
-                eachItem['formatOption'][this.langCode].forEach((item) => {
-                  if (item.checked) {
-                    if (self.userInfo[item.value] !== undefined) {
-                      if (item.value === "postalCode") {
-                        allValue = allValue + self.userInfo[item.value];
-                      } else {
-                        this.userInfo[item.value].forEach(eachLang => {
-                            if (eachLang.language === this.langCode) {
-                              allValue = allValue + eachLang.value + ",";
-                            }
-                        })
-                      }
-                    }
-                  }
-                  return "";
-                });
-              }
-            });
-            
-            let unCheckFullAddress = () =>{
-              data.formatOption[this.langCode].forEach(item =>{
-                if(item.value === "fullAddress"){
-                  item['checked'] = false;
+        } else {
+          this.schema = this.schema.map(item => {
+            if (data['attributeName'] === item['attributeName']) {
+              item['formatOption'][this.langCode].forEach(eachItem => {
+                if (eachItem.value === type['value']) {
+                  return eachItem['checked'] = !eachItem['checked']
+                } else {
+                  return eachItem['checked'] = eachItem['checked']
                 }
               })
             }
-            
-            for(let item of data.formatOption[this.langCode]){
-              if(!item.checked && item.value !== "fullAddress"){
+            return item
+          })
+
+          if (data.attributeName === "fullAddress") {
+            let selectedValuesCount = 0;
+            if (type["value"] !== 'fullAddress') {
+              this.schema.map(eachItem => {
+                if (data['attributeName'] === eachItem['attributeName']) {
+                  eachItem['formatOption'][this.langCode].forEach((item) => {
+                    if (item.checked) {
+                      if (self.userInfo[item.value] !== undefined) {
+                        if (item.value === "postalCode") {
+                          allValue = allValue + self.userInfo[item.value];
+                        } else {
+                          this.userInfo[item.value].forEach(eachLang => {
+                            if (eachLang.language === this.langCode) {
+                              allValue = allValue + eachLang.value + ",";
+                            }
+                          })
+                        }
+                      }
+                    }
+                    return "";
+                  });
+                }
+              });
+
+              let unCheckFullAddress = () => {
+                data.formatOption[this.langCode].forEach(item => {
+                  if (item.value === "fullAddress") {
+                    item['checked'] = false;
+                  }
+                })
+              }
+
+              for (let item of data.formatOption[this.langCode]) {
+                if (!item.checked && item.value !== "fullAddress") {
                   unCheckFullAddress();
                   break;
-              }else{
+                } else {
+                  item.checked = true;
+                }
+              }
+
+              if (allValue.endsWith(',')) {
+                allValue = allValue.replace(/.$/, '')
+              }
+              value = allValue;
+            } else {
+              value = this.fullAddress
+              data.formatOption[this.langCode].forEach(item => {
                 item.checked = true;
+              })
+            }
+
+            for (let eachItem of data.formatOption[this.langCode]) {
+              if (!eachItem.checked) {
+                selectedValuesCount += 1
               }
             }
 
-            if (allValue.endsWith(',')) {
-              allValue = allValue.replace(/.$/, '')
-            }
-            value = allValue;
-          } else {
-              value = this.fullAddress
-              data.formatOption[this.langCode].forEach(item =>{
+            if (selectedValuesCount === data.formatOption[this.langCode].length) {
+              data.checked = false;
+              delete this.dataDisplay[data.attributeName];
+              data.formatOption[this.langCode].forEach(item => {
                 item.checked = true;
               })
-          }
-
-          for (let eachItem of data.formatOption[this.langCode]){
-            if(!eachItem.checked){
-             selectedValuesCount += 1
+              $event.closeMenu();
             }
-         }
-         
-         if(selectedValuesCount === data.formatOption[this.langCode].length){
-           data.checked = false;
-           delete this.dataDisplay[data.attributeName];
-           data.formatOption[this.langCode].forEach(item =>{
-            item.checked = true;
-          })
-         $event.closeMenu();
-         }
-        }else{
-          data.checked = false;
-          delete this.dataDisplay[data.attributeName];
-          data.formatOption[this.langCode].forEach(item =>{
-            item.checked = true;
-          })
-         $event.closeMenu();
+          } else {
+            data.checked = false;
+            delete this.dataDisplay[data.attributeName];
+            data.formatOption[this.langCode].forEach(item => {
+              item.checked = true;
+            })
+            $event.closeMenu();
+          }
+        }
+        if (data.checked) {
+          this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": type["value"], "value": value };
         }
       }
-      if(data.checked){
-        this.dataDisplay[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": type["value"], "value": value };
+    }
+
+    $event.stopPropagation()
+
+    if (Object.keys(this.dataDisplay).length >= 3) {
+      this.downloadBtnDisabled = false
+    } else {
+      this.downloadBtnDisabled = true
+    }
+
+    if (!data.checked && typeof type === "string") {
+      if (data.formatRequired) {
+        let formatOptions = data['formatOption'][this.langCode].map(eachItem => {
+          return { ...eachItem }
+        })
+        this.selectedOprionsFormOptions[data['attributeName']] = formatOptions;
       }
     }
-  }
-
-  $event.stopPropagation()
-
-  if (Object.keys(this.dataDisplay).length >= 3) {
-    this.downloadBtnDisabled = false
-  } else {
-    this.downloadBtnDisabled = true
-  }
-
-  if (!data.checked && typeof type === "string") {
-    if (data.formatRequired) {
-      let formatOptions = data['formatOption'][this.langCode].map(eachItem => {
-        return { ...eachItem }
-      })
-      this.selectedOprionsFormOptions[data['attributeName']] = formatOptions;
-    }
-  }
-
-  let row = "";
-  let rowImage = ""
-
-  for (let key of this.valuesSelected) {
-    if(this.dataDisplay[key]){
-      if (key === "photo") {
-        rowImage = "<tr><td><img src=' " + this.dataDisplay[key].value + "' alt='' style='margin-left:48%;' width='70px' height='70px'/></td></tr>";
-      } else {
-        row = row + "<tr><td style='font-weight:600; font-family:Roboto;'>" + this.dataDisplay[key].label + ":</td><td style='font-weight:500; font-family:Roboto;'>" + this.dataDisplay[key].value + "</td></tr>";
-      }
-    }
-  }
-  this.buildHTML = `<html><head></head><body><table>` + rowImage + row + `</table></body></html>`;
   }
 
   downloadFile() {
@@ -378,6 +371,8 @@ captureCheckboxValue($event: any, data: any, type: any) {
   convertpdf() {
     this.isLoading = true;
     let self = this;
+    let elementHtml = document.getElementById('seleted-details-card').outerHTML;
+    this.buildHTML = `<html><head><style>.seleted-details-card { min-height: 210px; border-style: solid;border-width: 2px;border-color: #BCBCBC; border-radius: 5pt; overflow:hidden; padding:5px; }table{table-layout: fixed; width: 100%;}td {word-break: break-word;}.detailinfo{color: #000000; font-weight: 400; font-size: 14px;}</style></head><body>` + elementHtml + `</body></html>`;
     const request = {
       "id": this.appConfigService.getConfig()["mosip.resident.download.personalized.card.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
@@ -406,7 +401,7 @@ captureCheckboxValue($event: any, data: any, type: any) {
             }
             saveAs(data.body, fileName);
             this.showMessage()
-            this.router.navigate(['uinservices/dashboard']);
+            //this.router.navigate(['uinservices/dashboard']);
           } catch (error) {
             this.isLoading = false;
             console.log(error)
@@ -419,7 +414,23 @@ captureCheckboxValue($event: any, data: any, type: any) {
         });
   }
 
-
+  showErrorPopup(message: string) {
+    let errorCode = message[0]['errorCode']
+    setTimeout(() => {
+      this.dialog
+        .open(DialogComponent, {
+          width: '650px',
+          data: {
+            case: 'MESSAGE',
+            title: this.popupMessages.genericmessage.errorLabel,
+            message: this.popupMessages.serverErrors[errorCode],
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk: 'OK'
+          },
+          disableClose: true
+        });
+    }, 400)
+  }
 
   conditionsForPersonalisedCard() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -445,30 +456,14 @@ captureCheckboxValue($event: any, data: any, type: any) {
         eventId: this.eventId,
         passwordCombinationHeading: this.popupMessages.genericmessage.passwordCombinationHeading,
         passwordCombination: this.popupMessages.genericmessage.passwordCombination,
-        trackStatusText:this.popupMessages.genericmessage.trackStatusText,
+        trackStatusText: this.popupMessages.genericmessage.trackStatusText,
         dearResident: this.popupMessages.genericmessage.dearResident,
         message: this.message,
-        btnTxt: this.popupMessages.genericmessage.successButton
+        btnTxt: this.popupMessages.genericmessage.successButton,
+        isOk: 'OK'
       }
     });
     return dialogRef;
-  }
-
-  showErrorPopup(message: string) {
-    let errorCode = message[0]['errorCode']
-    setTimeout(() => {
-      this.dialog
-      .open(DialogComponent, {
-        width: '650px',
-        data: {
-          case: 'MESSAGE',
-          title: this.popupMessages.genericmessage.errorLabel,
-          message: this.popupMessages.serverErrors[errorCode],
-          btnTxt: this.popupMessages.genericmessage.successButton
-        },
-        disableClose: true
-      });
-  },400)
   }
 
   ngOnDestroy(): void {
