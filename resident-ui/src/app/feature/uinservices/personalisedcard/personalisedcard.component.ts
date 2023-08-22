@@ -61,7 +61,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
         if (active === "extraSmall") {
           this.cols = 1;
           this.width = "25em";
-          this.previewWidth = "19em"
+          this.previewWidth = "20em"
           this.attributeWidth = "10em";
         }
         if (active === "large") {
