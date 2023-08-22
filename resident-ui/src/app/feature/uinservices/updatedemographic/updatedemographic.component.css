@@ -85,7 +85,7 @@ label{
  .container label {
     color: #03A64A;
     width: 148px;
-    min-height: 44px;
+    height: 44px;
     border-radius: 5px;
     background: #FFFFFF;
     padding: 10px;
@@ -193,7 +193,6 @@ label{
 }
 
 .preview-agree-card{
-   margin-top: 8px;
    display: flex;
    align-items: center;
    justify-content:flex-end;
@@ -207,6 +206,11 @@ label{
   border: none;
   background-color: transparent;
   margin-bottom: 5px;
+}
+
+.input-values-main-card{
+   display: flex;
+   align-items: center;
 }
 
 .address-page{
@@ -252,6 +256,15 @@ label{
   width: 100% !important;
 }
 
+mat-select {
+  outline: 1px solid !important;
+  outline-color: #ccc !important;
+  outline-width: thin;
+  border-radius: 5px;
+  color: white !important;
+  background: white;
+}
+
 /* ::ng-deep .mat-tab-label{
   border: 1px solid black;
 } */
@@ -284,9 +297,10 @@ label{
 }
 
 .warning-message{
-  margin: 2px 0 0 0; 
+  margin: 0px; 
   color: red; 
   font-size: 11px;
+  margin-top: 5px;
 }
 .warning-message-for-contact{
   margin: 0px; 
@@ -294,91 +308,4 @@ label{
   font-size: 12px;
   font-weight: 600;
   margin-top: -14px;
-}
-
-::ng-deep .mat-grid-tile .mat-figure{
-  align-items: flex-start;
-}
-
-.main-contianer{
-  padding:1rem 4rem 0 4rem; 
-}
-
-.breadcrumb-two{
-  margin-left: 15px;
-}
-
-.show-preview-image{
-  width: 50%;
-  height: 550px;
-}
-
-.submit-btn-card{
-  text-align: end;
-  float: right;
-  margin-top: none;
-}
-
-.preview-image{
-  width: 50%
-}
-
-.each-Hierarchy-td{
-  text-align: start; 
-  vertical-align: text-top; 
-  height: 72px;
-}
-
-.disable-dropdown{
-  background-color: #F4F4F4;
-  border-radius: 5px;
-}
-
-@media screen and (min-width:989px) {
-  .table-main-card{
-    display: flex;
-  }
-  .show-preview-image-mobile{
-    display: none;
-  }
-  .input-values-main-card{
-    display: flex;
-    align-items: center;
- }
-}
-
-@media screen and ((min-width:750px) and (max-width:988px)) {
-  .main-contianer{
-    padding: 0.5rem 3rem 0 3rem; 
-  }
-  .show-preview-image{
-    display: none;
-  }
-  .preview-image{
-    width: 100%
-  }
-}
-
-@media screen and (max-width:749px) {
-  .main-contianer{
-    padding: 0.5rem 1rem 0 1rem; 
-  }
-  .mat-card{
-    padding: 10px 5px 10px 5px;
-  }
-  .breadcrumb-two{
-    margin-left: 4px;
-  }
-  .show-preview-image{
-    display: none;
-  }
-  th, td {
-    padding: 4px 2px 4px 2px;
-  }
-  .tab-headings{
-    margin-left: .5rem;
-  }
-  .preview-image{
-    width: 100%
-  }
 }

@@ -9,14 +9,14 @@ import io.mosip.test.residentTest.utility.BaseClass;
 import io.mosip.test.residentTest.utility.Commons;
 import io.mosip.test.residentTest.utility.JsonUtil;
 import io.mosip.test.residentTest.utility.MockSMTPListener;
-@Test(groups = "UMD")
+ @Test(groups = "UMD")
 public class UpdateMyData extends BaseClass {
 	
 	public void updateMyData() throws Exception {
 		String tempemail1=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail1");
 		LoginTest.loginTest();
 		 test=extent.createTest("updateMyData Test ", "verify Login");
-		Commons.click(test,driver, By.id("uinservices/updatedemographic"));
+		Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[7]"));
 		Commons.enter(test,driver, By.id("fullName"), data);
 		Commons.dropdown(test,driver, By.id("gender"));
 		 test.log(Status.INFO, "Click on gender");
@@ -34,8 +34,7 @@ public class UpdateMyData extends BaseClass {
 		Thread.sleep(3000);
 		
 		test.log(Status.INFO, "Update Address");
-		Commons.click(test,driver, By.id("uinservices/updatedemographic"));
-		//Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
+		Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
 		Commons.click(test,driver, By.xpath("//div[text()='Address']"));
 		Commons.enter(test,driver, By.id("addressLine1"), data);
 		Commons.dropdown(test,driver, By.id("Region"));
@@ -57,8 +56,7 @@ public class UpdateMyData extends BaseClass {
 		
 		
 		test.log(Status.INFO, "Update Email");
-		Commons.click(test,driver, By.id("uinservices/updatedemographic"));
-		//Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
+		Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
 		Commons.click(test,driver, By.xpath("//div[text()='Contact']"));
 		
 		Commons.enter(test,driver, By.id("email"), tempemail1);
@@ -75,8 +73,7 @@ public class UpdateMyData extends BaseClass {
 		    
 		    //Lang prefrence
 		    test.log(Status.INFO, "Select Language Preference");
-		    Commons.click(test,driver, By.id("uinservices/updatedemographic"));
-		 //   Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
+		    Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
 		    Commons.click(test,driver, By.xpath("//div[text()='Language Preference']"));
 		    Commons.dropdown(test,driver, By.id("preferredLang"));
 		    Commons.click(test,driver, By.id("submit"));

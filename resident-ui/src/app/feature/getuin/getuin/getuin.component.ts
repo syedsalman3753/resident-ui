@@ -8,7 +8,7 @@ import Utils from 'src/app/app.utils';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from 'src/app/core/services/audit.service';
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-getuin',
@@ -38,12 +38,6 @@ export class GetuinComponent implements OnInit {
   disableSendOtp: boolean = true;
   aidStatus:string;
   captchaEnable: boolean = false;
-  sitealignment:string = localStorage.getItem('direction');
-  classes:any ={
-    "SUCCESS": "processing-position-icon position-icon",
-    "FAILURE":"failure-position-icon position-icon",
-    "IN-PROGRESS":"inactive-position-icon position-icon"
-  }
 
   constructor(
     private router: Router,
@@ -52,26 +46,31 @@ export class GetuinComponent implements OnInit {
     private appConfigService: AppConfigService,
     private dialog: MatDialog,
     private auditService: AuditService, 
-    private breakPointService: BreakpointService
+    private breakpointObserver: BreakpointObserver
   ) {
     this.translateService.use(localStorage.getItem("langCode"));
     this.appConfigService.getConfig();
-
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if (active) {
-        if(active === "extraSmall"){
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
           this.width = "90%";
         }
-        if(active === "small"){
+        if (result.breakpoints[Breakpoints.Small]) {
           this.width = "90%";
         }
-        if(active === "medium"){
+        if (result.breakpoints[Breakpoints.Medium]) {
           this.width = "90%";
         }
-        if(active === "large"){
+        if (result.breakpoints[Breakpoints.Large]) {
           this.width = "40%";
         }
-        if(active === "ExtraLarge"){
+        if (result.breakpoints[Breakpoints.XLarge]) {
           this.width = "30%";
         }
       }
@@ -151,7 +150,6 @@ export class GetuinComponent implements OnInit {
           this.aidStatus = response["response"].aidStatus;
           this.orderStatusIndex =  this.stageKeys.indexOf(this.orderStatus);
         }
-        this.disableSendOtp = true;
       }else{
         this.showErrorPopup(response["errors"]);
       }
@@ -211,8 +209,7 @@ export class GetuinComponent implements OnInit {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          isOk:"OK"
+          btnTxt: this.popupMessages.genericmessage.successButton
         },
         disableClose: true
       });

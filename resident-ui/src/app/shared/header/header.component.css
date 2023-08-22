@@ -87,7 +87,7 @@
 }
 
 ::ng-deep .mat-menu-content {
-  /* width: 250px !important; */
+  width: 250px !important;
   /* height: auto !important; */
   padding-top: 0px !important;
   padding-bottom: 0px !important;
@@ -95,49 +95,60 @@
 
 .mat-menu-item {
   overflow-wrap: break-word;
-  /* height: 40px; */
 }
 
-/* ::ng-deep .mat-menu-panel.zoommenu {
-  min-width: 320px !important;
-} */
+::ng-deep .mat-menu-panel.zoommenu {
+  min-width: 320px!important;
+}
 
 ::ng-deep .mat-menu-panel.myMenu {
   height: 80%;
   min-width: 303px!important;
+  /*margin-right:-90px !important;*/
+  /* top: 140px !important; */
   border-radius: 0% !important;
   background-color: white;
   font-size: 13px;
   padding-bottom: 12px;
+  /*margin-left: -10.1rem;*/
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+/* .each-notification{
+  width: 200px !important;
+  margin: 8px;
+} */
+
+/* ::ng-deep .cdk-overlay-pane{
+  top: 80px !important;
+} */
 
 ::ng-deep .mat-menu-panel.myMenu > .mat-menu-content {
   width: 300px !important;
   height: auto !important;
 }
 
-/* ::ng-deep .cdk-overlay-connected-position-bounding-box{
+::ng-deep .cdk-overlay-connected-position-bounding-box{
   right: 30px !important;
-}  */
+} 
 
-/* ::ng-deep #cdk-overlay-0{
+::ng-deep #cdk-overlay-0{
   right: 90px !important;
-}  */
+} 
 
-/* ::ng-deep #cdk-overlay-1{
+::ng-deep #cdk-overlay-1{
   right: 90px !important;
-} */
+}
 
 ::ng-deep #cdk-overlay-3{
   right: 90px !important;
 } 
 
 
-/* ::ng-deep .cdk-overlay-pane{
+/*::ng-deep .cdk-overlay-pane{
   position: relative !important;
-} */
+}*/
 
 .dot{
   height: 10px;
@@ -169,22 +180,4 @@
   height: 100%;
   width: 150px;
   text-align: center;
-}
-
-.notification-icon{
-  color: white; 
-}
-
-@media screen and (max-width:550px){
-  .notification-icon{
-    margin: 0px;
-    color: white;
-  }
-  .notification-btn{
-    padding: 0 6px;
-    width: 40px;
-  }
-  .selected-lang{
-    display: none;
-  }
 }

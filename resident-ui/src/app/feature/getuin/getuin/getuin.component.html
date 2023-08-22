@@ -1,14 +1,14 @@
 <div class="main-container" *ngIf="!isUinNotReady">
   <span class="breadcrumb">
-    <a (click)="onItemSelected('home')">{{popupMessages.uinservices.home }} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<span
-      class="active">{{popupMessages.uinservices.label}}</span>
+    <a (click)="onItemSelected('home')">{{'uinservices.home' | translate}} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<span
+      class="active">{{'uinservices.label' | translate}}</span>
   </span>
   <mat-card class="login-card">
     <!-- <mat-card-subtitle class="login-heading" *ngIf="getUinData.login">{{getUinData.login |
       translate}}</mat-card-subtitle>
     <hr class="line" /> -->
     <div *ngIf="getUinData" class="form-container" [style.width]="width">
-      <form class="form-card" #basicForm="ngForm" (submit)="submitUserID(basicForm.value)">
+      <form #basicForm="ngForm" (submit)="submitUserID(basicForm.value)">
         <div class="uin-login-title-card">
           <mat-card-subtitle class="login-Input-heading">{{getUinData.title |
             translate}}</mat-card-subtitle>
@@ -18,10 +18,10 @@
         <div *ngIf="infoPopUpShow" class="info-box">
           <p>{{infoText}}</p>
         </div>
-        <input id="aidValue" class="input-text" type="text" ngModel name="AID" (blur)="getCaptchaToken($event.target.value)" placeholder="{{getUinData.enterHere}}"/>
+        <input id="aidValue" class="input-text" type="text" ngModel name="AID" (blur)="getCaptchaToken($event.target.value)"/>
         <br />
         <label class="label-text" >{{getUinData.description | translate}}</label>
-        <div *ngIf="siteKey && captchaEnable" id="recaptcha-container">
+        <div *ngIf="siteKey && captchaEnable">
           <app-captcha [captchaSiteKey]="siteKey" [resetCaptcha]="resetCaptcha"
             (captchaEvent)="getCaptchaToken($event)"></app-captcha>
         </div>
@@ -44,12 +44,12 @@
   </span>
   <div class="status-title-card">
     <mat-card-subtitle
-      class="status-title-text" *ngIf="aid && aidStatus === 'SUCCESS' || aidStatus === 'IN-PROGRESS'">{{getStatusData.uinTitleDescription.replace("$AID",aid)}}
+      class="status-title-text" *ngIf="aid && aidStatus === 'SUCCESS' ">{{getStatusData.uinTitleDescription.replace("$AID",aid)}}
     </mat-card-subtitle>
     <mat-card-subtitle
       class="status-title-text" *ngIf="aid && aidStatus === 'FAILURE' ">{{getStatusData.uinTitleDescription2.replace("$AID",aid)}}
     </mat-card-subtitle>
-      <mat-card-subtitle *ngIf="aidStatus === 'SUCCESS' || aidStatus === 'IN-PROGRESS'" class="req-msg-text">{{getStatusData.requestMsg}}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="aidStatus === 'SUCCESS' " class="req-msg-text">{{getStatusData.requestMsg}}</mat-card-subtitle>
       <mat-card-subtitle *ngIf="aidStatus === 'FAILURE' " class="req-msg-text">{{getStatusData.requestMsg2}}</mat-card-subtitle>
   </div>
   <mat-card class="status-details-card">
@@ -61,7 +61,7 @@
             <div *ngIf="i < orderStatusIndex" class="active-position-icon position-icon">
               <!-- <img src="./assets/icons/iconfont/Path 7837.svg" /> -->
             </div>
-            <div *ngIf="i === orderStatusIndex"  class= {{classes[aidStatus]}}>
+            <div *ngIf="i === orderStatusIndex"  [ngClass]="{ 'processing-position-icon ' : aidStatus === 'SUCCESS', 'failure-position-icon position-icon' : aidStatus === 'FAILURE' }">
               <!-- <img src="./assets/icons/iconfont/Path 7837.svg" /> -->
             </div>
             <div *ngIf="i > orderStatusIndex"  class="inactive-position-icon position-icon">

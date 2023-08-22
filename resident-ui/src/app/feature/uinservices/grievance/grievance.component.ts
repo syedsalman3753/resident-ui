@@ -138,7 +138,7 @@ export class GrievanceComponent implements OnInit {
         this.showMessage(response["response"])
         this.router.navigate(["/uinservices/dashboard"])
       } else {
-        this.showErrorPopupMessage(response["errors"])
+        this.showErrorPopup(response["errors"])
       }
     },
       error => {
@@ -158,20 +158,19 @@ export class GrievanceComponent implements OnInit {
         message: this.message,
         endMsg: this.popupMessages.genericmessage.successRemainMsg,
         dearResident: this.popupMessages.genericmessage.dearResident,
-        btnTxt: this.popupMessages.genericmessage.successButton,
-        isOk:'OK'
+        btnTxt: this.popupMessages.genericmessage.successButton
       }
     });
     return dialogRef;
   }
 
-  showErrorPopupMessage(message: string) {
+  showErrorPopup(message: string) {
     this.errorCode = message[0]["errorCode"];
     if (this.errorCode === "RES-SER-410") {
-      let errorMessage = message[0]["message"].split("-")[1].trim();
-      this.message = this.popupMessages.serverErrors[this.errorCode][errorMessage];
+      let messageType = message[0]["message"].split("-")[1].trim();
+      this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
     } else {
-      this.message = this.popupMessages.serverErrors[this.errorCode];
+      this.message = this.popupMessages.serverErrors[this.errorCode]
     }
 
     this.dialog
@@ -181,8 +180,7 @@ export class GrievanceComponent implements OnInit {
           case: 'MESSAGE',
           title: this.popupMessages.genericmessage.errorLabel,
           message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          isOk:"OK"
+          btnTxt: this.popupMessages.genericmessage.successButton
         },
         disableClose: true
       });

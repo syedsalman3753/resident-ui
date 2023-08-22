@@ -57,6 +57,7 @@ mat-card-content>p {
 }
 
 mat-card-actions {
+  width: 100%;
   text-align: center;
 }
 
@@ -130,7 +131,3 @@ mat-card-header,
   cursor: pointer;
 }
 
-.auth-type-text{
-  font-size: 14px;
-  font-weight: 600;
-}

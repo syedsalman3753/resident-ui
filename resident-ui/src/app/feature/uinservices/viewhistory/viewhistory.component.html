@@ -9,22 +9,23 @@
 		<mat-spinner></mat-spinner>
    </div>
 	<mat-card *ngIf="!isLoading">
-		<h3 class="main-heading">{{'viewhistory.title' | translate}}</h3>
-		<mat-grid-list *ngIf="responselist" [cols]="cols" rowHeight="100px" gutterSize="7px" dir="{{sitealignment}}">
+		<h3 style="color: #505050; font-size:20px;">{{'viewhistory.title' | translate}}</h3>
+		<mat-grid-list *ngIf="responselist" [cols]="cols" rowHeight="100px" gutterSize="7px">
 	        <mat-grid-tile>
 	          <div class="mini-card">
-	            <mat-card-header><span class="label" >{{'viewhistory.inputsearch' |translate}}</span></mat-card-header>
-	            <mat-card-subtitle><span class="input" ><input dir="{{sitealignment}}" [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
+	            <mat-card-header><span class="label">{{'viewhistory.inputsearch' |translate}}</span></mat-card-header>
+	            <mat-card-subtitle><span class="input"><input [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
 	          </div>
 	        </mat-grid-tile>
 	        <mat-grid-tile>
 	          <div class="mini-card">
 	            <mat-card-header><span class="label">{{'viewhistory.inputHistory' |translate}}</span></mat-card-header>
+	            <!-- <mat-card-subtitle> -->
 					<span class="input">
-						<button id="historyTypeBtn" class="dropdown-btn" [matMenuTriggerFor]="basic">{{serviceHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
+						<button class="dropdown-btn" [matMenuTriggerFor]="basic">{{serviceHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
 						<mat-menu #basic="matMenu">
 							<ng-container *ngFor="let serviceType of serviceTypeFilter">
-								<button mat-menu-item >
+								<button mat-menu-item>
 									<div (click)="captureValue($event,serviceType.value, 'serviceType', 'dropdown')" class="check-box-card">
 										<input class="check-box" type="checkbox" [checked]="serviceType.label.checked"
 											id="{{serviceType.value}}" />
@@ -32,8 +33,18 @@
 									</div>
 								</button>
 							</ng-container>
-						</mat-menu>					
+						</mat-menu>
+					<!-- <mat-select multiple #serviceTypeSelectAll id="serviceType" placeholder="{{'viewhistory.inputHistory' | translate}}"
+						(selectionChange)="captureValue($event, 'serviceType', 'dropdown')">
+						<ng-container *ngFor="let serviceType of serviceTypeFilter">
+							<mat-option  *ngIf="serviceType.value === 'ALL' " (click)="historyTosslePerOne(serviceType.value)" [id]="serviceType.value"
+							[value]="serviceType.value">{{serviceType.label}}</mat-option>
+							<mat-option (click)="historyTosslePerOneOption(serviceType.value)" *ngIf="serviceType.value !== 'ALL' "  [id]="serviceType.value"
+							[value]="serviceType.value">{{serviceType.label}}</mat-option>
+						</ng-container>
+					</mat-select>	 -->
 					</span>
+				<!-- </mat-card-subtitle> -->
 	          </div>
 	        </mat-grid-tile>
 	        <mat-grid-tile>
@@ -61,7 +72,13 @@
 	            <mat-card-header><span class="label">{{'viewhistory.inputStatus' | translate}}</span></mat-card-header>
 	            <!-- <mat-card-subtitle style="display: flex;"> -->
 					<span class="input">
-						<button class="dropdown-btn" id="statusTypeBtn" [matMenuTriggerFor]="basic2">{{statusHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
+						<!-- <mat-select multiple #statusFilterSelectAll id="statusFilter"  placeholder="{{'viewhistory.inputStatus' | translate}}"
+						(selectionChange)="captureValue($event, 'statusFilter', 'dropdown')">
+						<mat-option [disabled]="statusHistorySelectedValue === 'all' && status.label !== 'All' " *ngFor="let status of statusTypeFilter" [id]="status.value" [value]="status.value"
+							>
+							{{status.label}}</mat-option>
+						</mat-select> -->
+						<button class="dropdown-btn" [matMenuTriggerFor]="basic2">{{statusHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
 						<mat-menu #basic2="matMenu">
 							<ng-container *ngFor="let status of statusTypeFilter">
 								<button mat-menu-item>
@@ -90,24 +107,23 @@
 	        </mat-grid-tile> 
 	    </mat-grid-list>
 		<table *ngIf="responselist" class="history-data">
-			<tr *ngFor="let data of responselist; let i = index" style="outline: thin solid silver;border-radius: 5px; width: 100px;"
+			<tr *ngFor="let data of responselist; let i = index" style="outline: thin solid silver;border-radius: 5px;"
 				multi>
 				<mat-expansion-panel>
 					<mat-expansion-panel-header id="panelHeader{{i}}">
-					  <div class="header-item-card" >
-						<td class="event-id-text" ><span *ngIf="data.pinnedStatus === true"><img
-							src="assets\pin.png" style="margin-right: 4px; width: 8px;" alt=""></span><span>{{'viewhistory.inputAppId' |
+						<td style="width: 2%;padding: 10px;"><span *ngIf="data.pinnedStatus === true"><img
+									src="assets\pin.png" style="color: green;width: 8px;"></span></td>
+						<td style="width: 33%;padding: 10px;color: #008CED;"><span>{{'viewhistory.inputAppId' |
 								translate}}:
 							</span>{{data.eventId}}</td>
-						<td class="description-text" ><span>{{'viewhistory.description' | translate}}:
+						<td style="width: 39%;padding: 10px;"><span>{{'viewhistory.description' | translate}}:
 							</span>{{data.description}}</td>
-						<td class="date-text">
-							{{data.timeStamp}}</td>
-						<td class="event-status-text">
-							{{data.eventStatus}}</td>
-					  </div>	
+						<td style="width: 13%;padding: 10px;">
+							<!-- <span>{{'viewhistory.timestamp' | translate}} : </span> -->{{data.timeStamp}}</td>
+						<td style="width: 13%;padding: 10px;">
+							<!-- <span>{{'viewhistory.inputStatus' | translate}} : </span> -->{{data.eventStatus}}</td>
 					</mat-expansion-panel-header>
-					<p class="more-details-card" >
+					<p style="width: 100%;padding: 10px 35px;">
 						<span id="reportDetails{{i}}" style="cursor:pointer;" (click)="reportDetails(data)"><img
 								src="assets\report.png" style="color: green;width: 15px; margin-bottom: -4px;">&nbsp;&nbsp;&nbsp;<span
 								style="font-size:12px;color:#505050;">{{'viewhistory.reportIssueLabel' |

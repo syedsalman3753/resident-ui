@@ -9,8 +9,8 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-lockunlockauth",
@@ -39,25 +39,35 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   cols : number;
   userPreferredLangCode = localStorage.getItem("langCode");
   message2:any;
-  sitealignment:any = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService,private interactionService: InteractionService,private dialog: MatDialog,private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, 
-    private router: Router,private auditService: AuditService, private breakPointService: BreakpointService) {
+    private router: Router,private auditService: AuditService, private breakpointObserver: BreakpointObserver) {
       this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "confirmBtn") {
         this.updateAuthlockStatus()
       }
     });
-
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if (active) {
-        if(active === "extraSmall" || active === "small"){
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small,
+      Breakpoints.Medium,
+      Breakpoints.Large,
+      Breakpoints.XLarge,
+    ]).subscribe(result => {
+      if (result.matches) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
           this.cols = 1;
         }
-        if(active === "medium"){
+        if (result.breakpoints[Breakpoints.Small]) {
+          this.cols = 1;
+        }
+        if (result.breakpoints[Breakpoints.Medium]) {
           this.cols = 2;
         }
-        if(active === "ExtraLarge" || active === "large"){
+        if (result.breakpoints[Breakpoints.Large]) {
+          this.cols = 3;
+        }
+        if (result.breakpoints[Breakpoints.XLarge]) {
           this.cols = 3;
         }
       }
@@ -134,7 +144,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
                 }                    
               })
             }   
-            authTypesJSON["label"] = this.langJSON.lockunlockauth.labelmap[authTypes[i]];       
+            authTypesJSON["label"] = this.langJSON.lockunlockauth.labelmap[authTypes[i]];         
             authTypesJSON["recorddirty"] = false;
             authTypesJSON["unlockForSeconds"] = null;
             this.authlist.push(authTypesJSON);
@@ -296,7 +306,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         message: this.message,
         eventId,
         btnTxt: this.popupMessages.genericmessage.successButton,
-        isOk:"OK",
         clickHere:this.popupMessages.genericmessage.clickHere,
         dearResident:this.popupMessages.genericmessage.dearResident,
         trackStatusText:this.popupMessages.genericmessage.trackStatusText
@@ -313,10 +322,8 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
         title: this.popupMessages.genericmessage.warningLabel,
         message: this.popupMessages.genericmessage.secureMyId.confirmationMessage,
         btnTxt: this.popupMessages.genericmessage.yesButton,
-        isYes:"Yes",
         yesBtnFor:"lockunlockauth",
-        btnTxtNo: this.popupMessages.genericmessage.noButton,
-        isNo:"No"
+        btnTxtNo: this.popupMessages.genericmessage.noButton
       }
     });
     return dialogRef;
@@ -332,8 +339,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
             case: 'MESSAGE',
             title: this.popupMessages.genericmessage.errorLabel,
             message: this.popupMessages.serverErrors[errorCode],
-            btnTxt: this.popupMessages.genericmessage.successButton,
-            isOk:'OK'
+            btnTxt: this.popupMessages.genericmessage.successButton
           },
           disableClose: true
         });
