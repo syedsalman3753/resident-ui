@@ -240,10 +240,10 @@
             "DATA_SHARE_REQUEST": {"serviceType":"Data Share Request","checked":false}
         },
         "statusTypeFilter": {
-            "all": {"statusType":"All", "checked":false},
-            "Success": {"statusType":"Success", "checked":false},
-            "In Progress": {"statusType":"In Progress", "checked":false},
-            "Failed": {"statusType":"Failed", "checked":false}
+            "ALL": {"statusType":"All", "checked":false},
+            "SUCCESS": {"statusType":"Success", "checked":false},
+            "IN_PROGRESS": {"statusType":"In Progress", "checked":false},
+            "FAILED": {"statusType":"Failed", "checked":false}
         },
         "reportIssueLabel": "Report an Issue",
         "pinToTopLabel": "Pin to top",
