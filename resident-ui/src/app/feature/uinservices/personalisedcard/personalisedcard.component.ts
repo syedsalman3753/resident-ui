@@ -372,7 +372,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     let self = this;
     let elementHtml = document.getElementById('seleted-details-card').outerHTML;
-    this.buildHTML = `<html><head><style>.seleted-details-card { min-height: 210px; border-style: solid;border-width: 2px;border-color: #BCBCBC; border-radius: 5pt; overflow:hidden; padding:5px; }table{table-layout: fixed; width: 100%;}td {word-break: break-word;}.detailinfo{color: #000000; font-weight: 400; font-size: 14px;}</style></head><body>` + elementHtml + `</body></html>`;
+    this.buildHTML = `<html><head><style>.seleted-details-card { min-height: 210px; max-width: 339px; border-style: solid;border-width: 2px;border-color: #BCBCBC; border-radius: 5pt; overflow:hidden; padding:5px;}table{table-layout: fixed; width: 100%;}.detailinfo{color: #000000; font-weight: 400; font-size: 14px;width:100%}</style></head><body>` + elementHtml + `</body></html>`;
     const request = {
       "id": this.appConfigService.getConfig()["mosip.resident.download.personalized.card.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
@@ -401,7 +401,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
             }
             saveAs(data.body, fileName);
             this.showMessage()
-            //this.router.navigate(['uinservices/dashboard']);
+            this.router.navigate(['uinservices/dashboard']);
           } catch (error) {
             this.isLoading = false;
             console.log(error)
