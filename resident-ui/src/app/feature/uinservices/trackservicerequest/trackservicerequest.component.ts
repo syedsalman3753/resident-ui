@@ -49,7 +49,9 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     this.eventIdValidation =this.appConfigService.getConfig()["resident.validation.event-id.regex"];
     this.route.queryParams
       .subscribe(params => {
-        this.source = params.source
+        if(params.source){
+          this.source = params.source
+        }
         this.eidVal = params.eid;
         this.getEIDStatus();
       }
@@ -93,8 +95,11 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     }
   }
 
+  getEIDStatusByInput(){
+    this.router.navigateByUrl(`uinservices/trackservicerequest?eid=` + this.eidVal);
+  }
+
   getEIDStatus(){
-    this.isLoading = true;
     this.auditService.audit('RP-026', 'Track Service Request', 'RP-Track Service Request', 'Track Service Request', 'User clicks on "search" button');
     if(this.eidVal){
     this.dataStorageService
@@ -106,6 +111,7 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
       }else if(response["errors"]){
         this.isLoading = false;
         this.showErrorPopup(response["errors"])
+        this.eidStatus = ""
       }
         
     });
@@ -149,27 +155,29 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
   }
 
   showErrorPopup(message: string) {
-    console.log("Hello")
     this.errorCode = message[0]["errorCode"]
-    if(this.errorCode === "RES-SER-410"){
-      let errorMessageType = message[0]["message"].split("-")[1].trim()
-      this.message = this.popupMessages.serverErrors[this.errorCode][errorMessageType]
-    }else{
-      this.message = this.popupMessages.serverErrors[this.errorCode]
-    }
-  
-    this.dialog
-      .open(DialogComponent, {
-        width: '550px',
-        data: {
-          case: 'MESSAGE',
-          title: this.popupMessages.genericmessage.errorLabel,
-          message: this.message,
-          btnTxt: this.popupMessages.genericmessage.successButton,
-          isOk:"OK"
-        },
-        disableClose: true
-      });
+    setTimeout(() =>{
+      if(this.errorCode === "RES-SER-410"){
+        let errorMessageType = message[0]["message"].split("-")[1].trim()
+        this.message = this.popupMessages.serverErrors[this.errorCode][errorMessageType]
+      }else{
+        this.message = this.popupMessages.serverErrors[this.errorCode]
+      }
+    
+      this.dialog
+        .open(DialogComponent, {
+          width: '550px',
+          data: {
+            case: 'MESSAGE',
+            title: this.popupMessages.genericmessage.errorLabel,
+            message: this.message,
+            btnTxt: this.popupMessages.genericmessage.successButton,
+            isOk:"OK"
+          },
+          disableClose: true
+        });
+    },1000)
+   
   }
 
   downloadVIDCard(eventId:any){

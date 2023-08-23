@@ -1,6 +1,6 @@
 <span class="breadcrumb">
 	<a (click)="onItemSelected('uinservices/dashboard')">{{'dashboard.uinservices' | translate}} &nbsp;&nbsp;</a> >
-	&nbsp;&nbsp;<a (click)="onItemSelected('uinservices/viewhistory')" *ngIf="source">{{"trackservicerequest.source" | translate}}&nbsp;&nbsp;></a> 
+	&nbsp;<a (click)="onItemSelected('uinservices/viewhistory')" *ngIf="source">{{"trackservicerequest.source" | translate}}&nbsp;&nbsp;></a> 
 	&nbsp;&nbsp;<span class="active">{{'trackservicerequest.title' | translate}}</span>
 </span>
 
@@ -30,7 +30,7 @@
 						(input)="captureValue($event)"
 						placeholder="{{'trackservicerequest.searchPlaceholder' | translate}}" />&nbsp;&nbsp;&nbsp;&nbsp;
 					<button [disabled]="disableTrackBtn" id="getEIDStatusbtn" mat-raised-button class="track-btn"
-						(click)="getEIDStatus()">{{'trackservicerequest.searchButton' | translate}}</button>
+						(click)="getEIDStatusByInput()">{{'trackservicerequest.searchButton' | translate}}</button>
 					<p *ngIf="showWarningMessage" class="warning-message">{{'trackservicerequest.warningMsg' | translate}}</p>
 				</td>
 			</tr>
