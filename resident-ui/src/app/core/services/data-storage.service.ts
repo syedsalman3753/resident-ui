@@ -216,9 +216,9 @@ export class DataStorageService {
   }
 
   shareInfo(request: any) {
-    return this.httpClient.post(this.BASE_URL + '/share-credential', request, { observe: 'response', responseType: 'blob' as 'json' });
+    return this.httpClient.post(this.BASE_URL + '/share-credential', request, { observe: 'response' });
   }
-
+  
   downloadAcknowledgement(eventId: string) {
     return this.httpClient.get<Blob>(this.BASE_URL + '/ack/download/pdf/event/' + eventId + '/language/' + localStorage.getItem("langCode"), { observe: 'response', responseType: 'blob' as 'json' });
   }
