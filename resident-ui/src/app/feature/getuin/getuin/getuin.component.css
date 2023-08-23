@@ -1,6 +1,4 @@
 .main-container {
-    /* padding: 0 6% 0 6%;
-    width: 90%; */
     padding: 0 5rem 2rem 5rem;
 }
 
@@ -340,5 +338,14 @@ ul li:last-child hr{
         width: 88%;
         left: -34%;
         border-radius: 10px;
+    }
+}
+
+@media screen and (max-width:530px){
+    .main-container {
+        padding: 0 1.5rem 2rem 1.5rem;
+    }
+    .login-card {
+        padding: 0rem 0.2rem 0rem 0.2rem;
     }
 }

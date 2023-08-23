@@ -1,5 +1,5 @@
 <div class="main-container" *ngIf="!isUinNotReady">
-  <span class="breadcrumb">
+  <span class="breadcrumb" *ngIf="popupMessages">
     <a (click)="onItemSelected('home')">{{popupMessages.uinservices.home }} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<span
       class="active">{{popupMessages.uinservices.label}}</span>
   </span>
@@ -8,7 +8,7 @@
       translate}}</mat-card-subtitle>
     <hr class="line" /> -->
     <div *ngIf="getUinData" class="form-container" [style.width]="width">
-      <form class="form-card" #basicForm="ngForm" (submit)="submitUserID(basicForm.value)">
+      <div class="form-card" >
         <div class="uin-login-title-card">
           <mat-card-subtitle class="login-Input-heading">{{getUinData.title |
             translate}}</mat-card-subtitle>
@@ -18,7 +18,7 @@
         <div *ngIf="infoPopUpShow" class="info-box">
           <p>{{infoText}}</p>
         </div>
-        <input id="aidValue" class="input-text" type="text" ngModel name="AID" (blur)="getCaptchaToken($event.target.value)" placeholder="{{getUinData.enterHere}}"/>
+        <input id="aidValue" class="input-text" type="text" ngModel (input)="getUserID($event.target.value)" placeholder="{{getUinData.enterHere}}"/>
         <br />
         <label class="label-text" >{{getUinData.description | translate}}</label>
         <div *ngIf="siteKey && captchaEnable" id="recaptcha-container">
@@ -28,7 +28,7 @@
         <br />
         <button id="getUinSendOtpBtn" (click)="submitUserID()" [disabled]="disableSendOtp" mat-raised-button
           class="login-uin-otp-btn" >{{getUinData.buttonText | translate}}</button>
-      </form>
+      </div>
     </div>
   </mat-card>
 </div>

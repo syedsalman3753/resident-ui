@@ -48,7 +48,7 @@ export class DownloadUinComponent implements OnInit {
     private auditService: AuditService
   ) {
     if (this.router.getCurrentNavigation().extras.state) {
-      this.data = this.router.getCurrentNavigation().extras.state.data.AID
+      this.data = this.router.getCurrentNavigation().extras.state.data
       this.transactionID = this.router.getCurrentNavigation().extras.state.response.transactionId
       this.phoneNumber = this.router.getCurrentNavigation().extras.state.response.response.maskedMobile
       this.emailId = this.router.getCurrentNavigation().extras.state.response.response.maskedEmail

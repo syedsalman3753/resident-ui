@@ -105,19 +105,20 @@ export class GetuinComponent implements OnInit {
     }
   }
 
-  // ischecked() {
-  //   this.isChecked = !this.isChecked
-  //   if (this.isChecked) {
-  //     this.buttonbgColor = "#03A64A"
-  //   } else {
-  //     this.buttonbgColor = "#BFBCBC"
-  //   }
-  // }
+
+  getUserID(event){
+    this.aid = event
+    if(grecaptcha.getResponse().length && this.aid){
+      this.disableSendOtp = false;
+    }else{
+      this.disableSendOtp = true;
+    }
+  }
   
   getCaptchaToken(event: any) {
     if (event) {
       if(this.captchaEnable){
-        if(grecaptcha.getResponse().length){
+        if(grecaptcha.getResponse().length && this.aid){
           this.disableSendOtp = false;
         }
       }else{
@@ -128,20 +129,16 @@ export class GetuinComponent implements OnInit {
     }
   }
 
-  // if (this.isChecked && data["AID"] !== "") {
-  //   this.generateOTP(data)
-  // }
 
-  submitUserID(data: NgForm) {
+  submitUserID() {
     this.auditService.audit('RP-034', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "send OTP" button on Get my UIN page');
-    if ( data !== undefined) {
-      this.aid = data["AID"]
-      this.getStatus(data)
+    if (this.aid !== undefined) {
+      this.getStatus(this.aid)
     }
   }
 
   getStatus(data:any){
-    this.dataStorageService.getStatus(data["AID"]).subscribe(response =>{
+    this.dataStorageService.getStatus(data).subscribe(response =>{
       if(response["response"]){
         if(response["response"].transactionStage === "CARD_READY_TO_DOWNLOAD" && response["response"].aidStatus === "SUCCESS"){
           this.generateOTP(data);
@@ -171,7 +168,7 @@ export class GetuinComponent implements OnInit {
     let self = this;
     const request = {
       "id": "mosip.identity.otp.internal",
-      "individualId": data["AID"],
+      "individualId": data,
       "metadata": {},
       "otpChannel": [
             "PHONE",
@@ -200,7 +197,6 @@ export class GetuinComponent implements OnInit {
     if (this.errorCode === "RES-SER-410") {
       let messageType = message[0]["message"].split("-")[1].trim();
       this.message = this.popupMessages.serverErrors[this.errorCode][messageType]
-      console.log(messageType)
     } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }
