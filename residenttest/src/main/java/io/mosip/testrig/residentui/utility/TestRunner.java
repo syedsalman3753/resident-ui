@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.io.File;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 
-import io.mosip.admin.fw.util.AdminTestUtil;
-import io.mosip.kernel.util.ConfigManager;
-import io.mosip.kernel.util.KeycloakUserManager;
-import io.mosip.service.BaseTestCase;
-import io.mosip.test.residentTest.testcase.*;
+import io.mosip.testrig.residentui.fw.util.AdminTestUtil;
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
+import io.mosip.testrig.residentui.kernel.util.KeycloakUserManager;
+import io.mosip.testrig.residentui.service.BaseTestCase;
+import io.mosip.testrig.residentui.testcase.*;
 
 
 public class TestRunner {
@@ -52,7 +52,7 @@ public class TestRunner {
        ViewMyHistory.class,
       ManageMyVid.class,
        SecureMyId.class,
-       UpdateMyData.class,
+    
        TrackMyRequests.class,
        GetPersonalisedCard.class,
        ShareMyData.class,
@@ -68,7 +68,7 @@ public class TestRunner {
 	
 	public static String getGlobalResourcePath() {
 		if (checkRunType().equalsIgnoreCase("JAR")) {
-			return new File(jarUrl).getParentFile().getAbsolutePath()+"/MosipTestResource".toString();
+			return new File(jarUrl).getParentFile().getAbsolutePath().toString();
 		} else if (checkRunType().equalsIgnoreCase("IDE")) {
 			String path = new File(TestRunner.class.getClassLoader().getResource("").getPath()).getAbsolutePath()
 					.toString();

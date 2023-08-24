@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.testcase;
+package io.mosip.testrig.residentui.testcase;
 
 import java.io.IOException;
 
@@ -7,33 +7,33 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
-import io.mosip.test.residentTest.utility.Commons;
-import io.mosip.test.residentTest.utility.JsonUtil;
-import io.mosip.test.residentTest.utility.MockSMTPListener;
-import io.mosip.test.residentTest.utility.ResidentBaseClass;
+import io.mosip.testrig.residentui.utility.Commons;
+import io.mosip.testrig.residentui.utility.JsonUtil;
+import io.mosip.testrig.residentui.utility.MockSMTPListener;
+import io.mosip.testrig.residentui.utility.ResidentBaseClass;
 
 @Test(groups = "GMU")
 public class GetMyUIN extends ResidentBaseClass{
 
-	//@Test(groups = "GMU")
+	// @Test(groups = "GMU")
 	public void getMyUIN() throws Exception {
-		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
-		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
-		
-		test=extent.createTest("getMyUIN", "verify Login");
-		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
-		Commons.enter(test,driver, By.id("aidValue"), aid);//
+		String tempemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "tempemail");
+		String aid = JsonUtil.JsonObjParsing(Commons.getTestData(), "aid");
+
+		test = extent.createTest("getMyUIN", "verify Login");
+		Commons.click(test, driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));// id
+		Commons.enter(test, driver, By.id("aidValue"), aid);//
 		test.log(Status.INFO, "AID Entered");
-		Commons.switchToFrameByIndex(test,driver, 0);
-		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
+		Commons.switchToFrameByIndex(test, driver, 0);
+		Commons.click(test, driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
-		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
+		Commons.click(test, driver, By.id("getUinSendOtpBtn"));
 		String otp = MockSMTPListener.getOtp(10, tempemail);
-		Commons.enter(test,driver, By.id("otp-input"), otp);
-		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
-		   test.log(Status.INFO, "Click on submit");
-		   Commons.click(test,driver, By.id("confirmmessagepopup"));
+		Commons.enter(test, driver, By.id("otp-input"), otp);
+		Commons.click(test, driver, By.xpath("//button[@id='getUinsubmitBtn']"));
+		test.log(Status.INFO, "Click on submit");
+		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		
 		
 		

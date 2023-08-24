@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,16 +19,16 @@ import com.aventstack.extentreports.ExtentTest;
 public class Screenshot  {
 
 	public static String  ClickScreenshot(WebDriver driver) throws IOException {
-		TakesScreenshot ss=(TakesScreenshot)driver;
-		File so=ss.getScreenshotAs(OutputType.FILE);
-		String path=System.getProperty("user.dir")+"/Screenshots/"+System.currentTimeMillis()+".png";
-		File des=new File(path);
-		FileHandler.copy(so, des);
-		FileInputStream fis=new FileInputStream(path);
-		byte[] bytes =IOUtils.toByteArray(fis);
-		String base64img=Base64.getEncoder().encodeToString(bytes);
-		
-		
+//		TakesScreenshot ss=(TakesScreenshot)driver;
+//		File so=ss.getScreenshotAs(OutputType.FILE);
+//		String path=System.getProperty("user.dir")+"/Screenshots/"+System.currentTimeMillis()+".png";
+//		File des=new File(path);
+//		FileHandler.copy(so, des);
+//		FileInputStream fis=new FileInputStream(path);
+//		byte[] bytes =IOUtils.toByteArray(fis);
+		String base64img=Base64.getEncoder().encodeToString( new byte[0]);
+//		
+//		
 		return base64img;
 		
 	}

@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.testcase;
+package io.mosip.testrig.residentui.testcase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
-import io.mosip.test.residentTest.utility.BaseClass;
-import io.mosip.test.residentTest.utility.Commons;
-import io.mosip.test.residentTest.utility.JsonUtil;
+import io.mosip.testrig.residentui.utility.BaseClass;
+import io.mosip.testrig.residentui.utility.Commons;
+import io.mosip.testrig.residentui.utility.JsonUtil;
    @Test(groups = "TMR")
    public class TrackMyRequests extends BaseClass{
 	@Test(groups = "TMR",priority = 1)
@@ -42,7 +42,7 @@ import io.mosip.test.residentTest.utility.JsonUtil;
 		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
 		 Commons.enter(test,driver, By.id("appIdValue"), Eid);
 		 test.log(Status.INFO, "EID Extracted");
-		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
+		 Commons.clickWebelement(test,driver, By.id("getEIDStatusbtn"));
 		 test.log(Status.INFO, "Click on Track");
 		 Commons.click(test,driver, By.id("downloadAcknowledgementbtn"));
 	}

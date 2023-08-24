@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,7 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.mosip.test.residentTest.utility.pojo.Root;
+import io.mosip.testrig.residentui.utility.pojo.Root;
 
 import java.net.URI;
 import java.net.http.HttpClient;

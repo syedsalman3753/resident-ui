@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility.pojo;
+package io.mosip.testrig.residentui.utility.pojo;
 
 public class Value{
 	 public String address;

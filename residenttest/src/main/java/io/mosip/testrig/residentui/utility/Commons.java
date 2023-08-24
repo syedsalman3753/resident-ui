@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -79,7 +79,7 @@ public class Commons extends BaseClass{
 	}
 	
   
-	public  static void click(ExtentTest test,WebDriver driver, By by) throws IOException {
+	public  static void click(ExtentTest test,WebDriver driver, By by) throws IOException, InterruptedException {
 		logger.info("Clicking " + by );
 		
 		try {
@@ -91,12 +91,45 @@ public class Commons extends BaseClass{
 			// simply retry finding the element in the refreshed DOM
 			driver.findElement(by).click();
 		}
+		 catch (Exception e) {
+				try {
+					test.fail(e.getMessage());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
+
+			}
+		}
+	
+	public  static void clickWebelement(ExtentTest test,WebDriver driver, By by) throws IOException, InterruptedException {
+		logger.info("Clicking " + by );
+		
+		try {
+			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
+			Thread.sleep(500);
+			WebElement checkbox= driver.findElement(by);
+		    js.executeScript("arguments[0].click();", checkbox);
+			Thread.sleep(500);
+		}catch (StaleElementReferenceException sere) {
+			// simply retry finding the element in the refreshed DOM
+			driver.findElement(by).click();
+		}
 		catch (Exception e) {
-			test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+			try {
+				test.fail(e.getMessage());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", driver.findElement(by));
 
-		}}
+		}
+
+		}
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
@@ -186,12 +219,7 @@ public class Commons extends BaseClass{
 		 }catch(Exception e)
 		 
 		 {
-			 try {
-					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			 test.fail(e.getMessage());
 				JavascriptExecutor executor = (JavascriptExecutor) driver;
 				executor.executeScript("arguments[0].click();", driver.findElement(by));
 

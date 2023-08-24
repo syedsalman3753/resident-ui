@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

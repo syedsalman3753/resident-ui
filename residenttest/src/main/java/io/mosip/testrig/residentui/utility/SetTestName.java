@@ -1,4 +1,4 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

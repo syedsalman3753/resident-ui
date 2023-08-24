@@ -1,11 +1,11 @@
-package io.mosip.test.residentTest.testcase;
+package io.mosip.testrig.residentui.testcase;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import io.mosip.test.residentTest.utility.Commons;
-import io.mosip.test.residentTest.utility.JsonUtil;
-import io.mosip.test.residentTest.utility.ResidentBaseClass;
+import io.mosip.testrig.residentui.utility.Commons;
+import io.mosip.testrig.residentui.utility.JsonUtil;
+import io.mosip.testrig.residentui.utility.ResidentBaseClass;
 
 public class BookinganAppointment extends ResidentBaseClass {
 

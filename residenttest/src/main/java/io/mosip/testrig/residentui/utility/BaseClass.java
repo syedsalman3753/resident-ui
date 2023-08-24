@@ -1,13 +1,15 @@
-package io.mosip.test.residentTest.utility;
+package io.mosip.testrig.residentui.utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,6 +30,7 @@ import org.testng.ITest;
 //import org.junit.After;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -39,7 +42,10 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.mosip.test.residentTest.testcase.LoginTest;
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
+import io.mosip.testrig.residentui.kernel.util.S3Adapter;
+import io.mosip.testrig.residentui.service.BaseTestCase;
+import io.mosip.testrig.residentui.testcase.LoginTest;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -47,13 +53,14 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class BaseClass {
+	private static final Logger logger = Logger.getLogger(BaseClass.class);
 	protected static  WebDriver driver;
 	protected Map<String, Object> vars;
 	protected static JavascriptExecutor js;
 	protected String langcode;
 	public static LoginTest login;
-	protected String envPath = System.getProperty("path");
-	protected String vid = System.getProperty("vid");
+	protected String envPath = ConfigManager.getiam_adminportal_path();
+	protected String env = ConfigManager.getiam_apienvuser();
 	protected String externalurl = System.getProperty("externalurl");
 	protected String password = System.getProperty("password");
 	protected String data = Commons.appendDate;
@@ -135,6 +142,8 @@ public class BaseClass {
 		driver.quit();
 		extent.flush();
 	}
+	
+	
 
 	@DataProvider(name = "data-provider")
 	public Object[] dpMethod() {
@@ -169,4 +178,17 @@ public class BaseClass {
 		}
 		return contents;
 	}
+	private String getCommitId(){
+    	Properties properties = new Properties();
+		try (InputStream is = ExtentReportManager.class.getClassLoader().getResourceAsStream("git.properties")) {
+			properties.load(is);
+			
+			return "Commit Id is: " + properties.getProperty("git.commit.id.abbrev") + " & Branch Name is:" + properties.getProperty("git.branch");
+
+		} catch (IOException e) {
+			logger.error(e.getStackTrace());
+			return "";
+		}
+		
+    }
 }

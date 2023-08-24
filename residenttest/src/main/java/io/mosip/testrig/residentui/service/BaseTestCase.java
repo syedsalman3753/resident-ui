@@ -1,4 +1,4 @@
-package io.mosip.service;
+package io.mosip.testrig.residentui.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,10 +15,11 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.json.simple.JSONObject;
 
-import io.mosip.authentication.fw.util.RestClient;
-import io.mosip.kernel.util.CommonLibrary;
-import io.mosip.kernel.util.KernelAuthentication;
-import io.mosip.test.residentTest.utility.TestRunner;
+import io.mosip.testrig.residentui.authentication.fw.util.RestClient;
+import io.mosip.testrig.residentui.kernel.util.CommonLibrary;
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
+import io.mosip.testrig.residentui.kernel.util.KernelAuthentication;
+import io.mosip.testrig.residentui.utility.TestRunner;
 import io.restassured.response.Response;
 
 //import org.apache.log4j.Logger;
@@ -73,9 +74,9 @@ public class BaseTestCase {
 	public static List<String> getLanguageList() {
 		logger.info("We have created a Config Manager. Beginning to read properties!");
 
-		environment = System.getProperty("env.user");
+		environment = ConfigManager.getiam_apienvuser();
 		logger.info("Environemnt is  ==== :" + environment);
-		ApplnURI = System.getProperty("env.endpoint");
+		ApplnURI = ConfigManager.getiam_apiinternalendpoint();
 		logger.info("Application URI ======" + ApplnURI);
 
 		logger.info("Configs from properties file are set.");
@@ -120,11 +121,11 @@ public class BaseTestCase {
 		getOSType();
 		logger.info("We have created a Config Manager. Beginning to read properties!");
 
-		environment = System.getProperty("env.user");
+		environment = ConfigManager.getiam_apienvuser();
 		logger.info("Environemnt is  ==== :" + environment);
-		ApplnURI = System.getProperty("env.endpoint");
+		ApplnURI = ConfigManager.getiam_apiinternalendpoint();
 		logger.info("Application URI ======" + ApplnURI);
-		ApplnURIForKeyCloak = System.getProperty("env.keycloak");
+		ApplnURIForKeyCloak = ConfigManager.getIAMUrl();
 		logger.info("Application URI ======" + ApplnURIForKeyCloak);
 		testLevel = System.getProperty("env.testLevel");
 		logger.info("Test Level ======" + testLevel);
