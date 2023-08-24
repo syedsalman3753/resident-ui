@@ -1,4 +1,4 @@
-package io.mosip.kernel.util;
+package io.mosip.testrig.residentui.kernel.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,8 +22,8 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
-import io.mosip.service.BaseTestCase;
-import io.mosip.test.residentTest.utility.TestRunner;
+import io.mosip.testrig.residentui.service.BaseTestCase;
+import io.mosip.testrig.residentui.utility.TestRunner;
 
 public class KeycloakUserManager {
 	

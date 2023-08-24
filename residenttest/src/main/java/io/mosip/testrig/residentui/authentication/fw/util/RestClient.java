@@ -1,4 +1,4 @@
-package io.mosip.authentication.fw.util;
+package io.mosip.testrig.residentui.authentication.fw.util;
 
 import static io.restassured.RestAssured.given;
 

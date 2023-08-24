@@ -1,4 +1,4 @@
-package io.mosip.authentication.fw.precon;
+package io.mosip.testrig.residentui.authentication.fw.precon;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;

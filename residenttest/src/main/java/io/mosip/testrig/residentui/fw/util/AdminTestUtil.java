@@ -1,4 +1,4 @@
-package io.mosip.admin.fw.util;
+package io.mosip.testrig.residentui.fw.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,13 +15,12 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.mosip.authentication.fw.precon.JsonPrecondtion;
-import io.mosip.authentication.fw.util.RestClient;
-import io.mosip.kernel.util.ConfigManager;
-import io.mosip.kernel.util.KernelAuthentication;
-import io.mosip.kernel.util.KeycloakUserManager;
-import io.mosip.service.BaseTestCase;
-
+import io.mosip.testrig.residentui.authentication.fw.precon.JsonPrecondtion;
+import io.mosip.testrig.residentui.authentication.fw.util.RestClient;
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
+import io.mosip.testrig.residentui.kernel.util.KernelAuthentication;
+import io.mosip.testrig.residentui.kernel.util.KeycloakUserManager;
+import io.mosip.testrig.residentui.service.BaseTestCase;
 import io.restassured.response.Response;
 import org.apache.commons.lang.RandomStringUtils;
 
@@ -224,9 +223,10 @@ public class AdminTestUtil extends BaseTestCase {
 	    }
 	 public static void initialize() {
 	    	if (initialized == false) {
+	    		ConfigManager.init();
 	        	BaseTestCase.initialize();
 	    		// Initializing or setting up execution
-	    		ConfigManager.init(); //Langauge Independent
+	    		 //Langauge Independent
 	    		
 	        	// Generate Keycloak Users
 	        	KeycloakUserManager.createUsers();

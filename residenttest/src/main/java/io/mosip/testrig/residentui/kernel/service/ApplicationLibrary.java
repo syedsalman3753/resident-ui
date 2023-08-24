@@ -1,9 +1,9 @@
-package io.mosip.kernel.service;
+package io.mosip.testrig.residentui.kernel.service;
 
 import javax.ws.rs.core.MediaType;
 
-import io.mosip.kernel.util.CommonLibrary;
-import io.mosip.service.BaseTestCase;
+import io.mosip.testrig.residentui.kernel.util.CommonLibrary;
+import io.mosip.testrig.residentui.service.BaseTestCase;
 import io.restassured.response.Response;
 
 public class ApplicationLibrary extends BaseTestCase {

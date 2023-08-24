@@ -1,4 +1,4 @@
-package io.mosip.kernel.util;
+package io.mosip.testrig.residentui.kernel.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,10 +7,11 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import io.mosip.test.residentTest.utility.TestRunner;
+import io.mosip.testrig.residentui.utility.Commons;
+import io.mosip.testrig.residentui.utility.TestRunner;
 public class ConfigManager {
 
-	private static final Logger LOGGER = Logger.getLogger(ConfigManager.class);
+	private static final org.slf4j.Logger LOGGER= org.slf4j.LoggerFactory.getLogger(ConfigManager.class);
 	
 	private static String MOSIP_PMS_CLIENT_SECRET = "mosip_pms_client_secret";
 	private static String MOSIP_PMS_CLIENT_ID = "mosip_pms_client_id";
@@ -87,6 +88,9 @@ public class ConfigManager {
 	private static String MASTER_DB_SCHEMA = "master_db_schema";
 
 	private static String IAM_EXTERNAL_URL = "keycloak-external-url";
+	private static String IAM_ADMINPORTAL_PATH = "adminPortalPath";
+	private static String IAM_APIENVUSER = "apiEnvUser";
+	private static String IAM_APIINTERNALENDPOINT = "apiInternalEndPoint";
 	private static String IAM_REALM_ID = "keycloak-realm-id";
 	private static String IAM_USERS_TO_CREATE = "iam-users-to-create";
 	private static String IAM_USERS_PASSWORD = "iam-users-password";
@@ -102,7 +106,7 @@ public class ConfigManager {
 	private static String pms_client_secret;
 	private static String pms_client_id;
 	private static String pms_app_id;
-
+	private static String REPORT_EXPIRATION_IN_DAYS = "reportExpirationInDays";
 	private static String resident_client_secret;
 	private static String resident_client_id;
 	private static String resident_app_id;
@@ -175,6 +179,9 @@ public class ConfigManager {
 	private static String iam_external_url;
 	private static String iam_realm_id;
 	private static String iam_users_to_create;
+	private static String iam_adminportal_path;
+	private static String iam_apienvuser;
+	private static String iam_apiinternalendpoint;
 	private static String iam_users_password;
 	private static String authDemoServicePort;
 	private static String authDemoServiceBaseUrl;
@@ -184,7 +191,7 @@ public class ConfigManager {
 	private static String mountPathForScenario;
 	private static String packetUtilityBaseUrl;
 	public static Properties propsKernel;
-
+	private static String reportExpirationInDays;
 	public static void setProperty(String key, String value) {
 		// Overwrite the value with only if the key exists
 		if (propsKernel.containsKey(key)) {
@@ -234,6 +241,20 @@ public class ConfigManager {
 		s3_user_key = getValueForKey(S3_USER_KEY);
 		s3_secret_key = getValueForKey(S3_SECRET_KEY);
 		s3_account = getValueForKey(S3_ACCOUNT);
+		
+		iam_adminportal_path =System.getenv(IAM_ADMINPORTAL_PATH) == null
+				? propsKernel.getProperty(IAM_ADMINPORTAL_PATH)
+				: System.getenv(IAM_ADMINPORTAL_PATH);
+		
+		LOGGER.info("adminportal_path from config manager::" + iam_adminportal_path);
+		iam_apienvuser = System.getenv(IAM_APIENVUSER) == null
+				? propsKernel.getProperty(IAM_APIENVUSER)
+				: System.getenv(IAM_APIENVUSER);
+		LOGGER.info("apienvuser from config manager::" + iam_apienvuser);
+		iam_apiinternalendpoint = System.getenv(IAM_APIINTERNALENDPOINT) == null
+				? propsKernel.getProperty(IAM_APIINTERNALENDPOINT)
+				: System.getenv(IAM_APIINTERNALENDPOINT);
+		LOGGER.info("apiinternalendpoint from config manager::" + iam_apiinternalendpoint);
 //		push_reports_to_s3 = getValueForKey(PUSH_TO_S3);
 		db_port = getValueForKey(DB_PORT);
 		db_domain = getValueForKey(DB_DOMAIN);
@@ -259,7 +280,10 @@ public class ConfigManager {
 		master_db_schema = getValueForKey(MASTER_DB_SCHEMA);
 		iam_external_url = getValueForKey(IAM_EXTERNAL_URL);
 		System.out.println("keycloakendpoint from config manager::" + iam_external_url);
-
+		reportExpirationInDays = System.getenv(REPORT_EXPIRATION_IN_DAYS) == null
+				? propsKernel.getProperty(REPORT_EXPIRATION_IN_DAYS)
+				: System.getenv(REPORT_EXPIRATION_IN_DAYS);
+		propsKernel.setProperty(REPORT_EXPIRATION_IN_DAYS, reportExpirationInDays);	
 		iam_realm_id = getValueForKey(IAM_REALM_ID);
 		iam_users_to_create = getValueForKey(IAM_USERS_TO_CREATE);
 		iam_users_password = getValueForKey(IAM_USERS_PASSWORD);
@@ -461,6 +485,9 @@ public class ConfigManager {
 	public static String getS3Host() {
 		return s3_host;
 	}
+	public static String getReportExpirationInDays() {
+		return reportExpirationInDays;
+	}
 
 	public static String getS3Region() {
 		return s3_region;
@@ -504,6 +531,15 @@ public class ConfigManager {
 
 	public static String getShowSql() {
 		return hibernate_show_sql;
+	}
+	public static String getiam_adminportal_path() {
+		return iam_adminportal_path;
+	}
+	public static String getiam_apienvuser() {
+		return iam_apienvuser;
+	}
+	public static String getiam_apiinternalendpoint() {
+		return iam_apiinternalendpoint;
 	}
 
 	public static String getDbSessionContext() {

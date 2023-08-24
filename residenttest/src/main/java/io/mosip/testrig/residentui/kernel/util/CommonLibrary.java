@@ -1,4 +1,4 @@
-package io.mosip.kernel.util;
+package io.mosip.testrig.residentui.kernel.util;
 
 import static io.restassured.RestAssured.given;
 
@@ -17,9 +17,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import io.mosip.kernel.service.ApplicationLibrary;
-import io.mosip.service.BaseTestCase;
-import io.mosip.test.residentTest.utility.TestRunner;
+import io.mosip.testrig.residentui.kernel.service.ApplicationLibrary;
+import io.mosip.testrig.residentui.service.BaseTestCase;
+import io.mosip.testrig.residentui.utility.TestRunner;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
 

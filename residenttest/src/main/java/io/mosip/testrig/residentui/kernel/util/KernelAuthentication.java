@@ -1,12 +1,12 @@
-package io.mosip.kernel.util;
+package io.mosip.testrig.residentui.kernel.util;
 
 import java.util.Map;
 import java.util.UUID;
 
 import org.json.simple.JSONObject;
 
-import io.mosip.kernel.service.ApplicationLibrary;
-import io.mosip.service.BaseTestCase;
+import io.mosip.testrig.residentui.kernel.service.ApplicationLibrary;
+import io.mosip.testrig.residentui.service.BaseTestCase;
 import io.restassured.response.Response;
 
 public class KernelAuthentication extends BaseTestCase {
