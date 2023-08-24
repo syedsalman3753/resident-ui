@@ -59,14 +59,14 @@
 											<td *ngIf="sharableAttributes['fullName']" >
 												<label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['fullName']['value']}}</span>
 											</td>
-											<td colspan='2' align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
+											<td align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
 										</tr>
 										<tr *ngIf="sharableAttributes['dateOfBirth'] || sharableAttributes['gender']" style="word-break: break-word;">
 											<td *ngIf="sharableAttributes['dateOfBirth']" colspan='1'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['dateOfBirth']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['dateOfBirth']['value']}}</span></td>
 											<td *ngIf="sharableAttributes['gender']"><label style="font-size: 12px;color: #666666;">{{sharableAttributes['gender']['label']}}</label><br> <span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['gender']['value']}}</span></td>
 										</tr>
 										<tr *ngIf="sharableAttributes['UIN'] || sharableAttributes['perpetualVID']" style="word-break: break-word;">
-											<td *ngIf="sharableAttributes['UIN']" colspan='2'><label style="font-size: 12px;color: #666666;">{{sharableAttributes['UIN']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['UIN']['value']}}</span></td>
+											<td *ngIf="sharableAttributes['UIN']" ><label style="font-size: 12px;color: #666666;">{{sharableAttributes['UIN']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['UIN']['value']}}</span></td>
 											<td *ngIf="sharableAttributes['perpetualVID']"><label style="font-size: 12px;color: #666666;">{{sharableAttributes['perpetualVID']['label']}}</label><br><span style="color: #000000; font-weight: 600; font-size: 15px;">{{sharableAttributes['perpetualVID']['value']}}</span></td>
 										</tr>
 										<tr *ngIf="sharableAttributes['phone']" style="word-break: break-word;">
