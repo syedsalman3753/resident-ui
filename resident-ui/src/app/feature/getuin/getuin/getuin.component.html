@@ -12,11 +12,9 @@
         <div class="uin-login-title-card">
           <mat-card-subtitle class="login-Input-heading">{{getUinData.title |
             translate}}</mat-card-subtitle>
-          <span (mouseover)="openPopup()" (mouseout)="openPopup()"><img alt="info-icon" class="info-icon"
-              src="./assets/images/info_black_24dp (1).png" /></span>
-        </div>
-        <div *ngIf="infoPopUpShow" class="info-box">
-          <p>{{infoText}}</p>
+          <span>
+          <img #tooltip="matTooltip" [matTooltip]="infoText" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below" alt="info-icon" class="info-icon" src="./assets/images/info_black_24dp (1).png" />
+          </span>
         </div>
         <input id="aidValue" class="input-text" type="text" ngModel (input)="getUserID($event.target.value)" placeholder="{{getUinData.enterHere}}"/>
         <br />

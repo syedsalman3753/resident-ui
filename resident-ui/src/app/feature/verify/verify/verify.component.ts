@@ -425,9 +425,6 @@ export class VerifyComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
   
-  openPopUp(){
-    this.isPopUpShow = !this.isPopUpShow
-  }
 
  
 }

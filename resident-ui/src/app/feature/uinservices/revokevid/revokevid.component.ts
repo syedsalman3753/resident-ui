@@ -35,8 +35,6 @@ export class RevokevidComponent implements OnInit, OnDestroy {
   newVidValue:string;
   rowHeight:string = "2:1.2";
   cols:number;
-  showInfoCard:boolean = false;
-  iIconVidType:any;
   infoText:any;
   eventId:any;
   errorCode:string;
@@ -82,6 +80,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.langJSON = response.managemyvid;
         this.popupMessages = response;
+        this.infoText = this.popupMessages.InfomationContent.revokevid
       });
     this.getVID();
 
@@ -471,12 +470,6 @@ export class RevokevidComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     this.router.navigate([item]);
-  }
-
-  openPopupMsg(vidType:any){
-    this.showInfoCard = true
-    this.iIconVidType = vidType
-    this.infoText =this.popupMessages.InfomationContent.revokevid[vidType]
   }
 
 }

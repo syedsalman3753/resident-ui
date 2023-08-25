@@ -108,6 +108,26 @@ mat-card-subtitle{
   background-color: #F4F4F4;
 }
 
+::ng-deep .mat-tooltip {
+  background-color: #ffffff !important;
+  color: black !important;
+  font-size: 11px !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+.user-icon{
+  color: green;
+  font-size: 18px; 
+  cursor: pointer; 
+  margin-top: 7px;
+}
+.create-btn{
+  width: 100px; 
+  height: 36px; 
+  display: flex; 
+  align-items: center;
+}
 @media screen and (max-width: 550px){
   .empty-vid-card{
     width: 100%;
