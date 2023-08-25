@@ -404,6 +404,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
           .getNearbyRegistrationCenters(position.coords)
           .subscribe(
             (response) => {
+              this.totalItems = 0;
               if (!response["errors"]) {
                 this.displayResults(response[appConstants.RESPONSE]);
                 this.showMessage = false;

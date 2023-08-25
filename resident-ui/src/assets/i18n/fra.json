@@ -618,7 +618,7 @@
             "Face Authentication": "En verrouillant/déverrouillant l'« Authentification faciale », toute tentative d'authentification utilisant un visage sera désactivée/activée."
         },
         "trackStatus": "Veuillez saisir l'EID (Event ID) associé à l'événement que vous souhaitez suivre. Il est important que l'EID que vous saisissez soit associé au UIN connecté.",
-        "getUin": "Un AID est votre identifiant d'application à 16 chiffres qui vous a été fourni après votre inscription. Un UIN est votre numéro d'identification unique à 10 chiffres. Un VID est votre identifiant virtuel à 16 chiffres.",
+        "getUin": "Un AID est votre identifiant d'application à 29 chiffres qui vous a été fourni après votre inscription. Un UIN est votre numéro d'identification unique à 10 chiffres. Un VID est votre identifiant virtuel à 16 chiffres.",
         "verifyChannel": "Un UIN est votre numéro d'identification unique à 10 chiffres. Un VID est votre identifiant virtuel à 16 chiffres."
     },
     "serverErrors": {
