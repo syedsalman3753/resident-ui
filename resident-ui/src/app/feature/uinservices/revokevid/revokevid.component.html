@@ -17,13 +17,10 @@
 				     <span style="width: 9rem; display: flex; align-items: center; column-gap: 5px;">
 						<h4 style="color: #000000;">{{langJSON[policy.vidType].vidType}}</h4>
 						<span>
-						<mat-icon  (mouseover)="openPopupMsg(policy.vidType)" (mouseout)="openPopupMsg()" style="color: green;font-size: 18px; cursor: pointer; margin-top: 7px;" matTooltip="">info</mat-icon> 
+						<mat-icon  [matTooltip]="infoText[policy.vidType]" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below" class="user-icon" >info</mat-icon> 
 					</span>
 					</span>
-						<div *ngIf="showInfoCard && (iIconVidType===policy.vidType)" class="info-box">
-							<p style="margin-top: 0px;">{{infoText}}</p>
-						</div>
-						<button [id]="policy.vidType" mat-raised-button color="primary" style="width: 100px; height: 36px; display: flex; align-items: center;" (click)="generateVIDBtn(policy.vidType)"><img style="margin-right: 5px; margin-bottom: 2px;" src="./assets/icons/iconfont/add_circle_black_24dp (1).svg" alt=""/>{{'managemyvid.create' | translate}}</button>
+					<button [id]="policy.vidType" mat-raised-button color="primary" class="create-btn" (click)="generateVIDBtn(policy.vidType)"><img style="margin-right: 5px; margin-bottom: 2px;" src="./assets/icons/iconfont/add_circle_black_24dp (1).svg" alt=""/>{{'managemyvid.create' | translate}}</button>
 				</div>
 				<mat-card class="empty-vid-card" *ngIf="!finalTypeList[policy.vidType]?.length">{{langJSON.noVidsText.replace("$VIDTYPE",langJSON[policy.vidType].vidType)}}<span style="font-weight: 600;">{{langJSON.create}}</span>{{langJSON.noVidsText2}}</mat-card>
 				    <mat-grid-list   style="width:100%;" gutterSize="10px" [cols]="cols"  rowHeight="180px" (window:resize)="onResize($event)" *ngIf="finalTypeList[policy.vidType]" class="each-vid-card" dir="{{ sitealignment}}">

@@ -27,8 +27,6 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   vidType:string = "";
   notificationType:Array<string>=[];
   vidValue:string = "";
-  clickedId:string;
-  isPopupSHow:boolean = false;
   infoMsg:string;
   shortInfoMsg:any;
   submitBtnDisable:boolean = true;
@@ -72,6 +70,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
     .subscribe(response => {
       this.langJSON = response;
       this.popupMessages = response;
+      this.infoMsg = response.InfomationContent.secureMyID;
     });
 
     setTimeout(() => {
@@ -353,11 +352,5 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
       this.router.navigate([item]);
   }
 
-  openPopUp(clickedId:any){
-    /*this.clickedId = clickedId;
-    this.isPopupSHow = !this.isPopupSHow;
-    this.infoMsg =  this.popupMessages.InfomationContent.secureMyID[clickedId]*/
-    return this.popupMessages.InfomationContent.secureMyID[clickedId];
-  }
 
 }
