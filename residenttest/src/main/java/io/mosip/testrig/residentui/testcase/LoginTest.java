@@ -68,7 +68,7 @@ public class LoginTest extends BaseClass {
 		test.log(Status.INFO, "Extracted OTP");
 		Thread.sleep(4000);
 
-		Commons.click(test, driver, By.xpath("//button[text()='Verify']"));
+		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 //    List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
 //    List<String> ids =new ArrayList<>();
@@ -88,7 +88,7 @@ public class LoginTest extends BaseClass {
 		}catch(Exception a) {
 			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
 			test.log(Status.INFO, "ALL Checkboxes are selected");
-			Commons.click(test,driver, By.xpath("//button[text()='Allow']"));
+			Commons.click(test,driver, By.id("continue"));
 			Commons.click(test,driver, By.id("confirmmessagepopup"));
 		}
 	}
