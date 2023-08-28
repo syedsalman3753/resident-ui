@@ -474,6 +474,16 @@ button{
   display: flex;
 }
 
+::ng-deep .mat-grid-tile{
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  height: auto;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container{
+  overflow-y: auto;
+}
+
 .mat-tooltip {
   position: relative;
   &::after {
