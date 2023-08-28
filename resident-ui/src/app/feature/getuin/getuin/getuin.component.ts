@@ -44,6 +44,9 @@ export class GetuinComponent implements OnInit {
     "FAILURE":"failure-position-icon position-icon",
     "IN-PROGRESS":"inactive-position-icon position-icon"
   }
+  vidLength:string = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
+  uinLength:string = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
+  aidLength:string = this.appConfigService.getConfig()["mosip.kernel.rid.length"];
 
   constructor(
     private router: Router,
@@ -56,7 +59,6 @@ export class GetuinComponent implements OnInit {
   ) {
     this.translateService.use(localStorage.getItem("langCode"));
     this.appConfigService.getConfig();
-
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
         if(active === "extraSmall"){
@@ -90,7 +92,7 @@ export class GetuinComponent implements OnInit {
       .subscribe(response => {
         this.getUinData = response.uinservices
         this.popupMessages = response
-        this.infoText = response.InfomationContent.getUin
+        this.infoText = response.InfomationContent.getUin.replace('$AID',this.aidLength).replace('$UIN',this.uinLength).replace('$VID',this.vidLength)
         this.getStatusData = response.uinStatus
         this.stageKeys =  Object.keys(this.getStatusData.statusStages)
 
