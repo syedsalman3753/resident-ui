@@ -61,7 +61,10 @@ export class AppConfigService {
         this.appConfig["resident.grievance-redressal.alt-phone.chars.limit"] = responseData["resident.grievance-redressal.alt-phone.chars.limit"]; 
         this.appConfig["resident.validation.event-id.regex"] = responseData["resident.validation.event-id.regex"];
         this.appConfig["resident.purpose.allowed.special.char.regex"] = responseData["resident.purpose.allowed.special.char.regex"];
-        this.appConfig["mosip.resident.captcha.enable"] = responseData["mosip.resident.captcha.enable"];        
+        this.appConfig["mosip.resident.captcha.enable"] = responseData["mosip.resident.captcha.enable"];
+        this.appConfig["mosip.kernel.vid.length"] = responseData["mosip.kernel.vid.length"];
+        this.appConfig["mosip.kernel.uin.length"] = responseData["mosip.kernel.uin.length"];
+        this.appConfig["mosip.kernel.rid.length"] = responseData["mosip.kernel.rid.length"];        
       },
       (error) => {
         console.log(error);
