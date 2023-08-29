@@ -334,6 +334,18 @@ label{
   border-radius: 5px;
 }
 
+.mat-select-panel-wrap{
+  position: relative;
+  top: 26px;
+}
+
+::ng-deep .mat-select-panel{
+  margin-left: 1rem;
+}
+::ng-deep .mat-option{
+  padding: 0 10px;
+}
+
 @media screen and (min-width:989px) {
   .table-main-card{
     display: flex;

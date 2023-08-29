@@ -400,7 +400,8 @@
         "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
-        "EnterAllAddress":"Por favor selecciona"
+        "EnterAllAddress":"Por favor selecciona",
+        "select":"Seleccionar"
     },
     "preview": {
         "title": "Avance"
