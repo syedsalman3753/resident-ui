@@ -404,6 +404,7 @@ app-document > ul{
   outline-width: thin;
   border-radius: 5px;
   color: white !important;
+  font-size: 15px;
 }
 
 .mat-select-trigger {
