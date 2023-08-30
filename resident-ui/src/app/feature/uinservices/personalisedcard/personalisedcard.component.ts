@@ -305,9 +305,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
                 }
               }
 
-              if (allValue.endsWith(',')) {
-                allValue = allValue.replace(/.$/, '')
-              }
+              allValue = allValue.replace(/,(\s+)?$/, "");
               value = allValue;
             } else {
               value = this.fullAddress
