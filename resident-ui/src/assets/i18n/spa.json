@@ -76,6 +76,13 @@
                     "icon": "",
                     "route": "document",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Actualizar mis datos",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Los residentes pueden actualizar los datos ya existentes asociados a su UIN/VID. Los datos que se pueden actualizar incluyen nombre, sexo, fecha de nacimiento, dirección, documentos cargados, número de teléfono, ID de correo electrónico, idioma preferido, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
