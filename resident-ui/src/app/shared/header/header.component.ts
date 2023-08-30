@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   clickEventSubscription: Subscription;
   sitealignment:string = localStorage.getItem('direction');
   activeUrl:string;
+  agent:any = window.navigator.userAgent.toLowerCase();
 
   constructor(
     private router: Router,
@@ -215,21 +216,33 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   zoom(item:any) {
     if(item.fontSize === "12"){
-      //document.body.style["zoom"]= "90%";
-      document.body.style["transform"] = "scale(1, .9)";
-      document.body.style["margin-top"] = "-2.5%";
+      if(this.agent.indexOf('firefox') > -1){
+        document.body.style["transform"] = "scale(1, .9)";
+        document.body.style["margin-top"] = "-2.5%";
+      }else{
+        document.body.style["zoom"]= "90%";
+      }
     }else if(item.fontSize === "14"){
-      //document.body.style["zoom"]= "100%";
-      document.body.style["transform"] = "scale(1, 1.0)";
-      document.body.style["margin-top"] = "0%";
+      if(this.agent.indexOf('firefox') > -1){
+        document.body.style["transform"] = "scale(1, 1.0)";
+        document.body.style["margin-top"] = "0%";
+      }else{
+        document.body.style["zoom"]= "100%";
+      }
     }else if(item.fontSize === "16"){
-      //document.body.style["zoom"]= "110%";
-      document.body.style["transform"] = "scale(1, 1.1)";
-      document.body.style["margin-top"] = "2.1%";
+      if(this.agent.indexOf('firefox') > -1){
+        document.body.style["transform"] = "scale(1, 1.1)";
+        document.body.style["margin-top"] = "2.1%";
+      }else{
+        document.body.style["zoom"]= "110%";
+      }
     }else if(item.fontSize === "18"){
-      //document.body.style["zoom"]= "120%";
-      document.body.style["transform"] = "scale(1, 1.2)";
-      document.body.style["margin-top"] = "4.5%";
+      if(this.agent.indexOf('firefox') > -1){
+        document.body.style["transform"] = "scale(1, 1.2)";
+        document.body.style["margin-top"] = "4.5%";
+      }else{
+        document.body.style["zoom"]= "120%";
+      }
     }    
   }
 
