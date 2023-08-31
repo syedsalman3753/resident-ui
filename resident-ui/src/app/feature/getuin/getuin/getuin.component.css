@@ -326,27 +326,27 @@ ul li:last-child hr{
     }
 }
 
-::ng-deep .mat-tooltip {
-    position: relative;
+::ng-deep .below {
+    position: relative !important;
     overflow: visible !important;
     &::after {
-      width: 0;
-      height: 0;
+      width: 0 !important;
+      height: 0 !important;
       content: '';
-      position: absolute;
-      border-left: 0.5rem solid transparent;
-      border-right: 0.5rem solid transparent;
-      border-bottom: 0.5rem solid #0000008c;
-      border-color: transparent transparent #ffffff transparent;
-      border-width: 10px;
+      position: absolute !important;
+      border-left: 0.5rem solid transparent !important;
+      border-right: 0.5rem solid transparent !important;
+      border-bottom: 0.5rem solid #0000008c !important;
+      border-color: transparent transparent #ffffff transparent !important;
+      border-width: 10px !important;
     }
     &.below {
-      overflow: initial;
-      margin-top:0.4rem;
+      overflow: initial !important;
+      margin-top:0.4rem !important;
       &:after {
-        top: -0.5rem;
-        right: calc(50% - 0.5rem);
-        transform: rotate(0);
+        top: -0.5rem !important;
+        right: calc(50% - 0.5rem) !important;
+        transform: rotate(0) !important;
       }
     }
 }
