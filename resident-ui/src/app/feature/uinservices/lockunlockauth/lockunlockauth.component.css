@@ -86,7 +86,7 @@ mat-card-header,
 
 ::ng-deep .mat-tooltip {
   background-color: #ffffff !important;
-  color: black !important;
+  color: black;
   font-size: 11px !important;
   border-radius: 8px !important;
   padding: 10px !important;
@@ -115,7 +115,7 @@ mat-card-header,
 }
 
 .info-icon{
-  color: green;
+  color: green !important;
   font-size: 18px; 
   cursor: pointer;
 }
