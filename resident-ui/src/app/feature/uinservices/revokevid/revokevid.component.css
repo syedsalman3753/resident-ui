@@ -116,7 +116,7 @@ mat-card-subtitle{
   padding: 10px !important;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   margin-top: -2px !important;
-    &::after {
+    /* &::after {
         width: 0;
         height: 0;
         content: '';
@@ -135,7 +135,7 @@ mat-card-subtitle{
           right: calc(50% - 0.5rem);
           transform: rotate(0);
         }
-  }
+  } */
 }
 .user-icon{
   color: green;

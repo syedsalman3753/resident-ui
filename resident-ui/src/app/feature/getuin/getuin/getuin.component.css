@@ -75,11 +75,13 @@
 .uin-login-title-card {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .info-icon {
-    margin-left: 12px;
-    cursor: pointer;
+    /* margin-left: 12px;
+    cursor: pointer; */
+    margin-bottom: 8px;
 }
 
 .label-text {
