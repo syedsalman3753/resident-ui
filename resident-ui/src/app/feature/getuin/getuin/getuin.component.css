@@ -297,7 +297,28 @@ ul li:last-child hr{
     font-size: 11px !important;
     border-radius: 8px !important;
     padding: 10px !important;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+    margin-top: -2px !important;
+    &::after {
+        width: 0;
+        height: 0;
+        content: '';
+        position: absolute;
+        border-left: 0.5rem solid transparent;
+        border-right: 0.5rem solid transparent;
+        border-bottom: 0.5rem solid #0000008c;
+        border-color: transparent transparent #ffffff transparent;
+        border-width: 10px;
+      }
+      &.below {
+        overflow: initial;
+        margin-top:0.4rem;
+        &:after {
+          top: -0.5rem;
+          right: calc(50% - 0.5rem);
+          transform: rotate(0);
+        }
+     }
 }
 
 
@@ -326,27 +347,3 @@ ul li:last-child hr{
     }
 }
 
-::ng-deep .below {
-    position: relative !important;
-    overflow: visible !important;
-    &::after {
-      width: 0 !important;
-      height: 0 !important;
-      content: '';
-      position: absolute !important;
-      border-left: 0.5rem solid transparent !important;
-      border-right: 0.5rem solid transparent !important;
-      border-bottom: 0.5rem solid #0000008c !important;
-      border-color: transparent transparent #ffffff transparent !important;
-      border-width: 10px !important;
-    }
-    &.below {
-      overflow: initial !important;
-      margin-top:0.4rem !important;
-      &:after {
-        top: -0.5rem !important;
-        right: calc(50% - 0.5rem) !important;
-        transform: rotate(0) !important;
-      }
-    }
-}
