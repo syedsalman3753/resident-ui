@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
+import { MatKeyboardService } from 'ngx7-material-keyboard';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent {
     private router: Router,
     private logoutService: LogoutService,
     private auditService: AuditService,
+    private keyboardService: MatKeyboardService,
     private dataStorageService: DataStorageService
   ) {
     this.appConfigService.getConfig();
@@ -38,24 +40,6 @@ export class AppComponent {
     this.sitealignment = localStorage.getItem('direction');
     document.body.dir = this.sitealignment;
   }
-  
-  // @HostListener('window:popstate', ['$event'])
-  // PopState(event) {
-  //   console.log("Testing1")
-  //   console.log(window.location.hash)
-  //   if(window.location.hash.includes("uinservices")){
-  //   console.log("Testing2")
-  //   }else{ 
-  //     console.log("Testing3")
-  //     if(confirm("Are you sure want to leave the page. you will be logged out automatically if you press OK?")){
-  //       this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
-  //       this.logoutService.logout();
-  //     }else{
-  //       this.router.navigate([this.router.url]); 
-  //       return false;
-  //     }
-  //   }
-  // }
   
   ngOnInit() { 
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -101,6 +85,9 @@ export class AppComponent {
            // this.configService.navigationType = 'popstate';
             //this.preventBack();
           }
+          if (this.keyboardService.isOpened) {
+            this.keyboardService.dismiss();
+          }
         })
     );
   }
@@ -110,6 +97,12 @@ export class AppComponent {
     window.onunload = function() {
       null;
     };
+  }
+
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+    }
   }
 
   @HostListener('mouseover')
