@@ -17,15 +17,6 @@
       <!-- search container -->
       <div class="center_selection-intial-recommendation-container" *ngIf="searchClick; else elseBlock">
         <span class="spacer"></span>
-        <!-- <button
-          type="button"
-          matTooltip="{{ 'helpText.magnifying_glass' | translate }}"
-          mat-icon-button
-          class="search-btn"
-          (click)="setSearchClick(false)"
-        >
-          <img alt="" src="assets\search.png" />
-        </button> -->
       </div>
       <ng-template #elseBlock>
         <div class="center_selection-form-container">
@@ -34,9 +25,6 @@
               <mat-icon class="my-location-icon" matTooltip="{{ 'centerSelection.helpText' | translate }}" [inline]="true">my_location</mat-icon>&nbsp;&nbsp;
               {{ 'centerSelection.action_nearBy' | translate }}
             </button>
-            <!-- <span *ngIf="nearbyClicked"> -->
-              <!-- <mat-icon (click)="resetPagination();setSearchClick(true);" class="name-delete-button">close</mat-icon> -->
-            <!-- </span> -->
             <br />
           </div>
           <form class="search-form-card">
@@ -58,37 +46,21 @@
               </mat-select>
             </mat-card>
             <mat-card class="search-card" >
-              <!-- <input
-                *ngIf="locationType"
-                mat-input
-                type="search"
-                placeholder="{{ 'centerSelection.text_enter' | translate }} {{ locationType.hierarchyLevelName }}"
-                name="search"
-                class="search-input"
-                [(ngModel)]="searchText"
-                (keyup)="searchInput()"
-              /> -->
               <input
                 [disabled]="!locationType"
                 mat-input
-                type="search"
+                #search
                 placeholder="{{ 'centerSelection.text_search' | translate }}"
                 name="search"
                 class="search-input"
                 [(ngModel)]="searchText"
                 (input)="searchInput()"
+                (blur)="captureValue($event)"
+                (focus)="captureVirtualKeyboard(search, 0)"
+                id="search"
+                #keyboardRef
               />
-              <!-- <button
-                matTooltip="{{ 'helpText.magnifying_glass' | translate }}"
-                mat-icon-button
-                type="submit"
-                (click)="showResults()"
-              >
-                <img alt="" src="assets\search_grey.png" />
-              </button> -->
-              <!-- <button mat-icon-button class="search-cancel-btn" type="button" (click)="setSearchClick(true);resetPagination();">
-                <img alt="" src="assets\close.png" />
-              </button> -->
+              <i *ngIf="locationType" style="float: right; color: grey; cursor: pointer;" matSuffix class="material-icons" (click)="openKeyboard()">keyboard</i>
             </mat-card>
             <button [disabled]="isBlankSpace" mat-raised-button  (click)="showResults()" class="search-btn">
               <mat-icon>search</mat-icon>
@@ -106,15 +78,6 @@
       </ng-template>
 
       <div class="centers-list" *ngIf="REGISTRATION_CENTRES.length >0">
-        <!-- <span
-          *ngIf="!showMessage && !searchClick && REGISTRATION_CENTRES.length !== 0"
-          style="margin-left:24px;"
-          class="center_selection-center-available-text"
-        >
-          {{ 'centerSelection.text_found' | translate }}
-          {{ REGISTRATION_CENTRES.length > this.totalItems ? REGISTRATION_CENTRES.length: this.totalItems }}
-          {{ 'centerSelection.text_centers' | translate }}
-        </span> -->
         <span
           *ngIf="showMessage  && REGISTRATION_CENTRES.length === 0"
           style="margin-left:24px;"
@@ -146,20 +109,12 @@
                   <span  *ngIf="center.contactPerson !== ''">
                     {{ center.contactPerson}}, <span  *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">{{ center.contactPhone }}</span>
                   </span>
-                 <!--  <span  *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">
-                    {{ ', ' +  center.contactPhone }}
-                  </span>
-                  <span  *ngIf="center.contactPerson == '' && center.contactPhone !== ''">
-                    {{ center.contactPhone }}
-                  </span> -->
                 </div>
               </div>
               <span class="spacer"></span>
               <div style="width: 40%;">
                 <div >
                   <span>
-                    <!-- <div><img alt="" src="assets\address.png" (click)="selectedRow(center)" style="cursor:pointer;" /></div> -->
-                    <!-- <div><span  *ngIf="center.contactPerson !== '' && center.contactPhone !== ''">{{ center.contactPhone }}</span><span *ngIf="center.contactPerson == '' && center.contactPhone !== ''">{{ center.contactPhone }}</span></div> -->
                     <div [dir]="textDir">
                       {{ 'centerSelection.text_timing' | translate }} :
                       <span dir="ltr">
