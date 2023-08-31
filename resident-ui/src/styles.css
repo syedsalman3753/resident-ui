@@ -485,7 +485,7 @@ button{
   overflow-y: auto;
 }
 
-.mat-tooltip {
+/* .mat-tooltip {
   position: relative;
   overflow: visible !important;
   &::after {
@@ -517,9 +517,9 @@ button{
       right: calc(50% - 0.5rem);
       transform: rotate(180deg);
     }
-  }
+  } */
 
-  &.right {
+  /* &.right {
     overflow: initial;
     margin-left: 1rem;
     &:after {
@@ -537,6 +537,6 @@ button{
       top: calc(50% - 0.25rem);
       transform: rotate(90deg);
     }
-  }
-}
+  } */
+/* } */
 
