@@ -63,7 +63,7 @@ td {
 }
 
 .info-icon{
-  color: green;
+  color: green !important;
   font-size: 18px; 
   cursor: pointer;
   margin-left: 4px;
