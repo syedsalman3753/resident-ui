@@ -485,3 +485,8 @@ button{
   overflow-y: auto;
 }
 
+.info-icon-button{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
