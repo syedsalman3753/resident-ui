@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, HostListener } from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
@@ -13,7 +13,11 @@ import defaultJson from "src/assets/i18n/default.json";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { DateAdapter } from '@angular/material/core';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
-
+import {
+  MatKeyboardRef,
+  MatKeyboardComponent,
+  MatKeyboardService
+} from 'ngx7-material-keyboard';
 
 @Component({
   selector: "app-demographic",
@@ -96,12 +100,16 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   getAllDocIds:any = {};
   isSelectedAllAddress:boolean = true;
   fieldName:string;
-
+  
+  private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
+  @ViewChildren('keyboardRef', { read: ElementRef })
+  private attachToElementMesOne: any;
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
     private dialog: MatDialog, private dataStorageService: DataStorageService,
     private translateService: TranslateService, private router: Router,
     private appConfigService: AppConfigService, private auditService: AuditService,
-    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService) {
+    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService, 
+    private keyboardService: MatKeyboardService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -252,7 +260,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         }
       }
 
-
       this.getGender();
       this.getLocationHierarchyLevel();
       this.getDocumentType("POI", "proofOfIdentity"); this.getDocumentType("POA", "proofOfAddress");
@@ -264,7 +271,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     if (this.buildJSONData['preferredLang']) {
       let perfLangs = this.buildJSONData['preferredLang'].split(',');
       perfLangs.forEach(data => {
-        this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
+        if(data['nativeName']){
+          this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
+        }
       })
       this.buildJSONData['preferredLang'] = this.perfLangArr[localStorage.getItem("langCode")];
     }
@@ -705,6 +714,21 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.userPrefLang[formControlName] = event.source.viewValue;
   }
 
+  captureVirtualKeyboard(element: HTMLElement, index: number) {
+    this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
+  }
+
+  openKeyboard(inputId:any) {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+      this.keyboardRef = undefined;
+    } else {
+      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[this.langCode]);
+      document.getElementById(inputId).focus();
+      console.log(document.getElementById(inputId))
+    }
+  }
+
   updateBtn() {
     this.conditionsForupdateDemographicData();
   }
@@ -1075,6 +1099,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   logChange(event: any) {
     this.matTabIndex = event.index;
     this.matTabLabel = event.tab.textLabel;
+  }
+
+  @HostListener("blur", ["$event"])
+  @HostListener("focusout", ["$event"])
+  private _hideKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+    }
   }
 
   ngOnDestroy(): void {

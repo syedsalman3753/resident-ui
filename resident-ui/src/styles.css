@@ -490,3 +490,9 @@ button{
   background-color: transparent;
   cursor: pointer;
 }
+
+.mat-keyboard-icon{
+  float: right; 
+  color: grey; 
+  cursor: pointer;
+}

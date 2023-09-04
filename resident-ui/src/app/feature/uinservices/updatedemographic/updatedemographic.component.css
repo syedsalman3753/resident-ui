@@ -30,13 +30,13 @@ input.readonly{
 }
 .mat-input-element{
   width: 100%;
-  padding: 8px 16px;
+  padding: 8px 8px;
   display: inline-block;
   border: 1px solid #ccc;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 5px;
   color: #909090;
-  height: 42px;
+  /* height: 42px; */
 }
 
 .mini-card{
@@ -344,6 +344,19 @@ label{
 }
 ::ng-deep .mat-option{
   padding: 0 10px;
+}
+
+.input{
+  border: none;
+}
+
+.search-input-card{
+  width: 100%;
+  border-radius: 4px !important;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid #909090;
 }
 
 @media screen and (min-width:989px) {
