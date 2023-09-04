@@ -25,20 +25,20 @@ import io.restassured.response.Response;
 //import org.apache.log4j.Logger;
 
 public class BaseTestCase {
-	protected static Logger logger = Logger.getLogger(BaseTestCase.class);
+	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(BaseTestCase.class);
 	public static String environment;
 	public static List<String> languageList = new ArrayList<>();
 	public static String ApplnURI;
 	public static String ApplnURIForKeyCloak;
 	public static String testLevel;
 	public static Properties props = getproperty(
-			TestRunner.getResourcePath() + "/" + "config/application.properties");
+			TestRunner.getResourcePath() + "/" + "resource/config/application.properties");
 	public static Properties propsKernel = getproperty(
-			TestRunner.getResourcePath() + "/" + "config/Kernel.properties");
+			TestRunner.getResourcePath() + "/" + "resource/config/Kernel.properties");
 	public static Properties propsMap = getproperty(
-			TestRunner.getResourcePath() + "/" + "config/valueMapping.properties");
+			TestRunner.getResourcePath() + "/" + "resource/config/valueMapping.properties");
 	public static Properties propsBio = getproperty(
-			TestRunner.getGlobalResourcePath() + "/" + "config/bioValue.properties");
+			TestRunner.getGlobalResourcePath() + "/" + "resource/config/bioValue.properties");
 	public static String SEPRATOR = "";
 	public static String currentModule = "residentui";
 	public final static String COOKIENAME = "Authorization";
