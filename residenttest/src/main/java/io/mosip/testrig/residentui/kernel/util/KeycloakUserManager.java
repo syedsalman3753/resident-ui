@@ -27,9 +27,9 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 
 public class KeycloakUserManager {
 	
-	private static final Logger logger = Logger.getLogger(KeycloakUserManager.class);
+	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(KeycloakUserManager.class);
 
-	public static Properties propsKernel = getproperty(TestRunner.getResourcePath() + "/"+"config/Kernel.properties");
+	public static Properties propsKernel = getproperty(TestRunner.getResourcePath() + "/"+"resource/config/Kernel.properties");
 
 	private static Keycloak getKeycloakInstance() {
 		 Keycloak key=null;
