@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,Renderer2 } from "@angular/core";
+import { Component, OnInit, OnDestroy,Renderer2,ElementRef,ViewChildren,HostListener } from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
@@ -9,6 +9,12 @@ import { MatDialog } from '@angular/material';
 import { saveAs } from 'file-saver';
 import { AuditService } from "src/app/core/services/audit.service";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
+import {
+  MatKeyboardRef,
+  MatKeyboardComponent,
+  MatKeyboardService
+} from 'ngx7-material-keyboard';
+import defaultJson from "src/assets/i18n/default.json";
 
 @Component({
   selector: "app-trackservicerequest",
@@ -35,7 +41,15 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
   showWarningMessage:boolean = false;
   disableDownloadVidBtn:boolean = false;
 
-  constructor(private autoLogout: AutoLogoutService,private renderer:Renderer2 ,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router, private route: ActivatedRoute,private auditService: AuditService) {
+  private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
+  @ViewChildren('keyboardRef', { read: ElementRef })
+  private attachToElementMesOne: any;
+  constructor(private autoLogout: AutoLogoutService,private renderer:Renderer2 ,
+    private dialog: MatDialog, private appConfigService: AppConfigService, 
+    private dataStorageService: DataStorageService, private translateService: TranslateService, 
+    private router: Router, private route: ActivatedRoute,private auditService: AuditService,
+    private keyboardService: MatKeyboardService
+    ) {
     this.renderer.listen('window','click',(e:Event) =>{
        if(!this.iconBtnClicked){
           this.isPopUpShow = false
@@ -92,6 +106,20 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     }else{
       this.disableTrackBtn = true;
         this.showWarningMessage = true;
+    }
+  }
+
+  captureVirtualKeyboard(element: HTMLElement, index: number) {
+    this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
+  }
+
+  openKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+      this.keyboardRef = undefined;
+    } else {
+      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[this.userPreferredLangCode]);
+      document.getElementById("appIdValue").focus();
     }
   }
 
@@ -213,5 +241,13 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
   }
   preventCloseOnClick(){
     this.iconBtnClicked = true
+  }
+
+  @HostListener("blur", ["$event"])
+  @HostListener("focusout", ["$event"])
+  private _hideKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+    }
   }
 }
