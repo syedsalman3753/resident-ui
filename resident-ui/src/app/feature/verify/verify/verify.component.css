@@ -113,6 +113,7 @@ input {
   opacity: 1;
   font-size: 14px;
   padding: 12px;
+  overflow-wrap: anywhere;
 }
 
 .otp-infromation-card {
