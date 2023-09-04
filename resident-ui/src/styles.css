@@ -482,13 +482,14 @@ button{
 }
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container{
-  overflow-y: auto;
+  /*overflow-y: auto;*/
 }
 
 .info-icon-button{
   border: none;
   background-color: transparent;
   cursor: pointer;
+
 }
 
 .mat-keyboard-icon{

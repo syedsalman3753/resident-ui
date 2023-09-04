@@ -24,16 +24,16 @@ import io.restassured.http.Cookie;
 import io.restassured.response.Response;
 
 public class CommonLibrary extends BaseTestCase {
-	private static Logger logger = Logger.getLogger(CommonLibrary.class);
+	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(CommonLibrary.class);
 	private ApplicationLibrary applicationLibrary = new ApplicationLibrary();
 	
 	
 	public String getResourcePath() {
-		return TestRunner.getGlobalResourcePath() + "/";
+		return TestRunner.getGlobalResourcePath() + "/resource/";
 	}
 	
 	public String getResourcePathForKernel() {
-		return TestRunner.getResourcePath() + "/";
+		return TestRunner.getResourcePath() + "/resource/";
 	}
 	
 	

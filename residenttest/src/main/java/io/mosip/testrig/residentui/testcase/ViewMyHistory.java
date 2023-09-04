@@ -61,16 +61,27 @@ public class ViewMyHistory extends BaseClass {
 		Commons.clickWebelement(test, driver, By.id("DATA_SHARE_REQUEST"));
 		Commons.clickWebelement(test, driver, By.id("ALL"));
 		test.log(Status.INFO, "Select ServiceType");
+		
 		// Commons.click(test,driver, By.id("statusFilter"));
 
+		
+		
+		
+		
+		Commons.clickWebelement(test, driver, By.xpath("/html/body/app-root/app-viewhistory/span/a"));
+		
+		Commons.clickWebelement(test, driver, By.id("uinservices/viewhistory"));
 		Commons.clickWebelement(test, driver, By.xpath("//button[text()='Status']"));
-		Commons.clickWebelement(test, driver, By.id("Success"));
+//		Commons.click(test, driver, By.xpath("/html/body/app-root/app-viewhistory/span/a"));
+		
+		Commons.click(test, driver, By.id("SUCCESS"));
+//		driver.findElement(By.id("Success")).click();
 		Commons.clickWebelement(test, driver, By.id("searchbtn"));
-		Commons.clickWebelement(test, driver, By.id("Success"));
-		Commons.clickWebelement(test, driver, By.id("In Progress"));
+		Commons.clickWebelement(test, driver, By.id("SUCCESS"));
+		Commons.clickWebelement(test, driver, By.id("IN_PROGRESS"));
 		Commons.clickWebelement(test, driver, By.id("searchbtn"));
-		Commons.clickWebelement(test, driver, By.id("In Progress"));
-		Commons.clickWebelement(test, driver, By.id("Failed"));
+		Commons.clickWebelement(test, driver, By.id("IN_PROGRESS"));
+		Commons.clickWebelement(test, driver, By.id("FAILED"));
 		Commons.clickWebelement(test, driver, By.id("searchbtn"));
 		test.log(Status.INFO, "Select Status");
 		Commons.clickWebelement(test, driver, By.id("downloadbtn"));
