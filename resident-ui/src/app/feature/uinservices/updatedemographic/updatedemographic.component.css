@@ -25,8 +25,14 @@ input.readonly{
   border-radius: 5px;
   color: #909090;
 }
-::ng-deep .mat-select-panel-wrap{
-  flex-basis: 25% !important;
+/*::ng-deep .mat-select-panel-wrap{
+  flex-basis: 85% !important;
+}
+::ng-deep .my-custom-panel-class.mat-select-panel {
+  max-width: fit-content;
+}*/
+::ng-deep .mat-select-panel {
+  min-width: 100% !important;
 }
 .mat-input-element{
   width: 100%;
