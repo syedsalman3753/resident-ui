@@ -63,9 +63,13 @@
                                 value="{{buildJSONData[field.attributeName][language]}}"></td>
                             <td width="10%"></td>
                             <td width="45%" *ngIf="userInputValues[field.attributeName]">
-                              <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
-                                [value]="userInputValues[field.attributeName]" />
+                              <div class="search-input-card">
+                                <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
+                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language]);"
+                                  (focus)="captureVirtualKeyboard(field.attributeName, 0)"
+                                  [value]="userInputValues[field.attributeName]" #keyboardRef />
+                                  <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                              </div>
                               <span *ngIf="userInputValues[field.attributeName]">
                                 <p class="warning-message"
                                   *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][language]">
@@ -73,8 +77,12 @@
                               </span>
                             </td>
                             <td width="45%" *ngIf="!userInputValues[field.attributeName]">
-                              <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
+                              <div class="search-input-card">
+                                <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
+                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
+                                  (focus)="captureVirtualKeyboard(field.attributeName, 0)" #keyboardRef/>
+                                  <i  matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                              </div>
                               <span>
                                 <p class="warning-message"
                                   *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][language]">
@@ -99,7 +107,7 @@
                             <td width="10%"></td>
                             <td width="45%">
                               <mat-form-field style="min-width: 73%;">
-                                <mat-select class="enable-dropdown" [(ngModel)]="selected" id="{{field.attributeName}}">
+                                <mat-select disableOptionCentering class="enable-dropdown" [(ngModel)]="selected" id="{{field.attributeName}}">
                                   <mat-option *ngFor="let data of dropDownValues[field.attributeName]"
                                     (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, buildJSONData[field.attributeName][langCode])"
                                     [value]="data.code">{{ data.value }}</mat-option>
@@ -129,7 +137,7 @@
                           </tr>
                           <tr>
                             <td width="45%">
-                              <mat-select class="enable-dropdown"
+                              <mat-select disableOptionCentering class="enable-dropdown"
                                 [value]="proofOfIdentity['documenttype'] ? proofOfIdentity['documenttype'] : '' "
                                 id="{{field.attributeName}}">
                                 <mat-option style="min-width: 25.2rem;"
@@ -140,10 +148,14 @@
                             </td>
                             <td width="10%"></td>
                             <td width="45%">
-                              <input
-                                [value]="proofOfIdentity['documentreferenceId'] ? proofOfIdentity['documentreferenceId'] : '' "
-                                matInput #{{field.attributeName}} id="{{field.attributeName}}value"
-                                (blur)="captureValue($event, field.attributeName, language, '')" />
+                              <div class="search-input-card">
+                                <input class="input"
+                                  [value]="proofOfIdentity['documentreferenceId'] ? proofOfIdentity['documentreferenceId'] : '' "
+                                  matInput #{{field.attributeName}} id="{{field.attributeName}}value"
+                                  (blur)="captureValue($event, field.attributeName, language, '')" 
+                                  (focus)="captureVirtualKeyboard(field.attributeName + 'value', 1)" #keyboardRef/>
+                                <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName +'value')">keyboard</i>
+                              </div>
                             </td>
                           </tr>
                           <tr *ngIf="displayPOIUpload">
@@ -290,13 +302,21 @@
                               </td>
                               <td width="10%"></td>
                               <td width="45%" *ngIf="userInputValues[field.attributeName]">
-                                <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureAddressValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
-                                  [value]="userInputValues[field.attributeName]" />
+                                <div class="search-input-card">
+                                  <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
+                                    (blur)="captureAddressValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
+                                    [value]="userInputValues[field.attributeName]"
+                                    (focus)="captureVirtualKeyboard(field.attributeName, 2)" #keyboardRef/>
+                                  <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                                </div>
                               </td>
                               <td width="45%" *ngIf="!userInputValues[field.attributeName]">
-                                <input matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureAddressValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])" />
+                                <div class="search-input-card">
+                                  <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
+                                   (blur)="captureAddressValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
+                                   (focus)="captureVirtualKeyboard(field.attributeName, 2)" #keyboardRef/>
+                                   <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                                </div>
                               </td>
                             </tr>
                           </table>
@@ -320,8 +340,8 @@
                                   value="{{buildJSONData[field.attributeName][langCode]}}">
                               </td>
                               <td width="10%"></td>
-                              <td width="45%" class="each-Hierarchy-td" >
-                                <mat-select  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
+                              <td width="45%" class="each-Hierarchy-td" *ngIf="dynamicDropDown[field.name]">
+                                <mat-select disableOptionCentering placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
                                   (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);" >
                                   <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
                                     {{ data.name }}
@@ -349,7 +369,7 @@
                             </tr>
                             <tr>
                               <td width="45%">
-                                <mat-select class="enable-dropdown"
+                                <mat-select disableOptionCentering class="enable-dropdown"
                                   [value]="proofOfAddress['documenttype'] ? proofOfAddress['documenttype'] : '' "
                                   id="{{field.attributeName}}">
                                   <mat-option style="min-width: 25.2rem;"
@@ -361,10 +381,14 @@
                               </td>
                               <td width="10%"></td>
                               <td width="45%">
-                                <input
-                                  [value]="proofOfAddress['documentreferenceId'] ? proofOfAddress['documentreferenceId'] : '' "
-                                  matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureAddressValue($event, field.attributeName, language, '')" />
+                                <div class="search-input-card">
+                                  <input class="input"
+                                    [value]="proofOfAddress['documentreferenceId'] ? proofOfAddress['documentreferenceId'] : '' "
+                                    matInput #{{field.attributeName}} id="{{field.attributeName}}value"
+                                    (blur)="captureAddressValue($event, field.attributeName, language, '')" 
+                                    (focus)="captureVirtualKeyboard(field.attributeName, 3)" #keyboardRef/>
+                                  <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName+'value')">keyboard</i>
+                                </div>
                               </td>
                             </tr>
                             <tr *ngIf="displayPOAUpload">
@@ -503,10 +527,20 @@
               <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
                 <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
                 <mat-card-subtitle>
-                  <input *ngIf="field.attributeName === 'email'" [value]="userIdEmail" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
-                    (input)="captureContactValue($event, field.attributeName)" />
-                  <input *ngIf="field.attributeName === 'phone'" [value]="userIdPhone" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
-                    (input)="captureContactValue($event, field.attributeName)" />
+                  <div class="search-input-card" *ngIf="field.attributeName === 'email'">
+                    <input class="input"  [value]="userIdEmail" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
+                      (input)="captureContactValue($event, field.attributeName)"
+                      (blur)="captureContactValue($event, field.attributeName)" 
+                      (focus)="captureVirtualKeyboard(field.attributeName, 4)"  #keyboardRef/>
+                    <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                  </div>
+                  <div class="search-input-card" *ngIf="field.attributeName === 'phone'">
+                    <input class="input"  [value]="userIdPhone" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
+                      (input)="captureContactValue($event, field.attributeName)"
+                      (blur)="captureContactValue($event, field.attributeName)"
+                      (focus)="captureVirtualKeyboard(field.attributeName, 6)" #keyboardRef/>
+                    <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                  </div>
                   </mat-card-subtitle>
               </div>
             </mat-grid-tile>
@@ -514,10 +548,22 @@
               <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
                 <mat-card-header><mat-card-title>{{field.labelName[langCode][2]}}</mat-card-title></mat-card-header>
                 <mat-card-subtitle>
-                  <input *ngIf="field.attributeName === 'email'" [value]="confirmEmailContact" (input)="captureConfirmValue($event,field.attributeName)" matInput
-                    #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" />
-                  <input *ngIf="field.attributeName === 'phone'" [value]="confirmPhoneContact" (input)="captureConfirmValue($event,field.attributeName)" matInput
-                    #confirm{{field.attributeName}} id="confirm{{field.attributeName}}" />
+                  <div class="search-input-card" *ngIf="field.attributeName === 'email'">
+                  <input class="input" [value]="confirmEmailContact" 
+                    (input)="captureConfirmValue($event,field.attributeName)"
+                    (blur)="captureConfirmValue($event,field.attributeName)"
+                    (focus)="captureVirtualKeyboard('confirm' + field.attributeName, 5)"
+                    matInput #confirmemail #input id="confirm{{field.attributeName}}" #keyboardRef/>
+                    <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('confirm' + field.attributeName)">keyboard</i>
+                  </div>
+                  <div class="search-input-card" *ngIf="field.attributeName === 'phone'">
+                  <input class="input" [value]="confirmPhoneContact" 
+                    (input)="captureConfirmValue($event,field.attributeName)"
+                    (blur)="captureConfirmValue($event,field.attributeName)"
+                    (focus)="captureVirtualKeyboard('confirm' + field.attributeName, 7)"
+                    matInput #confirmphone id="confirm{{field.attributeName}}" #keyboardRef/>
+                    <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('confirm' + field.attributeName)">keyboard</i>
+                  </div>
                 </mat-card-subtitle>
                 <p *ngIf="showNotMatchedMessageEmail && (field.attributeName === contactTye) && field.attributeName === 'email' " class="warning-message-for-contact">
                   {{langJson.enteredValuesNotMatch}}</p>
@@ -558,7 +604,7 @@
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
                   <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
                   <!-- <mat-card-subtitle> -->
-                    <mat-select class="enable-dropdown" [(ngModel)]="selected2" id="{{field.attributeName}}">
+                    <mat-select disableOptionCentering class="enable-dropdown" [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
                         (onSelectionChange)="capturePerfLang($event, field.attributeName, langCode, field.dataType)"
                         [value]="data.code">{{ data.name }}</mat-option>

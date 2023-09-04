@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": "Les résidents peuvent choisir les données à partager avec l'un des partenaires enregistrés pour bénéficier de divers services tiers.",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Mettre à jour mes données",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Les résidents peuvent mettre à jour les données déjà existantes associées à leur UIN/ VID. Les données pouvant être mises à jour incluent le nom, le genre, la date de naissance, l'adresse, les documents téléchargés, le numéro de téléphone, l'adresse e-mail, la langue préférée, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -400,7 +407,8 @@
         "sameNameInputErrorMsg": "Le nom que vous avez saisi existe déjà. Veuillez saisir un nouveau nom pour continuer.",
         "sameDobInputErrorMsg": "La date de naissance que vous avez saisie existe déjà. Veuillez saisir une nouvelle date de naissance pour continuer.",
         "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer.",
-        "EnterAllAddress":"Veuillez sélectionner"
+        "EnterAllAddress":"Veuillez sélectionner",
+        "select":"Sélectionner"
     },
     "preview": {
         "title": "Aperçu"
@@ -618,7 +626,7 @@
             "Face Authentication": "En verrouillant/déverrouillant l'« Authentification faciale », toute tentative d'authentification utilisant un visage sera désactivée/activée."
         },
         "trackStatus": "Veuillez saisir l'EID (Event ID) associé à l'événement que vous souhaitez suivre. Il est important que l'EID que vous saisissez soit associé au UIN connecté.",
-        "getUin": "Un AID est votre identifiant d'application à 29 chiffres qui vous a été fourni après votre inscription. Un UIN est votre numéro d'identification unique à 10 chiffres. Un VID est votre identifiant virtuel à 16 chiffres.",
+        "getUin": "Un AID est votre identifiant d'application à $AID chiffres qui vous a été fourni après l'inscription. Un UIN est votre numéro d'identité unique à $UIN chiffres. Un VID est votre identifiant virtuel à $VID chiffres.",
         "verifyChannel": "Un UIN est votre numéro d'identification unique à 10 chiffres. Un VID est votre identifiant virtuel à 16 chiffres."
     },
     "serverErrors": {

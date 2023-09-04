@@ -404,6 +404,7 @@ app-document > ul{
   outline-width: thin;
   border-radius: 5px;
   color: white !important;
+  font-size: 15px;
 }
 
 .mat-select-trigger {
@@ -472,4 +473,27 @@ button{
   align-items: center;
   margin-top: 18vw;
   display: flex;
+}
+
+::ng-deep .mat-grid-tile{
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  height: auto;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container{
+  overflow-y: auto;
+}
+
+.info-icon-button{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+}
+
+.mat-keyboard-icon{
+  float: right; 
+  color: grey; 
+  cursor: pointer;
 }

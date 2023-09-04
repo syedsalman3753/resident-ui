@@ -89,7 +89,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         if(active === "extraSmall"){
           this.cols = 1;
           this.width = "25em";
-          this.previewWidth = "20rem"
+          this.previewWidth = "17.5em"
           this.attributeWidth = "10em";
         }
       }
@@ -212,11 +212,11 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                     if (typeof this.userInfo[item.value] !== "string") {
                       this.userInfo[item.value].forEach(eachLang => {
                         if (eachLang.language === this.langCode) {
-                          this.fullAddress = this.fullAddress + "," + eachLang.value
+                          this.fullAddress = this.fullAddress + ", " + eachLang.value
                         }
                       })
                     } else {
-                      this.fullAddress = this.fullAddress + this.userInfo[item.value]
+                      this.fullAddress = this.fullAddress +", " + this.userInfo[item.value]
                     }
                   }
                 })
@@ -308,7 +308,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                         } else {
                           this.userInfo[item.value].forEach(eachLang => {
                               if (eachLang.language === this.langCode) {
-                                allValues = allValues + eachLang.value + ",";
+                                allValues = allValues + eachLang.value + ", ";
                               }
                           })
                         }
@@ -318,7 +318,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                   });
                 }
               });
-
+              
               let unCheckFullAddress = () =>{
                 data.formatOption[this.langCode].forEach(eachItem =>{
                   if(eachItem.value === "fullAddress"){
@@ -343,10 +343,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
               })
 
               selectedFormats = selectedFormats.replace(/.$/, '');
-              if (allValues.endsWith(',')) {
-                allValues = allValues.replace(/.$/, '');
-              }
-
+              allValues = allValues.replace(/,(\s+)?$/, "");
               value = allValues;
             } else {
               value = this.fullAddress

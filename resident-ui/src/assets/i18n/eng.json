@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": " Residents can choose the data to be shared with any of the registered partners to avail various third party services.",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Update My Data",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Residents can update the already existing data associated with their UIN/ VID. The data that can be updated includes name, gender, DOB, address, documents uploaded, phone number, email ID, preferred language, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -400,7 +407,8 @@
         "sameNameInputErrorMsg": "The name you have entered already exists. Please enter a new name to proceed.",
         "sameDobInputErrorMsg": "The DOB you have entered already exists. Please enter a new DOB to proceed.",
         "sameGenderInputErrorMsg": "The gender you have chosen already exists. Please choose a new gender to proceed.",
-        "EnterAllAddress":"Please select"
+        "EnterAllAddress":"Please select",
+        "select":"Select"
     },
     "preview": {
         "title": "Preview"
@@ -618,7 +626,7 @@
             "Face Authentication": "On locking/unlocking 'Face Authentication', any Authentication attempt made using face will be disabled/ enabled."
         },
         "trackStatus": "Please enter the EID (Event ID) associated with the event that you want to track. It is important that the EID you enter is associated with the logged-in UIN.",
-        "getUin": "An AID is your 29-digit Application ID which was provided to you after registration. A UIN is your 10-digit Unique Identity Number. A VID is your 16-digit Virtual ID.",
+        "getUin": "An AID is your $AID-digit Application ID which was provided to you after registration. A UIN is your $UIN-digit Unique Identity Number. A VID is your $VID-digit Virtual ID.",
         "verifyChannel": "A UIN is your 10-digit Unique Identity Number. VID is your 16-digit Virtual ID."
     },
     "serverErrors": {

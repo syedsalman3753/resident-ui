@@ -76,6 +76,13 @@
                     "icon": "",
                     "route": "document",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Actualizar mis datos",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Los residentes pueden actualizar los datos ya existentes asociados a su UIN/VID. Los datos que se pueden actualizar incluyen nombre, sexo, fecha de nacimiento, dirección, documentos cargados, número de teléfono, ID de correo electrónico, idioma preferido, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -400,7 +407,8 @@
         "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
-        "EnterAllAddress":"Por favor selecciona"
+        "EnterAllAddress":"Por favor selecciona",
+        "select":"Seleccionar"
     },
     "preview": {
         "title": "Avance"
@@ -618,7 +626,7 @@
             "Face Authentication": "Al bloquear/desbloquear 'Autenticación facial', cualquier intento de autenticación realizado utilizando el rostro se deshabilitará/habilitará."
         },
         "trackStatus": "Por favor, ingresa el EID (ID de evento) asociado con el evento que deseas rastrear. Es importante que el EID que ingreses esté asociado con el UIN en sesión.",
-        "getUin": "Un AID es tu ID de Aplicación de 29 dígitos que se te proporcionó después del registro. Un UIN es tu Número de Identidad Única de 10 dígitos. Un VID es tu ID Virtual de 16 dígitos.",
+        "getUin": "Un AID es tu identificación de aplicación de $AID dígitos que se te proporcionó después de la inscripción. Un UIN es tu número de identidad único de $UIN dígitos. Un VID es tu identificación virtual de $VID dígitos.",
         "verifyChannel": "Un UIN es tu Número de Identidad Única de 10 dígitos. Un VID es tu ID Virtual de 16 dígitos."
     },
     "serverErrors": {
