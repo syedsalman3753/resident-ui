@@ -216,6 +216,13 @@ input[dir=rtl]::placeholder {
   font-size:20px;
 }
 
+.event-id-search-card{
+  display: flex; 
+  align-items: center;
+  border-radius: 5px; 
+  border: 2px solid #909090;
+}
+
 .header-item-card{
   display: flex; 
   flex-direction: row;

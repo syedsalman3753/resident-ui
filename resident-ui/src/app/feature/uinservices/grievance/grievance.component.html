@@ -9,45 +9,54 @@
   <div class="form-container">
     <mat-card class="form-card">
       <mat-card-title *ngIf="grievanceData" class="main-heading">{{grievanceData.title | translate}}</mat-card-title>
-      <form #userForm="ngForm" (submit)="getUserData(userForm.value)">
-        <div class="input-container" *ngIf="grievanceData && userInfo">
+      <div  >
+        <div class="input-container" *ngIf="grievanceData && userFormData.name">
           <div class="each-property-card">
             <label class="label">{{grievanceData.namelabel}}</label>
-            <input [readonly]="true"   [(ngModel)]="userInfo.fullName" required type="text" name="name"/>
+            <input id="userFullName" class="input-card" [readonly]="true"   [value]="userFormData.name" required type="text" name="name"/>
           </div>
           <div class="each-property-card">
             <label class="label">{{grievanceData.emailidlabel}}</label>
-            <input [readonly]="true" [(ngModel)]="userInfo.email" type="text" name="emailId"/>
+            <input id="emailID" class="input-card" [readonly]="true" [value]="userFormData.emailId" type="text" name="emailId"/>
           </div>
           <div class="each-property-card">
             <label class="label">{{grievanceData.alternateemailidlabel}}</label>
-            <input [maxlength]="emailCharLimit"  placeholder={{grievanceData.alternateEmailPlaceholder}} placeholder="" [(ngModel)]="alternateEmailId" type="text" name="alternateEmailId"/>
+            <div class="input-card">
+              <input id="alternateEmailID" [attr.maxLength]="emailCharLimit" placeholder="{{grievanceData.alternateEmailPlaceholder}}" type="text" name="alternateEmailId" (blur)="captureValue($event, 'alternateEmailId')" (focus)="captureVirtualKeyboard(search, 0)"  #keyboardRef/>
+              <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('alternateEmailID')">keyboard</i>
+            </div>
           </div>
           <div class="each-property-card">
             <label class="label">{{grievanceData.phonenumberlabel}}</label>
-            <input [readonly]="true" [(ngModel)]="userInfo.phone" type="text" name="phoneNo" ngModel/>
+            <input id="phoneNumber" class="input-card" [readonly]="true" [value]="userFormData.phoneNo" type="text" name="phoneNo"/>
           </div>
           <div class="each-property-card">
             <label class="label">{{grievanceData.alternatephonenumberlabel}}</label>
-            <input [maxlength]="phoneCharLimit" placeholder={{grievanceData.alternatePhoneNoPlaceholder}}  [(ngModel)]="alternatePhoneNo" type="text" name="alternatePhoneNo"/>
-          </div >
+              <div class="input-card">
+                <input id="alternatePhoneNumber" [attr.maxLength]="phoneCharLimit" placeholder={{grievanceData.alternatePhoneNoPlaceholder}} type="text" name="alternatePhoneNo" (blur)="captureValue($event, 'alternatePhoneNumber')" (focus)="captureVirtualKeyboard(search, 1)"  #keyboardRef/>
+                <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('alternatePhoneNumber')">keyboard</i>
+              </div>
+            </div >
           <div class="each-property-card">
             <label class="label">{{grievanceData.eventidlabel}}</label>
-            <input [readonly]="true" [(ngModel)]="eventId" type="text" name="eventId" ngModel/>
+            <input id="eventID" class="input-card" [readonly]="true" [value]="userFormData.eventId" type="text" name="eventId"/>
           </div>
           <div class="each-property-card">
             <label class="label">{{grievanceData.commentlabel}}</label>
             <div class="message-input-card">
-              <textarea [maxlength]="totalCommentCount" (input)="countCharacters($event)" placeholder={{grievanceData.EnterMsgPlaceholder}} rows="4" cols="60" name="message" [(ngModel)]="reportMsg"></textarea>
-              <span class="input-count" >{{grievanceData.TotalCharacters}}: {{totalCommentCount}}</span>
+              <div class="comment-input-sub-card">
+                <textarea id="userComment" [attr.maxLength]="totalCommentCount" (input)="countCharacters($event, 'message')" (blur)="countCharacters($event,'message')" (focus)="captureVirtualKeyboard(search, 2)"  #keyboardRef placeholder={{grievanceData.EnterMsgPlaceholder}} rows="4" cols="60" name="message" ></textarea>
+                <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('userComment')">keyboard</i>
+              </div>
+                <span class="input-count" >{{grievanceData.TotalCharacters}}: {{totalCommentCount}}</span>
               <span class="input-count" >{{grievanceData.remainingCharacters}}: {{remainingChars}}</span>
             </div>
           </div>
         </div>
         <div class="bnt-card">
-        <button class="submit-btn" *ngIf="grievanceData" mat-raised-button color="primary" type="submit">{{grievanceData.submitBtn}}</button>
+        <button id="submitBtn" class="submit-btn" *ngIf="grievanceData" mat-raised-button color="primary" (click)="sendGrievanceRedressal()" >{{grievanceData.submitBtn}}</button>
       </div>
-      </form>
+    </div>
     </mat-card>
   </div>
 </div>

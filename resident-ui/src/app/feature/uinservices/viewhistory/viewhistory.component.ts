@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild ,ElementRef, ViewChildren, HostListener} from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
@@ -13,6 +13,12 @@ import { AuditService } from "src/app/core/services/audit.service";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { MatPaginator } from '@angular/material/paginator';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import {
+  MatKeyboardRef,
+  MatKeyboardComponent,
+  MatKeyboardService
+} from 'ngx7-material-keyboard';
+import defaultJson from "src/assets/i18n/default.json";
 
 @Component({
   selector: "app-viewhistory",
@@ -63,11 +69,15 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   dataAvailable:boolean = false;
   sitealignment:string = localStorage.getItem('direction');
 
+  private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
+  @ViewChildren('keyboardRef', { read: ElementRef })
+  private attachToElementMesOne: any;
   constructor(private autoLogout: AutoLogoutService,private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, 
     private translateService: TranslateService, private router: Router, 
     private dateAdapter: DateAdapter<Date>, public headerService: HeaderService,private auditService: AuditService, 
     private breakPointService: BreakpointService,
-    private paginator2: MatPaginatorIntl
+    private paginator2: MatPaginatorIntl,
+    private keyboardService: MatKeyboardService
     ) {
     this.dateAdapter.setLocale('en-GB');
 
@@ -429,6 +439,20 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     return dialogRef;
   }
 
+  captureVirtualKeyboard(element: HTMLElement, index: number) {
+    this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
+  }
+
+  openKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+      this.keyboardRef = undefined;
+    } else {
+      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[this.langCode]);
+      document.getElementById("appIdValue").focus();
+    }
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
@@ -453,5 +477,13 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     this.router.navigate([item]);
+  }
+
+  @HostListener("blur", ["$event"])
+  @HostListener("focusout", ["$event"])
+  private _hideKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+    }
   }
 }
