@@ -25,20 +25,33 @@
     font-size: 1.3rem;
     margin-bottom: 10px;
 }
-input{
+.input-card{
     width: 60%;
     height: 1.8rem;
+    padding: 8px;
+    background-color: rgb(241, 250, 250);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+input{
+    width: 94%;
     border: none;
     outline: none;
     background-color: rgb(241, 250, 250);
+}
+.comment-input-sub-card{
+    width: 100%;
+    background-color: rgb(241, 250, 250);
+    display: flex;
     padding: 8px;
 }
 textarea{
-    width: 100%;
+    width: 94%;
     border: none;
     outline: none;
     background-color: rgb(241, 250, 250);
-    padding: 8px;
+    resize: none;
 }
 .bnt-card{
     text-align: right;
@@ -53,7 +66,7 @@ textarea{
 .input-card{
     width: 60%; 
     display: flex; 
-    flex-direction: column; 
+    /* flex-direction: column;  */
     row-gap: 10px;
 }
 
@@ -89,7 +102,7 @@ textarea{
         display: flex;
         flex-direction: column;
     }
-    input{
+    .input-card{
         width: 100%;
     }
     .message-input-card{
