@@ -47,6 +47,9 @@ export class VerifyComponent implements OnInit, OnDestroy {
   deviceSize:string = "";
   inputDisabled:boolean = false;
   captchaEnable: boolean = false;
+  vidLength:string = "0";
+  uinLength:string = "0";
+  aidLength:string = "0";
 
   constructor(
     private router: Router,
@@ -104,6 +107,9 @@ export class VerifyComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       self.siteKey = self.appConfigService["mosip.resident.captcha.sitekey"];
       self.captchaEnable = self.appConfigService["mosip.resident.captcha.enable"]; 
+      self.vidLength = self.appConfigService["mosip.kernel.vid.length"];
+      self.uinLength = self.appConfigService["mosip.kernel.uin.length"];
+      self.aidLength = self.appConfigService["mosip.kernel.rid.length"];
     }, 1000);  
     /*this.captchaService.captchStatus.subscribe((status)=>{
       this.captchaStatus = status;
@@ -161,7 +167,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
 
   getCaptchaToken(event: Event) {
     this.captchaChecked = true
-    if (this.channelSelected && this.individualId) {
+    if (this.channelSelected && (this.individualId.length == parseInt(this.vidLength) || this.individualId.length == parseInt(this.uinLength) || this.individualId.length == parseInt(this.aidLength))) {
       if(this.captchaEnable){
         if(this.captchaChecked){
           this.disableSendOtp = false
@@ -176,7 +182,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   
   captureValue(event: any, formControlName: string) {
     this[formControlName] = event.target.value;
-    if (this.channelSelected && this.individualId) {
+    if (this.channelSelected && (this.individualId.length == parseInt(this.vidLength) || this.individualId.length == parseInt(this.uinLength) || this.individualId.length == parseInt(this.aidLength))) {
       if(this.captchaEnable){
         if(this.captchaChecked){
           this.disableSendOtp = false
