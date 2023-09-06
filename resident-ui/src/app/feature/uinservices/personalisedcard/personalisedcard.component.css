@@ -70,6 +70,14 @@ table.fixed td {
     padding-left: 1.25rem;
 }
 
+button[disabled=disabled], button:disabled {
+    color:#505050 !important;
+}
+
+::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+    color: #505050;
+}
+
 @media screen and (max-width:465px){
     .each-property{
         width: 65%;
