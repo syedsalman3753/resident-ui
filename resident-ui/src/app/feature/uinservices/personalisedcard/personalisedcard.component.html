@@ -1,5 +1,4 @@
 <span class="breadcrumb">
-	<!-- <a (click)="onItemSelected('dashboard')">{{'dashboard.home' | translate}} &nbsp;&nbsp;</a> > &nbsp;&nbsp; -->
 	<a (click)="onItemSelected('uinservices/dashboard')">{{'dashboard.uinservices' | translate}} &nbsp;&nbsp;</a> > &nbsp;&nbsp;<span class="active">{{'personalisedcard.title' | translate}}</span>
 </span>
 
@@ -22,7 +21,7 @@
 								<mat-checkbox [disabled]="!data.checked"  id="{{data.maskRequiredLabel[langCode]}}{{i}}" (click)="captureCheckboxValue($event, data,data.maskAttributeName)">{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 							</td>
 							<td *ngIf="data.formatRequired" style="width:40%">
-								<button [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
+								<button disabled [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
 								<mat-menu #basic="matMenu">
 									<ng-container *ngFor="let data1 of data.formatOption[langCode];">
 										<button id="{{data1.value}}Btn" mat-menu-item>
