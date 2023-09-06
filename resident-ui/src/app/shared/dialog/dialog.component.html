@@ -111,34 +111,34 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <span><button style="background-color:#03A64A; margin-top: 0px;" *ngIf="input.isOk === 'OK' " mat-button
+      <span><button class="ok-button" *ngIf="input.isOk === 'OK' " mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button style="background-color:#03A64A; margin-top: 0px;"
+      <span><button class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'Vid' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="vidWarning()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button style="background-color:#03A64A; margin-top: 0px;"
+      <span><button class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'lockunlockauth' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="lockunlockauthWarning()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button *ngIf="input.isDelete === 'Delete'" style="background-color:red; margin-top: 0px;" mat-button
+      <span><button *ngIf="input.isDelete === 'Delete'" class="delete-button" mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="vidDelete()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button *ngIf="input.isDownload === 'Download'" style="background-color:#03A64A; margin-top: 0px;" mat-button
+      <span><button *ngIf="input.isDownload === 'Download'" class="ok-button" mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="vidDownload()">
           {{ input.btnTxt }}
         </button></span>
-        <span><button style="background-color:#03A64A; margin-top: 0px;"
+        <span><button class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'logOutBtn' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="logOutBtn()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button style="margin-top: 0px;" *ngIf="input.isNo === 'No' " mat-button cdkFocusInitial
+      <span><button class="no-button" *ngIf="input.isNo === 'No' " mat-button cdkFocusInitial
           id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxtNo }}
         </button></span>
@@ -158,7 +158,7 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <button mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+      <button class="ok-button" mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
     </div>
   </div>
 
@@ -174,7 +174,7 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <button mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+      <button class="ok-button" mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
     </div>
   </div>
 
@@ -194,7 +194,7 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <span><button style="background-color:#03A64A; margin-top: 0px;" *ngIf="input.isOk === 'OK' " mat-button
+      <span><button class="ok-button" *ngIf="input.isOk === 'OK' " mat-button
           cdkFocusInitial id="confirmmessagepopup" (click)="dismiss()">
           {{ input.btnTxt }}
         </button></span>
@@ -285,32 +285,6 @@
     </div>
   </div>
 
-  <!-- Conditions for personalised card -->
-
-  <div style="padding: 1rem;" *ngIf="input.case === 'conditionsForPersonalisedCard'">
-    <h3 style="color: #000000; text-align:center;">{{input.description.title}}</h3>
-    <div class="permission-card">
-      <mat-card-subtitle class="permission-card-text">{{input.description.wishes}}</mat-card-subtitle>
-      <mat-card-subtitle class="permission-card-text">{{input.description.description}}</mat-card-subtitle>
-      <mat-card-subtitle class="permission-card-text"
-        style="margin-bottom: 0px;">{{input.description.sendVid}}</mat-card-subtitle>
-      <div class="personalised-agree-card">
-        <img alt="" src="./assets/images/checkbox_sel.png" />
-        &nbsp;
-        <mat-card-subtitle class="permission-card-text"
-          style="margin-top: 1rem;">{{input.description.agreeLabel1}}</mat-card-subtitle>
-      </div>
-      <div class="personalised-agree-card">
-        <img alt="" src="./assets/images/checkbox_sel.png" />
-        &nbsp;
-        <mat-card-subtitle class="permission-card-text"
-          style="margin-top: 1rem;">{{input.description.agreeLabel1}}</mat-card-subtitle>
-      </div>
-    </div>
-    <div style="text-align: right; margin-top: 12px;">
-      <button mat-button class="share-btn" (click)="downloadPersonalCard()">{{input.btnTxt}}</button>
-    </div>
-  </div>
 
   <!-- In active log out -->
   <div class="pop-up log-out-warning-popup" *ngIf="input.case === 'LOGOUTWARNINGPOPUP'">
@@ -352,7 +326,7 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <button style="background-color:#03A64A;" mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
+      <button class="ok-button" mat-button cdkFocusInitial (click)="dismissPage()">{{input.btnTxt}}</button>
     </div>
   </div>
 
