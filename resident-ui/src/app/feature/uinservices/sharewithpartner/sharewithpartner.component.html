@@ -107,11 +107,16 @@
 								</tr>
 								<tr>
 									<td>
-										<textarea [attr.maxlength]="totalCommentCount" [style.width]="previewWidth"
+									<span class="purpose-search-card" [style.width]="previewWidth">
+										<textarea [attr.maxlength]="totalCommentCount" 
 											id="sharingReasonPlaceholder" class="purpose-input-box" matInput
 											placeholder="{{'sharewithpartner.sharingReasonPlaceholder' | translate}}"
-											(input)="getpurpose($event)"></textarea>
-										<span
+											(input)="getpurpose($event)"
+											(blur)="getpurpose($event)"
+                                            (focus)="captureVirtualKeyboard(search, 0)" #keyboardRef></textarea>
+											<i style="float: right; color: grey; cursor: pointer;" matSuffix class="material-icons" (click)="openKeyboard()">keyboard</i>
+										</span>
+											<span
 											style="color:red; font-size: 12px; display: block;">{{'sharewithpartner.TotalCharacters'
 											| translate}}: {{totalCommentCount}}</span>
 										<span

@@ -430,18 +430,6 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     }, 400)
   }
 
-  conditionsForPersonalisedCard() {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '650px',
-      data: {
-        case: 'conditionsForPersonalisedCard',
-        description: this.popupMessages.genericmessage.personalisedcardConditions,
-        btnTxt: this.popupMessages.genericmessage.sendButton
-      }
-    });
-    return dialogRef;
-  }
-
   showMessage() {
     this.message = this.popupMessages.genericmessage.personalisedcardMessages.downloadedSuccessFully.replace("$eventId", this.eventId)
     const dialogRef = this.dialog.open(DialogComponent, {
