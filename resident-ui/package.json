@@ -53,6 +53,7 @@
     "osm": "^1.0.0",
     "pdfjs-dist": "2.0.943",
     "rxjs": "^6.0.0",
+    "scuri": "^1.4.0",
     "smoothscroll-polyfill": "^0.4.4",
     "url-safe-base64": "^1.2.0",
     "vm": "^0.1.0",
