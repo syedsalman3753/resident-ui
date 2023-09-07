@@ -79,7 +79,7 @@ export class DialogComponent implements OnInit {
     /*private headerService: HeaderService,*/
     private logoutService: LogoutService,
     private interactionService: InteractionService,
-    private appConfigService: AppConfigService,
+    public appConfigService: AppConfigService,
     private redirectService: LoginRedirectService
   ) {
     this.translate.use(this.primaryLangCode);
