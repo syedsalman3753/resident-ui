@@ -560,19 +560,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "புதிய எச்சரிக்கை VID ஐ உருவாக்குவதன் மூலம் ஏற்கனவே உள்ள VID ஐ ரத்துசெய்யப்படும்.",
-                "confirmationMessageForCreateVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா புதிய எச்சரிக்கை VID ஐ உருவாக்குவது?",
-                "confirmationMessageForDeleteVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா தேர்ந்தெடுத்த நிரந்தர VID ஐ நீக்குவது?",
-                "confirmationMessageForDownloadVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா நிரந்தர VID அட்டையைப் பதிவிறக்க வேண்டுமா?"
+                "confirmationMessageForCreateVid": "நீங்கள் நிரந்தர விண்ணப்ப VID அட்டையை உருவாக்க விரும்புகின்றீர்களா?",
+                "confirmationMessageForDeleteVid": "தேர்ந்தெடுக்கப்பட்ட நிரந்தர VID கார்டை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
+                "confirmationMessageForDownloadVid": "நீங்கள் நிரந்தர VID கார்டை பதிவிறக்க விரும்புகின்றீர்களா?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா தற்காலிக எச்சரிக்கை VID ஐ உருவாக்குவது?",
-                "confirmationMessageForDeleteVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா தேர்ந்தெடுத்த தற்காலிக VID ஐ நீக்குவது?",
-                "confirmationMessageForDownloadVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா தற்காலிக VID அட்டையைப் பதிவிறக்க வேண்டுமா?"
+                "confirmationMessageForCreateVid": "தாமதமாக VID அட்டை உருவாக்க விரும்புகின்றீர்களா?",
+                "confirmationMessageForDeleteVid": "தேர்ந்தெடுத்த தாமதமாக VID அட்டையை நீக்க விரும்புகின்றீர்களா?",
+                "confirmationMessageForDownloadVid": "தாமதமாக VID அட்டை பதிவிறக்க விரும்புகின்றீர்களா?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா ஒரு முறையே பயன்படுத்தப்படும் VID ஐ உருவாக்குவது?",
-                "confirmationMessageForDeleteVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா தேர்ந்தெடுத்த ஒரு முறையே பயன்படுத்தப்படும் VID ஐ நீக்குவது?",
-                "confirmationMessageForDownloadVid": "நீங்கள் நிராகரிக்க விரும்புகின்றீர்களா ஒரு முறையே பயன்படுத்தப்படும் VID அட்டையைப் பதிவிறக்க வேண்டுமா?"
+                "confirmationMessageForCreateVid": "நிச்சயமாக ஒரு முறை VID கார்டை உருவாக்க விரும்புகிறீர்களா?",
+                "confirmationMessageForDeleteVid": "தேர்ந்தெடுத்த ஒருமுறை VID கார்டை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
+                "confirmationMessageForDownloadVid": "ஒரு முறை VID கார்டை நிச்சயமாகப் பதிவிறக்க விரும்புகிறீர்களா?"
             },
             "createdSuccessfully": "உங்கள் VID வெற்றிகரமாக உருவாக்கப்பட்டுள்ளது நிகழ்வு ஐடி: $eventId எதிர்ப்புக்கு.",
             "downloadedSuccessFully": "உங்கள் VID அட்டையை பதிவிறக்க கோரிக்கை வெற்றிகரமாக செயல்படுத்தப்பட்டுள்ளது நிகழ்வு ஐடி: $eventId எதிர்ப்புக்கு.",

@@ -132,9 +132,9 @@
             ]
         }
     ],
-    "header":{
-        "lastLogin":"آخر تسجيل دخول",
-        "logout":"تسجيل خروج"
+    "header": {
+        "lastLogin": "آخر تسجيل دخول",
+        "logout": "تسجيل خروج"
     },
     "dashboard": {
         "welcomeMessage": "مرحبًا بك في بوابة شريك Mosip!",
@@ -168,7 +168,7 @@
         "otpDescriptionEmail": " وعنوان البريد الإلكتروني المسجل",
         "resendBtnLabel": "إعادة إرسال OTP",
         "submitBtnLabel": "إرسال",
-        "enterOtp":"أدخل OTP هنا"
+        "enterOtp": "أدخل OTP هنا"
     },
     "centerSelection": {
         "title": "حجز موعد",
@@ -230,7 +230,7 @@
         "otpDescriptionPhone": "يرجى إدخال رمز التحقق لمرة واحدة (OTP) الذي تم إرساله إلى رقم هاتفك المسجل ",
         "resendBtnLabel": "إعادة إرسال OTP",
         "submitBtnLabel": "إرسال",
-        "back":"رجوع"
+        "back": "رجوع"
     },
     "viewhistory": {
         "title": "عرض تاريخي الخاص بي",
@@ -245,8 +245,8 @@
         "timestamp": "الطابع الزمني",
         "selectAll": "الكل",
         "noData": "لا توجد نتائج لعرضها",
-        "historyType":"نوع التاريخ",
-        "status":"حالة",
+        "historyType": "نوع التاريخ",
+        "status": "حالة",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "الكل",
@@ -356,12 +356,30 @@
         "generatevidtoggle": "إنشاء VID",
         "revokevidtoggle": "إلغاء VID",
         "labelmap": {
-            "demo": {"label":"المصادقة الديموغرافية","icon": "Demographic Authentication"},
-            "bio-FINGER": {"label":"المصادقة بصمة الإصبع","icon": "Fingerprint Authentication"},
-            "bio-IRIS": {"label":"المصادقة بالعين الشاملة","icon": "Iris Authentication"},
-            "bio-FACE": {"label":"المصادقة بالوجه","icon":"Face Authentication"},
-            "otp-email": {"label":"المصادقة برمز OTP عبر البريد الإلكتروني","icon":"Email OTP Authentication"},
-            "otp-phone": {"label":"المصادقة برمز OTP عبر الهاتف المحمول","icon":"Mobile OTP Authentication"}
+            "demo": {
+                "label": "المصادقة الديموغرافية",
+                "icon": "Demographic Authentication"
+            },
+            "bio-FINGER": {
+                "label": "المصادقة بصمة الإصبع",
+                "icon": "Fingerprint Authentication"
+            },
+            "bio-IRIS": {
+                "label": "المصادقة بالعين الشاملة",
+                "icon": "Iris Authentication"
+            },
+            "bio-FACE": {
+                "label": "المصادقة بالوجه",
+                "icon": "Face Authentication"
+            },
+            "otp-email": {
+                "label": "المصادقة برمز OTP عبر البريد الإلكتروني",
+                "icon": "Email OTP Authentication"
+            },
+            "otp-phone": {
+                "label": "المصادقة برمز OTP عبر الهاتف المحمول",
+                "icon": "Mobile OTP Authentication"
+            }
         },
         "introDescription": "عرض حالة جميع أنواع المصادقة. يمكنك اختيار قفل أو فتح أنواع المصادقة مثل مصادقة العين الشاملة ، مصادقة البريد الإلكتروني ، إلخ.",
         "unlockLabel": "إلغاء القفل",
@@ -383,7 +401,7 @@
         "enteredValuesNotMatch": "القيم المدخلة غير متطابقة.",
         "submit": "إرسال",
         "update": "تحديث",
-        "calendarPlaceHolder":"اليوم / الشهر / السنة",
+        "calendarPlaceHolder": "اليوم / الشهر / السنة",
         "documentUploaded": "تم تحميل المستند",
         "languageHeading": "تفضيل لغتي",
         "InvalidFormatMsg": "نوع الملف الذي تحاول تحميله غير مدعوم. يرجى تحميل نوع ملف مختلف.",
@@ -391,8 +409,8 @@
         "sameNameInputErrorMsg": "الاسم الذي أدخلته موجود بالفعل. يرجى إدخال اسم جديد للمتابعة.",
         "sameDobInputErrorMsg": "تاريخ الميلاد الذي أدخلته موجود بالفعل. يرجى إدخال تاريخ ميلاد جديد للمتابعة.",
         "sameGenderInputErrorMsg": "الجنس الذي اخترته موجود بالفعل. يرجى اختيار جنس جديد للمتابعة.",
-        "EnterAllAddress":"الرجاء التحديد",
-        "select":"يختار"
+        "EnterAllAddress": "الرجاء التحديد",
+        "select": "يختار"
     },
     "preview": {
         "title": "معاينة"
@@ -475,7 +493,7 @@
     },
     "paginatorIntl": {
         "itemsPerPageLabel": "مواد لكل صفحة",
-        "of":"ل"
+        "of": "ل"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -512,8 +530,8 @@
         "clickYesToProceed": "انقر نعم للمتابعة.",
         "logoutconfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج.",
         "accessDenied": "ا يمكنك الوصول إلى هذه الخدمة حيث لم تقبل الاستجابة أثناء تسجيل الدخول",
-        "toFindRegCen":" للعثور على مراكز التسجيل.",
-        "sessionExpired":"انتهت الجلسة",
+        "toFindRegCen": " للعثور على مراكز التسجيل.",
+        "sessionExpired": "انتهت الجلسة",
         "getMyUin": {
             "downloadedSuccessFully": "تم تحميل بطاقة UIN الخاصة بك بنجاح بموجب رقم الحدث: $eventId.",
             "invalidOtp": "تم إدخال رمز OTP غير صالح. يرجى النقر فوق إعادة إرسال OTP والمحاولة مرة أخرى برمز OTP صالح."
@@ -542,18 +560,18 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "إن إنشاء VID دائم جديد سيلغي VID الحالي الموجود بالفعل.",
-                "confirmationMessageForCreateVid": "هل أنت متأكد أنك تريد إنشاء VID دائم؟",
-                "confirmationMessageForDeleteVid": "هل أنت متأكد أنك تريد حذف VID الدائم المحدد؟",
+                "confirmationMessageForCreateVid": "هل أنت متأكد أنك تريد إنشاء بطاقة VID دائمة؟",
+                "confirmationMessageForDeleteVid": "هل أنت متأكد أنك تريد حذف بطاقة VID الدائمة المحددة؟",
                 "confirmationMessageForDownloadVid": "هل أنت متأكد أنك تريد تنزيل بطاقة VID الدائمة؟"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "هل أنت متأكد أنك تريد إنشاء VID مؤقت؟",
-                "confirmationMessageForDeleteVid": "هل أنت متأكد أنك تريد حذف VID المؤقت المحدد؟",
+                "confirmationMessageForCreateVid": "هل أنت متأكد أنك تريد إنشاء بطاقة VID مؤقتة؟",
+                "confirmationMessageForDeleteVid": "هل أنت متأكد أنك تريد حذف بطاقة VID المؤقتة التي اخترتها؟",
                 "confirmationMessageForDownloadVid": "هل أنت متأكد أنك تريد تنزيل بطاقة VID المؤقتة؟"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "هل أنت متأكد أنك تريد إنشاء VID لمرة واحدة؟",
-                "confirmationMessageForDeleteVid": "هل أنت متأكد أنك تريد حذف VID لمرة واحدة المحدد؟",
+                "confirmationMessageForCreateVid": "هل أنت متأكد أنك تريد إنشاء بطاقة VID لمرة واحدة؟",
+                "confirmationMessageForDeleteVid": "هل أنت متأكد أنك تريد حذف بطاقة VID لمرة واحدة التي اخترتها؟",
                 "confirmationMessageForDownloadVid": "هل أنت متأكد أنك تريد تنزيل بطاقة VID لمرة واحدة؟"
             },
             "createdSuccessfully": "تم إنشاء VID الخاص بك بنجاح بالنسبة لرقم الحدث: $eventId.",
@@ -610,7 +628,7 @@
             "Face Authentication": "عند قفل/فتح 'المصادقة بواسطة التعرف على الوجه'، سيتم تعطيل/تمكين أي محاولة للمصادقة باستخدام التعرف على الوجه."
         },
         "trackStatus": "يرجى إدخال معرّف الحدث (EID) المرتبط بالحدث الذي ترغب في تتبعه. من المهم أن يكون معرّف الحدث الذي تدخله مرتبطًا برقم التعريف الفريد للمستخدم (UIN) المسجل في النظام.",
-        "getUin": "المُعرِّف الذكي هو مُعرِّف طلب التطبيق الذي يتكون من $AID أرقام، والذي تم تزويدك به بعد التسجيل. المُعرِّف الفريد هو رقم الهوية الفريد الخاص بك والذي يتكون من $UIN أرقام. المُعرِّف الافتراضي هو $VID أرقام يمثل مُعرِّفك الافتراضي.",         
+        "getUin": "المُعرِّف الذكي هو مُعرِّف طلب التطبيق الذي يتكون من $AID أرقام، والذي تم تزويدك به بعد التسجيل. المُعرِّف الفريد هو رقم الهوية الفريد الخاص بك والذي يتكون من $UIN أرقام. المُعرِّف الافتراضي هو $VID أرقام يمثل مُعرِّفك الافتراضي.",
         "verifyChannel": "رقم التعريف الفريد (UIN) هو رقم الهوية الفريد المكون من 10 أرقام. رقم الهوية الافتراضي (VID) هو رقم الهوية الافتراضي المكون من 16 رقمًا."
     },
     "serverErrors": {

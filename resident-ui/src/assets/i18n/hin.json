@@ -132,9 +132,9 @@
             ]
         }
     ],
-    "header":{
-        "lastLogin":"आखरी लॉगइन",
-        "logout":"लॉग आउट"
+    "header": {
+        "lastLogin": "आखरी लॉगइन",
+        "logout": "लॉग आउट"
     },
     "dashboard": {
         "welcomeMessage": "मोसिप साथी पोर्टल में आपका स्वागत है!",
@@ -168,7 +168,7 @@
         "otpDescriptionEmail": " और आपके पंजीकृत ईमेल आईडी पर",
         "resendBtnLabel": "ओटीपी फिर से भेजें",
         "submitBtnLabel": "सबमिट करें",
-        "enterOtp":"यहां ओटीपी दर्ज करें"
+        "enterOtp": "यहां ओटीपी दर्ज करें"
     },
     "centerSelection": {
         "title": "अपॉइंटमेंट बुक करें",
@@ -245,8 +245,8 @@
         "timestamp": "टाइमस्टैम्प",
         "selectAll": "सभी",
         "noData": "कोई परिणाम नहीं हैं",
-        "historyType":"इतिहास प्रकार",
-        "status":"दर्जा",
+        "historyType": "इतिहास प्रकार",
+        "status": "दर्जा",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "सभी",
@@ -401,7 +401,7 @@
         "enteredValuesNotMatch": "दर्ज किए गए मान मेल नहीं खाते हैं।",
         "submit": "प्रस्तुत करें",
         "update": "अपडेट करें",
-        "calendarPlaceHolder":"DD/MMM/YYYY",
+        "calendarPlaceHolder": "DD/MMM/YYYY",
         "documentUploaded": "दस्तावेज़ अपलोड किया गया",
         "languageHeading": "मेरी भाषा प्राथमिकता",
         "InvalidFormatMsg": "आप अपलोड करने की कोशिश कर रहे हैं वह फ़ाइल प्रकार समर्थित नहीं है। कृपया एक अलग फ़ाइल प्रकार अपलोड करें।",
@@ -409,8 +409,8 @@
         "sameNameInputErrorMsg": "आपने दर्ज किए गए नाम मौजूद हैं। कृपया आगे बढ़ने के लिए एक नया नाम दर्ज करें।",
         "sameDobInputErrorMsg": "आपने दर्ज की गई जन्मतिथि पहले से मौजूद है। कृपया आगे बढ़ने के लिए एक नई जन्मतिथि दर्ज करें।",
         "sameGenderInputErrorMsg": "आपने चुना हुआ लिंग पहले से मौजूद है। कृपया आगे बढ़ने के लिए एक नया लिंग चुनें।",
-        "EnterAllAddress":"कृपया चयन कीजिए",
-        "select":"चुनना"
+        "EnterAllAddress": "कृपया चयन कीजिए",
+        "select": "चुनना"
     },
     "preview": {
         "title": "पूर्व दर्शन"
@@ -493,7 +493,7 @@
     },
     "paginatorIntl": {
         "itemsPerPageLabel": "आइटम प्रति पेज",
-        "of":"का"
+        "of": "का"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -530,8 +530,8 @@
         "clickYesToProceed": "आगे बढ़ने के लिए हाँ दबाएं।",
         "logoutconfirmMessage": "क्या आप लॉगआउट करना चाहते हैं।",
         "accessDenied": "आप इस सेवा तक पहुंच नहीं पा रहे हैं क्योंकि आपने लॉगिन करते समय सहमति स्वीकार नहीं की है। आपसे अनुरोध है कि आप फिर से लॉगिन करें और प्रासंगिक सहमति स्वीकार करें ताकि आप आगे बढ़ सकें।",
-        "toFindRegCen":" पंजीकरण केंद्र खोजने के लिए।",
-        "sessionExpired":"सत्र समाप्त हुआ",
+        "toFindRegCen": " पंजीकरण केंद्र खोजने के लिए।",
+        "sessionExpired": "सत्र समाप्त हुआ",
         "getMyUin": {
             "downloadedSuccessFully": "आपका UIN कार्ड सफलतापूर्वक डाउनलोड हो गया है। इवेंट आईडी: $eventId के खिलाफ।",
             "invalidOtp": "अमान्य OTP दर्ज किया गया था। कृपया फिर से OTP भेजें और एक वैध OTP के साथ पुनः प्रयास करें। "
@@ -560,19 +560,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "नया स्थायी VID जनरेट करने से पहले पहले से मौजूदा VID को रद्द किया जाएगा।",
-                "confirmationMessageForCreateVid": "क्या आप वाकई एक स्थायी VID बनाना चाहते हैं?",
-                "confirmationMessageForDeleteVid": "क्या आप चयनित स्थायी VID को हटाना चाहते हैं?",
-                "confirmationMessageForDownloadVid": "क्या आप स्थायी VID कार्ड डाउनलोड करना चाहते हैं?"
+                "confirmationMessageForCreateVid": "क्या आप सुनिश्चित हैं कि आप एक स्थायी VID कार्ड बनाना चाहते हैं?",
+                "confirmationMessageForDeleteVid": "क्या आप वाकई चयनित स्थायी VID कार्ड को हटाना चाहते हैं?",
+                "confirmationMessageForDownloadVid": "क्या आप सुनिश्चित हैं कि आप स्थायी VID कार्ड को डाउनलोड करना चाहते हैं?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "क्या आप वाकई एक अस्थायी VID बनाना चाहते हैं?",
-                "confirmationMessageForDeleteVid": "क्या आप चयनित अस्थायी VID को हटाना चाहते हैं?",
-                "confirmationMessageForDownloadVid": "क्या आप अस्थायी VID कार्ड डाउनलोड करना चाहते हैं?"
+                "confirmationMessageForCreateVid": "क्या आप सुनिश्चित हैं कि आप एक अस्थायी VID कार्ड बनाना चाहते हैं?",
+                "confirmationMessageForDeleteVid": "क्या आप सुनिश्चित हैं कि आप चयनित अस्थायी VID कार्ड को हटाना चाहते हैं?",
+                "confirmationMessageForDownloadVid": "क्या आप सुनिश्चित हैं कि आप अस्थायी VID कार्ड को डाउनलोड करना चाहते हैं?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "क्या आप वाकई एक एक-बार का VID बनाना चाहते हैं?",
-                "confirmationMessageForDeleteVid": "क्या आप चयनित एक-बार का VID को हटाना चाहते हैं?",
-                "confirmationMessageForDownloadVid": "क्या आप एक-बार का VID कार्ड डाउनलोड करना चाहते हैं?"
+                "confirmationMessageForCreateVid": "क्या आप सुनिश्चित हैं कि आप एक एक बार उपयोग के लिए VID कार्ड बनाना चाहते हैं?",
+                "confirmationMessageForDeleteVid": "क्या आप सुनिश्चित हैं कि आप चयनित एक बार उपयोग के लिए VID कार्ड को हटाना चाहते हैं?",
+                "confirmationMessageForDownloadVid": "क्या आप सुनिश्चित हैं कि आप एक बार उपयोग के लिए VID कार्ड को डाउनलोड करना चाहते हैं?"
             },
             "createdSuccessfully": "आपका VID सफलतापूर्वक इवेंट आईडी: $eventId के खिलाफ उत्पन्न किया गया है।",
             "downloadedSuccessFully": "आपकी VID कार्ड डाउनलोड करने की अनुरोध प्रशंसापूर्वक प्रसंस्कृत हुआ है इवेंट आईडी: $eventId के खिलाफ।",

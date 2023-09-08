@@ -132,9 +132,9 @@
             ]
         }
     ],
-    "header":{
-        "lastLogin":"ಕೊನೆಯ ಲಾಗಿನ್",
-        "logout":"ಲಾಗ್ ಔಟ್"
+    "header": {
+        "lastLogin": "ಕೊನೆಯ ಲಾಗಿನ್",
+        "logout": "ಲಾಗ್ ಔಟ್"
     },
     "dashboard": {
         "welcomeMessage": "ಮೋಸಿಪ್ ಭಾಗಿಗ ಪೋರ್ಟಲ್‌ಗೆ ಸ್ವಾಗತ!",
@@ -168,7 +168,7 @@
         "otpDescriptionEmail": " ಮತ್ತು ನೀವು ನೋಂದಾಯಿತ ಇಮೇಲ್ ಐಡಿಗೆ",
         "resendBtnLabel": "OTP ಮರುಹೊಂದಿಸಿ",
         "submitBtnLabel": "ಸಲ್ಲಿಸಿ",
-        "enterOtp":"ಇಲ್ಲಿ OTP ನಮೂದಿಸಿ"
+        "enterOtp": "ಇಲ್ಲಿ OTP ನಮೂದಿಸಿ"
     },
     "centerSelection": {
         "title": "ನೇಮಕಾತಿ ಬುಕ್ ಮಾಡಿ",
@@ -245,8 +245,8 @@
         "timestamp": "ಟೈಮ್‌ಸ್ಟ್ಯಾಂಪ್",
         "selectAll": "ಎಲ್ಲವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
         "noData": "ತೋರಿಸಲು ಯಾವುದೇ ಫಲಿತಾಂಶಗಳಿಲ್ಲ",
-        "historyType":"ಇತಿಹಾಸ ಪ್ರಕಾರ",
-        "status":"ಸ್ಥಿತಿ",
+        "historyType": "ಇತಿಹಾಸ ಪ್ರಕಾರ",
+        "status": "ಸ್ಥಿತಿ",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "ಎಲ್ಲಾ",
@@ -401,7 +401,7 @@
         "enteredValuesNotMatch": "ನಮೂದಿಸಿದ ಮೌಲ್ಯಗಳು ಹೊಂದಿಕೊಳ್ಳುವುದಿಲ್ಲ.",
         "submit": "ಸಲ್ಲಿಸಿ",
         "update": "ಅಪ್ಡೇಟ್ ಮಾಡಿ",
-        "calendarPlaceHolder":"DD/MMM/YYYY",
+        "calendarPlaceHolder": "DD/MMM/YYYY",
         "documentUploaded": "ಡಾಕ್ಯುಮೆಂಟ್ ಅಪ್ಲೋಡ್ ಆಗಿದೆ",
         "languageHeading": "ನನ್ನ ಭಾಷಾ ಆದಾಯ",
         "InvalidFormatMsg": "ನೀವು ಅಪ್ಲೋಡ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸುವ ಫೈಲ್ ಪ್ರಕಾರವು ಬೆಂಬಲಿಸಲ್ಪಡುವುದಿಲ್ಲ. ದಯವಿಟ್ಟು ಬೇರೆ ಫೈಲ್ ಪ್ರಕಾರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ.",
@@ -409,8 +409,8 @@
         "sameNameInputErrorMsg": "ನೀವು ನಮೂದಿಸಿದ ಹೆಸರು ಈಗಾಗಲೇ ಇದೆ. ಮುಂದುವರೆಸಲು ಹೊಸ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.",
         "sameDobInputErrorMsg": "ನೀವು ನಮೂದಿಸಿದ ಜನ್ಮ ದಿನಾಂಕ ಈಗಾಗಲೇ ಇದೆ. ಮುಂದುವರೆಸಲು ಹೊಸ ಜನ್ಮ ದಿನಾಂಕವನ್ನು ನಮೂದಿಸಿ.",
         "sameGenderInputErrorMsg": "ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಲಿಂಗ ಈಗಾಗಲೇ ಇದೆ. ಮುಂದುವರೆಸಲು ಹೊಸ ಲಿಂಗವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ.",
-        "EnterAllAddress":"ದಯವಿಟ್ಟು ಆಯ್ಕೆ ಮಾಡು",
-        "select":"ಆಯ್ಕೆ ಮಾಡಿ"
+        "EnterAllAddress": "ದಯವಿಟ್ಟು ಆಯ್ಕೆ ಮಾಡು",
+        "select": "ಆಯ್ಕೆ ಮಾಡಿ"
     },
     "preview": {
         "title": "ಮುನ್ನೋಟ"
@@ -493,7 +493,7 @@
     },
     "paginatorIntl": {
         "itemsPerPageLabel": "ಪ್ರತಿ ಪುಟಕ್ಕೆ ಐಟಂಗಳು",
-        "of":"ನ"
+        "of": "ನ"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -530,8 +530,8 @@
         "clickYesToProceed": "ಮುಂದುವರಿಸಲು ಹೌದು ಕ್ಲಿಕ್ ಮಾಡಿ.",
         "logoutconfirmMessage": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿರುವುದೆಂದು ನೀವು ಖಾತೆಯಿಂದ ಹೊರಹೋಗಲು ಬಯಸುತ್ತೀರಾ?",
         "accessDenied": "ನೀವು ಲಾಗಿನ್ ಮಾಡುವಾಗ ಸಮ್ಮತಿಯನ್ನು ಒಪ್ಪದಿರುವುದರಿಂದ ನೀವು ಈ ಸೇವೆಗೆ ಪ್ರವೇಶವನ್ನು ಪಡೆಯಲಾಗುವುದಿಲ್ಲ. ಮುಂದುವರಿಸಲು ಮತ್ತೆ ಲಾಗಿನ್ ಮಾಡಿ ಮತ್ತು ಸಂಬಂಧಿತ ಸಮ್ಮತಿಯನ್ನು ಒಪ್ಪಿಕೊಳ್ಳಲು ವಿನಂತಿಸುತ್ತೇವೆ.",
-        "toFindRegCen":" ನೋಂದಣಿ ಕೇಂದ್ರಗಳನ್ನು ಹುಡುಕಲು.",
-        "sessionExpired":"ಸೆಷನ್ ಅವಧಿ ಮೀರಿದೆ",
+        "toFindRegCen": " ನೋಂದಣಿ ಕೇಂದ್ರಗಳನ್ನು ಹುಡುಕಲು.",
+        "sessionExpired": "ಸೆಷನ್ ಅವಧಿ ಮೀರಿದೆ",
         "getMyUin": {
             "downloadedSuccessFully": "ನಿಮ್ಮ UIN ಕಾರ್ಡ್ ಯಶಸ್ವಿಯಾಗಿ ಡೌನ್‌ಲೋಡ್ ಆಗಿದೆ. ಈವೆಂಟ್ ಐಡಿ: $eventId.",
             "invalidOtp": "ಅಮಾನ್ಯ OTP ನಮೂದಾಯಿತು. ದಯವಿಟ್ಟು ಮರುಕಳಿಸಿ OTP ಮತ್ತು ಮಾನ್ಯ OTP ನಿಂದ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ."
@@ -560,19 +560,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "ಹೊಸ ಸದಾಯವಾದ VID ರನ್ನು ಸೃಷ್ಟಿಸುವುದರಿಂದ ಈಗಾಗಲೇ ಇರುವ VID ರನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುತ್ತದೆ.",
-                "confirmationMessageForCreateVid": "ಸದಾಯವಾದ VID ರನ್ನು ಸೃಷ್ಟಿಸಲು ನೀವು ಖಚಿತವಾಗಿಯೂ ಇಚ್ಛಿಸುತ್ತೀರಿರಿಯ?",
-                "confirmationMessageForDeleteVid": "ಆಯ್ದ ಸದಾಯವಾದ VID ಅನ್ನು ನೀವು ಖಚಿತವಾಗಿಯೂ ಅಳಿಸುವ ಬಗ್ಗೆ ಖಚಿತರಾಗಿಯೇ ಇರುತ್ತೀರಿರಿಯ?",
-                "confirmationMessageForDownloadVid": "ಸದಾಯವಾದ VID ಕಾರ್ಡ್ ಅನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಲು ನೀವು ಖಚಿತವಾಗಿಯೂ ಇಚ್ಛಿಸುತ್ತೀರಿರಿಯ?"
+                "confirmationMessageForCreateVid": "ಶಾಶ್ವತ VID ಕಾರ್ಡ್ ರಚಿಸಲು ನೀವು ನಿಶ್ಚಯಿಸಿದ್ದೀರಾ?",
+                "confirmationMessageForDeleteVid": "ಆಯ್ಕೆಮಾಡಿದ ಶಾಶ್ವತ VID ಕಾರ್ಡ್ ಅನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+                "confirmationMessageForDownloadVid": "ಶಾಶ್ವತ VID ಕಾರ್ಡ್ ಡೌನ್ಲೋಡ್ ಮಾಡಲು ಖಚಿತವಿದ್ದೀರಾ?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "ತಾತ್ಕಾಲಿಕ VID ಅನ್ನು ಸೃಷ್ಟಿಸಲು ನೀವು ಖಚಿತವಾಗಿಯೂ ಇಚ್ಛಿಸುತ್ತೀರಿರಿಯ?",
-                "confirmationMessageForDeleteVid": "ಆಯ್ದ ತಾತ್ಕಾಲಿಕ VID ಅನ್ನು ನೀವು ಖಚಿತವಾಗಿಯೂ ಅಳಿಸುವ ಬಗ್ಗೆ ಖಚಿತರಾಗಿಯೇ ಇರುತ್ತೀರಿರಿಯ?",
-                "confirmationMessageForDownloadVid": "ತಾತ್ಕಾಲಿಕ VID ಅನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಲು ನೀವು ಖಚಿತವಾಗಿಯೂ ಇಚ್ಛಿಸುತ್ತೀರಿರಿಯ?"
+                "confirmationMessageForCreateVid": "ನೀವು ತಾತ್ಕಾಲಿಕ VID ಕಾರ್ಡ್ ರಚಿಸಲು ಖಚಿತವಿದ್ದೀರಾ?",
+                "confirmationMessageForDeleteVid": "ನೀವು ಆಯ್ದ ತಾತ್ಕಾಲಿಕ VID ಕಾರ್ಡ್ ಅನ್ನು ಅಳಿಸಲು ಖಚಿತವಿದ್ದೀರಾ?",
+                "confirmationMessageForDownloadVid": "ನೀವು ತಾತ್ಕಾಲಿಕ VID ಕಾರ್ಡ್ ಡೌನ್ಲೋಡ್ ಮಾಡಲು ಖಚಿತವಿದ್ದೀರಾ?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "ಒಬ್ಬ ಬಾರಿಗೆ ಮಾತ್ರವಾಗಿ ಉಪಯೋಗಿಸಲು VID ಅನ್ನು ಸೃಷ್ಟಿಸಲು ನೀವು ಖಚಿತವಾಗಿಯೂ ಇಚ್ಛಿಸುತ್ತೀರಿರಿಯ?",
-                "confirmationMessageForDeleteVid": "ಆಯ್ದ ಒಬ್ಬ ಬಾರಿಗೆ ಮಾತ್ರವಾದ VID ಅನ್ನು ನೀವು ಖಚಿತವಾಗಿಯೂ ಅಳಿಸುವ ಬಗ್ಗೆ ಖಚಿತರಾಗಿಯೇ ಇರುತ್ತೀರಿರಿಯ?",
-                "confirmationMessageForDownloadVid": "ಒಬ್ಬ ಬಾರಿಗೆ ಮಾತ್ರವಾದ VID ಅನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಲು ನೀವು ಖಚಿತವಾಗಿಯೂ ಇಚ್ಛಿಸುತ್ತೀರಿರಿಯ?"
+                "confirmationMessageForCreateVid": "ನೀವು ನಿಶ್ಚಯಿಸಿದ್ದೀರಿ ಒಮ್ಮೆ ಬಳಕೆಯ ಹಾಕಿದ್ದಿನ VID ಕಾರ್ಡ್ ರಚಿಸಲು?",
+                "confirmationMessageForDeleteVid": "ನೀವು ಆಯ್ದ ಒಮ್ಮೆ ಬಳಕೆಯ ಹಾಕಿದ್ದಿನ VID ಕಾರ್ಡ್ ಅನ್ನು ಅಳಿಸಲು ಖಚಿತವಿದ್ದೀರಾ?",
+                "confirmationMessageForDownloadVid": "ನೀವು ಒಮ್ಮೆ ಬಳಕೆಯ ಹಾಕಿದ್ದಿನ VID ಕಾರ್ಡ್ ಡೌನ್ಲೋಡ್ ಮಾಡಲು ಖಚಿತವಿದ್ದೀರಾ?"
             },
             "createdSuccessfully": "ಈವೆಂಟ್ ಐಡಿ: $eventId ಗೆ ನಿಮ್ಮ VID ಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
             "downloadedSuccessFully": "VID ಕಾರ್ಡ್ ಅನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಲು ನಿಮ್ಮ ವಿನಂತಿಗೆ ಯಶಸ್ವಿಯಾಗಿ ಪ್ರಕ್ರಿಯೆ ಮಾಡಲಾಗಿದೆ. ಈವೆಂಟ್ ಐಡಿ: $eventId ಗೆ ವಿನಂತಿಯನ್ನು ನೆರವೇರಿಸಲಾಗಿದೆ.",
