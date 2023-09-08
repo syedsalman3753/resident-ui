@@ -560,19 +560,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "Generating a new perpetual VID will revoke the already existing VID.",
-                "confirmationMessageForCreateVid": "Are you sure you want to create a perpetual VID?",
-                "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen Perpetual VID?",
-                "confirmationMessageForDownloadVid": "Are you sure you want to download Perpetual VID card?"
+                "confirmationMessageForCreateVid": "Are you sure you want to create a perpetual VID card?",
+                "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen Perpetual VID card?",
+                "confirmationMessageForDownloadVid": "Are you sure you want to download Perpetual VID card card?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "Are you sure you want to create a temporary VID?",
-                "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen Temporary VID?",
-                "confirmationMessageForDownloadVid": "Are you sure you want to download Temporary VID?"
+                "confirmationMessageForCreateVid": "Are you sure you want to create a temporary VID card?",
+                "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen Temporary VID card?",
+                "confirmationMessageForDownloadVid": "Are you sure you want to download Temporary VID card?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "Are you sure you want to create a one-time VID?",
-                "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen One-time VID?",
-                "confirmationMessageForDownloadVid": "Are you sure you want to download One-time VID?"
+                "confirmationMessageForCreateVid": "Are you sure you want to create a one-time VID card?",
+                "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen One-time VID card?",
+                "confirmationMessageForDownloadVid": "Are you sure you want to download One-time VID card?"
             },
             "createdSuccessfully": "Your VID has been successfully created against the Event ID: $eventId.",
             "downloadedSuccessFully": "Your request to download the VID card has been successfully processed against the Event ID: $eventId.",

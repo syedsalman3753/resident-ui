@@ -86,8 +86,8 @@
 	            <mat-card-header><span class="label"></span></mat-card-header>
 	            <mat-card-subtitle style="display: flex;margin-top: 15px;"><span class="datepicker-card" style="display: contents;">
 					<button id="searchbtn" mat-raised-button color="primary"
-						(click)="search()">{{'viewhistory.searchBtn' | translate}}</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="downloadbtn" mat-raised-button
-						color="default" (click)="downloadServiceHistory()"><img class="save-icon"
+						(click)="search()">{{'viewhistory.searchBtn' | translate}}</button>&nbsp;&nbsp;&nbsp;&nbsp;<button [disabled]="disableDownloadBtn" id="downloadbtn" mat-button
+						 (click)="downloadServiceHistory()"><img class="save-icon"
 							src="./assets/images/save.png" /></button>
 					</span></mat-card-subtitle>
 	          </div>

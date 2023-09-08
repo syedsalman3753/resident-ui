@@ -132,9 +132,9 @@
             ]
         }
     ],
-    "header":{
-        "lastLogin":"Último acceso",
-        "logout":"Cerrar sesión"
+    "header": {
+        "lastLogin": "Último acceso",
+        "logout": "Cerrar sesión"
     },
     "dashboard": {
         "welcomeMessage": "¡Bienvenido al portal de socios de Mosip!",
@@ -168,7 +168,7 @@
         "otpDescriptionEmail": " y a su correo electrónico registrado",
         "resendBtnLabel": "Reenviar OTP",
         "submitBtnLabel": "Enviar",
-        "enterOtp":"Ingrese OTP aquí"
+        "enterOtp": "Ingrese OTP aquí"
     },
     "centerSelection": {
         "title": "Reservar cita",
@@ -245,8 +245,8 @@
         "timestamp": "Marca de tiempo",
         "selectAll": "Todos",
         "noData": "No hay resultados para mostrar",
-        "historyType":"tipo de historial",
-        "status":"Estado",
+        "historyType": "tipo de historial",
+        "status": "Estado",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "Todos",
@@ -401,7 +401,7 @@
         "enteredValuesNotMatch": "Los valores ingresados no coinciden.",
         "submit": "Enviar",
         "update": "Actualizar",
-        "calendarPlaceHolder":"DD/MMM/AAAA",
+        "calendarPlaceHolder": "DD/MMM/AAAA",
         "documentUploaded": "Documento cargado",
         "languageHeading": "Mi preferencia de idioma",
         "InvalidFormatMsg": "El tipo de archivo que estás intentando cargar no es compatible. Por favor, carga un tipo de archivo diferente.",
@@ -409,8 +409,8 @@
         "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
-        "EnterAllAddress":"Por favor selecciona",
-        "select":"Seleccionar"
+        "EnterAllAddress": "Por favor selecciona",
+        "select": "Seleccionar"
     },
     "preview": {
         "title": "Avance"
@@ -493,7 +493,7 @@
     },
     "paginatorIntl": {
         "itemsPerPageLabel": "Artículos por página",
-        "of":"de"
+        "of": "de"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -530,8 +530,8 @@
         "clickYesToProceed": "Haz clic en Sí para continuar.",
         "logoutconfirmMessage": "¿Estás seguro de que deseas cerrar sesión?",
         "accessDenied": "No puedes acceder a este servicio ya que no has aceptado el consentimiento al iniciar sesión. Te solicitamos que vuelvas a iniciar sesión y aceptes el consentimiento relevante para continuar.",
-        "toFindRegCen":" para encontrar los centros de registro.",
-        "sessionExpired":"Sesión expirada",
+        "toFindRegCen": " para encontrar los centros de registro.",
+        "sessionExpired": "Sesión expirada",
         "getMyUin": {
             "downloadedSuccessFully": "Tu tarjeta UIN se ha descargado exitosamente para el ID de evento: $eventId.",
             "invalidOtp": "Se ingresó un OTP no válido. Por favor, haz clic en reenviar OTP e intenta nuevamente con un OTP válido."
@@ -560,19 +560,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "Generar un nuevo VID perpetuo revocará el VID existente.",
-                "confirmationMessageForCreateVid": "¿Estás seguro de que quieres crear un VID perpetuo?",
-                "confirmationMessageForDeleteVid": "¿Estás seguro de que quieres eliminar el VID perpetuo seleccionado?",
-                "confirmationMessageForDownloadVid": "¿Estás seguro de que quieres descargar la tarjeta VID perpetua?"
+                "confirmationMessageForCreateVid": "¿Está seguro de que desea crear una tarjeta VID permanente?",
+                "confirmationMessageForDeleteVid": "¿Está seguro de que desea eliminar la tarjeta VID permanente seleccionada?",
+                "confirmationMessageForDownloadVid": "¿Estás seguro de que deseas descargar la tarjeta VID perpetua?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "¿Estás seguro de que quieres crear un VID temporal?",
-                "confirmationMessageForDeleteVid": "¿Estás seguro de que quieres eliminar el VID temporal seleccionado?",
-                "confirmationMessageForDownloadVid": "¿Estás seguro de que quieres descargar el VID temporal?"
+                "confirmationMessageForCreateVid": "¿Estás seguro/a de que deseas crear una tarjeta VID temporal?",
+                "confirmationMessageForDeleteVid": "¿Estás seguro/a de que deseas eliminar la tarjeta VID temporal seleccionada?",
+                "confirmationMessageForDownloadVid": "¿Estás seguro/a de que deseas descargar la tarjeta VID temporal?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "¿Estás seguro de que quieres crear un VID de un solo uso?",
-                "confirmationMessageForDeleteVid": "¿Estás seguro de que quieres eliminar el VID de un solo uso seleccionado?",
-                "confirmationMessageForDownloadVid": "¿Estás seguro de que quieres descargar el VID de un solo uso?"
+                "confirmationMessageForCreateVid": "¿Estás seguro/a de que deseas crear una tarjeta VID de un solo uso?",
+                "confirmationMessageForDeleteVid": "¿Estás seguro/a de que deseas eliminar la tarjeta VID de un solo uso seleccionada?",
+                "confirmationMessageForDownloadVid": "¿Estás seguro/a de que deseas descargar la tarjeta VID de un solo uso?"
             },
             "createdSuccessfully": "Se ha generado tu VID exitosamente para el ID de evento: $eventId.",
             "downloadedSuccessFully": "Tu solicitud para descargar la tarjeta VID se ha procesado exitosamente para el ID de evento: $eventId.",

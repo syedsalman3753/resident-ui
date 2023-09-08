@@ -132,9 +132,9 @@
             ]
         }
     ],
-    "header":{
-        "lastLogin":"Dernière connexion",
-        "logout":"Se déconnecter"
+    "header": {
+        "lastLogin": "Dernière connexion",
+        "logout": "Se déconnecter"
     },
     "dashboard": {
         "welcomeMessage": "Bienvenue sur le portail Mosip Partner !",
@@ -168,7 +168,7 @@
         "otpDescriptionEmail": " et à votre adresse e-mail enregistrée",
         "resendBtnLabel": "Renvoyer le OTP",
         "submitBtnLabel": "Soumettre",
-        "enterOtp":"Entrez OTP ici"
+        "enterOtp": "Entrez OTP ici"
     },
     "centerSelection": {
         "title": "Prendre rendez-vous",
@@ -245,8 +245,8 @@
         "timestamp": "Horodatage",
         "selectAll": "Tout",
         "noData": "Aucun résultat à afficher",
-        "historyType":"Type d'historique",
-        "status":"Statut",
+        "historyType": "Type d'historique",
+        "status": "Statut",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "Tous",
@@ -401,7 +401,7 @@
         "enteredValuesNotMatch": "Les valeurs saisies ne correspondent pas.",
         "submit": "Soumettre",
         "update": "Mettre à jour",
-        "calendarPlaceHolder":"JJ/MMM/AAAA",
+        "calendarPlaceHolder": "JJ/MMM/AAAA",
         "documentUploaded": "Document téléchargé",
         "languageHeading": "Ma préférence de langue",
         "InvalidFormatMsg": "Le type de fichier que vous essayez de télécharger n'est pas pris en charge. Veuillez télécharger un autre type de fichier.",
@@ -409,8 +409,8 @@
         "sameNameInputErrorMsg": "Le nom que vous avez saisi existe déjà. Veuillez saisir un nouveau nom pour continuer.",
         "sameDobInputErrorMsg": "La date de naissance que vous avez saisie existe déjà. Veuillez saisir une nouvelle date de naissance pour continuer.",
         "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer.",
-        "EnterAllAddress":"Veuillez sélectionner",
-        "select":"Sélectionner"
+        "EnterAllAddress": "Veuillez sélectionner",
+        "select": "Sélectionner"
     },
     "preview": {
         "title": "Aperçu"
@@ -493,7 +493,7 @@
     },
     "paginatorIntl": {
         "itemsPerPageLabel": "objets par page",
-        "of":"de"
+        "of": "de"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -530,8 +530,8 @@
         "clickYesToProceed": "Cliquez sur Oui pour continuer.",
         "logoutconfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter.",
         "accessDenied": "Vous ne pouvez pas accéder à ce service car vous n'avez pas accepté le consentement lors de votre connexion. Veuillez vous reconnecter et accepter le consentement correspondant pour continuer.",
-        "toFindRegCen":" pour trouver les centres d'inscription.",
-        "sessionExpired":"La session a expiré",
+        "toFindRegCen": " pour trouver les centres d'inscription.",
+        "sessionExpired": "La session a expiré",
         "getMyUin": {
             "downloadedSuccessFully": "Votre carte UIN a été téléchargée avec succès pour l'ID d'événement : $eventId.",
             "invalidOtp": "Le code OTP saisi est invalide. Veuillez cliquer sur Renvoyer OTP et réessayer avec un code OTP valide."
@@ -560,19 +560,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "La génération d'un nouvel VID perpétuel révoquera l'VID déjà existant.",
-                "confirmationMessageForCreateVid": "Êtes-vous sûr de vouloir créer un VID perpétuel ?",
-                "confirmationMessageForDeleteVid": "Êtes-vous sûr de vouloir supprimer l'VID perpétuel choisi ?",
-                "confirmationMessageForDownloadVid": "Êtes-vous sûr de vouloir télécharger la carte VID perpétuelle ?"
+                "confirmationMessageForCreateVid": "Êtes-vous sûr de vouloir créer une carte VID perpétuelle ?",
+                "confirmationMessageForDeleteVid": "Etes-vous sûr de vouloir supprimer la carte VID permanente sélectionnée ?",
+                "confirmationMessageForDownloadVid": "Êtes-vous sûr de vouloir télécharger la carte Perpetual VID ?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "Êtes-vous sûr de vouloir créer un VID temporaire ?",
-                "confirmationMessageForDeleteVid": "Êtes-vous sûr de vouloir supprimer l'VID temporaire choisi ?",
-                "confirmationMessageForDownloadVid": "Êtes-vous sûr de vouloir télécharger le VID temporaire ?"
+                "confirmationMessageForCreateVid": "Êtes-vous sûr de vouloir créer une carte VID temporaire ?",
+                "confirmationMessageForDeleteVid": "Êtes-vous sûr de vouloir supprimer la carte VID temporaire choisie ?",
+                "confirmationMessageForDownloadVid": "Êtes-vous sûr de vouloir télécharger la carte VID temporaire ?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "Êtes-vous sûr de vouloir créer un VID à usage unique ?",
-                "confirmationMessageForDeleteVid": "Êtes-vous sûr de vouloir supprimer l'VID à usage unique choisi ?",
-                "confirmationMessageForDownloadVid": "Êtes-vous sûr de vouloir télécharger l'VID à usage unique ?"
+                "confirmationMessageForCreateVid": "Êtes-vous sûr de vouloir créer une carte VID à usage unique ?",
+                "confirmationMessageForDeleteVid": "Êtes-vous sûr de vouloir supprimer la carte VID à usage unique choisie ?",
+                "confirmationMessageForDownloadVid": "Êtes-vous sûr de vouloir télécharger la carte VID à usage unique ?"
             },
             "createdSuccessfully": "Votre VID a été généré avec succès pour l'ID d'événement : $eventId.",
             "downloadedSuccessFully": "Votre demande de téléchargement de la carte VID a été traitée avec succès pour l'ID d'événement : $eventId.",
