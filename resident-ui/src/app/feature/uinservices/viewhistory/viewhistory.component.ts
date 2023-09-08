@@ -68,6 +68,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   isLoading:boolean = true;
   dataAvailable:boolean = false;
   sitealignment:string = localStorage.getItem('direction');
+  disableDownloadBtn:boolean = false;
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
@@ -278,6 +279,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   }
 
   captureValue(event: any,selectedValue:any, formControlName: string, controlType: string) {
+    if(event !== "")this.disableDownloadBtn = true;
     this.selectedDate = this.today;
     if (controlType === "dropdown") {
       if (selectedValue === "ALL" || selectedValue === "all") {
@@ -355,6 +357,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    this.disableDownloadBtn = false;
     let searchParam = "",
       self = this;
     this.controlTypes.forEach(controlType => {
@@ -392,7 +395,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     this.auditService.audit('RP-005', 'View history', 'RP-View history', 'View history', 'User clicks on "download" button');
     let searchParam = "", self = this;
     this.controlTypes.forEach(controlType => {
-
       if (self[controlType]) {
         if (searchParam) {
           searchParam = searchParam + "&" + controlType + "=" + self[controlType];
