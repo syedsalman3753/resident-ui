@@ -18,6 +18,7 @@ import { AppConfigService } from 'src/app/app-config.service';
 import * as appConstants from 'src/app/app.constants';
 import { HeaderService } from './header.service';
 import jwt_decode from "jwt-decode";
+import defaultJson from "src/assets/i18n/default.json";
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({ withCredentials: true });
     request = request.clone({
       // setHeaders: { 'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN') }
-      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': navigator.languages[0] }
+      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages'][localStorage.getItem("langCode")]['locale'] }
     });
     return next.handle(request).pipe(
       tap(
