@@ -52,10 +52,15 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     request = request.clone({ withCredentials: true });
-    request = request.clone({
-      // setHeaders: { 'X-XSRF-TOKEN': this.cookieService.get('XSRF-TOKEN') }
+    if(localStorage.getItem("langCode")){
+      request = request.clone({
       setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages'][localStorage.getItem("langCode")]['locale'] }
-    });
+      });
+    }else{
+      request = request.clone({
+      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages']["eng"]['locale']}
+      });
+    }
     return next.handle(request).pipe(
       tap(
         event => {
