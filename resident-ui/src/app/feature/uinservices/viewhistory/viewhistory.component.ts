@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { AppConfigService } from 'src/app/app-config.service';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog, MatPaginatorIntl } from '@angular/material';
-import { DateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { saveAs } from 'file-saver';
 import { HeaderService } from 'src/app/core/services/header.service';
 import { AuditService } from "src/app/core/services/audit.service";
@@ -19,11 +19,24 @@ import {
   MatKeyboardService
 } from 'ngx7-material-keyboard';
 import defaultJson from "src/assets/i18n/default.json";
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
 
 @Component({
   selector: "app-viewhistory",
   templateUrl: "viewhistory.component.html",
   styleUrls: ["viewhistory.component.css"],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class ViewhistoryComponent implements OnInit, OnDestroy {
   langJSON:any;
@@ -80,7 +93,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     private paginator2: MatPaginatorIntl,
     private keyboardService: MatKeyboardService
     ) {
-    this.dateAdapter.setLocale('en-GB');
 
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
@@ -102,7 +114,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.translateService.use(localStorage.getItem("langCode"));
-
+    this.dateAdapter.setLocale(defaultJson.keyboardMapping[this.langCode]);
     this.translateService
       .getTranslation(localStorage.getItem("langCode"))
       .subscribe(response => {
