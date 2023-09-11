@@ -111,7 +111,7 @@ jobs:
                sonar.sourceEncoding=UTF-8
                sonar.sources=src
                sonar.exclusions=**/node_modules/**
-               sonar.tests=resident-ui/src
+               sonar.tests=resident-ui
                sonar.typescript.lcov.reportPaths=coverage/lcov.info" >> sonar-project.properties
           npm install sonar-scanner && npm run sonar
         env:
