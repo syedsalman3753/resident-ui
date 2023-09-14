@@ -595,7 +595,7 @@
             "confirmationMessage": " Are you sure you want to save the changes made in Authentication types?"
         },
         "updateMyData": {
-            "emailSuccessMsg": "Your Email ID has been successfully updated against the Event ID:: $eventId.",
+            "emailSuccessMsg": "Your Email ID has been successfully updated against the Event ID: $eventId.",
             "phoneNumberSuccessMsg": "your phone number has been successfully updated against the event ID: $eventId.",
             "newDataUpdatedSuccessMsg": "Your request to change your data has been submitted against the Event ID: $eventId."
         }

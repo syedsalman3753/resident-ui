@@ -239,7 +239,7 @@
         "selectAll": "सभी",
         "noData": "कोई परिणाम नहीं हैं",
         "historyType": "इतिहास प्रकार",
-        "status": "दर्जा",
+        "status": "स्थिति",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "सभी",
@@ -272,7 +272,7 @@
                 "checked": false
             },
             "SUCCESS": {
-                "statusType": "सफलता",
+                "statusType": "सफल",
                 "checked": false
             },
             "IN_PROGRESS": {
