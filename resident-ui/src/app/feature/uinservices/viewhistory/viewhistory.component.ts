@@ -213,7 +213,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   selectingStatusOneValue(event:string,formControlName:string){
     let count = 0;
     this.statusTypeFilter.forEach(eachServiceType => {
-      if (eachServiceType.value === "all") {
+      if (eachServiceType.value === "ALL") {
         eachServiceType.label.checked = false;
       } else if (eachServiceType.value === event) {
         eachServiceType.label.checked = !eachServiceType.label.checked;
@@ -313,7 +313,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
           this.isStatusAllValue = false;
           this.statusHistorySelectedValue = "";
           this.selectingStatusOneValue(selectedValue,formControlName)
-
         }
       }
     } else if (controlType === "datepicker") {
