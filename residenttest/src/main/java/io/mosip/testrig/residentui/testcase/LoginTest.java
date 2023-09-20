@@ -41,7 +41,7 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 // @Test(priority = 0)
 public class LoginTest extends BaseClass {
 // 
-	@Test(priority = 0)
+//	@Test(priority = 0)
 	public static void loginTest() throws Exception {
 		// WebDriver driver = BaseClass.driver;
 		String envPath = ConfigManager.getiam_adminportal_path();

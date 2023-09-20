@@ -160,10 +160,18 @@ public class BaseClass {
 
 	public static String[] readFolderJsonList() {
 		String contents[] = null;
+		File directoryPath=null;
 		try {
-			String langcode = JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+		String langcode = JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
 				
-			File directoryPath = new File(System.getProperty("user.dir") + "\\BulkUploadFiles\\" + langcode + "\\");
+		//	File directoryPath = new File(System.getProperty("user.dir") + "\\BulkUploadFiles\\" + langcode + "\\");
+			if (TestRunner.checkRunType().equalsIgnoreCase("JAR")) {
+				directoryPath = new File(TestRunner.getResourcePath()   + "\\BulkUploadFiles\\" + langcode + "\\");
+			} else if (TestRunner.checkRunType().equalsIgnoreCase("IDE")) {
+				directoryPath= new File(System.getProperty("user.dir") + "\\src\\main\\resources"+"\\BulkUploadFiles\\" + langcode + "\\");
+
+
+			}
 
 			if (directoryPath.exists()) {
 

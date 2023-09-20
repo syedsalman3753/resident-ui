@@ -61,10 +61,14 @@ public class ShareMyData extends BaseClass {
 		Commons.clickWebelement(test, driver, By.id("Address"));
 		Commons.clickWebelement(test, driver, By.id("Gender"));
 		Commons.clickWebelement(test, driver, By.id("Image"));
-		Commons.clickWebelement(test, driver, By.id("Mask It2"));
-		Commons.clickWebelement(test, driver, By.id("Mask It3"));
-		Commons.clickWebelement(test, driver, By.id("Mask It4"));
-		Commons.clickWebelement(test, driver, By.id("Mask It5"));
+//		Commons.clickWebelement(test, driver, By.id("Mask It2"));
+	//	Commons.clickWebelement(test, driver, By.id("Mask It3"));
+		//Commons.clickWebelement(test, driver, By.id("Mask It4"));
+//		Commons.clickWebelement(test, driver, By.id("Mask It5"));
+		Commons.click(test, driver, By.xpath("//input[@id='Mask it2-input']"));
+		Commons.click(test, driver, By.xpath("//input[@id='Mask it3-input']"));
+		Commons.click(test, driver, By.xpath("//input[@id='Mask it4-input']"));
+		Commons.click(test, driver, By.xpath("//input[@id='Mask it5-input']"));
 		test.log(Status.INFO, "Click on Mask");
 		Commons.dropdown(test, driver, By.id("partnerDetails"));
 		test.log(Status.INFO, "Select Dropdown");
