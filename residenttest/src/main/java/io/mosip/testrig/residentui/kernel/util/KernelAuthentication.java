@@ -10,8 +10,8 @@ import io.mosip.testrig.residentui.service.BaseTestCase;
 import io.restassured.response.Response;
 
 public class KernelAuthentication extends BaseTestCase {
-	private String authRequest="config/Authorization/request.json";
-	private String authInternalRequest="config/Authorization/internalAuthRequest.json";
+	private String authRequest="/config/Authorization/request.json";
+	private String authInternalRequest="/config/Authorization/internalAuthRequest.json";
 	String cookie;
 	static String dataKey = "response";
 	CommonLibrary clib= new CommonLibrary();

@@ -29,11 +29,26 @@ public class CommonLibrary extends BaseTestCase {
 	
 	
 	public String getResourcePath() {
-		return TestRunner.getGlobalResourcePath() + "/resource/";
+		if(TestRunner.checkRunType().equals("JAR")) {
+			return TestRunner.getResourcePath();
+		}else if(TestRunner.checkRunType().equals("IDE")) {
+			return TestRunner.getResourcePath();
+		}
+		return null;
 	}
 	
 	public String getResourcePathForKernel() {
-		return TestRunner.getResourcePath() + "/resource/";
+		String kernelpath=null;
+		if(TestRunner.checkRunType().equals("JAR")) {
+			logger.info("file location for kernal"+TestRunner.getResourcePath() + "/" + "config/"+TestRunner.GetKernalFilename());
+
+			kernelpath = TestRunner.getResourcePath() + "/" + "config/"+TestRunner.GetKernalFilename().toString();
+			}else if(TestRunner.checkRunType().equals("IDE")){
+				logger.info("file location for kernal"+TestRunner.getResourcePath() + "/config/"+TestRunner.GetKernalFilename());
+
+				kernelpath = TestRunner.getResourcePath() + "/config/"+TestRunner.GetKernalFilename().toString();
+			}
+		return kernelpath;
 	}
 	
 	
@@ -66,13 +81,11 @@ public class CommonLibrary extends BaseTestCase {
 	public Map<String, String> readProperty(String propertyFileName) {
 		Properties prop = new Properties();
 		try {
-			System.out.println("propertyFileName:  " + propertyFileName + "Path :" + getResourcePathForKernel() + "config/" + propertyFileName + ".properties");
-			logger.info("propertyFileName:  " + propertyFileName + "Path :" + getResourcePathForKernel() + "config/" + propertyFileName + ".properties");
-			File propertyFile = new File(getResourcePathForKernel() + "config/" + propertyFileName + ".properties");
+			File propertyFile = new File( getResourcePathForKernel());
 			prop.load(new FileInputStream(propertyFile));
 
 		} catch (IOException e) {
-			System.out.println("Error occrued while reading propertyFileName " + propertyFileName + e.getMessage());
+			logger.info("Error occrued while reading propertyFileName " + propertyFileName + e.getMessage());
 			logger.info(e.getMessage());
 		}
 
