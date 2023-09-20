@@ -49,7 +49,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   locationFieldNameList: string[] = [];
   locCode = 0;
   initialLocationCode: any = "";
-  dynamicFieldValue = {};
   dynamicDropDown = {};
   files: any[] = [];
   filesPOA: any[] = [];
@@ -70,7 +69,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   userInfoClone: any = {};
   userInfoAddressClone: any = {};
   userPrefLang: any = {};
-  buildCloneJsonData: any = {};
+  buildCloneJsonData: any = [];
   uploadedFiles: any[] = [];
   previewDisabled: boolean = true;
   pdfSrcInPreviewPage = "";
@@ -96,9 +95,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   isValidFileFormatPOA: boolean = false;
   warningMessage: string;
   langJson: any;
-  selectedPOIFileForPreview: string = "";
-  selectedPOAFileForPreview: string = "";
-  selectedFileInPreviewPage: string = "";
   isLoading: boolean = true;
   showNotMatchedMessageEmail: boolean = false;
   showNotMatchedMessagePhone: boolean = false;
@@ -113,6 +109,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   getAllDocIds:any = {};
   isSelectedAllAddress:boolean = true;
   fieldName:string;
+  oldKeyBoradIndex:number;
   
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
@@ -223,6 +220,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.schema = response;
         });
     })
+   
   }
 
 
@@ -247,33 +245,43 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   buildData() {
+    let count = 0;
     try {
       let self = this;
       for (var schema of self.schema['identity']) {
-        if (self.userInfo[schema.attributeName]) {
-          if ((schema.attributeName !== "proofOfIdentity") && (schema.attributeName !== "proofOfAddress")) {
-            if (typeof self.userInfo[schema.attributeName] === "string") {
-              self.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName];
-            } else {
-              self.buildJSONData[schema.attributeName] = {};
-
-              if (self.userInfo[schema.attributeName].length) {
-                self.supportedLanguages.map((language) => {
-                  let value = self.userInfo[schema.attributeName].filter(function (data) {
-                    if (data.language.trim() === language.trim()) {
-                      return data.value.trim()
-                    }
-                  });
-                  if (value[0]) {
-                    self.buildJSONData[schema.attributeName][language] = value[0].value;
-                  }
-                });
-              }
+        if(schema.controlType === "textbox" || schema.controlType === "fileupload"){
+          if(schema.controlType === "textbox"){
+            if(typeof self.userInfo[schema.attributeName] === "string"){
+              this.userInputValues[schema.attributeName] = "";
+              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count,confIndex:count+1}
+              count++
+              count++
+            }else{
+              this.userInputValues[schema.attributeName] = {};
+              this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
+                item.index = count
+                count++
+                this.userInputValues[schema.attributeName][item.language] = '';
+                return item
+              })
             }
+          }else{
+            this.buildJSONData[schema.attributeName] = count
+            count++
+          }
+        }else{
+          if(typeof self.userInfo[schema.attributeName] === "string"){
+            this.userInputValues[schema.attributeName] = "";
+            this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName]}
+          }else{
+            this.userInputValues[schema.attributeName] = {};
+            this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName]
+            self.userInfo[schema.attributeName].forEach(item =>{
+                this.userInputValues[schema.attributeName][item.language] = ''
+              })
           }
         }
       }
-
       this.getGender();
       this.getLocationHierarchyLevel();
       this.getDocumentType("POI", "proofOfIdentity"); this.getDocumentType("POA", "proofOfAddress");
@@ -281,65 +289,47 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     } catch (ex) {
       console.log("Exception>>>" + ex.message);
     }
-
-    if (this.buildJSONData['preferredLang']) {
-      let perfLangs = this.buildJSONData['preferredLang'].split(',');
-      perfLangs.forEach(data => {
-        if(data['nativeName']){
-          this.perfLangArr[data] = defaultJson['languages'][data]['nativeName']
-        }
-      })
-      this.buildJSONData['preferredLang'] = this.perfLangArr[localStorage.getItem("langCode")];
-    }
   }
 
   changedBuildData(finaluserInfoClone: any) {
-    this.buildCloneJsonData = {};
+    this.buildCloneJsonData = [];
     let self = this;
     for (var schema of self.schema['identity']) {
-      if (finaluserInfoClone[schema.attributeName]) {
-        if (typeof finaluserInfoClone[schema.attributeName] === "string") {
-          self.buildCloneJsonData[schema.attributeName] = finaluserInfoClone[schema.attributeName];
-        } else {
-          self.buildCloneJsonData[schema.attributeName] = {};
-          self.supportedLanguages.map((language) => {
-            let value = finaluserInfoClone[schema.attributeName].filter(
-              function (data) {
-                if (data.language) {
-                  if (data.language.trim() === language.trim()) {
-                    return data.value.trim()
-                  }
-                }
-              });
-            if (value.length > 0) {
-              self.buildCloneJsonData[schema.attributeName][this.supportedLanguages[0]] = value[0].value;
-            }
-          });
+      Object.keys(finaluserInfoClone).map(attributeName =>{
+        if(schema.attributeName === attributeName){
+          this.buildCloneJsonData.push({
+            'labelName':schema.labelName[this.langCode][1],
+            'newData':finaluserInfoClone[attributeName]
+          })
         }
-      }
+      })
     }
   }
 
-  addingAddessData() {
-    Object.keys(this.userInfo).forEach(data => {
-      Object.keys(this.dynamicFieldValue).filter(item => {
-        let changedItem = item === "Postal Code" ? "postalCode" : item.split(" ").join("").toLowerCase();
-        if (changedItem === data) {
-          if (this.dynamicFieldValue[item] !== "") {
-            if (typeof this.userInfo[data] === "string") {
-              this.userInfoAddressClone[changedItem] = this.dynamicFieldValue[item].name
-            } else {
-              let newData = this.userInfo[changedItem].map(newItem => {
-                newItem["value"] = this.dynamicFieldValue[item].name
-                return newItem
-              })
-              this.userInfoAddressClone[changedItem] = newData
-            }
-
+  addingAddessData(event:any, formControlName:string, language:string) {
+    if(event !==''){
+      if(formControlName !== 'postalCode'){
+        if(this.userInputValues[formControlName][language] === ''){
+          let newData = { "language": language, "value": event.value.name };
+          if( this.userInfoAddressClone[formControlName]){
+            this.userInfoAddressClone[formControlName].push(newData)
+          }else{
+            this.userInfoAddressClone[formControlName] = [].concat(newData)
           }
+        }else{
+          this.userInfoAddressClone[formControlName].forEach(item =>{
+            if(item.language === language){
+              item.value = event.value.name
+            }
+          })
         }
-      })
-    })
+        this.userInputValues[formControlName][language] = event.value.name;
+      }else{
+        // this.userInputValues[formControlName] = event.value.name;
+        this.userInfoAddressClone[formControlName] = event.value.name;
+      }
+    }
+    
   }
 
   previewBtn(issue: any) {
@@ -373,7 +363,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   getLocationHierarchyLevel() {
     let self = this;
-    let fieldNameData = {};
     self.locationFieldNameList = [];
     self.dataStorageService.getLocationHierarchyLevel('eng').subscribe(response => {
       response["response"]["locationHierarchyLevels"].forEach(function (value) {
@@ -383,13 +372,12 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       });
       for (let value of self.locationFieldNameList) {
         self.dynamicDropDown[value] = [];
-        self.dynamicFieldValue[value] = "";
       }
-      self.loadLocationDataDynamically("", 0);
+      self.loadLocationDataDynamically("", 0,"","");
     });
   }
 
-  loadLocationDataDynamically(event: any, index: any) {
+  loadLocationDataDynamically(event: any, index: any, schemaFieldName:string, language:string) {  
     let unSelectedItems = this.locationFieldNameList.slice(index, this.locationFieldNameList.length)
     let locationCode = "";
     let fieldName = "";
@@ -400,7 +388,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     } else {
       fieldName = this.locationFieldNameList[parseInt(index)];
       locationCode = event.value.code;
-      this.dynamicFieldValue[this.locationFieldNameList[parseInt(index) - 1]] = event.value;
       this.isSelectedAllAddress = unSelectedItems.length ? false : true;
       this.fieldName = fieldName;
     }
@@ -409,11 +396,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         if (response['response'])
           self.dynamicDropDown[fieldName] = response['response']['locations'];
       });
-    this.addingAddessData();
+    
+    this.addingAddessData(event, schemaFieldName, language);
     unSelectedItems.forEach(item =>{
       this.dynamicDropDown[item] = [];
     });
-    
   }
 
   sendOTPBtn(id: any) {
@@ -510,45 +497,34 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   captureValue(event: any, formControlName: string, language: string, currentValue: any) {
     let self = this;
-    if (event.target.value !== '' && event.target.value !== currentValue) {
-      if (event.target.value === "" && this.userInfoClone[formControlName]) {
+      if (event.target.value.trim() === "") {
         this.userInfoClone[formControlName].forEach(item => {
-          if (item.language === language) {
-            let index = this.userInfoClone[formControlName].findIndex(data => data === item)
-            this.userInfoClone[formControlName].splice(index, 1)
+          if (item['language'] === language) {
+            item['value'] = '';
           }
         })
       } else {
-        if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
-          if (typeof self.userInfo[formControlName] === "string") {
-            self.userInfo[formControlName] = event.target.value;
-          } else {
-            let index = self.userInfo[formControlName].findIndex(data => data.language.trim() === language.trim());
+        if (formControlName !== "proofOfIdentity") {
+          if(this.userInputValues[formControlName][language] === ''){
             let newData = { "language": language, "value": event.target.value };
-            if (formControlName in this.userInfoClone) {
-              this.userInfoClone[formControlName].forEach(item => {
-                if (item['language'] === language) {
-                  item['value'] = event.target.value;
-                } else {
-                  if (item['language']) {
-                    if (this.userInfoClone[formControlName]) {
-                      this.userInfoClone[formControlName] = this.userInfoClone[formControlName].concat(newData);
-                    } else {
-                      this.userInfoClone[formControlName] = [].concat(newData);
-                    }
-                  }
-                }
-              })
-            } else {
-              this.userInfoClone[formControlName] = [].concat(newData);
+            if( this.userInfoClone[formControlName]){
+              this.userInfoClone[formControlName].push(newData)
+            }else{
+              this.userInfoClone[formControlName] = [].concat(newData)
             }
+          }else{
+            this.userInfoClone[formControlName].forEach(item =>{
+              if(item.language === language){
+                item.value = event.target.value
+              }
+            })
           }
+          this.userInputValues[formControlName][language] = event.target.value;
         } else {
           self[formControlName]["documentreferenceId"] = event.target.value;
+          this.userInputValues[formControlName] = event.target.value;
         }
       }
-    }
-    this.userInputValues[formControlName] = event.target.value;
   }
 
   captureDatePickerValue(event: any, formControlName: string, currentValue: any) {
@@ -569,29 +545,22 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   captureDropDownValue(event: any, formControlName: string, language: string, dataType: string, currentValue: any) {
     let self = this;
     if (event.source.selected && event.source.viewValue !== currentValue) {
-      if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
-        if (dataType === "string") {
-          this.userInfoClone[formControlName] = event.source.viewValue;
-        } else {
-          let newData = { "language": language, "value": event.source.viewValue }
-          if (formControlName in this.userInfoClone) {
-            this.userInfoClone[formControlName].forEach(item => {
-              if (item['language'] === language) {
-                item['value'] = event.source.viewValue;
-              } else {
-                if (item['language']) {
-                  if (this.userInfoClone[formControlName]) {
-                    this.userInfoClone[formControlName] = this.userInfoClone[formControlName].concat(newData);
-                  } else {
-                    this.userInfoClone[formControlName] = [].concat(newData);
-                  }
-                }
-              }
-            })
-          } else {
-            this.userInfoClone[formControlName] = [].concat(newData);
+      if (formControlName !== "proofOfIdentity") {
+        if(this.userInputValues[formControlName][language] === ''){
+          let newData = { "language": language, "value": event.source.viewValue };
+          if( this.userInfoClone[formControlName]){
+            this.userInfoClone[formControlName].push(newData)
+          }else{
+            this.userInfoClone[formControlName] = [].concat(newData)
           }
+        }else{
+          this.userInfoClone[formControlName].forEach(item =>{
+            if(item.language === language){
+              item.value = event.source.viewValue
+            }
+          })
         }
+      this.userInputValues[formControlName][language] = event.source.viewValue;
       } else {
         if (formControlName === "proofOfIdentity") {
           this.displayPOIUpload = true;
@@ -601,90 +570,54 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         self[formControlName]["documenttype"] = event.source.value;
       }
     }
-    this.userInputValues[formControlName] = event.source.viewValue;
+    
   }
 
   captureAddressValue(event: any, formControlName: string, language: string, currentValue: any) {
     let self = this;
-    if (event.target.value !== '' && event.target.value !== currentValue) {
-      if (event.target.value === "" && this.userInfoAddressClone[formControlName]) {
-        this.userInfoAddressClone[formControlName].forEach(item => {
-          if (item.language === language) {
-            let index = this.userInfoAddressClone[formControlName].findIndex(data => data === item)
-            this.userInfoAddressClone[formControlName].splice(index, 1)
-          }
-        })
-      } else {
-        if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
-          if (typeof self.userInfo[formControlName] === "string") {
-            self.userInfo[formControlName] = event.target.value;
-          } else {
-            let index = self.userInfo[formControlName].findIndex(data => data.language.trim() === language.trim());
-            let newData = { "language": language, "value": event.target.value };
-            if (formControlName in this.userInfoAddressClone) {
-              this.userInfoAddressClone[formControlName].forEach(item => {
-                if (item['language'] === language) {
-                  item['value'] = event.target.value;
-                } else {
-                  if (item['language']) {
-                    if (this.userInfoAddressClone[formControlName]) {
-                      this.userInfoAddressClone[formControlName] = this.userInfoAddressClone[formControlName].concat(newData);
-                    } else {
-                      this.userInfoAddressClone[formControlName] = [].concat(newData);
-                    }
-                  }
-                }
-              })
-            } else {
-              this.userInfoAddressClone[formControlName] = [].concat(newData);
-            }
-          }
-        } else {
-          self[formControlName]["documentreferenceId"] = event.target.value;
+    if (event.target.value.trim() === "") {
+      this.userInfoAddressClone[formControlName].forEach(item => {
+        if (item['language'] === language) {
+          item['value'] = '';
         }
+      })
+    } else {
+      if (formControlName !== "proofOfAddress") {
+          if(this.userInputValues[formControlName][language] === ''){
+            let newData = { "language": language, "value": event.target.value };
+            if( this.userInfoAddressClone[formControlName]){
+              this.userInfoAddressClone[formControlName].push(newData)
+            }else{
+              this.userInfoAddressClone[formControlName] = [].concat(newData)
+            }
+          }else{
+            this.userInfoAddressClone[formControlName].forEach(item =>{
+              if(item.language === language){
+                item.value = event.target.value
+              }
+            })
+          }
+        this.userInputValues[formControlName][language] = event.target.value;
+        console.log(this.userInfoAddressClone)
+      } else {
+        self[formControlName]["documentreferenceId"] = event.target.value;
+        this.userInputValues[formControlName] = event.target.value;
       }
     }
-    this.userInputValues[formControlName] = event.target.value;
   }
 
 
   captureAddressDropDownValue(event: any, formControlName: string, language: string, dataType: string, currentValue: any) {
     let self = this;
-    if (event.source.selected && event.source.viewValue !== currentValue) {
-      if ((formControlName !== "proofOfIdentity") && (formControlName !== "proofOfAddress")) {
-        if (dataType === "string") {
-          this.userInfoAddressClone[formControlName] = event.source.viewValue;
-        } else {
-          let newData = { "language": language, "value": event.source.viewValue }
-          if (formControlName in this.userInfoAddressClone) {
-            this.userInfoAddressClone[formControlName].forEach(item => {
-              if (item['language'] === language) {
-                item['value'] = event.source.viewValue;
-              } else {
-                if (item['language']) {
-                  if (this.userInfoAddressClone[formControlName]) {
-                    this.userInfoAddressClone[formControlName] = this.userInfoAddressClone[formControlName].concat(newData);
-                  } else {
-                    this.userInfoAddressClone[formControlName] = [].concat(newData);
-                  }
-                }
-              }
-            })
-          } else {
-            this.userInfoAddressClone[formControlName] = [].concat(newData);
-          }
-        }
-      } else {
-        if (formControlName === "proofOfIdentity") {
-          this.displayPOIUpload = true;
-        } else if (formControlName === "proofOfAddress") {
-          this.displayPOAUpload = true;
-        }
-        self[formControlName]["documenttype"] = event.source.value;
+    if (event.source.selected) {
+      if (formControlName === "proofOfIdentity") {
+        this.displayPOIUpload = true;
+      } else if (formControlName === "proofOfAddress") {
+        this.displayPOAUpload = true;
       }
+      self[formControlName]["documenttype"] = event.source.value;
     }
     this.userInputValues[formControlName] = event.source.viewValue;
-
   }
 
   captureContactValue(event: any, formControlName) {
@@ -729,17 +662,21 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureVirtualKeyboard(element: HTMLElement, index: number) {
-    this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
+   
+    if(this.keyboardRef){
+      this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
+    }
+    
   }
 
-  openKeyboard(inputId:any) {
-    if (this.keyboardService.isOpened) {
+  openKeyboard(inputId:any, langCode:string) {
+    if (this.oldKeyBoradIndex === inputId && this.keyboardService.isOpened) {
       this.keyboardService.dismiss();
       this.keyboardRef = undefined;
     } else {
-      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[this.langCode]);
+      this.oldKeyBoradIndex = inputId;
+      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[langCode]);
       document.getElementById(inputId).focus();
-      console.log(document.getElementById(inputId))
     }
   }
 
@@ -837,16 +774,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     });
     return dialogRef;
   }
-  closePreview(fileType: any) {
-    if (fileType === "POI") {
-      this.pdfSrc = "";
-      this.selectedPOIFileForPreview = "";
-    } else {
-      this.pdfSrcPOA = "";
-      this.selectedPOAFileForPreview = "";
-    }
-
-  }
   /**
    * on file drop handler
    */
@@ -870,31 +797,26 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.pdfSrc = e.target.result;
+        this.showPreviewImage(this.pdfSrc)
       };
       reader.readAsDataURL(this.files[index]);
-      this.selectedPOIFileForPreview = this.files[index].name;
     } else {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.pdfSrcPOA = e.target.result;
+        this.showPreviewImage(this.pdfSrcPOA)
       };
       reader.readAsDataURL(this.filesPOA[index]);
-      this.selectedPOAFileForPreview = this.filesPOA[index].name;
     }
   }
 
-  previewFileInPreviewPage(index: number, filename: string) {
-    this.selectedFileInPreviewPage = filename;
+  previewFileInPreviewPage(index: number) {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.pdfSrcInPreviewPage = e.target.result;
+      this.showPreviewImage(this.pdfSrcInPreviewPage)
     };
     reader.readAsDataURL(this.uploadedFiles[index]);
-  }
-
-  closePreviewPageImage() {
-    this.selectedFileInPreviewPage = '';
-    this.pdfSrcInPreviewPage = '';
   }
 
   /**
@@ -919,11 +841,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
-      this.selectedPOIFileForPreview = "";
     }
     if (this.filesPOA.length < 1) {
       this.previewDisabledInAddress = true;
-      this.selectedPOAFileForPreview = "";
     }
   }
 
@@ -1091,6 +1011,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }, 400)
   }
 
+  showPreviewImage(pdfSrc:any){
+    this.dialog
+    .open(DialogComponent, {
+      width: '70%',
+      data: {
+        case: 'previewImage',
+        imageLink:pdfSrc
+      },
+      disableClose: true
+    });
+  }
 
   onItemSelected(item: any) {
     if (item === "matTabLabel") {
@@ -1106,7 +1037,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   backBtn() {
     this.showPreviewPage = false;
-    this.selectedFileInPreviewPage = '';
     this.pdfSrcInPreviewPage = '';
   }
 

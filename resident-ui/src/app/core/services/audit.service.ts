@@ -36,7 +36,6 @@ export class AuditService {
     auditObject.moduleName = moduleName;
     auditObject.description = description;
 
-    console.log(auditObject);
     this.postAuditLog(auditObject);
   }
 
