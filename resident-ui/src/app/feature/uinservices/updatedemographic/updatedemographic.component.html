@@ -9,20 +9,20 @@
 <div class="spinner" *ngIf="isLoading">
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!isLoading" class="main-contianer">
+<div *ngIf="!isLoading && langJson" class="main-contianer">
   <mat-card *ngIf="userInfo && !showPreviewPage && (buildJSONData | json) != '{}'">
     <h1 style="font-weight: 500; font-size: 20px;color: #505050;">{{langJson.title}}</h1>
     <mat-tab-group animationDuration="0ms" [selectedIndex]="matTabIndex" (selectedTabChange)="logChange($event)">
       <mat-tab label="{{'updatedemographic.identity' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.identityHeading' | translate}}</h3>
-        <table width="100%">
+        <table class="each-tab-group-main-table">
           <tr class="table-main-card">
-            <td [style.width]="width">
-              <div *ngFor="let field of schema['identity']; let i = index" class="mat-form1">
+            <td class="main-table-data" >
+              <div *ngFor="let field of schema['identity']; let idx = index" class="mat-form1">
                 <div layout="row" *ngIf="field.tabgroup === 'identity'">
                   <table width="100%">
                     <tr *ngIf="field.controlType === 'calendar'">
-                      <td width="100%">
+                      <td width="100%" class="main-table-data">
                         <table width="100%">
                           <tr>
                             <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
@@ -31,17 +31,17 @@
                           </tr>
                           <tr>
                             <td width="45%"><input type="text" class="readonly" readonly="true" disabled="true"
-                                value="{{buildJSONData[field.attributeName]}}"></td>
+                                [value]="buildJSONData[field.attributeName].value"></td>
                             <td width="10%"></td>
                             <td width="45%">
-                              <!-- <mat-form-field style="min-width: 100%;"> -->
-                              <input [max]="maxdate" style="width:75%;" matInput [placeholder]="langJson.calendarPlaceHolder"
+                             <div class="date-input-card" *ngIf="langJson">
+                              <input [max]="maxdate" style=" border: none;" matInput [placeholder]="langJson.calendarPlaceHolder"
                                 [matDatepicker]="picker" readonly id="{{field.attributeName}}"
                                 (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName])"
                                 [(ngModel)]="selectedDate" (click)="picker.open()" />
-                              <mat-datepicker-toggle style="width:20%;" matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
-                              <!-- </mat-form-field> -->
+                             </div>
                               <p class="warning-message"
                                 *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName]">
                                 {{langJson.sameDobInputErrorMsg}}</p>
@@ -51,41 +51,30 @@
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'textbox'">
-                      <td width="100%">
+                      <td class="main-table-data"  width="100%">
                         <table width="100%" *ngFor="let language of supportedLanguages;">
                           <tr>
                             <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                             <td width="10%"></td>
                             <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
-                          <tr>
-                            <td width="45%"><input type="text" class="readonly" readonly="true" disabled="true"
-                                value="{{buildJSONData[field.attributeName][language]}}"></td>
-                            <td width="10%"></td>
-                            <td width="45%" *ngIf="userInputValues[field.attributeName]">
-                              <div class="search-input-card">
-                                <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language]);"
-                                  (focus)="captureVirtualKeyboard(field.attributeName, 0)"
-                                  [value]="userInputValues[field.attributeName]" #keyboardRef />
-                                  <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
-                              </div>
-                              <span *ngIf="userInputValues[field.attributeName]">
-                                <p class="warning-message"
-                                  *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][language]">
-                                  {{langJson.sameNameInputErrorMsg}}</p>
-                              </span>
+                          <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index" >
+                            <td class="sub-table-row" width="45%" class="each-input-data" [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                              <input type="text" class="readonly" readonly="true" disabled="true" [value]="item.value">
                             </td>
-                            <td width="45%" *ngIf="!userInputValues[field.attributeName]">
-                              <div class="search-input-card">
-                                <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                  (blur)="captureValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
-                                  (focus)="captureVirtualKeyboard(field.attributeName, 0)" #keyboardRef/>
-                                  <i  matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                            <td class="sub-table-row" width="10%"></td>
+                            <td class="sub-table-row" width="45%" >
+                              <div class="search-input-card" [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                                <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}{{item.language}}"
+                                  (blur)="captureValue($event, field.attributeName, item.language, item.value)"
+                                  placeholder="{{field.placeHolder[item.language]}}"
+                                  [(value)]="userInputValues[field.attributeName][item.language]"
+                                  (focus)="captureVirtualKeyboard(field.attributeName + item.language, item.index)" #keyboardRef/>
+                                  <i  matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                               </div>
-                              <span>
+                              <span *ngIf="userInputValues[field.attributeName] && i === (buildJSONData[field.attributeName]?.length -1) && buildJSONData[field.attributeName][0].value">
                                 <p class="warning-message"
-                                  *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][language]">
+                                  *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][0].value">
                                   {{langJson.sameNameInputErrorMsg}}</p>
                               </span>
                             </td>
@@ -94,26 +83,28 @@
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'dropdown'">
-                      <td width="100%">
+                      <td class="main-table-data" width="100%">
                         <table width="100%">
                           <tr>
                             <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                             <td width="10%"></td>
                             <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
-                          <tr>
-                            <td width="45%"><input type="text" class="readonly" readonly="true" disabled="true"
-                                value="{{buildJSONData[field.attributeName][langCode]}}"></td>
-                            <td width="10%"></td>
-                            <td width="45%">
-                              <mat-form-field style="min-width: 73%;">
-                                <mat-select disableOptionCentering class="enable-dropdown" [(ngModel)]="selected" id="{{field.attributeName}}">
+                          <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index" >
+                            <td class="sub-table-row" width="45%" [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                              <input type="text" class="readonly" readonly="true" disabled="true"
+                                [value]="item.value"></td>
+                            <td width="10%" class="sub-table-row"></td>
+                            <td class="sub-table-row" width="45%" >
+                              <span [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'" >
+                                <mat-select disableOptionCentering class="enable-dropdown" id="{{field.attributeName}}" 
+                                placeholder="{{field.placeHolder[item.language]}}"[(value)]="userInputValues[field.attributeName][item.language]">
                                   <mat-option *ngFor="let data of dropDownValues[field.attributeName]"
-                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType, buildJSONData[field.attributeName][langCode])"
-                                    [value]="data.code">{{ data.value }}</mat-option>
+                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, item.language, field.dataType, buildJSONData[field.attributeName][langCode])"
+                                    [value]="data.value">{{ data.value }}</mat-option>
                                 </mat-select>
-                              </mat-form-field>
-                              <span *ngIf="userInputValues[field.attributeName]">
+                              </span>
+                              <span *ngIf="userInputValues[field.attributeName] && i === (buildJSONData[field.attributeName]?.length -1)">
                                 <p class="warning-message"
                                   *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][langCode]">
                                   {{langJson.sameGenderInputErrorMsg}}</p>
@@ -124,7 +115,7 @@
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'fileupload'">
-                      <td width="100%">
+                      <td class="main-table-data" width="100%">
                         <table width="100%">
                           <tr>
                             <td width="100%" colspan="3"><label>{{field.labelName[langCode][0]}}</label></td>
@@ -152,8 +143,8 @@
                                 <input class="input"
                                   [value]="proofOfIdentity['documentreferenceId'] ? proofOfIdentity['documentreferenceId'] : '' "
                                   matInput #{{field.attributeName}} id="{{field.attributeName}}value"
-                                  (blur)="captureValue($event, field.attributeName, language, '')" 
-                                  (focus)="captureVirtualKeyboard(field.attributeName + 'value', 1)" #keyboardRef/>
+                                  (blur)="captureValue($event, field.attributeName, '', '')" 
+                                  (focus)="captureVirtualKeyboard(field.attributeName + 'value', buildJSONData.proofOfIdentity)" #keyboardRef/>
                                 <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName +'value')">keyboard</i>
                               </div>
                             </td>
@@ -163,7 +154,7 @@
                                   style="color: red;">*</span></label></td>
                           </tr>
                           <tr *ngIf="displayPOIUpload">
-                            <td width="100%" colspan="3">
+                            <td  width="100%" colspan="3">
                               <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POI')">
                                 <input (click)="$event.target.value=null"
                                   [disabled]="proofOfIdentity.documenttype === undefined || files?.length === 1 " type="file" #fileDropRef
@@ -233,12 +224,7 @@
                                   </div>
 
                                   <div class="preview">
-                                    <img *ngIf="file.name !== selectedPOIFileForPreview" (click)="previewFile(i, 'POI')"
-                                      mat-card-xs-image style="margin: 0 0 -5px 0;"
-                                      src='./assets/icons/iconfont/visibility_on.svg' alt="" />
-                                    <img *ngIf="file.name === selectedPOIFileForPreview" mat-card-xs-image
-                                      (click)="closePreview('POI')" style="margin: 0 0 -5px 0;"
-                                      src='./assets/icons/iconfont/visibility_off.svg' alt="" />
+                                    <img (click)="previewFile(i, 'POI')" mat-card-xs-image style="margin: 0 0 -5px 0;"  src='./assets/icons/iconfont/visibility_on.svg' alt="" />
                                   </div>
 
                                   <div class="delete" (click)="deleteFile(i, 'POI')">
@@ -258,18 +244,6 @@
                 </div>
               </div>
             </td>
-            <td class="show-preview-image">
-              <div *ngIf="pdfSrc" (click)="closePreview('POI')" width="100%" style="float: right;cursor: pointer;">
-                <mat-icon matTooltip="Close Preview">clear</mat-icon>
-              </div>
-              <embed *ngIf="pdfSrc" [src]="pdfSrc | sanitizepdf" height="100%" width="100%">
-            </td>
-          </tr>
-          <tr class="show-preview-image-mobile">
-            <div *ngIf="pdfSrc" (click)="closePreview('POI')" width="100%" style="float: right;cursor: pointer;">
-              <mat-icon matTooltip="Close Preview">clear</mat-icon>
-            </div>
-            <embed *ngIf="pdfSrc" [src]="pdfSrc | sanitizepdf" height="100%" width="100%">
           </tr>
         </table>
         <div class="submit-btn-card" >
@@ -280,69 +254,82 @@
       <mat-tab label="{{'updatedemographic.address' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.addressHeading' | translate}}</h3>
         <div class="address-page">
-          <table width="100%">
+          <table class="each-tab-group-main-table">
             <tr class="table-main-card">
-              <td [style.width]="width">
+              <td >
                 <div *ngFor="let field of schema['identity']; let i = index" class="mat-form1">
                   <div layout="row" *ngIf="field.tabgroup === 'address'">
                     <table width="100%">
                       <tr *ngIf="field.controlType === 'textbox'">
-                        <td width="100%">
+                        <td class="main-table-data" width="100%">
                           <table width="100%" *ngFor="let language of supportedLanguages;">
                             <tr>
                               <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                               <td width="10%"></td>
                               <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
-                            <tr>
-                              <td width="45%">
+                            <tr *ngFor="let item of buildJSONData[field.attributeName]" [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                              <td class="sub-table-row" width="45%">
                                 <input *ngIf="buildJSONData[field.attributeName]" type="text" class="readonly"
                                   readonly="true" disabled="true"
-                                  value="{{buildJSONData[field.attributeName][language]}}">
+                                  [value]="item.value">
                               </td>
-                              <td width="10%"></td>
-                              <td width="45%" *ngIf="userInputValues[field.attributeName]">
+                              <td class="sub-table-row" width="10%"></td>
+                              <td class="sub-table-row" width="45%">
                                 <div class="search-input-card">
-                                  <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                    (blur)="captureAddressValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
-                                    [value]="userInputValues[field.attributeName]"
-                                    (focus)="captureVirtualKeyboard(field.attributeName, 2)" #keyboardRef/>
-                                  <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
-                                </div>
-                              </td>
-                              <td width="45%" *ngIf="!userInputValues[field.attributeName]">
-                                <div class="search-input-card">
-                                  <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}"
-                                   (blur)="captureAddressValue($event, field.attributeName, language, buildJSONData[field.attributeName][language])"
-                                   (focus)="captureVirtualKeyboard(field.attributeName, 2)" #keyboardRef/>
-                                   <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
+                                  <input class="input" matInput #{{field.attributeName}} id="{{field.attributeName}}{{item.language}}"
+                                    (blur)="captureAddressValue($event, field.attributeName, item.language, item.value)"
+                                    [(value)]="userInputValues[field.attributeName][item.language]"
+                                    [placeholder]="field.placeHolder[item.language]"
+                                    (focus)="captureVirtualKeyboard(field.attributeName+item.language, item.index)" #keyboardRef/>
+                                  <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                                 </div>
                               </td>
                             </tr>
                           </table>
                         </td>
                       </tr>
-                      <tr *ngIf="field.controlType === 'dropdown'">
-                        <td width="100%">
+                      <tr  *ngIf="field.controlType === 'dropdown'">
+                        <td class="main-table-data" width="100%">
                           <table width="100%">
-                            <tr>
+                            <tr >
                               <td width="45%"><label>{{field.labelName[langCode][0]}}</label></td>
                               <td width="10%"></td>
                               <td width="45%"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
-                            <tr>
-                              <td width="45%" class="each-Hierarchy-td">
-                                <input *ngIf="field.attributeName === 'postalCode'" type="text" class="readonly"
-                                  readonly="true" disabled="true" value="{{buildJSONData[field.attributeName]}}">
+                            <ng-container *ngIf="field.attributeName !== 'postalCode'">
+                            <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index" >
+                              <td class="sub-table-row each-Hierarchy-td" width="45%">
                                 <input
-                                  *ngIf="field.attributeName !== 'postalCode' && buildJSONData[field.attributeName] "
+                                  *ngIf="buildJSONData[field.attributeName] "
                                   type="text" class="readonly" readonly="true" disabled="true"
-                                  value="{{buildJSONData[field.attributeName][langCode]}}">
+                                  [value]="item.value">
                               </td>
-                              <td width="10%"></td>
-                              <td width="45%" class="each-Hierarchy-td" *ngIf="dynamicDropDown[field.name]">
-                                <mat-select disableOptionCentering placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [value]="dynamicFieldValue[field.name]" id="{{field.name}}"
-                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel);" >
+                              <td class="sub-table-row" width="10%"></td>
+                              <td class="sub-table-row each-Hierarchy-td" width="45%" *ngIf="dynamicDropDown[field.name]">
+                                <mat-select disableOptionCentering placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"
+                                  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [(value)]="userInputValues[field.attributeName][item.value]" id="{{field.name}}{{item.language}}"
+                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel,field.attributeName,item.language);" >
+                                  <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
+                                    {{ data.name }}
+                                  </mat-option>
+                                </mat-select>
+                                <span *ngIf="dynamicDropDown[field.name][0] && i === (buildJSONData[field.attributeName]?.length -1)">
+                                  <p *ngIf="dynamicDropDown[field.name][0].hierarchyName === fieldName" class="warning-message">{{langJson.EnterAllAddress}} {{fieldName}}</p>
+                                </span>
+                              </td>
+                            </tr>
+                          </ng-container>
+                            <tr *ngIf="field.attributeName === 'postalCode'">
+                              <td *ngIf="buildJSONData[field.attributeName]">
+                                <input type="text" class="readonly"
+                                  readonly="true" disabled="true" [value]="buildJSONData[field.attributeName].value">
+                              </td>
+                              <td class="sub-table-row" width="10%"></td>
+                              <td class="sub-table-row each-Hierarchy-td" width="45%" *ngIf="dynamicDropDown[field.name]">
+                                <mat-select disableOptionCentering placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"  
+                                [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'" [(value)]="userInputValues[field.attributeName]" id="{{field.name}}"
+                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel,field.attributeName,'')" >
                                   <mat-option *ngFor="let data of dynamicDropDown[field.name]" [value]="data">
                                     {{ data.name }}
                                   </mat-option>
@@ -356,7 +343,7 @@
                         </td>
                       </tr>
                       <tr *ngIf="field.controlType === 'fileupload'">
-                        <td width="100%">
+                        <td class="main-table-data" width="100%">
                           <table width="100%">
                             <tr>
                               <td width="100%" colspan="3"><label>{{field.labelName[langCode][0]}}</label></td>
@@ -385,8 +372,8 @@
                                   <input class="input"
                                     [value]="proofOfAddress['documentreferenceId'] ? proofOfAddress['documentreferenceId'] : '' "
                                     matInput #{{field.attributeName}} id="{{field.attributeName}}value"
-                                    (blur)="captureAddressValue($event, field.attributeName, language, '')" 
-                                    (focus)="captureVirtualKeyboard(field.attributeName, 3)" #keyboardRef/>
+                                    (blur)="captureAddressValue($event, field.attributeName, '', '')" 
+                                    (focus)="captureVirtualKeyboard(field.attributeName, buildJSONData.proofOfAddress)" #keyboardRef/>
                                   <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName+'value')">keyboard</i>
                                 </div>
                               </td>
@@ -465,12 +452,7 @@
                                       <app-progress [progress]="file?.progress"></app-progress>
                                     </div>
                                     <div class="preview">
-                                      <img *ngIf="file.name !== selectedPOAFileForPreview"
-                                        (click)="previewFile(i, 'POA')" mat-card-xs-image style="margin: 0 0 -5px 0;"
-                                        src='./assets/icons/iconfont/visibility_on.svg' alt="" />
-                                      <img *ngIf="file.name === selectedPOAFileForPreview" mat-card-xs-image
-                                        (click)="closePreview('POA')" style="margin: 0 0 -5px 0;"
-                                        src='./assets/icons/iconfont/visibility_off.svg' alt="" />
+                                      <img (click)="previewFile(i, 'POA')" mat-card-xs-image style="margin: 0 0 -5px 0;"  src='./assets/icons/iconfont/visibility_on.svg' alt="" />
                                     </div>
                                     <div class="delete" (click)="deleteFile(i, 'POA')">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18"
@@ -490,22 +472,9 @@
                   </div>
                 </div>
               </td>
-              <td class="show-preview-image">
-                <div *ngIf="pdfSrcPOA" (click)="closePreview('POA')" width="100%" style="float: right;cursor: pointer;">
-                  <mat-icon matTooltip="Close Preview">clear</mat-icon>
-                </div>
-                <embed *ngIf="pdfSrcPOA" [src]="pdfSrcPOA | sanitizepdf" height="100%" width="100%">
-              </td>
-            </tr>
-            <tr class="show-preview-image-mobile">
-              <div *ngIf="pdfSrcPOA" (click)="closePreview('POA')" width="100%" style="float: right;cursor: pointer;">
-                <mat-icon matTooltip="Close Preview">clear</mat-icon>
-              </div>
-              <embed *ngIf="pdfSrcPOA" [src]="pdfSrcPOA | sanitizepdf" height="100%" width="100%">
             </tr>
           </table>
         </div>
-        
         <div class="submit-btn-card">
           <button [disabled]="previewDisabledInAddress || !isSelectedAllAddress" mat-raised-button (click)="previewBtn('address')"
             color="primary" id="submit">{{langJson.preview}}</button>
@@ -514,13 +483,12 @@
       <mat-tab label="{{'updatedemographic.contact' | translate}}">
         <h3 class="tab-headings">{{'updatedemographic.contactHeading' | translate}}</h3>
         <div *ngFor="let field of schema['identity']; let i = index" dir="{{sitealignment}}">
-          <mat-grid-list *ngIf="field.tabgroup === 'contact'" [cols]="cols" rowHeight="100px" gutterSize="7px"
-            style="margin-top: 15px;">
-            <mat-grid-tile class="mat-form1">
+          <mat-grid-list *ngIf="field.tabgroup === 'contact'" [cols]="cols" rowHeight="100px" gutterSize="7px">
+            <mat-grid-tile class="mat-form1" *ngIf="buildJSONData[field.attributeName]">
               <div class="mini-card" *ngIf="field.controlType === 'textbox'">
                 <mat-card-header><mat-card-title>{{field.labelName[langCode][0]}}</mat-card-title></mat-card-header>
-                <mat-card-subtitle><input type="text" class="readonly" readonly="true" disabled="true"
-                    value="{{buildJSONData[field.attributeName]}}"></mat-card-subtitle>
+                <mat-card-subtitle ><input type="text" class="readonly" readonly="true" disabled="true"
+                    [value]="buildJSONData[field.attributeName].value"></mat-card-subtitle>
               </div>
             </mat-grid-tile>
             <mat-grid-tile class="mat-form1">
@@ -530,15 +498,17 @@
                   <div class="search-input-card" *ngIf="field.attributeName === 'email'">
                     <input class="input"  [value]="userIdEmail" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
                       (input)="captureContactValue($event, field.attributeName)"
+                      [placeholder]="field.placeHolder[langCode]"
                       (blur)="captureContactValue($event, field.attributeName)" 
-                      (focus)="captureVirtualKeyboard(field.attributeName, 4)"  #keyboardRef/>
+                      (focus)="captureVirtualKeyboard(field.attributeName, buildJSONData[field.attributeName].index)"  #keyboardRef/>
                     <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
                   </div>
                   <div class="search-input-card" *ngIf="field.attributeName === 'phone'">
                     <input class="input"  [value]="userIdPhone" matInput type="password" #{{field.attributeName}} id="{{field.attributeName}}"
                       (input)="captureContactValue($event, field.attributeName)"
+                      [placeholder]="field.placeHolder[langCode]"
                       (blur)="captureContactValue($event, field.attributeName)"
-                      (focus)="captureVirtualKeyboard(field.attributeName, 6)" #keyboardRef/>
+                      (focus)="captureVirtualKeyboard(field.attributeName, buildJSONData[field.attributeName].index)" #keyboardRef/>
                     <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard(field.attributeName)">keyboard</i>
                   </div>
                   </mat-card-subtitle>
@@ -547,24 +517,25 @@
             <mat-grid-tile class="mat-form1">
               <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
                 <mat-card-header><mat-card-title>{{field.labelName[langCode][2]}}</mat-card-title></mat-card-header>
-                <mat-card-subtitle>
+                
                   <div class="search-input-card" *ngIf="field.attributeName === 'email'">
                   <input class="input" [value]="confirmEmailContact" 
                     (input)="captureConfirmValue($event,field.attributeName)"
                     (blur)="captureConfirmValue($event,field.attributeName)"
-                    (focus)="captureVirtualKeyboard('confirm' + field.attributeName, 5)"
+                    [placeholder]="field.placeHolder[langCode]"
+                    (focus)="captureVirtualKeyboard('confirm' + field.attributeName, buildJSONData[field.attributeName].confIndex)"
                     matInput #confirmemail #input id="confirm{{field.attributeName}}" #keyboardRef/>
                     <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('confirm' + field.attributeName)">keyboard</i>
                   </div>
                   <div class="search-input-card" *ngIf="field.attributeName === 'phone'">
                   <input class="input" [value]="confirmPhoneContact" 
                     (input)="captureConfirmValue($event,field.attributeName)"
+                    [placeholder]="field.placeHolder[langCode]"
                     (blur)="captureConfirmValue($event,field.attributeName)"
-                    (focus)="captureVirtualKeyboard('confirm' + field.attributeName, 7)"
+                    (focus)="captureVirtualKeyboard('confirm' + field.attributeName, buildJSONData[field.attributeName].confIndex)"
                     matInput #confirmphone id="confirm{{field.attributeName}}" #keyboardRef/>
                     <i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard('confirm' + field.attributeName)">keyboard</i>
                   </div>
-                </mat-card-subtitle>
                 <p *ngIf="showNotMatchedMessageEmail && (field.attributeName === contactTye) && field.attributeName === 'email' " class="warning-message-for-contact">
                   {{langJson.enteredValuesNotMatch}}</p>
                 <p *ngIf="showNotMatchedMessagePhone && (field.attributeName === contactTye) && field.attributeName === 'phone' " class="warning-message-for-contact">
@@ -574,11 +545,11 @@
             <mat-grid-tile class="mat-form1">
               <div class="mini-card" *ngIf="field.tabgroup === 'contact' && field.controlType === 'textbox'">
                 <mat-card-header></mat-card-header>
-                <mat-card-subtitle style="margin-top: 14px;"><button
+                <button
                     [disabled]="sendOtpDisable || !(field.attributeName === contactTye)"
                     (click)="sendOTPBtn(field.attributeName)" mat-raised-button color="primary"
                     id="sendOTP{{field.attributeName}}">{{field.labelName[langCode][3]
-                    |translate}}</button></mat-card-subtitle>
+                    |translate}}</button>
               </div>
             </mat-grid-tile>
           </mat-grid-list>
@@ -594,31 +565,28 @@
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
                   <mat-card-header><mat-card-title>{{field.labelName[langCode][0]}}</mat-card-title></mat-card-header>
-                  <mat-card-subtitle *ngIf="buildJSONData[field.attributeName]"><input
-                      style="border: none; background-color: #F7F7F7" type="text" class="readonly" readonly="true"
-                      disabled="true" value="{{buildJSONData[field.attributeName]}}"></mat-card-subtitle>
+                  <span *ngIf="buildJSONData[field.attributeName]"><input
+                      style="border: none;" type="text" class="readonly" readonly="true"
+                      disabled="true" [value]="buildJSONData[field.attributeName].value"></span>
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
                   <mat-card-header><mat-card-title>{{field.labelName[langCode][1]}}</mat-card-title></mat-card-header>
-                  <!-- <mat-card-subtitle> -->
-                    <mat-select disableOptionCentering class="enable-dropdown" [(ngModel)]="selected2" id="{{field.attributeName}}">
+                  
+                    <mat-select [placeholder]="field.placeHolder[langCode]" disableOptionCentering class="enable-dropdown" [(ngModel)]="selected2" id="{{field.attributeName}}">
                       <mat-option *ngFor="let data of newNotificationLanguages"
                         (onSelectionChange)="capturePerfLang($event, field.attributeName, langCode, field.dataType)"
                         [value]="data.code">{{ data.name }}</mat-option>
                     </mat-select>
-                  <!-- </mat-card-subtitle> -->
-                </div>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <div style="text-align: end;margin-right: 2rem; margin-top: none;">
-                  <button mat-raised-button (click)="updatenotificationLanguage()" color="primary"
-                    id="submit">{{langJson.submit}}</button>
                 </div>
               </mat-grid-tile>
             </mat-grid-list>
+            <div style="text-align: end;margin-right: 2rem; margin-top: none;" *ngIf="langJson">
+              <button mat-raised-button (click)="updatenotificationLanguage()" color="primary"
+                id="submit">{{langJson.submit}}</button>
+            </div>
           </div>
         </div>
       </mat-tab>
@@ -637,29 +605,33 @@
       <div [style.width]="width">
         <div class="input-values-main-card">
           <div>
-            <div *ngFor="let field of schema['identity']">
-              <table width="100%" *ngFor="let language of supportedLanguages;">
-                <tr *ngIf="buildCloneJsonData[field.attributeName]">
-                  <td width="75%">{{field.labelName[langCode][1]}}</td>
+              <table class="preview-input-size" *ngFor="let item of buildCloneJsonData">
+                <tr *ngIf="typeOf(item.newData) !== 'string' && item.newData[0]" >
+                  <td *ngIf="item.newData[0].value">{{item.labelName}}</td>
                 </tr>
-                <tr
-                  *ngIf="typeOf(buildCloneJsonData[field.attributeName]) !== 'string' && buildCloneJsonData[field.attributeName]">
-                  <td width="75%"><input type="text" class="readonly" readonly="true" disabled="true"
-                      value="{{buildCloneJsonData[field.attributeName][language]}}"></td>
+                <tr *ngIf="item.newData && typeOf(item.newData) === 'string'">
+                  <td >{{item.labelName}}</td>
                 </tr>
-                <tr
-                  *ngIf="typeOf(buildCloneJsonData[field.attributeName]) === 'string' && buildCloneJsonData[field.attributeName]">
-                  <td width="75%"><input type="text" class="readonly" readonly="true" disabled="true"
-                      value="{{buildCloneJsonData[field.attributeName]}}"></td>
+                <tr *ngIf="typeOf(item.newData) !== 'string'" >
+                  <td>
+                    <span *ngFor="let eachLang of item.newData" style="margin-bottom: 5px;">
+                      <input *ngIf="eachLang.value" style="margin-bottom: 5px; color: #000000;" type="text" class="readonly" readonly="true" disabled="true"
+                      [value]="eachLang.value">
+                    </span>
+                  </td>
+                </tr>
+                <tr *ngIf="typeOf(item.newData) === 'string' && item.newData">
+                  <td>
+                    <input style="color: #000000;" type="text" class="readonly" readonly="true" disabled="true"
+                      [value]="item.newData">
+                  </td>
                 </tr>
               </table>
             </div>
-          </div>
         </div>
-        <div style="margin-left: 13px; margin-top: 0px;">
-          <mat-card-title style="font-size: 16px; color: #000000;">{{langJson.documentUploaded}}</mat-card-title>
-          <!-- <mat-card-subtitle style="font-size: 14px; color: #000000;">Identity Proof</mat-card-subtitle> -->
-          <div class="files-list" style="width: 80%;">
+        <div class="files-list">
+          <mat-card-title class="files-list-title">{{langJson.documentUploaded}}...</mat-card-title>
+          <div style="width: 80%;">
             <div class="uploaded-single-file" *ngFor="let file of uploadedFiles; let i = index">
               <div class="file-icon" style="width: 50px">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -692,17 +664,12 @@
               </div>
 
               <div class="preview" >
-                <img *ngIf="file.name !== selectedFileInPreviewPage" (click)="previewFileInPreviewPage(i,file.name)" mat-card-xs-image
+                <img *ngIf="file.name !== selectedFileInPreviewPage" (click)="previewFileInPreviewPage(i)" mat-card-xs-image
                   style="margin: 0 0 -5px 0;" src='./assets/icons/iconfont/visibility_on.svg' alt="" />
-                <img *ngIf="file.name === selectedFileInPreviewPage" mat-card-xs-image (click)="closePreviewPageImage()"
-                  style="margin: 0 0 -5px 0;" src='./assets/icons/iconfont/visibility_off.svg' alt="" />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="preview-image">
-        <embed *ngIf="pdfSrcInPreviewPage" [src]="pdfSrcInPreviewPage | sanitizepdf" height="100%" width="100%">
       </div>
     </div>
 

@@ -357,5 +357,12 @@
       </div>
     </div>
   </div>
-
+  
+  <!-- show preview image -->
+  <div style="height: 50%;" *ngIf="input.case === 'previewImage'">
+    <div (click)="dismiss()" width="100%" style="float: right;cursor: pointer;">
+      <mat-icon matTooltip="Close Preview">clear</mat-icon>
+    </div>
+    <embed *ngIf="input.imageLink" [src]="input.imageLink | sanitizepdf" width="100%" height="500px">
+  </div>
 </div>

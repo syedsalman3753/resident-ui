@@ -103,7 +103,6 @@ export class DialogComponent implements OnInit {
 
     if (this.data.case === "OTP") {
       this.setOtpTime()
-      // setInterval(this.interval)
     }
     this.appConfigService.getConfig();
   }
