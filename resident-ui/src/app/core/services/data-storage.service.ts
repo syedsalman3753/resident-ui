@@ -345,4 +345,12 @@ export class DataStorageService {
   getUpdateMyDataSchema(schemaType:any){
     return this.httpClient.get(this.BASE_URL+'/auth-proxy/config/ui-schema/'+schemaType)
   }
+
+  translateUserInput(request:any){
+    return this.httpClient.post(this.BASE_URL + '/transliteration/transliterate', request)
+  }
+
+  getUpdateDataCount(){
+    return this.httpClient.get(this.BASE_URL + '/identity/update-count')
+  }
 }
