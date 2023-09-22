@@ -110,6 +110,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   isSelectedAllAddress:boolean = true;
   fieldName:string;
   oldKeyBoradIndex:number;
+  getUserPerfLang = new Set([]);
+  attributeUpdateCountMaxLimit:any;
+  attributeUpdateCountRemainLimit:any = {};
   
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
@@ -181,7 +184,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
     this.getUpdateMyDataSchema();
     this.getUserInfo();
-
+    await this.getMappingData();
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
     );
@@ -230,6 +233,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         if (response["response"]) {
           this.userInfo = response["response"];
+          this.userInfo['fullName'].forEach(item=>{
+            this.getUserPerfLang.add(item.language)
+          }) 
           UpdatedemographicComponent.actualData = response["response"];
           if (this.schema && this.userInfo) {
             this.buildData()
@@ -242,6 +248,27 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.showErrorPopup(response['errors'])
         }
       });
+  }
+
+  async getMappingData(){
+    this.dataStorageService.getMappingData().subscribe((response) =>{
+      if(response){
+        this.attributeUpdateCountMaxLimit = {...response['attributeUpdateCountLimit']}
+        this.getUpdateDataCount();
+      }
+    })
+  }
+
+  async getUpdateDataCount(){
+    this.dataStorageService.getUpdateDataCount().subscribe((response) =>{
+      if(response['response']){
+        this.attributeUpdateCountRemainLimit = {...this.attributeUpdateCountMaxLimit}
+        response['response'].attributes.forEach(item =>{
+          this.attributeUpdateCountRemainLimit[item.attributeName] = item.noOfUpdatesLeft
+        })
+      }
+    })
+
   }
 
   buildData() {
@@ -466,7 +493,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.dialog.closeAll();
     this.isLoading = true;
     const request = {
-      "id": "mosip.resident.contact.details.update.id",
+      "id": this.appConfigService.getConfig()["resident.contact.details.update.id"],
       "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
       "requesttime": Utils.getCurrentDate(),
       "request": {
@@ -495,7 +522,36 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     })
   }
 
-  captureValue(event: any, formControlName: string, language: string, currentValue: any) {
+async translateUserInput(toLang: string, fromLang: string, input:string,formControlName:string){
+    // let attribute = document.getElementById(formControlName+toLang)
+      // if(toLang !== 'fra'){
+        let request = {
+          "id": this.appConfigService.getConfig()["mosip.resident.transliteration.transliterate.id"],
+          "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
+          "requesttime": "2023-09-20T10:43:08.864Z",
+          "request": {
+            "from_field_value": input,
+            "from_field_lang": fromLang,
+            "to_field_lang": toLang
+          }
+        }
+        this.dataStorageService.translateUserInput(request).subscribe(response =>{
+          if(response['response']){
+            let value = response['response'].to_field_value
+            this.userInfoClone[formControlName].push({"language":toLang, "value" : value})
+            this.userInputValues[formControlName][toLang] = value;
+            // document.getElementById(formControlName+toLang).focus();
+            // attribute.setAttribute('value',value);
+            // document.getElementById(formControlName+toLang).focusOut();
+          }else{
+            this.userInputValues[formControlName][toLang] = '';
+          }
+         
+        })
+      // }
+  }
+
+async captureValue(event: any, formControlName: string, language: string, currentValue: any) {
     let self = this;
       if (event.target.value.trim() === "") {
         this.userInfoClone[formControlName].forEach(item => {
@@ -506,12 +562,20 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       } else {
         if (formControlName !== "proofOfIdentity") {
           if(this.userInputValues[formControlName][language] === ''){
-            let newData = { "language": language, "value": event.target.value };
-            if( this.userInfoClone[formControlName]){
-              this.userInfoClone[formControlName].push(newData)
-            }else{
-              this.userInfoClone[formControlName] = [].concat(newData)
-            }
+            console.log("Hello")
+              this.getUserPerfLang.forEach(item =>{
+                if(item === language){
+                  this.userInfoClone[formControlName] = [].concat({"language":language,"value":event.target.value})
+                }else{
+                  this.translateUserInput(item, language, event.target.value, formControlName)
+                }
+              
+              })
+            // if( this.userInfoClone[formControlName]){
+            //   this.userInfoClone[formControlName].push(newData)
+            // }else{
+            //   this.userInfoClone[formControlName] = [].concat(newData)
+            // }
           }else{
             this.userInfoClone[formControlName].forEach(item =>{
               if(item.language === language){
