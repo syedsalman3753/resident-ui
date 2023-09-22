@@ -49,9 +49,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   pageIndex = 0;
   pageSizeOptions: number[] = [5, 10, 15, 20];
   serviceTypeFilter:any;
-  serviceTypeFilter2:any;
   statusTypeFilter:any;
-  statusTypeFilter2:any;
   showFirstLastButtons:boolean = true;
   cols:number;
   today: Date = new Date();
@@ -115,23 +113,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.translateService.use(localStorage.getItem("langCode"));
     this.dateAdapter.setLocale(defaultJson.keyboardMapping[this.langCode]);
-    this.translateService
-      .getTranslation(localStorage.getItem("langCode"))
-      .subscribe(response => {
-        this.langJSON = response;
-        this.popupMessages = response;
-        this.serviceHistorySelectedValue = response.viewhistory.historyType;
-        this.statusHistorySelectedValue = response.viewhistory.status;
-        this.paginator2.itemsPerPageLabel = response['paginatorIntl'].itemsPerPageLabel;
-        const originalGetRangeLabel = this.paginator2.getRangeLabel;
-        this.paginator2.getRangeLabel = (page: number, size: number, len: number) => {
-          return originalGetRangeLabel(page, size, len)
-              .replace('of', response['paginatorIntl'].of);
-      }; 
-      });
-
-    this.getServiceHistory("","","");
+    
+    this.getLangJsonData();
     this.captureValue("","ALL","", "")
+
 
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -149,18 +134,34 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     }
   }
 
+  async getLangJsonData(){
+    this.translateService
+    .getTranslation(localStorage.getItem("langCode"))
+    .subscribe(response => {
+      this.langJSON = response;
+      this.popupMessages = response;
+      this.serviceHistorySelectedValue = response.viewhistory.historyType;
+      this.statusHistorySelectedValue = response.viewhistory.status;
+      this.paginator2.itemsPerPageLabel = response['paginatorIntl'].itemsPerPageLabel;
+      const originalGetRangeLabel = this.paginator2.getRangeLabel;
+      this.paginator2.getRangeLabel = (page: number, size: number, len: number) => {
+        return originalGetRangeLabel(page, size, len)
+            .replace('of', response['paginatorIntl'].of);
+    };
+    this.getServiceHistory("","","");
+    });
+
+  }
+
   getServiceHistory(pageEvent:any, filters:any, actionTriggered:string){
     this.dataStorageService
       .getServiceHistory(pageEvent, filters,this.pageSize)
       .subscribe((response) => {
         if(response["response"]){
-          this.isLoading = false;
           this.responselist = response["response"]["data"];
           this.totalItems = response["response"]["totalItems"];
           this.serviceTypeFilter = this.appConfigService.getConfig()["resident.view.history.serviceType.filters"].split(',');
-          this.serviceTypeFilter2 = this.appConfigService.getConfig()["resident.view.history.serviceType.filters"].split(',');
           this.statusTypeFilter = this.appConfigService.getConfig()["resident.view.history.status.filters"].split(',');
-          this.statusTypeFilter2 = this.appConfigService.getConfig()["resident.view.history.status.filters"].split(',');
           this.pageSize = response["response"]['pageSize']
           this.parsedrodowndata();
           if (this.responselist.length) {
@@ -168,6 +169,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
           } else {
             this.dataAvailable = true;
           }
+          this.isLoading = false;
         } else {
           this.isLoading = false;
           this.showErrorMessagePopup(response["errors"])
@@ -180,6 +182,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     this.serviceTypeFilter = [];
     let statusTypeFilter = this.statusTypeFilter;
     this.statusTypeFilter = [];
+   
     serviceTypeFilter.forEach((element) => {
       if (this.langJSON.viewhistory.serviceTypeFilter[element]) {
         this.serviceTypeFilter.push({ "label": this.langJSON.viewhistory.serviceTypeFilter[element], "value": element });
@@ -194,7 +197,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
   tosslePerOne(isStatusAllValue:boolean, formControlName:string){
     if (isStatusAllValue) {
-      this[formControlName] = this.statusTypeFilter2.join(",");
+      this[formControlName] = 'ALL';
       this.statusHistorySelectedValue = this.langJSON.viewhistory.selectAll;
       this.statusTypeFilter = this.statusTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = true;
@@ -244,7 +247,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
   historyTosslePerOne(isHistoryAllValue: boolean, formControlName: string) {
     if (isHistoryAllValue) {
-      this[formControlName] = this.serviceTypeFilter2.join(",");
+      this[formControlName] = 'ALL';
       this.serviceHistorySelectedValue = this.langJSON.viewhistory.selectAll;
       this.serviceTypeFilter = this.serviceTypeFilter.map(eachServiceType => {
         eachServiceType.label.checked = true;
@@ -294,7 +297,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     if(event !== "")this.disableDownloadBtn = true;
     this.selectedDate = this.today;
     if (controlType === "dropdown") {
-      if (selectedValue === "ALL" || selectedValue === "all") {
+      if (selectedValue === "ALL") {
         if (formControlName === "serviceType") {
           this.isHistoryAllValue = !this.isHistoryAllValue;
           this.historyTosslePerOne(this.isHistoryAllValue, formControlName);
@@ -328,10 +331,8 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     }
     if(formControlName === "serviceType"){
       this.auditService.audit('RP-009', 'View history', 'RP-View history', 'View history', 'User chooses the "history filter" from the drop-down');
-      this.serviceType = this.serviceType.replace(/ALL,/ig, '').replace(/,\s*$/, "");
     }else if(formControlName === "statusFilter"){
       this.auditService.audit('RP-010', 'View history', 'RP-View history', 'View history', 'User chooses the "status filter" from the drop-down');
-      this.statusFilter = this.statusFilter.replace(/ALL,/ig, '').replace(/,\s*$/, "");
     }
     if(event){
       event.stopPropagation()
@@ -417,7 +418,6 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     this.dataStorageService
       .downloadServiceHistory(searchParam)
       .subscribe(data => {
-        // var fileName = "viewhistory.pdf";
         var fileName = ""
         const contentDisposition = data.headers.get('content-disposition');
         if (contentDisposition) {

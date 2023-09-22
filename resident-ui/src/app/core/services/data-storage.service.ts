@@ -257,7 +257,6 @@ export class DataStorageService {
     if (!filters) {
       buildURL = "?languageCode=" + localStorage.getItem("langCode");
     }
-    console.log("buildURL>>>" + buildURL);
     return this.httpClient.get<Blob>(this.BASE_URL + '/download/service-history' + buildURL, { observe: 'response', responseType: 'blob' as 'json' });
   }
 

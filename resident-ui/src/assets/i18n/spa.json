@@ -403,7 +403,9 @@
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
         "EnterAllAddress": "Por favor selecciona",
-        "select": "Seleccionar"
+        "select": "Seleccionar",
+        "remainingAttems": "Quedan $remainingAttems intentos.",
+        "maxAttems": "Se puede hacer una solicitud de cambio de nombre un máximo de $maxAttems veces."
     },
     "preview": {
         "title": "Avance"
@@ -626,6 +628,7 @@
     },
     "serverErrors": {
         "IDA-MLC-009": "No se encontró ningún correo electrónico o número de teléfono registrado con el UIN/VID ingresado. Para agregar un correo electrónico o número de teléfono, visita el centro de registro más cercano.",
+        "IDA-MLC-002": "No se encontró ningún correo electrónico o número de teléfono registrado con el UIN/VID ingresado. Para agregar un correo electrónico o número de teléfono, visita el centro de registro más cercano.",
         "IDA-MLC-018": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
         "RES-SER-422": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido.",
         "RES-SER-410": {
