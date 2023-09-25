@@ -52,13 +52,6 @@
                     "route": "uinservices/sharewithpartner",
                     "description": " Residents can choose the data to be shared with any of the registered partners to avail various third party services.",
                     "auditEventId": "ADM-004"
-                },
-                {
-                    "displayName": "Update My Data",
-                    "icon": "assets/images/updatedemographic.png",
-                    "route": "uinservices/updatedemographic",
-                    "description": "Residents can update the already existing data associated with their UIN/ VID. The data that can be updated includes name, gender, DOB, address, documents uploaded, phone number, email ID, preferred language, etc.",
-                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -235,7 +228,7 @@
     "viewhistory": {
         "title": "View My History",
         "inputsearch": "Search",
-        "inputAppId": "Event ID",
+        "inputAppId": "EID",
         "inputHistory": "History Type",
         "inputStatus": "Status",
         "inputFrom": "From (dd/mm/yyyy)",
@@ -591,7 +584,8 @@
             "sharedSuccessfully": "The data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
         },
         "verifyChannel": {
-            "warningMsg": "Your $channel has already been verified.",
+            "warningMsgForEmail": "Your Email has already been verified.",
+            "warningMsgForPhone": "Your Phone number has already been verified.",
             "emailSuccess": "Your email ID: $channel has been successfully verified against the Event ID: $eventId.",
             "phoneSuccess": "Your phone number: $channel has been successfully verified against the Event ID: $eventId."
         },
