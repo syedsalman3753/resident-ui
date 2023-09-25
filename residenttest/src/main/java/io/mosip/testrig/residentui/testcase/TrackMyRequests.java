@@ -44,6 +44,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		 test.log(Status.INFO, "EID Extracted");
 		 Commons.clickWebelement(test,driver, By.id("getEIDStatusbtn"));
 		 test.log(Status.INFO, "Click on Track");
+		 Thread.sleep(2000);
 		 Commons.click(test,driver, By.id("downloadAcknowledgementbtn"));
 	}
 
