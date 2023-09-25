@@ -134,8 +134,8 @@
                                   placeholder="{{field.placeHolder[item.language]}}"
                                   [(value)]="userInputValues[field.attributeName][item.language]"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0">
-                                  <mat-option *ngFor="let data of dropDownValues[field.attributeName]"
-                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, item.language, field.dataType, buildJSONData[field.attributeName][langCode])"
+                                  <mat-option *ngFor="let data of dropDownValues[field.attributeName][item.language]"
+                                    (onSelectionChange)="captureDropDownValue($event, field.attributeName, item.language, data.code, buildJSONData[field.attributeName][langCode])"
                                     [value]="data.value">{{ data.value }}</mat-option>
                                 </mat-select>
                               </span>

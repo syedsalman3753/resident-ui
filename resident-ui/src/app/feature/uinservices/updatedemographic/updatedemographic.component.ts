@@ -383,8 +383,13 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   getGender() {
-    this.dataStorageService.getDataForDropDown("/auth-proxy/masterdata/dynamicfields/gender" + "/" + localStorage.getItem("langCode") + "?withValue=true").subscribe(response => {
-      this.dropDownValues["gender"] = response["response"]['values'];
+    this.dropDownValues["gender"] = {}
+    this.dataStorageService.getDataForDropDown("/proxy/masterdata/dynamicfields/all/gender").subscribe(response => {
+      if(response['response']){
+        response['response'].forEach(eachItem =>{
+          this.dropDownValues["gender"][eachItem.langCode] = eachItem.fieldVal
+        })
+      }
     });
   }
 
@@ -522,9 +527,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     })
   }
 
-async translateUserInput(toLang: string, fromLang: string, input:string,formControlName:string){
-    // let attribute = document.getElementById(formControlName+toLang)
-      // if(toLang !== 'fra'){
+async translateUserInput(toLang: string, fromLang: string, input:string,formControlName:string, userInfoType:string){
         let request = {
           "id": this.appConfigService.getConfig()["mosip.resident.transliteration.transliterate.id"],
           "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
@@ -538,52 +541,36 @@ async translateUserInput(toLang: string, fromLang: string, input:string,formCont
         this.dataStorageService.translateUserInput(request).subscribe(response =>{
           if(response['response']){
             let value = response['response'].to_field_value
-            this.userInfoClone[formControlName].push({"language":toLang, "value" : value})
+            this[userInfoType][formControlName].push({"language":toLang, "value" : value})
             this.userInputValues[formControlName][toLang] = value;
-            // document.getElementById(formControlName+toLang).focus();
-            // attribute.setAttribute('value',value);
-            // document.getElementById(formControlName+toLang).focusOut();
           }else{
             this.userInputValues[formControlName][toLang] = '';
           }
-         
         })
-      // }
   }
 
-async captureValue(event: any, formControlName: string, language: string, currentValue: any) {
+captureValue(event: any, formControlName: string, language: string, currentValue: any) {
     let self = this;
       if (event.target.value.trim() === "") {
-        this.userInfoClone[formControlName].forEach(item => {
-          if (item['language'] === language) {
-            item['value'] = '';
-          }
+        if(this.userInfoClone[formControlName]){
+          delete this.userInfoClone[formControlName]
+        }
+        this.getUserPerfLang.forEach(item =>{
+          this.userInputValues[formControlName][item] = ''
         })
       } else {
         if (formControlName !== "proofOfIdentity") {
-          if(this.userInputValues[formControlName][language] === ''){
-            console.log("Hello")
-              this.getUserPerfLang.forEach(item =>{
-                if(item === language){
-                  this.userInfoClone[formControlName] = [].concat({"language":language,"value":event.target.value})
-                }else{
-                  this.translateUserInput(item, language, event.target.value, formControlName)
-                }
-              
-              })
-            // if( this.userInfoClone[formControlName]){
-            //   this.userInfoClone[formControlName].push(newData)
-            // }else{
-            //   this.userInfoClone[formControlName] = [].concat(newData)
-            // }
-          }else{
-            this.userInfoClone[formControlName].forEach(item =>{
-              if(item.language === language){
-                item.value = event.target.value
-              }
-            })
-          }
-          this.userInputValues[formControlName][language] = event.target.value;
+          this.userInfoClone[formControlName] = []
+          this.getUserPerfLang.forEach(item =>{
+            let newData
+            if(item === language){
+              newData = { "language": language, "value": event.target.value }
+              this.userInfoClone[formControlName].push(newData)
+              this.userInputValues[formControlName][language] = event.target.value;
+            }else{
+              this.translateUserInput(item, language, event.target.value, formControlName, 'userInfoClone')
+            }
+          })
         } else {
           self[formControlName]["documentreferenceId"] = event.target.value;
           this.userInputValues[formControlName] = event.target.value;
@@ -606,25 +593,28 @@ async captureValue(event: any, formControlName: string, language: string, curren
     this.userInputValues[formControlName] = formattedDate;
   }
 
-  captureDropDownValue(event: any, formControlName: string, language: string, dataType: string, currentValue: any) {
+  captureDropDownValue(event: any, formControlName: string, language: string, code: string, currentValue: any) {
+    let genders =this.dropDownValues.gender
     let self = this;
     if (event.source.selected && event.source.viewValue !== currentValue) {
       if (formControlName !== "proofOfIdentity") {
-        if(this.userInputValues[formControlName][language] === ''){
-          let newData = { "language": language, "value": event.source.viewValue };
-          if( this.userInfoClone[formControlName]){
+        this.userInfoClone[formControlName] = []
+        this.getUserPerfLang.forEach(item =>{
+          let newData
+          if(item === language){
+            newData = { "language": language, "value": event.source.viewValue }
             this.userInfoClone[formControlName].push(newData)
+            this.userInputValues[formControlName][language] = event.source.viewValue;
           }else{
-            this.userInfoClone[formControlName] = [].concat(newData)
+            genders[item].forEach(eachGender =>{
+              if(eachGender.code === code){
+                newData = { "language": item, "value": eachGender.value }
+                this.userInputValues[formControlName][item] = eachGender.value;
+              }
+            })
+            this.userInfoClone[formControlName].push(newData)
           }
-        }else{
-          this.userInfoClone[formControlName].forEach(item =>{
-            if(item.language === language){
-              item.value = event.source.viewValue
-            }
-          })
-        }
-      this.userInputValues[formControlName][language] = event.source.viewValue;
+        })
       } else {
         if (formControlName === "proofOfIdentity") {
           this.displayPOIUpload = true;
@@ -640,29 +630,25 @@ async captureValue(event: any, formControlName: string, language: string, curren
   captureAddressValue(event: any, formControlName: string, language: string, currentValue: any) {
     let self = this;
     if (event.target.value.trim() === "") {
-      this.userInfoAddressClone[formControlName].forEach(item => {
-        if (item['language'] === language) {
-          item['value'] = '';
-        }
+      if(this.userInfoClone[formControlName]){
+        delete this.userInfoClone[formControlName]
+      }
+      this.getUserPerfLang.forEach(item =>{
+        this.userInputValues[formControlName][item] = ''
       })
     } else {
       if (formControlName !== "proofOfAddress") {
-          if(this.userInputValues[formControlName][language] === ''){
-            let newData = { "language": language, "value": event.target.value };
-            if( this.userInfoAddressClone[formControlName]){
-              this.userInfoAddressClone[formControlName].push(newData)
-            }else{
-              this.userInfoAddressClone[formControlName] = [].concat(newData)
-            }
+        this.userInfoAddressClone[formControlName] = []
+        this.getUserPerfLang.forEach(item =>{
+          let newData
+          if(item === language){
+            newData = { "language": language, "value": event.target.value }
+            this.userInfoAddressClone[formControlName].push(newData)
+            this.userInputValues[formControlName][language] = event.target.value;
           }else{
-            this.userInfoAddressClone[formControlName].forEach(item =>{
-              if(item.language === language){
-                item.value = event.target.value
-              }
-            })
+            this.translateUserInput(item, language, event.target.value, formControlName, 'userInfoAddressClone')
           }
-        this.userInputValues[formControlName][language] = event.target.value;
-        console.log(this.userInfoAddressClone)
+        })
       } else {
         self[formControlName]["documentreferenceId"] = event.target.value;
         this.userInputValues[formControlName] = event.target.value;

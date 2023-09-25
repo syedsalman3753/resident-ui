@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": " Residents can choose the data to be shared with any of the registered partners to avail various third party services.",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Update My Data",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Residents can update the already existing data associated with their UIN/ VID. The data that can be updated includes name, gender, DOB, address, documents uploaded, phone number, email ID, preferred language, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -557,7 +564,7 @@
                 "WarningMessageLabel": "Generating a new perpetual VID will revoke the already existing VID.",
                 "confirmationMessageForCreateVid": "Are you sure you want to create a perpetual VID card?",
                 "confirmationMessageForDeleteVid": "Are you sure you want to delete the chosen Perpetual VID card?",
-                "confirmationMessageForDownloadVid": "Are you sure you want to download Perpetual VID card card?"
+                "confirmationMessageForDownloadVid": "Are you sure you want to download Perpetual VID card?"
             },
             "Temporary": {
                 "confirmationMessageForCreateVid": "Are you sure you want to create a temporary VID card?",
