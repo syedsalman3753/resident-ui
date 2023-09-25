@@ -29,7 +29,7 @@ public class KeycloakUserManager {
 	
 	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(KeycloakUserManager.class);
 
-	public static Properties propsKernel = getproperty(TestRunner.getResourcePath() + "/"+"resource/config/Kernel.properties");
+	public static Properties propsKernel = getproperty(TestRunner.getResourcePath() + "/config/"+TestRunner.GetKernalFilename());
 
 	private static Keycloak getKeycloakInstance() {
 		 Keycloak key=null;

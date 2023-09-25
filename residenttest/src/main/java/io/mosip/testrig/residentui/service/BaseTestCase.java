@@ -32,13 +32,13 @@ public class BaseTestCase {
 	public static String ApplnURIForKeyCloak;
 	public static String testLevel;
 	public static Properties props = getproperty(
-			TestRunner.getResourcePath() + "/" + "resource/config/application.properties");
+			TestRunner.getResourcePath() + "/config/application.properties");
 	public static Properties propsKernel = getproperty(
-			TestRunner.getResourcePath() + "/" + "resource/config/Kernel.properties");
+			TestRunner.getResourcePath() + "/config/"+TestRunner.GetKernalFilename());
 	public static Properties propsMap = getproperty(
-			TestRunner.getResourcePath() + "/" + "resource/config/valueMapping.properties");
+			TestRunner.getResourcePath() + "/config/valueMapping.properties");
 	public static Properties propsBio = getproperty(
-			TestRunner.getGlobalResourcePath() + "/" + "resource/config/bioValue.properties");
+			TestRunner.getResourcePath() + "/config/bioValue.properties");
 	public static String SEPRATOR = "";
 	public static String currentModule = "residentui";
 	public final static String COOKIENAME = "Authorization";
