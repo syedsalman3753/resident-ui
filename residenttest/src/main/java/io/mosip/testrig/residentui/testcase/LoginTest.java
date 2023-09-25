@@ -43,20 +43,26 @@ public class LoginTest extends BaseClass {
 // 
 //	@Test(priority = 0)
 	public static void loginTest() throws Exception {
-		// WebDriver driver = BaseClass.driver;
+	
 		String envPath = ConfigManager.getiam_adminportal_path();
-		// String vid = System.getProperty("vid");
+		
 		String otp = "111111";
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
 		Thread.sleep(60000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		Commons.clickWebelement(test, driver, By.xpath("//div[@id='dashboardCard1']"));
+	Commons.clickWebelement(test, driver, By.xpath("//div[@id='dashboardCard1']"));
+		try {
+		
 		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
 		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 		Thread.sleep(30000);
+		}catch(Exception e) {
+			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Thread.sleep(30000);	
+		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 		// otp = MockSMTPListener.getOtp(10, externalemail);
@@ -70,17 +76,7 @@ public class LoginTest extends BaseClass {
 
 		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
-//    List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
-//    List<String> ids =new ArrayList<>();
-//    for(WebElement checkbox: checkboxes) {
-//    	String id = checkbox.getAttribute("id");	
-//    	ids.add(id);
-//    }
-//    System.out.println(ids);
-//    for(String id :ids) {
-//    WebElement checkbox= driver.findElement(By.id(id));
-//    js.executeScript("arguments[0].click();", checkbox); 
-//    }
+
 		Thread.sleep(3000);
 		try {
 			driver.findElement(By.id("confirmmessagepopup")).click();
@@ -93,9 +89,67 @@ public class LoginTest extends BaseClass {
 		}
 	}
 
-//  
+
+//	public static void loginTest() throws Exception {
+//		
+//		String envPath = ConfigManager.getiam_adminportal_path();
+//	
+//		String otp = "111111";
+//		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
+//		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
+//		driver.get(envPath);
+//		Thread.sleep(60000);
+//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//		String Screen=JsonUtil.JsonObjParsing(Commons.getTestData(), "screen");
+//		Commons.clickWebelement(test, driver, By.xpath("//div[@id='dashboardCard1']"));
+//		if(Screen.equals("latest")) {
+//			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+//			Thread.sleep(30000);
+//		}else if(Screen.equals("old")) {
+//			
+//			Commons.clickWebelement(test, driver, By.id("here_tab_id"));
+//			Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
+//			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+//			Thread.sleep(30000);
+//			
+//		}
+//		
+//		
+//		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
+//		Commons.clickWebelement(test, driver, By.id("get_otp"));
+//		// otp = MockSMTPListener.getOtp(10, externalemail);
+//		System.out.println(otp);
+//		for (int i = 0; i <= otp.length() - 1; i++) {
+//			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
+//					Character.toString(otp.charAt(i)));
+//		}
+//		test.log(Status.INFO, "Extracted OTP");
+//		Thread.sleep(4000);
+//
+//		Commons.click(test, driver, By.id("verify_otp"));
+//		test.log(Status.INFO, "Click on Verify");
 //
 //
+//		Thread.sleep(3000);
+//		try {
+//			driver.findElement(By.id("confirmmessagepopup")).click();
+//			
+//		}catch(Exception a) {
+//			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
+//			test.log(Status.INFO, "ALL Checkboxes are selected");
+//			Commons.click(test,driver, By.id("continue"));
+//			Commons.click(test,driver, By.id("confirmmessagepopup"));
+//		}
+//	}
+//	
+	
+	
+	
+	
+	
+	
+	
+	
 	// @Test(priority = 0)
 	public static void loginTestWithTempraryVID() throws Exception {
 		// WebDriver driver = BaseClass.driver;
