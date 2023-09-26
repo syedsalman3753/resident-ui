@@ -112,6 +112,9 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+::ng-deep .cdk-overlay-connected-position-bounding-box{
+  right: 5px !important;
+}
 
 ::ng-deep .mat-menu-panel.myMenu > .mat-menu-content {
   width: 300px !important;
