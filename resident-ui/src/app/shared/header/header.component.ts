@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notificationList:any;
   langCode = localStorage.getItem("langCode");
   popupMessages:any;
+  langJson:any;
   page = 1;
   selector: string = "#notificationMenu";
   clickEventSubscription: Subscription;
@@ -122,6 +123,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     .getTranslation(localStorage.getItem("langCode"))
     .subscribe(response => {
       this.popupMessages = response;
+      this.langJson = response.genericmessage
     });
     
     if(localStorage.getItem("redirectURL") === window.location.href){

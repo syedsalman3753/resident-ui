@@ -228,7 +228,7 @@
     "viewhistory": {
         "title": "Consulter mon historique",
         "inputsearch": "Rechercher",
-        "inputAppId": "Identifiant d'événement",
+        "inputAppId": "EID",
         "inputHistory": "Type d'historique",
         "inputStatus": "Statut",
         "inputFrom": "Du (jj/mm/aaaa)",
@@ -512,6 +512,8 @@
         "clickHere2": "cliquez ",
         "relogin": " pour vous connecter à nouveau.",
         "login": " pour vous connecter.",
+        "click":"cliquez ici.",
+        "toSeeMoreDetails":"pour voir plus de détails",
         "otpPopupDescription": "Un mot de passe à usage unique (OTP) a été envoyé à",
         "loginSuccessfully": "Cher résident, vous vous êtes connecté avec succès",
         "successRemainMsg": "pour suivre la demande de service avec l'EID pré-rempli.",
@@ -584,7 +586,8 @@
             "sharedSuccessfully": "Les données choisies par vous ont été partagées avec succès avec le partenaire choisi pour l'ID d'événement : $eventId."
         },
         "verifyChannel": {
-            "warningMsg": "Votre $channel a déjà été vérifié.",
+            "warningMsgForEmail": "Votre adresse e-mail a déjà été vérifiée.",
+            "warningMsgForPhone": "Votre numéro de téléphone a déjà été vérifié.",
             "emailSuccess": "Votre adresse e-mail : $channel a été vérifiée avec succès pour l'ID d'événement : $eventId.",
             "phoneSuccess": "Votre numéro de téléphone : $channel a été vérifié avec succès pour l'ID d'événement : $eventId."
         },

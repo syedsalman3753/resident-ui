@@ -62,10 +62,10 @@
                   src="./assets/icons/iconfont/lock_black.svg" alt="" />  
               </div>
             </div>
-            <div style="margin-left:6px; width: 280px;"> <span style="font-weight: 600;"> EID:
+            <div style="margin-left:6px; width: 280px;" *ngIf="langJson"> <span style="font-weight: 600;"> EID:
                 {{data.eventId}}</span>&nbsp;|&nbsp;{{data.description}}. <span
-                style="text-decoration: underline; color: #551A8B; cursor: pointer;">Click here</span>
-              to see more details.
+                style="text-decoration: underline; color: #551A8B; cursor: pointer;">{{langJson.click}}</span>
+              {{langJson.toSeeMoreDetails}}
             </div>
           </div>
           <mat-divider></mat-divider>

@@ -354,9 +354,9 @@ export class VerifyComponent implements OnInit, OnDestroy {
 
   showMessageWarning(message: string) {
     if (this.otpChannel[0] === "PHONE") {
-      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsg.replace("$channel", "Phone Number")
+      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForPhone
     } else {
-      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsg.replace("$channel", "Email")
+      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForEmail
     }
 
     const dialogRef = this.dialog.open(DialogComponent, {
