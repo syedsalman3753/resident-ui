@@ -519,6 +519,8 @@
         "clickHere2": "click ",
         "relogin": " to login again.",
         "login": " to login.",
+        "click":"Click here",
+        "toSeeMoreDetails":"to see more details.",
         "otpPopupDescription": "One Time Password (OTP) has been sent to",
         "loginSuccessfully": "Dear resident, you logged in complected successfully",
         "successRemainMsg": "to track service request with pre-filled EID.",

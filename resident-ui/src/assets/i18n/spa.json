@@ -228,7 +228,7 @@
     "viewhistory": {
         "title": "Ver mi historial",
         "inputsearch": "Buscar",
-        "inputAppId": "ID de evento",
+        "inputAppId": "EID",
         "inputHistory": "Tipo de historial",
         "inputStatus": "Estado",
         "inputFrom": "Desde (dd/mm/aaaa)",
@@ -512,11 +512,13 @@
         "clickHere2": "haz clic ",
         "relogin": " para iniciar sesión nuevamente.",
         "login": " para iniciar sesión.",
+        "click":"haz clic aquí.",
+        "toSeeMoreDetails":"ver más detalles.",
         "otpPopupDescription": "Se ha enviado un OTP (One Time Password) a",
         "loginSuccessfully": "Estimado residente, has iniciado sesión exitosamente",
         "successRemainMsg": "para rastrear la solicitud de servicio con el EID prellenado.",
         "passwordCombinationHeading": "Combinación de contraseña: ",
-        "passwordCombination": "Las primeras cuatro letras de tu nombre en mayúsculas y tu año de nacimiento. Por ejemplo: Si tu nombre es Juan Pérez y tu fecha de nacimiento es 09/06/1963, tu contraseña será JUAN1963.",
+        "passwordCombination": "Las primeras cuatro letras de tu nombre en mayúsculas y tu año de nacimiento. Por ejemplo: Si tu nombre es Johnny Depp y tu fecha de nacimiento es 09/06/1963, tu contraseña será JUAN1963.",
         "SuccessLogin": "Has iniciado sesión exitosamente.",
         "successLogout": "Has cerrado sesión exitosamente.",
         "dearResident": "Estimado residente,",
@@ -584,7 +586,8 @@
             "sharedSuccessfully": "Los datos elegidos por ti se han compartido correctamente con el socio seleccionado para el ID de evento: $eventId."
         },
         "verifyChannel": {
-            "warningMsg": "Tu $channel ya ha sido verificado.",
+            "warningMsgForEmail": "Su correo electrónico ya ha sido verificado.",
+            "warningMsgForPhone": "Su número de teléfono ya ha sido verificado.",
             "emailSuccess": "Tu ID de correo electrónico: $channel se ha verificado correctamente para el ID de evento: $eventId.",
             "phoneSuccess": "Tu número de teléfono: $channel se ha verificado correctamente para el ID de evento: $eventId."
         },

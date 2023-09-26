@@ -228,7 +228,7 @@
     "viewhistory": {
         "title": "عرض تاريخي الخاص بي",
         "inputsearch": "بحث",
-        "inputAppId": "معرف الحدث",
+        "inputAppId": "EID",
         "inputHistory": "نوع التاريخ",
         "inputStatus": "الحالة",
         "inputFrom": "من (يوم/شهر/سنة)",
@@ -512,12 +512,13 @@
         "clickHere2": "انقر ",
         "relogin": " لتسجيل الدخول مرة أخرى.",
         "login": " لتسجيل الدخول.",
+        "click":"انقر هنا.",
+        "toSeeMoreDetails":"لرؤية المزيد من التفاصيل",
         "otpPopupDescription": "تم إرسال رمز المرور لمرة واحدة (OTP) إلى",
         "loginSuccessfully": "عزيزي المقيم ، تم تسجيل دخولك بنجاح",
         "successRemainMsg": "لتتبع طلب الخدمة باستخدام EID مملوء مسبقًا.",
         "passwordCombinationHeading": "تركيبة كلمة المرور: ",
-        "passwordCombination": "أربعة أحرف من اسمك الأول بحروف كبيرة وسنة ميلادك. على سبيل المثال: إذا كان اسمك هو جوني ديب وتاريخ ميلادك هو 09/06/1963 ، فسيكون كلمة المرور الخاصة بك JOHN1963.",
-        "SuccessLogin": "لقد سجلت الدخول بنجاح.",
+        "passwordCombination": "الأربعة أحرف الأولى من اسمك الأول بحروف كبيرة وسنة ميلادك. على سبيل المثال: إذا كان اسمك Johnny Depp وتاريخ ميلادك هو 09/06/1963، سيكون كلمة المرور الخاصة بك JOHN1963.",        "SuccessLogin": "لقد سجلت الدخول بنجاح.",
         "successLogout": "لقد قمت بتسجيل الخروج بنجاح. ",
         "dearResident": "عزيزي المقيم،",
         "trackStatusText": "لتتبع حالة الحدث ، انقر ",
@@ -584,7 +585,8 @@
             "sharedSuccessfully": "تمت مشاركة البيانات التي اخترتها بنجاح مع الشريك المحدد بناءً على رقم الحدث: $eventId"
         },
         "verifyChannel": {
-            "warningMsg": "تم التحقق بالفعل من $channel الخاص بك.",
+            "warningMsgForEmail": "تم التحقق بالفعل من بريدك الإلكتروني.",
+            "warningMsgForPhone": "تم التحقق بالفعل من رقم هاتفك.",
             "emailSuccess": "تم التحقق بنجاح من عنوان البريد الإلكتروني الخاص بك: $channel ضد رقم الحدث: $eventId.",
             "phoneSuccess": "تم التحقق بنجاح من رقم هاتفك: $channel ضد رقم الحدث: $eventId."
         },

@@ -81,14 +81,11 @@ export class GetuinComponent implements OnInit {
   }
 
   ngOnInit() {
-    let self = this;
-    setTimeout(() => {
-      self.siteKey = self.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
-      self.captchaEnable = self.appConfigService.getConfig()["mosip.resident.captcha.enable"];      
-      self.vidLength = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
-      self.uinLength = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
-      self.aidLength = this.appConfigService.getConfig()["mosip.kernel.rid.length"];
-    }, 1000);  
+    this.siteKey = this.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
+    this.captchaEnable = this.appConfigService.getConfig()["mosip.resident.captcha.enable"];
+    this.vidLength = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
+    this.uinLength = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
+    this.aidLength = this.appConfigService.getConfig()["mosip.kernel.rid.length"];
     this.translateService.use(localStorage.getItem("langCode"));    
     this.translateService
     .getTranslation(this.userPreferredLangCode)
@@ -98,8 +95,7 @@ export class GetuinComponent implements OnInit {
         this.infoText = response.InfomationContent.getUin.replace('$AID',this.aidLength).replace('$UIN',this.uinLength).replace('$VID',this.vidLength)
         this.getStatusData = response.uinStatus
         this.stageKeys =  Object.keys(this.getStatusData.statusStages)
-
-      });
+    });
   }
 
   onItemSelected(item: any) {
