@@ -261,8 +261,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   async getUpdateDataCount(){
     this.dataStorageService.getUpdateDataCount().subscribe((response) =>{
+      this.attributeUpdateCountRemainLimit = {...this.attributeUpdateCountMaxLimit}
       if(response['response']){
-        this.attributeUpdateCountRemainLimit = {...this.attributeUpdateCountMaxLimit}
         response['response'].attributes.forEach(item =>{
           this.attributeUpdateCountRemainLimit[item.attributeName] = item.noOfUpdatesLeft
         })
