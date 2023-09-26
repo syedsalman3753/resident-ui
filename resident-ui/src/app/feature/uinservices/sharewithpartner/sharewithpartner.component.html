@@ -34,7 +34,7 @@
 											[matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}
 											<mat-icon>keyboard_arrow_down</mat-icon>
 										</button>
-										<mat-menu #basic="matMenu">
+										<mat-menu #basic="matMenu" class="each-lang-card">
 											<ng-container *ngFor="let data1 of data.formatOption[langCode];">
 												<button id="{{data1.value}}Btn" mat-menu-item>
 													<div class="check-box-card" (click)="captureCheckboxValue($event, data,data1)">
@@ -82,7 +82,7 @@
 										</tr>
 								</table>
 							</div>
-							<table [style.width]="width">
+							<table [style.width]="previewWidth">
 								<tr>
 									<td style="padding-bottom: 10px;font-size: 14px;">
 										<mat-label>{{'sharewithpartner.partnerName' | translate}}<span
@@ -91,7 +91,7 @@
 								</tr>
 								<tr>
 									<td>
-										<mat-select class="enable-dropdown" id="partnerDetails" [style.width]="previewWidth">
+										<mat-select class="enable-dropdown" id="partnerDetails">
 											<mat-option (onSelectionChange)="captureDropDownValue($event)"
 												*ngFor="let partnerDetail of partnerDetails"
 												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">
@@ -107,7 +107,7 @@
 								</tr>
 								<tr>
 									<td>
-									<span class="purpose-search-card" [style.width]="previewWidth">
+									<span class="purpose-search-card" >
 										<textarea [attr.maxlength]="totalCommentCount" 
 											id="sharingReasonPlaceholder" class="purpose-input-box" matInput
 											placeholder="{{'sharewithpartner.sharingReasonPlaceholder' | translate}}"

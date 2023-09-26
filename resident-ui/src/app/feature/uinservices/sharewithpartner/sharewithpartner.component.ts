@@ -87,13 +87,13 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         if(active === "medium"){
           this.cols = 2;
           this.width = "25em";
-          this.previewWidth = "25em"
+          this.previewWidth = "23em"
           this.attributeWidth = "12em";
         }
         if(active === "small"){
           this.cols = 1;
           this.width = "35em";
-          this.previewWidth = "35em"
+          this.previewWidth = "30em"
           this.attributeWidth = "20em";
         }
         if(active === "extraSmall"){

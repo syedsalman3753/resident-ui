@@ -55,7 +55,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
         if (active === "small") {
           this.cols = 1;
           this.width = "40em";
-          this.previewWidth = "40em"
+          this.previewWidth = "25em"
           this.attributeWidth = "20em";
         }
         if (active === "extraSmall") {
@@ -136,7 +136,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
       this.schema.forEach(data =>{
         this.valuesSelected.push(data.attributeName)
       })
-    });
+    });   
   }
 
   getUserInfo() {
