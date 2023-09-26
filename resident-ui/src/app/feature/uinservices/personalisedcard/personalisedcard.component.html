@@ -22,7 +22,7 @@
 							</td>
 							<td *ngIf="data.formatRequired" style="width:40%">
 								<button disabled [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>
-								<mat-menu #basic="matMenu">
+								<mat-menu #basic="matMenu" class="each-lang-card" >
 									<ng-container *ngFor="let data1 of data.formatOption[langCode];">
 										<button id="{{data1.value}}Btn" mat-menu-item>
 											<div class="check-box-card" (click)="captureCheckboxValue($event, data,data1)">
@@ -38,7 +38,7 @@
 					</table>					
 				</td></mat-grid-tile><mat-grid-tile>
 				<td style="vertical-align: top;" [style.width] = "previewWidth">
-					<div class="seleted-details-card" id="seleted-details-card" [style.width]="previewWidth">
+					<div class="seleted-details-card" id="seleted-details-card" >
 					<table style="width: 100%; max-height: 217px;">
 						<tr >
 							<td rowspan='2'  *ngIf="dataDisplay['photo']" style="width: 25%;"><img [src]="dataDisplay['photo']['value']" alt='' width='70px' height='70px' style="border-radius: 10%;" /></td>

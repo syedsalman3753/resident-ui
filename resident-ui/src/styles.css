@@ -497,3 +497,7 @@ button{
   color: grey; 
   cursor: pointer;
 }
+
+::-webkit-scrollbar{
+   width: 5px;
+}
