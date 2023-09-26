@@ -149,10 +149,14 @@ public class TestRunner {
 	}
 	public static String GetKernalFilename(){
 		String path = System.getProperty("env.user");
-	
-		String kernalpath="Kernel_"+path+".properties";
-		return kernalpath;
-		
+		String kernalpath=null;
+	if(System.getProperty("env.user")==null) {
+		 kernalpath="Kernel.properties";
+
+	}else {
+		 kernalpath="Kernel_"+path+".properties";
+	}
+	return kernalpath;
 	}
 
 }
