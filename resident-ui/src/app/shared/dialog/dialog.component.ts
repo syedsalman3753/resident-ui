@@ -239,6 +239,11 @@ export class DialogComponent implements OnInit {
   dismissPage(){
     this.dialog.closeAll()
   }
+
+  dismissPageToHome(){
+    this.dialog.closeAll()
+    this.router.navigate(['uinservices/dashboard'])
+  }
   logOut(){
     this.redirectService.redirect(window.location.href);
   }
