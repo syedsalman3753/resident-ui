@@ -30,8 +30,8 @@ describe('DocumentComponent', () => {
 
     fixture = TestBed.createComponent(DocumentComponent);
     component = fixture.componentInstance;
-    dataStorageService = TestBed.inject(DataStorageService);
-    auditService = TestBed.inject(AuditService);
+    dataStorageService = TestBed.get(DataStorageService);
+    auditService = TestBed.get(AuditService);
   });
 
   it('should create the DocumentComponent', () => {
@@ -40,7 +40,7 @@ describe('DocumentComponent', () => {
 
   it('should set pdfSrc when ngOnInit is called', () => {
     const mockBlob = new Blob(['PDF content'], { type: 'application/pdf' });
-    const mockResponse = new Response([mockBlob]);
+    const mockResponse = new Response();
     spyOn(dataStorageService, 'getSupportingDocument').and.returnValue(of(mockResponse));
     
     component.ngOnInit();
@@ -59,7 +59,7 @@ describe('DocumentComponent', () => {
   it('should download supporting document', () => {
     const saveAsSpy = spyOn(saveAs, 'saveAs');
     const mockBlob = new Blob(['PDF content'], { type: 'application/pdf' });
-    const mockResponse = new Response([mockBlob]);
+    const mockResponse = new Response();
     spyOn(dataStorageService, 'downloadSupportingDocument').and.returnValue(of(mockResponse));
     
     component.downloadSupportingDocument();

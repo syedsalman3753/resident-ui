@@ -46,13 +46,13 @@ describe('RevokevidComponent', () => {
 
     fixture = TestBed.createComponent(RevokevidComponent);
     component = fixture.componentInstance;
-    dataStorageService = TestBed.inject(DataStorageService) as jasmine.SpyObj<DataStorageService>;
-    matDialog = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
-    translateService = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
-    autoLogoutService = TestBed.inject(AutoLogoutService) as jasmine.SpyObj<AutoLogoutService>;
-    breakpointService = TestBed.inject(BreakpointService) as jasmine.SpyObj<BreakpointService>;
-    interactionService = TestBed.inject(InteractionService) as jasmine.SpyObj<InteractionService>;
-    auditService = TestBed.inject(AuditService) as jasmine.SpyObj<AuditService>;
+    dataStorageService = TestBed.get(DataStorageService) as jasmine.SpyObj<DataStorageService>;
+    matDialog = TestBed.get(MatDialog) as jasmine.SpyObj<MatDialog>;
+    translateService = TestBed.get(TranslateService) as jasmine.SpyObj<TranslateService>;
+    autoLogoutService = TestBed.get(AutoLogoutService) as jasmine.SpyObj<AutoLogoutService>;
+    breakpointService = TestBed.get(BreakpointService) as jasmine.SpyObj<BreakpointService>;
+    interactionService = TestBed.get(InteractionService) as jasmine.SpyObj<InteractionService>;
+    auditService = TestBed.get(AuditService) as jasmine.SpyObj<AuditService>;
   });
 
   it('should create the component', () => {

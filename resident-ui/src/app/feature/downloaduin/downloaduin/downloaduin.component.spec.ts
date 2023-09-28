@@ -43,10 +43,10 @@ describe('DownloadUinComponent', () => {
 
     fixture = TestBed.createComponent(DownloadUinComponent);
     component = fixture.componentInstance;
-    dataStorageService = TestBed.inject(DataStorageService);
-    appConfigService = TestBed.inject(AppConfigService);
-    auditService = TestBed.inject(AuditService);
-    dialog = TestBed.inject(MatDialog);
+    dataStorageService = TestBed.get(DataStorageService);
+    appConfigService = TestBed.get(AppConfigService);
+    auditService = TestBed.get(AuditService);
+    dialog = TestBed.get(MatDialog);
   });
 
   it('should create the DownloadUinComponent', () => {
