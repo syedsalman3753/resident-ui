@@ -15,7 +15,6 @@ import { BreakpointService } from "src/app/core/services/breakpoint.service";
   templateUrl: './getuin.component.html',
   styleUrls: ['./getuin.component.css']
 })
-declare var grecaptcha: any;
 export class GetuinComponent implements OnInit {
   getUinData: any;
   transactionID: any;
