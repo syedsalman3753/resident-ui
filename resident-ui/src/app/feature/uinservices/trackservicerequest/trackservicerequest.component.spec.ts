@@ -47,14 +47,14 @@ describe('TrackservicerequestComponent', () => {
 
     fixture = TestBed.createComponent(TrackservicerequestComponent);
     component = fixture.componentInstance;
-    matDialog = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
-    dataStorageService = TestBed.inject(DataStorageService) as jasmine.SpyObj<DataStorageService>;
-    translateService = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
-    route = TestBed.inject(ActivatedRoute) as jasmine.SpyObj<ActivatedRoute>;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    appConfigService = TestBed.inject(AppConfigService) as jasmine.SpyObj<AppConfigService>;
-    autoLogoutService = TestBed.inject(AutoLogoutService) as jasmine.SpyObj<AutoLogoutService>;
-    keyboardService = TestBed.inject(MatKeyboardService) as jasmine.SpyObj<MatKeyboardService>;
+    matDialog = TestBed.get(MatDialog) as jasmine.SpyObj<MatDialog>;
+    dataStorageService = TestBed.get(DataStorageService) as jasmine.SpyObj<DataStorageService>;
+    translateService = TestBed.get(TranslateService) as jasmine.SpyObj<TranslateService>;
+    route = TestBed.get(ActivatedRoute) as jasmine.SpyObj<ActivatedRoute>;
+    router = TestBed.get(Router) as jasmine.SpyObj<Router>;
+    appConfigService = TestBed.get(AppConfigService) as jasmine.SpyObj<AppConfigService>;
+    autoLogoutService = TestBed.get(AutoLogoutService) as jasmine.SpyObj<AutoLogoutService>;
+    keyboardService = TestBed.get(MatKeyboardService) as jasmine.SpyObj<MatKeyboardService>;
   });
 
   it('should create the component', () => {

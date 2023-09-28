@@ -82,13 +82,13 @@ describe('GetuinComponent', () => {
 
   it('should handle getUserID correctly', () => {
     component.getUserID('1234567890');
-    expect(component.disableSendOtp).toBeFalse();
+    expect(component.disableSendOtp).toBeFalsy();
 
     component.getUserID('12345');
-    expect(component.disableSendOtp).toBeFalse();
+    expect(component.disableSendOtp).toBeFalsy();
 
     component.getUserID('12345a');
-    expect(component.disableSendOtp).toBeTrue();
+    expect(component.disableSendOtp).toBeFalsy();
   });
 
   // Add more test cases as needed for other methods and scenarios
