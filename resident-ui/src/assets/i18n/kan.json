@@ -405,7 +405,10 @@
         "EnterAllAddress": "ದಯವಿಟ್ಟು ಆಯ್ಕೆ ಮಾಡು",
         "select": "ಆಯ್ಕೆ ಮಾಡಿ",
         "remainingAttems": "$remainingAttems ಪ್ರಯಾಸಗಳು ಉಳಿಯಿವೆ.",
-        "maxAttems": "ಹೆಸರು ಬದಲಾಯಿಸುವ ವಿನಂತಿಗೆ ಗರಿಷ್ಠ $maxAttems ಸಲ ಮಾಡಬಹುದು."
+        "maxAttems": "$Name ಬದಲಾಯಿಸಲು ಅಧಿಕತಮ $MaxAttems ಸಲ ಅನುವಾದಿಸಬಹುದು.",
+        "fullName": "ಹೆಸರು",
+        "dateOfBirth": "ಹುಟ್ಟಿದ ದಿನಾಂಕ",
+        "gender": "ಲಿಂಗ"
     },
     "preview": {
         "title": "ಮುನ್ನೋಟ"

@@ -405,7 +405,10 @@
         "EnterAllAddress":"தயவு செய்து தேர்வு செய்யவும்",
         "select":"தேர்ந்தெடு",
         "remainingAttems": "இன்னும் $remainingAttems முயற்சிகள் உள்ளன.",
-        "maxAttems": "பெயர் மாற்ற கோரிக்கை அதிசயமாக $maxAttems முயற்சிகள் செய்யலாம்."
+        "maxAttems": "$Name மாற்றம் கேட்க அதிசய $MaxAttems முறை செய்யப்படலாம்.",
+        "fullName": "பெயர்",
+        "dateOfBirth": "பிறந்த தேதி",
+        "gender": "பாலினம்"
     },
     "preview": {
         "title": "முன்னோட்ட"

@@ -405,7 +405,10 @@
         "EnterAllAddress": "कृपया चयन कीजिए",
         "select": "चुनना",
         "remainingAttems": "आपके पास $remainingAttems प्रयास शेष हैं।",
-        "maxAttems": "नाम परिवर्तन अनुरोध को अधिकतम $maxAttems बार किया जा सकता है।"
+        "maxAttems": "$Name परिवर्तन अनुरोध को अधिकतम $MaxAttems बार किया जा सकता है।",
+        "fullName": "नाम",
+        "dateOfBirth": "जन्म तिथि",
+        "gender": "लिंग"
     },
     "preview": {
         "title": "पूर्व दर्शन"

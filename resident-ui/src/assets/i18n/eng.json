@@ -412,7 +412,10 @@
         "EnterAllAddress":"Please select",
         "select":"Select",
         "remainingAttems":"$remainingAttems attempts left",
-        "maxAttems":"Name change request can be made maximum $maxAttems times."
+        "maxAttems":"$Name change request can be made maximum $MaxAttems times.",
+        "fullName":"Name",
+        "dateOfBirth":"Date of birth",
+        "gender":"Gender"
     },
     "preview": {
         "title": "Preview"

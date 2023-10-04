@@ -405,7 +405,10 @@
         "EnterAllAddress": "Por favor selecciona",
         "select": "Seleccionar",
         "remainingAttems": "Quedan $remainingAttems intentos.",
-        "maxAttems": "Se puede hacer una solicitud de cambio de nombre un máximo de $maxAttems veces."
+        "maxAttems": "Se puede solicitar un cambio de $Name un máximo de $MaxAttems veces.",
+        "fullName": "Nombre",
+        "dateOfBirth": "Fecha de nacimiento",
+        "gender": "Género"
     },
     "preview": {
         "title": "Avance"

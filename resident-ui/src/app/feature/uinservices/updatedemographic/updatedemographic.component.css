@@ -328,14 +328,15 @@ label{
   width: 50%
 }
 
-.each-Hierarchy-td{
-  text-align: start; 
+/* .each-Hierarchy-td{
+  text-align: start;  
   vertical-align: text-top; 
-}
+} */
 
 .disable-dropdown{
   background-color: #F4F4F4;
   border-radius: 5px;
+  width: 100%;
 }
 
 .mat-select-panel-wrap{
@@ -440,6 +441,14 @@ label{
   width: 60%;
 }
 
+.number-of-attems-mobile-card{
+  display: none;
+}
+
+.ele-for-mob-card{
+  display: none;
+}
+
 @media screen and ((min-width:950px) and (max-width:1300px)){
   .number-of-attems-main-card{
     width: 80%;
@@ -455,7 +464,7 @@ label{
   }
 }
 
-@media screen and ((min-width:750px) and (max-width:988px)) {
+@media screen and ((min-width:824px) and (max-width:988px)) {
   .main-contianer{
     padding: 0.5rem 3rem 0 3rem; 
   }
@@ -485,7 +494,7 @@ label{
   }
 }
 
-@media screen and (max-width:749px) {
+@media screen and (max-width:823px) {
   .main-contianer{
     padding: 0.5rem 1rem 0 1rem; 
   }
@@ -507,7 +516,14 @@ label{
   .number-of-attems-main-card{
     display: none;
   }
+  .number-of-attems-mobile-card{
+    display: block;
+  }
+  .file-Upload-card{
+    width: 100%;
+  }
 }
+
 @media screen and ((min-width:550px) and (max-width:749px)) {
   /* .each-tab-group-main-table{
     width: 80%;
@@ -516,7 +532,7 @@ label{
     width: 36%;
   }
   .file-Upload-card{
-    width: 75%;
+    width: 100%;
   }
   .contact-send-otp-btn{
     margin-top: 1.4rem;
@@ -535,5 +551,14 @@ label{
   }
   .number-of-attems-main-card{
     display: none;
+  }
+  .ele-for-lap-tab-card{
+    display: none;
+  }
+  .ele-for-mob-card{
+    display: block;
+  }
+  .preview-input-size{
+    width: 100%;
   }
 }
