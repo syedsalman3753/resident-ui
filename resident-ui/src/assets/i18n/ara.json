@@ -405,7 +405,10 @@
         "EnterAllAddress": "الرجاء التحديد",
         "select": "يختار",
         "remainingAttems": "$remainingAttems محاولات متبقية",
-        "maxAttems": "يمكن تقديم طلب تغيير الاسم مرة واحدة فقط كحد أقصى $maxAttems مرات."
+        "maxAttems": "$Name يمكن تقديم طلب تغيير الاسم مرات كحد أقصى $MaxAttems.",
+        "fullName": "الاسم",
+        "dateOfBirth": "تاريخ الميلاد",
+        "gender": "الجنس"
     },
     "preview": {
         "title": "معاينة"

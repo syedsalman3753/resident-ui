@@ -24,16 +24,31 @@
                     <tr *ngIf="field.controlType === 'calendar'">
                       <td width="100%" class="main-table-data">
                         <table width="100%">
+                          <!-- number of attems mobile and tab code -->
+                          <tr class="number-of-attems-mobile-card">
+                            <td>
+                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'">
+                                <div>
+                                  <span
+                                    style="display: block; font-weight: 600;">{{langJson.remainingAttems.replace("$remainingAttems",
+                                    attributeUpdateCountRemainLimit[field.attributeName])}}</span>
+                                  <span style="display: block;">{{langJson.maxAttems.replace("$MaxAttems",
+                                    attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- number of attems mobile and tab code -->
                           <tr>
                             <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
-                            <td width="3%"></td>
-                            <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                            <td width="3% ele-for-lap-tab-card"></td>
+                            <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr>
                             <td class="width-of-input"><input type="text" class="readonly" readonly="true"
                                 disabled="true" [value]="buildJSONData[field.attributeName].value"></td>
-                            <td width="3%"></td>
-                            <td class="width-of-input">
+                            <td width="3%" class="ele-for-lap-tab-card"></td>
+                            <td class="width-of-input ele-for-lap-tab-card">
                               <div class="date-input-card" *ngIf="langJson">
                                 <input [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0" [max]="maxdate" style=" border: none;" matInput
                                   [placeholder]="langJson.calendarPlaceHolder" [matDatepicker]="picker" readonly
@@ -47,38 +62,73 @@
                                 *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName]">
                                 {{langJson.sameDobInputErrorMsg}}</p>
                             </td>
-                            <td width="1%"></td>
+                            <td width="1%" class="ele-for-lap-tab-card"></td>
                             <td *ngIf="attributeUpdateCountRemainLimit" class="number-of-attems-main-card">
-                              <div class="number-of-attems-left-card">
-                                <div class="number-of-attems-arrow-shape"></div>
-                                <div>
+                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'">
+                                <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-arrow-shape':'number-of-attems-arrow-shape'"></div>
+                                <div *ngIf="langJson">
                                   <span
                                     style="display: block; font-weight: 600;">{{langJson.remainingAttems.replace("$remainingAttems",
                                     attributeUpdateCountRemainLimit[field.attributeName])}}</span>
-                                  <span style="display: block;">{{langJson.maxAttems.replace("$maxAttems",
-                                    attributeUpdateCountMaxLimit[field.attributeName])}}</span>
+                                  <span style="display: block;">{{langJson.maxAttems.replace("$MaxAttems",
+                                    attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
                                 </div>
                               </div>
                             </td>
                           </tr>
+                          <!-- input field for mobile view -->
+                          <tr>
+                            <td class="width-of-input ele-for-mob-card"><label>{{field.labelName[langCode][1]}}</label></td>
+                          </tr>
+                          <tr>
+                            <td class="sub-table-row ele-for-mob-card">
+                              <div class="date-input-card" *ngIf="langJson">
+                                <input [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0" [max]="maxdate" style=" border: none;" matInput
+                                  [placeholder]="langJson.calendarPlaceHolder" [matDatepicker]="picker" readonly
+                                  id="{{field.attributeName}}"
+                                  (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName])"
+                                  [(ngModel)]="selectedDate" (click)="picker.open()" />
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </div>
+                              <p class="warning-message"
+                                *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName]">
+                                {{langJson.sameDobInputErrorMsg}}</p>
+                            </td>
+                          </tr>
+                          <!-- input field for mobile view -->
                         </table>
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'textbox'">
                       <td class="main-table-data" width="100%">
                         <table width="100%" *ngFor="let language of supportedLanguages;">
+                           <!-- number of attems mobile and tab code -->
+                           <tr class="number-of-attems-mobile-card">
+                            <td>
+                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'" >
+                                <div>
+                                  <span
+                                    style="display: block; font-weight: 600;">{{langJson.remainingAttems.replace("$remainingAttems",attributeUpdateCountRemainLimit[field.attributeName])}}</span>
+                                  <span *ngIf="attributeUpdateCountMaxLimit" style="display: block;">{{langJson.maxAttems.replace("$MaxAttems",
+                                    attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <!-- number of attems mobile and tab code -->
                           <tr>
                             <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
                             <td width="3%"></td>
-                            <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                            <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index">
                             <td class="sub-table-row" class="width-of-input" class="each-input-data"
                               [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
                               <input type="text" class="readonly" readonly="true" disabled="true" [value]="item.value">
                             </td>
-                            <td class="sub-table-row" width="3%"></td>
-                            <td class="sub-table-row">
+                            <td class="sub-table-row ele-for-lap-tab-card" width="3%"></td>
+                            <td class="sub-table-row ele-for-lap-tab-card">
                               <div class="search-input-card" [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
                                 <input class="input" matInput #{{field.attributeName}}
                                   id="{{field.attributeName}}{{item.language}}"
@@ -98,37 +148,79 @@
                                   {{langJson.sameNameInputErrorMsg}}</p>
                               </span>
                             </td>
-                            <td class="sub-table-row" width="1%"></td>
+                            <td class="sub-table-row ele-for-lap-tab-card" width="1%"></td>
                             <td *ngIf="i===0 && attributeUpdateCountRemainLimit" class="number-of-attems-main-card">
-                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'" class="number-of-attems-left-card">
-                                <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-arrow-shape':'number-of-attems-arrow-shape'" class="number-of-attems-arrow-shape"></div>
+                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'" >
+                                <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-arrow-shape':'number-of-attems-arrow-shape'"></div>
                                 <div>
                                   <span
                                     style="display: block; font-weight: 600;">{{langJson.remainingAttems.replace("$remainingAttems",attributeUpdateCountRemainLimit[field.attributeName])}}</span>
-                                  <span *ngIf="attributeUpdateCountMaxLimit" style="display: block;">{{langJson.maxAttems.replace("$maxAttems",
-                                    attributeUpdateCountMaxLimit[field.attributeName])}}</span>
+                                  <span *ngIf="attributeUpdateCountMaxLimit" style="display: block;">{{langJson.maxAttems.replace("$MaxAttems",
+                                    attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
                                 </div>
                               </div>
                             </td>
                           </tr>
+                          <!-- input field for mobile view -->
+                          <tr>
+                            <td class="width-of-input ele-for-mob-card"><label>{{field.labelName[langCode][1]}}</label></td>
+                          </tr>
+                          <tr *ngFor="let item of buildJSONData[field.attributeName]">
+                            <td class="sub-table-row ele-for-mob-card">
+                              <div class="search-input-card" [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                                <input class="input" matInput #{{field.attributeName}}
+                                  id="{{field.attributeName}}{{item.language}}"
+                                  (blur)="captureValue($event, field.attributeName, item.language, item.value)"
+                                  placeholder="{{field.placeHolder[item.language]}}"
+                                  [value]="userInputValues[field.attributeName][item.language]"
+                                  (focus)="captureVirtualKeyboard(field.attributeName + item.language, item.index)"
+                                  [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
+                                  #keyboardRef />
+                                <i matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
+                              </div>
+                              <span
+                                *ngIf="userInputValues[field.attributeName] && i === (buildJSONData[field.attributeName]?.length -1) && buildJSONData[field.attributeName][0].value">
+                                <p class="warning-message"
+                                  *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][0].value">
+                                  {{langJson.sameNameInputErrorMsg}}</p>
+                              </span>
+                            </td>
+                          </tr>
+                        <!-- input field for mobile view -->
                         </table>
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'dropdown'">
                       <td class="main-table-data" width="100%">
-                        <table width="100%">
+                        <table width="100%" >
+                          <!-- number of attems mobile and tab code -->
+                          <tr class="number-of-attems-mobile-card">
+                            <td>
+                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'">
+                                <div>
+                                  <span
+                                    style="display: block; font-weight: 600;">{{langJson.remainingAttems.replace("$remainingAttems",
+                                    attributeUpdateCountRemainLimit[field.attributeName])}}</span>
+                                  <span style="display: block;">{{langJson.maxAttems.replace("$MaxAttems",
+                                    attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                           <!-- number of attems mobile and tab code -->
                           <tr>
                             <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
-                            <td width="3%"></td>
-                            <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                            <td width="3%" class="ele-for-lap-tab-card"></td>
+                            <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index">
                             <td class="sub-table-row width-of-input"
                               [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
                               <input type="text" class="readonly" readonly="true" disabled="true" [value]="item.value">
                             </td>
-                            <td width="3%" class="sub-table-row"></td>
-                            <td class="sub-table-row width-of-input">
+                            <td width="3%" class="sub-table-row ele-for-lap-tab-card"></td>
+                            <td class="sub-table-row width-of-input ele-for-lap-tab-card">
                               <span [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
                                 <mat-select disableOptionCentering class="enable-dropdown" id="{{field.attributeName}}"
                                   placeholder="{{field.placeHolder[item.language]}}"
@@ -148,18 +240,43 @@
                             </td>
                             <td class="sub-table-row" width="1%"></td>
                             <td *ngIf="i===0 && attributeUpdateCountRemainLimit" class="number-of-attems-main-card">
-                              <div class="number-of-attems-left-card">
-                                <div class="number-of-attems-arrow-shape"></div>
+                              <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'">
+                                <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-arrow-shape':'number-of-attems-arrow-shape'"></div>
                                 <div>
                                   <span
                                     style="display: block; font-weight: 600;">{{langJson.remainingAttems.replace("$remainingAttems",
                                     attributeUpdateCountRemainLimit[field.attributeName])}}</span>
-                                  <span style="display: block;">{{langJson.maxAttems.replace("$maxAttems",
-                                    attributeUpdateCountMaxLimit[field.attributeName])}}</span>
+                                  <span style="display: block;">{{langJson.maxAttems.replace("$MaxAttems",
+                                    attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
                                 </div>
                               </div>
                             </td>
                           </tr>
+                          <!-- input field for mobile view -->
+                          <tr>
+                            <td class="width-of-input ele-for-mob-card"><label>{{field.labelName[langCode][1]}}</label></td>
+                          </tr>
+                          <tr *ngFor="let item of buildJSONData[field.attributeName]">
+                              <td class="sub-table-row ele-for-mob-card">
+                                <span [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                                  <mat-select disableOptionCentering class="enable-dropdown" id="{{field.attributeName}}"
+                                    placeholder="{{field.placeHolder[item.language]}}"
+                                    [(value)]="userInputValues[field.attributeName][item.language]"
+                                    [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
+                                    (selectionChange)="captureDropDownValue($event, field.attributeName, item.language)">
+                                    <mat-option *ngFor="let data of dropDownValues[field.attributeName][item.language]"
+                                      [value]="data.code">{{ data.value }}</mat-option>
+                                  </mat-select>
+                                </span>
+                                <span
+                                  *ngIf="userInputValues[field.attributeName] && i === (buildJSONData[field.attributeName]?.length -1)">
+                                  <p class="warning-message"
+                                    *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][langCode]">
+                                    {{langJson.sameGenderInputErrorMsg}}</p>
+                                </span>
+                            </td>
+                          </tr>
+                           <!-- input field for mobile view -->
                         </table>
                       </td>
                     </tr>
@@ -318,8 +435,8 @@
                           <table width="100%" *ngFor="let language of supportedLanguages;">
                             <tr>
                               <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
-                              <td width="3%"></td>
-                              <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                              <td width="3%" class="ele-for-lap-tab-card"></td>
+                              <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
                             <tr *ngFor="let item of buildJSONData[field.attributeName] let i = index"
                               [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
@@ -327,8 +444,8 @@
                                 <input *ngIf="buildJSONData[field.attributeName]" type="text" class="readonly"
                                   readonly="true" disabled="true" [value]="item.value">
                               </td>
-                              <td class="sub-table-row" width="3%"></td>
-                              <td class="sub-table-row" class="width-of-input">
+                              <td class="sub-table-row ele-for-lap-tab-card" width="3%"></td>
+                              <td class="sub-table-row width-of-input ele-for-lap-tab-card" >
                                 <div class="search-input-card">
                                   <input class="input" matInput #{{field.attributeName}}
                                     id="{{field.attributeName}}{{item.language}}"
@@ -342,6 +459,26 @@
                                 </div>
                               </td>
                             </tr>
+                            <!-- input field for mobile view -->
+                            <tr class="ele-for-mob-card">
+                              <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                            </tr>
+                            <tr class="ele-for-mob-card" *ngFor="let item of buildJSONData[field.attributeName]">
+                              <td class="sub-table-row width-of-input">
+                                <div class="search-input-card">
+                                  <input class="input" matInput #{{field.attributeName}}
+                                    id="{{field.attributeName}}{{item.language}}"
+                                    (blur)="captureAddressValue($event, field.attributeName, item.language)"
+                                    [(value)]="userInputValues[field.attributeName][item.language]"
+                                    [placeholder]="field.placeHolder[item.language]"
+                                    (focus)="captureVirtualKeyboard(field.attributeName+item.language, item.index)"
+                                    #keyboardRef />
+                                  <i matSuffix class="material-icons mat-keyboard-icon"
+                                    (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
+                                </div>
+                              </td>
+                            </tr>
+                            <!-- input field for mobile view -->
                           </table>
                         </td>
                       </tr>
@@ -350,8 +487,8 @@
                           <table width="100%">
                             <tr>
                               <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
-                              <td width="3%"></td>
-                              <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                              <td width="3%" class="ele-for-lap-tab-card"></td>
+                              <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                             </tr>
                             <ng-container *ngIf="typeOf(userInfo[field.attributeName]) !== 'string'">
                               <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index">
@@ -359,8 +496,8 @@
                                   <input *ngIf="buildJSONData[field.attributeName]"  type="text" class="readonly"
                                     readonly="true" disabled="true" [value]="item.value">
                                 </td>
-                                <td class="sub-table-row" width="3%"></td>
-                                <td  class="sub-table-row each-Hierarchy-td width-of-input"
+                                <td class="sub-table-row ele-for-lap-tab-card" width="3%"></td>
+                                <td  class="sub-table-row each-Hierarchy-td width-of-input ele-for-lap-tab-card"
                                 *ngIf="dynamicDropDown[field.name]">
                                 <span [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
                                   <mat-select disableOptionCentering
@@ -386,8 +523,8 @@
                                 <input type="text" class="readonly" readonly="true" disabled="true"
                                   [value]="buildJSONData[field.attributeName].value">
                               </td>
-                              <td class="sub-table-row" width="3%"></td>
-                              <td class="sub-table-row each-Hierarchy-td" class="width-of-input"
+                              <td class="sub-table-row ele-for-lap-tab-card" width="3%"></td>
+                              <td class="sub-table-row each-Hierarchy-td width-of-input ele-for-lap-tab-card"
                                 *ngIf="dynamicDropDown[field.name]">
                                 <mat-select disableOptionCentering
                                   placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"
@@ -404,6 +541,53 @@
                                 </span>
                               </td>
                             </tr>
+
+                            <!-- input field for mobile view -->
+                            <tr class="ele-for-mob-card">
+                              <td class="width-of-input"><label>{{field.labelName[langCode][1]}}</label></td>
+                            </tr>
+                            <tr *ngIf="typeOf(userInfo[field.attributeName]) !== 'string'">
+                              <td class="ele-for-mob-card" *ngFor="let item of buildJSONData[field.attributeName], let i = index">
+                                <span  class="sub-table-row each-Hierarchy-td"
+                                *ngIf="dynamicDropDown[field.name]">
+                                <span [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
+                                  <mat-select disableOptionCentering
+                                    placeholder="{{field.placeHolder[item.language]}}"
+                                    [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'"
+                                    [(value)]="userInputValues[field.attributeName][item.language]"
+                                    id="{{field.name}}{{item.language}}"
+                                    (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel,field.attributeName,typeOf(userInfo[field.attributeName]))">
+                                    <mat-option *ngFor="let data of dynamicDropDown[field.name][item.language]" [value]="data.code">
+                                      {{ data.name }}
+                                    </mat-option>
+                                  </mat-select>
+                                </span>
+                                  <span *ngIf="locationFieldNameList?.length">
+                                    <p *ngIf="locationFieldNameList[field.locationHierarchyLevel-1] === fieldName && i === (buildJSONData[field.attributeName]?.length -1)"
+                                      class="warning-message">{{langJson.EnterAllAddress}} {{fieldName}}</p>
+                                  </span>
+                                </span>
+                              </td>
+                            </tr>
+                            <tr *ngIf="typeOf(userInfo[field.attributeName]) === 'string'">
+                              <td class="sub-table-row each-Hierarchy-td ele-for-mob-card"
+                                *ngIf="dynamicDropDown[field.name]">
+                                <mat-select disableOptionCentering
+                                  placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"
+                                  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'"
+                                  [(value)]="userInputValues[field.attributeName]" id="{{field.name}}"
+                                  (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel,field.attributeName,typeOf(userInfo[field.attributeName]))">
+                                  <mat-option *ngFor="let data of dynamicDropDown[field.name].eng" [value]="data.code">
+                                    {{ data.name }}
+                                  </mat-option>
+                                </mat-select>
+                                <span *ngIf="locationFieldNameList?.length">
+                                  <p *ngIf="locationFieldNameList[field.locationHierarchyLevel-1] === fieldName"
+                                    class="warning-message">{{langJson.EnterAllAddress}} {{fieldName}}</p>
+                                </span>
+                              </td>
+                            </tr>
+                            <!-- input field for mobile view -->
                           </table>
                         </td>
                       </tr>
@@ -706,7 +890,7 @@
         </div>
         <div class="files-list">
           <mat-card-title class="files-list-title">{{langJson.documentUploaded}}...</mat-card-title>
-          <div style="width: 80%;">
+          <div class="preview-input-size">
             <div class="uploaded-single-file" *ngFor="let file of uploadedFiles; let i = index">
               <div class="file-icon" style="width: 50px">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
