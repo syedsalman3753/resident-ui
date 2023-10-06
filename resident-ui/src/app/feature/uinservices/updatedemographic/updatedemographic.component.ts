@@ -116,7 +116,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   attributeUpdateCountRemainLimit:any = {};
   selectedOptionData:any;
   oldSelectedIndex:any;
-  
+  isSameData: any = {};
+
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
   private attachToElementMesOne: any;
@@ -124,7 +125,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     private dialog: MatDialog, private dataStorageService: DataStorageService,
     private translateService: TranslateService, private router: Router,
     private appConfigService: AppConfigService, private auditService: AuditService,
-    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService, 
+    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService,
     private keyboardService: MatKeyboardService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
@@ -283,7 +284,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           if(schema.controlType === "textbox"){
             if(typeof self.userInfo[schema.attributeName] === "string"){
               this.userInputValues[schema.attributeName] = "";
-              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count,confIndex:count+1}
+              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count,confIndex:count + 1 }
               count++
               count++
             }else{
@@ -307,8 +308,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             this.userInputValues[schema.attributeName] = {};
             this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName]
             self.userInfo[schema.attributeName].forEach(item =>{
-                this.userInputValues[schema.attributeName][item.language] = ''
-              })
+            this.userInputValues[schema.attributeName][item.language] = ''
+            })
           }
         }
       }
@@ -329,40 +330,40 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.buildCloneJsonData = [];
     let self = this;
     for (var schema of self.schema['identity']) {
-      Object.keys(finaluserInfoClone).map(attributeName =>{
-        if(schema.attributeName === attributeName){
+      Object.keys(finaluserInfoClone).map(attributeName => {
+        if (schema.attributeName === attributeName) {
           this.buildCloneJsonData.push({
-            'labelName':schema.labelName[this.langCode][1],
-            'newData':finaluserInfoClone[attributeName]
+            'labelName': schema.labelName[this.langCode][1],
+            'newData': finaluserInfoClone[attributeName]
           })
         }
       })
     }
   }
 
-  addingAddessData(event:any, formControlName:string, fieldType:string, fieldName:string) {
+  addingAddessData(event: any, formControlName: string, fieldType: string, fieldName: string) {
     let locationCode = event.value
-    if(fieldType !== 'string'){
+    if (fieldType !== 'string') {
       this.userInfoAddressClone[formControlName] = []
-      this.getUserPerfLang.forEach(langCode =>{
+      this.getUserPerfLang.forEach(langCode => {
         let newData
-        this.dynamicDropDown[fieldName][langCode].forEach(eachLocation =>{
-          if(eachLocation.code === locationCode){
+        this.dynamicDropDown[fieldName][langCode].forEach(eachLocation => {
+          if (eachLocation.code === locationCode) {
             newData = { "language": langCode, "value": eachLocation.name }
             this.userInputValues[formControlName][langCode] = eachLocation.code;
           }
         })
         this.userInfoAddressClone[formControlName].push(newData)
       })
-    }else{
-      this.dynamicDropDown[fieldName]['eng'].forEach(eachLocation =>{
-        if(eachLocation.code === locationCode){
+    } else {
+      this.dynamicDropDown[fieldName]['eng'].forEach(eachLocation => {
+        if (eachLocation.code === locationCode) {
           this.userInfoAddressClone[formControlName] = eachLocation.name;
           this.userInfoAddressClone[formControlName] = eachLocation.code;
         }
       })
     }
-    
+
   }
 
   previewBtn(issue: any) {
@@ -391,8 +392,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   getGender() {
     this.dropDownValues["gender"] = {}
     this.dataStorageService.getDataForDropDown("/proxy/masterdata/dynamicfields/all/gender").subscribe(response => {
-      if(response['response']){
-        response['response'].forEach(eachItem =>{
+      if (response['response']) {
+        response['response'].forEach(eachItem => {
           this.dropDownValues["gender"][eachItem.langCode] = eachItem.fieldVal
         })
       }
@@ -411,11 +412,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       for (let value of self.locationFieldNameList) {
         self.dynamicDropDown[value] = [];
       }
-      self.loadLocationDataDynamically("", 0,"","");
+      self.loadLocationDataDynamically("", 0, "", "");
     });
   }
 
-  loadLocationDataDynamically(event: any, index: any, schemaFieldName:string, fieldType:string) {
+  loadLocationDataDynamically(event: any, index: any, schemaFieldName: string, fieldType: string) {
     let unSelectedItems = this.locationFieldNameList.slice(index, this.locationFieldNameList.length)
     let locationCode = "";
     let fieldName = "";
@@ -428,28 +429,28 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       locationCode = event.value;
       this.isSelectedAllAddress = unSelectedItems.length ? false : true;
     }
-    
+
     this.fieldName = fieldName
-    if(fieldName){
+    if (fieldName) {
       this.dataStorageService.getImmediateChildren(locationCode, this.getUserPerfLangString)
-      .subscribe(response => {
-        if (response['response'])
-          self.dynamicDropDown[fieldName] = response['response']['locations'];
-      });
+        .subscribe(response => {
+          if (response['response'])
+            self.dynamicDropDown[fieldName] = response['response']['locations'];
+        });
     }
-  
-    if(event !==''){
-        this.addingAddessData(event, schemaFieldName, fieldType, this.locationFieldNameList[parseInt(index) -1]);
+
+    if (event !== '') {
+      this.addingAddessData(event, schemaFieldName, fieldType, this.locationFieldNameList[parseInt(index) - 1]);
     }
-    
-    unSelectedItems.forEach(item =>{
+
+    unSelectedItems.forEach(item => {
       this.dynamicDropDown[item] = [];
-      let filedNameForuserInput = (item.charAt(0).toLocaleLowerCase() + item.slice(1)).replace(" ","")
-      if(typeof this.userInputValues[filedNameForuserInput] !== 'string'){
-        this.getUserPerfLang.forEach(lang =>{
+      let filedNameForuserInput = (item.charAt(0).toLocaleLowerCase() + item.slice(1)).replace(" ", "")
+      if (typeof this.userInputValues[filedNameForuserInput] !== 'string') {
+        this.getUserPerfLang.forEach(lang => {
           this.userInputValues[filedNameForuserInput][lang] = ''
         })
-      }else{
+      } else {
         this.userInputValues[filedNameForuserInput] = ''
       }
     });
@@ -547,55 +548,67 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     })
   }
 
-async translateUserInput(toLang: string, fromLang: string, input:string,formControlName:string, userInfoType:string){
-        let request = {
-          "id": this.appConfigService.getConfig()["mosip.resident.transliteration.transliterate.id"],
-          "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
-          "requesttime": "2023-09-20T10:43:08.864Z",
-          "request": {
-            "from_field_value": input,
-            "from_field_lang": fromLang,
-            "to_field_lang": toLang
-          }
-        }
-        this.dataStorageService.translateUserInput(request).subscribe(response =>{
-          if(response['response']){
-            let value = response['response'].to_field_value
-            this[userInfoType][formControlName].push({"language":toLang, "value" : value})
-            this.userInputValues[formControlName][toLang] = value;
-          }else{
-            this.userInputValues[formControlName][toLang] = '';
-          }
-        })
+  async translateUserInput(toLang: string, fromLang: string, input: string, formControlName: string, userInfoType: string) {
+    let request = {
+      "id": this.appConfigService.getConfig()["mosip.resident.transliteration.transliterate.id"],
+      "version": this.appConfigService.getConfig()['mosip.resident.request.response.version'],
+      "requesttime": "2023-09-20T10:43:08.864Z",
+      "request": {
+        "from_field_value": input,
+        "from_field_lang": fromLang,
+        "to_field_lang": toLang
+      }
+    }
+    this.dataStorageService.translateUserInput(request).subscribe(response => {
+      if (response['response']) {
+        let value = response['response'].to_field_value
+        this[userInfoType][formControlName].push({ "language": toLang, "value": value })
+        this.userInputValues[formControlName][toLang] = value;
+      } else {
+        this.userInputValues[formControlName][toLang] = '';
+      }
+    })
   }
 
-captureValue(event: any, formControlName: string, language: string, currentValue: any) {
+  captureValue(event: any, formControlName: string, language: string, currentValue: any) {
     let self = this;
-      if (event.target.value.trim() === "") {
-        if(this.userInfoClone[formControlName]){
-          delete this.userInfoClone[formControlName]
-        }
-        this.getUserPerfLang.forEach(item =>{
-          this.userInputValues[formControlName][item] = ''
-        })
-      } else {
-        if (formControlName !== "proofOfIdentity") {
+    if (event.target.value.trim() === "") {
+      if (this.userInfoClone[formControlName]) {
+        delete this.userInfoClone[formControlName]
+      }
+      this.getUserPerfLang.forEach(item => {
+        this.userInputValues[formControlName][item] = ''
+      })
+    } else {
+      if (formControlName !== "proofOfIdentity") {
+        if (event.target.value !== currentValue) {
+          this.isSameData[formControlName] = false;
           this.userInfoClone[formControlName] = []
-          this.getUserPerfLang.forEach(item =>{
+          this.getUserPerfLang.forEach(item => {
             let newData
-            if(item === language){
+            if (item === language) {
               newData = { "language": language, "value": event.target.value }
               this.userInfoClone[formControlName].push(newData)
               this.userInputValues[formControlName][language] = event.target.value;
-            }else{
+            } else {
               this.translateUserInput(item, language, event.target.value, formControlName, 'userInfoClone')
             }
           })
         } else {
-          self[formControlName]["documentreferenceId"] = event.target.value;
-          this.userInputValues[formControlName] = event.target.value;
+          if (this.userInfoClone[formControlName]) {
+            delete this.userInfoClone[formControlName]
+          }
+          this.getUserPerfLang.forEach(item => {
+            this.userInputValues[formControlName][item] = ''
+          })
+          this.isSameData[formControlName] = true;
         }
+      } else {
+        self[formControlName]["documentreferenceId"] = event.target.value;
+        this.userInputValues[formControlName] = event.target.value;
       }
+    }
+
   }
 
   captureDatePickerValue(event: any, formControlName: string, currentValue: any) {
@@ -604,24 +617,32 @@ captureValue(event: any, formControlName: string, language: string, currentValue
     let formattedDate = dateFormat.getFullYear() + "/" + ("0" + (dateFormat.getMonth() + 1)).slice(-2) + "/" + ("0" + dateFormat.getDate()).slice(-2);
     this.selectedDate = dateFormat;
     if (formattedDate !== currentValue) {
-      if (event.target.value === null && this.userInfoClone["dateOfBirth"]) {
-        delete this.userInfoClone["dateOfBirth"]
-      } else {
-        self.userInfoClone[formControlName] = formattedDate;
-      }
+      self.userInfoClone[formControlName] = formattedDate;
+      this.isSameData[formControlName] = false;
+    } else {
+      this.isSameData[formControlName] = true;
+      delete this.userInfoClone["dateOfBirth"]
     }
     this.userInputValues[formControlName] = formattedDate;
   }
 
   captureDropDownValue(event: any, formControlName: string, language: string, currentValue: any) {
-    let genders =this.dropDownValues.gender
+    let genders = this.dropDownValues.gender
+    let currentValueCode
+    genders[language].forEach(item => {
+      if (item.value === currentValue) {
+        currentValueCode = item.code
+      }
+    })
     let self = this;
-      if (formControlName !== "proofOfIdentity") {
+    if (formControlName !== "proofOfIdentity") {
+      if (event.value !== currentValueCode) {
+        this.isSameData[formControlName] = false;
         this.userInfoClone[formControlName] = []
-        this.getUserPerfLang.forEach(item =>{
+        this.getUserPerfLang.forEach(item => {
           let newData
-          genders[item].forEach(eachGender =>{
-            if(eachGender.code === event.value){
+          genders[item].forEach(eachGender => {
+            if (eachGender.code === event.value) {
               newData = { "language": item, "value": eachGender.value }
               this.userInputValues[formControlName][item] = eachGender.code;
             }
@@ -629,37 +650,51 @@ captureValue(event: any, formControlName: string, language: string, currentValue
           this.userInfoClone[formControlName].push(newData)
         })
       } else {
-        if (formControlName === "proofOfIdentity") {
-          this.displayPOIUpload = true;
-        } else if (formControlName === "proofOfAddress") {
-          this.displayPOAUpload = true;
-        }
-        self[formControlName]["documenttype"] = event.source.value;
+        this.isSameData[formControlName] = true;
       }
+    } else {
+      if (formControlName === "proofOfIdentity") {
+        this.displayPOIUpload = true;
+      } else if (formControlName === "proofOfAddress") {
+        this.displayPOAUpload = true;
+      }
+      self[formControlName]["documenttype"] = event.source.value;
+    }
   }
 
-  captureAddressValue(event: any, formControlName: string, language: string) {
+  captureAddressValue(event: any, formControlName: string, language: string, currentValue: string) {
     let self = this;
     if (event.target.value.trim() === "") {
-      if(this.userInfoClone[formControlName]){
+      if (this.userInfoClone[formControlName]) {
         delete this.userInfoClone[formControlName]
       }
-      this.getUserPerfLang.forEach(item =>{
+      this.getUserPerfLang.forEach(item => {
         this.userInputValues[formControlName][item] = ''
       })
     } else {
       if (formControlName !== "proofOfAddress") {
-        this.userInfoAddressClone[formControlName] = []
-        this.getUserPerfLang.forEach(item =>{
-          let newData
-          if(item === language){
-            newData = { "language": language, "value": event.target.value }
-            this.userInfoAddressClone[formControlName].push(newData)
-            this.userInputValues[formControlName][language] = event.target.value;
-          }else{
-            this.translateUserInput(item, language, event.target.value, formControlName, 'userInfoAddressClone')
+        if (event.target.value !== currentValue) {
+          this.isSameData[formControlName] = false;
+          this.userInfoAddressClone[formControlName] = []
+          this.getUserPerfLang.forEach(item => {
+            let newData
+            if (item === language) {
+              newData = { "language": language, "value": event.target.value }
+              this.userInfoAddressClone[formControlName].push(newData)
+              this.userInputValues[formControlName][language] = event.target.value;
+            } else {
+              this.translateUserInput(item, language, event.target.value, formControlName, 'userInfoAddressClone')
+            }
+          })
+        } else {
+          if (this.userInfoAddressClone[formControlName]) {
+            delete this.userInfoAddressClone[formControlName]
           }
-        })
+          this.getUserPerfLang.forEach(item => {
+            this.userInputValues[formControlName][item] = ''
+          })
+          this.isSameData[formControlName] = true;
+        }
       } else {
         self[formControlName]["documentreferenceId"] = event.target.value;
         this.userInputValues[formControlName] = event.target.value;
@@ -681,7 +716,7 @@ captureValue(event: any, formControlName: string, language: string, currentValue
     this.userInputValues[formControlName] = event.source.viewValue;
   }
 
-  captureContactValue(event: any, formControlName:any) {
+  captureContactValue(event: any, formControlName: any) {
     this.userId = event.target.value;
     this.contactTye = formControlName;
 
@@ -723,14 +758,14 @@ captureValue(event: any, formControlName: string, language: string, currentValue
   }
 
   captureVirtualKeyboard(element: HTMLElement, index: number) {
-   
-    if(this.keyboardRef){
+
+    if (this.keyboardRef) {
       this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
     }
-    
+
   }
 
-  openKeyboard(inputId:any, langCode:string) {
+  openKeyboard(inputId: any, langCode: string) {
     if (this.oldKeyBoradIndex === inputId && this.keyboardService.isOpened) {
       this.keyboardService.dismiss();
       this.keyboardRef = undefined;
@@ -747,19 +782,19 @@ captureValue(event: any, formControlName: string, language: string, currentValue
 
   uploadFiles(files, transactionID, docCatCode, docTypCode, referenceId) {
     this.dataStorageService.uploadfile(files, transactionID, docCatCode, docTypCode, referenceId).subscribe(response => {
-      if(response['response']){
+      if (response['response']) {
         this.getAllDocIds[response['response'].docName] = response['response'].docId
       }
     });
   }
 
-  deleteUploadedFile(docId, transactionID){
-    this.dataStorageService.deleteUploadedFile(docId, transactionID).subscribe(response =>{
+  deleteUploadedFile(docId, transactionID) {
+    this.dataStorageService.deleteUploadedFile(docId, transactionID).subscribe(response => {
       console.log(response)
     })
   }
 
-  finalUpdateDemographicData(transactionID:any){
+  finalUpdateDemographicData(transactionID: any) {
     const request = {
       "id": this.appConfigService.getConfig()["resident.updateuin.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
@@ -788,9 +823,9 @@ captureValue(event: any, formControlName: string, language: string, currentValue
 
   updateDemographicData() {
     this.isLoading = true;
-    if(this.updatingtype === 'identity'){
+    if (this.updatingtype === 'identity') {
       this.finalUpdateDemographicData(this.transactionIDForPOI)
-    }else{
+    } else {
       this.finalUpdateDemographicData(this.transactionIDForPOA)
     }
   }
@@ -1072,16 +1107,16 @@ captureValue(event: any, formControlName: string, language: string, currentValue
     }, 400)
   }
 
-  showPreviewImage(pdfSrc:any){
+  showPreviewImage(pdfSrc: any) {
     this.dialog
-    .open(DialogComponent, {
-      width: '70%',
-      data: {
-        case: 'previewImage',
-        imageLink:pdfSrc
-      },
-      disableClose: true
-    });
+      .open(DialogComponent, {
+        width: '70%',
+        data: {
+          case: 'previewImage',
+          imageLink: pdfSrc
+        },
+        disableClose: true
+      });
   }
 
   onItemSelected(item: any) {

@@ -41,19 +41,19 @@
                           <!-- number of attems mobile and tab code -->
                           <tr>
                             <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
-                            <td width="3% ele-for-lap-tab-card"></td>
+                            <td width="3%" class="ele-for-lap-tab-card"></td>
                             <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr>
                             <td class="width-of-input"><input type="text" class="readonly" readonly="true"
-                                disabled="true" [value]="buildJSONData[field.attributeName].value"></td>
+                                disabled="true" [value]="buildJSONData[field.attributeName].value | date:'dd/MMM/yyyy'"></td>
                             <td width="3%" class="ele-for-lap-tab-card"></td>
                             <td class="width-of-input ele-for-lap-tab-card">
                               <div class="date-input-card" *ngIf="langJson">
                                 <input [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0" [max]="maxdate" style=" border: none;" matInput
                                   [placeholder]="langJson.calendarPlaceHolder" [matDatepicker]="picker" readonly
                                   id="{{field.attributeName}}"
-                                  (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName])"
+                                  (dateChange)="captureDatePickerValue($event, field.attributeName, buildJSONData[field.attributeName].value)"
                                   [(ngModel)]="selectedDate" (click)="picker.open()" />
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
@@ -76,6 +76,14 @@
                               </div>
                             </td>
                           </tr>
+                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-lap-tab-card">
+                            <td></td>
+                            <td></td>
+                            <td>
+                              <span class="warning-message">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
+                            </td>
+                          </tr>
                           <!-- input field for mobile view -->
                           <tr>
                             <td class="width-of-input ele-for-mob-card"><label>{{field.labelName[langCode][1]}}</label></td>
@@ -94,6 +102,12 @@
                               <p class="warning-message"
                                 *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName]">
                                 {{langJson.sameDobInputErrorMsg}}</p>
+                            </td>
+                          </tr>
+                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-mob-card">
+                            <td>
+                              <span class="warning-message">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                             </td>
                           </tr>
                           <!-- input field for mobile view -->
@@ -119,7 +133,7 @@
                           <!-- number of attems mobile and tab code -->
                           <tr>
                             <td class="width-of-input"><label>{{field.labelName[langCode][0]}}</label></td>
-                            <td width="3%"></td>
+                            <td width="3%" class="ele-for-lap-tab-card"></td>
                             <td class="width-of-input ele-for-lap-tab-card"><label>{{field.labelName[langCode][1]}}</label></td>
                           </tr>
                           <tr *ngFor="let item of buildJSONData[field.attributeName], let i = index">
@@ -141,12 +155,7 @@
                                 <i matSuffix class="material-icons mat-keyboard-icon"
                                   (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                               </div>
-                              <span
-                                *ngIf="userInputValues[field.attributeName] && i === (buildJSONData[field.attributeName]?.length -1) && buildJSONData[field.attributeName][0].value">
-                                <p class="warning-message"
-                                  *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][0].value">
-                                  {{langJson.sameNameInputErrorMsg}}</p>
-                              </span>
+                              
                             </td>
                             <td class="sub-table-row ele-for-lap-tab-card" width="1%"></td>
                             <td *ngIf="i===0 && attributeUpdateCountRemainLimit" class="number-of-attems-main-card">
@@ -159,6 +168,14 @@
                                     attributeUpdateCountMaxLimit[field.attributeName]).replace("$Name",langJson[field.attributeName])}}</span>
                                 </div>
                               </div>
+                            </td>
+                          </tr>
+                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-lap-tab-card">
+                            <td></td>
+                            <td></td>
+                            <td>
+                              <span class="warning-message">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                             </td>
                           </tr>
                           <!-- input field for mobile view -->
@@ -179,12 +196,12 @@
                                 <i matSuffix class="material-icons mat-keyboard-icon"
                                   (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                               </div>
-                              <span
-                                *ngIf="userInputValues[field.attributeName] && i === (buildJSONData[field.attributeName]?.length -1) && buildJSONData[field.attributeName][0].value">
-                                <p class="warning-message"
-                                  *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][0].value">
-                                  {{langJson.sameNameInputErrorMsg}}</p>
-                              </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-mob-card">
+                            <td>
+                              <span class="warning-message">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                             </td>
                           </tr>
                         <!-- input field for mobile view -->
@@ -226,7 +243,7 @@
                                   placeholder="{{field.placeHolder[item.language]}}"
                                   [(value)]="userInputValues[field.attributeName][item.language]"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
-                                  (selectionChange)="captureDropDownValue($event, field.attributeName, item.language)">
+                                  (selectionChange)="captureDropDownValue($event, field.attributeName, item.language, item.value)">
                                   <mat-option *ngFor="let data of dropDownValues[field.attributeName][item.language]"
                                     [value]="data.code">{{ data.value }}</mat-option>
                                 </mat-select>
@@ -238,7 +255,7 @@
                                   {{langJson.sameGenderInputErrorMsg}}</p>
                               </span>
                             </td>
-                            <td class="sub-table-row" width="1%"></td>
+                            <td class="sub-table-row ele-for-lap-tab-card" width="1%"></td>
                             <td *ngIf="i===0 && attributeUpdateCountRemainLimit" class="number-of-attems-main-card">
                               <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-left-card' : 'number-of-attems-left-card'">
                                 <div [ngClass]="attributeUpdateCountRemainLimit[field.attributeName] <= 0 ? 'low-number-of-attems-arrow-shape':'number-of-attems-arrow-shape'"></div>
@@ -252,6 +269,14 @@
                               </div>
                             </td>
                           </tr>
+                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-lap-tab-card">
+                            <td></td>
+                            <td></td>
+                            <td>
+                              <span class="warning-message">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
+                            </td>
+                          </tr>
                           <!-- input field for mobile view -->
                           <tr>
                             <td class="width-of-input ele-for-mob-card"><label>{{field.labelName[langCode][1]}}</label></td>
@@ -263,7 +288,7 @@
                                     placeholder="{{field.placeHolder[item.language]}}"
                                     [(value)]="userInputValues[field.attributeName][item.language]"
                                     [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
-                                    (selectionChange)="captureDropDownValue($event, field.attributeName, item.language)">
+                                    (selectionChange)="captureDropDownValue($event, field.attributeName, item.language,item.value)">
                                     <mat-option *ngFor="let data of dropDownValues[field.attributeName][item.language]"
                                       [value]="data.code">{{ data.value }}</mat-option>
                                   </mat-select>
@@ -274,6 +299,12 @@
                                     *ngIf="userInputValues[field.attributeName] === buildJSONData[field.attributeName][langCode]">
                                     {{langJson.sameGenderInputErrorMsg}}</p>
                                 </span>
+                            </td>
+                          </tr>
+                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-mob-card">
+                            <td>
+                              <span class="warning-message">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                             </td>
                           </tr>
                            <!-- input field for mobile view -->
@@ -296,10 +327,10 @@
                             <td class="width-of-input">
                               <mat-select disableOptionCentering class="enable-dropdown"
                                 [value]="proofOfIdentity['documenttype'] ? proofOfIdentity['documenttype'] : '' "
-                                id="{{field.attributeName}}">
+                                id="{{field.attributeName}}"
+                                (selectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], '')">
                                 <mat-option style="min-width: 25.2rem;"
                                   *ngFor="let data of dropDownValues[field.attributeName]"
-                                  (onSelectionChange)="captureDropDownValue($event, field.attributeName, supportedLanguages[0], field.dataType)"
                                   [value]="data.code">{{ data.name }}</mat-option>
                               </mat-select>
                             </td>
@@ -449,7 +480,7 @@
                                 <div class="search-input-card">
                                   <input class="input" matInput #{{field.attributeName}}
                                     id="{{field.attributeName}}{{item.language}}"
-                                    (blur)="captureAddressValue($event, field.attributeName, item.language)"
+                                    (blur)="captureAddressValue($event, field.attributeName, item.language, item.value)"
                                     [(value)]="userInputValues[field.attributeName][item.language]"
                                     [placeholder]="field.placeHolder[item.language]"
                                     (focus)="captureVirtualKeyboard(field.attributeName+item.language, item.index)"
@@ -457,6 +488,14 @@
                                   <i matSuffix class="material-icons mat-keyboard-icon"
                                     (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                                 </div>
+                              </td>
+                            </tr>
+                            <tr *ngIf="isSameData[field.attributeName]" class="ele-for-lap-tab-card">
+                              <td></td>
+                              <td></td>
+                              <td>
+                                <span class="warning-message">
+                                  {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                               </td>
                             </tr>
                             <!-- input field for mobile view -->
@@ -468,7 +507,7 @@
                                 <div class="search-input-card">
                                   <input class="input" matInput #{{field.attributeName}}
                                     id="{{field.attributeName}}{{item.language}}"
-                                    (blur)="captureAddressValue($event, field.attributeName, item.language)"
+                                    (blur)="captureAddressValue($event, field.attributeName, item.language, item.value)"
                                     [(value)]="userInputValues[field.attributeName][item.language]"
                                     [placeholder]="field.placeHolder[item.language]"
                                     (focus)="captureVirtualKeyboard(field.attributeName+item.language, item.index)"
@@ -476,6 +515,12 @@
                                   <i matSuffix class="material-icons mat-keyboard-icon"
                                     (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                                 </div>
+                              </td>
+                            </tr>
+                            <tr *ngIf="isSameData[field.attributeName]" class="ele-for-mob-card">
+                              <td>
+                                <span class="warning-message">
+                                  {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                               </td>
                             </tr>
                             <!-- input field for mobile view -->
@@ -880,7 +925,11 @@
                 </td>
               </tr>
               <tr *ngIf="typeOf(item.newData) === 'string' && item.newData">
-                <td>
+                <td *ngIf="item.labelName === 'New DOB'">
+                  <input style="color: #000000;" type="text" class="readonly" readonly="true" disabled="true"
+                    [value]="item.newData | date:'dd/MMM/yyyy'">
+                </td>
+                <td *ngIf="item.labelName !== 'New DOB'">
                   <input style="color: #000000;" type="text" class="readonly" readonly="true" disabled="true"
                     [value]="item.newData">
                 </td>
