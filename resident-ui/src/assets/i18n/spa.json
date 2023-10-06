@@ -399,7 +399,7 @@
         "languageHeading": "Mi preferencia de idioma",
         "InvalidFormatMsg": "El tipo de archivo que estás intentando cargar no es compatible. Por favor, carga un tipo de archivo diferente.",
         "InvalidFileSize": "El documento que estás intentando cargar excede el límite de tamaño de archivo de 2 MB. Por favor, carga un documento dentro de 2 MB.",
-        "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
+        "sameNameInputErrorMsg": "El $NAME que has ingresado ya existe. Por favor, ingresa un nuevo $NAME para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
         "EnterAllAddress": "Por favor selecciona",
