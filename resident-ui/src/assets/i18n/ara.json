@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": "يمكن للمقيمين اختيار البيانات المراد مشاركتها مع أي من الشركاء المسجلين للاستفادة من مختلف الخدمات من الطرف الثالث.",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "تحديث بياناتي",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "يمكن للمقيمين تحديث البيانات الموجودة بالفعل المرتبطة بمعرّف UIN/VID الخاص بهم. يمكن تحديث البيانات التي يمكن تحديثها بما في ذلك الاسم والجنس وتاريخ الميلاد والعنوان والوثائق المرفوعة ورقم الهاتف وعنوان البريد الإلكتروني واللغة المفضلة ، إلخ.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -408,7 +415,9 @@
         "maxAttems": "$Name يمكن تقديم طلب تغيير الاسم مرات كحد أقصى $MaxAttems.",
         "fullName": "الاسم",
         "dateOfBirth": "تاريخ الميلاد",
-        "gender": "الجنس"
+        "gender": "الجنس",
+        "addressLine1":"العنوان",
+        "sameFileUploading":"يرجى تحميل الملف باستخدام اسم ملف مختلف."
     },
     "preview": {
         "title": "معاينة"

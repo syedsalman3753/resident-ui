@@ -356,7 +356,7 @@
                             <td width="100%" colspan="3">
                               <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POI')">
                                 <input (click)="$event.target.value=null"
-                                  [disabled]="proofOfIdentity.documenttype === undefined || files?.length === 1 "
+                                  [disabled]="proofOfIdentity.documenttype === undefined"
                                   type="file" #fileDropRef id="fileDropRef"
                                   (change)="fileBrowseHandler($event.target.files, 'POI')"
                                   accept=".pdf, .jpg, .jpeg, .png" />
@@ -682,7 +682,7 @@
                               <td width="100%" colspan="3">
                                 <div class="container" appDnd (fileDropped)="onFileDropped($event, 'POA')">
                                   <input (click)="$event.target.value=null"
-                                    [disabled]="proofOfAddress.documenttype === undefined || filesPOA?.length === 1"
+                                    [disabled]="proofOfAddress.documenttype === undefined"
                                     type="file" #fileAddRef id="fileAddRef"
                                     (change)="fileBrowseHandler($event.target.files, 'POA')"
                                     accept=".pdf, .jpg, .jpeg, .png" />

@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": "निवासी विभिन्न तृतीय पक्ष सेवाओं का लाभ उठाने के लिए किसी भी पंजीकृत भागीदार के साथ साझा किए जाने वाले डेटा का चयन कर सकते हैं।",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "मेरा डेटा अपडेट करें",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "निवासी अपने यूआईएन/वीआईडी ​​से जुड़े पहले से मौजूद डेटा को अपडेट कर सकते हैं। जिन डेटा को अपडेट किया जा सकता है उनमें नाम, लिंग, जन्मतिथि, पता, अपलोड किए गए दस्तावेज़, फ़ोन नंबर, ईमेल आईडी, पसंदीदा भाषा आदि शामिल हैं।",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -408,7 +415,9 @@
         "maxAttems": "$Name परिवर्तन अनुरोध को अधिकतम $MaxAttems बार किया जा सकता है।",
         "fullName": "नाम",
         "dateOfBirth": "जन्म तिथि",
-        "gender": "लिंग"
+        "gender": "लिंग",
+        "addressLine1":"पता",
+        "sameFileUploading":"कृपया एक अलग फ़ाइल नाम के साथ फ़ाइल अपलोड करें।"
     },
     "preview": {
         "title": "पूर्व दर्शन"

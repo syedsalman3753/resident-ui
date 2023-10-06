@@ -874,14 +874,27 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    * on file drop handler
    */
   onFileDropped($event, type) {
-    this.prepareFilesList($event, type);
+    if(this.getAllDocIds[$event[0].name]){
+      type === 'POI' ? this.isValidFileFormatPOI = true : this.isValidFileFormatPOA = true;;
+      this.warningMessage = this.langJson.sameFileUploading
+    }else{
+      this.isValidFileFormatPOI = false;
+      this.prepareFilesList($event, type);
+    }
   }
 
   /**
    * handle file from browsing
    */
   fileBrowseHandler(files, type) {
-    this.prepareFilesList(files, type);
+    if(this.getAllDocIds[files[0].name]){
+      type === 'POI' ? this.isValidFileFormatPOI = true : this.isValidFileFormatPOA = true;;
+      this.warningMessage = this.langJson.sameFileUploading
+    }else{
+      this.isValidFileFormatPOI = false;
+      this.prepareFilesList(files, type);
+    }
+    
   }
 
   /**
@@ -926,14 +939,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.files.splice(index, 1);
       this.uploadedFiles = this.files
       this.deleteUploadedFile(documentID, this.transactionIDForPOI)
-      this.pdfSrc = "";
+      delete this.getAllDocIds[documentName]
     } else {
       let documentName = this.filesPOA[index].name;
       let documentID = this.getAllDocIds[documentName]
       this.filesPOA.splice(index, 1);
       this.uploadedFiles = this.filesPOA
       this.deleteUploadedFile(documentID, this.transactionIDForPOA)
-      this.pdfSrcPOA = ""
+      delete this.getAllDocIds[documentName]
     }
     if (this.files.length < 1) {
       this.previewDisabled = true;
@@ -954,11 +967,13 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         } else {
           if (this.files.length) {
             const progressInterval = setInterval(() => {
-              if (this.files[index].progress === 100) {
-                clearInterval(progressInterval);
-                this.uploadFilesSimulator(index + 1, type);
-              } else {
-                this.files[index].progress += 20;
+              if(this.files[index]){
+                if (this.files[index].progress === 100) {
+                  clearInterval(progressInterval);
+                  this.uploadFilesSimulator(index + 1, type);
+                } else {
+                  this.files[index].progress += 20;
+                }   
               }
             }, 200);
           }
