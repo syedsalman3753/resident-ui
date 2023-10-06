@@ -416,7 +416,8 @@
         "fullName":"Name",
         "dateOfBirth":"Date of birth",
         "gender":"Gender",
-        "addressLine1":"Address"
+        "addressLine1":"Address",
+        "sameFileUploading":"Please upload file with a different file name."
     },
     "preview": {
         "title": "Preview"

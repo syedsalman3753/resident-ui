@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": "Les résidents peuvent choisir les données à partager avec l'un des partenaires enregistrés pour bénéficier de divers services tiers.",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Mettre à jour mes données",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Les résidents peuvent mettre à jour les données déjà existantes associées à leur UIN/ VID. Les données pouvant être mises à jour incluent le nom, le genre, la date de naissance, l'adresse, les documents téléchargés, le numéro de téléphone, l'adresse e-mail, la langue préférée, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -408,7 +415,9 @@
         "maxAttems": "Vous pouvez faire une demande de changement de $Name un maximum de $MaxAttems fois.",
         "fullName": "Nom",
         "dateOfBirth": "Date de naissance",
-        "gender": "Genre"
+        "gender": "Genre",
+        "addressLine1":"Adresse",
+        "sameFileUploading":"Veuillez télécharger le fichier avec un nom de fichier différent."
     },
     "preview": {
         "title": "Aperçu"
