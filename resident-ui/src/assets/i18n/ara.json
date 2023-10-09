@@ -15,7 +15,7 @@
                     "displayName": "عرض تاريخي الخاص بي",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "عرض تاريخ جميع المعاملات المرتبطة بمعرّف UIN/AID/VID الخاص بك. يمكنك أيضًا عرض تفاصيلها وإذا تم العثور على إدخال غير محاسب له ، يمكن تقديم تقرير بشأنه.",
+                    "description": "عرض تاريخ جميع المعاملات المرتبطة بمعرّف UIN/ VID الخاص بك. يمكنك أيضًا عرض تفاصيلها وإذا تم العثور على إدخال غير محاسب له ، يمكن تقديم تقرير بشأنه.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -238,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "نوع التاريخ",
         "inputStatus": "الحالة",
-        "inputFrom": "من (يوم/شهر/سنة)",
-        "inputTo": "إلى (يوم/شهر/سنة)",
+        "inputFrom": "من (ي ي/ش ش ش/السنة)",
+        "inputTo": "إلى (ي ي/ش ش ش/السنة)",
         "searchBtn": "بحث",
         "description": "الوصف",
         "timestamp": "الطابع الزمني",

@@ -15,7 +15,7 @@
                     "displayName": "Ver mi historial",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "Vea el historial de todas las transacciones asociadas con su UIN/ AID/ VID registrado. También puede ver sus detalles y si se encuentra alguna entrada no contabilizada, se puede levantar un informe contra la misma.",
+                    "description": "Vea el historial de todas las transacciones asociadas con su UIN/ VID registrado. También puede ver sus detalles y si se encuentra alguna entrada no contabilizada, se puede levantar un informe contra la misma.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -238,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "Tipo de historial",
         "inputStatus": "Estado",
-        "inputFrom": "Desde (dd/mm/aaaa)",
-        "inputTo": "Hasta (dd/mm/aaaa)",
+        "inputFrom": "Desde (dd/MMM/aaaa)",
+        "inputTo": "Hasta (dd/MMM/aaaa)",
         "searchBtn": "Buscar",
         "description": "Descripción",
         "timestamp": "Marca de tiempo",

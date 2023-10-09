@@ -15,7 +15,7 @@
                     "displayName": "ನನ್ನ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "ನಿಮ್ಮ ಲಾಗ್-ಇನ್ ಮಾಡಿದ UIN/ AID/ VID ಗೆ ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ ವಹಿವಾಟುಗಳ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ. ನೀವು ಅವರ ವಿವರಗಳನ್ನು ಸಹ ವೀಕ್ಷಿಸಬಹುದು ಮತ್ತು ಯಾವುದೇ ಲೆಕ್ಕವಿಲ್ಲದ ನಮೂದು ಕಂಡುಬಂದರೆ, ಅದರ ವಿರುದ್ಧ ವರದಿಯನ್ನು ಎತ್ತಬಹುದು.",
+                    "description": "ನಿಮ್ಮ ಲಾಗ್-ಇನ್ ಮಾಡಿದ UIN/ VID ಗೆ ಸಂಬಂಧಿಸಿದ ಎಲ್ಲಾ ವಹಿವಾಟುಗಳ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ. ನೀವು ಅವರ ವಿವರಗಳನ್ನು ಸಹ ವೀಕ್ಷಿಸಬಹುದು ಮತ್ತು ಯಾವುದೇ ಲೆಕ್ಕವಿಲ್ಲದ ನಮೂದು ಕಂಡುಬಂದರೆ, ಅದರ ವಿರುದ್ಧ ವರದಿಯನ್ನು ಎತ್ತಬಹುದು.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -238,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "ಇತಿಹಾಸ ಪ್ರಕಾರ",
         "inputStatus": "ಸ್ಥಿತಿ",
-        "inputFrom": "ಇಂದಿನಿಂದ (dd/mm/yyyy)",
-        "inputTo": "ಇಂದಿಗೆ (dd/mm/yyyy)",
+        "inputFrom": "ಇಂದಿನಿಂದ (dd/MMM/yyyy)",
+        "inputTo": "ಇಂದಿಗೆ (dd/MMM/yyyy)",
         "searchBtn": "ಹೋಗು",
         "description": "ವಿವರಣೆ",
         "timestamp": "ಟೈಮ್‌ಸ್ಟ್ಯಾಂಪ್",

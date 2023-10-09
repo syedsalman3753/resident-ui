@@ -15,7 +15,7 @@
                     "displayName": "मेरा इतिहास देखें",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "अपने लॉग-इन UIN/ AID/ VID के साथ जुड़े सभी लेन-देन का इतिहास देखें। आप उनका विवरण भी देख सकते हैं और यदि कोई गैर-लेखित प्रविष्टि मिलती है, तो उसके खिलाफ एक रिपोर्ट दर्ज की जा सकती है।",
+                    "description": "अपने लॉग-इन UIN/ VID के साथ जुड़े सभी लेन-देन का इतिहास देखें। आप उनका विवरण भी देख सकते हैं और यदि कोई गैर-लेखित प्रविष्टि मिलती है, तो उसके खिलाफ एक रिपोर्ट दर्ज की जा सकती है।",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -238,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "इतिहास प्रकार",
         "inputStatus": "स्थिति",
-        "inputFrom": "से (दिनांक/महीना/वर्ष)",
-        "inputTo": "तक (दिनांक/महीना/वर्ष)",
+        "inputFrom": "से (dd/MMM/yyyy)",
+        "inputTo": "तक (dd/MMM/yyyy)",
         "searchBtn": "जाएँ",
         "description": "विवरण",
         "timestamp": "टाइमस्टैम्प",

@@ -15,7 +15,7 @@
                     "displayName": "View My History",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "View the history of all the transactions associated with your logged-in UIN/ AID/ VID. You can also view their details and if any unaccounted entry is found, a report can be raised against the same.",
+                    "description": "View the history of all the transactions associated with your logged-in UIN/ VID. You can also view their details and if any unaccounted entry is found, a report can be raised against the same.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -238,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "History Type",
         "inputStatus": "Status",
-        "inputFrom": "From (dd/mm/yyyy)",
-        "inputTo": "To (dd/mm/yyyy)",
+        "inputFrom": "From (dd/MMM/yyyy)",
+        "inputTo": "To (dd/MMM/yyyy)",
         "searchBtn": "Go",
         "description": "Description",
         "timestamp": "Timestamp",

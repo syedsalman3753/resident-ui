@@ -11,32 +11,19 @@ import { InteractionService } from "src/app/core/services/interaction.service";
 import { AuditService } from "src/app/core/services/audit.service";
 import defaultJson from "src/assets/i18n/default.json";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
 import {
   MatKeyboardRef,
   MatKeyboardComponent,
   MatKeyboardService
 } from 'ngx7-material-keyboard';
-import {
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
 
 @Component({
   selector: "app-demographic",
   templateUrl: "updatedemographic.component.html",
   styleUrls: ["updatedemographic.component.css"],
-  providers: [
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-    },
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-  ],
 })
+
 export class UpdatedemographicComponent implements OnInit, OnDestroy {
   userInfo: any;
   static actualData: any;
@@ -125,7 +112,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     private dialog: MatDialog, private dataStorageService: DataStorageService,
     private translateService: TranslateService, private router: Router,
     private appConfigService: AppConfigService, private auditService: AuditService,
-    private dateAdapter: DateAdapter<Date>, private breakPointService: BreakpointService,
+    private breakPointService: BreakpointService,
     private keyboardService: MatKeyboardService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
@@ -136,7 +123,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.verifyupdatedData(id.otp);
       }
     });
-
     this.breakPointService.isBreakpointActive().subscribe(active => {
       if (active) {
         if (active === "extraSmall") {
@@ -161,13 +147,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         }
       }
     });
-
-    this.dateAdapter.setLocale('en-GB');
   }
 
   async ngOnInit() {
     this.defaultJsonValue = { ...defaultJson }
-    this.dateAdapter.setLocale(defaultJson.keyboardMapping[this.langCode]);
     this.initialLocationCode = "MOR";
     this.locCode = 5;
     this.translateService.use(localStorage.getItem("langCode"));
