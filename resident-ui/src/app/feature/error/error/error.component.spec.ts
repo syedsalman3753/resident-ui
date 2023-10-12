@@ -31,8 +31,8 @@ describe('ErrorComponent', () => {
 
     fixture = TestBed.createComponent(ErrorComponent);
     component = fixture.componentInstance;
-    redirectService = TestBed.inject(LoginRedirectService);
-    translateService = TestBed.inject(TranslateService);
+    redirectService = TestBed.get(LoginRedirectService);
+    translateService = TestBed.get(TranslateService);
   });
 
   it('should create the ErrorComponent', () => {

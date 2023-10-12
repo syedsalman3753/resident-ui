@@ -15,7 +15,7 @@
                     "displayName": "Ver mi historial",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "Vea el historial de todas las transacciones asociadas con su UIN/ AID/ VID registrado. También puede ver sus detalles y si se encuentra alguna entrada no contabilizada, se puede levantar un informe contra la misma.",
+                    "description": "Vea el historial de todas las transacciones asociadas con su UIN/ VID registrado. También puede ver sus detalles y si se encuentra alguna entrada no contabilizada, se puede levantar un informe contra la misma.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -51,6 +51,13 @@
                     "icon": "assets/images/sharewithpartner.png",
                     "route": "uinservices/sharewithpartner",
                     "description": " Los residentes pueden elegir los datos que se compartirán con cualquiera de los socios registrados para aprovechar varios servicios de terceros.",
+                    "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Actualizar mis datos",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Los residentes pueden actualizar los datos ya existentes asociados a su UIN/VID. Los datos que se pueden actualizar incluyen nombre, sexo, fecha de nacimiento, dirección, documentos cargados, número de teléfono, ID de correo electrónico, idioma preferido, etc.",
                     "auditEventId": "ADM-004"
                 }
             ]
@@ -231,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "Tipo de historial",
         "inputStatus": "Estado",
-        "inputFrom": "Desde (dd/mm/aaaa)",
-        "inputTo": "Hasta (dd/mm/aaaa)",
+        "inputFrom": "Desde (dd/MMM/aaaa)",
+        "inputTo": "Hasta (dd/MMM/aaaa)",
         "searchBtn": "Buscar",
         "description": "Descripción",
         "timestamp": "Marca de tiempo",
@@ -399,13 +406,18 @@
         "languageHeading": "Mi preferencia de idioma",
         "InvalidFormatMsg": "El tipo de archivo que estás intentando cargar no es compatible. Por favor, carga un tipo de archivo diferente.",
         "InvalidFileSize": "El documento que estás intentando cargar excede el límite de tamaño de archivo de 2 MB. Por favor, carga un documento dentro de 2 MB.",
-        "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
+        "sameNameInputErrorMsg": "El $NAME que has ingresado ya existe. Por favor, ingresa un nuevo $NAME para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
         "EnterAllAddress": "Por favor selecciona",
         "select": "Seleccionar",
         "remainingAttems": "Quedan $remainingAttems intentos.",
-        "maxAttems": "Se puede hacer una solicitud de cambio de nombre un máximo de $maxAttems veces."
+        "maxAttems": "Se puede solicitar un cambio de $Name un máximo de $MaxAttems veces.",
+        "fullName": "Nombre",
+        "dateOfBirth": "Fecha de nacimiento",
+        "gender": "Género",
+        "addressLine1":"Dirección",
+        "sameFileUploading":"Por favor, suba el archivo con un nombre de archivo diferente."
     },
     "preview": {
         "title": "Avance"
@@ -665,6 +677,7 @@
         "RES-SER-514": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
         "IDA-MLC-019": "El tipo de autenticación de OTP por correo electrónico está bloqueado para el UIN",
         "RES-SER-522": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
-        "RES_SER_509": "La tarjeta no está lista para su descarga."
+        "RES_SER_509": "La tarjeta no está lista para su descarga.",
+        "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo."
     }
 }

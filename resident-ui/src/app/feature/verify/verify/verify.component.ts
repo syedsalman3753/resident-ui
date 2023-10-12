@@ -381,7 +381,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     } else {
       this.message = this.popupMessages.serverErrors[this.errorCode]
     }
-    if (this.errorCode === "IDA-MLC-009") {
+    if (this.errorCode === "IDA-MLC-009" || this.errorCode === 'IDA-OTA-002') {
       this.dialog
       .open(DialogComponent, {
         width: '550px',

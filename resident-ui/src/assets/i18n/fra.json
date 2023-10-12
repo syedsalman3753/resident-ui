@@ -15,7 +15,7 @@
                     "displayName": "Consulter mon historique",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "Consultez l'historique de toutes les transactions associées à votre UIN/ AID/ VID connecté. Vous pouvez également consulter leurs détails et si une entrée non comptabilisée est trouvée, un rapport peut être établi à ce sujet.",
+                    "description": "Consultez l'historique de toutes les transactions associées à votre UIN/ VID connecté. Vous pouvez également consulter leurs détails et si une entrée non comptabilisée est trouvée, un rapport peut être établi à ce sujet.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -51,6 +51,13 @@
                     "icon": "assets/images/sharewithpartner.png",
                     "route": "uinservices/sharewithpartner",
                     "description": "Les résidents peuvent choisir les données à partager avec l'un des partenaires enregistrés pour bénéficier de divers services tiers.",
+                    "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Mettre à jour mes données",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Les résidents peuvent mettre à jour les données déjà existantes associées à leur UIN/ VID. Les données pouvant être mises à jour incluent le nom, le genre, la date de naissance, l'adresse, les documents téléchargés, le numéro de téléphone, l'adresse e-mail, la langue préférée, etc.",
                     "auditEventId": "ADM-004"
                 }
             ]
@@ -231,8 +238,8 @@
         "inputAppId": "EID",
         "inputHistory": "Type d'historique",
         "inputStatus": "Statut",
-        "inputFrom": "Du (jj/mm/aaaa)",
-        "inputTo": "Au (jj/mm/aaaa)",
+        "inputFrom": "Du (jj/MMM/aaaa)",
+        "inputTo": "Au (jj/MMM/aaaa)",
         "searchBtn": "Rechercher",
         "description": "Description",
         "timestamp": "Horodatage",
@@ -399,13 +406,18 @@
         "languageHeading": "Ma préférence de langue",
         "InvalidFormatMsg": "Le type de fichier que vous essayez de télécharger n'est pas pris en charge. Veuillez télécharger un autre type de fichier.",
         "InvalidFileSize": "Le document que vous essayez de télécharger dépasse la limite de taille de fichier de 2 Mo. Veuillez télécharger un document de taille inférieure à 2 Mo.",
-        "sameNameInputErrorMsg": "Le nom que vous avez saisi existe déjà. Veuillez saisir un nouveau nom pour continuer.",
+        "sameNameInputErrorMsg": "Le $NAME que vous avez saisi existe déjà. Veuillez saisir un nouveau $NAME pour continuer.",
         "sameDobInputErrorMsg": "La date de naissance que vous avez saisie existe déjà. Veuillez saisir une nouvelle date de naissance pour continuer.",
         "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer.",
         "EnterAllAddress": "Veuillez sélectionner",
         "select": "Sélectionner",
         "remainingAttems":"Il vous reste $remainingAttems tentatives.",
-        "maxAttems":"Une demande de changement de nom peut être effectuée au maximum $maxAttems fois."
+        "maxAttems": "Vous pouvez faire une demande de changement de $Name un maximum de $MaxAttems fois.",
+        "fullName": "Nom",
+        "dateOfBirth": "Date de naissance",
+        "gender": "Genre",
+        "addressLine1":"Adresse",
+        "sameFileUploading":"Veuillez télécharger le fichier avec un nom de fichier différent."
     },
     "preview": {
         "title": "Aperçu"
@@ -665,6 +677,7 @@
         "RES-SER-514": "UIN/VID invalide saisi. Veuillez saisir un UIN/VID valide et réessayer.",
         "IDA-MLC-019": "Le type d'authentification par OTP par e-mail est verrouillé pour le UIN.",
         "RES-SER-522": "UIN/VID invalide saisi. Veuillez saisir un UIN/VID valide et réessayer.",
-        "RES-SER-509": "La carte n'est pas prête à être téléchargée."
+        "RES-SER-509": "La carte n'est pas prête à être téléchargée.",
+        "RES-SER-418": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer."
     }
 }

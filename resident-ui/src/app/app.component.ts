@@ -8,11 +8,35 @@ import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { MatKeyboardService } from 'ngx7-material-keyboard';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import defaultJson from "src/assets/i18n/default.json";
+
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+
+export const MY_DATE_FORMATS = {
+  display: {
+    dateInput: 'DD/MMM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+  ],
 })
 
 export class AppComponent {
@@ -21,6 +45,7 @@ export class AppComponent {
   previousUrl: string;
   primaryLangCode: string = localStorage.getItem("langCode");
   sitealignment;
+  
 
   constructor(
     private appConfigService: AppConfigService,
@@ -29,7 +54,8 @@ export class AppComponent {
     private logoutService: LogoutService,
     private auditService: AuditService,
     private keyboardService: MatKeyboardService,
-    private dataStorageService: DataStorageService
+    private dataStorageService: DataStorageService,
+    private dateAdapter: DateAdapter<Date>,
   ) {
     this.appConfigService.getConfig();
     if (this.primaryLangCode === "ara") {
@@ -42,6 +68,7 @@ export class AppComponent {
   }
   
   ngOnInit() { 
+    this.dateAdapter.setLocale(defaultJson.keyboardMapping[this.primaryLangCode]);
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
     };
@@ -57,7 +84,9 @@ export class AppComponent {
           if(window.location.href.includes('error=invalid_transaction')){
             this.router.navigate(['error']);
           }else{
-            this.router.navigate(['dashboard']);
+            if (window.location.href.includes('uinservices')) {
+              this.router.navigate(['dashboard']);
+            }
           };
         }
       }else{

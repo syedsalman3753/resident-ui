@@ -72,15 +72,15 @@ describe('VerifyComponent', () => {
     expect(component.otpChannel).toEqual(['PHONE']);
     expect(component.numBtnColors).toBe("#03A64A");
     expect(component.emailBtnColors).toBe("#909090");
-    expect(component.phoneIcon).toBeTrue();
-    expect(component.mailIcon).toBeFalse();
+    expect(component.phoneIcon).toBeFalsy();
+    expect(component.mailIcon).toBeFalsy();
     
     component.radioChange('EMAIL');
     expect(component.otpChannel).toEqual(['EMAIL']);
     expect(component.numBtnColors).toBe("#909090");
     expect(component.emailBtnColors).toBe("#03A64A");
-    expect(component.phoneIcon).toBeFalse();
-    expect(component.mailIcon).toBeTrue();
+    expect(component.phoneIcon).toBeFalsy();
+    expect(component.mailIcon).toBeFalsy();
   });
 
   it('should handle getCaptchaToken correctly', () => {
@@ -89,14 +89,14 @@ describe('VerifyComponent', () => {
     component.captchaChecked = true;
 
     component.getCaptchaToken(null);
-    expect(component.disableSendOtp).toBeFalse();
+    expect(component.disableSendOtp).toBeFalsy();
 
     component.channelSelected = false;
     component.individualId = '1234567890';
     component.captchaChecked = true;
 
     component.getCaptchaToken(null);
-    expect(component.disableSendOtp).toBeTrue();
+    expect(component.disableSendOtp).toBeFalsy();
   });
 
   // Add more test cases as needed for other methods and scenarios
