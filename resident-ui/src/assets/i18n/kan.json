@@ -397,7 +397,7 @@
         "uploadImage": "ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
         "dropImage": "ಚಿತ್ರವನ್ನು ಹಾಕಿಕೊಳ್ಳಿ",
         "or": "ಅಥವಾ",
-        "preview": "ಪೂರ್ವದರ್ಶನ",
+        "preview": "ಮುನ್ನೋಟ",
         "enteredValuesNotMatch": "ನಮೂದಿಸಿದ ಮೌಲ್ಯಗಳು ಹೊಂದಿಕೊಳ್ಳುವುದಿಲ್ಲ.",
         "submit": "ಸಲ್ಲಿಸಿ",
         "update": "ಅಪ್ಡೇಟ್ ಮಾಡಿ",
@@ -409,7 +409,7 @@
         "sameNameInputErrorMsg": "$NAME ನೀವು ಈಗ ನಮೂದಿಸಿದ್ದೀರಿ ಮತ್ತು ಇದು ಈಗಿನ $NAME ಮಾತ್ರ ಇದೆ. ಮುಂದುವರೆಯಲು ಹೊಸ $NAME ನಮೂದಿಸಿ.",
         "sameDobInputErrorMsg": "ನೀವು ನಮೂದಿಸಿದ ಜನ್ಮ ದಿನಾಂಕ ಈಗಾಗಲೇ ಇದೆ. ಮುಂದುವರೆಸಲು ಹೊಸ ಜನ್ಮ ದಿನಾಂಕವನ್ನು ನಮೂದಿಸಿ.",
         "sameGenderInputErrorMsg": "ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಲಿಂಗ ಈಗಾಗಲೇ ಇದೆ. ಮುಂದುವರೆಸಲು ಹೊಸ ಲಿಂಗವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ.",
-        "EnterAllAddress": "ದಯವಿಟ್ಟು ಆಯ್ಕೆ ಮಾಡು",
+        "EnterAllAddress": "ದಯವಿಟ್ಟು ",
         "select": "ಆಯ್ಕೆ ಮಾಡಿ",
         "remainingAttems": "$remainingAttems ಪ್ರಯಾಸಗಳು ಉಳಿಯಿವೆ.",
         "maxAttems": "$Name ಬದಲಾಯಿಸಲು ಅಧಿಕತಮ $MaxAttems ಸಲ ಅನುವಾದಿಸಬಹುದು.",
@@ -417,10 +417,9 @@
         "dateOfBirth": "ಹುಟ್ಟಿದ ದಿನಾಂಕ",
         "gender": "ಲಿಂಗ",
         "addressLine1":"ವಿಳಾಸ",
-        "sameFileUploading":"ದಯವಿಟ್ಟು ವೇರೆ ಕಡತವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ."
-    },
-    "preview": {
-        "title": "ಮುನ್ನೋಟ"
+        "sameFileUploading":"ದಯವಿಟ್ಟು ವೇರೆ ಕಡತವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ.",
+        "docTypePlaceholder": "ದಸ್ತಾವೇಜು ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+        "DocIDPlaceholder": "ದಸ್ತಾವೇಜು ಐಡಿ ನಮೂದಿಸಿ"
     },
     "trackservicerequest": {
         "title": "ನನ್ನ ವಿನಂತಿಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ",
@@ -614,7 +613,8 @@
         "updateMyData": {
             "emailSuccessMsg": "ನಿಮ್ಮ ಇಮೇಲ್ ID ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿತವಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ.",
             "phoneNumberSuccessMsg": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿತವಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ.",
-            "newDataUpdatedSuccessMsg": "ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಬದಲಿಸಲು ನಿಮ್ಮ ವಿನಂತಿ ಸಲ್ಲಿಸಲಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ."
+            "newDataUpdatedSuccessMsg": "ನೀವು ನಿಮ್ಮ $dataType ಡೇಟಾವನ್ನು ಬದಲಿಸಲು ವಿನಂತಿಸಿದ್ದೀರಿ. ಈ ಈವೆಂಟ್ ಐಡಿ: $eventId ಖಿಲಾನಗೆ ಸಲ್ಲಿಸಲಾಗಿದೆ.",
+            "updateNotificationData": "ನಿಮ್ಮ ಅಧಿಸೂಚನೆ ಭಾಷೆಯನ್ನು ಬದಲಿಸಲು ವಿನಂತಿಸಿದ್ದೀರಿ. ಈ ಈವೆಂಟ್ ಐಡಿ: $eventId ಖಿಲಾನಗೆ ಸಲ್ಲಿಸಲಾಗಿದೆ."
         }
     },
     "autologout": {

@@ -303,7 +303,7 @@ p{
 }
 
 .share-btn {
-  width: 100px;
+  min-width: 100px;
   height: 36px;
   border-radius: 5px;
   border: none;
@@ -412,4 +412,11 @@ p{
   background-color: #FFD9D8; 
   color: red; 
   border-radius: 8px;
+}
+
+.preview-file-name-card{
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 4px 0 4px;
 }

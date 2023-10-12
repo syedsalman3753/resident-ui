@@ -280,8 +280,7 @@
         <p class="agree-text">{{input.agreeLabel}}</p>
       </div>
       <button [disabled]="isChecked" mat-button [style.background]=" isChecked ? '#909090':'#03A64A' "
-        [style.color]="'#ffffff'" (click)="shareInfoForUpdateMyData(input.id)" class="share-btn">{{ input.btnTxt
-        }}</button>
+      [style.color]="'#ffffff'" (click)="shareInfoForUpdateMyData(input.id)" class="share-btn">{{ input.btnTxt}}</button>
     </div>
   </div>
 
@@ -339,7 +338,7 @@
       <br />
       <label class="label-text" for="otp-input">{{'verifyuinvid.inputLabel' | translate}}</label>
       <br />
-      <input [disabled]="disableInput" #box (keyup)="getInputValues(box.value)" placeholder="Enter OTP here" id="otp-input"
+      <input [disabled]="disableInput" #box (keyup)="getInputValues(box.value)" placeholder="{{'verifyuinvid.otp' | translate}}" id="otp-input"
         class="enter-opt-input" type="text" />
       <div class="otp-infromation-card">
         <p class="otp-infromation-text">{{input.message}}<span class="mobile-number">
@@ -360,8 +359,11 @@
   
   <!-- show preview image -->
   <div style="height: 50%;" *ngIf="input.case === 'previewImage'">
-    <div (click)="dismiss()" width="100%" style="float: right;cursor: pointer;">
-      <mat-icon matTooltip="Close Preview">clear</mat-icon>
+    <div width="100%" class="preview-file-name-card" >
+      <p>{{input.fileName}}</p>
+      <span (click)="dismiss()" style="cursor: pointer;">
+        <mat-icon matTooltip="Close Preview">clear</mat-icon>
+      </span>
     </div>
     <embed *ngIf="input.imageLink" [src]="input.imageLink | sanitizepdf" width="100%" height="500px">
   </div>

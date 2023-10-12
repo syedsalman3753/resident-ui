@@ -409,7 +409,7 @@
         "sameNameInputErrorMsg": "Le $NAME que vous avez saisi existe déjà. Veuillez saisir un nouveau $NAME pour continuer.",
         "sameDobInputErrorMsg": "La date de naissance que vous avez saisie existe déjà. Veuillez saisir une nouvelle date de naissance pour continuer.",
         "sameGenderInputErrorMsg": "Le genre que vous avez choisi existe déjà. Veuillez choisir un nouveau genre pour continuer.",
-        "EnterAllAddress": "Veuillez sélectionner",
+        "EnterAllAddress": "S'il te plaît ",
         "select": "Sélectionner",
         "remainingAttems":"Il vous reste $remainingAttems tentatives.",
         "maxAttems": "Vous pouvez faire une demande de changement de $Name un maximum de $MaxAttems fois.",
@@ -417,10 +417,9 @@
         "dateOfBirth": "Date de naissance",
         "gender": "Genre",
         "addressLine1":"Adresse",
-        "sameFileUploading":"Veuillez télécharger le fichier avec un nom de fichier différent."
-    },
-    "preview": {
-        "title": "Aperçu"
+        "sameFileUploading":"Veuillez télécharger le fichier avec un nom de fichier différent.",
+        "docTypePlaceholder": "Sélectionner le type de document",
+        "DocIDPlaceholder": "Entrer l'identifiant du document"
     },
     "trackservicerequest": {
         "title": "Suivre mes demandes",
@@ -614,7 +613,8 @@
         "updateMyData": {
             "emailSuccessMsg": "Votre adresse e-mail a été mise à jour avec succès pour l'ID d'événement : $eventId.",
             "phoneNumberSuccessMsg": "Votre numéro de téléphone a été mis à jour avec succès pour l'ID d'événement : $eventId.",
-            "newDataUpdatedSuccessMsg": "Votre demande de modification de vos données a été soumise avec succès pour l'ID d'événement : $eventId."
+            "newDataUpdatedSuccessMsg": "Votre demande de modification de vos données $dataType a été soumise pour l'ID de l'événement : $eventId.",
+            "updateNotificationData": "Votre demande de modification de la langue des notifications a été soumise pour l'ID de l'événement : $eventId."
         }
     },
     "autologout": {
