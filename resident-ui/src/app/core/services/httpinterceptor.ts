@@ -54,11 +54,11 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({ withCredentials: true });
     if(localStorage.getItem("langCode")){
       request = request.clone({
-      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages'][localStorage.getItem("langCode")]['locale'] }
+      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages']['eng']['locale'] }
       });
     }else{
       request = request.clone({
-      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages']["eng"]['locale']}
+      setHeaders: { 'time-zone-offset': this.localTimeZoneOffset, 'locale': defaultJson['languages']['eng']['locale']}
       });
     }
     return next.handle(request).pipe(
