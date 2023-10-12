@@ -294,11 +294,8 @@ label{
   font-size: 11px;
 }
 .warning-message-for-contact{
-  margin: 0px; 
   color: red; 
   font-size: 12px;
-  font-weight: 600;
-  margin-top: -14px;
 }
 
 ::ng-deep .mat-grid-tile .mat-figure{
@@ -398,6 +395,19 @@ label{
   color: #89730B;
   font-size: 14px;
 }
+
+.low-number-of-attems-left-card{
+  border: 1.5px solid #DB4F4F;
+  min-height: 50px;
+  width: 100%;
+  position: relative;
+  background-color: #FFEAEA;
+  padding: 6px;
+  border-radius: 3px;
+  color: #DB4F4F;
+  font-size: 14px;
+}
+
 .number-of-attems-arrow-shape{
    position: absolute;
    width: 10px;
@@ -411,31 +421,47 @@ label{
    border-top: none;
 }
 
-.low-number-of-attems-left-card{
-  border: 1.5px solid #DB4F4F;
-  min-height: 50px;
-  width: 100%;
-  position: relative;
-  background-color: #FFEAEA;
-  padding: 6px;
-  border-radius: 3px;
-  color: #DB4F4F;
-  font-size: 14px;
-}
 .low-number-of-attems-arrow-shape{
-   position: absolute;
-   width: 10px;
-   height: 10px;
-   border: 1.5px solid #DB4F4F;
-   top: 10px;
-   left: -5.5px;
-   transform: rotate(45deg);
-   background-color: #FFEAEA;
-   border-right: none;
-   border-top: none;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #DB4F4F;
+  top: 10px;
+  left: -5.5px;
+  transform: rotate(45deg);
+  background-color: #FFEAEA;
+  border-right: none;
+  border-top: none;
+}
+
+.ara-number-of-attems-arrow-shape{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #89730B;
+  top: 10px;
+  transform: rotate(45deg);
+  background-color: #FFF9DB;
+  border-left: none;
+  border-bottom: none;
+  margin-left: 1.36px;
+}
+
+.low-ara-number-of-attems-arrow-shape{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #DB4F4F;
+  top: 10px;
+  transform: rotate(45deg);
+  background-color: #FFEAEA;
+  border-left: none;
+  border-bottom: none;
+  margin-left: 1.36px;
 }
 
 .number-of-attems-main-card{
+  direction: ltr;
   display: block;
   margin-bottom: -25px;
   width: 60%;
@@ -449,6 +475,42 @@ label{
   display: none;
 }
 
+.perLang-submit-btn-card{
+  float: right;
+  margin-right: 2rem; 
+  margin-top: none;
+}
+.perLang-submit-btn-card-ara{
+  float: left;
+  margin-right: 2rem; 
+  margin-top: none;
+}
+
+.contact-update-card{
+  margin: 8px; 
+  display: flex;
+  flex-direction: row;
+  width:"100%";
+}
+
+.contact-update-sub-card{
+  display: flex; 
+  flex-direction: row;
+  width: 48%;
+  margin-bottom: 1rem;
+}
+
+.contact-update-each-sub-card{
+  width: 50%; 
+  margin-right: 12px;
+}
+
+.contact-lable{
+  height: 20px; 
+  overflow-wrap: break-word;
+  color: #000000 !important;
+}
+
 @media screen and ((min-width:950px) and (max-width:1300px)){
   .number-of-attems-main-card{
     width: 80%;
@@ -458,9 +520,6 @@ label{
 @media screen and (min-width:989px) {
   .show-preview-image-mobile{
     display: none;
-  }
-  .contact-send-otp-btn{
-    margin-top: 1.4rem;
   }
 }
 
@@ -483,14 +542,22 @@ label{
   .file-Upload-card{
     width: 67%;
   }
-  .contact-send-otp-btn{
-    margin-top: 1.4rem;
-  }
   .number-of-attems-left-card{
     width: 100%;
   }
   .number-of-attems-main-card{
     margin-bottom: -70px;
+  }
+}
+
+@media screen and ((min-width:550px) and (max-width:1300px)) {
+  .contact-update-card{
+    flex-direction: column;
+  }
+  .contact-update-sub-card{
+    display: flex; 
+    flex-direction: row;
+    width: 100%;
   }
 }
 
@@ -522,27 +589,25 @@ label{
   .file-Upload-card{
     width: 100%;
   }
+
 }
 
 @media screen and ((min-width:550px) and (max-width:749px)) {
-  /* .each-tab-group-main-table{
-    width: 80%;
-  } */
   .width-of-input{
     width: 36%;
   }
   .file-Upload-card{
     width: 100%;
   }
-  .contact-send-otp-btn{
-    margin-top: 1.4rem;
+  .contact-update-card{
+    margin: 8px; 
+    display: flex;
+    flex-direction: column;
+    width:"99%";
   }
   
 }
 @media screen and (max-width:549px) {
-  /* .each-tab-group-main-table{
-    width: 90%;
-  } */
   .width-of-input{
     width: 45%;
   }
@@ -560,5 +625,16 @@ label{
   }
   .preview-input-size{
     width: 100%;
+  }
+  .contact-update-card{
+    flex-direction: column;
+  }
+  .contact-update-sub-card{
+    flex-direction: column;
+    width: 100%;
+  }
+  .contact-update-each-sub-card{
+    width: 100%; 
+    margin-right: 12px;
   }
 }

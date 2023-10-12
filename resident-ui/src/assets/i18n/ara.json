@@ -409,7 +409,7 @@
         "sameNameInputErrorMsg": "ال$NAME الذي أدخلته موجود بالفعل. الرجاء إدخال $NAME جديد للمتابعة.",
         "sameDobInputErrorMsg": "تاريخ الميلاد الذي أدخلته موجود بالفعل. يرجى إدخال تاريخ ميلاد جديد للمتابعة.",
         "sameGenderInputErrorMsg": "الجنس الذي اخترته موجود بالفعل. يرجى اختيار جنس جديد للمتابعة.",
-        "EnterAllAddress": "الرجاء التحديد",
+        "EnterAllAddress": "لو سمحت ",
         "select": "يختار",
         "remainingAttems": "$remainingAttems محاولات متبقية",
         "maxAttems": "$Name يمكن تقديم طلب تغيير الاسم مرات كحد أقصى $MaxAttems.",
@@ -417,10 +417,10 @@
         "dateOfBirth": "تاريخ الميلاد",
         "gender": "الجنس",
         "addressLine1":"العنوان",
-        "sameFileUploading":"يرجى تحميل الملف باستخدام اسم ملف مختلف."
-    },
-    "preview": {
-        "title": "معاينة"
+        "sameFileUploading":"يرجى تحميل الملف باستخدام اسم ملف مختلف.",
+        "docTypePlaceholder": "اختر نوع المستند",
+        "DocIDPlaceholder": "أدخل معرف المستند"
+
     },
     "trackservicerequest": {
         "title": "تتبع طلباتي",
@@ -613,7 +613,8 @@
         "updateMyData": {
             "emailSuccessMsg": "تم تحديث عنوان بريدك الإلكتروني بنجاح ضد رقم الحدث: $eventId.",
             "phoneNumberSuccessMsg": "تم تحديث رقم هاتفك بنجاح ضد رقم الحدث: $eventId.",
-            "newDataUpdatedSuccessMsg": "تم تقديم طلبك لتغيير بياناتك بنجاح ضد رقم الحدث: $eventId."
+            "newDataUpdatedSuccessMsg": "تم تقديم طلبك لتغيير بيانات $dataType ضد معرّف الحدث: $eventId.",
+            "updateNotificationData": "تم تقديم طلبك لتغيير لغة الإشعارات ضد معرّف الحدث: $eventId."
         }
     },
     "autologout": {

@@ -390,7 +390,7 @@
         "identity": "पहचान",
         "address": "पता",
         "contact": "संपर्क",
-        "languagePreference": "भाषा प्राथमिकता",
+        "languagePreference": "पसंदीदा भाषा",
         "identityHeading": "मेरी पहचान",
         "addressHeading": "मेरा पता",
         "contactHeading": "मेरा संपर्क",
@@ -403,13 +403,13 @@
         "update": "अपडेट करें",
         "calendarPlaceHolder": "DD/MMM/YYYY",
         "documentUploaded": "दस्तावेज़ अपलोड किया गया",
-        "languageHeading": "मेरी भाषा प्राथमिकता",
+        "languageHeading": "मेरी पसंदीदा भाषा",
         "InvalidFormatMsg": "आप अपलोड करने की कोशिश कर रहे हैं वह फ़ाइल प्रकार समर्थित नहीं है। कृपया एक अलग फ़ाइल प्रकार अपलोड करें।",
         "InvalidFileSize": "आप अपलोड करने की कोशिश कर रहे हैं वह दस्तावेज़ 2mb की फ़ाइल साइज़ सीमा से अधिक है। कृपया 2mb से कम की फ़ाइल अपलोड करें।",
         "sameNameInputErrorMsg": "आपने पहले से ही $NAME दर्ज किया है। कृपया जारी करने के लिए एक नया $NAME दर्ज करें।",
         "sameDobInputErrorMsg": "आपने दर्ज की गई जन्मतिथि पहले से मौजूद है। कृपया आगे बढ़ने के लिए एक नई जन्मतिथि दर्ज करें।",
         "sameGenderInputErrorMsg": "आपने चुना हुआ लिंग पहले से मौजूद है। कृपया आगे बढ़ने के लिए एक नया लिंग चुनें।",
-        "EnterAllAddress": "कृपया चयन कीजिए",
+        "EnterAllAddress": "कृपया ",
         "select": "चुनना",
         "remainingAttems": "आपके पास $remainingAttems प्रयास शेष हैं।",
         "maxAttems": "$Name परिवर्तन अनुरोध को अधिकतम $MaxAttems बार किया जा सकता है।",
@@ -417,10 +417,9 @@
         "dateOfBirth": "जन्म तिथि",
         "gender": "लिंग",
         "addressLine1":"पता",
-        "sameFileUploading":"कृपया एक अलग फ़ाइल नाम के साथ फ़ाइल अपलोड करें।"
-    },
-    "preview": {
-        "title": "पूर्व दर्शन"
+        "sameFileUploading":"कृपया एक अलग फ़ाइल नाम के साथ फ़ाइल अपलोड करें।",
+        "docTypePlaceholder": "दस्तावेज़ प्रकार चुनें",
+        "DocIDPlaceholder": "दस्तावेज़ आईडी दर्ज करें"
     },
     "trackservicerequest": {
         "title": "मेरी अनुरोधों का पता लगाएं",
@@ -520,8 +519,8 @@
         "updateMessage": "सफलतापूर्वक अपडेट किया गया",
         "mappingMessage": "सफलतापूर्वक मैप किया गया",
         "termsAndConditionsLabel": "नियम और शर्तें",
-        "clickHere": "यहां क्लिक करें",
-        "clickHere2": "क्लिक करें",
+        "clickHere": "यहां करें",
+        "clickHere2": "क्लिक",
         "relogin": "फिर से लॉगिन करने के लिए।",
         "login": "लॉगिन करने के लिए।",
         "click":"यहां क्लिक करें।",
@@ -534,8 +533,8 @@
         "SuccessLogin": "आपने सफलतापूर्वक लॉगिन किया है।",
         "successLogout": "आपने सफलतापूर्वक लॉगआउट किया है। ",
         "dearResident": "प्रिय निवासी,",
-        "trackStatusText": "घटना की स्थिति को ट्रैक करने के लिए, क्लिक करें ",
-        "trackStatusForLogin": "इवेंट के बारे में विवरण देखने के लिए इस ईवेंट ID का उपयोग किया जा सकता है। क्लिक करें ",
+        "trackStatusText": "घटना की स्थिति को ट्रैक करने के लिए, क्लिक ",
+        "trackStatusForLogin": "इवेंट के बारे में विवरण देखने के लिए इस ईवेंट ID का उपयोग किया जा सकता है। क्लिक ",
         "clickYesToProceed": "आगे बढ़ने के लिए हाँ दबाएं।",
         "logoutconfirmMessage": "क्या आप लॉगआउट करना चाहते हैं।",
         "accessDenied": "आप इस सेवा तक पहुंच नहीं पा रहे हैं क्योंकि आपने लॉगिन करते समय सहमति स्वीकार नहीं की है। आपसे अनुरोध है कि आप फिर से लॉगिन करें और प्रासंगिक सहमति स्वीकार करें ताकि आप आगे बढ़ सकें।",
@@ -614,7 +613,8 @@
         "updateMyData": {
             "emailSuccessMsg": "आपका ईमेल ID सफलतापूर्वक अपडेट किया गया है। इवेंट ID: $eventId के खिलाफ।",
             "phoneNumberSuccessMsg": "आपका फोन नंबर सफलतापूर्वक अपडेट किया गया है। इवेंट ID: $eventId के खिलाफ।",
-            "newDataUpdatedSuccessMsg": "आपका डेटा बदलने का अनुरोध सफलतापूर्वक सबमिट किया गया है। इवेंट ID: $eventId के खिलाफ।"
+            "newDataUpdatedSuccessMsg": "आपकी अनुरोध $dataType डेटा बदलने के लिए इवेंट आईडी: $eventId के खिलाफ सबमिट किया गया है।",
+            "updateNotificationData": "आपका सूचना भाषा बदलने का अनुरोध इवेंट आईडी: $eventId के खिलाफ सबमिट किया गया है।"
         }
     },
     "autologout": {

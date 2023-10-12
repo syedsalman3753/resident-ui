@@ -163,12 +163,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this.matTabLabel = response.updatedemographic.identity;
       });
 
-    let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
-    supportedLanguages.forEach(data => {
-      let newObj = { "code": data, "name": this.defaultJsonValue['languages'][data]['nativeName'] }
-      this.newNotificationLanguages.push(newObj)
-    })
-
     this.getUpdateMyDataSchema();
     this.getUserInfo();
     await this.getMappingData();
@@ -210,7 +204,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.schema = response;
         });
     })
-   
+  
   }
 
 
@@ -227,6 +221,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           if (this.schema && this.userInfo) {
             this.buildData()
             this.isLoading = false;
+            this.getSupportingLanguages()
           } else {
             this.getUpdateMyDataSchema();
             this.getUserInfo();
@@ -235,6 +230,16 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.showErrorPopup(response['errors'])
         }
       });
+  }
+
+  getSupportingLanguages(){
+    let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
+    supportedLanguages.forEach(data => {
+      if(this.defaultJsonValue['languages'][data]['nativeName'] !== this.userInfo.preferredLang){
+        let newObj = { "code": data, "name": this.defaultJsonValue['languages'][data]['nativeName'] }
+        this.newNotificationLanguages.push(newObj)
+      }
+    })
   }
 
   async getMappingData(){
@@ -276,6 +281,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
                 item.index = count
                 count++
                 this.userInputValues[schema.attributeName][item.language] = '';
+                return item
+              })
+              this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
+                item.mobileIndex = count
+                count++
                 return item
               })
             }
@@ -700,9 +710,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureContactValue(event: any, formControlName: any) {
-    this.userId = event.target.value;
+    this.sendOtpDisable = true
+    this.userId = event.target.value.trim();
     this.contactTye = formControlName;
-
     if (formControlName === "email" && this.userId) {
       this.userIdEmail = this.userId.toLowerCase();
       this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
@@ -710,7 +720,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.userIdPhone = this.userId;
       this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
     }
-
     if (this[formControlName]) {
       if (formControlName === "email") {
         this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
@@ -721,14 +730,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureConfirmValue(event: any, formControlName: any) {
-    this[formControlName] = event.target.value;
+    this.sendOtpDisable = true
+    this[formControlName] = event.target.value.trim();
     this.contactTye = formControlName;
-
-    if (formControlName === "email") {
+    if (formControlName === "email" && this[formControlName]) {
       this.confirmEmailContact = event.target.value.toLowerCase();
       this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
       this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-    } else if (formControlName === "phone") {
+    } else if (formControlName === "phone" && this[formControlName]) {
       this.confirmPhoneContact = event.target.value;
       this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
       this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
@@ -736,25 +745,23 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   capturePerfLang(event: any, formControlName: string) {
-    this.userInputValues[formControlName] = event.source.viewValue;
-    this.userPrefLang[formControlName] = event.source.viewValue;
+    this.userPrefLang[formControlName] = event.value;
   }
 
   captureVirtualKeyboard(element: HTMLElement, index: number) {
-
     if (this.keyboardRef) {
       this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
     }
-
   }
 
   openKeyboard(inputId: any, langCode: string) {
+    let finalLangCode = langCode ? langCode : "eng"
     if (this.oldKeyBoradIndex === inputId && this.keyboardService.isOpened) {
       this.keyboardService.dismiss();
       this.keyboardRef = undefined;
     } else {
       this.oldKeyBoradIndex = inputId;
-      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[langCode]);
+      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[finalLangCode]);
       document.getElementById(inputId).focus();
     }
   }
@@ -790,7 +797,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     };
     this.dataStorageService.updateuin(request).subscribe(response => {
       let eventId = response.headers.get("eventid");
-      this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
+      this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId).replace("$dataType", this.langJson[this.updatingtype].toLowerCase())
       if (response.body["response"]) {
         this.isLoading = false;
         this.showMessage(this.message, eventId);
@@ -827,7 +834,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     };
     this.dataStorageService.updateuin(request).subscribe(response => {
       let eventId = response.headers.get("eventid")
-      this.message = this.popupMessages.genericmessage.updateMyData.newDataUpdatedSuccessMsg.replace("$eventId", eventId)
+      this.message = this.popupMessages.genericmessage.updateMyData.updateNotificationData.replace("$eventId", eventId)
       if (response.body["response"]) {
         this.showMessage(this.message, eventId);
         this.router.navigate(['uinservices/dashboard']);
@@ -884,29 +891,29 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
    * Preview file from files list
    * @param index (File index)
    */
-  previewFile(index: number, type: string) {
+  previewFile(index: number, type: string,fileName:string) {
     if (type === "POI") {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.pdfSrc = e.target.result;
-        this.showPreviewImage(this.pdfSrc)
+        this.showPreviewImage(this.pdfSrc, fileName)
       };
       reader.readAsDataURL(this.files[index]);
     } else {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.pdfSrcPOA = e.target.result;
-        this.showPreviewImage(this.pdfSrcPOA)
+        this.showPreviewImage(this.pdfSrcPOA,fileName)
       };
       reader.readAsDataURL(this.filesPOA[index]);
     }
   }
 
-  previewFileInPreviewPage(index: number) {
+  previewFileInPreviewPage(index: number,fileName:string) {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.pdfSrcInPreviewPage = e.target.result;
-      this.showPreviewImage(this.pdfSrcInPreviewPage)
+      this.showPreviewImage(this.pdfSrcInPreviewPage,fileName)
     };
     reader.readAsDataURL(this.uploadedFiles[index]);
   }
@@ -1105,13 +1112,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }, 400)
   }
 
-  showPreviewImage(pdfSrc: any) {
+  showPreviewImage(pdfSrc: any,fileName:string) {
     this.dialog
       .open(DialogComponent, {
         width: '70%',
         data: {
           case: 'previewImage',
-          imageLink: pdfSrc
+          imageLink: pdfSrc,
+          fileName
         },
         disableClose: true
       });
