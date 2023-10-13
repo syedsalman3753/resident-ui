@@ -116,26 +116,6 @@ mat-card-subtitle{
   padding: 10px !important;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   margin-top: -2px !important;
-    /* &::after {
-        width: 0;
-        height: 0;
-        content: '';
-        position: absolute;
-        border-left: 0.5rem solid transparent;
-        border-right: 0.5rem solid transparent;
-        border-bottom: 0.5rem solid #0000008c;
-        border-color: transparent transparent #ffffff transparent;
-        border-width: 10px;
-      }
-      &.below {
-        overflow: initial;
-        margin-top:0.4rem;
-        &:after {
-          top: -0.5rem;
-          right: calc(50% - 0.5rem);
-          transform: rotate(0);
-        }
-  } */
 }
 .user-icon{
   color: green;
@@ -144,7 +124,7 @@ mat-card-subtitle{
   margin-top: 7px;
 }
 .create-btn{
-  width: 100px; 
+  min-width: 100px; 
   height: 36px; 
   display: flex; 
   align-items: center;
