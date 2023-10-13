@@ -12,12 +12,12 @@
         <p class="intro-description">{{'managemyvid.introDescription' | translate}}</p>
 		<table *ngIf="policyType" style="width:100%">
 			<tr *ngFor = "let policy of policyType.vidPolicies;">
-				<td style="width:100%">	
+				<td style="width:100%">
 					<div class="title-card" >				 
 				     <span style="width: 9rem; display: flex; align-items: center; column-gap: 5px;">
 						<h4 style="color: #000000;">{{langJSON[policy.vidType].vidType}}</h4>
 						<span>
-						<mat-icon  [matTooltip]="infoText[policy.vidType]" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below" class="user-icon" >info</mat-icon> 
+						<mat-icon  [matTooltip]="infoText[policy.vidType].replace('$instancesVID', policy.vidPolicy.instancesAllowed).replace('$expiryTime', policy.vidPolicy.validForInMinutes).replace('$transactionLimit', policy.vidPolicy.transactionsAllowed)" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below" class="user-icon" >info</mat-icon> 
 					</span>
 					</span>
 					<button [id]="policy.vidType" mat-raised-button color="primary" class="create-btn" (click)="generateVIDBtn(policy.vidType)"><img style="margin-right: 5px; margin-bottom: 2px;" src="./assets/icons/iconfont/add_circle_black_24dp (1).svg" alt=""/>{{'managemyvid.create' | translate}}</button>
