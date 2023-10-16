@@ -198,6 +198,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(item.fontSize === "12"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, .9)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "-2.5%";
       }else{
         document.body.style["zoom"]= "90%";
@@ -205,6 +206,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }else if(item.fontSize === "14"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, 1.0)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "0%";
       }else{
         document.body.style["zoom"]= "100%";
@@ -212,6 +214,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }else if(item.fontSize === "16"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, 1.1)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "2.1%";
       }else{
         document.body.style["zoom"]= "110%";
@@ -219,6 +222,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }else if(item.fontSize === "18"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, 1.2)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "4.5%";
       }else{
         document.body.style["zoom"]= "120%";
