@@ -658,7 +658,8 @@
             "identity/preferredLang": "Invalid preferred language. please give valid data."
         },
         "RES-SER-459": "The entered EID is not associated with the UIN/ VID used to log in.",
-        "RES-SER-412": "Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
+        "RES-SER-412": "Unable to access API resource.",
+        "RES-SER-522": "Invalid UIN/ VID entered. Please enter a valid UIN/ VID and try again.",
         "RES-SER-405": "Maximum allowed VIDs are active. Deactivate VID(s) to create a new one.",
         "RES-SER-511": "The entered EID is not associated with the UIN/ VID used to log in.",
         "RES-SER-449": "Invalid UIN/ AID/ VID entered. Please enter a valid UIN/ AID/ VID and try again.",
