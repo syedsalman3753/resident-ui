@@ -31,9 +31,9 @@ public class GetPersonalisedCard extends BaseClass {
 		Commons.click(test, driver, By.xpath("//span[text()=' Perpetual VID']"));
 		Commons.click(test, driver, By.xpath("//span[text()=' Phone Number']"));
 
-		Commons.click(test, driver, By.id("Mask It2"));
-		Commons.click(test, driver, By.id("Mask It3"));
-		Commons.click(test, driver, By.id("Mask It4"));
+//		Commons.click(test, driver, By.id("Mask It2"));
+//		Commons.click(test, driver, By.id("Mask It3"));
+//		Commons.click(test, driver, By.id("Mask It4"));
 		//Commons.click(test, driver, By.id("Mask It3"));
 		//Commons.click(test, driver, By.id("Mask It4"));
 		Commons.click(test, driver, By.id("downloadFileBtn"));
@@ -78,10 +78,10 @@ public class GetPersonalisedCard extends BaseClass {
 		Commons.click(test, driver, By.xpath("//span[text()=' Address']"));
 		Commons.click(test, driver, By.xpath("//span[text()=' Gender']"));
 		Commons.click(test, driver, By.xpath("//span[text()=' Image']"));
-		Commons.click(test, driver, By.id("Mask It2"));
-		Commons.click(test, driver, By.id("Mask It3"));
-		Commons.click(test, driver, By.id("Mask It4"));
-		Commons.click(test, driver, By.id("Mask It5"));
+//		Commons.click(test, driver, By.id("Mask It2"));
+//		Commons.click(test, driver, By.id("Mask It3"));
+//		Commons.click(test, driver, By.id("Mask It4"));
+//		Commons.click(test, driver, By.id("Mask It5"));
 	//	Commons.click(test, driver, By.xpath("//input[@id='Mask it2-input']"));
 	//	Commons.click(test, driver, By.xpath("//input[@id='Mask it3-input']"));
 	//	Commons.click(test, driver, By.xpath("//input[@id='Mask it4-input']"));

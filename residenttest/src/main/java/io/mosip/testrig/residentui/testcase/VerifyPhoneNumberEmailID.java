@@ -15,8 +15,8 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 
 	public void VerifyEmailID() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
-
-		Commons.click(test, driver, By.id("dashboardCard4"));
+		Thread.sleep(2000);
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), vid);
 		Commons.switchToFrameByIndex(test, driver, 0);
@@ -33,7 +33,8 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 	}
 
 	public void VerifyEmailIDWIthInvalidVid() throws IOException, InterruptedException {
-		Commons.click(test, driver, By.id("dashboardCard4"));
+		Thread.sleep(2000);
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), data);
 		Commons.switchToFrameByIndex(test, driver, 0);
@@ -44,8 +45,8 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 	}
 
 	public void VerifyPhoneWIthInvalidVid() throws IOException, InterruptedException {
-
-		Commons.click(test, driver, By.id("dashboardCard4"));
+		Thread.sleep(2000);
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
 		Commons.click(test, driver, By.id("phoneChannelBtn"));
 		Commons.enter(test, driver, By.id("uin"), data);
 		Commons.switchToFrameByIndex(test, driver, 0);
@@ -58,7 +59,8 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 
 	public void VerifyEmailIDWIthInvalidOtp() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
-		Commons.click(test, driver, By.id("dashboardCard4"));
+		Thread.sleep(2000);
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), vid);
 		Commons.switchToFrameByIndex(test, driver, 0);
@@ -76,7 +78,8 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 
 	public void VerifyEmailIDWIthoutOtp() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
-		Commons.click(test, driver, By.id("dashboardCard4"));
+		Thread.sleep(2000);
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), vid);
 		Commons.switchToFrameByIndex(test, driver, 0);

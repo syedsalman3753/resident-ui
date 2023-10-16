@@ -21,7 +21,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		String aid = JsonUtil.JsonObjParsing(Commons.getTestData(), "aid");
 
 		test = extent.createTest("getMyUIN", "verify Login");
-		Commons.click(test, driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));// id
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[1]"));
 		Commons.enter(test, driver, By.id("aidValue"), aid);//
 		test.log(Status.INFO, "AID Entered");
 		Commons.switchToFrameByIndex(test, driver, 0);
@@ -41,7 +41,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	
 	public void getMyUINWithoutAID() throws InterruptedException, IOException {
 		test=extent.createTest("get MyUIN Without AID", "verify Login");
-		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[1]"));
 		Commons.switchToFrameByIndex(test,driver, 0);
 		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 		Thread.sleep(3000);
@@ -54,7 +54,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
 		test=extent.createTest("get My UIN With Invalid Otp", "verify Login");
-		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[1]"));
 		Commons.enter(test,driver, By.id("aidValue"), aid);//
 		Commons.switchToFrameByIndex(test,driver, 0);
 		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
@@ -73,7 +73,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
 		test=extent.createTest("get My UIN With Expired Otp", "verify Login");
-		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[1]"));//id
 		Commons.enter(test,driver, By.id("aidValue"), aid);//
 		Commons.switchToFrameByIndex(test,driver, 0);
 		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
@@ -93,7 +93,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		test=extent.createTest("get My UIN Without Otp", "verify Login");
 		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
 		String aid=JsonUtil.JsonObjParsing(Commons.getTestData(),"aid");
-		Commons.click(test,driver, By.xpath("(//mat-card[@class='mat-card'])[4]"));//id
+		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[1]"));//id
 		Commons.enter(test,driver, By.id("aidValue"), aid);//
 		Commons.switchToFrameByIndex(test,driver, 0);
 		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
