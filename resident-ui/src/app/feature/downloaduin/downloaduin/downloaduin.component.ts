@@ -147,7 +147,6 @@ export class DownloadUinComponent implements OnInit {
       .subscribe((response) => {
         if(response['response']){
           this.resetBtnDisable = true;
-          this.submitBtnDisable = false;
           this.inputDisabled = false;
         }
       },
