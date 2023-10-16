@@ -382,30 +382,34 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     };
     this.dataStorageService
       .convertpdf(request)
-      .subscribe(data => {
-        // var fileName = self.userInfo.fullName+".pdf";
-        let contentDisposition = data.headers.get('content-disposition');
-        this.eventId = data.headers.get("eventid")
-        if (contentDisposition) {
+      .subscribe(async (response : any) => {
+        const isJsonBlob = (data: any) => data instanceof Blob && data.type === "application/json";
+        const responseData = isJsonBlob(response) ? await response.text() : response || {};
+        const responseJson = (typeof responseData === "string") ? JSON.parse(responseData) : responseData;
+        if (responseJson.body.type === "application/pdf") {
+          let contentDisposition = response.headers.get('content-disposition');
+          this.eventId = response.headers.get("eventid")
           this.isLoading = false;
-          try {
-            var fileName = ""
-            if (contentDisposition) {
-              const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-              const matches = fileNameRegex.exec(contentDisposition);
-              if (matches != null && matches[1]) {
-                fileName = matches[1].replace(/['"]/g, '');
-              }
+          var fileName = ""
+          if (contentDisposition) {
+            const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            const matches = fileNameRegex.exec(contentDisposition);
+            if (matches != null && matches[1]) {
+              fileName = matches[1].replace(/['"]/g, '');
             }
-            saveAs(data.body, fileName);
-            this.showMessage()
-            this.router.navigate(['uinservices/dashboard']);
-          } catch (error) {
-            this.isLoading = false;
-            console.log(error)
           }
+          saveAs(response.body, fileName);
+          this.showMessage()
+          this.router.navigate(['uinservices/dashboard']);
+        }else{
+          var reader = new FileReader();
+          reader.onloadend = function(e) {
+            let failureResponse = JSON.parse((<any>e.target).result)
+            self.showErrorPopup(failureResponse.errors)
+          }
+          reader.readAsText(responseJson.body);
+          this.isLoading = false;
         }
-
       },
         err => {
           console.error(err);
