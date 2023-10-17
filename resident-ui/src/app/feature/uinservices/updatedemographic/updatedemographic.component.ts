@@ -300,9 +300,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           }else{
             this.userInputValues[schema.attributeName] = {};
             this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName]
-            self.userInfo[schema.attributeName].forEach(item =>{
-            this.userInputValues[schema.attributeName][item.language] = ''
-            })
+            if(this.userInfo[schema.attributeName]){
+              self.userInfo[schema.attributeName].forEach(item =>{
+                this.userInputValues[schema.attributeName][item.language] = ''
+              })
+            }
           }
         }
       }
