@@ -180,6 +180,17 @@ button[disabled=disabled], button:disabled {
   bottom: 30px !important;
 }
 
+.partner-label{
+  padding: 10px 0 3px 0;
+  font-size: 14px;
+}
+
+.sharing-purpose-label{
+  padding: 10px 0 3px 0;
+  font-size: 14px;
+}
+
+
 @media screen and (max-width:465px){
   .each-property{
       width: 65%;
