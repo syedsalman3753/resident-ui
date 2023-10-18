@@ -376,7 +376,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
       "requesttime": Utils.getCurrentDate(),
       "request": {
-        "html": btoa(this.buildHTML),
+        "html":btoa(unescape(encodeURIComponent(this.buildHTML))),
         "attributes": Object.keys(this.dataDisplay)
       }
     };
