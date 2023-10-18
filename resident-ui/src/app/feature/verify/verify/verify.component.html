@@ -22,7 +22,7 @@
         </mat-button-toggle>
       </div>
       <div class="uin-login-title-card" for="uin">{{verifyChannelData.uid | translate }}
-        <mat-icon class="info-icon" #tooltip="matTooltip" [matTooltip]="infoText" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below">info</mat-icon>
+        <mat-icon class="info-icon" #tooltip="matTooltip" [matTooltip]="infoText" matTooltipPosition="left" matTooltipHideDelay="5000" matTooltipClass="left">info</mat-icon>
       </div>
       <input id="uidValue" type="text" id="uin" name="uin" (input)="captureValue($event, 'individualId')"
         value={{individualId}} placeholder="{{verifyChannelData.uid | translate}}" />

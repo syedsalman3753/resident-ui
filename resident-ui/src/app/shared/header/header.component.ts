@@ -195,8 +195,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   zoom(item:any) {
+    console.log("this.router.url>>>"+this.router.url);
     if(item.fontSize === "12"){
-      if(this.agent.indexOf('firefox') > -1){
+      if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
         document.body.style["transform"] = "scale(1, .9)";
         document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "-2.5%";
@@ -204,7 +205,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["zoom"]= "90%";
       }
     }else if(item.fontSize === "14"){
-      if(this.agent.indexOf('firefox') > -1){
+      if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
         document.body.style["transform"] = "scale(1, 1.0)";
         document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "0%";
@@ -212,7 +213,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["zoom"]= "100%";
       }
     }else if(item.fontSize === "16"){
-      if(this.agent.indexOf('firefox') > -1){
+      if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
         document.body.style["transform"] = "scale(1, 1.1)";
         document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "2.1%";
@@ -220,7 +221,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["zoom"]= "110%";
       }
     }else if(item.fontSize === "18"){
-      if(this.agent.indexOf('firefox') > -1){
+      if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
         document.body.style["transform"] = "scale(1, 1.2)";
         document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "4.5%";
