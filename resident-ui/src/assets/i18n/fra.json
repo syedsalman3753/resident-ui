@@ -189,7 +189,8 @@
         "helpText": "Centres d'inscription basés sur votre géolocalisation",
         "noRegCentersNearby": "Aucun centre d'inscription à proximité trouvé. Veuillez entrer manuellement du texte pour rechercher des centres d'inscription.",
         "noRegCenters": "Aucun centre d'inscription trouvé.",
-        "warnMessage": "Veuillez entrer des lettres/chiffres pour effectuer une recherche."
+        "warnMessage": "Veuillez entrer des lettres/chiffres pour effectuer une recherche.",
+        "or":"OU"
     },
     "downloadDocument": {
         "downloadbutton": "Télécharger"
