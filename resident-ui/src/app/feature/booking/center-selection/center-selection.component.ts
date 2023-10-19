@@ -44,7 +44,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   nearbyClicked = false;
   apiErrorCodes: any;
   step = 0;
-  textDir = localStorage.getItem("dir");
+  textDir = localStorage.getItem("direction");
   showDescription = false;
   mapProvider = "OSM";
   searchTextFlag = false;

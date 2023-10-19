@@ -189,7 +189,8 @@
         "helpText": "Centros de registro basados en su ubicación geográfica",
         "noRegCentersNearby": "No se encontraron Centros de Registro cercanos. Por favor, ingrese el texto manualmente para buscar Centros de Registro.",
         "noRegCenters": "No se encontró ningún Centro de Registro.",
-        "warnMessage": "Por favor, ingrese letras/números para realizar la búsqueda."
+        "warnMessage": "Por favor, ingrese letras/números para realizar la búsqueda.",
+        "or":"O"
     },
     "downloadDocument": {
         "downloadbutton": "Descargar"

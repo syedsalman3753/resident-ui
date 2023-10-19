@@ -189,7 +189,8 @@
         "helpText": "Registration centers based on your geo-location",
         "noRegCentersNearby": "No nearby Registration Centers found. Please enter text manually to look for Registration Centers.",
         "noRegCenters": "No Registration Center found.",
-        "warnMessage": "Please enter letters/numbers in order to search."
+        "warnMessage": "Please enter letters/numbers in order to search.",
+        "or":"OR"
     },
     "downloadDocument": {
         "downloadbutton": "Download"
