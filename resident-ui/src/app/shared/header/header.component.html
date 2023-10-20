@@ -25,7 +25,7 @@
           <span class="selected-lang">{{selectedLanguage}}</span> <mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
 
-      <mat-menu #languages="matMenu" [overlapTrigger]="false" id="languages">
+      <mat-menu class="language-menu" #languages="matMenu" [overlapTrigger]="false" id="languages">
         <button mat-menu-item (click)="onlanguagechange(item)"
           *ngFor="let item of selectLanguagesArr" >{{item.value}}</button>
       </mat-menu>
