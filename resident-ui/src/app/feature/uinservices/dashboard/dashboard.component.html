@@ -5,7 +5,7 @@
 </span>
 <div class="main-div" dir="{{sitealignment}}">
 	<mat-card  class="main-card">
-		<mat-card-title class="uin-heading">{{'dashboard.uinservices' | translate}}</mat-card-title>
+		<h2 class="uin-heading">{{'dashboard.uinservices' | translate}}</h2>
 		<mat-card-subtitle class="services-description">{{'dashboard.uindescription' | translate}}</mat-card-subtitle>
 		<mat-grid-list *ngIf="menuItems" [cols]="cols" [rowHeight]="userPreferredLangCode === 'tam' ? '220px' :'190px' ">
 			<mat-grid-tile *ngFor="let item of menuItems[0].subMenus">

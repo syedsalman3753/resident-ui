@@ -71,7 +71,7 @@
                   <ul>
                     <li *ngFor="let center of REGISTRATION_CENTRES; let i = index;">
                       <div [ngClass]="REGISTRATION_CENTRES.length === i+1 ? 'center-card item' :'center-card'">
-                        <div style="width: 50%;" (click)="selectedRow(center)" style="cursor:pointer;">
+                        <div style="width: 40%;cursor:pointer;" (click)="selectedRow(center)">
                           <div class="inline-flex" [dir]="textDir">
                             <img alt="" src="assets\address.png" />
                             <div>
@@ -97,8 +97,8 @@
                             </span>
                           </div>
                         </div>
-                        <span class="spacer"></span>
-                        <div style="width: 40%;">
+                        <span style="width: 5%;" class="spacer"></span>
+                        <div style="width: 55%;">
                           <div>
                             <span>
                               <div [dir]="textDir">

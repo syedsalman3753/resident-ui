@@ -39,7 +39,6 @@ mat-card-title {
   font-weight: 600;
   letter-spacing: 0px;
   color: #505050;
-  cursor: none;
 }
 
 @media  screen and (max-width: 1690px) and (min-width:1410px) {
