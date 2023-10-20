@@ -121,6 +121,15 @@
   height: auto !important;
 }
 
+::ng-deep .mat-menu-panel.language-menu{
+  min-width: auto;
+  margin-left: 1rem;
+}
+
+::ng-deep .mat-menu-panel.zoommenu{
+  min-width: auto;
+}
+
 /* ::ng-deep .cdk-overlay-connected-position-bounding-box{
   right: 30px !important;
 }  */
