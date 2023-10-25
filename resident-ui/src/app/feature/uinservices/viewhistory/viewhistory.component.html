@@ -26,7 +26,7 @@
 	            <mat-card-header><span class="label">{{'viewhistory.inputHistory' |translate}}</span></mat-card-header>
 					<span class="input">
 						<button id="historyTypeBtn" class="dropdown-btn" [matMenuTriggerFor]="basic">{{serviceHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
-						<mat-menu #basic="matMenu">
+						<mat-menu #basic="matMenu" [backdropClass]="'viewHistory'" xPosition="before">
 							<ng-container *ngFor="let serviceType of serviceTypeFilter">
 								<button mat-menu-item >
 									<div (click)="captureValue($event,serviceType.value, 'serviceType', 'dropdown')" class="check-box-card">
@@ -66,7 +66,7 @@
 	            <!-- <mat-card-subtitle style="display: flex;"> -->
 					<span class="input">
 						<button class="dropdown-btn" id="statusTypeBtn" [matMenuTriggerFor]="basic2">{{statusHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
-						<mat-menu #basic2="matMenu">
+						<mat-menu #basic2="matMenu" [backdropClass]="'viewHistory'" xPosition="before">
 							<ng-container *ngFor="let status of statusTypeFilter">
 								<button mat-menu-item>
 									<div (click)="captureValue($event, status.value, 'statusFilter', 'dropdown')" class="check-box-card">

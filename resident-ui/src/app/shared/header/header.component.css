@@ -104,7 +104,7 @@
 
 ::ng-deep .mat-menu-panel.myMenu {
   height: 80%;
-  min-width: 303px!important;
+  min-width: 303px !important;
   border-radius: 0% !important;
   background-color: white;
   font-size: 13px;
@@ -112,8 +112,14 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
-::ng-deep .cdk-overlay-connected-position-bounding-box{
+
+::ng-deep .first+.cdk-overlay-connected-position-bounding-box{
   right: 5px !important;
+  width:auto !important;
+}
+
+::ng-deep .zoom+.cdk-overlay-connected-position-bounding-box{
+  width:auto !important;
 }
 
 ::ng-deep .mat-menu-panel.myMenu > .mat-menu-content {
@@ -123,7 +129,7 @@
 
 ::ng-deep .mat-menu-panel.language-menu{
   min-width: auto;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 
 ::ng-deep .mat-menu-panel.zoommenu{

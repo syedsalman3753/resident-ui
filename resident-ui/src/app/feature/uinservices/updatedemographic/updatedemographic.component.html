@@ -24,7 +24,7 @@
                 <div layout="row" *ngIf="field.tabgroup === 'identity'">
                   <table width="100%">
                     <tr *ngIf="field.controlType === 'calendar'">
-                      <td width="100%" class="main-table-data">
+                      <td width="100%" class="main-table-data" *ngIf="userInfo[field.attributeName]">
                         <table width="100%">
                           <!-- number of attems mobile and tab code -->
                           <tr class="number-of-attems-mobile-card">
@@ -134,7 +134,7 @@
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'textbox'">
-                      <td class="main-table-data" width="100%">
+                      <td class="main-table-data" width="100%" *ngIf="userInfo[field.attributeName]">
                         <table width="100%" *ngFor="let language of supportedLanguages;">
                           <!-- number of attems mobile and tab code -->
                           <tr class="number-of-attems-mobile-card">
@@ -254,7 +254,7 @@
                       </td>
                     </tr>
                     <tr *ngIf="field.controlType === 'dropdown'">
-                      <td class="main-table-data" width="100%">
+                      <td class="main-table-data" width="100%" *ngIf="userInfo[field.attributeName]">
                         <table width="100%">
                           <!-- number of attems mobile and tab code -->
                           <tr class="number-of-attems-mobile-card">
@@ -532,8 +532,8 @@
                   <div layout="row" *ngIf="field.tabgroup === 'address'">
                     <table width="100%">
                       <tr *ngIf="field.controlType === 'textbox'">
-                        <td class="main-table-data" width="100%">
-                          <table width="100%" *ngFor="let language of supportedLanguages;">
+                        <td class="main-table-data" width="100%" *ngIf="userInfo[field.attributeName]">
+                          <table width="100%">
                             <tr>
                               <td class="width-of-input">
                                 <span *ngFor="let eachLang of getUserPerfLang; let langI = index">
@@ -613,7 +613,7 @@
                         </td>
                       </tr>
                       <tr *ngIf="field.controlType === 'dropdown'">
-                        <td class="main-table-data" width="100%">
+                        <td class="main-table-data" width="100%" *ngIf="userInfo[field.attributeName]">
                           <table width="100%">
                             <tr *ngIf="typeOf(userInfo[field.attributeName]) !== 'string'">
                               <td class="width-of-input" >

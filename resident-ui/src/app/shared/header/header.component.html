@@ -15,7 +15,7 @@
         <button mat-button [matMenuTriggerFor]="zoomItem"> <span
           class="mat-button-wrapper">Aa<mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
-      <mat-menu class="zoommenu" #zoomItem="matMenu" [overlapTrigger]="false" id="zoomItem">
+      <mat-menu class="zoommenu" [backdropClass]="'zoom'" #zoomItem="matMenu" [overlapTrigger]="false" id="zoomItem">
         <button mat-menu-item (click)="zoom(item)" *ngFor="let item of zoomLevel"><span
             [style.font-size.px]="item.fontSize">{{item.label}}</span></button>
       </mat-menu>
@@ -25,7 +25,7 @@
           <span class="selected-lang">{{selectedLanguage}}</span> <mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
 
-      <mat-menu class="language-menu" #languages="matMenu" [overlapTrigger]="false" id="languages">
+      <mat-menu class="language-menu" [backdropClass]="'zoom'"  #languages="matMenu" [overlapTrigger]="false" id="languages">
         <button mat-menu-item (click)="onlanguagechange(item)"
           *ngFor="let item of selectLanguagesArr" >{{item.value}}</button>
       </mat-menu>
@@ -39,7 +39,7 @@
         </button>
       </mat-list-item>&nbsp;&nbsp;&nbsp;
 
-      <mat-menu class="myMenu" #notificationMenu="matMenu" [overlapTrigger]="false" xPosition="before" id="notificationMenu">
+      <mat-menu class="myMenu" [backdropClass]="'first'" #notificationMenu="matMenu" [overlapTrigger]="false" xPosition="before" id="notificationMenu">
         <div *ngIf="!notificationList" style="height:100px">
           <mat-spinner style="margin:0 auto;margin-top: 10px;" [diameter]="50"></mat-spinner>
         </div>
@@ -77,7 +77,7 @@
           style="border: 1px solid white;border-radius: 5px;padding: 0px 8px;line-height: 36px;height: 36px;background-color: white;"><mat-icon
             style="margin: 0px;color: green;">person</mat-icon></button>
       </mat-list-item>
-      <mat-menu class="profile-menu" #profilemenu="matMenu" [overlapTrigger]="false" xPosition="before" id="profileMenu">
+      <mat-menu class="profile-menu" [backdropClass]="'first'" #profilemenu="matMenu" [overlapTrigger]="false" xPosition="before" id="profileMenu">
         <div style="padding: 15px 20px;background: #03A64A;display: flex;align-items: center; overflow-wrap: break-word;"><img
             [src]="userImage" alt=""
             style="width:50px;height: 50px;border-radius: 50px;border: 2px solid white;" />&nbsp;&nbsp;&nbsp;<span

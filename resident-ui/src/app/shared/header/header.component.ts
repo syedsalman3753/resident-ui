@@ -204,9 +204,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["margin-top"] = "-2.5%";
       }else{
         document.body.style["zoom"]= "90%";
-        document.body.style["transform"] = "scale(1, 1)";
-        document.body.style["transformOrigin "] = "0 0";
-        document.body.style["margin-top"] = "0";
+        document.body.style.removeProperty('transform');
+        document.body.style.removeProperty('transformOrigin');
+        document.body.style.removeProperty('margin-top');
       }
     }else if(item.fontSize === "14"){
       if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
@@ -216,6 +216,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["margin-top"] = "0%";
       }else{
         document.body.style["zoom"]= "100%";
+        document.body.style.removeProperty('transform');
+        document.body.style.removeProperty('transformOrigin');
+        document.body.style.removeProperty('margin-top');
       }
     }else if(item.fontSize === "16"){
       if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
@@ -225,6 +228,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["margin-top"] = "2.1%";
       }else{
         document.body.style["zoom"]= "110%";
+        document.body.style.removeProperty('transform');
+        document.body.style.removeProperty('transformOrigin');
+        document.body.style.removeProperty('margin-top');
       }
     }else if(item.fontSize === "18"){
       if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
@@ -234,6 +240,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         document.body.style["margin-top"] = "4.5%";
       }else{
         document.body.style["zoom"]= "120%";
+        document.body.style.removeProperty('transform');
+        document.body.style.removeProperty('transformOrigin');
+        document.body.style.removeProperty('margin-top');
       }
     }    
   }
