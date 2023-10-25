@@ -213,7 +213,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .getUserInfo('update-demographics')
       .subscribe((response) => {
         if (response["response"]) {
-          this.userInfo = response["response"];
+          this.userInfo = response["response"]['identity'];
           this.userInfo['fullName'].forEach(item=>{
             this.getUserPerfLang.indexOf(item.language) === -1 ? this.getUserPerfLang.push(item.language) : ''
           }) 
@@ -277,17 +277,19 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               count++
             }else{
               this.userInputValues[schema.attributeName] = {};
-              this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
-                item.index = count
-                count++
-                this.userInputValues[schema.attributeName][item.language] = '';
-                return item
-              })
-              this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
-                item.mobileIndex = count
-                count++
-                return item
-              })
+              if(this.userInfo[schema.attributeName]){
+                this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
+                  item.index = count
+                  count++
+                  this.userInputValues[schema.attributeName][item.language] = '';
+                  return item
+                })
+                 this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
+                  item.mobileIndex = count
+                  count++
+                  return item
+                })
+              }
             }
           }else{
             this.buildJSONData[schema.attributeName] = count
