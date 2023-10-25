@@ -98,9 +98,6 @@
   /* height: 40px; */
 }
 
-/* ::ng-deep .mat-menu-panel.zoommenu {
-  min-width: 320px !important;
-} */
 
 ::ng-deep .mat-menu-panel.myMenu {
   height: 80%;
@@ -115,10 +112,6 @@
 
 ::ng-deep .first+.cdk-overlay-connected-position-bounding-box{
   right: 5px !important;
-  width:auto !important;
-}
-
-::ng-deep .zoom+.cdk-overlay-connected-position-bounding-box{
   width:auto !important;
 }
 
