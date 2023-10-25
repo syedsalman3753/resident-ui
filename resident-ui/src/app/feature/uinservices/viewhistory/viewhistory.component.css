@@ -292,6 +292,10 @@ input[dir=rtl]::placeholder {
   }
 }
 
+::ng-deep .viewHistory+.cdk-overlay-connected-position-bounding-box{
+  width:auto !important;
+}
+
 .mat-expansion-panel-header{
   padding: 0 10px;
 }
