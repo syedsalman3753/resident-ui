@@ -186,6 +186,16 @@
   color: white; 
 }
 
+.font-size-btn{
+  color: #000000DE;
+  background-color: #ffffff;
+}
+
+.sel-font-size-btn{
+  color: #ffffff;
+  background-color: #03A64A;
+}
+
 @media screen and (max-width:550px){
   .notification-icon{
     margin: 0px;

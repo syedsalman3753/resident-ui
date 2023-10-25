@@ -16,7 +16,7 @@
           class="mat-button-wrapper">Aa<mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
       <mat-menu class="zoommenu" #zoomItem="matMenu" [overlapTrigger]="false" id="zoomItem">
-        <button mat-menu-item (click)="zoom(item)" *ngFor="let item of zoomLevel"><span
+        <button mat-menu-item (click)="zoom(item)" [ngClass]="item.fontSize === selectedfontsize ? 'sel-font-size-btn' : 'font-size-btn'" *ngFor="let item of zoomLevel"><span
             [style.font-size.px]="item.fontSize">{{item.label}}</span></button>
       </mat-menu>
 
