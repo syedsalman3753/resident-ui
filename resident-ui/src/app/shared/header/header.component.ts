@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sitealignment:string = localStorage.getItem('direction');
   activeUrl:string;
   agent:any = window.navigator.userAgent.toLowerCase();
+  selectedfontsize:any;
 
   constructor(
     private router: Router,
@@ -126,6 +127,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       localStorage.removeItem('logOut');
     }
     this.activeUrl = window.location.hash
+    this.selectedfontsize= localStorage.getItem('selectedfontsize')
   }
 
   getNotificationInfo(){
@@ -196,6 +198,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   zoom(item:any) {
     localStorage.setItem("selectedfontsize", item.fontSize);
+    this.selectedfontsize= localStorage.getItem('selectedfontsize')
     if(item.fontSize === "12"){
       if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
         document.body.style["zoom"] = "100%";
