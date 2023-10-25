@@ -164,7 +164,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       });
 
     this.getUpdateMyDataSchema();
-    this.getUserInfo();
+    // this.getUserInfo();
     await this.getMappingData();
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -202,6 +202,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         .getUpdateMyDataSchema('update-demographics')
         .subscribe((response) => {
           this.schema = response;
+          this.getUserInfo();
         });
     })
   
@@ -213,19 +214,13 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .getUserInfo('update-demographics')
       .subscribe((response) => {
         if (response["response"]) {
-          this.userInfo = response["response"]['identity'];
+          this.userInfo = response["response"];
           this.userInfo['fullName'].forEach(item=>{
             this.getUserPerfLang.indexOf(item.language) === -1 ? this.getUserPerfLang.push(item.language) : ''
           }) 
           UpdatedemographicComponent.actualData = response["response"];
-          if (this.schema && this.userInfo) {
-            this.buildData()
-            this.isLoading = false;
-            this.getSupportingLanguages()
-          } else {
-            this.getUpdateMyDataSchema();
-            this.getUserInfo();
-          }
+          this.buildData()
+          this.getSupportingLanguages()
         } else {
           this.showErrorPopup(response['errors'])
         }
