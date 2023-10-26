@@ -189,11 +189,13 @@
 .font-size-btn{
   color: #000000DE;
   background-color: #ffffff;
+  font-weight: 500;
 }
 
 .sel-font-size-btn{
   color: #ffffff;
   background-color: #03A64A;
+  font-weight: 600;
 }
 
 @media screen and (max-width:550px){
