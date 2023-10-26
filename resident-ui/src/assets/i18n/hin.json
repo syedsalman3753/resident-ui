@@ -5,7 +5,7 @@
             "displaydescription": "निवासियों को अपने डेटा को देखने, अपडेट करने, प्रबंधित करने या साझा करने के लिए इन सेवाओं का उपयोग करना संभव है। वे यदि किसी शिकायत के मामले में समस्या की रिपोर्ट करना चाहें, तो वह भी कर सकते हैं।",
             "availableServicesDescription": "निम्नलिखित सेवाएँ उपलब्ध हैं:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
@@ -65,7 +65,7 @@
         {
             "displayName": "जानकारी हासिल करें",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -89,7 +89,7 @@
         {
             "displayName": "अपॉइंटमेंट बुक करना",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -106,7 +106,7 @@
         {
             "displayName": "मेरा UIN प्राप्त करें",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -120,7 +120,7 @@
         {
             "displayName": "फ़ोन नंबर/ईमेल ID सत्यापित करें",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,

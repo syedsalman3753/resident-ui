@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   menuItems:any;
   message:any;
   subscriptions: Subscription[] = [];
-  userPreferredLangCode = localStorage.getItem("langCode");
+  langCode = localStorage.getItem("langCode");
   cols : number;
   sitealignment:string = localStorage.getItem('direction');
   
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.translateService.use(localStorage.getItem("langCode")); 
     this.translateService
-    .getTranslation(this.userPreferredLangCode)
+    .getTranslation(this.langCode)
     .subscribe(response => {
       this.menuItems = response.menuItems;
     });
