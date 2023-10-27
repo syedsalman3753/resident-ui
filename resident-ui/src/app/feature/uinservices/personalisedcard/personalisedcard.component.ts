@@ -39,8 +39,9 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
   width: string;
   previewWidth:string;
   cols: number;
+  dataCols:number;
+  previewCols:number;
   message2: any;
-  attributeWidth: string;
   fullAddress: string = "";
   formatLabels: any;
   formatCheckBoxClicked: boolean = false;
@@ -52,35 +53,30 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     private auditService: AuditService, private breakPointService: BreakpointService) {
     this.breakPointService.isBreakpointActive().subscribe(active => {
       if (active) {
-        if (active === "small") {
+        if(active === "small" || active === "extraSmall"){
           this.cols = 1;
-          this.width = "40em";
-          this.previewWidth = "25em"
-          this.attributeWidth = "20em";
+          this.dataCols = 1;
+          this.previewCols = 1;
         }
-        if (active === "extraSmall") {
-          this.cols = 1;
-          this.width = "25em";
-          this.previewWidth = "17.8em"
-          this.attributeWidth = "10em";
+        if(active === "ExtraLarge"){
+          this.cols = 5;
+          this.dataCols = 2;
+          this.previewCols = 3;
+          this.previewWidth = "28em"
         }
-        if (active === "large") {
-          this.cols = 2;
-          this.width = "29em";
-          this.previewWidth = "29em"
-          this.attributeWidth = "12em";
+        if(active === "large" || active === "small"){
+          this.previewWidth = "28em"
         }
-        if (active === "medium") {
-          this.cols = 2;
-          this.width = "25em";
-          this.previewWidth = "25em"
-          this.attributeWidth = "12em";
+        if(active === "extraSmall"){
+          this.previewWidth = "88vw"
         }
-        if (active === "ExtraLarge") {
-          this.cols = 2;
-          this.width = "35rem";
-          this.previewWidth = "35em"
-          this.attributeWidth = "18em";
+        if(active === "large" || active === "medium"){
+          this.cols = 5;
+          this.dataCols = 3;
+          this.previewCols = 2;
+        }
+        if(active === "medium"){
+          this.previewWidth = "23em"
         }
       }
     });
