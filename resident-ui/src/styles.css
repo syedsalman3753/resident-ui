@@ -482,7 +482,7 @@ button{
 }
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container{
-  overflow-y: auto;
+  /*overflow-y: auto;*/
 }
 
 .info-icon-button{
@@ -496,4 +496,8 @@ button{
   float: right; 
   color: grey; 
   cursor: pointer;
+}
+
+::-webkit-scrollbar{
+   width: 5px;
 }

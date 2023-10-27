@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppConfigService {
   appConfig: any;
-
   constructor(public http: HttpClient) { }
-
+  
   async loadAppConfig() {
+    localStorage.setItem("isDataLoaded", 'false')
     this.appConfig = await this.http.get('./assets/config.json').toPromise();
     this.http.get(this.appConfig.baseUrl  + '/proxy/config/ui-properties').subscribe(
       (response) => {
@@ -64,7 +64,10 @@ export class AppConfigService {
         this.appConfig["mosip.resident.captcha.enable"] = responseData["mosip.resident.captcha.enable"];
         this.appConfig["mosip.kernel.vid.length"] = responseData["mosip.kernel.vid.length"];
         this.appConfig["mosip.kernel.uin.length"] = responseData["mosip.kernel.uin.length"];
-        this.appConfig["mosip.kernel.rid.length"] = responseData["mosip.kernel.rid.length"];        
+        this.appConfig["mosip.kernel.rid.length"] = responseData["mosip.kernel.rid.length"];   
+        this.appConfig["mosip.resident.transliteration.transliterate.id"] = responseData["mosip.resident.transliteration.transliterate.id"];
+        this.appConfig["resident.contact.details.update.id"] = responseData["resident.contact.details.update.id"]
+        localStorage.setItem("isDataLoaded", 'true')
       },
       (error) => {
         console.log(error);

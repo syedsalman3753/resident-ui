@@ -92,7 +92,6 @@ span.label {
   color: #707070;
   font-size: 14px;
   width: 100%;
-  /* text-align: left; */
   margin-left: -30px;
   padding-bottom: 20px;
 }
@@ -216,6 +215,13 @@ input[dir=rtl]::placeholder {
   font-size:20px;
 }
 
+.event-id-search-card{
+  display: flex; 
+  align-items: center;
+  border-radius: 5px; 
+  border: 2px solid #909090;
+}
+
 .header-item-card{
   display: flex; 
   flex-direction: row;
@@ -231,7 +237,7 @@ input[dir=rtl]::placeholder {
 }
 
 .description-text{
-  width: 39%;
+  width: 37%;
   padding: 10px;
 }
 
@@ -241,7 +247,7 @@ input[dir=rtl]::placeholder {
 }
 
 .event-status-text{
-  width: 13%;
+  width: 15%;
   padding: 10px;
 }
 
@@ -286,3 +292,9 @@ input[dir=rtl]::placeholder {
   }
 }
 
+.mat-expansion-panel-header{
+  padding: 0 10px;
+}
+::ng-deep .mat-expansion-indicator::after {
+  margin-left: 10px;
+}

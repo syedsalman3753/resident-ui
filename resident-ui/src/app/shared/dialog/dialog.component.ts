@@ -79,7 +79,7 @@ export class DialogComponent implements OnInit {
     /*private headerService: HeaderService,*/
     private logoutService: LogoutService,
     private interactionService: InteractionService,
-    private appConfigService: AppConfigService,
+    public appConfigService: AppConfigService,
     private redirectService: LoginRedirectService
   ) {
     this.translate.use(this.primaryLangCode);
@@ -103,7 +103,6 @@ export class DialogComponent implements OnInit {
 
     if (this.data.case === "OTP") {
       this.setOtpTime()
-      // setInterval(this.interval)
     }
     this.appConfigService.getConfig();
   }
@@ -239,6 +238,11 @@ export class DialogComponent implements OnInit {
   }
   dismissPage(){
     this.dialog.closeAll()
+  }
+
+  dismissPageToHome(){
+    this.dialog.closeAll()
+    this.router.navigate(['uinservices/dashboard'])
   }
   logOut(){
     this.redirectService.redirect(window.location.href);

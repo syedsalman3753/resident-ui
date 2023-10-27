@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   textDir = localStorage.getItem("dir");
   defaultJsonValue: any;
   selectedLanguage: any;
-  supportedLanguages: Array<string>;
   selectLanguagesArr: any = [];
   zoomLevel:any = [{"fontSize":"12", "label":"Small"},{"fontSize":"14", "label":"Normal"},{"fontSize":"16", "label":"Large"},{"fontSize":"18", "label":"Huge"}];
   fullName: string;
@@ -38,6 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notificationList:any;
   langCode = localStorage.getItem("langCode");
   popupMessages:any;
+  langJson:any;
   page = 1;
   selector: string = "#notificationMenu";
   clickEventSubscription: Subscription;
@@ -65,46 +65,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }) 
   }
 
-  onScroll() {
-    console.log("scroll down>>>");
-    /*this.dataStorageService
-    .getNotificationData(this.langCode)
-    .subscribe((response) => {
-      if(response["response"])     
-        this.notificationList = response["response"]["data"];
-        console.log(this.notificationList)
-    });*/
-  }
-
-  onScrollUp() {
-    console.log("scroll up>>>");
-    /*this.dataStorageService
-    .getNotificationData(this.langCode)
-    .subscribe((response) => {
-      if(response["response"])     
-        this.notificationList = response["response"]["data"];
-        console.log(this.notificationList)
-    });*/
-  }
-
- async ngOnInit() {
-    this.defaultJsonValue = defaultJson;
-    let self = this;       
-    setTimeout(()=>{        
-      if(!localStorage.getItem("langCode")){
-        localStorage.setItem("langCode", "eng");
-        self.selectedLanguage = defaultJson["languages"][0].nativeName;
-      }else{
-        Object.keys(defaultJson["languages"]).forEach(function(key) {
-          if(localStorage.getItem("langCode") === key){
-            self.selectedLanguage = defaultJson["languages"][key].nativeName;
-          }
-        });                
-      }
-
+  getConfigData(){
+    if(localStorage.getItem('isDataLoaded') === 'true'){
       let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(','); 
       if(supportedLanguages.length > 1){
-        supportedLanguages.map((language) => {
+        supportedLanguages.forEach((language) => {
           this.selectLanguagesArr.push({
            code: language.trim(),
            value: defaultJson.languages[language.trim()].nativeName,
@@ -112,16 +77,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });
       }
       
-      self.translateService.use(localStorage.getItem("langCode")); 
-      self.textDir = localStorage.getItem("dir");
-    }, 1000);    
+      this.translateService.use(localStorage.getItem("langCode")); 
+      this.textDir = localStorage.getItem("dir");
+      return
+    }else{
+      setTimeout(()=>{ 
+      this.getConfigData()
+      },400)
+    }
+  }
 
+
+ async ngOnInit() {
+    this.defaultJsonValue = defaultJson;
+    let self = this;
+    this.getConfigData();
+
+    if(!localStorage.getItem("langCode")){
+      localStorage.setItem("langCode", "eng");
+      this.selectedLanguage =  defaultJson["languages"]['eng'].nativeName;
+    }else{
+      let key = localStorage.getItem("langCode")
+      this.selectedLanguage =  defaultJson["languages"][key].nativeName;              
+    }
     self.getProfileInfo();
 
     await  this.translateService
     .getTranslation(localStorage.getItem("langCode"))
     .subscribe(response => {
       this.popupMessages = response;
+      this.langJson = response.genericmessage
     });
     
     if(localStorage.getItem("redirectURL") === window.location.href){
@@ -141,11 +126,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       localStorage.removeItem('logOut');
     }
     this.activeUrl = window.location.hash
-    // if(localStorage.getItem("zoomLevel")){
-    //   document.body.style["zoom"] = localStorage.getItem("zoomLevel");
-    // }
-    
-    //window.addEventListener('scroll', this.scroll, true); //third parameter
   }
 
   getNotificationInfo(){
@@ -218,6 +198,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(item.fontSize === "12"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, .9)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "-2.5%";
       }else{
         document.body.style["zoom"]= "90%";
@@ -225,6 +206,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }else if(item.fontSize === "14"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, 1.0)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "0%";
       }else{
         document.body.style["zoom"]= "100%";
@@ -232,6 +214,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }else if(item.fontSize === "16"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, 1.1)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "2.1%";
       }else{
         document.body.style["zoom"]= "110%";
@@ -239,6 +222,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }else if(item.fontSize === "18"){
       if(this.agent.indexOf('firefox') > -1){
         document.body.style["transform"] = "scale(1, 1.2)";
+        document.body.style["transformOrigin "] = "0 0";
         document.body.style["margin-top"] = "4.5%";
       }else{
         document.body.style["zoom"]= "120%";

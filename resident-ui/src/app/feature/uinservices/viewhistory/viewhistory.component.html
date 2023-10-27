@@ -14,7 +14,11 @@
 	        <mat-grid-tile>
 	          <div class="mini-card">
 	            <mat-card-header><span class="label" >{{'viewhistory.inputsearch' |translate}}</span></mat-card-header>
-	            <mat-card-subtitle><span class="input" ><input dir="{{sitealignment}}" [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px;" /></span></mat-card-subtitle>
+	            <mat-card-subtitle><span class="input event-id-search-card" >
+					<input dir="{{sitealignment}}" [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" 
+					placeholder="{{'viewhistory.inputAppId' | translate}}" style="padding: 10px; border: none; outline: none;" (focus)="captureVirtualKeyboard(search, 0)" #keyboardRef/>
+					<i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard()">keyboard</i>
+				</span></mat-card-subtitle>
 	          </div>
 	        </mat-grid-tile>
 	        <mat-grid-tile>
@@ -82,8 +86,8 @@
 	            <mat-card-header><span class="label"></span></mat-card-header>
 	            <mat-card-subtitle style="display: flex;margin-top: 15px;"><span class="datepicker-card" style="display: contents;">
 					<button id="searchbtn" mat-raised-button color="primary"
-						(click)="search()">{{'viewhistory.searchBtn' | translate}}</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="downloadbtn" mat-raised-button
-						color="default" (click)="downloadServiceHistory()"><img class="save-icon"
+						(click)="search()">{{'viewhistory.searchBtn' | translate}}</button>&nbsp;&nbsp;&nbsp;&nbsp;<button [disabled]="disableDownloadBtn" id="downloadbtn" mat-button
+						 (click)="downloadServiceHistory()"><img class="save-icon"
 							src="./assets/images/save.png" /></button>
 					</span></mat-card-subtitle>
 	          </div>

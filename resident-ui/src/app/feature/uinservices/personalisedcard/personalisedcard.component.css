@@ -70,6 +70,23 @@ table.fixed td {
     padding-left: 1.25rem;
 }
 
+button[disabled=disabled], button:disabled {
+    color:#505050 !important;
+}
+
+::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+    color: #505050;
+}
+
+::ng-deep .mat-menu-panel.each-lang-card{
+    min-height: 55px !important;
+    max-height: 200px !important;
+}
+
+::ng-deep .cdk-overlay-connected-position-bounding-box{
+    bottom: 0px !important;
+}
+
 @media screen and (max-width:465px){
     .each-property{
         width: 65%;

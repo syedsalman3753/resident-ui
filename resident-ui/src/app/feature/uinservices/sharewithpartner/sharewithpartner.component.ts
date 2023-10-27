@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, HostListener } from "@angular/core";
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
@@ -13,6 +13,12 @@ import { AuditService } from "src/app/core/services/audit.service";
 import moment from 'moment';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
+import {
+  MatKeyboardRef,
+  MatKeyboardComponent,
+  MatKeyboardService
+} from 'ngx7-material-keyboard';
+import defaultJson from "src/assets/i18n/default.json";
 
 @Component({
   selector: "app-sharewithpartner",
@@ -52,8 +58,12 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   selectedOprionsFormOptions: object = {};
 
+  private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
+  @ViewChildren('keyboardRef', { read: ElementRef })
+  private attachToElementMesOne: any;
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, 
-    private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakPointService: BreakpointService) {
+    private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakPointService: BreakpointService,
+    private keyboardService: MatKeyboardService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "shareWithPartner") {
         this.shareInfo()
@@ -77,13 +87,13 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         if(active === "medium"){
           this.cols = 2;
           this.width = "25em";
-          this.previewWidth = "25em"
+          this.previewWidth = "23em"
           this.attributeWidth = "12em";
         }
         if(active === "small"){
           this.cols = 1;
           this.width = "35em";
-          this.previewWidth = "35em"
+          this.previewWidth = "30em"
           this.attributeWidth = "20em";
         }
         if(active === "extraSmall"){
@@ -173,6 +183,19 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.purpose = event.target.value;
     let enterdChars = this.purpose.length
     this.remainingChars = this.totalCommentCount - enterdChars
+  }
+  captureVirtualKeyboard(element: HTMLElement, index: number) {
+    this.keyboardRef.instance.setInputInstance(this.attachToElementMesOne._results[index]);
+  }
+
+  openKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+      this.keyboardRef = undefined;
+    } else {
+      this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[this.langCode]);
+      document.getElementById("sharingReasonPlaceholder").focus();
+    }
   }
 
   getPartnerDetails() {
@@ -576,6 +599,14 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
 
   onItemSelected(item: any) {
     this.router.navigate([item]);
+  }
+
+  @HostListener("blur", ["$event"])
+  @HostListener("focusout", ["$event"])
+  private _hideKeyboard() {
+    if (this.keyboardService.isOpened) {
+      this.keyboardService.dismiss();
+    }
   }
 
 }

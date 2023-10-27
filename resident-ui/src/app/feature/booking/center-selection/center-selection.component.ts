@@ -243,13 +243,12 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   }
   
   searchInput(){
-    console.log("this.searchText.length>>>"+this.searchText.length);
-    if(this.searchText.length > 2 && this.searchText.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
+    if(this.searchText.length > 2 && this.searchText.match(/[\p{Letter}\p{Number}\p{Mark}\s]+/gu)){
       this.isBlankSpace = false;
     }else{
       this.isBlankSpace = true;
     }
-    if(!this.searchText.match(/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/)){
+    if(!this.searchText.match(/[\p{Letter}\p{Number}\p{Mark}\s]+/gu)){
       this.showWarningMsg = true;
     }else{
       this.showWarningMsg = false;
@@ -268,7 +267,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
         this.pageSize = pageEvent.pageSize;
         this.pageIndex = pageEvent.pageIndex;
       }
-      //console.log(this.locationType);
       const subs = this.dataService
         .getRegistrationCentersByNamePageWise(
           this.locationType.hierarchyLevel,
@@ -294,7 +292,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
             this.showMessage = true;
             this.totalItems = 0;
             this.selectedCentre = null;
-            //this.showErrorMessage(error);
           });
       this.subscriptions.push(subs);
     } else {
@@ -305,11 +302,9 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   }
 
   onChangeLocationType() {
-    //console.log('onChangeLocationType');
     this.showMessage = false;
     this.totalItems = 0;
     this.searchText = "";
-    //this.REGISTRATION_CENTRES = [];
     this.selectedCentre = null;
   }
 

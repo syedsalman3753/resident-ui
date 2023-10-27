@@ -44,9 +44,10 @@ export class GetuinComponent implements OnInit {
     "FAILURE":"failure-position-icon position-icon",
     "IN-PROGRESS":"inactive-position-icon position-icon"
   }
-  vidLength:string = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
-  uinLength:string = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
-  aidLength:string = this.appConfigService.getConfig()["mosip.kernel.rid.length"];
+  vidLength:string;
+  uinLength:string;
+  aidLength:string;
+  isLoading:boolean = true;
 
   constructor(
     private router: Router,
@@ -80,12 +81,24 @@ export class GetuinComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    let self = this;
-    setTimeout(() => {
-      self.siteKey = self.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
-      self.captchaEnable = self.appConfigService.getConfig()["mosip.resident.captcha.enable"];      
-    }, 1000);  
+  getConfigData(){
+    if(localStorage.getItem('isDataLoaded') === 'true'){
+      this.siteKey = this.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
+      this.captchaEnable = this.appConfigService.getConfig()["mosip.resident.captcha.enable"];
+      this.vidLength = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
+      this.uinLength = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
+      this.aidLength = this.appConfigService.getConfig()["mosip.kernel.rid.length"];
+      this.getLangData()
+      this.isLoading = false;
+      return
+    }else{
+      setTimeout(()=>{ 
+      this.getConfigData()
+      },500)
+    }
+  }
+
+  getLangData(){
     this.translateService.use(localStorage.getItem("langCode"));    
     this.translateService
     .getTranslation(this.userPreferredLangCode)
@@ -95,8 +108,11 @@ export class GetuinComponent implements OnInit {
         this.infoText = response.InfomationContent.getUin.replace('$AID',this.aidLength).replace('$UIN',this.uinLength).replace('$VID',this.vidLength)
         this.getStatusData = response.uinStatus
         this.stageKeys =  Object.keys(this.getStatusData.statusStages)
+    });
+  }
 
-      });
+  ngOnInit() {
+    this.getConfigData()
   }
 
   onItemSelected(item: any) {
@@ -110,7 +126,7 @@ export class GetuinComponent implements OnInit {
 
   getUserID(event){
     this.aid = event
-    if(grecaptcha.getResponse().length && this.aid){
+    if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){
       this.disableSendOtp = false;
     }else{
       this.disableSendOtp = true;
@@ -120,9 +136,9 @@ export class GetuinComponent implements OnInit {
   getCaptchaToken(event: any) {
     if (event) {
       if(this.captchaEnable){
-        if(grecaptcha.getResponse().length && this.aid){
+        /*if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){*/
           this.disableSendOtp = false;
-        }
+        /*}*/
       }else{
         this.disableSendOtp = false;
       }      

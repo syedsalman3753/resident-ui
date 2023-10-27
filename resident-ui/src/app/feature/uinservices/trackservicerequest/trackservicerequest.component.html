@@ -22,11 +22,23 @@
 							style="color: #FF0000; margin-bottom:8px;">*</span>
 						<mat-icon #tooltip="matTooltip" [matTooltip]="infoText" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below" class="info-icon">info</mat-icon>
 					</label>
-					<input style="outline: none;" type="text" id="appIdValue" name="appIdValue" value={{eidVal}}
-						(input)="captureValue($event)"
-						placeholder="{{'trackservicerequest.searchPlaceholder' | translate}}" />&nbsp;&nbsp;&nbsp;&nbsp;
-					<button [disabled]="disableTrackBtn" id="getEIDStatusbtn" mat-raised-button class="track-btn"
+					<div class="event-id-search-main-card">
+						<span class="event-id-search-card">
+						  <input class="input" style="outline: none; border: none;" type="text" id="appIdValue" name="appIdValue" value={{eidVal}}
+						  (input)="captureValue($event)"
+						  (blur)="captureValue($event)"
+                          (focus)="captureVirtualKeyboard(search, 0)" 
+						  #keyboardRef
+						  placeholder="{{'trackservicerequest.searchPlaceholder' | translate}}" />
+						  <i style="float: right; color: grey; cursor: pointer;" matSuffix class="material-icons" (click)="openKeyboard()">keyboard</i>
+					    </span>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button [disabled]="disableTrackBtn" id="getEIDStatusbtn" mat-raised-button class="track-btn"
 						(click)="getEIDStatusByInput()">{{'trackservicerequest.searchButton' | translate}}</button>
+						
+					</div>
+				
+					
 					<p *ngIf="showWarningMessage" class="warning-message">{{'trackservicerequest.warningMsg' | translate}}</p>
 				</td>
 			</tr>
@@ -50,8 +62,6 @@
 					<!-- <td style="width:25%">{{eidStatus.info.description}}</td> -->
 					<td style="width:25%">{{eidStatus.eventStatus}}</td>
 					<td style="width:25%">{{eidStatus.timestamp}}</td>
-					
-
 				</tr>
 				<tr style="padding:10px;">
 					<td style="width:25%"><label>{{'trackservicerequest.individualId' | translate}}</label></td>
@@ -69,76 +79,66 @@
 
 				</tr>
 				<!-- Download Personalized Card and Update my data -->
-				<tr *ngIf="eidStatus.eventType === 'Download Personalized Card' || eidStatus.eventType === 'Update UIN Data' "
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'DOWNLOAD_PERSONALIZED_CARD' || eidStatus.info.eventTypeEnum === 'UPDATE_MY_UIN' "
 					style="padding:10px; border-top: 1px solid silver;">
 					<td><label>{{'trackservicerequest.attributeList' | translate}} </label></td>
 				</tr>
 				<tr
-					*ngIf="eidStatus.eventType === 'Download Personalized Card' || eidStatus.eventType === 'Update UIN Data' ">
+					*ngIf="eidStatus.info.eventTypeEnum === 'DOWNLOAD_PERSONALIZED_CARD' || eidStatus.info.eventTypeEnum === 'UPDATE_MY_UIN' ">
 					<td>{{eidStatus.info.attributeList}}</td>
 				</tr>
-				<!-- Authentication request -->
-				<tr *ngIf="eidStatus.eventType === 'Authentication request' "
+				<!-- Authentication Request -->
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'AUTHENTICATION_REQUEST' "
 					style="padding:10px; padding:10px; border-top: 1px solid silver;">
 					<td><label>{{'trackservicerequest.partnerLogo' | translate}} </label></td>
 					<td><label>{{'trackservicerequest.partnerName' | translate}} </label></td>
 				</tr>
-				<tr *ngIf="eidStatus.eventType === 'Authentication request' ">
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'AUTHENTICATION_REQUEST' ">
 					<td><img alt="logo" style="width:130px;height: 60px;" [src]=eidStatus.info.partnerLogo /></td>
 					<td>{{eidStatus.info.partnerName}}</td>
 				</tr>
 				<!-- Manage my VID	 -->
-				<tr *ngIf="eidStatus.eventType === 'Generate Vid' "
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'GENERATE_VID' "
 					style="padding:10px; padding:10px; border-top: 1px solid silver;">
 					<td><label>{{'trackservicerequest.vidType' | translate}} </label></td>
 					<td><label>{{'trackservicerequest.vid' | translate}} </label></td>
 				</tr>
-				<tr *ngIf="eidStatus.eventType === 'Generate Vid' ">
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'GENERATE_VID' ">
 					<td>{{eidStatus.info.vidType}}</td>
 					<td>{{eidStatus.info.vid}}</td>
 				</tr>
 				<!-- Share credential with partner	 -->
-				<tr *ngIf="eidStatus.eventType === 'Share Credential With Partner' "
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'SHARE_CRED_WITH_PARTNER' "
 					style="padding:10px; padding:10px; border-top: 1px solid silver;">
 					<td style="width:25%"><label>{{'trackservicerequest.partnerLogo' | translate}} </label></td>
 					<td style="width:25%"><label>{{'trackservicerequest.partnerName' | translate}} </label></td>
 					<td style="width:25%"><label>{{'trackservicerequest.attributeList' | translate}} </label></td>
 					<td style="width:25%"><label>{{'trackservicerequest.purpose' | translate}} </label></td>
 				</tr>
-				<tr *ngIf="eidStatus.eventType === 'Share Credential With Partner' ">
+				<tr *ngIf="eidStatus.info.eventTypeEnum === 'SHARE_CRED_WITH_PARTNER' ">
 					<td style="width:25%"><img alt="logo" style="width:130px;height: 60px;" [src]=eidStatus.info.partnerLogo /></td>
 					<td style="width:25%">{{eidStatus.info.partnerName}}</td>
 					<td style="width:25%">{{eidStatus.info.attributeList}}</td>
 					<td style="width:25%">{{eidStatus.info.purpose}}</td>
 				</tr>
 			</table>
-			<div *ngIf="eidStatus.eventType === 'Generate Vid'"
-				style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 1rem;">
-				<button id="downloadVIDCardBtn" style="cursor: pointer;" class="download-btn"><img class="save-icon"
-						src="./assets/images/save.png" />{{'trackservicerequest.downloadVIDCard' | translate}}</button>
-
-				<button id="downloadAcknowledgementbtn" style="cursor: pointer;" class="download-btn"
-					(click)="downloadAcknowledgement()"><img class="save-icon"
-						src="./assets/images/save.png" />{{'trackservicerequest.downloadbuttonLabel' |
-					translate}}</button>
-			</div>
-			<div *ngIf="eidStatus.eventType === 'Update UIN Data'"
+			<div *ngIf="eidStatus.info.eventTypeEnum === 'UPDATE_MY_UIN'"
 				style="display: flex; justify-content: space-between; width: 100%; margin-top: 1rem;">
 				<div>
-				<button mat-raised-button id="downloadCardWithNewDataBtn" [disabled]="eidStatus.info.downloadLink === 'NA' || disableDownloadVidBtn" *ngIf="eidStatus.eventStatus === 'Success'" (click)="downloadVIDCard(eidStatus.eventId)" class="download-btn"><img
+				<button mat-raised-button id="downloadCardWithNewDataBtn" [disabled]="eidStatus.info.downloadLink === 'NA' || disableDownloadVidBtn" *ngIf="eidStatus.info.eventStatusEnum === 'SUCCESS'" (click)="downloadVIDCard(eidStatus.eventId)" class="download-btn"><img
 						class="save-icon"
 						src="./assets/images/save.png" />{{'trackservicerequest.downloadUINCard' |
 					translate}}</button>
 				</div>
 				<button id="downloadAcknowledgementbtn" style="cursor: pointer;" class="download-btn"
-					(click)="downloadAcknowledgement()"><img class="save-icon"
+				    (click)="downloadAcknowledgement()"><img class="save-icon"
 						src="./assets/images/save.png" />{{'trackservicerequest.downloadbuttonLabel' |
 					translate}}</button>
 			</div>
-			<div *ngIf="eidStatus.eventType === 'Download VID Card' "
+			<div *ngIf="eidStatus.info.eventTypeEnum === 'VID_CARD_DOWNLOAD' "
 				style="display: flex; justify-content: space-between; width: 100%; margin-top: 1rem;">
 				<div>
-				<button mat-raised-button [disabled]="eidStatus.info.downloadLink === 'NA' || disableDownloadVidBtn" *ngIf="eidStatus.eventStatus === 'Success'" (click)="downloadVIDCard(eidStatus.eventId)" id="downloadCardWithNewDataBtn" class="download-btn"><img
+				<button mat-raised-button [disabled]="eidStatus.info.downloadLink === 'NA' || disableDownloadVidBtn" *ngIf="eidStatus.info.eventStatusEnum === 'SUCCESS'" (click)="downloadVIDCard(eidStatus.eventId)" id="downloadCardWithNewDataBtn" class="download-btn"><img
 						class="save-icon"
 						src="./assets/images/save.png" />{{'trackservicerequest.downloadVIDCard' |
 					translate}}</button>
@@ -148,7 +148,7 @@
 						src="./assets/images/save.png" />{{'trackservicerequest.downloadbuttonLabel' |
 					translate}}</button>
 			</div>
-			<div *ngIf="eidStatus.eventType !== 'Update UIN Data' && eidStatus.eventType !== 'Generate Vid' && eidStatus.eventType !== 'Download VID Card' "
+			<div *ngIf="eidStatus.info.eventTypeEnum !== 'UPDATE_MY_UIN' && eidStatus.info.eventTypeEnum !== 'VID_CARD_DOWNLOAD' "
 				style="display: flex; justify-content: flex-end; width: 100%; margin-top: 1rem;">
 				<button id="downloadAcknowledgementbtn" style="cursor: pointer;" class="download-btn"
 					(click)="downloadAcknowledgement()"><img class="save-icon"

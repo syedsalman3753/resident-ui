@@ -89,12 +89,27 @@ h5 {
     margin-bottom: 0px;
     padding: 0 16px;
   }
+
+  .ok-button{
+    background-color: #03A64A;
+    margin-top: 0px;
+  }
+
+  .no-button{
+    background-color: #909090;  
+    margin-top: 0px;
+  }
+
+  .delete-button{
+    background-color:red; 
+    margin-top: 0px;
+  }
+
   .pop-up-footer .mat-button {
     outline: none;
     margin: 0 10px;
     border-radius: 0;
     color:#ffffff;
-    background: #909090;
     border-radius: 5px;
   }
  
@@ -288,7 +303,7 @@ p{
 }
 
 .share-btn {
-  width: 100px;
+  min-width: 100px;
   height: 36px;
   border-radius: 5px;
   border: none;
@@ -397,4 +412,11 @@ p{
   background-color: #FFD9D8; 
   color: red; 
   border-radius: 8px;
+}
+
+.preview-file-name-card{
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 4px 0 4px;
 }

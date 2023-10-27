@@ -15,7 +15,7 @@
                     "displayName": "Ver mi historial",
                     "icon": "assets/images/viewhistory.png",
                     "route": "uinservices/viewhistory",
-                    "description": "Vea el historial de todas las transacciones asociadas con su UIN/ AID/ VID registrado. También puede ver sus detalles y si se encuentra alguna entrada no contabilizada, se puede levantar un informe contra la misma.",
+                    "description": "Vea el historial de todas las transacciones asociadas con su UIN/ VID registrado. También puede ver sus detalles y si se encuentra alguna entrada no contabilizada, se puede levantar un informe contra la misma.",
                     "auditEventId": "ADM-004"
                 },
                 {
@@ -52,6 +52,13 @@
                     "route": "uinservices/sharewithpartner",
                     "description": " Los residentes pueden elegir los datos que se compartirán con cualquiera de los socios registrados para aprovechar varios servicios de terceros.",
                     "auditEventId": "ADM-004"
+                },
+                {
+                    "displayName": "Actualizar mis datos",
+                    "icon": "assets/images/updatedemographic.png",
+                    "route": "uinservices/updatedemographic",
+                    "description": "Los residentes pueden actualizar los datos ya existentes asociados a su UIN/VID. Los datos que se pueden actualizar incluyen nombre, sexo, fecha de nacimiento, dirección, documentos cargados, número de teléfono, ID de correo electrónico, idioma preferido, etc.",
+                    "auditEventId": "ADM-004"
                 }
             ]
         },
@@ -75,13 +82,6 @@
                     "displayName": "Documentos de respaldo",
                     "icon": "",
                     "route": "document",
-                    "auditEventId": "ADM-004"
-                },
-                {
-                    "displayName": "Actualizar mis datos",
-                    "icon": "assets/images/updatedemographic.png",
-                    "route": "uinservices/updatedemographic",
-                    "description": "Los residentes pueden actualizar los datos ya existentes asociados a su UIN/VID. Los datos que se pueden actualizar incluyen nombre, sexo, fecha de nacimiento, dirección, documentos cargados, número de teléfono, ID de correo electrónico, idioma preferido, etc.",
                     "auditEventId": "ADM-004"
                 }
             ]
@@ -132,9 +132,9 @@
             ]
         }
     ],
-    "header":{
-        "lastLogin":"Último acceso",
-        "logout":"Cerrar sesión"
+    "header": {
+        "lastLogin": "Último acceso",
+        "logout": "Cerrar sesión"
     },
     "dashboard": {
         "welcomeMessage": "¡Bienvenido al portal de socios de Mosip!",
@@ -162,12 +162,13 @@
         "home": "Inicio",
         "label": "Descargar UIN",
         "subTitle": "El OTP expirará en",
+        "subTitle2": "La OTP ha caducado. Haga clic en Reenviar OTP.",
         "inputLabel": "Ingrese la Contraseña de un Solo Uso (OTP)",
         "otpDescription": "Se ha enviado una Contraseña de un Solo Uso (OTP) a su número de teléfono móvil registrado",
         "otpDescriptionEmail": " y a su correo electrónico registrado",
         "resendBtnLabel": "Reenviar OTP",
         "submitBtnLabel": "Enviar",
-        "enterOtp":"Ingrese OTP aquí"
+        "enterOtp": "Ingrese OTP aquí"
     },
     "centerSelection": {
         "title": "Reservar cita",
@@ -179,7 +180,7 @@
         "text_open": "Abierto",
         "text_select": "Seleccionar tipos de ubicación",
         "text_enter": "Ingresar",
-        "text_search": "Buscar...",
+        "text_search": "Buscar",
         "action_back": "Volver",
         "action_book_later": "Reservar luego",
         "action_continue": "Continuar",
@@ -223,6 +224,7 @@
         "otp": "Ingrese OTP",
         "phoneicon": "assets/images/phone_iphone_black_24dp.png",
         "subTitle": "El OTP expirará en",
+        "subTitle2": "La OTP ha caducado. Haga clic en Reenviar OTP.",
         "inputLabel": "Ingrese la Contraseña de un Solo Uso (OTP)",
         "otpDescriptionEmail": "Ingrese el OTP que se ha enviado a su ID de correo electrónico registrado",
         "otpDescriptionPhone": "Ingrese el OTP que se ha enviado a su número de teléfono registrado",
@@ -233,18 +235,18 @@
     "viewhistory": {
         "title": "Ver mi historial",
         "inputsearch": "Buscar",
-        "inputAppId": "ID de evento",
+        "inputAppId": "EID",
         "inputHistory": "Tipo de historial",
         "inputStatus": "Estado",
-        "inputFrom": "Desde (dd/mm/aaaa)",
-        "inputTo": "Hasta (dd/mm/aaaa)",
+        "inputFrom": "Desde (dd/MMM/aaaa)",
+        "inputTo": "Hasta (dd/MMM/aaaa)",
         "searchBtn": "Buscar",
         "description": "Descripción",
         "timestamp": "Marca de tiempo",
         "selectAll": "Todos",
         "noData": "No hay resultados para mostrar",
-        "historyType":"tipo de historial",
-        "status":"Estado",
+        "historyType": "tipo de historial",
+        "status": "Estado",
         "serviceTypeFilter": {
             "ALL": {
                 "serviceType": "Todos",
@@ -399,19 +401,25 @@
         "enteredValuesNotMatch": "Los valores ingresados no coinciden.",
         "submit": "Enviar",
         "update": "Actualizar",
-        "calendarPlaceHolder":"DD/MMM/AAAA",
+        "calendarPlaceHolder": "DD/MMM/AAAA",
         "documentUploaded": "Documento cargado",
         "languageHeading": "Mi preferencia de idioma",
         "InvalidFormatMsg": "El tipo de archivo que estás intentando cargar no es compatible. Por favor, carga un tipo de archivo diferente.",
         "InvalidFileSize": "El documento que estás intentando cargar excede el límite de tamaño de archivo de 2 MB. Por favor, carga un documento dentro de 2 MB.",
-        "sameNameInputErrorMsg": "El nombre que has ingresado ya existe. Por favor, ingresa un nombre nuevo para continuar.",
+        "sameNameInputErrorMsg": "El $NAME que has ingresado ya existe. Por favor, ingresa un nuevo $NAME para continuar.",
         "sameDobInputErrorMsg": "La fecha de nacimiento que has ingresado ya existe. Por favor, ingresa una fecha de nacimiento nueva para continuar.",
         "sameGenderInputErrorMsg": "El género que has elegido ya existe. Por favor, elige un género nuevo para continuar.",
-        "EnterAllAddress":"Por favor selecciona",
-        "select":"Seleccionar"
-    },
-    "preview": {
-        "title": "Avance"
+        "EnterAllAddress": "Por favor ",
+        "select": "Seleccionar",
+        "remainingAttems": "Quedan $remainingAttems intentos.",
+        "maxAttems": "Se puede solicitar un cambio de $Name un máximo de $MaxAttems veces.",
+        "fullName": "Nombre",
+        "dateOfBirth": "Fecha de nacimiento",
+        "gender": "Género",
+        "addressLine1":"Dirección",
+        "sameFileUploading":"Por favor, suba el archivo con un nombre de archivo diferente.",
+        "docTypePlaceholder": "Seleccionar tipo de documento",
+        "DocIDPlaceholder": "Ingresar número de documento"
     },
     "trackservicerequest": {
         "title": "Seguir mis solicitudes",
@@ -491,7 +499,7 @@
     },
     "paginatorIntl": {
         "itemsPerPageLabel": "Artículos por página",
-        "of":"de"
+        "of": "de"
     },
     "genericmessage": {
         "successLabel": "Success",
@@ -515,11 +523,13 @@
         "clickHere2": "haz clic ",
         "relogin": " para iniciar sesión nuevamente.",
         "login": " para iniciar sesión.",
+        "click":"haz clic aquí.",
+        "toSeeMoreDetails":"ver más detalles.",
         "otpPopupDescription": "Se ha enviado un OTP (One Time Password) a",
         "loginSuccessfully": "Estimado residente, has iniciado sesión exitosamente",
         "successRemainMsg": "para rastrear la solicitud de servicio con el EID prellenado.",
         "passwordCombinationHeading": "Combinación de contraseña: ",
-        "passwordCombination": "Las primeras cuatro letras de tu nombre en mayúsculas y tu año de nacimiento. Por ejemplo: Si tu nombre es Juan Pérez y tu fecha de nacimiento es 09/06/1963, tu contraseña será JUAN1963.",
+        "passwordCombination": "Las primeras cuatro letras de tu nombre en mayúsculas y tu año de nacimiento. Por ejemplo: Si tu nombre es Johnny Depp y tu fecha de nacimiento es 09/06/1963, tu contraseña será JUAN1963.",
         "SuccessLogin": "Has iniciado sesión exitosamente.",
         "successLogout": "Has cerrado sesión exitosamente.",
         "dearResident": "Estimado residente,",
@@ -528,8 +538,8 @@
         "clickYesToProceed": "Haz clic en Sí para continuar.",
         "logoutconfirmMessage": "¿Estás seguro de que deseas cerrar sesión?",
         "accessDenied": "No puedes acceder a este servicio ya que no has aceptado el consentimiento al iniciar sesión. Te solicitamos que vuelvas a iniciar sesión y aceptes el consentimiento relevante para continuar.",
-        "toFindRegCen":" para encontrar los centros de registro.",
-        "sessionExpired":"Sesión expirada",
+        "toFindRegCen": " para encontrar los centros de registro.",
+        "sessionExpired": "Sesión expirada",
         "getMyUin": {
             "downloadedSuccessFully": "Tu tarjeta UIN se ha descargado exitosamente para el ID de evento: $eventId.",
             "invalidOtp": "Se ingresó un OTP no válido. Por favor, haz clic en reenviar OTP e intenta nuevamente con un OTP válido."
@@ -558,19 +568,19 @@
         "manageMyVidMessages": {
             "Perpetual": {
                 "WarningMessageLabel": "Generar un nuevo VID perpetuo revocará el VID existente.",
-                "confirmationMessageForCreateVid": "¿Estás seguro de que quieres crear un VID perpetuo?",
-                "confirmationMessageForDeleteVid": "¿Estás seguro de que quieres eliminar el VID perpetuo seleccionado?",
-                "confirmationMessageForDownloadVid": "¿Estás seguro de que quieres descargar la tarjeta VID perpetua?"
+                "confirmationMessageForCreateVid": "¿Está seguro de que desea crear una tarjeta VID permanente?",
+                "confirmationMessageForDeleteVid": "¿Está seguro de que desea eliminar la tarjeta VID permanente seleccionada?",
+                "confirmationMessageForDownloadVid": "¿Estás seguro de que deseas descargar la tarjeta VID perpetua?"
             },
             "Temporary": {
-                "confirmationMessageForCreateVid": "¿Estás seguro de que quieres crear un VID temporal?",
-                "confirmationMessageForDeleteVid": "¿Estás seguro de que quieres eliminar el VID temporal seleccionado?",
-                "confirmationMessageForDownloadVid": "¿Estás seguro de que quieres descargar el VID temporal?"
+                "confirmationMessageForCreateVid": "¿Estás seguro/a de que deseas crear una tarjeta VID temporal?",
+                "confirmationMessageForDeleteVid": "¿Estás seguro/a de que deseas eliminar la tarjeta VID temporal seleccionada?",
+                "confirmationMessageForDownloadVid": "¿Estás seguro/a de que deseas descargar la tarjeta VID temporal?"
             },
             "OneTimeUse": {
-                "confirmationMessageForCreateVid": "¿Estás seguro de que quieres crear un VID de un solo uso?",
-                "confirmationMessageForDeleteVid": "¿Estás seguro de que quieres eliminar el VID de un solo uso seleccionado?",
-                "confirmationMessageForDownloadVid": "¿Estás seguro de que quieres descargar el VID de un solo uso?"
+                "confirmationMessageForCreateVid": "¿Estás seguro/a de que deseas crear una tarjeta VID de un solo uso?",
+                "confirmationMessageForDeleteVid": "¿Estás seguro/a de que deseas eliminar la tarjeta VID de un solo uso seleccionada?",
+                "confirmationMessageForDownloadVid": "¿Estás seguro/a de que deseas descargar la tarjeta VID de un solo uso?"
             },
             "createdSuccessfully": "Se ha generado tu VID exitosamente para el ID de evento: $eventId.",
             "downloadedSuccessFully": "Tu solicitud para descargar la tarjeta VID se ha procesado exitosamente para el ID de evento: $eventId.",
@@ -587,7 +597,8 @@
             "sharedSuccessfully": "Los datos elegidos por ti se han compartido correctamente con el socio seleccionado para el ID de evento: $eventId."
         },
         "verifyChannel": {
-            "warningMsg": "Tu $channel ya ha sido verificado.",
+            "warningMsgForEmail": "Su correo electrónico ya ha sido verificado.",
+            "warningMsgForPhone": "Su número de teléfono ya ha sido verificado.",
             "emailSuccess": "Tu ID de correo electrónico: $channel se ha verificado correctamente para el ID de evento: $eventId.",
             "phoneSuccess": "Tu número de teléfono: $channel se ha verificado correctamente para el ID de evento: $eventId."
         },
@@ -602,7 +613,8 @@
         "updateMyData": {
             "emailSuccessMsg": "Tu ID de correo electrónico se ha actualizado correctamente para el ID de evento: $eventId.",
             "phoneNumberSuccessMsg": "Tu número de teléfono se ha actualizado correctamente para el ID de evento: $eventId.",
-            "newDataUpdatedSuccessMsg": "Tu solicitud de cambiar tus datos se ha enviado correctamente para el ID de evento: $eventId."
+            "newDataUpdatedSuccessMsg": "Se ha enviado su solicitud para cambiar sus datos de $dataType con éxito. Se ha registrado con el ID del evento: $eventId.",
+            "updateNotificationData": "Se ha enviado su solicitud para cambiar su idioma de notificación con éxito. Se ha registrado con el ID del evento: $eventId."
         }
     },
     "autologout": {
@@ -613,9 +625,9 @@
         "readMoreLabel": "Leer más...",
         "readLessLabel": "Leer menos...",
         "revokevid": {
-            "Perpetual": "Un VID perpetuo no tiene fecha de vencimiento y no tiene límite en el número de transacciones que se pueden realizar utilizando este VID. Un UIN solo puede estar asociado con un VID perpetuo a la vez.",
-            "Temporary": "Un VID temporal es válido por 30 minutos y solo se puede realizar una transacción utilizando este VID. Un UIN puede estar asociado con varios VIDs temporales al mismo tiempo.",
-            "OneTimeUse": "Un VID de un solo uso no tiene fecha de vencimiento, pero solo se puede realizar una transacción utilizando este VID. Un UIN puede estar asociado con varios VIDs de un solo uso al mismo tiempo."
+            "Perpetual": "Un VID perpetuo no tiene fecha de vencimiento y no tiene límite en el número de transacciones que se pueden realizar con este VID. Un UIN puede estar asociado solo con un VID perpetuo $instancesVID a la vez.",
+            "Temporary": "Un VID temporal es válido por $expiryTime minutos y solo se pueden realizar $transactionLimit transacciones utilizando este VID. Un UIN puede estar asociado con $instancesVID VID temporales a la vez.",
+            "OneTimeUse": "Un VID de un solo uso no tiene fecha de vencimiento, pero solo se pueden realizar $transactionLimit transacciones utilizando este VID. Un UIN puede estar asociado con un VID de un solo uso $instancesVID a la vez."            
         },
         "secureMyID": {
             "Email OTP Authentication": "Al bloquear/desbloquear 'Autenticación por correo electrónico con OTP', cualquier intento de autenticación realizado utilizando un OTP por correo electrónico se deshabilitará/habilitará.",
@@ -631,6 +643,7 @@
     },
     "serverErrors": {
         "IDA-MLC-009": "No se encontró ningún correo electrónico o número de teléfono registrado con el UIN/VID ingresado. Para agregar un correo electrónico o número de teléfono, visita el centro de registro más cercano.",
+        "IDA-MLC-002": "No se encontró ningún correo electrónico o número de teléfono registrado con el UIN/VID ingresado. Para agregar un correo electrónico o número de teléfono, visita el centro de registro más cercano.",
         "IDA-MLC-018": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
         "RES-SER-422": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido.",
         "RES-SER-410": {
@@ -664,6 +677,7 @@
         "RES-SER-514": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
         "IDA-MLC-019": "El tipo de autenticación de OTP por correo electrónico está bloqueado para el UIN",
         "RES-SER-522": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
-        "RES_SER_509": "La tarjeta no está lista para su descarga."
+        "RES_SER_509": "La tarjeta no está lista para su descarga.",
+        "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo."
     }
 }

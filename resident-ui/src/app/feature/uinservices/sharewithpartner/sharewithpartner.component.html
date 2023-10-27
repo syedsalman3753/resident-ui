@@ -34,7 +34,7 @@
 											[matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}
 											<mat-icon>keyboard_arrow_down</mat-icon>
 										</button>
-										<mat-menu #basic="matMenu">
+										<mat-menu #basic="matMenu" class="each-lang-card">
 											<ng-container *ngFor="let data1 of data.formatOption[langCode];">
 												<button id="{{data1.value}}Btn" mat-menu-item>
 													<div class="check-box-card" (click)="captureCheckboxValue($event, data,data1)">
@@ -56,8 +56,10 @@
 									<table  style="min-width: 100%; max-height: 217px;">
 										<tr style="word-break: break-word;">
 											<td rowspan='2' *ngIf="sharableAttributes['photo']"><img [src]="sharableAttributes['photo']['value']" alt='' width='70px' height='70px' /></td>
-											<td *ngIf="sharableAttributes['fullName']" >
-												<label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 400; font-size: 15px;">{{sharableAttributes['fullName']['value']}}</span>
+											<td>
+											   <span *ngIf="sharableAttributes['fullName']">
+												  <label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 400; font-size: 15px;">{{sharableAttributes['fullName']['value']}}</span>
+											   </span>
 											</td>
 											<td align="right"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
 										</tr>
@@ -82,7 +84,7 @@
 										</tr>
 								</table>
 							</div>
-							<table [style.width]="width">
+							<table [style.width]="previewWidth">
 								<tr>
 									<td style="padding-bottom: 10px;font-size: 14px;">
 										<mat-label>{{'sharewithpartner.partnerName' | translate}}<span
@@ -91,7 +93,7 @@
 								</tr>
 								<tr>
 									<td>
-										<mat-select class="enable-dropdown" id="partnerDetails" [style.width]="previewWidth">
+										<mat-select class="enable-dropdown" id="partnerDetails">
 											<mat-option (onSelectionChange)="captureDropDownValue($event)"
 												*ngFor="let partnerDetail of partnerDetails"
 												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">
@@ -107,11 +109,16 @@
 								</tr>
 								<tr>
 									<td>
-										<textarea [attr.maxlength]="totalCommentCount" [style.width]="previewWidth"
+									<span class="purpose-search-card" >
+										<textarea [attr.maxlength]="totalCommentCount" 
 											id="sharingReasonPlaceholder" class="purpose-input-box" matInput
 											placeholder="{{'sharewithpartner.sharingReasonPlaceholder' | translate}}"
-											(input)="getpurpose($event)"></textarea>
-										<span
+											(input)="getpurpose($event)"
+											(blur)="getpurpose($event)"
+                                            (focus)="captureVirtualKeyboard(search, 0)" #keyboardRef></textarea>
+											<i style="float: right; color: grey; cursor: pointer;" matSuffix class="material-icons" (click)="openKeyboard()">keyboard</i>
+										</span>
+											<span
 											style="color:red; font-size: 12px; display: block;">{{'sharewithpartner.TotalCharacters'
 											| translate}}: {{totalCommentCount}}</span>
 										<span

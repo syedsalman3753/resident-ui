@@ -46,10 +46,11 @@
     <button id="backBtn" (click)="onItemSelected('back')" class="book-appointment-back-btn"><img
         src="./assets/images/arrow_back_black_24dp.png" alt="" />{{verifyChannelData.back}}</button>
     <div class="send-otp-container">
-      <mat-card-subtitle class="otp-time-heading">{{verifyChannelData.subTitle | translate}}<span
+      <mat-card-subtitle *ngIf="resetBtnDisable" class="otp-time-heading">{{verifyChannelData.subTitle | translate}}<span
           class="otp-expire-time">
           0{{otpTimeMinutes}}:{{displaySeconds}}</span>
       </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="!resetBtnDisable" class="otp-time-heading">{{verifyChannelData.subTitle2}}</mat-card-subtitle>
       <label for="otp-input" class="label-for-otp">{{verifyChannelData.inputLabel | translate}}</label>
       <br />
       <input id="otpValue" #box [value]="otp" [disabled]="inputDisabled" (keyup)="captureOtpValue(box.value)" placeholder="{{verifyChannelData.inputLabel}}" id="otp-input"

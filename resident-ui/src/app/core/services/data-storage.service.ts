@@ -257,7 +257,6 @@ export class DataStorageService {
     if (!filters) {
       buildURL = "?languageCode=" + localStorage.getItem("langCode");
     }
-    console.log("buildURL>>>" + buildURL);
     return this.httpClient.get<Blob>(this.BASE_URL + '/download/service-history' + buildURL, { observe: 'response', responseType: 'blob' as 'json' });
   }
 
@@ -294,7 +293,8 @@ export class DataStorageService {
   }
 
   getImmediateChildren(locationCode: string, langCode: string) {
-    return this.httpClient.get(this.BASE_URL + '/proxy/masterdata/locations/immediatechildren/' + locationCode + '/' + langCode);
+    // return this.httpClient.get(this.BASE_URL + '/proxy/masterdata/locations/immediatechildren/' + locationCode + '/' + langCode);
+    return this.httpClient.get(this.BASE_URL + '/auth-proxy/masterdata/locations/immediatechildren/' + locationCode + '?languageCodes=' + langCode)
   }
 
 
@@ -344,5 +344,13 @@ export class DataStorageService {
 
   getUpdateMyDataSchema(schemaType:any){
     return this.httpClient.get(this.BASE_URL+'/auth-proxy/config/ui-schema/'+schemaType)
+  }
+
+  translateUserInput(request:any){
+    return this.httpClient.post(this.BASE_URL + '/transliteration/transliterate', request)
+  }
+
+  getUpdateDataCount(){
+    return this.httpClient.get(this.BASE_URL + '/identity/update-count')
   }
 }

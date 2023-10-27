@@ -5,10 +5,24 @@ ul, li{
 
 table, th, td {
   border-collapse: collapse;
+  text-align: start;
 }
 
-th, td {
+td .main-table-data{
   padding: 8px;
+}
+
+.sub-table-row{
+  padding: 4px 0 ;
+}
+
+
+.dir-ltl{
+  direction: ltr;
+}
+
+.dir-rtl{
+  direction: rtl;
 }
 
 .demographic{
@@ -17,26 +31,25 @@ th, td {
 
 input.readonly{
   width: 100%;
-  padding: 12px 20px;
-  /* margin: 0 0 8px 8px; */
+  padding: 12px 16px;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: none;
   background: #ededed 0% 0% no-repeat padding-box;
   border-radius: 5px;
   color: #909090;
 }
-::ng-deep .mat-select-panel-wrap{
-  flex-basis: 25% !important;
+::ng-deep .mat-select-panel {
+  min-width: auto !important;
 }
 .mat-input-element{
   width: 100%;
-  padding: 8px 8px;
+  padding: 6px 6px;
   display: inline-block;
   border: 1px solid #ccc;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border-radius: 5px;
   color: #909090;
-  /* height: 42px; */
+  outline: none;
 }
 
 .mini-card{
@@ -48,13 +61,10 @@ label{
 }
 
 .mat-tab-group{
-  /* padding-left:50px; */
   margin-top: -20px;
 }
 
-/*::ng-deep .mat-card-header-text{
-  padding: 15px 0px;
-}*/
+
 
 .mat-card-header .mat-card-title {
     font-size: 13px !important;
@@ -151,9 +161,10 @@ label{
   color: #505050;
   font-weight: 600;
 }
-
-.files-list {
-  margin-top: 1.5rem;
+.files-list-title{
+  font-size: 16px; 
+  color: #000000; 
+  margin-bottom: 5px;
 }
 .files-list .uploaded-single-file {
   display: flex;
@@ -213,8 +224,12 @@ label{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: .5rem 0 0 .5rem;
 }
+
+.each-lang-value{
+  margin-bottom: -4px !important;
+}
+
 ::ng-deep .mat-form-field-wrapper{
   padding-bottom: 0.01em !important;
 }
@@ -222,8 +237,6 @@ label{
   display: block;
   position: relative;
   flex: auto;
-  /*width: 138% !important;*/
-/*  margin-top: 1.4rem !important;*/
 }
 
 ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button{
@@ -239,10 +252,6 @@ label{
   display: none;
 }
 
-/*::ng-deep .mat-grid-tile .mat-figure{
-  align-items: baseline !important;
-  display: block !important;
-}*/
 
 ::ng-deep .mat-form-field-flex{
   align-items: center !important;
@@ -252,9 +261,6 @@ label{
   width: 100% !important;
 }
 
-/* ::ng-deep .mat-tab-label{
-  border: 1px solid black;
-} */
 
 ::ng-deep .mat-tab-label.mat-tab-label-active {
   color: #03A64A;
@@ -267,9 +273,8 @@ label{
 .tab-headings{
   font-size:17px;
   color: #505050;
-  /* margin-bottom: 0px; */
   font-weight: 500;
-  margin-left: 1.5rem;
+  margin-bottom: 5px;
 }
 
 .language-card{
@@ -289,11 +294,8 @@ label{
   font-size: 11px;
 }
 .warning-message-for-contact{
-  margin: 0px; 
   color: red; 
   font-size: 12px;
-  font-weight: 600;
-  margin-top: -14px;
 }
 
 ::ng-deep .mat-grid-tile .mat-figure{
@@ -323,15 +325,15 @@ label{
   width: 50%
 }
 
-.each-Hierarchy-td{
-  text-align: start; 
+/* .each-Hierarchy-td{
+  text-align: start;  
   vertical-align: text-top; 
-  height: 72px;
-}
+} */
 
 .disable-dropdown{
   background-color: #F4F4F4;
   border-radius: 5px;
+  width: 100%;
 }
 
 .mat-select-panel-wrap{
@@ -348,6 +350,7 @@ label{
 
 .input{
   border: none;
+  color: #000000;
 }
 
 .search-input-card{
@@ -355,24 +358,172 @@ label{
   border-radius: 4px !important;
   display: inline-flex;
   align-items: center;
-  padding: 3px;
+  padding: 5px;
   border: 1px solid #909090;
 }
 
-@media screen and (min-width:989px) {
-  .table-main-card{
-    display: flex;
+.date-input-card{
+  width: 100%;
+  border-radius: 4px !important;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #909090;
+}
+
+.preview-input-size{
+  width: 60%;
+}
+
+.each-tab-group-main-table{
+  width: 100%;
+}
+.file-Upload-card{
+  width: 55%;
+}
+.width-of-input{
+  width: 26%;
+}
+
+.number-of-attems-left-card{
+  border: 1.5px solid #89730B;
+  min-height: 50px;
+  width: 100%;
+  position: relative;
+  background-color: #FFF9DB;
+  padding: 6px;
+  border-radius: 3px;
+  color: #89730B;
+  font-size: 14px;
+}
+
+.low-number-of-attems-left-card{
+  border: 1.5px solid #DB4F4F;
+  min-height: 50px;
+  width: 100%;
+  position: relative;
+  background-color: #FFEAEA;
+  padding: 6px;
+  border-radius: 3px;
+  color: #DB4F4F;
+  font-size: 14px;
+}
+
+.number-of-attems-arrow-shape{
+   position: absolute;
+   width: 10px;
+   height: 10px;
+   border: 1.5px solid #89730B;
+   top: 10px;
+   left: -5.5px;
+   transform: rotate(45deg);
+   background-color: #FFF9DB;
+   border-right: none;
+   border-top: none;
+}
+
+.low-number-of-attems-arrow-shape{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #DB4F4F;
+  top: 10px;
+  left: -5.5px;
+  transform: rotate(45deg);
+  background-color: #FFEAEA;
+  border-right: none;
+  border-top: none;
+}
+
+.ara-number-of-attems-arrow-shape{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #89730B;
+  top: 10px;
+  transform: rotate(45deg);
+  background-color: #FFF9DB;
+  border-left: none;
+  border-bottom: none;
+  margin-left: 1.36px;
+}
+
+.low-ara-number-of-attems-arrow-shape{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #DB4F4F;
+  top: 10px;
+  transform: rotate(45deg);
+  background-color: #FFEAEA;
+  border-left: none;
+  border-bottom: none;
+  margin-left: 1.36px;
+}
+
+.number-of-attems-main-card{
+  direction: ltr;
+  display: block;
+  margin-bottom: -25px;
+  width: 60%;
+}
+
+.number-of-attems-mobile-card{
+  display: none;
+}
+
+.ele-for-mob-card{
+  display: none;
+}
+
+.perLang-submit-btn-card{
+  float: right;
+  margin-right: 2rem; 
+  margin-top: none;
+}
+.perLang-submit-btn-card-ara{
+  float: left;
+  margin-right: 2rem; 
+  margin-top: none;
+}
+
+.contact-update-card{
+  margin: 8px; 
+  display: flex;
+  flex-direction: row;
+  width:"100%";
+}
+
+.contact-update-sub-card{
+  display: flex; 
+  flex-direction: row;
+  width: 48%;
+  margin-bottom: 1rem;
+}
+
+.contact-update-each-sub-card{
+  width: 50%; 
+  margin-right: 12px;
+}
+
+.contact-lable{
+  height: 20px; 
+  overflow-wrap: break-word;
+  color: #000000 !important;
+}
+
+@media screen and ((min-width:950px) and (max-width:1300px)){
+  .number-of-attems-main-card{
+    width: 80%;
   }
+}
+
+@media screen and (min-width:989px) {
   .show-preview-image-mobile{
     display: none;
   }
-  .input-values-main-card{
-    display: flex;
-    align-items: center;
- }
 }
 
-@media screen and ((min-width:750px) and (max-width:988px)) {
+@media screen and ((min-width:824px) and (max-width:988px)) {
   .main-contianer{
     padding: 0.5rem 3rem 0 3rem; 
   }
@@ -382,9 +533,35 @@ label{
   .preview-image{
     width: 100%
   }
+  .number-of-attems-main-card{
+    width: 100%;
+  }
+  .width-of-input{
+    width: 32%;
+  }
+  .file-Upload-card{
+    width: 67%;
+  }
+  .number-of-attems-left-card{
+    width: 100%;
+  }
+  .number-of-attems-main-card{
+    margin-bottom: -70px;
+  }
 }
 
-@media screen and (max-width:749px) {
+@media screen and ((min-width:550px) and (max-width:1300px)) {
+  .contact-update-card{
+    flex-direction: column;
+  }
+  .contact-update-sub-card{
+    display: flex; 
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:823px) {
   .main-contianer{
     padding: 0.5rem 1rem 0 1rem; 
   }
@@ -398,12 +575,66 @@ label{
     display: none;
   }
   th, td {
-    padding: 4px 2px 4px 2px;
-  }
-  .tab-headings{
-    margin-left: .5rem;
+    padding: 4px 3px 4px 2px;
   }
   .preview-image{
     width: 100%
+  }
+  .number-of-attems-main-card{
+    display: none;
+  }
+  .number-of-attems-mobile-card{
+    display: block;
+  }
+  .file-Upload-card{
+    width: 100%;
+  }
+
+}
+
+@media screen and ((min-width:550px) and (max-width:749px)) {
+  .width-of-input{
+    width: 36%;
+  }
+  .file-Upload-card{
+    width: 100%;
+  }
+  .contact-update-card{
+    margin: 8px; 
+    display: flex;
+    flex-direction: column;
+    width:"99%";
+  }
+  
+}
+@media screen and (max-width:549px) {
+  .width-of-input{
+    width: 45%;
+  }
+  .file-Upload-card{
+    width: 100%;
+  }
+  .number-of-attems-main-card{
+    display: none;
+  }
+  .ele-for-lap-tab-card{
+    display: none;
+  }
+  .ele-for-mob-card{
+    display: block;
+  }
+  .preview-input-size{
+    width: 100%;
+  }
+  .contact-update-card{
+    flex-direction: column;
+  }
+  .contact-update-sub-card{
+    flex-direction: column;
+    width: 100%;
+  }
+  .contact-update-each-sub-card{
+    width: 100%; 
+    margin-right: 12px;
   }
 }

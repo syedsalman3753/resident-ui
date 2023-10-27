@@ -119,7 +119,6 @@ export class RevokevidComponent implements OnInit, OnDestroy {
     let results = [];
     self.finalTypeList = {};
     this.dataStorageService.getPolicy().subscribe(response => {
-      console.log(response)
       if (response) {
         this.policyType = response;
         this.isLoading = false;
@@ -131,10 +130,10 @@ export class RevokevidComponent implements OnInit, OnDestroy {
               results.push(self.vidlist[j]);
             }
           }
-          // console.log("this.policyType.vidPolicies[i].vidType>>>"+this.policyType.vidPolicies[i].vidType);
           self.finalTypeList[this.policyType.vidPolicies[i].vidType] = results;
         }
       }
+
     },
       error => {
         console.log(error);
