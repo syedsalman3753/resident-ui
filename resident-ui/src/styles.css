@@ -69,7 +69,7 @@
 
 html,
 body {
-  height: 100rem;
+  height: 100%;
   margin: 0;
   font-family: "source_sans_pro_lightregular", Helvetica, sans-serif;
   /* font-family: 'Roboto', 'Helvetica Neue', sans-serif; */
