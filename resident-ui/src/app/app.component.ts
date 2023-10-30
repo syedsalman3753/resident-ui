@@ -69,7 +69,7 @@ export class AppComponent {
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, .9)";
                 document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "-2.5%";
+                document.body.style["margin-top"] = "-5.2em";
               }else{
                 document.body.style["zoom"] = "90%";
                 document.body.style.removeProperty('transform');
@@ -96,7 +96,7 @@ export class AppComponent {
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, 1.1)";
                 document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "2.1%";
+                document.body.style["margin-top"] = "5em";
               }else{
                 document.body.style["zoom"] = "110%";
                 document.body.style.removeProperty('transform');
@@ -108,7 +108,7 @@ export class AppComponent {
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, 1.2)";
                 document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "4.5%";
+                document.body.style["margin-top"] = "10em";
               }else{
                 document.body.style["zoom"] = "120%";
                 document.body.style.removeProperty('transform');
