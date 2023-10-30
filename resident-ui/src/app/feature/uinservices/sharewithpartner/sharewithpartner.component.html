@@ -13,7 +13,7 @@
 		<p class="intro-description">{{'sharewithpartner.introDescription' | translate}}</p>
 		<label class="main-label">{{'sharewithpartner.mainlabel' |
 			translate}}</label>
-		<table style="width:100%;">
+		<table style="width:100%;" dir="{{sitealignment}}">
 			<tr><mat-grid-list [cols]="cols" rowHeight="10rem" gutterSize="10px">
 				<mat-grid-tile [colspan]="dataCols" [rowspan]="dataRow">
 						<td >
@@ -94,9 +94,9 @@
 								</tr>
 								<tr>
 									<td>
-										<mat-select class="enable-dropdown" id="partnerDetails">
-											<mat-option (onSelectionChange)="captureDropDownValue($event)"
-												*ngFor="let partnerDetail of partnerDetails"
+										<mat-select (selectionChange)="captureDropDownValue($event)" class="enable-dropdown" id="partnerDetails">
+											<mat-option 
+											    *ngFor="let partnerDetail of partnerDetails"
 												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">
 												{{partnerDetail.organizationName}}</mat-option>
 										</mat-select>

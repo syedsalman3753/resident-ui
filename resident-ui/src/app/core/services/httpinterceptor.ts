@@ -96,6 +96,9 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401 && err.statusText === "Unauthorized") {
              this.router.navigate(['dashboard']);
+             if (window.location.href.includes('uinservices')) {
+               window.location.reload();
+             }
             }else if (err.status === 403 && err.statusText === "Forbidden") {
               this.showMessage()
             } else if (err.status === 413) {

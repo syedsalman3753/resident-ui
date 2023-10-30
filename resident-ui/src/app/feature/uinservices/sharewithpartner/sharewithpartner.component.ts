@@ -59,6 +59,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   formatLabels: any;
   isLoading: boolean = true;
   selectedOprionsFormOptions: object = {};
+  sitealignment:string = localStorage.getItem('direction');
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
@@ -438,6 +439,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   }
 
   captureDropDownValue(event: any) {
+    console.log(event.source.value)
     if (event.source.selected) {
       this.partnerId = event.source.value;
     }

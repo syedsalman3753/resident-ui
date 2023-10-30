@@ -288,7 +288,7 @@ p{
 
 .agree-test-card{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .agree-card {
@@ -330,6 +330,7 @@ p{
   height: 20px !important;
   width: 20px !important;
   cursor: pointer;
+  margin-top: 0;
 }
 
 .otp-time-heading {
