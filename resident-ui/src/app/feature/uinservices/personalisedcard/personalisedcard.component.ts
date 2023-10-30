@@ -47,6 +47,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
   formatCheckBoxClicked: boolean = false;
   isLoading: boolean = true;
   selectedOprionsFormOptions: object = {};
+  sitealignment:string = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
     private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,

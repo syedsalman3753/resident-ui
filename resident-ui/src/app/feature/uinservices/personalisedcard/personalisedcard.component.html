@@ -10,7 +10,7 @@
 		<h3 style="color: #505050;">{{'personalisedcard.title' | translate}}</h3>
 		<p class="intro-description">{{'personalisedcard.introDescription' | translate}}</p>
 		<p class="intro-description">{{'personalisedcard.mainlabel' | translate}}</p>
-		<table style="width:100%;">
+		<table style="width:100%;" dir="{{sitealignment}}">
 			<tr><mat-grid-list [cols]="cols" rowHeight="9rem" gutterSize="10px">
 			  <mat-grid-tile [colspan]="dataCols" [rowspan]="3">
 				<td [style.width] = "width">
