@@ -472,8 +472,9 @@ button{
   height: auto;
 }
 
-.cdk-global-overlay-wrapper, .cdk-overlay-container{
+.cdk-global-overlay-wrapper{
   /*overflow-y: auto;*/
+  align-items: flex-start !important;
 }
 
 .info-icon-button{
