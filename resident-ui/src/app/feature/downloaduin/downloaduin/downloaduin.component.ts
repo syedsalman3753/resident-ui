@@ -118,7 +118,6 @@ export class DownloadUinComponent implements OnInit {
     this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60;
     this.displaySeconds = "00";
     this.generateOTP(this.data)
-    this.setOtpTime()
   }
 
   generateOTP(data: any) {
@@ -148,6 +147,7 @@ export class DownloadUinComponent implements OnInit {
         if(response['response']){
           this.resetBtnDisable = true;
           this.inputDisabled = false;
+          this.setOtpTime()
         }
       },
         error => {
