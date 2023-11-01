@@ -149,7 +149,7 @@ export class GetuinComponent implements OnInit {
 
 
   submitUserID() {
-    this.auditService.audit('RP-034', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "send OTP" button on Get my UIN page');
+    this.auditService.audit('RP-034', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "send OTP" button on Get my UIN page',this.aid);
     if (this.aid !== undefined) {
       this.getStatus(this.aid)
     }

@@ -156,7 +156,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.notificationList = response["response"]["data"];
     });
 
-    this.auditService.audit('RP-001', 'Notification section', 'RP-Notification', 'Notification section', 'User clicks on "notification" icon after logging in to UIN services');
+    this.auditService.audit('RP-001', 'Notification section', 'RP-Notification', 'Notification section', 'User clicks on "notification" icon after logging in to UIN services', '');
     this.getNotificationInfo();
   }
 
@@ -285,7 +285,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   doLogout() {
-    this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
+    this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services', '');
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
       data: {
