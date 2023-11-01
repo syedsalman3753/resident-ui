@@ -446,7 +446,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   }
 
   shareInfoBtn() {
-    this.auditService.audit('RP-033', 'Share credential with partner', 'RP-Share credential with partner', 'Share credential with partner', 'User clicks on "share" button on share credential page');
+    this.auditService.audit('RP-033', 'Share credential with partner', 'RP-Share credential with partner', 'Share credential with partner', 'User clicks on "share" button on share credential page','');
     if (!this.partnerId) {
       this.message = this.popupMessages.genericmessage.sharewithpartner.needPartner
       this.showValidateMessage(this.message);

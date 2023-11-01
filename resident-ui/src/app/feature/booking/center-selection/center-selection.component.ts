@@ -259,7 +259,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     if (this.keyboardService.isOpened) {
       this.keyboardService.dismiss();
     }
-    this.auditService.audit('RP-040', 'Locate registration center', 'RP-Locate registration center', 'Locate registration center', 'User clicks on "search" button on locate registration center page');
+    this.auditService.audit('RP-040', 'Locate registration center', 'RP-Locate registration center', 'Locate registration center', 'User clicks on "search" button on locate registration center page','');
     this.REGISTRATION_CENTRES = [];
     if (this.locationType !== null && this.searchText) {
       this.showMap = false;
@@ -492,7 +492,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   }
 
   downloadCentersPdf() {
-    this.auditService.audit('RP-041', 'Locate registration center', 'RP-Locate registration center', 'Locate registration center', 'User clicks on "download" button on locate registration center page');
+    this.auditService.audit('RP-041', 'Locate registration center', 'RP-Locate registration center', 'Locate registration center', 'User clicks on "download" button on locate registration center page','');
     if (this.locationType && this.searchText) {
       this.dataService.registrationCentersList(this.langCode, this.locationType.hierarchyLevel, this.searchText)
         .subscribe(response => {

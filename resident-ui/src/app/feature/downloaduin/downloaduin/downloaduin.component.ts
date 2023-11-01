@@ -108,12 +108,12 @@ export class DownloadUinComponent implements OnInit {
   }
 
   submitOtp(){
-    this.auditService.audit('RP-035', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on the "submit button" on Get my UIN page');
+    this.auditService.audit('RP-035', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on the "submit button" on Get my UIN page', this.data);
     this.validateUinCardOtp()
   }
 
   resendOtp(){
-    this.auditService.audit('RP-036', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "resend OTP" button on Get my UIN page');
+    this.auditService.audit('RP-036', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "resend OTP" button on Get my UIN page', this.data);
     clearInterval(this.interval)
     this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60;
     this.displaySeconds = "00";

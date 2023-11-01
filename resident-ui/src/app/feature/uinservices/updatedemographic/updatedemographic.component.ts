@@ -360,7 +360,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   previewBtn(issue: any) {
     if (issue === "address") {
-      this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address');
+      this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address', '');
       this.changedBuildData(this.userInfoAddressClone);
       this.finalUserCloneData = this.userInfoAddressClone;
       this.uploadedFiles = this.filesPOA;
@@ -368,7 +368,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.changedBuildData(this.userInfoClone);
       this.finalUserCloneData = this.userInfoClone;
       this.uploadedFiles = this.files;
-      this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data');
+      this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data', '');
     }
     this.showPreviewPage = true;
     this.updatingtype = issue;
@@ -452,11 +452,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     if (id === "email") {
       this.userIdPhone = "";
       this.confirmPhoneContact = "";
-      this.auditService.audit('RP-029', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update email Id');
+      this.auditService.audit('RP-029', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update email Id', '');
     } else if (id === "phone") {
       this.userIdEmail = "";
       this.confirmEmailContact = "";
-      this.auditService.audit('RP-030', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update phone number');
+      this.auditService.audit('RP-030', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update phone number', '');
     }
 
     this.generateOtp()
@@ -820,7 +820,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   updatenotificationLanguage() {
-    this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language');
+    this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language', '');
     const request = {
       "id": this.appConfigService.getConfig()["resident.updateuin.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
