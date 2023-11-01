@@ -375,10 +375,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     let searchParam = "",
       self = this;
     if(pageEvent.pageIndex > this.pageIndex) {
-      this.auditService.audit('RP-011', 'View history', 'RP-View history', 'View history', 'User clicks on next page in pagination');
+      this.auditService.audit('RP-011', 'View history', 'RP-View history', 'View history', 'User clicks on next page in pagination', '');
     }
     if(pageEvent.pageSize != this.pageSize){
-      this.auditService.audit('RP-012', 'View history', 'RP-View history', 'View history', 'User chooses the number of items to be shown on each page from drop-down');
+      this.auditService.audit('RP-012', 'View history', 'RP-View history', 'View history', 'User chooses the number of items to be shown on each page from drop-down', '');
     }
     this.controlTypes.forEach(controlType => {
       if (self[controlType]) {
