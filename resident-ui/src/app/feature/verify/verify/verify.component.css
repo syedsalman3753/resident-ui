@@ -236,7 +236,7 @@ input{
      position: absolute;
      border-left: 0.5rem solid transparent;
      border-right: 0.5rem solid transparent;
-     border-bottom: 0.5rem solid #000 8c;
+     border-bottom: 0.5rem solid #000;
      border-color: transparent transparent #fff transparent;
      border-width: 10px;
 }
