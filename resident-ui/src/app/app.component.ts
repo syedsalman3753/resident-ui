@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { AppConfigService } from './app-config.service';
 import { AutoLogoutService } from 'src/app/core/services/auto-logout.service';
 import { Subscription } from 'rxjs';
-import { Event as NavigationEvent, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Event as NavigationEvent, Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';

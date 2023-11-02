@@ -16,6 +16,7 @@ import {
   MatKeyboardService
 } from 'ngx7-material-keyboard';
 import defaultJson from "src/assets/i18n/default.json";
+import { BreakpointService } from "src/app/core/services/breakpoint.service";
 
 @Component({
   selector: "app-center-selection",
@@ -68,6 +69,10 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   showWarningMsg:boolean = false;
   showMesssageText:string="";
   popupMessages: any;
+  isMobileView:boolean = false;
+  showLocationDetails:boolean = true;
+  showBackBtn:boolean = false;
+
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
@@ -82,9 +87,21 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private auditService: AuditService,
     private paginator: MatPaginatorIntl,
-    private keyboardService: MatKeyboardService
+    private keyboardService: MatKeyboardService,
+    private breakPointService: BreakpointService
   ) {
     this.translate.use(this.langCode); 
+    this.breakPointService.isBreakpointActive().subscribe(active => {
+      if (active) {
+        if (active === "extraSmall") {
+           this.isMobileView = true;
+           this.showBackBtn = true;
+        }else{
+          this.showBackBtn = false;
+          this.isMobileView = false;
+        }
+      }
+    })
   }
 
   async ngOnInit() {
@@ -256,6 +273,9 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   }
 
   showResults(pageEvent) {
+    this.showLocationDetails = true;
+    this.isMobileView = this.showBackBtn ?  true : false;
+    this.isWorkingDaysAvailable = false;
     if (this.keyboardService.isOpened) {
       this.keyboardService.dismiss();
     }
@@ -306,6 +326,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     this.totalItems = 0;
     this.searchText = "";
     this.selectedCentre = null;
+    this.isBlankSpace = true;
   }
 
   plotOnMap() {
@@ -320,9 +341,26 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     this.selectedCentre = row;
     this.enableNextButton = true;
 
-    if (Object.keys(this.selectedCentre).length !== 0) {
+    if (Object.keys(this.selectedCentre).length !== 0 && !this.isMobileView) {
       this.plotOnMap();
     }
+  }
+
+  selectedEachMap(center:any){
+    this.isMobileView = false;
+    this.showLocationDetails = false;
+    this.selectedRow(center)
+  }
+
+  showAllCenters(){
+    this.isMobileView = false;
+    this.showLocationDetails = false;
+    this.selectedRow(this.REGISTRATION_CENTRES[0]);
+  }
+
+  backBtn(){
+    this.showMap = false;
+    this.showLocationDetails = true;
   }
 
   getLocation() {

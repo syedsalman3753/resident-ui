@@ -190,7 +190,8 @@
         "noRegCentersNearby": "No se encontraron Centros de Registro cercanos. Por favor, ingrese el texto manualmente para buscar Centros de Registro.",
         "noRegCenters": "No se encontró ningún Centro de Registro.",
         "warnMessage": "Por favor, ingrese letras/números para realizar la búsqueda.",
-        "or":"O"
+        "or":"O",
+        "showMapBtnLabel":"Mostrar centro de registro en el mapa"
     },
     "downloadDocument": {
         "downloadbutton": "Descargar"
