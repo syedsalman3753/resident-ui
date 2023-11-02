@@ -180,7 +180,7 @@ export class DataStorageService {
     if (request) {
       let pageSize = request.pageSize;
       let pageIndex = parseInt(request.pageIndex);
-      buildURL = "?pageStart=" + pageIndex + "&pageFetch=" + pageSize;
+      buildURL = "?pageIndex=" + pageIndex + "&pageSize=" + pageSize;
       if (request) {
         buildURL = buildURL + "&" + filters;
       }
