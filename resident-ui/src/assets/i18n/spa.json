@@ -680,6 +680,7 @@
         "IDA-MLC-019": "El tipo de autenticación de OTP por correo electrónico está bloqueado para el UIN",
         "RES-SER-522": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
         "RES-SER-509": "La tarjeta no está lista para su descarga.",
-        "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo."
+        "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
+        "RES-OTP-006": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido."
     }
 }

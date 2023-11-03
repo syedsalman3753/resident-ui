@@ -36,7 +36,6 @@ export class DownloadUinComponent implements OnInit {
   pdfSrc = "";
   eventId: any;
   isLoading:boolean = false;
-  inputDisabled:boolean = false;
 
   userPreferredLangCode = localStorage.getItem("langCode");
 
@@ -65,11 +64,6 @@ export class DownloadUinComponent implements OnInit {
       this.downloadUinData = response.downloadUin,
         this.popupMessages = response;
     })
-    // this.translateService
-    //   .getTranslation(localStorage.getItem("langCode"))
-    //   .subscribe(response => {
-    //     this.popupMessages = response;
-    //   });
     this.setOtpTime()
   }
 
@@ -87,7 +81,6 @@ export class DownloadUinComponent implements OnInit {
         this.displaySeconds = "00";
         this.resetBtnDisable = false;
         this.submitBtnDisable = true;
-        this.inputDisabled = true;
       }
       if (this.otpTimeSeconds < 10) {
         this.displaySeconds = "0" + this.otpTimeSeconds.toString()
@@ -118,6 +111,8 @@ export class DownloadUinComponent implements OnInit {
     this.otpTimeMinutes = this.appConfigService.getConfig()['mosip.kernel.otp.expiry-time']/60;
     this.displaySeconds = "00";
     this.generateOTP(this.data)
+    this.resetBtnDisable = true;
+    this.setOtpTime();
   }
 
   generateOTP(data: any) {
@@ -145,9 +140,7 @@ export class DownloadUinComponent implements OnInit {
     this.dataStorageService.generateOTPForUid(request)
       .subscribe((response) => {
         if(response['response']){
-          this.resetBtnDisable = true;
-          this.inputDisabled = false;
-          this.setOtpTime()
+          
         }
       },
         error => {
