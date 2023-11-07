@@ -79,11 +79,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
           this.deviceSize = "Small";
         }
         if (result.breakpoints[Breakpoints.Medium]) {
-          this.width = "60%";
+          this.width = "80%";
           this.deviceSize = "Medium";
         }
         if (result.breakpoints[Breakpoints.Large]) {
-          this.width = "55%";
+          this.width = "64%";
           this.deviceSize = "Large";
         }
         if (result.breakpoints[Breakpoints.XLarge]) {
