@@ -306,7 +306,6 @@ input[type="radio"] {
   display: inline-flex;
   display: inline-flex;
   padding: 7px;
-  margin-left: 5px;
   border: 2px solid #909090;
 }
 
@@ -316,7 +315,7 @@ input[type="radio"] {
   align-items: center;
   justify-content: center;
   row-gap: 10px;
-  column-gap: 5px;
+  column-gap: 8px;
 }
 
 .search-form-card{
@@ -379,6 +378,7 @@ input[type="radio"] {
 .manual-loc-search-card{
   display: flex;
   align-items: center;
+  column-gap: 8px;
 }
 
 .manual-loc-search-btns{

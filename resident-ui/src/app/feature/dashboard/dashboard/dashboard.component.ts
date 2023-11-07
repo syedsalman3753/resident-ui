@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   langCode = localStorage.getItem("langCode");
   cols : number;
   sitealignment:string = localStorage.getItem('direction');
+  rowHeight:any;
   
   constructor(
     private router: Router,
@@ -35,18 +36,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (active) {
         if(active === "extraSmall"){
           this.cols = 1;
+          this.rowHeight = '235px'
         }
         if(active === "small"){
           this.cols = 1;
+          this.rowHeight = '195px'
         }
         if(active === "medium"){
           this.cols = 2;
+          this.rowHeight = '200px'
         }
         if(active === "large"){
           this.cols = 3;
+          this.rowHeight = '200px'
         }
         if(active === "ExtraLarge"){
           this.cols = 3;
+          this.rowHeight = '200px'
         }
       }
     });

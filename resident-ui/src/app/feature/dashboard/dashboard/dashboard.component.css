@@ -24,7 +24,7 @@
 }
 
 .item1 {
-  height: 390px !important;
+  height: 99% !important;
 }
 
 .item-card {
@@ -111,5 +111,11 @@ div.item-card:hover{
 
 .mat-card{
   border-radius: 25px !important;
+}
+
+@media screen and (max-width:460px){
+  .item-card{
+    padding: 8px;
+  }
 }
 
