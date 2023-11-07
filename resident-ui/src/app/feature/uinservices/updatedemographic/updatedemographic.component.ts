@@ -117,6 +117,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
+        if (this.updatingtype === "address") {
+          this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address', '');
+        }else if(this.updatingtype === "identity"){
+          this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data', '');
+        }
       } else if (id === "resend") {
         this.reGenerateOtp();
       } else if (id !== 'string' && id.type === 'otp') {
@@ -360,7 +365,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   previewBtn(issue: any) {
     if (issue === "address") {
-      this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address', '');
       this.changedBuildData(this.userInfoAddressClone);
       this.finalUserCloneData = this.userInfoAddressClone;
       this.uploadedFiles = this.filesPOA;
@@ -368,7 +372,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.changedBuildData(this.userInfoClone);
       this.finalUserCloneData = this.userInfoClone;
       this.uploadedFiles = this.files;
-      this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data', '');
     }
     this.showPreviewPage = true;
     this.updatingtype = issue;
