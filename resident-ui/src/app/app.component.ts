@@ -61,11 +61,10 @@ export class AppComponent {
     this.currentRoute = "";
     router.events.subscribe((val) => {
         if (val instanceof NavigationStart) {
-          this.currentRoute = val.url;  
-          console.log("localStorage.getItem>>>"+localStorage.getItem("selectedfontsize"));
+          this.currentRoute = val.url;
           if(localStorage.getItem("selectedfontsize")){
             if(localStorage.getItem("selectedfontsize") === "12"){
-              if(this.agent.indexOf('firefox') > -1 || (this.currentRoute === "/getuin" || this.currentRoute === "/verify")){
+              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, .9)";
                 document.body.style["transformOrigin "] = "0 0";
@@ -79,7 +78,7 @@ export class AppComponent {
                 document.body.style.removeProperty("height");
               }
             }else if(localStorage.getItem("selectedfontsize") === "14"){
-              if(this.agent.indexOf('firefox') > -1 || (this.currentRoute === "/getuin" || this.currentRoute === "/verify")){
+              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, 1.0)";
                 document.body.style["transformOrigin "] = "0 0";
@@ -94,7 +93,7 @@ export class AppComponent {
 
               }
             }else if(localStorage.getItem("selectedfontsize") === "16"){
-              if(this.agent.indexOf('firefox') > -1 || (this.currentRoute === "/getuin" || this.currentRoute === "/verify")){
+              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, 1.1)";
                 document.body.style["transformOrigin "] = "0 0";
@@ -108,7 +107,7 @@ export class AppComponent {
                 document.body.style.removeProperty("height");
               }
             }else if(localStorage.getItem("selectedfontsize") === "18"){
-              if(this.agent.indexOf('firefox') > -1 || (this.currentRoute === "/getuin" || this.currentRoute === "/verify")){
+              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
                 document.body.style["zoom"] = "100%";
                 document.body.style["transform"] = "scale(1, 1.2)";
                 document.body.style["transformOrigin "] = "0 0";
