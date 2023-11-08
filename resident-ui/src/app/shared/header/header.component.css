@@ -217,3 +217,9 @@
     display: none;
   }
 }
+
+@-moz-document url-prefix() {
+  #zoomItemBtn {
+    display:none;
+  }
+}
