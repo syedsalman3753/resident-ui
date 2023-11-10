@@ -1,5 +1,5 @@
 <div class="main-div" *ngIf="menuItems" dir="{{sitealignment}}">
-  <mat-grid-list #grid [cols]="cols" [rowHeight]="rowHeight" gutterSize="5px">
+  <mat-grid-list #grid [cols]="cols" [rowHeight]="langCode === 'tam' ? rowHeight : '185px' " gutterSize="5px">
     <mat-grid-tile colspan="1" rowspan="2">
       <div class="item1 item-card" id="dashboardCard1" (click)="onItemSelected('UIN Services')">
         <div class="title">

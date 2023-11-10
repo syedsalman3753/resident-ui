@@ -999,8 +999,7 @@
                   <mat-select [placeholder]="field.placeHolder[langCode]" disableOptionCentering class="enable-dropdown"
                     [(ngModel)]="selected2" id="{{field.attributeName}}"
                     (selectionChange)="capturePerfLang($event, field.attributeName)">
-                    <mat-option *ngFor="let data of newNotificationLanguages" [value]="data.name">{{ data.name
-                      }}</mat-option>
+                    <mat-option *ngFor="let data of newNotificationLanguages" [value]="data.value">{{ data.value }}</mat-option>
                   </mat-select>
                 </div>
               </mat-grid-tile>
