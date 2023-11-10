@@ -68,7 +68,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   defaultJsonValue: any;
   newLangArr: any = [];
   perfLangArr: any = {};
-  newNotificationLanguages: any = [];
+  newNotificationLanguages: any;
   matTabLabel: string;
   matTabIndex: number = 0;
   contactTye: string = "";
@@ -233,11 +233,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   getSupportingLanguages(){
-    let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
-    supportedLanguages.forEach(data => {
-      if(this.defaultJsonValue['languages'][data]['nativeName'] !== this.userInfo.preferredLang){
-        let newObj = { "code": data, "name": this.defaultJsonValue['languages'][data]['nativeName'] }
-        this.newNotificationLanguages.push(newObj)
+    this.dataStorageService.getPreferredLangs(this.langCode).subscribe((response) =>{
+      if(response['response']){
+        this.newNotificationLanguages = response['response'].values
       }
     })
   }

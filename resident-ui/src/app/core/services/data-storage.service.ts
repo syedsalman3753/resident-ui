@@ -353,4 +353,8 @@ export class DataStorageService {
   getUpdateDataCount(){
     return this.httpClient.get(this.BASE_URL + '/identity/update-count')
   }
+
+  getPreferredLangs(langCode:string){
+    return this.httpClient.get(this.BASE_URL + '/auth-proxy/masterdata/dynamicfields/preferredLang/' + langCode + '?withValue=true' )
+  }
 }
