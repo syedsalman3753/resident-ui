@@ -96,9 +96,12 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
         if (active === "extraSmall") {
            this.isMobileView = true;
            this.showBackBtn = true;
+           this.showMap = false;
         }else{
           this.showBackBtn = false;
           this.isMobileView = false;
+          this.showMap = true;
+          this.showLocationDetails = true;
         }
       }
     })
@@ -296,7 +299,6 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
         )
         .subscribe(
           (response) => {
-            console.log(response)
             if (response[appConstants.RESPONSE]) {
               this.totalItems = response[appConstants.RESPONSE].totalItems;
               this.displayResults(response[appConstants.RESPONSE]);
@@ -306,6 +308,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
               this.showMessage = true;
               this.showMesssageText = this.popupMessages.centerSelection.noRegCenters;
               this.selectedCentre = null;
+              this.isWorkingDaysAvailable = true;
             }
           },
           (error) => {
@@ -347,8 +350,10 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   }
 
   selectedEachMap(center:any){
+    if(this.isMobileView){
+      this.showLocationDetails = false;
+    }
     this.isMobileView = false;
-    this.showLocationDetails = false;
     this.selectedRow(center)
   }
 
@@ -361,6 +366,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
   backBtn(){
     this.showMap = false;
     this.showLocationDetails = true;
+    this.isMobileView = true;
   }
 
   getLocation() {
@@ -486,6 +492,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
             resolve(true);
           },
             (error) => {
+              this.isWorkingDaysAvailable = true;
               this.showErrorMessage(error);
             });
       });

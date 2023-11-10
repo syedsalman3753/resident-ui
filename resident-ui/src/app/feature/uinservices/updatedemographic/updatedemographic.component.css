@@ -155,6 +155,7 @@ label{
 }
  .files-list .single-file .info {
    width: 100%;
+   word-break: break-word;
 }
 
 .preview-heading{
@@ -201,6 +202,7 @@ label{
 }
 .files-list .uploaded-single-file .info {
   width: 100%;
+  word-break: break-word
 }
 
 .preview-agree-card{
