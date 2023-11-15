@@ -64,62 +64,62 @@ export class AppComponent {
           this.currentRoute = val.url;
           if(localStorage.getItem("selectedfontsize")){
             if(localStorage.getItem("selectedfontsize") === "12"){
-              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
-                document.body.style["zoom"] = "100%";
-                document.body.style["transform"] = "scale(1, .9)";
-                document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "-5.2em";
-                document.body.style["height"] = "100rem";
-              }else{
+              // if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
+              //   document.body.style["zoom"] = "100%";
+              //   document.body.style["transform"] = "scale(1, .9)";
+              //   document.body.style["transformOrigin "] = "0 0";
+              //   document.body.style["margin-top"] = "-5.2em";
+              //   document.body.style["height"] = "100rem";
+              // }else{
                 document.body.style["zoom"] = "90%";
-                document.body.style.removeProperty('transform');
-                document.body.style.removeProperty('transformOrigin');
-                document.body.style.removeProperty('margin-top');
-                document.body.style.removeProperty("height");
-              }
+              //   document.body.style.removeProperty('transform');
+              //   document.body.style.removeProperty('transformOrigin');
+              //   document.body.style.removeProperty('margin-top');
+              //   document.body.style.removeProperty("height");
+              // }
             }else if(localStorage.getItem("selectedfontsize") === "14"){
-              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
+              // if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
+              //   document.body.style["zoom"] = "100%";
+              //   document.body.style["transform"] = "scale(1, 1.0)";
+              //   document.body.style["transformOrigin "] = "0 0";
+              //   document.body.style["margin-top"] = "0%";
+              //   document.body.style["height"] = "100rem";
+              // }else{
                 document.body.style["zoom"] = "100%";
-                document.body.style["transform"] = "scale(1, 1.0)";
-                document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "0%";
-                document.body.style["height"] = "100rem";
-              }else{
-                document.body.style["zoom"] = "100%";
-                document.body.style.removeProperty('transform');
-                document.body.style.removeProperty('transformOrigin');
-                document.body.style.removeProperty('margin-top');
-                document.body.style.removeProperty("height");
+              //   document.body.style.removeProperty('transform');
+              //   document.body.style.removeProperty('transformOrigin');
+              //   document.body.style.removeProperty('margin-top');
+              //   document.body.style.removeProperty("height");
 
-              }
+              // }
             }else if(localStorage.getItem("selectedfontsize") === "16"){
-              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
-                document.body.style["zoom"] = "100%";
-                document.body.style["transform"] = "scale(1, 1.1)";
-                document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "5em";
-                document.body.style["height"] = "100rem";
-              }else{
+              // if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
+              //   document.body.style["zoom"] = "100%";
+              //   document.body.style["transform"] = "scale(1, 1.1)";
+              //   document.body.style["transformOrigin "] = "0 0";
+              //   document.body.style["margin-top"] = "5em";
+              //   document.body.style["height"] = "100rem";
+              // }else{
                 document.body.style["zoom"] = "110%";
-                document.body.style.removeProperty('transform');
-                document.body.style.removeProperty('transformOrigin');
-                document.body.style.removeProperty('margin-top');
-                document.body.style.removeProperty("height");
-              }
+              //   document.body.style.removeProperty('transform');
+              //   document.body.style.removeProperty('transformOrigin');
+              //   document.body.style.removeProperty('margin-top');
+              //   document.body.style.removeProperty("height");
+              // }
             }else if(localStorage.getItem("selectedfontsize") === "18"){
-              if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
-                document.body.style["zoom"] = "100%";
-                document.body.style["transform"] = "scale(1, 1.2)";
-                document.body.style["transformOrigin "] = "0 0";
-                document.body.style["margin-top"] = "10em";
-                document.body.style["height"] = "100rem";
-              }else{
+              // if(this.currentRoute === "/getuin" || this.currentRoute === "/verify"){
+              //   document.body.style["zoom"] = "100%";
+              //   document.body.style["transform"] = "scale(1, 1.2)";
+              //   document.body.style["transformOrigin "] = "0 0";
+              //   document.body.style["margin-top"] = "10em";
+              //   document.body.style["height"] = "100rem";
+              // }else{
                 document.body.style["zoom"] = "120%";
-                document.body.style.removeProperty('transform');
-                document.body.style.removeProperty('transformOrigin');
-                document.body.style.removeProperty('margin-top');
-                document.body.style.removeProperty("height");
-              }
+              //   document.body.style.removeProperty('transform');
+              //   document.body.style.removeProperty('transformOrigin');
+              //   document.body.style.removeProperty('margin-top');
+              //   document.body.style.removeProperty("height");
+              // }
             }
           }
         }
