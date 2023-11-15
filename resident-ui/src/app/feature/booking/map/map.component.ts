@@ -102,14 +102,19 @@ export class MapComponent implements OnInit {
 
     this.view = new OlView({
       center: fromLonLat(this.lonLat),
-      zoom: 14
+      zoom: 14,                        // Set the zoom level manually
+      maxZoom: 12,
+      minZoom: 5,
+      zoomControl: false,
+      scaleControl: false,
+      scrollwheel: false,
     });
 
     this.map = new OlMap({
       target: 'map',
       // Added both layers
       layers: [this.tileLayer, this.vectorLayer],
-      view: this.view
+      view: this.view,
     });
   }
 
