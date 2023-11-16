@@ -660,7 +660,7 @@
             "identity/preferredLang": "Idioma preferido inválido. Por favor, ingresa datos válidos."
         },
         "RES-SER-459": "El EID ingresado no está asociado con el UIN/VID utilizado para iniciar sesión.",
-        "RES-SER-412": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
+        "RES-SER-412": "No se puede acceder al recurso API.",
         "RES-SER-405": "Se han alcanzado el número máximo de VIDs permitidos. Desactiva VID(s) para generar uno nuevo.",
         "RES-SER-511": "El EID ingresado no está asociado con el UIN/VID utilizado para iniciar sesión.",
         "RES-SER-449": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
@@ -681,6 +681,7 @@
         "RES-SER-522": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
         "RES-SER-509": "La tarjeta no está lista para su descarga.",
         "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
-        "RES-OTP-006": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido."
+        "RES-OTP-006": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido.",
+        "RES-SER-406": "No se puede acceder al recurso API."
     }
 }
