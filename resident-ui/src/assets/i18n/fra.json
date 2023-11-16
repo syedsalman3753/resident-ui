@@ -660,7 +660,7 @@
             "identity/preferredLang": "Langue préférée invalide. Veuillez fournir des données valides."
         },
         "RES-SER-459": "L'EID saisi n'est pas associé au UIN/VID utilisé pour se connecter.",
-        "RES-SER-412": "UIN/VID invalide saisi. Veuillez saisir un UIN/VID valide et réessayer.",
+        "RES-SER-412": "Impossible d'accéder à la ressource API.",
         "RES-SER-405": "Le nombre maximum de VIDs autorisés est atteint. Désactivez des VIDs pour en générer un nouveau.",
         "RES-SER-511": "L'EID saisi n'est pas associé au UIN/VID utilisé pour se connecter.",
         "RES-SER-449": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer.",
@@ -681,6 +681,7 @@
         "RES-SER-522": "UIN/VID invalide saisi. Veuillez saisir un UIN/VID valide et réessayer.",
         "RES-SER-509": "La carte n'est pas prête à être téléchargée.",
         "RES-SER-418": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer.",
-        "RES-OTP-006": "OTP invalide saisi. Veuillez réessayer avec un OTP valide."
+        "RES-OTP-006": "OTP invalide saisi. Veuillez réessayer avec un OTP valide.",
+        "RES-SER-406": "Impossible d'accéder à la ressource API."
     }
 }
