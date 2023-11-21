@@ -136,9 +136,9 @@ export class GetuinComponent implements OnInit {
   getCaptchaToken(event: any) {
     if (event) {
       if(this.captchaEnable){
-        /*if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){*/
+        if(this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength)){
           this.disableSendOtp = false;
-        /*}*/
+        }
       }else{
         this.disableSendOtp = false;
       }      
