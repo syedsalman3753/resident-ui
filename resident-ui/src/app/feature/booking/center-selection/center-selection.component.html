@@ -59,7 +59,7 @@
                       <img alt="" class="save-icon" src="./assets/icons/iconfont/download-1.svg" />
                     </button>
                     &nbsp;
-                    <button *ngIf="REGISTRATION_CENTRES.length >0" class="show-map-btn" (click)="showAllCenters()">{{ popupMessages.centerSelection.showMapBtnLabel }}</button>
+                    <button *ngIf="REGISTRATION_CENTRES?.length >0" class="show-map-btn" (click)="showAllCenters()">{{ popupMessages.centerSelection.showMapBtnLabel }}</button>
                   </div>
                 </div>
               </form>
