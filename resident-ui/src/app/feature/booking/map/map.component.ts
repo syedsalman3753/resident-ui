@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
 
   OSM_URL = 'https://tile.osm.org/{z}/{x}/{y}.png';
 
-  constructor(private service: BookingService,private appConfigService: AppConfigService,) {}
+  constructor(private service: BookingService,private appConfigService: AppConfigService) {}
 
   ngOnInit() {
     if (this.mapProvider === 'OSM') {
