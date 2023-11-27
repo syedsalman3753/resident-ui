@@ -32,9 +32,9 @@ export class MapComponent implements OnInit {
   url: string;
   centers: any;
   markers = [];
-  zoom:any;
-  minZoom:any;
-  maxZoom:any;
+  zoom:number;
+  minZoom:number;
+  maxZoom:number;
 
   googleMapsUrl =
     'https://maps.google.com/maps/vt?pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m3!1e0!2sm!3i375060738!3m9!2spl!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!4e0';
@@ -65,10 +65,13 @@ export class MapComponent implements OnInit {
   }
 
   createMap() {
-    this.zoom = Number(this.appConfigService.getConfig()["mosip.resident.zoom"]);
-    this.minZoom = Number(this.appConfigService.getConfig()["mosip.resident.minZoom"]);
-    this.maxZoom = Number(this.appConfigService.getConfig()["mosip.resident.maxZoom"]);
-    
+    if (this.appConfigService.getConfig()["mosip.resident.zoom"] && this.appConfigService.getConfig()["mosip.resident.minZoom"] && this.appConfigService.getConfig()["mosip.resident.maxZoom"]) {
+      this.zoom = Number(this.appConfigService.getConfig()["mosip.resident.zoom"]);
+      this.minZoom = Number(this.appConfigService.getConfig()["mosip.resident.minZoom"]);
+      this.maxZoom = Number(this.appConfigService.getConfig()["mosip.resident.maxZoom"]);
+    }
+
+
     addCommonProjections();
     for (let i in this.centers) {
       this.marker = new OlFeature({
