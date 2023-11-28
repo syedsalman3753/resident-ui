@@ -270,8 +270,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           if(schema.controlType === "textbox"){
             if(typeof self.userInfo[schema.attributeName] === "string"){
               this.userInputValues[schema.attributeName] = "";
-              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count,confIndex:count + 1 }
-              count++
+              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count }
               count++
             }else{
               this.userInputValues[schema.attributeName] = {};
@@ -522,18 +521,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       }
     }
     this.dataStorageService.verifyUpdateData(request).subscribe(response => {
+      this.sendOtpDisable = true;
       if (response.body['response']) {
         let eventId = response.headers.get("eventid")
         this.message = this.contactTye === 'email' ? this.popupMessages.genericmessage.updateMyData.emailSuccessMsg.replace("$eventId", eventId) : this.popupMessages.genericmessage.updateMyData.phoneNumberSuccessMsg.replace("$eventId", eventId);
         this.isLoading = false;
         this.showMessage(this.message, eventId);
-        this.sendOtpDisable = true;
         this.contactTye = "";
         this.router.navigate(['uinservices/dashboard']);
       } else {
         this.isLoading = false;
         this.showErrorPopup(response.body["errors"]);
-        this.sendOtpDisable = true;
         this.contactTye = "";
       }
     }, error => {
@@ -710,37 +708,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureContactValue(event: any, formControlName: any) {
-    this.sendOtpDisable = true
+    if(event.target.value.length){
+      this.sendOtpDisable = false;
+    }else{
+      this.sendOtpDisable = true;
+    }
     this.userId = event.target.value.trim();
     this.contactTye = formControlName;
-    if (formControlName === "email" && this.userId) {
-      this.userIdEmail = this.userId.toLowerCase();
-      this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-    } else if (formControlName === "phone" && this.userId) {
-      this.userIdPhone = this.userId;
-      this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
-    }
-    if (this[formControlName]) {
-      if (formControlName === "email") {
-        this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
-      } else {
-        this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
-      }
-    }
-  }
-
-  captureConfirmValue(event: any, formControlName: any) {
-    this.sendOtpDisable = true
-    this[formControlName] = event.target.value.trim();
-    this.contactTye = formControlName;
-    if (formControlName === "email" && this[formControlName]) {
-      this.confirmEmailContact = event.target.value.toLowerCase();
-      this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
-      this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-    } else if (formControlName === "phone" && this[formControlName]) {
-      this.confirmPhoneContact = event.target.value;
-      this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
-      this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
+    if(formControlName === "email"){
+      this.userIdEmail = this.userId
+    }else{
+      this.userIdPhone = this.userId
     }
   }
 
