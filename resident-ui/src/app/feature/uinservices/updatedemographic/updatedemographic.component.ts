@@ -97,7 +97,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   isSelectedAllAddress:boolean = true;
   fieldName:string;
   oldKeyBoradIndex:number;
-  getUserPerfLang = [];
+  getUserPerfLang = [this.langCode];
   getUserPerfLangString:string = "";
   attributeUpdateCountMaxLimit:any;
   attributeUpdateCountRemainLimit:any = {};
