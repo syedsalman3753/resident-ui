@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   activeUrl:string;
   agent:any = window.navigator.userAgent.toLowerCase();
   selectedfontsize:any;
+  selectedLangData:any;
 
   constructor(
     private router: Router,
@@ -63,6 +64,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (id === "logOutBtn") {
         this.logoutService.logout();
       }
+      if(id === "changeLanguage"){
+        this.selectedLanguage = this.selectedLangData.nativeName;
+        localStorage.setItem("langCode", this.selectedLangData.code);
+        window.location.reload();
+      }
+      
     }) 
   }
 
@@ -260,12 +267,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }    
   }
 
-  onlanguagechange(item:any) {
-    if(item){
+  onlanguagechange(item:any) {    
+    if(window.location.href.includes('/uinservices/updatedemographic')){
+      this.selectedLangData = item;
+      this.showMsgForChangeLang();
+    }else{
       this.selectedLanguage = item.nativeName;
       localStorage.setItem("langCode", item.code);
       window.location.reload();
-    }    
+    }
   }
 
   godashboard() {
@@ -358,6 +368,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     return dialogRef;
   },400)
+  }
+
+  showMsgForChangeLang(){
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        case: 'MESSAGEFORLANGCHANGE',
+        message:this.popupMessages.genericmessage.langChgWarnText ,
+        btnTxt: this.popupMessages.genericmessage.continue,
+        btnTxtCanc: this.popupMessages.genericmessage.cancel
+        
+      }
+    });
+    return dialogRef;
   }
 
   onItemSelected(item: any) {
