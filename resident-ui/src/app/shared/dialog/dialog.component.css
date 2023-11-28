@@ -95,6 +95,16 @@ h5 {
     margin-top: 0px;
   }
 
+  .lang-btn-card{
+     text-align: right;
+     color: #ffffff;
+  }
+
+  .lang-btn-card-ara{
+    text-align: left;
+    color: #ffffff;
+  }
+
   .no-button{
     background-color: #909090;  
     margin-top: 0px;
@@ -395,6 +405,10 @@ p{
   color: #89730B;
   background-color: #FFF9DB;
   border-color: #89730B;
+}
+
+.lang-change-msg{
+  height: 100% !important;
 }
 
 .inactive-log-out-popup{
