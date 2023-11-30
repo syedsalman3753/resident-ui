@@ -123,9 +123,16 @@ export class GetuinComponent implements OnInit {
     }
   }
 
-
+  isNumberKey(event){
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)){
+      return false;
+    }else{
+      return true;
+    }
+  }
   getUserID(event){
-    this.aid = event
+    this.aid = event.target.value
     if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){
       this.disableSendOtp = false;
     }else{
