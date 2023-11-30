@@ -195,6 +195,15 @@ export class VerifyComponent implements OnInit, OnDestroy {
     }
   }
 
+  isNumberKey(event){
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   setOtpTime() {
     this.otpTimeMinutes = this.appConfigService['mosip.kernel.otp.expiry-time']/60;
     this.interval = setInterval(() => {
