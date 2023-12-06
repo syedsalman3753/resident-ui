@@ -602,8 +602,8 @@
             "sharedSuccessfully": "आपके द्वारा चुना गया डेटा इवेंट ID: $eventId के विरुद्ध चुने गए भागीदार के साथ सफलतापूर्वक साझा किया गया है"
         },
         "verifyChannel": {
-            "warningMsgForEmail": "आपका ईमेल पहले से ही सत्यापित हो चुका है।",
-            "warningMsgForPhone": "आपका फ़ोन नंबर पहले से ही सत्यापित हो चुका है।",
+            "warningMsgForEmail": "आपकी ईमेल आईडी: $userID पहले ही सत्यापित है।",
+            "warningMsgForPhone": "आपका फ़ोन नंबर: $userID पहले से ही सत्यापित है।",
             "emailSuccess": "आपका ईमेल ID: $channel सफलतापूर्वक सत्यापित किया गया है। ईवेंट ID: $eventId के खिलाफ।",
             "phoneSuccess": "आपका फ़ोन नंबर: $channel सफलतापूर्वक सत्यापित किया गया है। ईवेंट ID: $eventId के खिलाफ।"
         },

@@ -602,8 +602,8 @@
             "sharedSuccessfully": "The data chosen by you has been successfully shared with the chosen partner against the Event Id: $eventId"
         },
         "verifyChannel": {
-            "warningMsgForEmail": "Your Email has already been verified.",
-            "warningMsgForPhone": "Your Phone number has already been verified.",
+            "warningMsgForEmail": "Your email ID: $userID is already verified.",
+            "warningMsgForPhone": "Your phone number: $userID is already verified.",
             "emailSuccess": "Your email ID: $channel has been successfully verified against the Event ID: $eventId.",
             "phoneSuccess": "Your phone number: $channel has been successfully verified against the Event ID: $eventId."
         },

@@ -295,7 +295,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.dataStorageService.isVerified(this.otpChannel[0], this.individualId).subscribe(response => {
       if (!response["errors"]) {
         if (response["response"].verificationStatus) {
-          this.showMessageWarning(JSON.stringify(response["response"]));
+          this.showMessageWarning(response["response"]);
           this.router.navigate(["dashboard"]);
         } else {
           this.generateOTP()
@@ -338,7 +338,6 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   showMessage(message: string,eventId:any) {
-    console.log(this.channelType)
     if (this.otpChannel[0] === "PHONE") {
       this.message = this.popupMessages.genericmessage.verifyChannel.phoneSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
     } else {
@@ -361,11 +360,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
     return dialogRef;
   }
 
-  showMessageWarning(message: string) {
+  showMessageWarning(message:any) {
     if (this.otpChannel[0] === "PHONE") {
-      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForPhone
+      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForPhone.replace("$userID", message.maskedUserId)
     } else {
-      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForEmail
+      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForEmail.replace("$userID", message.maskedUserId)
     }
 
     const dialogRef = this.dialog.open(DialogComponent, {
