@@ -602,8 +602,8 @@
             "sharedSuccessfully": "تمت مشاركة البيانات التي اخترتها بنجاح مع الشريك المحدد بناءً على رقم الحدث: $eventId"
         },
         "verifyChannel": {
-            "warningMsgForEmail": "تم التحقق بالفعل من بريدك الإلكتروني.",
-            "warningMsgForPhone": "تم التحقق بالفعل من رقم هاتفك.",
+            "warningMsgForEmail": "معرف البريد الإلكتروني الخاص بك: $userID تم التحقق منه بالفعل.",
+            "warningMsgForPhone": "رقم هاتفك: $userID تم التحقق منه بالفعل.",
             "emailSuccess": "تم التحقق بنجاح من عنوان البريد الإلكتروني الخاص بك: $channel ضد رقم الحدث: $eventId.",
             "phoneSuccess": "تم التحقق بنجاح من رقم هاتفك: $channel ضد رقم الحدث: $eventId."
         },

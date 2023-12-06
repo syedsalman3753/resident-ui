@@ -602,8 +602,8 @@
             "sharedSuccessfully": "ನೀವು ಆಯ್ದ ಮಾಹಿತಿಯನ್ನು ಈವೆಂಟ್ ID: $eventId ಗೆ ಆಯ್ಕೆಮಾಡಿದ ಪಾರ್ಟ್ನರ್ ಜೊತೆಗೆ ಯಶಸ್ವಿಯಾಗಿ ಹಂಚಿಕೆ ಮಾಡಲಾಗಿದೆ."
         },
         "verifyChannel": {
-            "warningMsgForEmail": "ನಿಮ್ಮ ಇಮೇಲ್ ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
-            "warningMsgForPhone": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
+            "warningMsgForEmail": "ನಿಮ್ಮ ಇಮೇಲ್ ಐಡಿ: $userID ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
+            "warningMsgForPhone": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ: $userID ಅನ್ನು ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
             "emailSuccess": "ನಿಮ್ಮ ಇಮೇಲ್ ID: $channel ವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ.",
             "phoneSuccess": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ: $channel ವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ."
         },
