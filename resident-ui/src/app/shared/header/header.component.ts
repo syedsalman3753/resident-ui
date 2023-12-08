@@ -15,6 +15,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { AuthService } from 'src/app/core/services/authservice.service';
 /*import { MatMenuModule } from '@angular/material/menu';*/
 import { InteractionService } from "src/app/core/services/interaction.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-header",
@@ -44,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sitealignment:string = localStorage.getItem('direction');
   activeUrl:string;
   agent:any = window.navigator.userAgent.toLowerCase();
-  selectedfontsize:any;
+  selectedfontsize:any = localStorage.getItem('selectedfontsize');
   selectedLangData:any;
 
   constructor(
@@ -58,7 +59,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private auditService: AuditService,
     private dialog: MatDialog,
     private authService: AuthService,
-    private interactionService: InteractionService
+    private interactionService: InteractionService,
+    private fontSizeService: FontSizeService
   ) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "logOutBtn") {
@@ -265,6 +267,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // document.body.style.removeProperty("height");
       // }
     }    
+  }
+
+  setFontSize(size: any): void {
+    localStorage.setItem("selectedfontsize", size.fontSize);
+    this.selectedfontsize= localStorage.getItem('selectedfontsize')
+    this.fontSizeService.setFontSize(size.fontSize);
   }
 
   onlanguagechange(item:any) {    
