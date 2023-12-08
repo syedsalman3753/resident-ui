@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private auditService: AuditService,
     private dialog: MatDialog,
     private authService: AuthService,
-    private interactionService: InteractionService,
+    private interactionService: InteractionService
     // private fontSizeService: FontSizeService
   ) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
