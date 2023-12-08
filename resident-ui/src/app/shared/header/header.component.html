@@ -11,14 +11,14 @@
       </div>
       <span class="spacer"></span>
 
-      <mat-list-item id="zoomItemBtn" *ngIf="activeUrl !== '#/dashboard/expired' ">
+      <!-- <mat-list-item id="zoomItemBtn" *ngIf="activeUrl !== '#/dashboard/expired' ">
         <button mat-button [matMenuTriggerFor]="zoomItem"> <span
           class="mat-button-wrapper">Aa<mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
       <mat-menu class="zoommenu" [backdropClass]="'zoom'" #zoomItem="matMenu" [overlapTrigger]="false" id="zoomItem">
-        <button  mat-menu-item (click)="setFontSize(item)"  [style.font-size.px]="item.fontSize" [ngClass]="item.fontSize === selectedfontsize ? 'sel-font-size-btn' : 'font-size-btn'" *ngFor="let item of zoomLevel">
+        <button  mat-menu-item (click)="zoom(item)"  [style.font-size.px]="item.fontSize" [ngClass]="item.fontSize === selectedfontsize ? 'sel-font-size-btn' : 'font-size-btn'" *ngFor="let item of zoomLevel">
           {{item.label}}</button>
-      </mat-menu>
+      </mat-menu> -->
 
       <mat-list-item *ngIf="activeUrl !== '#/dashboard/expired' ">
         <button id="languages" mat-button [matMenuTriggerFor]="languages"> <span class="mat-button-wrapper"><mat-icon>g_translate</mat-icon>

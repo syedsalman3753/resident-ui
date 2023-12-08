@@ -15,7 +15,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { AuthService } from 'src/app/core/services/authservice.service';
 /*import { MatMenuModule } from '@angular/material/menu';*/
 import { InteractionService } from "src/app/core/services/interaction.service";
-import { FontSizeService } from "src/app/core/services/font-size.service";
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-header",
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sitealignment:string = localStorage.getItem('direction');
   activeUrl:string;
   agent:any = window.navigator.userAgent.toLowerCase();
-  selectedfontsize:any = localStorage.getItem('selectedfontsize');
+  selectedfontsize:any;
   selectedLangData:any;
 
   constructor(
@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private authService: AuthService,
     private interactionService: InteractionService,
-    private fontSizeService: FontSizeService
+    // private fontSizeService: FontSizeService
   ) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "logOutBtn") {
@@ -269,11 +269,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }    
   }
 
-  setFontSize(size: any): void {
-    localStorage.setItem("selectedfontsize", size.fontSize);
-    this.selectedfontsize= localStorage.getItem('selectedfontsize')
-    this.fontSizeService.setFontSize(size.fontSize);
-  }
+  // setFontSize(size: any): void {
+  //   localStorage.setItem("selectedfontsize", size.fontSize);
+  //   this.selectedfontsize= localStorage.getItem('selectedfontsize')
+  //   this.fontSizeService.setFontSize(size.fontSize);
+  // }
 
   onlanguagechange(item:any) {    
     if(window.location.href.includes('/uinservices/updatedemographic')){
