@@ -27,7 +27,7 @@
 
       <mat-menu class="language-menu" [backdropClass]="'zoom'"  #languages="matMenu" [overlapTrigger]="false" id="languages">
         <button mat-menu-item (click)="onlanguagechange(item)"
-          *ngFor="let item of selectLanguagesArr" >{{item.value}}</button>
+          *ngFor="let item of selectLanguagesArr" id="lang{{item.code}}" >{{item.value}}</button>
       </mat-menu>
 
       <mat-list-item *ngIf="fullName">
