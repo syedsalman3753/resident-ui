@@ -93,7 +93,7 @@ public class KeycloakUserManager {
  				System.out.println(response);
 			System.out.printf("Repsonse: %s %s%n", response.getStatus(), response.getStatusInfo());
 			if (response.getStatus()==409) {
-				continue;
+				break;
 			}
 			System.out.println(response.getLocation());
 			String userId = CreatedResponseUtil.getCreatedId(response);

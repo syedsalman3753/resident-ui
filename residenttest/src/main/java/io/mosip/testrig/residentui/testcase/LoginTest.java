@@ -46,7 +46,7 @@ public class LoginTest extends BaseClass {
 	
 		String envPath = ConfigManager.getiam_adminportal_path();
 		
-		String otp = "111111";
+		String otp = "";
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
@@ -65,7 +65,7 @@ public class LoginTest extends BaseClass {
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
-		// otp = MockSMTPListener.getOtp(10, externalemail);
+		 otp = MockSMTPListener.getOtp(externalemail);
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
@@ -169,7 +169,7 @@ public class LoginTest extends BaseClass {
 		Thread.sleep(30000);
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.temporaryVid);
 		Commons.click(test, driver, By.id("get_otp"));
-		otp = MockSMTPListener.getOtp(10, externalemail);
+		otp = MockSMTPListener.getOtp(externalemail);
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
@@ -216,7 +216,7 @@ public class LoginTest extends BaseClass {
 		Thread.sleep(30000);
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.onetimeuseVid);
 		Commons.click(test, driver, By.id("get_otp"));
-		otp = MockSMTPListener.getOtp(10, externalemail);
+		otp = MockSMTPListener.getOtp(externalemail);
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),

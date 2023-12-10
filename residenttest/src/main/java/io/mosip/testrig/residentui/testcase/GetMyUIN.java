@@ -29,7 +29,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("getUinSendOtpBtn"));
-		String otp = MockSMTPListener.getOtp(10, tempemail);
+		String otp = MockSMTPListener.getOtp(tempemail);
 		Commons.enter(test, driver, By.id("otp-input"), otp);
 		Commons.click(test, driver, By.xpath("//button[@id='getUinsubmitBtn']"));
 		test.log(Status.INFO, "Click on submit");
@@ -61,7 +61,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
 		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
-		String otp = MockSMTPListener.getOtp(10, tempemail);
+		String otp = MockSMTPListener.getOtp(tempemail);
 		
 		Commons.enter(test,driver, By.id("otp-input"), otp+"56");
 		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
@@ -80,7 +80,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		Thread.sleep(3000);
 		driver.switchTo().parentFrame();
 		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
-		String otp = MockSMTPListener.getOtp(10, tempemail);
+		String otp = MockSMTPListener.getOtp(tempemail);
 		Thread.sleep(180020);
 		Commons.enter(test,driver, By.id("otp-input"), otp);
 		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
