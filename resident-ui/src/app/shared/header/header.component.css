@@ -98,13 +98,10 @@
   /* height: 40px; */
 }
 
-/* ::ng-deep .mat-menu-panel.zoommenu {
-  min-width: 320px !important;
-} */
 
 ::ng-deep .mat-menu-panel.myMenu {
   height: 80%;
-  min-width: 303px!important;
+  min-width: 303px !important;
   border-radius: 0% !important;
   background-color: white;
   font-size: 13px;
@@ -112,13 +109,30 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
-::ng-deep .cdk-overlay-connected-position-bounding-box{
+
+::ng-deep .first+.cdk-overlay-connected-position-bounding-box{
   right: 5px !important;
+  width:auto !important;
+}
+
+::ng-deep .zoom+.cdk-overlay-connected-position-bounding-box{
+  right: auto !important;
 }
 
 ::ng-deep .mat-menu-panel.myMenu > .mat-menu-content {
   width: 300px !important;
   height: auto !important;
+}
+
+::ng-deep .mat-menu-panel.zoommenu{
+  min-width: 80px !important;
+  max-width: auto !important;
+}
+
+::ng-deep .mat-menu-panel.language-menu{
+  min-width: 90px !important;
+  max-width: auto !important;
+  margin-left: 0.5rem;
 }
 
 /* ::ng-deep .cdk-overlay-connected-position-bounding-box{
@@ -133,9 +147,9 @@
   right: 90px !important;
 } */
 
-::ng-deep #cdk-overlay-3{
+/* ::ng-deep #cdk-overlay-3{
   right: 90px !important;
-} 
+}  */
 
 
 /* ::ng-deep .cdk-overlay-pane{
@@ -178,6 +192,18 @@
   color: white; 
 }
 
+.font-size-btn{
+  color: #000000DE;
+  background-color: #ffffff;
+  font-weight: 500;
+}
+
+.sel-font-size-btn{
+  color: #ffffff;
+  background-color: #03A64A;
+  font-weight: 600;
+}
+
 @media screen and (max-width:550px){
   .notification-icon{
     margin: 0px;
@@ -189,5 +215,11 @@
   }
   .selected-lang{
     display: none;
+  }
+}
+
+@-moz-document url-prefix() {
+  #zoomItemBtn {
+    display:none;
   }
 }

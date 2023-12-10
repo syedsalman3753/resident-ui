@@ -5,7 +5,7 @@
             "displaydescription": "Los residentes pueden utilizar estos servicios para ver, actualizar, gestionar o compartir sus datos. También pueden informar un problema en caso de una queja.",
             "availableServicesDescription": "A continuación se muestran los servicios disponibles:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
@@ -65,7 +65,7 @@
         {
             "displayName": "Obtener información",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -89,7 +89,7 @@
         {
             "displayName": "Reservar una cita",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -106,7 +106,7 @@
         {
             "displayName": "Obtener mi UIN",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -120,7 +120,7 @@
         {
             "displayName": "Verificar número de teléfono/ID de correo electrónico",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,
@@ -189,7 +189,9 @@
         "helpText": "Centros de registro basados en su ubicación geográfica",
         "noRegCentersNearby": "No se encontraron Centros de Registro cercanos. Por favor, ingrese el texto manualmente para buscar Centros de Registro.",
         "noRegCenters": "No se encontró ningún Centro de Registro.",
-        "warnMessage": "Por favor, ingrese letras/números para realizar la búsqueda."
+        "warnMessage": "Por favor, ingrese letras/números para realizar la búsqueda.",
+        "or":"O",
+        "showMapBtnLabel":"Mostrar centro de registro en el mapa"
     },
     "downloadDocument": {
         "downloadbutton": "Descargar"
@@ -524,6 +526,9 @@
         "relogin": " para iniciar sesión nuevamente.",
         "login": " para iniciar sesión.",
         "click":"haz clic aquí.",
+        "cancel":"Cancelar",
+        "continue":"Continuar",
+        "langChgWarnText":"Al pulsar en continuar se perderán los datos que hayas introducido.",
         "toSeeMoreDetails":"ver más detalles.",
         "otpPopupDescription": "Se ha enviado un OTP (One Time Password) a",
         "loginSuccessfully": "Estimado residente, has iniciado sesión exitosamente",
@@ -597,8 +602,8 @@
             "sharedSuccessfully": "Los datos elegidos por ti se han compartido correctamente con el socio seleccionado para el ID de evento: $eventId."
         },
         "verifyChannel": {
-            "warningMsgForEmail": "Su correo electrónico ya ha sido verificado.",
-            "warningMsgForPhone": "Su número de teléfono ya ha sido verificado.",
+            "warningMsgForEmail": "Su ID de correo electrónico: $userID ya está verificado.",
+            "warningMsgForPhone": "Tu número de teléfono: $userID ya está verificado.",
             "emailSuccess": "Tu ID de correo electrónico: $channel se ha verificado correctamente para el ID de evento: $eventId.",
             "phoneSuccess": "Tu número de teléfono: $channel se ha verificado correctamente para el ID de evento: $eventId."
         },
@@ -658,7 +663,7 @@
             "identity/preferredLang": "Idioma preferido inválido. Por favor, ingresa datos válidos."
         },
         "RES-SER-459": "El EID ingresado no está asociado con el UIN/VID utilizado para iniciar sesión.",
-        "RES-SER-412": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
+        "RES-SER-412": "No se puede acceder al recurso API.",
         "RES-SER-405": "Se han alcanzado el número máximo de VIDs permitidos. Desactiva VID(s) para generar uno nuevo.",
         "RES-SER-511": "El EID ingresado no está asociado con el UIN/VID utilizado para iniciar sesión.",
         "RES-SER-449": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
@@ -677,7 +682,9 @@
         "RES-SER-514": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
         "IDA-MLC-019": "El tipo de autenticación de OTP por correo electrónico está bloqueado para el UIN",
         "RES-SER-522": "UIN/VID ingresado inválido. Por favor, ingresa un UIN/VID válido y vuelve a intentarlo.",
-        "RES_SER_509": "La tarjeta no está lista para su descarga.",
-        "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo."
+        "RES-SER-509": "La tarjeta no está lista para su descarga.",
+        "RES-SER-418": "UIN/AID/VID ingresado inválido. Por favor, ingresa un UIN/AID/VID válido y vuelve a intentarlo.",
+        "RES-OTP-006": "OTP ingresado inválido. Por favor, intenta nuevamente con un OTP válido.",
+        "RES-SER-406": "No se puede acceder al recurso API."
     }
 }

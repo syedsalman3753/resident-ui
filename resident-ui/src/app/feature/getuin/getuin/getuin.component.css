@@ -293,6 +293,12 @@ ul li:last-child hr{
     border-radius: 10px;
 }
 
+/* ::ng-deep .cdk-global-overlay-wrapper {
+    align-items: baseline !important;
+    margin-top: 25em !important;
+} */
+  
+
 ::ng-deep .mat-tooltip {
     background-color: #ffffff !important;
     color: black !important;
@@ -332,20 +338,30 @@ ul li:last-child hr{
     }
 }
 
-@media screen and ((min-width:700px) and (max-width:999px)){
+@media screen and ((min-width:680px) and (max-width:999px)){
     ul li:last-child hr{
         width: 88%;
         left: -34%;
         border-radius: 10px;
     }
+    .input-text{
+        width: 70%;
+    }
 }
 
-@media screen and (max-width:530px){
+@media screen and (max-width:679px){
     .main-container {
         padding: 0 1.5rem 2rem 1.5rem;
     }
     .login-card {
         padding: 0rem 0.2rem 0rem 0.2rem;
     }
+    .form-card{
+       width: 90%;
+    }
+    .input-text{
+       width: 93%;
+    }
 }
+
 

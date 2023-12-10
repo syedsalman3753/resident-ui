@@ -95,7 +95,7 @@
   border-radius: 6px; 
   padding: 12px;
   overflow-wrap: break-word;
-  width: 100%; 
+  width: 99%; 
 }
 
 
@@ -179,6 +179,17 @@ button[disabled=disabled], button:disabled {
 ::ng-deep .cdk-overlay-connected-position-bounding-box{
   bottom: 30px !important;
 }
+
+.partner-label{
+  padding: 10px 0 3px 0;
+  font-size: 14px;
+}
+
+.sharing-purpose-label{
+  padding: 10px 0 3px 0;
+  font-size: 14px;
+}
+
 
 @media screen and (max-width:465px){
   .each-property{

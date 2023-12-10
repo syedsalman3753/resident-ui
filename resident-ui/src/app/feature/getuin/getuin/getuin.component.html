@@ -12,11 +12,11 @@
         <div class="uin-login-title-card">
           <mat-card-subtitle class="login-Input-heading">{{getUinData.title |
             translate}}</mat-card-subtitle>
-          <button class="info-icon-button" #tooltip="matTooltip" [matTooltip]="infoText" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="below">
+          <button class="info-icon-button" #tooltip="matTooltip" [matTooltip]="infoText" matTooltipPosition="below" matTooltipHideDelay="5000" matTooltipClass="left">
           <img  alt="info-icon" class="info-icon" src="./assets/images/info_black_24dp (1).png" />
           </button>
         </div>
-        <input id="aidValue" class="input-text" type="text" ngModel (input)="getUserID($event.target.value)" placeholder="{{getUinData.enterHere}}"/>
+        <input id="aidValue" class="input-text" type="text" ngModel (input)="getUserID($event)" (keypress)="isNumberKey($event)" placeholder="{{getUinData.enterHere}}"/>
         <br />
         <label class="label-text" >{{getUinData.description | translate}}</label>
         <div *ngIf="siteKey && captchaEnable" id="recaptcha-container">
