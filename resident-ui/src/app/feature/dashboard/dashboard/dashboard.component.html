@@ -11,7 +11,7 @@
             <img alt="" [ngClass]="langCode === 'ara' ? 'ara-dashboard-icons' :  'dashboard-icons'"
               [src]='menuItems[0].activeIcon' />
           </span>
-          <mat-card-title class="mat-card-title" [id]="menuItems[0].displayName" *ngIf="menuItems[0]">{{
+          <mat-card-title class="mat-card-title" [id]="menuItems[0].id" *ngIf="menuItems[0]">{{
             menuItems[0].displayName}}</mat-card-title>
         </div>
         <p class="display-description">{{menuItems[0].displaydescription}}</p>
@@ -34,7 +34,7 @@
             <img alt="" [ngClass]="langCode === 'ara' ? 'ara-dashboard-icons' :  'dashboard-icons'"
               [src]='menuItems[1].activeIcon' />
           </span>
-          <mat-card-title class="mat-card-title" [id]="menuItems[1].displayName" *ngIf="menuItems[1]">{{ menuItems[1].displayName | translate }}
+          <mat-card-title class="mat-card-title" [id]="menuItems[1].id" *ngIf="menuItems[1]">{{ menuItems[1].displayName | translate }}
           </mat-card-title>
         </div>
         <p class="display-description">{{menuItems[1].availableServicesDescription}}:</p>
@@ -55,7 +55,7 @@
             <img alt="" [ngClass]="langCode === 'ara' ? 'ara-dashboard-icons' :  'dashboard-icons'"
               [src]='menuItems[2].activeIcon' />
           </span>
-          <mat-card-title class="mat-card-title" [id]="menuItems[2].displayName" *ngIf="menuItems[2]">{{
+          <mat-card-title class="mat-card-title" [id]="menuItems[2].id" *ngIf="menuItems[2]">{{
             menuItems[2].displayName | translate }}</mat-card-title>
         </div>
         <mat-card-header>
@@ -76,7 +76,7 @@
             <img alt="" [ngClass]="langCode === 'ara' ? 'ara-dashboard-icons' :  'dashboard-icons'"
               [src]='menuItems[3].activeIcon' />
           </span>
-          <mat-card-title class="mat-card-title" [id]="menuItems[3].displayName" *ngIf="menuItems[3]">{{ menuItems[3].displayName | translate }}
+          <mat-card-title class="mat-card-title" [id]="menuItems[3].id" *ngIf="menuItems[3]">{{ menuItems[3].displayName | translate }}
           </mat-card-title>
         </div>
         <mat-card-header>
@@ -97,7 +97,7 @@
             <img alt="" [ngClass]="langCode === 'ara' ? 'ara-dashboard-icons' :  'dashboard-icons'"
               [src]='menuItems[4].activeIcon' />
           </span>
-          <mat-card-title class="mat-card-title" [id]="menuItems[4].displayName" *ngIf="menuItems[4]">{{
+          <mat-card-title class="mat-card-title" [id]="menuItems[4].id" *ngIf="menuItems[4]">{{
             menuItems[4].displayName | translate }}
           </mat-card-title>
         </div>

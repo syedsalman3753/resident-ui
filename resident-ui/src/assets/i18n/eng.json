@@ -10,6 +10,7 @@
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "View My History",
@@ -71,6 +72,7 @@
             "cols": 1,
             "rows": 1,
             "availableServicesDescription": "Click here to search for",
+            "id":"getInformation",
             "subMenus": [
                 {
                     "displayName": "Registration Centers",
@@ -94,6 +96,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "Click here for new enrollment",
@@ -111,6 +114,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "Click here to download your UIN card or to know the status of your UIN"
@@ -125,6 +129,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "Click here to verify your  phone number/ email ID"

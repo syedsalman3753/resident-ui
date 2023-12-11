@@ -10,6 +10,7 @@
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "எனது வரலாற்றைக் காண்க",
@@ -70,6 +71,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "தேட இங்கே கிளிக் செய்யவும்",
             "subMenus": [
                 {
@@ -94,6 +96,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "புதிய பதிவுக்கு இங்கே கிளிக் செய்யவும்",
@@ -111,6 +114,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "உங்கள் UIN கார்டைப் பதிவிறக்க அல்லது உங்கள் UIN இன் நிலையை அறிய இங்கே கிளிக் செய்யவும்"
@@ -125,6 +129,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "உங்கள் தொலைபேசி எண்/ மின்னஞ்சல் ID-யைச் சரிபார்க்க இங்கே கிளிக் செய்யவும்"
