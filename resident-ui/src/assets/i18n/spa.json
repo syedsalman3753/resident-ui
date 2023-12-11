@@ -10,6 +10,7 @@
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "Ver mi historial",
@@ -70,6 +71,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "Haga clic aquí para buscar",
             "subMenus": [
                 {
@@ -94,6 +96,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "Haga clic aquí para una nueva inscripción",
@@ -111,6 +114,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "Haga clic aquí para descargar su tarjeta UIN o para conocer el estado de su UIN"
@@ -125,6 +129,7 @@
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "Haga clic aquí para verificar su número de teléfono/ID de correo electrónico"
