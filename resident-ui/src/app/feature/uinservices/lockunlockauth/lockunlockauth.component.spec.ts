@@ -90,6 +90,7 @@ describe('LockunlockauthComponent', () => {
 
     translateServiceSpy.getTranslation.and.returnValue(of(mockResponse));
     appConfigServiceSpy.getConfig.and.returnValue(mockAppConfig);
+    autoLogoutServiceSpy.currentMessageAutoLogout.and.returnValue(of({ timerFired: false }));
     autoLogoutServiceSpy.getValues.and.returnValue(null);
 
     component.ngOnInit();

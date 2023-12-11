@@ -59,6 +59,7 @@ describe('DashboardComponent', () => {
       menuItems: ['item1', 'item2'],
     };
     translateServiceSpy.getTranslation.and.returnValue(of(mockResponse));
+    autoLogoutServiceSpy.currentMessageAutoLogout.and.returnValue(of({ timerFired: false }));
     autoLogoutServiceSpy.getValues.and.returnValue(null);
 
     component.ngOnInit();

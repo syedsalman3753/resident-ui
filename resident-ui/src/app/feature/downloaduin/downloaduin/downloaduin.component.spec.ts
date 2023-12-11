@@ -64,6 +64,7 @@ describe('DownloadUinComponent', () => {
     expect(component.popupMessages).toBeDefined();
     expect(component.otpTimeMinutes).toBe(10); // 10 minutes
     expect(component.interval).toBeDefined();
+    expect(component.inputDisabled).toBe(false);
   });
 
   it('should handle item selection correctly', () => {
