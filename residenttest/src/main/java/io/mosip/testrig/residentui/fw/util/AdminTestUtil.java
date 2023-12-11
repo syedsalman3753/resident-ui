@@ -21,6 +21,7 @@ import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.kernel.util.KernelAuthentication;
 import io.mosip.testrig.residentui.kernel.util.KeycloakUserManager;
 import io.mosip.testrig.residentui.service.BaseTestCase;
+import io.mosip.testrig.residentui.utility.GlobalConstants;
 import io.restassured.response.Response;
 import org.apache.commons.lang.RandomStringUtils;
 
@@ -28,6 +29,7 @@ public class AdminTestUtil extends BaseTestCase {
 
 	private static final Logger logger = Logger.getLogger(AdminTestUtil.class);
 	public static String token;
+	public static final int OTP_CHECK_INTERVAL = 10000;
 	public static String tokenRoleIdRepo = "idrepo";
 	public static String tokenRoleAdmin = "admin";
 	public static boolean initialized = false;
@@ -158,6 +160,43 @@ public class AdminTestUtil extends BaseTestCase {
 		System.out.println(requestJson);
 		return requestJson.toString();
     }
+	
+	private static String otpExpTime = "";
+	public static int getOtpExpTimeFromActuator() {
+		if (otpExpTime.isEmpty()) {
+			String section = "/mosip-config/application-default.properties";
+			if (!BaseTestCase.isTargetEnvLTS())
+				section = "/mosip-config/sandbox/application-lts.properties";
+			Response response = null;
+			org.json.JSONObject responseJson = null;
+			JSONArray responseArray = null;
+			String url = ApplnURI + propsKernel.getProperty("actuatorIDAEndpoint");
+			try {
+				response = RestClient.getRequest(url, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON);
+
+				responseJson = new org.json.JSONObject(response.getBody().asString());
+				responseArray = responseJson.getJSONArray("propertySources");
+
+				for (int i = 0, size = responseArray.length(); i < size; i++) {
+					org.json.JSONObject eachJson = responseArray.getJSONObject(i);
+					logger.info("eachJson is :" + eachJson.toString());
+					if (eachJson.get("name").toString().contains(section)) {
+
+						org.json.JSONObject otpExpiryTime = (org.json.JSONObject) eachJson
+								.getJSONObject(GlobalConstants.PROPERTIES).get("mosip.kernel.otp.expiry-time");
+						otpExpTime = otpExpiryTime.getString(GlobalConstants.VALUE);
+						if (ConfigManager.IsDebugEnabled())
+							logger.info("Actuator: " +url +" otpExpTime: "+otpExpTime);
+						break;
+					}
+				}
+			} catch (Exception e) {
+				logger.error(GlobalConstants.EXCEPTION_STRING_2 + e);
+			}
+		}
+		return Integer.parseInt(otpExpTime);
+	}
+
 	
 	 public static String generateUIN() {
 	    	String uin = "";

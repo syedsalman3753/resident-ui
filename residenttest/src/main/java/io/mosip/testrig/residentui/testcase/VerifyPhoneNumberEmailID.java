@@ -25,7 +25,7 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
-		String otp = MockSMTPListener.getOtp(10, externalemail);
+		String otp = MockSMTPListener.getOtp(externalemail);
 
 		Commons.enter(test, driver, By.id("otp-input"), otp);
 		Commons.click(test, driver, By.id("submitOtpBtn"));
@@ -69,7 +69,7 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
-		String otp = MockSMTPListener.getOtp(10, externalemail);
+		String otp = MockSMTPListener.getOtp(externalemail);
 
 		Commons.enter(test, driver, By.id("otp-input"), otp + "23");
 		Commons.click(test, driver, By.id("submitOtpBtn"));

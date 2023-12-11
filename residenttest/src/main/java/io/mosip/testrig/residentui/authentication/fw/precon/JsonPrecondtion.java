@@ -2,12 +2,21 @@ package io.mosip.testrig.residentui.authentication.fw.precon;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class JsonPrecondtion {
 	private static final Logger JSONPRECONDATION_LOGGER = Logger.getLogger(JsonPrecondtion.class);
 	
+	public static String toPrettyFormat(String jsonString) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonParser jp = new JsonParser();
+		JsonElement je = jp.parse(jsonString);
+		return gson.toJson(je);
+	}
 	
 	public static String getValueFromJson(String jsonContent, String fieldMapper) {
 		try {
