@@ -36,7 +36,7 @@
                         value="locationType" (selectionChange)="onChangeLocationType()"
                         placeholder="{{ 'centerSelection.text_select' | translate }}">
                         <mat-option class="locationType-card" *ngFor="let locationType of locationTypes; let i = index"
-                          [value]="locationType" id="locationName{{i}}">
+                          [value]="locationType" id="hierarchyLevel{{locationType.hierarchyLevel}}">
                           {{ locationType.hierarchyLevelName }}
                         </mat-option>
                       </mat-select>
@@ -69,7 +69,7 @@
             <!-- <span class="search-text" *ngIf="searchTextFlag">{{ displayMessage }}</span> -->
           </ng-template>
           <div class="container">
-            <h4 *ngIf="showMessage" class="show-message-text">{{showMesssageText}}</h4>
+            <h4 id="noNearByCentersText" *ngIf="showMessage" class="show-message-text">{{showMesssageText}}</h4>
             <div *ngIf="showLocationDetails" class="centers-details-card">
               <div class="centers-list">
                 <div *ngIf="REGISTRATION_CENTRES.length >0">

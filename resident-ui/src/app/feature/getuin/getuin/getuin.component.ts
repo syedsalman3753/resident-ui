@@ -9,6 +9,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: 'app-getuin',
@@ -55,8 +56,9 @@ export class GetuinComponent implements OnInit {
     private dataStorageService: DataStorageService,
     private appConfigService: AppConfigService,
     private dialog: MatDialog,
-    private auditService: AuditService, 
-    private breakPointService: BreakpointService
+    private auditService: AuditService,
+    private breakPointService: BreakpointService,
+    // private fontSizeService: FontSizeService
   ) {
     this.translateService.use(localStorage.getItem("langCode"));
     this.appConfigService.getConfig();
@@ -133,10 +135,18 @@ export class GetuinComponent implements OnInit {
   }
   getUserID(event){
     this.aid = event.target.value
-    if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){
-      this.disableSendOtp = false;
+    if (this.captchaEnable) {
+      if (grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))) {
+        this.disableSendOtp = false;
+      } else {
+        this.disableSendOtp = true;
+      }
     }else{
-      this.disableSendOtp = true;
+      if (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength)) {
+        this.disableSendOtp = false;
+      }else{
+        this.disableSendOtp = true;
+      }
     }
   }
   
@@ -238,6 +248,10 @@ export class GetuinComponent implements OnInit {
         disableClose: true
       });
   }
+
+  // get fontSize(): number {
+  //   return this.fontSizeService.fontSize;
+  // }
 
   openPopup(){
     this.infoPopUpShow = !this.infoPopUpShow
