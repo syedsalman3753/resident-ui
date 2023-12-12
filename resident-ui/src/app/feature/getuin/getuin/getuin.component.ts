@@ -86,7 +86,7 @@ export class GetuinComponent implements OnInit {
   getConfigData(){
     if(localStorage.getItem('isDataLoaded') === 'true'){
       this.siteKey = this.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
-      this.captchaEnable = this.appConfigService.getConfig()["mosip.resident.captcha.enable"];
+      this.captchaEnable = JSON.parse(this.appConfigService.getConfig()["mosip.resident.captcha.enable"]);
       this.vidLength = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
       this.uinLength = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
       this.aidLength = this.appConfigService.getConfig()["mosip.kernel.rid.length"];

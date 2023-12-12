@@ -8,6 +8,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from "src/app/core/services/audit.service";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-verify",
@@ -60,6 +61,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private auditService: AuditService, 
     private breakpointObserver: BreakpointObserver
+    // private fontSizeService: FontSizeService
   ) {
     this.appConfigService = this.appConfigService.getConfig();
     this.breakpointObserver.observe([
@@ -106,7 +108,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
       });
     setTimeout(() => {
       self.siteKey = self.appConfigService["mosip.resident.captcha.sitekey"];
-      self.captchaEnable = self.appConfigService["mosip.resident.captcha.enable"]; 
+      self.captchaEnable = JSON.parse(self.appConfigService["mosip.resident.captcha.enable"]); 
       self.vidLength = self.appConfigService["mosip.kernel.vid.length"];
       self.uinLength = self.appConfigService["mosip.kernel.uin.length"];
       self.aidLength = self.appConfigService["mosip.kernel.rid.length"];
@@ -436,9 +438,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.displaySeconds = "00"
   }
 
+  // get fontSize(): number {
+  //   return this.fontSizeService.fontSize;
+  // }
+
   ngOnDestroy(): void {
   }
-  
-
  
 }
