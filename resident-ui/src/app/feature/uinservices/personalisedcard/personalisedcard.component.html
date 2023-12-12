@@ -17,10 +17,10 @@
 					<table class="fixed" *ngFor="let data of schema; let i = index" style="width:100%;">
 						<tr>
 							<td class="each-property" style="width:40%;">
-							  <mat-checkbox [checked]="data.checked" *ngIf="data.label[langCode] !== 'undefiend'" (click)="captureCheckboxValue($event, data,'datacheck')" >
+							  <mat-checkbox [id]="data.attributeName" [checked]="data.checked" *ngIf="data.label[langCode] !== 'undefiend'" (click)="captureCheckboxValue($event, data,'datacheck')" >
 								{{data.label[langCode]}}</mat-checkbox></td>
 							<td *ngIf="data.maskRequired" class="each-masked-property" style="width:60%;">
-								<mat-checkbox [disabled]="!data.checked"  id="{{data.maskRequiredLabel[langCode]}}{{i}}" (click)="captureCheckboxValue($event, data,data.maskAttributeName)">{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
+								<mat-checkbox [disabled]="!data.checked"  id="mask{{data.attributeName}}" (click)="captureCheckboxValue($event, data,data.maskAttributeName)">{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 							</td>
 							<td *ngIf="data.formatRequired" style="width:60%">
 								<button disabled [disabled]="!data.checked" mat-button [matMenuTriggerFor]="basic">{{data.formatOptionLabel[langCode]}}<mat-icon>keyboard_arrow_down</mat-icon></button>

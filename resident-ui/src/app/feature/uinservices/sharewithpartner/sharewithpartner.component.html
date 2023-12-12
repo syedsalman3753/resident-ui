@@ -20,13 +20,13 @@
 							<table class="fixed" *ngFor="let data of schema; let i = index" style="width:100%;">
 								<tr>
 									<td class="each-property" style="width:40%;">
-										<mat-checkbox [checked]="data.checked" id="{{data.label[langCode]}}"
+										<mat-checkbox [checked]="data.checked" [id]="data.attributeName"
 											(click)="captureCheckboxValue($event, data, 'datacheck')">{{data.label[langCode]}}
 										</mat-checkbox>
 									</td>
 									<td *ngIf="data.maskRequired" class="each-masked-property" style="width:60%;">
 										<mat-checkbox [disabled]="!data.checked"
-											id="{{data.maskRequiredLabel[langCode]}}{{i}}"
+											id="mask{{data.attributeName}}"
 											(click)="captureCheckboxValue($event, data, data.maskAttributeName)">
 											{{data.maskRequiredLabel[langCode]}}</mat-checkbox>
 									</td>
@@ -96,8 +96,8 @@
 									<td>
 										<mat-select (selectionChange)="captureDropDownValue($event)" class="enable-dropdown" id="partnerDetails">
 											<mat-option 
-											    *ngFor="let partnerDetail of partnerDetails"
-												[id]="partnerDetail.organizationName" [value]="partnerDetail.partnerID">
+											    *ngFor="let partnerDetail of partnerDetails; let i = index"
+												id="partner{{i}}" [value]="partnerDetail.partnerID">
 												{{partnerDetail.organizationName}}</mat-option>
 										</mat-select>
 									</td>
