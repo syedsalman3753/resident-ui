@@ -25,52 +25,29 @@ public class TestRunner {
 	static TestNG testNg;
 
 	public static void main(String[] args) throws Exception {
+		AdminTestUtil.initialize();
+		String identityGenManual=JsonUtil.JsonObjParsing(Commons.getTestData(),"identityGenManual");
+		if(identityGenManual.equals("yes")) {
+			uin=JsonUtil.JsonObjParsing(Commons.getTestData(),"UIN");
+			perpetualVid=JsonUtil.JsonObjParsing(Commons.getTestData(),"perpetualvid");
+			onetimeuseVid=JsonUtil.JsonObjParsing(Commons.getTestData(),"onetimevid");
+			temporaryVid=JsonUtil.JsonObjParsing(Commons.getTestData(),"temporaryvid");
+		}else {
+			uin = AdminTestUtil.generateUIN();
 
-		uin = AdminTestUtil.generateUIN();
-
-		if (uin != null) {
-			perpetualVid = AdminTestUtil.generateVID(uin, "perpetual");
-			onetimeuseVid = AdminTestUtil.generateVID(uin, "onetimeuse");
-			temporaryVid= AdminTestUtil.generateVID(uin, "temporary");
+			if (uin != null) {
+				perpetualVid = AdminTestUtil.generateVID(uin, "perpetual");
+				onetimeuseVid = AdminTestUtil.generateVID(uin, "onetimeuse");
+				temporaryVid= AdminTestUtil.generateVID(uin, "temporary");
+			}
 		}
 
-
-
-	/*	testNg=new TestNG();
-		testNg.setDefaultSuiteName("resident");
-		MockSMTPListener mockSMTPListener = new MockSMTPListener();
-		mockSMTPListener.run(); */
-		//		TestListenerAdapter listenerAdapter = new TestListenerAdapter();
-		//		testNg.addListener(listenerAdapter);
-		//		testNg.addListener(new ExtendReportsListeners());
-		/*	String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
-		testNg.setExcludedGroups(listExcludedGroups);
-		testNg.setTestClasses(new Class[] {
-
-
-      LoginTest.class,    
-       ViewMyHistory.class,
-      ManageMyVid.class,
-       SecureMyId.class,
-
-       TrackMyRequests.class,
-       GetPersonalisedCard.class,
-       ShareMyData.class,
-       GetMyUIN.class,
-       GetInformation.class,
-       VerifyPhoneNumberEmailID.class,
-//       BookinganAppointment.class
-		});
-//		testNg.addListener(tla);
-		testNg.run(); */
 		startTestRunner();
 	}
 
 
 
 	public static void startTestRunner() throws Exception {
-		File homeDir = null;
-		//	TestNG runner = new TestNG();
 		testNg=new TestNG();
 		testNg.setDefaultSuiteName("resident");
 		MockSMTPListener mockSMTPListener = new MockSMTPListener();
@@ -83,7 +60,7 @@ public class TestRunner {
 				ViewMyHistory.class,
 				ManageMyVid.class,
 				SecureMyId.class,
-
+				UpdateMyData.class,
 				TrackMyRequests.class,
 				GetPersonalisedCard.class,
 				ShareMyData.class,
@@ -100,20 +77,10 @@ public class TestRunner {
 
 
 		testNg.run();
-
-		//	MockSMTPListener mockSMTPListener = new MockSMTPListener();
-		//	mockSMTPListener.bTerminate = true;
-
 		System.exit(0);
 	}
 
-
-
-
-
-
-
-	public static String getGlobalResourcePath() {
+public static String getGlobalResourcePath() {
 		if (checkRunType().equalsIgnoreCase("JAR")) {
 			return new File(jarUrl).getParentFile().getAbsolutePath().toString();
 		} else if (checkRunType().equalsIgnoreCase("IDE")) {
@@ -130,7 +97,7 @@ public class TestRunner {
 		if (checkRunType().equalsIgnoreCase("JAR")) {
 			return new File(jarUrl).getParentFile().getAbsolutePath().toString()+"/resources/";
 		} else if (checkRunType().equalsIgnoreCase("IDE")) {
-			String path = System.getProperty("user.dir") + "\\src\\main\\resources";
+			String path = System.getProperty("user.dir") +  System.getProperty("path.config");
 
 			//	String path = new File(TestRunner.class.getClassLoader().getResource("").getPath()).getAbsolutePath()
 			//				.toString();
@@ -150,13 +117,13 @@ public class TestRunner {
 	public static String GetKernalFilename(){
 		String path = System.getProperty("env.user");
 		String kernalpath=null;
-	if(System.getProperty("env.user")==null) {
-		 kernalpath="Kernel.properties";
-		
-	}else {
-		 kernalpath="Kernel_"+path+".properties";
-	}
-	return kernalpath;
+		if(System.getProperty("env.user")==null) {
+			kernalpath="Kernel.properties";
+
+		}else {
+			kernalpath="Kernel_"+path+".properties";
+		}
+		return kernalpath;
 	}
 
 }

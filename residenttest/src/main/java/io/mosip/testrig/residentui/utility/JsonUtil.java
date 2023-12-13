@@ -2,6 +2,7 @@ package io.mosip.testrig.residentui.utility;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -120,7 +121,29 @@ public class JsonUtil {
         return list;
 
     }
-    
+    public static String JsonObjArrayListParsing2(String jsonIdentity, String idfield) throws Exception {
+        List<String> list = new LinkedList<String>();
+        JSONObject json = new JSONObject(jsonIdentity);
+
+        JSONObject identity = json.getJSONObject("identity");
+
+        JSONArray identityitems = identity.getJSONArray(idfield);
+       
+        
+
+        for (int i = 0, size = identityitems.length(); i < size; i++) {
+            JSONObject idItem = identityitems.getJSONObject(i);
+            String lang = idItem.getString("language");
+            String val = idItem.getString("value");
+            if (lang.equals(JsonUtil.JsonObjParsing(Commons.getTestData(),"language"))) {
+            	return val;
+            }
+        	
+        }
+		return "";
+       
+
+    }
     public static String  readJsonFileText(String document) {
         
         String jsonTxt = null;
@@ -133,12 +156,11 @@ public class JsonUtil {
     		} else if (TestRunner.checkRunType().equalsIgnoreCase("IDE")) {
 
             
-    	         f = new File(System.getProperty("user.dir") + "\\src\\main\\resources"+ "/"+document);
+    	         f = new File(System.getProperty("user.dir") +  System.getProperty("path.config")+ "/"+document);
     		}
                 if (f.exists()) {
                     InputStream is = new FileInputStream(f);
                     jsonTxt = IOUtils.toString(is, "UTF-8");
-                    System.out.println(jsonTxt);
                     logger.info("readJsonFileText");
             }
         } catch (Exception e) {

@@ -25,13 +25,10 @@ public class ViewMyHistory extends BaseClass {
 		Commons.clickWebelement(test, driver, By.id("uinservices/viewhistory"));
 
 		Commons.clickWebelement(test, driver, By.id("fromPickertext"));
-		Commons.clickWebelement(test, driver,
-				By.xpath("//*[@id=\"mat-datepicker-0\"]/div/mat-month-view/table/tbody/tr[5]/td[4]"));
+		Commons.clickWebelement(test, driver,By.xpath("//*[@id=\"mat-datepicker-0\"]/div/mat-month-view/table/tbody/tr[5]/td[4]"));
 		Commons.clickWebelement(test, driver, By.id("searchbtn"));
 		test.log(Status.INFO, "date");
-
-		// Commons.click(test,driver, By.id("serviceType"));
-		Commons.clickWebelement(test, driver, By.xpath("//button[text()='History type']"));
+		Commons.clickWebelement(test, driver, By.id("historyTypeBtn"));
 		Commons.clickWebelement(test, driver, By.id("ALL"));
 		Commons.clickWebelement(test, driver, By.id("searchbtn"));
 		// Commons.click(test,driver, By.id("serviceType"));
@@ -67,12 +64,11 @@ public class ViewMyHistory extends BaseClass {
 		
 		
 		
-		
-		Commons.clickWebelement(test, driver, By.xpath("/html/body/app-root/app-viewhistory/span/a"));
+		driver.navigate().back();
+		//Commons.clickWebelement(test, driver, By.xpath("/html/body/app-root/app-viewhistory/span/a"));
 		
 		Commons.clickWebelement(test, driver, By.id("uinservices/viewhistory"));
-		Commons.clickWebelement(test, driver, By.xpath("//button[text()='Status']"));
-//		Commons.click(test, driver, By.xpath("/html/body/app-root/app-viewhistory/span/a"));
+		Commons.clickWebelement(test, driver, By.id("statusTypeBtn"));
 		
 		Commons.click(test, driver, By.id("SUCCESS"));
 //		driver.findElement(By.id("Success")).click();

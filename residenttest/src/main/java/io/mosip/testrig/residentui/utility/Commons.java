@@ -228,7 +228,31 @@ public class Commons extends BaseClass{
 		 
 		 
 	  }
-	
+	public static void dropdown(WebDriver driver, By by,By value)
+	  {
+		logger.info("Selecting DropDown By Value " + by +value );
+		 try {  
+			 Thread.sleep(500);
+			 click(driver,by);
+			 Thread.sleep(500);
+		    click(driver,value);
+				Thread.sleep(500);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 }
+	public  static void click(WebDriver driver, By by) throws IOException, InterruptedException {
+		logger.info("Clicking " + by );
+		try {
+			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
+			Thread.sleep(500);
+			driver.findElement(by).click();
+			Thread.sleep(500);
+		} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		}
 	public static void dropdown(ExtentTest test,WebDriver driver, By by,String value)
 	  {
 		logger.info("Selecting DropDown By Value " + by +value );

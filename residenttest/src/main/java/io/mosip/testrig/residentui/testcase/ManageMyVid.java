@@ -22,7 +22,7 @@ public class ManageMyVid extends BaseClass {
 		test.log(Status.INFO, "Click on Perpetual");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.xpath("(//img[@id='download0'])[1]"));
+		Commons.click(test, driver, By.xpath("(//*[@id='download0'])[1]"));
 		test.log(Status.INFO, "Click on download");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
@@ -32,11 +32,11 @@ public class ManageMyVid extends BaseClass {
 		test.log(Status.INFO, "Click on Temporary");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.xpath("(//img[@id='download0'])[2]"));
+		Commons.click(test, driver, By.xpath("(//*[@id='download0'])[2]"));
 		test.log(Status.INFO, "Click on download");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.xpath("(//mat-icon[@id='delete0'])[2]"));
+		Commons.click(test, driver, By.xpath("(//*[@id='delete0'])[2]"));
 		test.log(Status.INFO, "Click on delete");
 		Commons.click(test, driver, By.xpath("//span[text()=' Delete ']"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
@@ -47,11 +47,11 @@ public class ManageMyVid extends BaseClass {
 		test.log(Status.INFO, "Click on OneTimeUse");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.xpath("(//img[@id='download0'])[2]"));
+		Commons.click(test, driver, By.xpath("(//*[@id='download0'])[2]"));
 		test.log(Status.INFO, "Click on download");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.xpath("(//mat-icon[@id='delete0'])[2]"));
+		Commons.click(test, driver, By.xpath("(//*[@id='delete0'])[2]"));
 		test.log(Status.INFO, "Click on delete");
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));

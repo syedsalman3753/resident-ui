@@ -9,63 +9,47 @@ import io.mosip.testrig.residentui.utility.Commons;
 import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.ResidentBaseClass;
+import io.mosip.testrig.residentui.utility.TestRunner;
 
 @Test(groups = "VPNEEI")
 public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 
-	public void VerifyEmailID() throws Exception {
-		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
-		Thread.sleep(2000);
-		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
-		Commons.click(test, driver, By.id("emailChannelBtn-button"));
-		Commons.enter(test, driver, By.id("uin"), vid);
-		Commons.switchToFrameByIndex(test, driver, 0);
-		Commons.click(test, driver, By.id("recaptcha-anchor"));
-		driver.switchTo().parentFrame();
-		Thread.sleep(3000);
-		Commons.click(test, driver, By.id("sendOtpBtn"));
-		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
-		String otp = MockSMTPListener.getOtp(10, externalemail);
-
-		Commons.enter(test, driver, By.id("otp-input"), otp);
-		Commons.click(test, driver, By.id("submitOtpBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-	}
-
+	
+	@Test(priority=0)
 	public void VerifyEmailIDWIthInvalidVid() throws IOException, InterruptedException {
 		Thread.sleep(2000);
-		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
+		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
-		Commons.enter(test, driver, By.id("uin"), data);
-		Commons.switchToFrameByIndex(test, driver, 0);
-		Commons.click(test, driver, By.id("recaptcha-anchor"));
-		driver.switchTo().parentFrame();
+		Commons.enter(test, driver, By.id("uin"), "6534906793542111");
+//		Commons.switchToFrameByIndex(test, driver, 0);
+//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+//		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 	}
-
+	@Test(priority=1)
 	public void VerifyPhoneWIthInvalidVid() throws IOException, InterruptedException {
 		Thread.sleep(2000);
-		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
+		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("phoneChannelBtn"));
-		Commons.enter(test, driver, By.id("uin"), data);
-		Commons.switchToFrameByIndex(test, driver, 0);
-		Commons.click(test, driver, By.id("recaptcha-anchor"));
-		driver.switchTo().parentFrame();
+		Commons.enter(test, driver, By.id("uin"), "6534906793542111");
+//		Commons.switchToFrameByIndex(test, driver, 0);
+//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+//		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 
 	}
-
-	public void VerifyEmailIDWIthInvalidOtp() throws Exception {
+	@Test(priority=2)
+	public void aVerifyEmailIDWIthInvalidOtp() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		Thread.sleep(2000);
-		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
+		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
-		Commons.enter(test, driver, By.id("uin"), vid);
-		Commons.switchToFrameByIndex(test, driver, 0);
-		Commons.click(test, driver, By.id("recaptcha-anchor"));
-		driver.switchTo().parentFrame();
+		Commons.enter(test, driver, By.id("uin"), TestRunner.perpetualVid);
+//		Commons.switchToFrameByIndex(test, driver, 0);
+//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+//		driver.switchTo().parentFrame();
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
@@ -75,21 +59,38 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Commons.click(test, driver, By.id("submitOtpBtn"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 	}
-
-	public void VerifyEmailIDWIthoutOtp() throws Exception {
+	@Test(priority=3)
+	public void bVerifyEmailIDWIthoutOtp() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		Thread.sleep(2000);
-		Commons.click(test, driver, By.xpath("(//*[@id='dashboardCard4'])[2]"));
+		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
-		Commons.enter(test, driver, By.id("uin"), vid);
-		Commons.switchToFrameByIndex(test, driver, 0);
-		Commons.click(test, driver, By.id("recaptcha-anchor"));
-		driver.switchTo().parentFrame();
+		Commons.enter(test, driver, By.id("uin"), TestRunner.perpetualVid);
+//		Commons.switchToFrameByIndex(test, driver, 0);
+//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+//		driver.switchTo().parentFrame();
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
 
 		Commons.click(test, driver, By.id("submitOtpBtn"));
 
+	}
+	@Test(priority=4)
+	public void VerifyEmailID() throws Exception {
+		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
+		Thread.sleep(2000);
+		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
+		Commons.click(test, driver, By.id("emailChannelBtn-button"));
+		Commons.enter(test, driver, By.id("uin"), TestRunner.perpetualVid);
+
+		Thread.sleep(3000);
+		Commons.click(test, driver, By.id("sendOtpBtn"));
+		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
+		String otp = MockSMTPListener.getOtp(10, externalemail);
+
+		Commons.enter(test, driver, By.id("otp-input"), otp);
+		Commons.click(test, driver, By.id("submitOtpBtn"));
+		Commons.click(test, driver, By.id("confirmmessagepopup"));
 	}
 }

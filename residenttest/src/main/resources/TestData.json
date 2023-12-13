@@ -13,24 +13,48 @@
 		"9VerifyPhoneNumberEmailID":"VPNEEI",
 		"10viewMyHistory":"VMH",
 		"BELOW_ARE_STATIC_KEYWORDS": "We are using this setExcludedGroups to exclude scenarios",
-		"setExcludedGroups": "GMU,VPNEEI",
-		"perpetualvid":"6534906793542960",
+		"setExcludedGroups": "GMU,UMD,GI,MMV,SMI,SMD,TMR,VMH,GPC",
+		"identityGenManual":"no",
+		"perpetualvid":"3820153059067924",
 		 "temporaryvid":"3048902169863853",
-		 "UIN":"2359064162",
+		 "UIN":"7817563598",
 		 "onetimevid":"6301483241681503",
 		 "externalemail": "Resident_AddIdentity_ValidParam_smoke_Pos@mosip.net",
 		 "tempemail1": "mosipuser@gmail.com",
 		 "tempemail": "damudar@gmail.com",
 		 "tempEID": "9154434691678886",
 		 "aid":"10001100800003920230505043751",
-		 "country": "MyCountry",
-		 "region": "Rabat",
-		 "province": "Kenitra",
-		 "city": "Kenitra",
-		 "zone": "Agdal",
 		 "postalcode": "10104",
 		 "headless": "no",
-		"langcode": [
+		 "language":"hin",
+		 "loginlang":"mul",
+		"hierarchyLevel0": [
+			{
+				"language": "eng",
+				"value": "My Country"
+			},
+			{
+				"language": "kan",
+				"value": "ನನ್ನ ದೇಶ"
+			},
+			{
+				"language": "hin",
+				"value": "मेरा देश"
+			},
+			{
+				"language": "tam",
+				"value": "English"
+			},
+			{
+				"language": "fra",
+				"value": "FranÃ§ais"
+			},
+			{
+				"language": "ara",
+				"value": "مايكونتري"
+			}
+		]
+		,"hierarchyLevel1": [
 			{
 				"language": "tam",
 				"value": "à®¤à®®à®¿à®´à¯�"
@@ -41,11 +65,11 @@
 			},
 			{
 				"language": "hin",
-				"value": "à¤¹à¤¿à¤‚à¤¦à¥€"
+				"value": "रबात"
 			},
 			{
 				"language": "eng",
-				"value": "English"
+				"value": "Kenitra"
 			},
 			{
 				"language": "fra",
@@ -53,7 +77,82 @@
 			},
 			{
 				"language": "ara",
-				"value": "Arabic"
+				"value": "الرباط"
+			}
+		],"hierarchyLevel2": [
+			{
+				"language": "tam",
+				"value": "à®¤à®®à®¿à®´à¯�"
+			},
+			{
+				"language": "kan",
+				"value": "à²•à²¨à³�à²¨à²¡"
+			},
+			{
+				"language": "hin",
+				"value": "केनिट्रा"
+			},
+			{
+				"language": "eng",
+				"value": "Rabat"
+			},
+			{
+				"language": "fra",
+				"value": "FranÃ§ais"
+			},
+			{
+				"language": "ara",
+				"value": "القنيطرة"
+			}
+		],"hierarchyLevel3": [
+			{
+				"language": "tam",
+				"value": "à®¤à®®à®¿à®´à¯�"
+			},
+			{
+				"language": "kan",
+				"value": "à²•à²¨à³�à²¨à²¡"
+			},
+			{
+				"language": "hin",
+				"value": "केनिट्रा"
+			},
+			{
+				"language": "eng",
+				"value": "Rabat"
+			},
+			{
+				"language": "fra",
+				"value": "FranÃ§ais"
+			},
+			{
+				"language": "ara",
+				"value": "القنيطرة"
+			}
+		],"hierarchyLevel4": [
+			{
+				"language": "tam",
+				"value": "à®¤à®®à®¿à®´à¯�"
+			},
+			{
+				"language": "kan",
+				"value": "à²•à²¨à³�à²¨à²¡"
+			},
+			{
+				"language": "hin",
+				"value": "अगडाल"
+			},
+			{
+				"language": "eng",
+				"value": "Agdal"
+			},
+			{
+				"language": "fra",
+				"value": "FranÃ§ais"
+			},
+			{
+				"language": "ara",
+				"value": "القنيطرة"
 			}
 		]
 	}

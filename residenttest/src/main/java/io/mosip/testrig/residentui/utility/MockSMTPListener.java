@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.utility.pojo.Root;
 
 import java.net.URI;
@@ -48,7 +49,7 @@ public class MockSMTPListener{
 				String a1="wss://smtp.";
 				//String externalurlvar="https://iam.dev3.mosip.net";
 				//String externalurlvar="https://iam.qatriple.mosip.net";
-				String externalurlvar =System.getProperty("KeyclockURL");
+				String externalurlvar =ConfigManager.getiam_keyclockurl();
 			    String a2=	externalurlvar.substring(externalurlvar.indexOf(".")+1);
 			    String a3="/mocksmtp/websocket"; 
 				  
