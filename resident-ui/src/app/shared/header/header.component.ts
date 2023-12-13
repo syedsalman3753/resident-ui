@@ -15,6 +15,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { AuthService } from 'src/app/core/services/authservice.service';
 /*import { MatMenuModule } from '@angular/material/menu';*/
 import { InteractionService } from "src/app/core/services/interaction.service";
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-header",
@@ -44,6 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sitealignment:string = localStorage.getItem('direction');
   activeUrl:string;
   agent:any = window.navigator.userAgent.toLowerCase();
+  selectedfontsize:any;
+  selectedLangData:any;
 
   constructor(
     private router: Router,
@@ -57,11 +60,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private authService: AuthService,
     private interactionService: InteractionService
+    // private fontSizeService: FontSizeService
   ) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "logOutBtn") {
         this.logoutService.logout();
       }
+      if(id === "changeLanguage"){
+        this.selectedLanguage = this.selectedLangData.nativeName;
+        localStorage.setItem("langCode", this.selectedLangData.code);
+        window.location.reload();
+      }
+      
     }) 
   }
 
@@ -126,6 +136,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       localStorage.removeItem('logOut');
     }
     this.activeUrl = window.location.hash
+    this.selectedfontsize= localStorage.getItem('selectedfontsize')
   }
 
   getNotificationInfo(){
@@ -154,7 +165,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.notificationList = response["response"]["data"];
     });
 
-    this.auditService.audit('RP-001', 'Notification section', 'RP-Notification', 'Notification section', 'User clicks on "notification" icon after logging in to UIN services');
+    this.auditService.audit('RP-001', 'Notification section', 'RP-Notification', 'Notification section', 'User clicks on "notification" icon after logging in to UIN services', '');
     this.getNotificationInfo();
   }
 
@@ -195,47 +206,84 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   zoom(item:any) {
+    localStorage.setItem("selectedfontsize", item.fontSize);
+    this.selectedfontsize= localStorage.getItem('selectedfontsize')
     if(item.fontSize === "12"){
-      if(this.agent.indexOf('firefox') > -1){
-        document.body.style["transform"] = "scale(1, .9)";
-        document.body.style["transformOrigin "] = "0 0";
-        document.body.style["margin-top"] = "-2.5%";
-      }else{
+      // if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
+      //   document.body.style["zoom"] = "100rem";
+      //   document.body.style["transform"] = "scale(1, .9)";
+      //   document.body.style["transformOrigin "] = "0 0";
+      //   document.body.style["margin-top"] = "-5.2em";
+      //   document.body.style["height"] = "100rem";
+      // }else{
         document.body.style["zoom"]= "90%";
-      }
+        // document.body.style.removeProperty('transform');
+        // document.body.style.removeProperty('transformOrigin');
+        // document.body.style.removeProperty('margin-top');
+        // document.body.style.removeProperty("height");
+      // }
     }else if(item.fontSize === "14"){
-      if(this.agent.indexOf('firefox') > -1){
-        document.body.style["transform"] = "scale(1, 1.0)";
-        document.body.style["transformOrigin "] = "0 0";
-        document.body.style["margin-top"] = "0%";
-      }else{
+      // if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
+      //   document.body.style["zoom"] = "100rem";
+      //   document.body.style["transform"] = "scale(1, 1.0)";
+      //   document.body.style["transformOrigin "] = "0 0";
+      //   document.body.style["margin-top"] = "0%";
+      //   document.body.style["height"] = "100rem";
+      // }else{
         document.body.style["zoom"]= "100%";
-      }
+        // document.body.style.removeProperty('transform');
+        // document.body.style.removeProperty('transformOrigin');
+        // document.body.style.removeProperty('margin-top');
+        // document.body.style.removeProperty("height");
+      // }
     }else if(item.fontSize === "16"){
-      if(this.agent.indexOf('firefox') > -1){
-        document.body.style["transform"] = "scale(1, 1.1)";
-        document.body.style["transformOrigin "] = "0 0";
-        document.body.style["margin-top"] = "2.1%";
-      }else{
+      // if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
+      //   document.body.style["zoom"] = "100rem";
+      //   document.body.style["transform"] = "scale(1, 1.1)";
+      //   document.body.style["transformOrigin "] = "0 0";
+      //   document.body.style["margin-top"] = "5em";
+      //   document.body.style["height"] = "100rem";
+      // }else{
         document.body.style["zoom"]= "110%";
-      }
+        // document.body.style.removeProperty('transform');
+        // document.body.style.removeProperty('transformOrigin');
+        // document.body.style.removeProperty('margin-top');
+        // document.body.style.removeProperty("height");
+      // }
     }else if(item.fontSize === "18"){
-      if(this.agent.indexOf('firefox') > -1){
-        document.body.style["transform"] = "scale(1, 1.2)";
-        document.body.style["transformOrigin "] = "0 0";
-        document.body.style["margin-top"] = "4.5%";
-      }else{
+      // if(this.agent.indexOf('firefox') > -1 || (this.router.url === "/getuin" || this.router.url === "/verify")){
+      //   document.body.style["zoom"] = "100rem";
+      //   document.body.style["transform"] = "scale(1, 1.2)";
+      //   document.body.style["transformOrigin "] = "0 0";
+      //   document.body.style["margin-top"] = "10em";
+      //   document.body.style["height"] = "100rem";
+        // document.body.style["zoom"]= "120%";
+        
+      // }else{
         document.body.style["zoom"]= "120%";
-      }
+        // document.body.style.removeProperty('transform');
+        // document.body.style.removeProperty('transformOrigin');
+        // document.body.style.removeProperty('margin-top');
+        // document.body.style.removeProperty("height");
+      // }
     }    
   }
 
-  onlanguagechange(item:any) {
-    if(item){
+  // setFontSize(size: any): void {
+  //   localStorage.setItem("selectedfontsize", size.fontSize);
+  //   this.selectedfontsize= localStorage.getItem('selectedfontsize')
+  //   this.fontSizeService.setFontSize(size.fontSize);
+  // }
+
+  onlanguagechange(item:any) {    
+    if(window.location.href.includes('/uinservices/updatedemographic')){
+      this.selectedLangData = item;
+      this.showMsgForChangeLang();
+    }else{
       this.selectedLanguage = item.nativeName;
       localStorage.setItem("langCode", item.code);
       window.location.reload();
-    }    
+    }
   }
 
   godashboard() {
@@ -257,7 +305,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   doLogout() {
-    this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services');
+    this.auditService.audit('RP-002', 'Logout', 'RP-Logout', 'Logout', 'User clicks on "logout" button after logging in to UIN services', '');
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
       data: {
@@ -328,6 +376,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     return dialogRef;
   },400)
+  }
+
+  showMsgForChangeLang(){
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: {
+        case: 'MESSAGEFORLANGCHANGE',
+        message:this.popupMessages.genericmessage.langChgWarnText ,
+        btnTxt: this.popupMessages.genericmessage.continue,
+        btnTxtCanc: this.popupMessages.genericmessage.cancel
+        
+      }
+    });
+    return dialogRef;
   }
 
   onItemSelected(item: any) {

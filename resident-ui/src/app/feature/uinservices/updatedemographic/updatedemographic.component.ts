@@ -68,7 +68,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   defaultJsonValue: any;
   newLangArr: any = [];
   perfLangArr: any = {};
-  newNotificationLanguages: any = [];
+  newNotificationLanguages: any;
   matTabLabel: string;
   matTabIndex: number = 0;
   contactTye: string = "";
@@ -97,7 +97,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   isSelectedAllAddress:boolean = true;
   fieldName:string;
   oldKeyBoradIndex:number;
-  getUserPerfLang = [];
+  getUserPerfLang = [this.langCode];
   getUserPerfLangString:string = "";
   attributeUpdateCountMaxLimit:any;
   attributeUpdateCountRemainLimit:any = {};
@@ -117,6 +117,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
+        if (this.updatingtype === "address") {
+          this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address', '');
+        }else if(this.updatingtype === "identity"){
+          this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data', '');
+        }
       } else if (id === "resend") {
         this.reGenerateOtp();
       } else if (id !== 'string' && id.type === 'otp') {
@@ -164,7 +169,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       });
 
     this.getUpdateMyDataSchema();
-    this.getUserInfo();
+    // this.getUserInfo();
     await this.getMappingData();
     const subs = this.autoLogout.currentMessageAutoLogout.subscribe(
       (message) => (this.message2 = message) //message =  {"timerFired":false}
@@ -202,6 +207,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         .getUpdateMyDataSchema('update-demographics')
         .subscribe((response) => {
           this.schema = response;
+          this.getUserInfo();
         });
     })
   
@@ -218,14 +224,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             this.getUserPerfLang.indexOf(item.language) === -1 ? this.getUserPerfLang.push(item.language) : ''
           }) 
           UpdatedemographicComponent.actualData = response["response"];
-          if (this.schema && this.userInfo) {
-            this.buildData()
-            this.isLoading = false;
-            this.getSupportingLanguages()
-          } else {
-            this.getUpdateMyDataSchema();
-            this.getUserInfo();
-          }
+          this.buildData()
+          this.getSupportingLanguages()
         } else {
           this.showErrorPopup(response['errors'])
         }
@@ -233,11 +233,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   getSupportingLanguages(){
-    let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
-    supportedLanguages.forEach(data => {
-      if(this.defaultJsonValue['languages'][data]['nativeName'] !== this.userInfo.preferredLang){
-        let newObj = { "code": data, "name": this.defaultJsonValue['languages'][data]['nativeName'] }
-        this.newNotificationLanguages.push(newObj)
+    this.dataStorageService.getPreferredLangs(this.langCode).subscribe((response) =>{
+      if(response['response']){
+        this.newNotificationLanguages = response['response'].values
       }
     })
   }
@@ -272,22 +270,23 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           if(schema.controlType === "textbox"){
             if(typeof self.userInfo[schema.attributeName] === "string"){
               this.userInputValues[schema.attributeName] = "";
-              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count,confIndex:count + 1 }
-              count++
+              this.buildJSONData[schema.attributeName] = {value:self.userInfo[schema.attributeName],index:count }
               count++
             }else{
               this.userInputValues[schema.attributeName] = {};
-              this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
-                item.index = count
-                count++
-                this.userInputValues[schema.attributeName][item.language] = '';
-                return item
-              })
-              this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
-                item.mobileIndex = count
-                count++
-                return item
-              })
+              if(this.userInfo[schema.attributeName]){
+                this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
+                  item.index = count
+                  count++
+                  this.userInputValues[schema.attributeName][item.language] = '';
+                  return item
+                })
+                 this.buildJSONData[schema.attributeName] = self.userInfo[schema.attributeName].map(item =>{
+                  item.mobileIndex = count
+                  count++
+                  return item
+                })
+              }
             }
           }else{
             this.buildJSONData[schema.attributeName] = count
@@ -363,7 +362,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   previewBtn(issue: any) {
     if (issue === "address") {
-      this.auditService.audit('RP-028', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my address');
       this.changedBuildData(this.userInfoAddressClone);
       this.finalUserCloneData = this.userInfoAddressClone;
       this.uploadedFiles = this.filesPOA;
@@ -371,7 +369,6 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.changedBuildData(this.userInfoClone);
       this.finalUserCloneData = this.userInfoClone;
       this.uploadedFiles = this.files;
-      this.auditService.audit('RP-027', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update my data');
     }
     this.showPreviewPage = true;
     this.updatingtype = issue;
@@ -455,11 +452,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     if (id === "email") {
       this.userIdPhone = "";
       this.confirmPhoneContact = "";
-      this.auditService.audit('RP-029', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update email Id');
+      this.auditService.audit('RP-029', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update email Id', '');
     } else if (id === "phone") {
       this.userIdEmail = "";
       this.confirmEmailContact = "";
-      this.auditService.audit('RP-030', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update phone number');
+      this.auditService.audit('RP-030', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "Send OTP" button in update phone number', '');
     }
 
     this.generateOtp()
@@ -524,18 +521,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       }
     }
     this.dataStorageService.verifyUpdateData(request).subscribe(response => {
+      this.sendOtpDisable = true;
       if (response.body['response']) {
         let eventId = response.headers.get("eventid")
         this.message = this.contactTye === 'email' ? this.popupMessages.genericmessage.updateMyData.emailSuccessMsg.replace("$eventId", eventId) : this.popupMessages.genericmessage.updateMyData.phoneNumberSuccessMsg.replace("$eventId", eventId);
         this.isLoading = false;
         this.showMessage(this.message, eventId);
-        this.sendOtpDisable = true;
         this.contactTye = "";
         this.router.navigate(['uinservices/dashboard']);
       } else {
         this.isLoading = false;
         this.showErrorPopup(response.body["errors"]);
-        this.sendOtpDisable = true;
         this.contactTye = "";
       }
     }, error => {
@@ -712,37 +708,17 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureContactValue(event: any, formControlName: any) {
-    this.sendOtpDisable = true
+    if(event.target.value.length){
+      this.sendOtpDisable = false;
+    }else{
+      this.sendOtpDisable = true;
+    }
     this.userId = event.target.value.trim();
     this.contactTye = formControlName;
-    if (formControlName === "email" && this.userId) {
-      this.userIdEmail = this.userId.toLowerCase();
-      this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-    } else if (formControlName === "phone" && this.userId) {
-      this.userIdPhone = this.userId;
-      this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
-    }
-    if (this[formControlName]) {
-      if (formControlName === "email") {
-        this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
-      } else {
-        this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
-      }
-    }
-  }
-
-  captureConfirmValue(event: any, formControlName: any) {
-    this.sendOtpDisable = true
-    this[formControlName] = event.target.value.trim();
-    this.contactTye = formControlName;
-    if (formControlName === "email" && this[formControlName]) {
-      this.confirmEmailContact = event.target.value.toLowerCase();
-      this.showNotMatchedMessageEmail = this.userIdEmail === this.confirmEmailContact ? false : true;
-      this.sendOtpDisable = this.userIdEmail === this.confirmEmailContact ? false : true;
-    } else if (formControlName === "phone" && this[formControlName]) {
-      this.confirmPhoneContact = event.target.value;
-      this.showNotMatchedMessagePhone = this.userIdPhone === this.confirmPhoneContact ? false : true;
-      this.sendOtpDisable = this.userIdPhone === this.confirmPhoneContact ? false : true;
+    if(formControlName === "email"){
+      this.userIdEmail = this.userId
+    }else{
+      this.userIdPhone = this.userId
     }
   }
 
@@ -823,7 +799,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   updatenotificationLanguage() {
-    this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language');
+    this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language', '');
     const request = {
       "id": this.appConfigService.getConfig()["resident.updateuin.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],

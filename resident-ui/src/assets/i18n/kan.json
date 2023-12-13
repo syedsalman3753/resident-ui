@@ -5,11 +5,12 @@
             "displaydescription": "ನಿವಾಸಿಗಳು ತಮ್ಮ ಮಾಹಿತಿಯನ್ನು ವೀಕ್ಷಿಸಲು, ನವೀಕರಿಸಲು, ನಿರ್ವಹಿಸಲು ಅಥವಾ ಹಂಚಲು ಈ ಸೇವೆಗಳನ್ನು ಬಳಸಬಹುದು. ಅನುಕೂಲವಾಗಿ, ನೇರವಾಗಿ ತಿದ್ದಲು ಬೇಕಾದಷ್ಟು ಸೇವೆಗಳನ್ನು ಬೇಕಾಗಿ ಪಡೆದುಕೊಳ್ಳುತ್ತವೆ.",
             "availableServicesDescription": "ಈ ಮೇಲ್ಮೆ ಸೇವೆಗಳು ಹೀಗಿವೆ:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "ನನ್ನ ಇತಿಹಾಸವನ್ನು ವೀಕ್ಷಿಸಿ",
@@ -65,11 +66,12 @@
         {
             "displayName": "ಮಾಹಿತಿ ಪಡೆಯಿರಿ",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "ಹುಡುಕಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ",
             "subMenus": [
                 {
@@ -89,11 +91,12 @@
         {
             "displayName": "ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಕಾಯ್ದಿರಿಸುವಿಕೆ",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "ಹೊಸ ದಾಖಲಾತಿಗಾಗಿ ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ",
@@ -106,11 +109,12 @@
         {
             "displayName": "ನನ್ನ UIN ಪಡೆಯಿರಿ",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "ನಿಮ್ಮ UIN ಕಾರ್ಡ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಅಥವಾ ನಿಮ್ಮ UIN ಸ್ಥಿತಿಯನ್ನು ತಿಳಿಯಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ"
@@ -120,11 +124,12 @@
         {
             "displayName": "ಫೋನ್ ಸಂಖ್ಯೆ/ ಇಮೇಲ್ ಐಡಿಯನ್ನು ಪರಿಶೀಲಿಸಿ",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ/ ಇಮೇಲ್ ಐಡಿಯನ್ನು ಪರಿಶೀಲಿಸಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ"
@@ -189,7 +194,9 @@
         "helpText": "ನಿಮ್ಮ ಜಿಯೋ ಸ್ಥಾನಾಂತರಿಕ ಪರಿಬಳಕೆಯ ಪ್ರಕಾರದ ನೇಮಕಾತಿ ಕೇಂದ್ರಗಳು",
         "noRegCentersNearby": "ಹತ್ತಿರದ ನೇಮಕಾತಿ ಕೇಂದ್ರಗಳು ಕಂಡುಬಂದಿಲ್ಲ. ನೇಮಕಾತಿ ಕೇಂದ್ರಗಳನ್ನು ಹುಡುಕಲು ಮೂಲಕ ಪಠ್ಯವನ್ನು ಮುಖ್ಯವಾಗಿ ನಮೂದಿಸಿ.",
         "noRegCenters": "ನೇಮಕಾತಿ ಕೇಂದ್ರಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
-        "warnMessage": "ಹುಡುಕಲು ಅಕ್ಷರಗಳು / ಸಂಖ್ಯೆಗಳನ್ನು ನಮೂದಿಸಿ."
+        "warnMessage": "ಹುಡುಕಲು ಅಕ್ಷರಗಳು / ಸಂಖ್ಯೆಗಳನ್ನು ನಮೂದಿಸಿ.",
+        "or":"ಅಥವಾ",
+        "showMapBtnLabel":"ನಕ್ಷೆಯಲ್ಲಿ ರೆಗ್ ಸೆಂಟರ್ ತೋರಿಸಿ"
     },
     "downloadDocument": {
         "downloadbutton": "ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ"
@@ -524,6 +531,9 @@
         "relogin": "ಮರುಪ್ರವೇಶಿಸಲು.",
         "login": "ಲಾಗಿನ್ ಮಾಡಲು.",
         "click":"ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ.",
+        "cancel":"ರದ್ದುಮಾಡು",
+        "continue":"ಮುಂದುವರಿಸಿ",
+        "langChgWarnText":"ಮುಂದುವರಿಸು ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ, ನೀವು ನಮೂದಿಸಿದ ಡೇಟಾ ಕಳೆದುಹೋಗುತ್ತದೆ.",
         "toSeeMoreDetails":"ಹೆಚ್ಚಿನ ವಿವರಗಳನ್ನು ನೋಡಲು.",
         "otpPopupDescription": "ಒನ್ ಟೈಮ್ ಪಾಸ್‌ವರ್ಡ್ (OTP) ಈ ಸಂಖ್ಯೆಗೆ ಕಳುಹಿಸಲಾಗಿದೆ:",
         "loginSuccessfully": "ಪ್ರಿಯ ನಿವಾಸಿ, ನೀವು ಯಶಸ್ವಿಯಾಗಿ ಲಾಗಿನ್ ಮಾಡಿದ್ದೀರಿ",
@@ -597,8 +607,8 @@
             "sharedSuccessfully": "ನೀವು ಆಯ್ದ ಮಾಹಿತಿಯನ್ನು ಈವೆಂಟ್ ID: $eventId ಗೆ ಆಯ್ಕೆಮಾಡಿದ ಪಾರ್ಟ್ನರ್ ಜೊತೆಗೆ ಯಶಸ್ವಿಯಾಗಿ ಹಂಚಿಕೆ ಮಾಡಲಾಗಿದೆ."
         },
         "verifyChannel": {
-            "warningMsgForEmail": "ನಿಮ್ಮ ಇಮೇಲ್ ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
-            "warningMsgForPhone": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
+            "warningMsgForEmail": "ನಿಮ್ಮ ಇಮೇಲ್ ಐಡಿ: $userID ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
+            "warningMsgForPhone": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ: $userID ಅನ್ನು ಈಗಾಗಲೇ ಪರಿಶೀಲಿಸಲಾಗಿದೆ.",
             "emailSuccess": "ನಿಮ್ಮ ಇಮೇಲ್ ID: $channel ವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ.",
             "phoneSuccess": "ನಿಮ್ಮ ಫೋನ್ ಸಂಖ್ಯೆ: $channel ವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ. ಈವೆಂಟ್ ID: $eventId ಗೆ."
         },
@@ -658,7 +668,7 @@
             "identity/preferredLang": "ಅಮಾನ್ಯ ಆದರಿಂದಾಗಿ ಪ್ರಾಧಾನ್ಯ ಭಾಷೆಯನ್ನು ನೀಡಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಮಾನ್ಯ ಮಾಹಿತಿಯನ್ನು ನೀಡಿ."
         },
         "RES-SER-459": "ನಮೂದಿಸಿದ EID ಲಾಗಿನ್ ಆಗಿರುವ UIN/VID ನೊಂದಿಗೆ ಸಂಬಂಧಿಸಿಲ್ಲ.",
-        "RES-SER-412": "ಅಮಾನ್ಯ UIN/VID ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಮಾನ್ಯ UIN/VID ನಮೂದಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
+        "RES-SER-412": "API ಸಂಪನ್ಮೂಲವನ್ನು ಪ್ರವೇಶಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.",
         "RES-SER-405": "ಅನುಮತಿತರವಾದ VIDs ಯನ್ನು ಮಾಡಲಾಗಿದೆ. ಹೊಸದನ್ನು ರದ್ದುಗೊಳಿಸಲು ಹಿಂದಿರುಗಿ VID ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ.",
         "RES-SER-511": "ನಮೂದಿಸಿದ EID ಲಾಗಿನ್ ಆಗಿರುವ UIN/VID ನೊಂದಿಗೆ ಸಂಬಂಧಿಸಿಲ್ಲ.",
         "RES-SER-449": "ಅಮಾನ್ಯ UIN/AID/VID ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಮಾನ್ಯ UIN/AID/VID ನಮೂದಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
@@ -677,7 +687,9 @@
         "RES-SER-514": "ಅಮಾನ್ಯ UIN/VID ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಮಾನ್ಯ UIN/VID ನಮೂದಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
         "IDA-MLC-019": "otp-ಇಮೇಲ್ ಪ್ರಮಾಣೀಕರಣ ಪ್ರಕಾರ UIN ಗೆ ಲಾಕ್ ಆಗಿದೆ.",
         "RES-SER-522": "ಅಮಾನ್ಯ UIN/VID ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಮಾನ್ಯ UIN/VID ನಮೂದಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
-        "RES_SER_509": "ಕಾರ್ಡ್ ಡೌನ್ಲೋಡ್ ಗೊಂಡಿಲ್ಲ.",
-        "RES-SER-418": "ಅಮಾನ್ಯ UIN/AID/VID ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಮಾನ್ಯ UIN/AID/VID ನಮೂದಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ."
+        "RES-SER-509": "ಕಾರ್ಡ್ ಡೌನ್ಲೋಡ್ ಗೊಂಡಿಲ್ಲ.",
+        "RES-SER-418": "ಅಮಾನ್ಯ UIN/AID/VID ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಮಾನ್ಯ UIN/AID/VID ನಮೂದಿಸಿ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
+        "RES-OTP-006": "ಅಮಾನ್ಯ OTP ನಮೂದಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಮಾನ್ಯ OTP ನೊಂದಿಗೆ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.",
+        "RES-SER-406": "API ಸಂಪನ್ಮೂಲವನ್ನು ಪ್ರವೇಶಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ."
     }
 }

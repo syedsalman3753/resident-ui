@@ -8,6 +8,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from "src/app/core/services/audit.service";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-verify",
@@ -60,6 +61,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private auditService: AuditService, 
     private breakpointObserver: BreakpointObserver
+    // private fontSizeService: FontSizeService
   ) {
     this.appConfigService = this.appConfigService.getConfig();
     this.breakpointObserver.observe([
@@ -79,11 +81,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
           this.deviceSize = "Small";
         }
         if (result.breakpoints[Breakpoints.Medium]) {
-          this.width = "60%";
+          this.width = "80%";
           this.deviceSize = "Medium";
         }
         if (result.breakpoints[Breakpoints.Large]) {
-          this.width = "55%";
+          this.width = "64%";
           this.deviceSize = "Large";
         }
         if (result.breakpoints[Breakpoints.XLarge]) {
@@ -106,7 +108,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
       });
     setTimeout(() => {
       self.siteKey = self.appConfigService["mosip.resident.captcha.sitekey"];
-      self.captchaEnable = self.appConfigService["mosip.resident.captcha.enable"]; 
+      self.captchaEnable = JSON.parse(self.appConfigService["mosip.resident.captcha.enable"]); 
       self.vidLength = self.appConfigService["mosip.kernel.vid.length"];
       self.uinLength = self.appConfigService["mosip.kernel.uin.length"];
       self.aidLength = self.appConfigService["mosip.kernel.rid.length"];
@@ -195,6 +197,15 @@ export class VerifyComponent implements OnInit, OnDestroy {
     }
   }
 
+  isNumberKey(event){
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   setOtpTime() {
     this.otpTimeMinutes = this.appConfigService['mosip.kernel.otp.expiry-time']/60;
     this.interval = setInterval(() => {
@@ -222,12 +233,12 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   sendOtpBtn() {
-    this.auditService.audit('RP-037', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on "send OTP" button on verify phone number/email Id page');
+    this.auditService.audit('RP-037', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on "send OTP" button on verify phone number/email Id page', this.individualId);
     this.isVerifiedPhoneNumEmailId()
   }
 
   resendOtp() {
-    this.auditService.audit('RP-039', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on "resend OTP" button on verify phone number/email Id page');
+    this.auditService.audit('RP-039', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on "resend OTP" button on verify phone number/email Id page', this.individualId);
     clearInterval(this.interval)
     this.otpTimeSeconds = "00"
     this.otpTimeMinutes = this.appConfigService['mosip.kernel.otp.expiry-time']/60
@@ -237,7 +248,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   submitOtp() {
-    this.auditService.audit('RP-038', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on the "submit button" on verify phone number/email Id page');
+    this.auditService.audit('RP-038', 'Verify phone number/email ID', 'RP-Verify phone number/email ID', 'Verify phone number/email ID', 'User clicks on the "submit button" on verify phone number/email Id page', this.individualId);
     this.verifyOTP()
   
   }
@@ -286,7 +297,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.dataStorageService.isVerified(this.otpChannel[0], this.individualId).subscribe(response => {
       if (!response["errors"]) {
         if (response["response"].verificationStatus) {
-          this.showMessageWarning(JSON.stringify(response["response"]));
+          this.showMessageWarning(response["response"]);
           this.router.navigate(["dashboard"]);
         } else {
           this.generateOTP()
@@ -329,7 +340,6 @@ export class VerifyComponent implements OnInit, OnDestroy {
   }
 
   showMessage(message: string,eventId:any) {
-    console.log(this.channelType)
     if (this.otpChannel[0] === "PHONE") {
       this.message = this.popupMessages.genericmessage.verifyChannel.phoneSuccess.replace("$channel", this.channelType).replace("$eventId",eventId)
     } else {
@@ -352,11 +362,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
     return dialogRef;
   }
 
-  showMessageWarning(message: string) {
+  showMessageWarning(message:any) {
     if (this.otpChannel[0] === "PHONE") {
-      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForPhone
+      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForPhone.replace("$userID", message.maskedUserId)
     } else {
-      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForEmail
+      this.message = this.popupMessages.genericmessage.verifyChannel.warningMsgForEmail.replace("$userID", message.maskedUserId)
     }
 
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -428,9 +438,11 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.displaySeconds = "00"
   }
 
+  // get fontSize(): number {
+  //   return this.fontSizeService.fontSize;
+  // }
+
   ngOnDestroy(): void {
   }
-  
-
  
 }

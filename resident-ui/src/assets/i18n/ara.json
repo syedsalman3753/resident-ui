@@ -5,11 +5,12 @@
             "displaydescription": "يمكن للمقيمين استخدام هذه الخدمات لعرض وتحديث وإدارة أو مشاركة بياناتهم. يمكنهم أيضًا الإبلاغ عن أي مشكلة في حالة وجود شكوى.",
             "availableServicesDescription": "فيما يلي الخدمات المتاحة:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "عرض تاريخي الخاص بي",
@@ -65,11 +66,12 @@
         {
             "displayName": "الحصول على معلومات",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "انقر هنا للبحث عن",
             "subMenus": [
                 {
@@ -89,11 +91,12 @@
         {
             "displayName": "حجز موعد",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "انقر هنا للتسجيل الجديد",
@@ -106,11 +109,12 @@
         {
             "displayName": "الحصول على UIN الخاص بي",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "انقر هنا لتنزيل بطاقة UIN الخاصة بك أو معرفة حالة UIN الخاصة بك"
@@ -120,11 +124,12 @@
         {
             "displayName": "تحقق من رقم الهاتف / البريد الإلكتروني",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "انقر هنا للتحقق من رقم هاتفك / عنوان بريدك الإلكتروني"
@@ -189,7 +194,9 @@
         "helpText": "مراكز التسجيل بناءً على موقعك الجغرافي",
         "noRegCentersNearby": "لم يتم العثور على مراكز تسجيل قريبة. يُرجى إدخال النص يدويًا للبحث عن مراكز التسجيل.",
         "noRegCenters": "لم يتم العثور على مركز تسجيل.",
-        "warnMessage": "يرجى إدخال أحرف / أرقام للبحث."
+        "warnMessage": "يرجى إدخال أحرف / أرقام للبحث.",
+        "or":"أو",
+        "showMapBtnLabel":"عرض مركز ريج على الخريطة"
     },
     "downloadDocument": {
         "downloadbutton": "تحميل"
@@ -525,6 +532,9 @@
         "relogin": " لتسجيل الدخول مرة أخرى.",
         "login": " لتسجيل الدخول.",
         "click":"انقر هنا.",
+        "cancel":"يلغي",
+        "continue":"يكمل",
+        "langChgWarnText":"عند الضغط على متابعة، سيتم فقدان البيانات التي قمت بإدخالها.",
         "toSeeMoreDetails":"لرؤية المزيد من التفاصيل",
         "otpPopupDescription": "تم إرسال رمز المرور لمرة واحدة (OTP) إلى",
         "loginSuccessfully": "عزيزي المقيم ، تم تسجيل دخولك بنجاح",
@@ -597,8 +607,8 @@
             "sharedSuccessfully": "تمت مشاركة البيانات التي اخترتها بنجاح مع الشريك المحدد بناءً على رقم الحدث: $eventId"
         },
         "verifyChannel": {
-            "warningMsgForEmail": "تم التحقق بالفعل من بريدك الإلكتروني.",
-            "warningMsgForPhone": "تم التحقق بالفعل من رقم هاتفك.",
+            "warningMsgForEmail": "معرف البريد الإلكتروني الخاص بك: $userID تم التحقق منه بالفعل.",
+            "warningMsgForPhone": "رقم هاتفك: $userID تم التحقق منه بالفعل.",
             "emailSuccess": "تم التحقق بنجاح من عنوان البريد الإلكتروني الخاص بك: $channel ضد رقم الحدث: $eventId.",
             "phoneSuccess": "تم التحقق بنجاح من رقم هاتفك: $channel ضد رقم الحدث: $eventId."
         },
@@ -658,7 +668,7 @@
             "identity/preferredLang": "اللغة المفضلة غير صالحة. يرجى إدخال بيانات صالحة."
         },
         "RES-SER-459": "الـ EID المُدخَل غير مرتبط بالـ UIN/ VID المستخدم لتسجيل الدخول.",
-        "RES-SER-412": "تم إدخال UIN/ VID غير صالح. يرجى إدخال UIN/ VID صالح والمحاولة مرة أخرى.",
+        "RES-SER-412": "غير قادر على الوصول إلى موارد API.",
         "RES-SER-405": "الحد الأقصى المسموح به من الـ VIDs نشط. يجب إلغاء تفعيل VID(s) لإنشاء واحد جديد.",
         "RES-SER-511": "الـ EID المُدخَل غير مرتبط بالـ UIN/ VID المستخدم لتسجيل الدخول.",
         "RES-SER-449": "تم إدخال UIN/ AID/ VID غير صالح. يرجى إدخال UIN/ AID/ VID صالح والمحاولة مرة أخرى.",
@@ -677,7 +687,9 @@
         "RES-SER-514": "تم إدخال UIN/VID غير صالح. يرجى إدخال UIN/VID صالح والمحاولة مرة أخرى.",
         "IDA-MLC-019": "نوع مصادقة otp-email مقفل للـ UIN",
         "RES-SER-522": "تم إدخال UIN/VID غير صالح. يرجى إدخال UIN/VID صالح والمحاولة مرة أخرى.",
-        "RES_SER_509": "البطاقة غير جاهزة للتنزيل.",
-        "RES-SER-418": "تم إدخال UIN/ AID/ VID غير صالح. يرجى إدخال UIN/ AID/ VID صالح والمحاولة مرة أخرى."
+        "RES-SER-509": "البطاقة غير جاهزة للتنزيل.",
+        "RES-SER-418": "تم إدخال UIN/ AID/ VID غير صالح. يرجى إدخال UIN/ AID/ VID صالح والمحاولة مرة أخرى.",
+        "RES-OTP-006": "تم إدخال رمز OTP غير صالح. يرجى المحاولة مرة أخرى باستخدام رمز OTP صالح.",
+        "RES-SER-406": "غير قادر على الوصول إلى موارد API."
     }
 }

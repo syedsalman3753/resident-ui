@@ -1,51 +1,46 @@
 package io.mosip.testrig.residentui.utility;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.net.http.WebSocket.Listener;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CompletionStage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.testng.Reporter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+import io.mosip.testrig.residentui.fw.util.AdminTestUtil;
 
 import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.utility.pojo.Root;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.WebSocket;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.CountDownLatch;
 
+public class MockSMTPListener {
+	private static Logger logger = Logger.getLogger(MockSMTPListener.class);
 
-public class MockSMTPListener{
-	
-	//static HashMap emailNotificationMapS=new HashMap<Object, Object>();
-	
-	 
-	public static Map<Object, Object> emailNotificationMapS = Collections.synchronizedMap(new HashMap<Object, Object>()); 
+	public static Map<Object, Object> emailNotificationMapS = Collections
+			.synchronizedMap(new HashMap<Object, Object>());
+
 	public static Boolean bTerminate = false;
+	
+	public MockSMTPListener() {
+		
+	}
 
 	public void run() {
 		try {
+
 				String a1="wss://smtp.";
 				//String externalurlvar="https://iam.dev3.mosip.net";
 				//String externalurlvar="https://iam.qatriple.mosip.net";
@@ -58,54 +53,57 @@ public class MockSMTPListener{
 					.newWebSocketBuilder()
 					.buildAsync(URI.create(a1+a2+a3), new WebSocketClient())
 					.join();
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 
 	}
 
 	private static class WebSocketClient implements WebSocket.Listener {
-		Long count=(long) 00;
-		Root root =new Root();
-		public WebSocketClient() {  
+		Long count = (long) 00;
+		Root root = new Root();
+
+		public WebSocketClient() {
+			return;
 
 		}
 
 		@Override
 		public void onOpen(WebSocket webSocket) {
-			System.out.println("onOpen using subprotocol " + webSocket.getSubprotocol());
+			logger.info("onOpen using subprotocol " + webSocket.getSubprotocol());
 			WebSocket.Listener.super.onOpen(webSocket);
 		}
 
-
 		@Override
 		public CompletionStage<?> onClose(WebSocket webSocket, int statusCode, String reason) {
-			// TODO Auto-generated method stub
 			return Listener.super.onClose(webSocket, statusCode, reason);
 		}
 
 		@Override
 		public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
-			if(bTerminate) {
-				System.out.println(emailNotificationMapS);
-				System.out.println("End Closure of listner " );
+			if (bTerminate) {
+				logger.info(emailNotificationMapS);
+				logger.info("End Closure of listner ");
 				onClose(webSocket, 0, "After suite invoked closing");
 			}
-			try {       
+			try {
 				ObjectMapper om = new ObjectMapper();
 
 				root = om.readValue(data.toString(), Root.class);
-				emailNotificationMapS.put(root.to.value.get(0).address,root.html);
-				System.out.println(" After adding to emailNotificationMap key = " + root.to.value.get(0).address
-						+ " data " + data + " root " + root );
-			} catch (JsonMappingException e) {
+				if (!parseOtp(root.html).isEmpty() || !parseAdditionalReqId(root.html).isEmpty()) {
+					emailNotificationMapS.put(root.to.value.get(0).address, root.html);
+					logger.info(" After adding to emailNotificationMap key = " + root.to.value.get(0).address + " data "
+							+ data + " root " + root);
+				}
 
-				e.printStackTrace();
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-			} 	catch(JSONException e)
-			{
-				e.printStackTrace();
+				else {
+					logger.info(" Skip adding to emailNotificationMap key = " + root.to.value.get(0).address + " data "
+							+ data + " root " + root);
+				}
+			} catch (Exception e) {
+
+				logger.error(e.getMessage());
 			}
 
 			return WebSocket.Listener.super.onText(webSocket, data, last);
@@ -114,76 +112,111 @@ public class MockSMTPListener{
 		@Override
 		public void onError(WebSocket webSocket, Throwable error) {
 
-			System.out.println("Bad day! " + webSocket.toString());
-			error.printStackTrace();
+			logger.info("Bad day! " + webSocket.toString());
+			logger.error(error.getMessage());
 			WebSocket.Listener.super.onError(webSocket, error);
 		}
 	}
-	
-	public static String getOtp(int repeatCounter, String emailId){
+
+	public static String getOtp(String emailId) {
+		int otpExpTime = AdminTestUtil.getOtpExpTimeFromActuator();
+		int otpCheckLoopCount = (otpExpTime * 1000) / AdminTestUtil.OTP_CHECK_INTERVAL;
+
 		int counter = 0;
-		
-		//HashMap m=new HashMap<Object, Object>();
+
 		String otp = "";
-		while (counter < repeatCounter) {
-		//	m= emailNotificationMap;
-			if(emailNotificationMapS.get(emailId)!=null) {
-				String html=(String) emailNotificationMapS.get(emailId);
-				//as we alredy consumed notification removed from map
-				emailNotificationMapS.remove(emailId);	
+		if (ConfigManager.getUsePreConfiguredOtp().equalsIgnoreCase(GlobalConstants.TRUE_STRING)) {
+			return ConfigManager.getPreConfiguredOtp();
+		}
+		while (counter < otpCheckLoopCount) {
+			if (emailNotificationMapS.get(emailId) != null) {
+				String html = (String) emailNotificationMapS.get(emailId);
+				emailNotificationMapS.remove(emailId);
 				otp = parseOtp(html);
-				if (otp != null && otp.length()>0) {
-//					Got the required OTP Ignore in between notification which doesn't have OTP
+				if (otp != null && otp.length() > 0) {
+					logger.info("Found the OTP = " + otp);
 					return otp;
+				} else {
+					logger.info("html Message = " + html + " Email = " + emailId);
 				}
-				
+
 			}
-			System.out.println("*******Checking the email for OTP...*******");
+			logger.info("*******Checking the email for OTP...*******");
 			counter++;
 			try {
-				System.out.println("Not received Otp yet, waiting for 10 Sec");
-				Thread.sleep(10000);
+				logger.info("Not received Otp yet, waiting for 10 Sec");
+				Thread.sleep(AdminTestUtil.OTP_CHECK_INTERVAL);
 			} catch (InterruptedException e) {
-				System.out.println(e.getMessage());
+				logger.info(e.getMessage());
+				Thread.currentThread().interrupt();
 			}
-			
+
 		}
-		System.out.println("OTP not found even after " + repeatCounter + " retries");
+		logger.info("OTP not found even after " + otpCheckLoopCount + " retries");
 		return otp;
 	}
+
+	public static String getAdditionalReqId(String emailId) {
+
+		int counter = 0;
+
+		String additionalRequestId = "";
+
+		int additionalRequestIdLoopCount =10;
+		
+		while (counter < additionalRequestIdLoopCount ) {
+			if (emailNotificationMapS.get(emailId) != null) {
+				String html = (String) emailNotificationMapS.get(emailId);
+				emailNotificationMapS.remove(emailId);
+				additionalRequestId = parseAdditionalReqId(html);
+				if (additionalRequestId != null && additionalRequestId.length() > 0) {
+					logger.info("Found the additionalRequestId = " + additionalRequestId);
+					return additionalRequestId;
+				} else {
+					logger.info("html Message = " + html + " Email = " + emailId);
+				}
+
+			}
+			logger.info("*******Checking the email for additionalRequestId...*******");
+			counter++;
+			try {
+				logger.info("Not received additionalRequestId yet, waiting for 10 Sec");
+				Thread.sleep(AdminTestUtil.OTP_CHECK_INTERVAL);
+			} catch (InterruptedException e) {
+				logger.info(e.getMessage());
+				Thread.currentThread().interrupt();
+			}
+
+		}
+		logger.info("OTP not found even after " + additionalRequestIdLoopCount + " retries");
+		return additionalRequestId;
+	}
 	
-	public static String parseOtp(String message){
-		
-		// To Do Key entry found add parsing logic for OTP
-		
-//		Dear FR OTP for UIN XXXXXXXX02 is 111111 and is valid for 3 minutes. (Generated on 16-03-2023 at 15:43:39 Hrs)
-//
-//		عزيزي $ name OTP لـ $ idvidType $ idvid هو $ otp وهو صالح لـ $ validTime دقيقة. (تم إنشاؤه في $ date في $ time Hrs)
-//
-//		Cher $name_fra, OTP pour UIN XXXXXXXX02 est 111111 et est valide pour 3 minutes. (Généré le 16-03-2023 à 15:43:39 Hrs)
-		
-//		"Dear FR OTP for UIN XXXXXXXX02 is 111111 and is valid for 3 minutes. (Generated on 16-03-2023 at 15:43:39 Hrs)\r\n"
-//		+ "\r\n"
-//		+ "عزيزي $ name OTP لـ $ idvidType $ idvid هو $ 101010 وهو صالح لـ $ validTime دقيقة. (تم إنشاؤه في $ date في $ time Hrs)\r\n"
-//		+ "\r\n"
-//		+ "Cher $name_fra, OTP pour UIN XXXXXXXX02 est 123456 et est valide pour 3 minutes. (Généré le 16-03-2023 à 15:43:39 Hrs)";
-		
-		//find any 6 digit number
+	public static String parseOtp(String message) {
+
 		Pattern mPattern = Pattern.compile("(|^)\\s\\d{6}\\s");
 		String otp = "";
-		if(message!=null) {
-		    Matcher mMatcher = mPattern.matcher(message);
-		    if(mMatcher.find()) {
-		        otp = mMatcher.group(0);
-		        otp = otp.trim();
-		        System.out.println("Extracted OTP: "+ otp+ " message : "+ message);
-		    }else {
-		        //something went wrong
-		    	System.out.println("Failed to extract the OTP!! "+ "message : " + message);
-		    	
-		    }
+		if (message != null) {
+			Matcher mMatcher = mPattern.matcher(message);
+			if (mMatcher.find()) {
+				otp = mMatcher.group(0);
+				otp = otp.trim();
+				logger.info("Extracted OTP: " + otp + " message : " + message);
+			} else {
+				logger.info("Failed to extract the OTP!! " + "message : " + message);
+
+			}
 		}
 		return otp;
 	}
-	
+
+	public static String parseAdditionalReqId(String message) {
+		String additionalReqId = StringUtils.substringBetween(message, "AdditionalInfoRequestId",
+				"-BIOMETRIC_CORRECTION-1");
+		if (additionalReqId == null)
+			return "";
+		else
+			return additionalReqId;
+	}
+
 }

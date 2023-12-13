@@ -9,6 +9,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: 'app-getuin',
@@ -55,8 +56,9 @@ export class GetuinComponent implements OnInit {
     private dataStorageService: DataStorageService,
     private appConfigService: AppConfigService,
     private dialog: MatDialog,
-    private auditService: AuditService, 
-    private breakPointService: BreakpointService
+    private auditService: AuditService,
+    private breakPointService: BreakpointService,
+    // private fontSizeService: FontSizeService
   ) {
     this.translateService.use(localStorage.getItem("langCode"));
     this.appConfigService.getConfig();
@@ -84,7 +86,7 @@ export class GetuinComponent implements OnInit {
   getConfigData(){
     if(localStorage.getItem('isDataLoaded') === 'true'){
       this.siteKey = this.appConfigService.getConfig()["mosip.resident.captcha.sitekey"];
-      this.captchaEnable = this.appConfigService.getConfig()["mosip.resident.captcha.enable"];
+      this.captchaEnable = JSON.parse(this.appConfigService.getConfig()["mosip.resident.captcha.enable"]);
       this.vidLength = this.appConfigService.getConfig()["mosip.kernel.vid.length"];
       this.uinLength = this.appConfigService.getConfig()["mosip.kernel.uin.length"];
       this.aidLength = this.appConfigService.getConfig()["mosip.kernel.rid.length"];
@@ -123,22 +125,37 @@ export class GetuinComponent implements OnInit {
     }
   }
 
-
-  getUserID(event){
-    this.aid = event
-    if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){
-      this.disableSendOtp = false;
+  isNumberKey(event){
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)){
+      return false;
     }else{
-      this.disableSendOtp = true;
+      return true;
+    }
+  }
+  getUserID(event){
+    this.aid = event.target.value
+    if (this.captchaEnable) {
+      if (grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))) {
+        this.disableSendOtp = false;
+      } else {
+        this.disableSendOtp = true;
+      }
+    }else{
+      if (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength)) {
+        this.disableSendOtp = false;
+      }else{
+        this.disableSendOtp = true;
+      }
     }
   }
   
   getCaptchaToken(event: any) {
     if (event) {
       if(this.captchaEnable){
-        /*if(grecaptcha.getResponse().length && (this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength))){*/
+        if(this.aid.length == parseInt(this.vidLength) || this.aid.length == parseInt(this.uinLength) || this.aid.length == parseInt(this.aidLength)){
           this.disableSendOtp = false;
-        /*}*/
+        }
       }else{
         this.disableSendOtp = false;
       }      
@@ -149,7 +166,7 @@ export class GetuinComponent implements OnInit {
 
 
   submitUserID() {
-    this.auditService.audit('RP-034', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "send OTP" button on Get my UIN page');
+    this.auditService.audit('RP-034', 'Get my UIN', 'RP-Get my UIN', 'Get my UIN', 'User clicks on "send OTP" button on Get my UIN page',this.aid);
     if (this.aid !== undefined) {
       this.getStatus(this.aid)
     }
@@ -231,6 +248,10 @@ export class GetuinComponent implements OnInit {
         disableClose: true
       });
   }
+
+  // get fontSize(): number {
+  //   return this.fontSizeService.fontSize;
+  // }
 
   openPopup(){
     this.infoPopUpShow = !this.infoPopUpShow

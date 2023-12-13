@@ -5,11 +5,12 @@
             "displaydescription": "Les résidents peuvent utiliser ces services pour consulter, mettre à jour, gérer ou partager leurs données. Ils peuvent également signaler un problème en cas de réclamation.",
             "availableServicesDescription": "Voici les services disponibles :",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "Consulter mon historique",
@@ -65,11 +66,12 @@
         {
             "displayName": "Obtenir des informations",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "Cliquez ici pour effectuer une recherche",
             "subMenus": [
                 {
@@ -89,11 +91,12 @@
         {
             "displayName": "Prendre rendez-vous",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "Cliquez ici pour une nouvelle inscription",
@@ -106,11 +109,12 @@
         {
             "displayName": "Obtenir mon UIN",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "Cliquez ici pour télécharger votre carte UIN ou pour connaître le statut de votre UIN"
@@ -120,11 +124,12 @@
         {
             "displayName": "Vérifier le numéro de téléphone / l'identifiant de messagerie",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "Cliquez ici pour vérifier votre numéro de téléphone / identifiant de messagerie"
@@ -189,7 +194,9 @@
         "helpText": "Centres d'inscription basés sur votre géolocalisation",
         "noRegCentersNearby": "Aucun centre d'inscription à proximité trouvé. Veuillez entrer manuellement du texte pour rechercher des centres d'inscription.",
         "noRegCenters": "Aucun centre d'inscription trouvé.",
-        "warnMessage": "Veuillez entrer des lettres/chiffres pour effectuer une recherche."
+        "warnMessage": "Veuillez entrer des lettres/chiffres pour effectuer une recherche.",
+        "or":"OU",
+        "showMapBtnLabel":"Afficher le centre d'enregistrement sur la carte"
     },
     "downloadDocument": {
         "downloadbutton": "Télécharger"
@@ -524,6 +531,9 @@
         "relogin": " pour vous connecter à nouveau.",
         "login": " pour vous connecter.",
         "click":"cliquez ici.",
+        "cancel":"Annuler",
+        "continue":"Continuer",
+        "langChgWarnText":"En cliquant sur continuer, les données que vous avez saisies seront perdues.",
         "toSeeMoreDetails":"pour voir plus de détails",
         "otpPopupDescription": "Un mot de passe à usage unique (OTP) a été envoyé à",
         "loginSuccessfully": "Cher résident, vous vous êtes connecté avec succès",
@@ -597,8 +607,8 @@
             "sharedSuccessfully": "Les données choisies par vous ont été partagées avec succès avec le partenaire choisi pour l'ID d'événement : $eventId."
         },
         "verifyChannel": {
-            "warningMsgForEmail": "Votre adresse e-mail a déjà été vérifiée.",
-            "warningMsgForPhone": "Votre numéro de téléphone a déjà été vérifié.",
+            "warningMsgForEmail": "Votre identifiant de messagerie : $userID est déjà vérifié.",
+            "warningMsgForPhone": "Votre numéro de téléphone : $userID est déjà vérifié.",
             "emailSuccess": "Votre adresse e-mail : $channel a été vérifiée avec succès pour l'ID d'événement : $eventId.",
             "phoneSuccess": "Votre numéro de téléphone : $channel a été vérifié avec succès pour l'ID d'événement : $eventId."
         },
@@ -658,7 +668,7 @@
             "identity/preferredLang": "Langue préférée invalide. Veuillez fournir des données valides."
         },
         "RES-SER-459": "L'EID saisi n'est pas associé au UIN/VID utilisé pour se connecter.",
-        "RES-SER-412": "UIN/VID invalide saisi. Veuillez saisir un UIN/VID valide et réessayer.",
+        "RES-SER-412": "Impossible d'accéder à la ressource API.",
         "RES-SER-405": "Le nombre maximum de VIDs autorisés est atteint. Désactivez des VIDs pour en générer un nouveau.",
         "RES-SER-511": "L'EID saisi n'est pas associé au UIN/VID utilisé pour se connecter.",
         "RES-SER-449": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer.",
@@ -678,6 +688,8 @@
         "IDA-MLC-019": "Le type d'authentification par OTP par e-mail est verrouillé pour le UIN.",
         "RES-SER-522": "UIN/VID invalide saisi. Veuillez saisir un UIN/VID valide et réessayer.",
         "RES-SER-509": "La carte n'est pas prête à être téléchargée.",
-        "RES-SER-418": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer."
+        "RES-SER-418": "UIN/AID/VID invalide saisi. Veuillez saisir un UIN/AID/VID valide et réessayer.",
+        "RES-OTP-006": "OTP invalide saisi. Veuillez réessayer avec un OTP valide.",
+        "RES-SER-406": "Impossible d'accéder à la ressource API."
     }
 }

@@ -14,16 +14,17 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 @Test(groups = "VPNEEI")
 public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 
-	
+
+
 	@Test(priority=0)
 	public void VerifyEmailIDWIthInvalidVid() throws IOException, InterruptedException {
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), "6534906793542111");
-//		Commons.switchToFrameByIndex(test, driver, 0);
-//		Commons.click(test, driver, By.id("recaptcha-anchor"));
-//		driver.switchTo().parentFrame();
+		//		Commons.switchToFrameByIndex(test, driver, 0);
+		//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+		//		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 	}
@@ -33,9 +34,9 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("phoneChannelBtn"));
 		Commons.enter(test, driver, By.id("uin"), "6534906793542111");
-//		Commons.switchToFrameByIndex(test, driver, 0);
-//		Commons.click(test, driver, By.id("recaptcha-anchor"));
-//		driver.switchTo().parentFrame();
+		//		Commons.switchToFrameByIndex(test, driver, 0);
+		//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+		//		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		Commons.click(test, driver, By.id("confirmmessagepopup"));
 
@@ -47,13 +48,13 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), TestRunner.perpetualVid);
-//		Commons.switchToFrameByIndex(test, driver, 0);
-//		Commons.click(test, driver, By.id("recaptcha-anchor"));
-//		driver.switchTo().parentFrame();
+		//		Commons.switchToFrameByIndex(test, driver, 0);
+		//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+		//		driver.switchTo().parentFrame();
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
-		String otp = MockSMTPListener.getOtp(10, externalemail);
+		String otp = MockSMTPListener.getOtp(externalemail);
 
 		Commons.enter(test, driver, By.id("otp-input"), otp + "23");
 		Commons.click(test, driver, By.id("submitOtpBtn"));
@@ -66,9 +67,9 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
 		Commons.click(test, driver, By.id("emailChannelBtn-button"));
 		Commons.enter(test, driver, By.id("uin"), TestRunner.perpetualVid);
-//		Commons.switchToFrameByIndex(test, driver, 0);
-//		Commons.click(test, driver, By.id("recaptcha-anchor"));
-//		driver.switchTo().parentFrame();
+		//		Commons.switchToFrameByIndex(test, driver, 0);
+		//		Commons.click(test, driver, By.id("recaptcha-anchor"));
+		//		driver.switchTo().parentFrame();
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
@@ -87,7 +88,7 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
-		String otp = MockSMTPListener.getOtp(10, externalemail);
+		String otp = MockSMTPListener.getOtp(externalemail);
 
 		Commons.enter(test, driver, By.id("otp-input"), otp);
 		Commons.click(test, driver, By.id("submitOtpBtn"));

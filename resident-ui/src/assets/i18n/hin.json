@@ -5,11 +5,12 @@
             "displaydescription": "निवासियों को अपने डेटा को देखने, अपडेट करने, प्रबंधित करने या साझा करने के लिए इन सेवाओं का उपयोग करना संभव है। वे यदि किसी शिकायत के मामले में समस्या की रिपोर्ट करना चाहें, तो वह भी कर सकते हैं।",
             "availableServicesDescription": "निम्नलिखित सेवाएँ उपलब्ध हैं:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "मेरा इतिहास देखें",
@@ -65,11 +66,12 @@
         {
             "displayName": "जानकारी हासिल करें",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "खोजने के लिए यहां क्लिक करें",
             "subMenus": [
                 {
@@ -89,11 +91,12 @@
         {
             "displayName": "अपॉइंटमेंट बुक करना",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "नए नामांकन के लिए यहां क्लिक करें",
@@ -106,11 +109,12 @@
         {
             "displayName": "मेरा UIN प्राप्त करें",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "अपना UIN कार्ड डाउनलोड करने के लिए यहाँ क्लिक करें या अपने UIN की स्थिति जानने के लिए।"
@@ -120,11 +124,12 @@
         {
             "displayName": "फ़ोन नंबर/ईमेल ID सत्यापित करें",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "अपना फ़ोन नंबर/ईमेल ID सत्यापित करने के लिए यहां क्लिक करें"
@@ -189,7 +194,9 @@
         "helpText": "आपके भू-स्थान के आधार पर पंजीकरण केंद्र",
         "noRegCentersNearby": "आस-पास कोई पंजीकरण केंद्र नहीं मिला। कृपया पंजीकरण केंद्रों की खोज करने के लिए मैन्युअल रूप से पाठ दर्ज करें।",
         "noRegCenters": "कोई पंजीकरण केंद्र नहीं मिला।",
-        "warnMessage": "खोज करने के लिए कृपया अक्षर/संख्या दर्ज करें।"
+        "warnMessage": "खोज करने के लिए कृपया अक्षर/संख्या दर्ज करें।",
+        "or":"या",
+        "showMapBtnLabel":"मानचित्र पर रेग केंद्र दिखाएँ"
     },
     "downloadDocument": {
         "downloadbutton": "डाउनलोड करना"
@@ -524,6 +531,9 @@
         "relogin": "फिर से लॉगिन करने के लिए।",
         "login": "लॉगिन करने के लिए।",
         "click":"यहां क्लिक करें।",
+        "cancel":"रद्द करना",
+        "continue":"जारी रखना",
+        "langChgWarnText":"जारी रखें पर क्लिक करते ही आपके द्वारा दर्ज किया गया डेटा खो जाएगा।",
         "toSeeMoreDetails":"अधिक विवरण देखने के लिए",
         "otpPopupDescription": "एक समय पासवर्ड (OTP) भेजा गया है",
         "loginSuccessfully": "प्रिय निवासी, आपने सफलतापूर्वक लॉगिन किया है",
@@ -597,8 +607,8 @@
             "sharedSuccessfully": "आपके द्वारा चुना गया डेटा इवेंट ID: $eventId के विरुद्ध चुने गए भागीदार के साथ सफलतापूर्वक साझा किया गया है"
         },
         "verifyChannel": {
-            "warningMsgForEmail": "आपका ईमेल पहले से ही सत्यापित हो चुका है।",
-            "warningMsgForPhone": "आपका फ़ोन नंबर पहले से ही सत्यापित हो चुका है।",
+            "warningMsgForEmail": "आपकी ईमेल आईडी: $userID पहले ही सत्यापित है।",
+            "warningMsgForPhone": "आपका फ़ोन नंबर: $userID पहले से ही सत्यापित है।",
             "emailSuccess": "आपका ईमेल ID: $channel सफलतापूर्वक सत्यापित किया गया है। ईवेंट ID: $eventId के खिलाफ।",
             "phoneSuccess": "आपका फ़ोन नंबर: $channel सफलतापूर्वक सत्यापित किया गया है। ईवेंट ID: $eventId के खिलाफ।"
         },
@@ -658,7 +668,7 @@
             "identity/preferredLang": "अमान्य पसंदीदा भाषा। कृपया वैध डेटा दें।"
         },
         "RES-SER-459": "दर्ज किए गए EID (ईवेंट ID) को लॉग इन करने के लिए उपयोग किए गए UIN/ VID से संबद्ध नहीं है।",
-        "RES-SER-412": "अमान्य UIN/ VID दर्ज किए गए हैं। कृपया एक वैध UIN/ VID दर्ज करें और पुन: प्रयास करें।",
+        "RES-SER-412": "एपीआई संसाधन तक पहुंचने में असमर्थ.",
         "RES-SER-405": "अधिकतम अनुमत VIDs सक्रिय हैं। एक नया बनाने के लिए VID(वर्चुअल ID) को निष्क्रिय करें।",
         "RES-SER-511": "दर्ज किए गए EID (ईवेंट ID) को लॉग इन करने के लिए उपयोग किए गए UIN/ VID से संबद्ध नहीं है।",
         "RES-SER-449": "अमान्य UIN/ AID/ VID दर्ज किए गए हैं। कृपया एक वैध UIN/ AID/ VID दर्ज करें और पुन: प्रयास करें।",
@@ -677,7 +687,9 @@
         "RES-SER-514": "अमान्य UIN/VID दर्ज किए गए हैं। कृपया एक वैध UIN/VID दर्ज करें और पुनः प्रयास करें।",
         "IDA-MLC-019": "OTP-ईमेल प्रमाणीकरण प्रकार UIN के लिए लॉक किया गया है",
         "RES-SER-522": "अमान्य UIN/VID दर्ज किए गए हैं। कृपया एक वैध UIN/VID दर्ज करें और पुनः प्रयास करें।",
-        "RES_SER_509": "कार्ड डाउनलोड के लिए तैयार नहीं है।",
-        "RES-SER-418": "अमान्य UIN/ AID/ VID दर्ज किए गए हैं। कृपया एक वैध UIN/ AID/ VID दर्ज करें और पुन: प्रयास करें।"
+        "RES-SER-509": "कार्ड डाउनलोड के लिए तैयार नहीं है।",
+        "RES-SER-418": "अमान्य UIN/ AID/ VID दर्ज किए गए हैं। कृपया एक वैध UIN/ AID/ VID दर्ज करें और पुन: प्रयास करें।",
+        "RES-OTP-006": "अमान्य OTP दर्ज किया गया है। कृपया एक वैध OTP के साथ पुन: प्रयास करें।",
+        "RES-SER-406": "एपीआई संसाधन तक पहुंचने में असमर्थ."
     }
 }

@@ -5,11 +5,12 @@
             "displaydescription": "வாசிப்புரிமையாளர்கள் தங்களது தரவைப் பார்க்க, புதுப்பிக்க, நிர்வகிக்க அல்லது பகிர்வதற்கு இந்த சேவைகளைப் பயன்படுத்தலாம். மேலும், பிரச்சினை ஏற்பட்டபின்பு மேலதிக அறிவித்தல் பற்றிய புகார் அனுப்ப முடியும்.",
             "availableServicesDescription": "கீழே கிடைக்கும் சேவைகள் பின்பற்றப்படுகின்றன:",
             "icon": "./assets/icons/iconfont/uin_services.svg",
-            "activeIcon": "./assets/images/UIN Services.png",
+            "activeIcon": "./assets/icons/iconfont/uin_services_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 2,
             "rows": 2,
+            "id":"UINservices",
             "subMenus": [
                 {
                     "displayName": "எனது வரலாற்றைக் காண்க",
@@ -65,11 +66,12 @@
         {
             "displayName": "தகவல் பெறவும்",
             "icon": "./assets/icons/iconfont/get_information.svg",
-            "activeIcon": "./assets/images/Get Information.png",
+            "activeIcon": "./assets/icons/iconfont/get_information_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getInformation",
             "availableServicesDescription": "தேட இங்கே கிளிக் செய்யவும்",
             "subMenus": [
                 {
@@ -89,11 +91,12 @@
         {
             "displayName": "ஒரு சந்திப்பை முன்பதிவு செய்தல்",
             "icon": "./assets/icons/iconfont/book_appointment.svg",
-            "activeIcon": "./assets/images/Book an Appointment.png",
+            "activeIcon": "./assets/icons/iconfont/book_appointment_active.svg",
             "route": "",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"bookingAnAppointment",
             "subMenus": [
                 {
                     "displayName": "புதிய பதிவுக்கு இங்கே கிளிக் செய்யவும்",
@@ -106,11 +109,12 @@
         {
             "displayName": "எனது UIN ஐப் பெறவும்",
             "icon": "./assets/icons/iconfont/get_my_uin.svg",
-            "activeIcon": "./assets/images/Get My UIN.png",
+            "activeIcon": "./assets/icons/iconfont/get_my_uin_active.svg",
             "route": "getuin",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"getMyUIN",
             "subMenus": [
                 {
                     "displayName": "உங்கள் UIN கார்டைப் பதிவிறக்க அல்லது உங்கள் UIN இன் நிலையை அறிய இங்கே கிளிக் செய்யவும்"
@@ -120,11 +124,12 @@
         {
             "displayName": "தொலைபேசி எண்/ மின்னஞ்சல் ID-யைச் சரிபார்க்கவும்",
             "icon": "./assets/icons/iconfont/verify_phone_number.svg",
-            "activeIcon": "./assets/images/Verify Phone Number-Email ID.png",
+            "activeIcon": "./assets/icons/iconfont/verify_phone_number_active.svg",
             "route": "verify",
             "auditEventId": "ADM-004",
             "cols": 1,
             "rows": 1,
+            "id":"verifyPhoneNumber/EmailID",
             "subMenus": [
                 {
                     "displayName": "உங்கள் தொலைபேசி எண்/ மின்னஞ்சல் ID-யைச் சரிபார்க்க இங்கே கிளிக் செய்யவும்"
@@ -189,7 +194,9 @@
         "helpText": "உங்கள் புரட்சி இடங்களின் அடிப்படையில் பதிவு மையங்கள்",
         "noRegCentersNearby": "அருகிலுள்ள பதிவு மையங்கள் கிடைக்கவில்லை. பதிவு மையங்களை தேட கைமாறாக உருவாக்கவும்.",
         "noRegCenters": "பதிவு மையம் கிடைக்கவில்லை.",
-        "warnMessage": "தேடலுக்கு எழுத்துக்கள் / எண்களை உள்ளிடவும்."
+        "warnMessage": "தேடலுக்கு எழுத்துக்கள் / எண்களை உள்ளிடவும்.",
+        "or":"அல்லது",
+        "showMapBtnLabel":"வரைபடத்தில் ரெக் சென்டரைக் காட்டு"
     },
     "downloadDocument": {
         "downloadbutton": "பதிவிறக்க Tamil"
@@ -524,6 +531,9 @@
         "relogin": " மீண்டும் உள்நுழைய செய்க.",
         "login": " உள்நுழைய செய்க.",
         "click":"இங்கே கிளிக் செய்யவும்.",
+        "cancel":"ரத்து செய்",
+        "continue":"தொடரவும்",
+        "langChgWarnText":"தொடரவும் என்பதைக் கிளிக் செய்தால், நீங்கள் உள்ளிட்ட தரவு இழக்கப்படும்.",
         "toSeeMoreDetails":"மேலும் விவரங்கள் பார்க்க",
         "otpPopupDescription": "ஒரு முறையே கடவுச்சொல் (OTP) அனுப்பப்பட்டுள்ளது",
         "loginSuccessfully": "அன்புள்ள குடியிருப்பாளரே, நீங்கள் வெற்றிகரமாக உள்நுழைந்துள்ளீர்கள்",
@@ -597,8 +607,8 @@
             "sharedSuccessfully": "உங்களால் தேர்ந்தெடுத்த பங்களிப்பாளருக்கு தேர்ந்தெடுத்த தரவு வெற்றிகரமாக பகிரப்பட்டுள்ளது நிகழ்வு ID: $eventId"
         },
         "verifyChannel": {
-            "warningMsgForEmail": "உங்கள் மின்னஞ்சல் ஏற்கனவே சரிபார்க்கப்பட்டுள்ளது.",
-            "warningMsgForPhone": "உங்கள் தொலைபேசி எண் ஏற்கனவே சரிபார்க்கப்பட்டுள்ளது.",
+            "warningMsgForEmail": "உங்கள் மின்னஞ்சல் ஐடி: $userID ஏற்கனவே சரிபார்க்கப்பட்டது.",
+            "warningMsgForPhone": "உங்கள் தொலைபேசி எண்: $userID ஏற்கனவே சரிபார்க்கப்பட்டது.",
             "emailSuccess": "உங்கள் மின்னஞ்சல் ID: $channel வெற்றிகரமாக சரிபார்க்கப்பட்டுள்ளது நிகழ்வு ID: $eventId எதிர்ப்புக்கு.",
             "phoneSuccess": "உங்கள் தொலைபேசி எண்: $channel வெற்றிகரமாக சரிபார்க்கப்பட்டுள்ளது நிகழ்வு ID: $eventId எதிர்ப்புக்கு."
         },
@@ -659,7 +669,7 @@
             "identity/preferredLang": "தவறான முன்னியுடன் தேர்ந்தெடுத்த மொழியை உள்ளிட்டுக் கொடுங்கள். சரியான தகவலைக் கொடுங்கள்"
         },
         "RES-SER-459": "உள்ளிட்ட EID உங்கள் உள்நுழைவான UIN/ VID உடன் தொடர்பு கொண்டிருக்கவில்லை.",
-        "RES-SER-412": "தவறான UIN/ VID உள்ளிடப்பட்டுள்ளது. சரியான UIN/ VID ஐ உள்ளிட்டு மீண்டும் முயற்சிக்கவும்.",
+        "RES-SER-412": "API ஆதாரத்தை அணுக முடியவில்லை.",
         "RES-SER-405": "அதிகபட்ச அனுமதிக்கப்பட்ட VIDs ஆக்டிவ் ஆகிவிட்டன. புதியதை உருவாக்குவதற்கு முடியாது, முன் உள்ள VIDs ஐ முடக்குங்கள்.",
         "RES-SER-511": "உள்ளிட்ட EID உங்கள் உள்நுழைவான UIN/ VID உடன் தொடர்பு கொண்டிருக்கவில்லை.",
         "RES-SER-449": "தவறான UIN/ AID/ VID உள்ளிடப்பட்டுள்ளது. சரியான UIN/ AID/ VID ஐ உள்ளிட்டு மீண்டும் முயற்சிக்கவும்.",
@@ -678,7 +688,9 @@
         "RES-SER-514": "தவறான UIN/ VID உள்ளிடப்பட்டுள்ளது. சரியான UIN/ VID ஐ உள்ளிட்டு மீண்டும் முயற்சிக்கவும்.",
         "IDA-MLC-019": "otp-email ஆதார வகையை UIN க்கு முட்டுக்கட்டுக்கப்பட்டுள்ளது",
         "RES-SER-522": "தவறான UIN/ VID உள்ளிடப்பட்டுள்ளது. சரியான UIN/ VID ஐ உள்ளிட்டு மீண்டும் முயற்சிக்கவும்.",
-        "RES_SER_509": "அட்டை பதிவிறக்கு முடியாது.",
-        "RES-SER-418": "தவறான UIN/ AID/ VID உள்ளிடப்பட்டுள்ளது. சரியான UIN/ AID/ VID ஐ உள்ளிட்டு மீண்டும் முயற்சிக்கவும்."
+        "RES-SER-509": "அட்டை பதிவிறக்கு முடியாது.",
+        "RES-SER-418": "தவறான UIN/ AID/ VID உள்ளிடப்பட்டுள்ளது. சரியான UIN/ AID/ VID ஐ உள்ளிட்டு மீண்டும் முயற்சிக்கவும்.",
+        "RES-OTP-006": "தவறான OTP ஐ உள்ளிட்டுள்ளீர்கள். சரியான OTP ஐ மீண்டும் முயற்சிக்கவும்.",
+        "RES-SER-406": "API ஆதாரத்தை அணுக முடியவில்லை."
     }
 }

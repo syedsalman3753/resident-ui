@@ -193,15 +193,6 @@ body {
   color: rgba(255, 255, 255, 1) !important;
 }
 
-.icon {
-  margin: 5px;
-  vertical-align: middle;
-}
-
-/* .mat-form-field-appearance-legacy .mat-form-field-underline {
- background-color: #696f7c !important;
-} */
-
 .mat-error {
   color: #e44c29;
 }
@@ -485,6 +476,13 @@ button{
   /*overflow-y: auto;*/
 }
 
+@-moz-document url-prefix() {
+  .cdk-global-overlay-wrapper {
+    align-items: baseline !important;
+    margin-top: 25em !important;
+  }
+}
+
 .info-icon-button{
   border: none;
   background-color: transparent;
@@ -500,4 +498,8 @@ button{
 
 ::-webkit-scrollbar{
    width: 5px;
+}
+
+.cdk-overlay-backdrop{
+  height: 100rem !important;
 }

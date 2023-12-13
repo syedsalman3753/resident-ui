@@ -16,6 +16,10 @@ public class ConfigManager {
 	private static String MOSIP_PMS_CLIENT_SECRET = "mosip_pms_client_secret";
 	private static String MOSIP_PMS_CLIENT_ID = "mosip_pms_client_id";
 	private static String MOSIP_PMS_APP_ID = "mosip_pms_app_id";
+	private static String USEPRECONFIGOTP = "usePreConfiguredOtp";
+	private static String PRECONFIGOTP = "preconfiguredOtp";
+	
+	
 
 	private static String MOSIP_RESIDENT_CLIENT_SECRET = "mosip_resident_client_secret";
 	private static String MOSIP_RESIDENT_CLIENT_ID = "mosip_resident_client_id";
@@ -49,6 +53,7 @@ public class ConfigManager {
 	private static String MOSIP_AUTOMATION_APP_ID = "mosip_automation_app_id";
 
 	private static String S3_HOST = "s3-host";
+	private static String usePreConfiguredOtp;
 	private static String S3_REGION = "s3-region";
 	private static String S3_USER_KEY = "s3-user-key";
 	private static String S3_SECRET_KEY = "s3-user-secret";
@@ -57,6 +62,7 @@ public class ConfigManager {
 	private static String ENABLE_DEBUG = "enableDebug";
 	private static String THREAD_COUNT = "threadCount";
 	private static String LANG_SELECT = "langselect";
+	private static String preconfiguredOtp;
 	
 
 	private static String DB_PORT = "db-port";
@@ -289,6 +295,14 @@ public class ConfigManager {
 		iam_realm_id = getValueForKey(IAM_REALM_ID);
 		iam_users_to_create = getValueForKey(IAM_USERS_TO_CREATE);
 		iam_users_password = getValueForKey(IAM_USERS_PASSWORD);
+		
+		usePreConfiguredOtp = System.getenv(USEPRECONFIGOTP) == null ? propsKernel.getProperty(USEPRECONFIGOTP)
+				: System.getenv(USEPRECONFIGOTP);
+		propsKernel.setProperty(USEPRECONFIGOTP, usePreConfiguredOtp);
+		
+		preconfiguredOtp = System.getenv(PRECONFIGOTP) == null ? propsKernel.getProperty(PRECONFIGOTP)
+				: System.getenv(PRECONFIGOTP);
+		propsKernel.setProperty(PRECONFIGOTP, preconfiguredOtp);
 
 		admin_client_secret = System.getenv(MOSIP_ADMIN_CLIENT_SECRET) == null
 				? propsKernel.getProperty(MOSIP_ADMIN_CLIENT_SECRET)
@@ -330,6 +344,8 @@ public class ConfigManager {
 		langselect =System.getenv(LANG_SELECT) == null ? propsKernel.getProperty(LANG_SELECT) : System.getenv(LANG_SELECT);
 		propsKernel.setProperty(LANG_SELECT, langselect);
 		
+		
+		
 		//enableDebug threadCount  langselect
 
 	}
@@ -343,6 +359,7 @@ public class ConfigManager {
 
 	}
 	
+	
 	public static String getLangselect() {
 		return langselect;
 
@@ -352,6 +369,8 @@ public class ConfigManager {
 		return threadCount;
 
 	}
+	
+	
 	
 	public static String getEnableDebug() {
 		return enableDebug;
@@ -414,6 +433,10 @@ public class ConfigManager {
 
 	public static String getAdminClientSecret() {
 		return admin_client_secret;
+	}
+	
+	public static Boolean IsDebugEnabled() {
+		return enableDebug.equalsIgnoreCase("yes");
 	}
 
 	public static String getAdminClientId() {
@@ -644,6 +667,15 @@ public class ConfigManager {
 
 	public static String getIAMUsersPassword() {
 		return iam_users_password;
+	}
+	
+	public static String getUsePreConfiguredOtp() {
+		return usePreConfiguredOtp;
+	}
+	
+	public static String getPreConfiguredOtp() {
+		return preconfiguredOtp;
+
 	}
 
 	public static String getRolesForUser(String userId) {

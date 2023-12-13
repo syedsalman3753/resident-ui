@@ -65,7 +65,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.enter(test, driver, By.id("email"), tempemail1);
 		Commons.enter(test, driver, By.id("confirmemail"), tempemail1);
 		Commons.clickWebelement(test, driver, By.id("sendOTPemail"));
-		String otp = MockSMTPListener.getOtp(10, tempemail1);
+		String otp = MockSMTPListener.getOtp(tempemail1);
 		System.out.println(otp);
 //		    for(int i=0;i<=otp.length()-1;i++) {
 //		    Commons.enter(driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
