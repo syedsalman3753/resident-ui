@@ -91,19 +91,7 @@ public class BaseClass {
 			options.addArguments("--headless=new");
 		}
 		
-//		System.out.println(System.getProperty("user.dir"));
-//		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
-//		System.setProperty("webdriver.chrome.driver", configFilePath);	
-//		ChromeOptions options = new ChromeOptions();
-//		try {
-//			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-//			if(headless.equalsIgnoreCase("yes")) {
-//				options.addArguments("--headless=new");
-//			}
-//		} catch (Exception e1) {
-//			
-//			e1.printStackTrace();
-//		}
+
 		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
@@ -111,28 +99,20 @@ public class BaseClass {
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		login = new LoginTest();
 		
 		
-//		String language1 = null;
-//		try {
-//			language1 = Commons.getFieldData("langcode");
-//
-//			System.out.println(language1);
-//			if(!language1.equals("sin"))
-//			{Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
-//			String var = "//li/a[contains(text(),'" + language1 + "')]";
-//			Commons.click(test,driver, By.xpath(var));
-//			}
-//
-//		} catch (Exception e) {
-//			e.getMessage();
+		String langid="lang"+JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
+		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+		try {
+			if(!language.equals("sin")) {
+			Commons.dropdown( driver, By.id("languages"), By.id(langid));
+			}
 		}
-//		driver.findElement(By.id("username")).sendKeys(userid);
-//		driver.findElement(By.id("password")).sendKeys(password);
-//		driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-
-//	}
+		catch (Exception e) {
+		e.printStackTrace();
+		}
+		login = new LoginTest();
+}
 
 	@AfterMethod
 	public void tearDown() {

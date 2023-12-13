@@ -27,7 +27,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 //		String eid=driver.findElement(By.xpath("//span[text()='Event ID : ']")).getText();
 //		System.out.println(eid);
 		 test=extent.createTest("TrackMyRequests", "verify Login");
-		Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+		Commons.click(test,driver, By.id("uinservices/managemyvid"));
 		 Commons.click(test,driver, By.id("Temporary"));
 		 test.log(Status.INFO, "Click on Temporary VID");
 		 Commons.click(test,driver, By.id("confirmmessagepopup"));
@@ -39,8 +39,8 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		 
 		 
 		 Commons.click(test,driver, By.id("confirmmessagepopup"));
-		 Commons.click(test,driver, By.xpath("//a[text()]"));
-		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+	driver.navigate().back();
+		 Commons.click(test,driver, By.id("uinservices/trackservicerequest"));
 		 Commons.enter(test,driver, By.id("appIdValue"), Eid);
 		 Thread.sleep(2000);
 		 test.log(Status.INFO, "EID Extracted");
@@ -54,7 +54,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 	public void TrackMyRequestsInvalidEId() throws Exception {
 		LoginTest.loginTest();
 		test=extent.createTest("TrackMyRequestsInvalidEId", "verify Login");
-		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+		 Commons.click(test,driver, By.id("uinservices/trackservicerequest"));
 		 Commons.enter(test,driver, By.id("appIdValue"), data+"345");
 		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
 		 test.log(Status.INFO, "Click on Track");
@@ -65,7 +65,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		String tempEID=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempEID");
 		LoginTest.loginTest();
 		test=extent.createTest("TrackMyRequestsInvalidEId", "verify Login");
-		 Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[4]"));
+		 Commons.click(test,driver, By.id("uinservices/trackservicerequest"));
 		 Commons.enter(test,driver, By.id("appIdValue"), tempEID);
 		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
 		 test.log(Status.INFO, "Click on Track");

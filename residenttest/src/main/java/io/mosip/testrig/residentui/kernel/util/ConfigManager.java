@@ -186,6 +186,7 @@ public class ConfigManager {
 	private static String iam_realm_id;
 	private static String iam_users_to_create;
 	private static String iam_adminportal_path;
+	private static String iam_keyclockurl;
 	private static String iam_apienvuser;
 	private static String iam_apiinternalendpoint;
 	private static String iam_users_password;
@@ -558,6 +559,10 @@ public class ConfigManager {
 	}
 	public static String getiam_adminportal_path() {
 		return iam_adminportal_path;
+	}
+	public static String getiam_keyclockurl() {
+		iam_keyclockurl=propsKernel.getProperty("keycloakurl");
+		return iam_keyclockurl;
 	}
 	public static String getiam_apienvuser() {
 		return iam_apienvuser;

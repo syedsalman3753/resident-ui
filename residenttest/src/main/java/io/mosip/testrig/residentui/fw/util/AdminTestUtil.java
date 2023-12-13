@@ -48,10 +48,13 @@ public class AdminTestUtil extends BaseTestCase {
 		String url = ApplnURI + props.getProperty("masterSchemaURL");
 		kernelAuthLib = new KernelAuthentication();
 		String token = kernelAuthLib.getTokenByRole("admin");
-
-		Response response = RestClient.getRequestWithCookie(url, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON,
+		Response response=null;
+try {
+		 response = RestClient.getRequestWithCookie(url, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON,
 				"Authorization", token);
-
+}catch(Exception e) {
+	logger.error(e.getMessage());
+}
 		return response.asString();
 	}
 	
@@ -201,7 +204,7 @@ public class AdminTestUtil extends BaseTestCase {
 	 public static String generateUIN() {
 	    	String uin = "";
 	    	
-	    	initialize();
+	   // 	initialize();
 	    	
 			DateFormat dateFormatter = new SimpleDateFormat("YYYYMMddHHmmss");
 			Calendar cal = Calendar.getInstance();
@@ -268,7 +271,7 @@ public class AdminTestUtil extends BaseTestCase {
 	    		 //Langauge Independent
 	    		
 	        	// Generate Keycloak Users
-	        	KeycloakUserManager.createUsers();
+	        	KeycloakUserManager.createuser();
 	    		initialized = true;
 	    	}
 	    }
