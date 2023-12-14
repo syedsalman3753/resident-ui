@@ -9,9 +9,10 @@ import io.mosip.testrig.residentui.utility.BaseClass;
 import io.mosip.testrig.residentui.utility.Commons;
 import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
-
+import io.mosip.testrig.residentui.utility.TestRunner;
+@Test(groups = "UMD")
 public class UpdateMyData extends BaseClass {
-	@Test(groups = "UMD")
+	
 	public void updateMyData() throws Exception {
 		String tempemail1 = JsonUtil.JsonObjParsing(Commons.getTestData(), "tempemail1");
 		LoginTest.loginTest();
@@ -23,7 +24,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.enter(test, driver, By.id("proofOfIdentityvalue"), data);
 		Commons.dropdown(test, driver, By.id("proofOfIdentity"));
 		Commons.enter(test, driver, By.id("fileDropRef"),
-				System.getProperty("user.dir") + "\\src\\main\\resources\\BulkUploadFiles\\tonyId.png");
+				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
 
 		test.log(Status.INFO, "Click on submit");
@@ -38,8 +39,7 @@ public class UpdateMyData extends BaseClass {
 
 		test.log(Status.INFO, "Update Address");
 		Commons.clickWebelement(test, driver, By.id("uinservices/updatedemographic"));
-		// Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
-		Commons.clickWebelement(test, driver, By.id("mat-tab-label-0-1"));
+		Commons.clickWebelement(test, driver, By.xpath("//div[@id='mat-tab-label-0-1']"));
 		
 		
 		Commons.enter(test, driver, By.id("addressLine1eng"), data);
@@ -51,7 +51,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.dropdown(test, driver, By.id("proofOfAddress"));
 		Commons.enter(test, driver, By.id("proofOfAddressvalue"), data);
 		Commons.enter(test, driver, By.id("fileAddRef"),
-				System.getProperty("user.dir") + "\\BulkUploadFiles\\tonyId.png");
+				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
 		test.log(Status.INFO, "file Uploaded");
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
 		
@@ -65,7 +65,7 @@ public class UpdateMyData extends BaseClass {
 		test.log(Status.INFO, "Update Email");
 		Commons.click(test, driver, By.id("uinservices/updatedemographic"));
 		// Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
-		Commons.clickWebelement(test, driver, By.id("mat-tab-label-0-2"));
+		Commons.clickWebelement(test, driver, By.xpath("//div[@id='mat-tab-label-0-2']"));
 
 		Commons.enter(test, driver, By.id("email"), tempemail1);
 		
@@ -83,7 +83,7 @@ public class UpdateMyData extends BaseClass {
 		test.log(Status.INFO, "Select Language Preference");
 		Commons.click(test, driver, By.id("uinservices/updatedemographic"));
 		// Commons.click(test,driver, By.xpath("//span[text()='Demographic Data']"));
-		Commons.clickWebelement(test, driver, By.id("mat-tab-label-0-3"));
+		Commons.clickWebelement(test, driver, By.xpath("//div[@id='mat-tab-label-0-3']"));
 		Commons.dropdown(test, driver, By.id("preferredLang"));
 		Commons.clickWebelement(test, driver, By.id("submit"));
 
@@ -108,29 +108,7 @@ public class UpdateMyData extends BaseClass {
 //		
 	}
 
-	public void UpdateDataWithNameAndDOB() throws Exception {
-		LoginTest.loginTest();
-		test = extent.createTest("UpdateDataWithNameAndDOB ", "verify Login");
-		Commons.clickWebelement(test, driver, By.id("uinservices/updatedemographic"));
-		Commons.enter(test, driver, By.id("fullNameeng"), data);
-		Commons.clickWebelement(test, driver, By.id("dateOfBirth"));
-		Commons.clickWebelement(test, driver,
-				By.xpath("//*[@id=\"mat-datepicker-0\"]/mat-calendar-header/div/div/button[2]"));
-		Commons.clickWebelement(test, driver,
-				By.xpath("//*[@id='mat-datepicker-6']/mat-calendar-header/div/div/button[2]"));
-		Commons.enter(test, driver, By.id("proofOfIdentityvalue"), data);
-		Commons.dropdown(test, driver, By.id("proofOfIdentity"));
-		test.log(Status.INFO, "Select ProofOfIdentity");
-		Commons.enter(test, driver, By.id("fileDropRef"),
-				System.getProperty("user.dir") + "\\src\\main\\resources\\BulkUploadFiles\\tonyId.png");
-		Commons.clickWebelement(test, driver, By.id("previewBtn"));
-
-		test.log(Status.INFO, "Click on submit");
-		
-		Commons.clickWebelement(test, driver, By.id("submitBtn"));
-		Commons.clickWebelement(test, driver, By.id("confirmUpdateData"));
-    	Commons.clickWebelement(test, driver, By.id("updateMyDataBtn"));
-	}
+	
 
 	public void UpdateDataWithNameAndGender() throws Exception {
 		LoginTest.loginTest();
@@ -142,7 +120,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.enter(test, driver, By.id("proofOfIdentityvalue"), data);
 		Commons.dropdown(test, driver, By.id("proofOfIdentity"));
 		Commons.enter(test, driver, By.id("fileDropRef"),
-				System.getProperty("user.dir") + "\\src\\main\\resources\\BulkUploadFiles\\tonyId.png");
+				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
 
 		test.log(Status.INFO, "Click on submit");
@@ -156,7 +134,7 @@ public class UpdateMyData extends BaseClass {
 		LoginTest.loginTest();
 		test = extent.createTest("UpdateDataWithoutAddressLine ", "verify Login");
 		Commons.clickWebelement(test, driver, By.id("uinservices/updatedemographic"));
-		Commons.clickWebelement(test, driver, By.id("mat-tab-label-0-1"));
+		Commons.clickWebelement(test, driver, By.xpath("//div[@id='mat-tab-label-0-1']"));
 		Commons.dropdown(test, driver, By.id("Regioneng"));
 		Commons.dropdown(test, driver, By.id("Provinceeng"));
 		Commons.dropdown(test, driver, By.id("Cityeng"));
@@ -164,8 +142,8 @@ public class UpdateMyData extends BaseClass {
 		Commons.dropdown(test, driver, By.id("Postal Code"));
 		Commons.dropdown(test, driver, By.id("proofOfAddress"));
 		Commons.enter(test, driver, By.id("proofOfAddressvalue"), data);
-		Commons.enter(test, driver, By.id("fileDropRef"),
-				System.getProperty("user.dir") + "\\src\\main\\resources\\BulkUploadFiles\\tonyId.png");
+		Commons.enter(test, driver, By.id("fileAddRef"),
+				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
 		test.log(Status.INFO, "file Uploaded");
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
 		
