@@ -16,20 +16,20 @@ public class GetPersonalisedCard extends BaseClass {
 		test = extent.createTest("Get Personalised Card", "verify Login");
 		Commons.click(test, driver, By.id("uinservices/personalisedcard"));
 
-		Commons.click(test, driver, By.xpath("//span[text()=' Name']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' DOB']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' UIN']"));
+		Commons.click(test, driver, By.id("fullName"));
+		Commons.clickWebelement(test, driver, By.id("dateOfBirth"));
+		Commons.clickWebelement(test, driver, By.id("UIN"));
 
 		Commons.click(test, driver, By.id("downloadFileBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		test.log(Status.INFO, "Click on download");
 		Commons.click(test, driver, By.id("uinservices/personalisedcard"));
 
-		Commons.click(test, driver, By.xpath("//span[text()=' Name']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' DOB']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' UIN']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Perpetual VID']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Phone Number']"));
+		Commons.click(test, driver, By.id("fullName"));
+		Commons.clickWebelement(test, driver, By.id("dateOfBirth"));
+		Commons.clickWebelement(test, driver, By.id("UIN"));
+		Commons.clickWebelement(test, driver, By.id("perpetualVID"));
+		Commons.clickWebelement(test, driver, By.id("phone"));
 
 //		Commons.click(test, driver, By.id("Mask It2"));
 //		Commons.click(test, driver, By.id("Mask It3"));
@@ -37,7 +37,7 @@ public class GetPersonalisedCard extends BaseClass {
 		//Commons.click(test, driver, By.id("Mask It3"));
 		//Commons.click(test, driver, By.id("Mask It4"));
 		Commons.click(test, driver, By.id("downloadFileBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 
 		test.log(Status.INFO, "Submit with any three checkbox with masked  ");
 //		Commons.click(test,driver, By.id("uinservices/personalisedcard"));
@@ -55,29 +55,29 @@ public class GetPersonalisedCard extends BaseClass {
 //		Commons.click(test,driver, By.id("confirmmessagepopup"));
 
 		Commons.click(test, driver, By.id("uinservices/personalisedcard"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Name']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' DOB']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' UIN']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Perpetual VID']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Phone Number']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Email ID']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Address']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Gender']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Image']"));
+		Commons.clickWebelement(test, driver, By.id("fullName"));
+		Commons.clickWebelement(test, driver, By.id("dateOfBirth"));
+		Commons.clickWebelement(test, driver, By.id("UIN"));
+		Commons.clickWebelement(test, driver, By.id("perpetualVID"));
+		Commons.clickWebelement(test, driver, By.id("phone"));
+		Commons.clickWebelement(test, driver, By.id("email"));
+		Commons.clickWebelement(test, driver, By.id("fullAddress"));
+		Commons.clickWebelement(test, driver, By.id("gender"));
+		Commons.clickWebelement(test, driver, By.id("photo"));
 		Commons.click(test, driver, By.id("downloadFileBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		test.log(Status.INFO, "Select all check box");
 
 		Commons.click(test, driver, By.id("uinservices/personalisedcard"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Name']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' DOB']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' UIN']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Perpetual VID']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Phone Number']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Email ID']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Address']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Gender']"));
-		Commons.click(test, driver, By.xpath("//span[text()=' Image']"));
+		Commons.clickWebelement(test, driver, By.id("fullName"));
+		Commons.clickWebelement(test, driver, By.id("dateOfBirth"));
+		Commons.clickWebelement(test, driver, By.id("UIN"));
+		Commons.clickWebelement(test, driver, By.id("perpetualVID"));
+		Commons.clickWebelement(test, driver, By.id("phone"));
+		Commons.clickWebelement(test, driver, By.id("email"));
+		Commons.clickWebelement(test, driver, By.id("fullAddress"));
+		Commons.clickWebelement(test, driver, By.id("gender"));
+		Commons.clickWebelement(test, driver, By.id("photo"));
 //		Commons.click(test, driver, By.id("Mask It2"));
 //		Commons.click(test, driver, By.id("Mask It3"));
 //		Commons.click(test, driver, By.id("Mask It4"));
@@ -88,7 +88,7 @@ public class GetPersonalisedCard extends BaseClass {
 	//	Commons.click(test, driver, By.xpath("//input[@id='Mask it5-input']"));
 		test.log(Status.INFO, "Select all checbox masked");
 		Commons.click(test, driver, By.id("downloadFileBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		test.log(Status.INFO, "Click on Submit");
 	}
 

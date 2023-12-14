@@ -26,7 +26,7 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		//		Commons.click(test, driver, By.id("recaptcha-anchor"));
 		//		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("sendOtpBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 	}
 	@Test(priority=1)
 	public void VerifyPhoneWIthInvalidVid() throws IOException, InterruptedException {
@@ -38,11 +38,11 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		//		Commons.click(test, driver, By.id("recaptcha-anchor"));
 		//		driver.switchTo().parentFrame();
 		Commons.click(test, driver, By.id("sendOtpBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 
 	}
 	@Test(priority=2)
-	public void aVerifyEmailIDWIthInvalidOtp() throws Exception {
+	public void VerifyEmailIDWIthInvalidOtp() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
@@ -58,10 +58,10 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 
 		Commons.enter(test, driver, By.id("otp-input"), otp + "23");
 		Commons.click(test, driver, By.id("submitOtpBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 	}
 	@Test(priority=3)
-	public void bVerifyEmailIDWIthoutOtp() throws Exception {
+	public void VerifyEmailIDWIthoutOtp() throws Exception {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("verifyPhoneNumber/EmailID"));
@@ -72,9 +72,7 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		//		driver.switchTo().parentFrame();
 		Thread.sleep(3000);
 		Commons.click(test, driver, By.id("sendOtpBtn"));
-		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
 
-		Commons.click(test, driver, By.id("submitOtpBtn"));
 
 	}
 	@Test(priority=4)
@@ -89,9 +87,9 @@ public class VerifyPhoneNumberEmailID extends ResidentBaseClass {
 		Commons.click(test, driver, By.id("sendOtpBtn"));
 		// Commons.click(test,driver, By.xpath("//button[text()='Get OTP']"));
 		String otp = MockSMTPListener.getOtp(externalemail);
-
+		Thread.sleep(5000);
 		Commons.enter(test, driver, By.id("otp-input"), otp);
 		Commons.click(test, driver, By.id("submitOtpBtn"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 	}
 }

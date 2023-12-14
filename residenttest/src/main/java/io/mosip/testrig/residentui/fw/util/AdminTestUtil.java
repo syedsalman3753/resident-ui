@@ -31,6 +31,7 @@ public class AdminTestUtil extends BaseTestCase {
 	public static String token;
 	public static final int OTP_CHECK_INTERVAL = 10000;
 	public static String tokenRoleIdRepo = "idrepo";
+	public static String tokenRoleResident = "resident";
 	public static String tokenRoleAdmin = "admin";
 	public static boolean initialized = false;
 	
@@ -78,7 +79,37 @@ try {
 		
 		return responseJson.getJSONObject("response").getString("status").equalsIgnoreCase("ACTIVATED");
 	}
-	
+	public static void genrateCredentialRequest(String rid,String role) {
+	//	String token = BaseTestCase.kernelAuthLib.getTokenByRole(tokenRoleIdRepo);
+    	JSONObject requestJson = new JSONObject();
+    	Response response = null;
+    	String a=null;
+    	requestJson.put("id", "mosip.credential.request.service.id");
+    	requestJson.put("version", "1.0");
+    	requestJson.put("requesttime", AdminTestUtil.generateCurrentUTCTimeStamp());
+    	requestJson.put("request", new HashMap<>());
+    	requestJson.getJSONObject("request").put("id", rid);
+    	requestJson.getJSONObject("request").put("credentialType", "PDFCard");
+    	requestJson.getJSONObject("request").put("issuer", "mpartner-default-digitalcard");
+    	requestJson.getJSONObject("request").put("recepiant", a);
+    	requestJson.getJSONObject("request").put("user", a);
+    	requestJson.getJSONObject("request").put("encrypt", false);
+    	requestJson.getJSONObject("request").put("encryptionKey", "247651");
+    	requestJson.getJSONObject("request").put("sharableAttributes", a);
+    	requestJson.getJSONObject("request").put("additionalData", new HashMap<>());
+    	requestJson.getJSONObject("request").getJSONObject("additionalData").put("registrationId", rid);
+    	requestJson.getJSONObject("request").getJSONObject("additionalData").put("templateTypeCode", "RPR_UIN_CARD_TEMPLATE");
+    	token = kernelAuthLib.getTokenByRole(role);
+    	
+    	response = RestClient.postRequestWithCookie(BaseTestCase.ApplnURI + BaseTestCase.propsKernel.getProperty("credentialRequestUrl")+rid+"-PDF", requestJson.toString(), MediaType.APPLICATION_JSON,
+				MediaType.APPLICATION_JSON, BaseTestCase.COOKIENAME, token);
+    	JSONObject responseJson = new JSONObject(response.asString());
+		
+		
+		System.out.println("responseJson = " + responseJson);
+		
+		
+	}
 	public static String buildaddIdentityRequestBody(String schemaJson, String uin, String rid) {
     	org.json.JSONObject schemaresponseJson = new org.json.JSONObject(schemaJson);
     	
@@ -225,7 +256,8 @@ try {
 			if (AdminTestUtil.activateUIN(requestjson, tokenRoleIdRepo) == false) {
 				// UIN activation failed
 				return "";
-			}		
+			}	
+			AdminTestUtil.genrateCredentialRequest(rid,tokenRoleIdRepo);
 	    	
 	    	return uin;
 	    }

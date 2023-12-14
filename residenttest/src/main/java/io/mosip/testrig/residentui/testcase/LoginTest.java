@@ -81,13 +81,13 @@ public class LoginTest extends BaseClass {
 
 		Thread.sleep(3000);
 		try {
-			driver.findElement(By.id("confirmmessagepopup")).click();
+			driver.findElement(By.id("dismissBtn")).click();
 			
 		}catch(Exception a) {
 			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
 			test.log(Status.INFO, "ALL Checkboxes are selected");
 			Commons.click(test,driver, By.id("continue"));
-			Commons.click(test,driver, By.id("confirmmessagepopup"));
+			Commons.click(test,driver, By.id("dismissBtn"));
 		}
 	}
 

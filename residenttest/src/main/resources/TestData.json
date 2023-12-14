@@ -13,7 +13,7 @@
 		"9VerifyPhoneNumberEmailID":"VPNEEI",
 		"10viewMyHistory":"VMH",
 		"BELOW_ARE_STATIC_KEYWORDS": "We are using this setExcludedGroups to exclude scenarios",
-		"setExcludedGroups": "GMU,UMD,GI,MMV,SMI,SMD,TMR,VMH,GPC",
+		"setExcludedGroups": "",
 		"identityGenManual":"no",
 		"perpetualvid":"3820153059067924",
 		 "temporaryvid":"3048902169863853",
@@ -26,12 +26,12 @@
 		 "aid":"10001100800003920230505043751",
 		 "postalcode": "10104",
 		 "headless": "no",
-		 "language":"hin",
+		 "language":"eng",
 		 "loginlang":"mul",
 		"hierarchyLevel0": [
 			{
 				"language": "eng",
-				"value": "My Country"
+				"value": "MyCountry"
 			},
 			{
 				"language": "kan",
