@@ -29,14 +29,14 @@ public class GetInformation extends ResidentBaseClass {
 		test = extent.createTest("Get Information of country", "verify country");
 		Commons.dropdown(test, driver, By.id("locationType"), By.id("hierarchyLevel0")); //get it fix 
 		Commons.enter(test, driver, By.id("searchLocationBox"), hierarchyLevel0);// take from testdata
-	//	Commons.click(test, driver, By.xpath("(//span[@class='mat-button-wrapper'])[7]"));// connect with arvind
-		//Commons.click(test, driver, By.xpath("regCentersDownloadBtn"));
+		Thread.sleep(1000);
 		Commons.click(test, driver, By.id("regCenterSearchBtn"));//get it fix 
 		Commons.click(test, driver, By.id("regCentersDownloadBtn"));//get it fix 
 		// region
 		test = extent.createTest("Get Information of region", "verify region");
 		Commons.dropdown(test, driver, By.id("locationType"), By.id("hierarchyLevel1"));
 		Commons.enter(test, driver, By.id("searchLocationBox"), hierarchyLevel1);
+		Thread.sleep(1000);
 		Commons.click(test, driver, By.id("regCenterSearchBtn"));
 	//	Commons.click(test, driver, By.xpath("(//span[@class='mat-button-wrapper'])[8]"));
 		Commons.click(test, driver, By.id("regCentersDownloadBtn"));
@@ -44,6 +44,7 @@ public class GetInformation extends ResidentBaseClass {
 		test = extent.createTest("Get Information of province", "verify province");
 		Commons.dropdown(test, driver, By.id("locationType"), By.id("hierarchyLevel2"));
 		Commons.enter(test, driver, By.id("searchLocationBox"), hierarchyLevel2);
+		Thread.sleep(1000);
 		Commons.click(test, driver, By.id("regCenterSearchBtn"));
 	//	Commons.click(test, driver, By.xpath("(//span[@class='mat-button-wrapper'])[8]"));
 		Commons.click(test, driver, By.id("regCentersDownloadBtn"));
@@ -51,6 +52,7 @@ public class GetInformation extends ResidentBaseClass {
 		test = extent.createTest("Get Information of city", "verify city");
 		Commons.dropdown(test, driver, By.id("locationType"), By.id("hierarchyLevel3"));
 		Commons.enter(test, driver, By.id("searchLocationBox"), hierarchyLevel3);
+		Thread.sleep(1000);
 		Commons.click(test, driver, By.id("regCenterSearchBtn"));
 		//Commons.click(test, driver, By.xpath("(//span[@class='mat-button-wrapper'])[8]"));
 		Commons.click(test, driver, By.id("regCentersDownloadBtn"));
@@ -58,6 +60,7 @@ public class GetInformation extends ResidentBaseClass {
 		test = extent.createTest("Get Information of zone", "verify zone");
 		Commons.dropdown(test, driver, By.id("locationType"), By.id("hierarchyLevel4"));
 		Commons.enter(test, driver, By.id("searchLocationBox"), hierarchyLevel4);
+		Thread.sleep(1000);
 		Commons.click(test, driver, By.id("regCenterSearchBtn"));
 	//	Commons.click(test, driver, By.xpath("(//span[@class='mat-button-wrapper'])[8]"));
 		Commons.click(test, driver, By.id("regCentersDownloadBtn"));
@@ -65,6 +68,7 @@ public class GetInformation extends ResidentBaseClass {
 		test = extent.createTest("Get Information of postalcode", "verify postalcode");
 		Commons.dropdown(test, driver, By.id("locationType"), By.id("hierarchyLevel5"));
 		Commons.enter(test, driver, By.id("searchLocationBox"), postalcode);
+		Thread.sleep(1000);
 		Commons.click(test, driver, By.id("regCenterSearchBtn"));
 	//	Commons.click(test, driver, By.xpath("(//span[@class='mat-button-wrapper'])[8]"));
 		Commons.click(test, driver, By.id("regCentersDownloadBtn"));

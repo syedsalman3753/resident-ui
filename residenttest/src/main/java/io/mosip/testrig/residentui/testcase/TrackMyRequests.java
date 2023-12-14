@@ -30,7 +30,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		Commons.click(test,driver, By.id("uinservices/managemyvid"));
 		 Commons.click(test,driver, By.id("Temporary"));
 		 test.log(Status.INFO, "Click on Temporary VID");
-		 Commons.click(test,driver, By.id("confirmmessagepopup"));
+		 Commons.click(test,driver, By.id("vidWarningBtn"));
 		 Thread.sleep(2000);
 	     String eid	= driver.findElement(By.className("pop-up-header")).getText();
 		 System.out.println(eid);
@@ -38,7 +38,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		 System.out.println(Eid);
 		 
 		 
-		 Commons.click(test,driver, By.id("confirmmessagepopup"));
+		 Commons.click(test,driver, By.id("dismissBtn"));
 	driver.navigate().back();
 		 Commons.click(test,driver, By.id("uinservices/trackservicerequest"));
 		 Commons.enter(test,driver, By.id("appIdValue"), Eid);
@@ -58,7 +58,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		 Commons.enter(test,driver, By.id("appIdValue"), data+"345");
 		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
 		 test.log(Status.INFO, "Click on Track");
-		 Commons.click(test,driver, By.id("confirmmessagepopup"));
+		 Commons.click(test,driver, By.id("dismissBtn"));
 	}
 	
 	public void TrackMyRequestsWithDiffEId() throws Exception {
@@ -69,6 +69,6 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 		 Commons.enter(test,driver, By.id("appIdValue"), tempEID);
 		 Commons.click(test,driver, By.id("getEIDStatusbtn"));
 		 test.log(Status.INFO, "Click on Track");
-		 Commons.click(test,driver, By.id("confirmmessagepopup"));
+		 Commons.click(test,driver, By.id("dismissBtn"));
 	}
 }

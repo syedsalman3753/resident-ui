@@ -3,6 +3,7 @@ package io.mosip.testrig.residentui.utility;
 import java.io.File;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 
@@ -54,7 +55,7 @@ public class TestRunner {
 		mockSMTPListener.run();
 
 		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
-		testNg.setExcludedGroups(listExcludedGroups);
+		testNg.setExcludedGroups(listExcludedGroups);		
 		testNg.setTestClasses(new Class[] {
 				LoginTest.class,    
 				ViewMyHistory.class,
@@ -69,11 +70,17 @@ public class TestRunner {
 				VerifyPhoneNumberEmailID.class
 
 		});
-
+		String langid=JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
+		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+		
+			if(language.equals("sin")) {
+				langid="";
+			}
+		
 		System.getProperties().setProperty("testng.outpur.dir", "testng-report");
 		testNg.setOutputDirectory("testng-report");
 		System.getProperties().setProperty("emailable.report2.name", "ResidentUI" + "-"
-				+ ConfigManager.getiam_apienvuser()+ "-" + System.currentTimeMillis() + "-report.html");
+				+ System.getProperty("env.user")+ "-"+langid+"-"+ System.currentTimeMillis() + "-report.html");
 
 
 		testNg.run();

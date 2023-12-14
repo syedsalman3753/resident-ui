@@ -20,41 +20,40 @@ public class ManageMyVid extends BaseClass {
 		Commons.click(test, driver, By.id("uinservices/managemyvid"));
 		Commons.click(test, driver, By.id("Perpetual"));
 		test.log(Status.INFO, "Click on Perpetual");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("vidWarningBtn"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		Commons.click(test, driver, By.xpath("(//*[@id='download0'])[1]"));
 		test.log(Status.INFO, "Click on download");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-
+		Commons.click(test, driver, By.id("NoBtn"));
+		
 		// Commons.click(test,driver, By.id("uinservices/managemyvid"));
 		Commons.click(test, driver, By.id("Temporary"));
 		test.log(Status.INFO, "Click on Temporary");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("vidWarningBtn"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		Commons.click(test, driver, By.xpath("(//*[@id='download0'])[2]"));
 		test.log(Status.INFO, "Click on download");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("vidDownloadBtn"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		Commons.click(test, driver, By.xpath("(//*[@id='delete0'])[2]"));
 		test.log(Status.INFO, "Click on delete");
-		Commons.click(test, driver, By.xpath("//span[text()=' Delete ']"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("vidDeleteBtn"));
+		
 		Thread.sleep(3000);
-
+		Commons.click(test, driver, By.id("dismissBtn"));
 		// Commons.click(test,driver, By.id("uinservices/managemyvid"));
 		Commons.click(test, driver, By.id("OneTimeUse"));
 		test.log(Status.INFO, "Click on OneTimeUse");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("vidWarningBtn"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		Commons.click(test, driver, By.xpath("(//*[@id='download0'])[2]"));
 		test.log(Status.INFO, "Click on download");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("vidDownloadBtn"));
+		Commons.click(test, driver, By.id("dismissBtn"));
 		Commons.click(test, driver, By.xpath("(//*[@id='delete0'])[2]"));
 		test.log(Status.INFO, "Click on delete");
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
-		Commons.click(test, driver, By.id("confirmmessagepopup"));
+		Commons.click(test, driver, By.id("NoBtn"));
+		
 
 //	    
 	}
