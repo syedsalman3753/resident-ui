@@ -80,7 +80,7 @@ public class TestRunner {
 		System.getProperties().setProperty("testng.outpur.dir", "testng-report");
 		testNg.setOutputDirectory("testng-report");
 		System.getProperties().setProperty("emailable.report2.name", "ResidentUI" + "-"
-				+ System.getProperty("env.user")+ "-"+langid+-+ System.currentTimeMillis() + "-report.html");
+				+ System.getProperty("env.user")+ "-"+langid+"-"+ System.currentTimeMillis() + "-report.html");
 
 
 		testNg.run();
