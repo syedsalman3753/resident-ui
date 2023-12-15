@@ -257,7 +257,7 @@ try {
 				// UIN activation failed
 				return "";
 			}	
-			AdminTestUtil.genrateCredentialRequest(rid,tokenRoleIdRepo);
+		//	AdminTestUtil.genrateCredentialRequest(rid,tokenRoleIdRepo);
 	    	
 	    	return uin;
 	    }
