@@ -53,7 +53,6 @@ public class TestRunner {
 		testNg.setDefaultSuiteName("resident");
 		MockSMTPListener mockSMTPListener = new MockSMTPListener();
 		mockSMTPListener.run();
-
 		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
 		testNg.setExcludedGroups(listExcludedGroups);		
 		testNg.setTestClasses(new Class[] {
