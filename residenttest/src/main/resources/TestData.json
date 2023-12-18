@@ -14,7 +14,7 @@
 		"10VerifyPhoneNumberEmailID":"VPNEEI",
 		"11viewMyHistory":"VMH",
 		"BELOW_ARE_STATIC_KEYWORDS": "We are using this setExcludedGroups to exclude scenarios",
-		"setExcludedGroups": "",
+		"setExcludedGroups": "LG,GMU,VPNEEI,GI,MMV,SMI,SMD,TMR,VMH,GPC",
 		"identityGenManual":"no",
 		"perpetualvid":"3820153059067924",
 		 "temporaryvid":"3048902169863853",
@@ -153,7 +153,7 @@
 			},
 			{
 				"language": "ara",
-				"value": "القنيطرة"
+				"value": "أولد أوجيه"
 			}
 		]
 	}
