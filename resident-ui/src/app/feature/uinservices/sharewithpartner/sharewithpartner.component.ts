@@ -255,7 +255,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 this.fullAddress = this.fullAddress.replace(/^./, "");
                 value = this.fullAddress
               } else {
-                this.userInfo[data.attributeName].forEach(item =>{
+                this.userInfo['fullName'].forEach(item =>{
                   if(item.language === this.langCode){
                     value = item.value
                   }
