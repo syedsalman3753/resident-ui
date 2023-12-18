@@ -19,6 +19,7 @@ import {
   MatKeyboardService
 } from 'ngx7-material-keyboard';
 import defaultJson from "src/assets/i18n/default.json";
+// import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-sharewithpartner",
@@ -66,7 +67,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   private attachToElementMesOne: any;
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, 
     private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakPointService: BreakpointService,
-    private keyboardService: MatKeyboardService) {
+    private keyboardService: MatKeyboardService,
+    // private fontSizeService: FontSizeService
+    ) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "shareWithPartner") {
         this.shareInfo()
@@ -268,9 +271,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         }
 
         if (data.formatRequired) {
-          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": data['maskRequired'], "format": data['defaultFormat'], "value": value };
+          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "format": data['defaultFormat'], "value": value };
         } else {
-          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": data['maskRequired'], "value": value };
+          this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": false, "value": value };
         }
       }
 
@@ -294,7 +297,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
         } else {
           value = this.userInfo[type];
         }
-        this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": $event.checked, "value": value };
+        this.sharableAttributes[data.attributeName] = { "label": data.label[this.langCode], "attributeName": data['attributeName'], "isMasked": !this.sharableAttributes[data.attributeName]['isMasked'], "value": value };
       } else {
         let value = "";
         let allValues = "";
@@ -595,7 +598,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('uinservices/viewhistory');
   }
 
-
+  // get fontSize(): number {
+  //   return this.fontSizeService.fontSize;
+  // }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
