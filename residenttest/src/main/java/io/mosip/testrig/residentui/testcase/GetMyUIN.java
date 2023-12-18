@@ -91,9 +91,9 @@ public class GetMyUIN extends ResidentBaseClass{
 		Commons.click(test, driver, By.xpath("getMyUIN"));//id
 		Commons.enter(test,driver, By.id("aidValue"), vid);//
 		Commons.switchToFrameByIndex(test,driver, 0);
-		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
-		Thread.sleep(3000);
-		driver.switchTo().parentFrame();
+//		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
+//		Thread.sleep(3000);
+//		driver.switchTo().parentFrame();
 		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
 		   
