@@ -27,7 +27,7 @@
 		 "aid":"10001100800003920230505043751",
 		 "postalcode": "10104",
 		 "headless": "no",
-		 "language":"eng",
+		 "language":"fra",
 		 "loginlang":"mul",
 		"hierarchyLevel0": [
 			{
@@ -48,7 +48,7 @@
 			},
 			{
 				"language": "fra",
-				"value": "FranÃ§ais"
+				"value": "Maroc"
 			},
 			{
 				"language": "ara",
@@ -74,7 +74,7 @@
 			},
 			{
 				"language": "fra",
-				"value": "FranÃ§ais"
+				"value": "Rabat-Salé-Kénitra"
 			},
 			{
 				"language": "ara",
@@ -99,7 +99,7 @@
 			},
 			{
 				"language": "fra",
-				"value": "FranÃ§ais"
+				"value": "Kénitra"
 			},
 			{
 				"language": "ara",
@@ -124,7 +124,7 @@
 			},
 			{
 				"language": "fra",
-				"value": "FranÃ§ais"
+				"value": "Kénitra"
 			},
 			{
 				"language": "ara",
@@ -149,7 +149,7 @@
 			},
 			{
 				"language": "fra",
-				"value": "FranÃ§ais"
+				"value": "Ben Mansour"
 			},
 			{
 				"language": "ara",

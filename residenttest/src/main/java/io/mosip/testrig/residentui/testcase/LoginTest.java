@@ -50,7 +50,7 @@ public class LoginTest extends BaseClass {
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
-		Thread.sleep(60000);
+		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
@@ -58,10 +58,10 @@ public class LoginTest extends BaseClass {
 		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
 		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(30000);
+		Thread.sleep(2000);
 		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-			Thread.sleep(30000);	
+			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
@@ -74,12 +74,12 @@ public class LoginTest extends BaseClass {
 					Character.toString(otp.charAt(i)));
 		}
 		test.log(Status.INFO, "Extracted OTP");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 
 		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
 			
@@ -108,7 +108,7 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
-		Thread.sleep(60000);
+		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
@@ -116,10 +116,10 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
 		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(30000);
+		Thread.sleep(2000);
 		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-			Thread.sleep(30000);	
+			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.temporaryVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
@@ -132,12 +132,12 @@ String envPath = ConfigManager.getiam_adminportal_path();
 					Character.toString(otp.charAt(i)));
 		}
 		test.log(Status.INFO, "Extracted OTP");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 
 		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
 			
@@ -157,7 +157,7 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
-		Thread.sleep(60000);
+		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
@@ -165,10 +165,10 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
 		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(30000);
+		Thread.sleep(2000);
 		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-			Thread.sleep(30000);	
+			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.onetimeuseVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
@@ -181,12 +181,12 @@ String envPath = ConfigManager.getiam_adminportal_path();
 					Character.toString(otp.charAt(i)));
 		}
 		test.log(Status.INFO, "Extracted OTP");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 
 		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
 			
