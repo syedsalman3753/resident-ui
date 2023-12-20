@@ -74,7 +74,7 @@ public class ResidentBaseClass {
 //			
 //			e1.printStackTrace();
 //		}
-		String configFilePath ="/usr/bin/chromedriver.exe";
+		String configFilePath ="/usr/bin/chromedriver";
 		System.setProperty("webdriver.chrome.driver", configFilePath);
 		
 	//	WebDriverManager.chromedriver().setup();
