@@ -435,11 +435,12 @@ public class EmailableReport implements IReporter {
 			for (MethodResult methodResult : classResult.getMethodResults()) {
 				List<ITestResult> results = methodResult.getResults();
 				assert !results.isEmpty();
-
+				ITestResult firstResult = results.iterator().next();
+				String methodName=firstResult.getName();
 				String label = Utils
 						.escapeHtml(className + "#" + results.iterator().next().getMethod().getMethodName());
 				for (ITestResult result : results) {
-					writeScenario(scenarioIndex, label, result);
+					writeScenario(scenarioIndex, methodName, result);
 					scenarioIndex++;
 				}
 			}
@@ -455,7 +456,7 @@ public class EmailableReport implements IReporter {
 		writer.print("<h3 id=\"m");
 		writer.print(scenarioIndex);
 		writer.print("\">");
-		// writer.print(label);
+		 writer.print(label);
 		writer.print("</h3>");
 
 		writer.print("<table class=\"result\">");

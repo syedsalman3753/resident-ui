@@ -227,7 +227,7 @@ public static String getGlobalResourcePath() {
 	public static String GetKernalFilename(){
 		String path = System.getProperty("env.user");
 		String kernalpath=null;
-		if(System.getProperty("env.user")==null) {
+		if(System.getProperty("env.user")==null || System.getProperty("env.user").equals("")) {
 			kernalpath="Kernel.properties";
 
 		}else {
