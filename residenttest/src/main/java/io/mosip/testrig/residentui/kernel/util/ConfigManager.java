@@ -3,6 +3,8 @@ package io.mosip.testrig.residentui.kernel.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -51,7 +53,7 @@ public class ConfigManager {
 	private static String MOSIP_AUTOMATION_CLIENT_SECRET = "mosip_testrig_client_secret";
 	private static String MOSIP_AUTOMATION_CLIENT_ID = "mosip_testrig_client_id";
 	private static String MOSIP_AUTOMATION_APP_ID = "mosip_automation_app_id";
-
+	private static String serviceNotDeployedList;
 	private static String S3_HOST = "s3-host";
 	private static String usePreConfiguredOtp;
 	private static String S3_REGION = "s3-region";
@@ -116,7 +118,7 @@ public class ConfigManager {
 	private static String resident_client_secret;
 	private static String resident_client_id;
 	private static String resident_app_id;
-
+	private static String SERVICES_NOT_DEPLOYED = "servicesNotDeployed";
 	private static String mpartner_mobile_client_id;
 	private static String mpartner_mobile_client_secret;
 
@@ -263,6 +265,11 @@ public class ConfigManager {
 				? propsKernel.getProperty(IAM_APIINTERNALENDPOINT)
 				: System.getenv(IAM_APIINTERNALENDPOINT);
 		LOGGER.info("apiinternalendpoint from config manager::" + iam_apiinternalendpoint);
+		
+		serviceNotDeployedList = System.getenv(SERVICES_NOT_DEPLOYED) == null
+				? propsKernel.getProperty(SERVICES_NOT_DEPLOYED)
+				: System.getenv(SERVICES_NOT_DEPLOYED);
+		propsKernel.setProperty(SERVICES_NOT_DEPLOYED, serviceNotDeployedList);
 //		push_reports_to_s3 = getValueForKey(PUSH_TO_S3);
 		db_port = getValueForKey(DB_PORT);
 		db_domain = getValueForKey(DB_DOMAIN);
@@ -697,5 +704,22 @@ public class ConfigManager {
 	public static String getAuthDemoServiceUrl() {
 		return ConfigManager.getAuthDemoServiceBaseUrl() + ":" + ConfigManager.getAuthDemoServicePort();
 	}
-	
+	public static boolean isInServiceNotDeployedList(String stringToFind) {
+		synchronized (serviceNotDeployedList) {
+			if (serviceNotDeployedList.isBlank())
+				return false;
+			List<String> serviceNotDeployed = Arrays.asList(serviceNotDeployedList.split(","));
+			if (ConfigManager.IsDebugEnabled())
+				LOGGER.info("serviceNotDeployedList:  " + serviceNotDeployedList + ", serviceNotDeployed : " + serviceNotDeployed
+						+ ", stringToFind : " + stringToFind);
+			for (String string : serviceNotDeployed) {
+				if (string.equalsIgnoreCase(stringToFind))
+					return true;
+				else if(stringToFind.toLowerCase().contains(string.toLowerCase())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

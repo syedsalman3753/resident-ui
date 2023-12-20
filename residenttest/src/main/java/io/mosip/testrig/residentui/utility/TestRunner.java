@@ -1,6 +1,7 @@
 package io.mosip.testrig.residentui.utility;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -49,41 +50,144 @@ public class TestRunner {
 
 
 	public static void startTestRunner() throws Exception {
-		testNg=new TestNG();
-		testNg.setDefaultSuiteName("resident");
-		MockSMTPListener mockSMTPListener = new MockSMTPListener();
-		mockSMTPListener.run();
-		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
-		testNg.setExcludedGroups(listExcludedGroups);		
-		testNg.setTestClasses(new Class[] {
-				LoginTest.class,    
-				ViewMyHistory.class,
-				ManageMyVid.class,
-				SecureMyId.class,
-				UpdateMyData.class,
-				TrackMyRequests.class,
-				GetPersonalisedCard.class,
-				ShareMyData.class,
-				GetMyUIN.class,
-				GetInformation.class,
-				VerifyPhoneNumberEmailID.class
+		
+		
+		
+		
+		
+		
+		
+		File homeDir = null;
+		TestNG runner = new TestNG();
+		List<String> suitefiles = new ArrayList<String>();
+		String os = System.getProperty("os.name");
+		
+		if (checkRunType().contains("IDE") || os.toLowerCase().contains("windows") == true) {
+			homeDir = new File(getResourcePath() + "/testngFile");
+//			LOGGER.info("IDE Home Dir=" + homeDir);
+		} else {
+			homeDir = new File(getResourcePath() + "/testngFile");
+//			LOGGER.info("Jar Home Dir=" + homeDir);
+		}
 
-		});
+		for (File file : homeDir.listFiles()) {
+			if (file.getName().toLowerCase() != null) {
+				suitefiles.add(file.getAbsolutePath());
+			}
+		}
+//		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
+//		runner.setExcludedGroups(listExcludedGroups);		
+//		runner.setTestClasses(new Class[] {
+//				LoginTest.class,    
+//				ViewMyHistory.class,
+//				ManageMyVid.class,
+//				SecureMyId.class,
+//				UpdateMyData.class,
+//				TrackMyRequests.class,
+//				GetPersonalisedCard.class,
+//				ShareMyData.class,
+//				GetMyUIN.class,
+//				GetInformation.class,
+//				VerifyPhoneNumberEmailID.class
+//
+//		});
+		runner.setTestSuites(suitefiles);
+		
+	
 		String langid=JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
 		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
 		
 			if(language.equals("sin")) {
 				langid="";
 			}
-		
 		System.getProperties().setProperty("testng.outpur.dir", "testng-report");
-		testNg.setOutputDirectory("testng-report");
-		System.getProperties().setProperty("emailable.report2.name", "ResidentUI" + "-"
-				+ System.getProperty("env.user")+ "-"+langid+"-"+ System.currentTimeMillis() + "-report.html");
+		runner.setOutputDirectory("testng-report");
+		System.getProperties().setProperty("emailable.report2.name", "RESIDENT-" + BaseTestCase.environment + "-"
+				+ langid + "-run-" + System.currentTimeMillis() + "-report.html");
+		
+		
+		runner.run();
+		
+		MockSMTPListener mockSMTPListener = new MockSMTPListener();
+		mockSMTPListener.bTerminate = true;
 
-
-		testNg.run();
 		System.exit(0);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		
+//		File homeDir = null;
+//		List<String> suitefiles = new ArrayList<String>();
+//		String os = System.getProperty("os.name");
+//		testNg=new TestNG();
+//		testNg.setDefaultSuiteName("resident");
+//		MockSMTPListener mockSMTPListener = new MockSMTPListener();
+//		mockSMTPListener.run();
+//		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
+//		testNg.setExcludedGroups(listExcludedGroups);		
+//		testNg.setTestClasses(new Class[] {
+//				LoginTest.class,    
+//				ViewMyHistory.class,
+//				ManageMyVid.class,
+//				SecureMyId.class,
+//				UpdateMyData.class,
+//				TrackMyRequests.class,
+//				GetPersonalisedCard.class,
+//				ShareMyData.class,
+//				GetMyUIN.class,
+//				GetInformation.class,
+//				VerifyPhoneNumberEmailID.class
+//
+//		});
+//		if (checkRunType().contains("IDE") || os.toLowerCase().contains("windows") == true) {
+//			homeDir = new File(getResourcePath() + "/testngFile");
+////			LOGGER.info("IDE Home Dir=" + homeDir);
+//		} else {
+////			homeDir = new File(System.getProperty("user.dir") + "/"+resourceTestFolderName + "/" + TestResources.resourceFolderName +"/testngFile");
+////			LOGGER.info("Jar Home Dir=" + homeDir);
+//		}
+//
+//		for (File file : homeDir.listFiles()) {
+//			if (file.getName().toLowerCase() != null) {
+//				suitefiles.add(file.getAbsolutePath());
+//			}
+//		}
+//		testNg.setTestSuites(suitefiles);
+//		String langid=JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
+//		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+//		
+//			if(language.equals("sin")) {
+//				langid="";
+//			}
+//		
+//		System.getProperties().setProperty("testng.outpur.dir", "testng-report");
+//		testNg.setOutputDirectory("testng-report");
+//		System.getProperties().setProperty("emailable.report2.name", "ResidentUI" + "-"
+//				+ System.getProperty("env.user")+ "-"+langid+"-"+ System.currentTimeMillis() + "-report.html");
+//
+//
+//		testNg.run();
+//		System.exit(0);
 	}
 
 public static String getGlobalResourcePath() {
