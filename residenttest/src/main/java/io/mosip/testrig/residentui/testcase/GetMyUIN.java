@@ -39,7 +39,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	public void getMyUINWithoutAID() throws InterruptedException, IOException {
 		test=extent.createTest("get MyUIN Without AID", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));
-		Commons.switchToFrameByIndex(test,driver, 0);
+//		Commons.switchToFrameByIndex(test,driver, 0);
 //		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 //		Thread.sleep(3000);
 //		driver.switchTo().parentFrame();
@@ -53,7 +53,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		test=extent.createTest("get My UIN With Invalid Otp", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));
 		Commons.enter(test,driver, By.id("aidValue"), vid);//
-		Commons.switchToFrameByIndex(test,driver, 0);
+//		Commons.switchToFrameByIndex(test,driver, 0);
 //		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 //		Thread.sleep(3000);
 //		driver.switchTo().parentFrame();
@@ -72,7 +72,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		test=extent.createTest("get My UIN With Expired Otp", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));//id
 		Commons.enter(test,driver, By.id("aidValue"), vid);//
-		Commons.switchToFrameByIndex(test,driver, 0);
+	//	Commons.switchToFrameByIndex(test,driver, 0);
 //		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 //		Thread.sleep(3000);
 //		driver.switchTo().parentFrame();
@@ -90,7 +90,7 @@ public class GetMyUIN extends ResidentBaseClass{
 		test=extent.createTest("get My UIN Without Otp", "verify Login");
 		Commons.click(test, driver, By.xpath("getMyUIN"));//id
 		Commons.enter(test,driver, By.id("aidValue"), vid);//
-		Commons.switchToFrameByIndex(test,driver, 0);
+//		Commons.switchToFrameByIndex(test,driver, 0);
 //		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));
 //		Thread.sleep(3000);
 //		driver.switchTo().parentFrame();
