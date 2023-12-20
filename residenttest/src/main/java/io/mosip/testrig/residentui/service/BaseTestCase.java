@@ -20,7 +20,7 @@ import io.mosip.testrig.residentui.kernel.util.CommonLibrary;
 import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.kernel.util.KernelAuthentication;
 import io.mosip.testrig.residentui.utility.GlobalConstants;
-import io.mosip.testrig.residentui.utility.GlobalMethods;
+//import io.mosip.testrig.residentui.utility.GlobalMethods;
 import io.mosip.testrig.residentui.utility.TestRunner;
 import io.restassured.response.Response;
 
@@ -151,7 +151,7 @@ private static String targetEnvVersion = "";
 			String url = ApplnURI + "/v1/auditmanager/actuator/info";
 			try {
 				response = RestClient.getRequest(url, MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON);
-				GlobalMethods.reportResponse(response.getHeaders().asList().toString(), url, response);
+			//	GlobalMethods.reportResponse(response.getHeaders().asList().toString(), url, response);
 
 				responseJson = new org.json.JSONObject(response.getBody().asString());
 
