@@ -83,7 +83,7 @@ jobs:
     env:
       NAMESPACE: ${{ secrets.dev_namespace_docker_hub }}
       SERVICE_NAME: residenttest
-      SERVICE_LOCATION: residenttests
+      SERVICE_LOCATION: residenttest
       BUILD_ARTIFACT: residenttest-local
     steps:
       - uses: actions/checkout@v2
