@@ -134,7 +134,7 @@ jobs:
         include:
           - SERVICE_LOCATION: 'residenttest'
             SERVICE_NAME: 'residenttest'
-            BUILD_ARTIFACT: 'residenttest'
+            BUILD_ARTIFACT: 'residenttest-local'
       fail-fast: false
     name: ${{ matrix.SERVICE_NAME }}
     uses: mosip/kattu/.github/workflows/docker-build.yml@master
