@@ -1,4 +1,4 @@
-FROM selenium/standalone-chrome:latest
+FROM openjdk:11-jre
 USER root
 ARG SOURCE
 ARG COMMIT_HASH
@@ -27,6 +27,12 @@ ENV work_dir=/home/${container_user}/
 # install packages and create user
 RUN groupadd -g ${container_user_gid} ${container_user_group} \
     && useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/bash -m ${container_user} -d ${work_dir}
+RUN apt-get update -y && \
+    apt-get install -y wget gnupg && \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update -y && \
+    apt-get install -y google-chrome-stable
 
 # select container user for all tasks
 USER ${container_user_uid}:${container_user_gid}
