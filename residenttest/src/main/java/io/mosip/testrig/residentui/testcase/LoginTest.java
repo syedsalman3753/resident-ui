@@ -69,11 +69,10 @@ public class LoginTest extends BaseClass {
 		 otp = MockSMTPListener.getOtp(externalemail);
 
 		System.out.println(otp);
-		Commons.enter(test, driver, By.xpath("/html/body/div/div/section/div/div[2]/div/form/div[2]/div/input[1]"),"1");
-	//	Commons.enter(test, driver, By.id("otp_verify_input"), otp);
+	
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			
-			Commons.enter(test, driver, By.xpath("/html/body/div/div/section/div/div[2]/div/form/div[2]/div/input["+i+"]"),i+1+"");
+			Commons.enter(test, driver, By.xpath("/html/body/div/div/section/div/div[2]/div/form/div[2]/div/input["+i+1+"]"),Character.toString(otp.charAt(i)));
 		}
 
 		test.log(Status.INFO, "Extracted OTP");
