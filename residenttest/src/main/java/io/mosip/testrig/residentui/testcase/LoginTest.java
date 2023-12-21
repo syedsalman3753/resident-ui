@@ -73,10 +73,13 @@ public class LoginTest extends BaseClass {
 		System.out.println(otp);
 		
 		for (int i = 1; i <= otp.length(); i++) {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class='pincode-input-text']["+i+"]")));
 				String a="//input[@class='pincode-input-text']["+i+"]";
 				logger.info("path of Xpath="+a);
 			Commons.enter(test, driver, By.xpath(a),Character.toString(otp.charAt(i-1)));
 		}
+		driver.findElement(By.className("pincode-input-text"));
 //		for (int i = 0; i < otp.length(); i++) {
 //		    String inputId = "otp_verify_input"; // Replace with the actual unique ID
 //		    Commons.enter(test, driver, By.id(inputId), Character.toString(otp.charAt(i)));
