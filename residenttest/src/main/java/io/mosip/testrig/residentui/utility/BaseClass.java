@@ -85,9 +85,12 @@ public class BaseClass {
     }
 	@BeforeMethod
 	public void setUp() throws Exception {
-		String configFilePath ="/usr/bin/chromedriver";
-		System.setProperty("webdriver.chrome.driver", configFilePath);
-	//	WebDriverManager.chromedriver().setup();
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			String configFilePath ="/usr/bin/chromedriver";
+			System.setProperty("webdriver.chrome.driver", configFilePath);
+		}else {
+			WebDriverManager.chromedriver().setup();
+		}
 		ChromeOptions options = new ChromeOptions();
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		if(headless.equalsIgnoreCase("yes")) {
