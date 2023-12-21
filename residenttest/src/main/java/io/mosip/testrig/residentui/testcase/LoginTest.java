@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -38,10 +39,11 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
- @Test(groups = "LG")
+// @Test(groups = "LG")
 public class LoginTest extends BaseClass {
 // 
-//	@Test(priority = 0)
+	private static final Logger logger = Logger.getLogger(LoginTest.class);
+	@Test(priority = 0)
 	public static void loginTest() throws Exception {
 	
 		String envPath = ConfigManager.getiam_adminportal_path();
@@ -69,10 +71,16 @@ public class LoginTest extends BaseClass {
 		 otp = MockSMTPListener.getOtp(externalemail);
 
 		System.out.println(otp);
-		for (int i = 0; i <= otp.length() - 1; i++) {
-			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
-					Character.toString(otp.charAt(i)));
+		
+		for (int i = 1; i <= otp.length(); i++) {
+				String a="//input[@class='pincode-input-text']["+i+"]";
+				logger.info("path of Xpath="+a);
+			Commons.enter(test, driver, By.xpath(a),Character.toString(otp.charAt(i-1)));
 		}
+//		for (int i = 0; i < otp.length(); i++) {
+//		    String inputId = "otp_verify_input"; // Replace with the actual unique ID
+//		    Commons.enter(test, driver, By.id(inputId), Character.toString(otp.charAt(i)));
+//		}
 		test.log(Status.INFO, "Extracted OTP");
 		Thread.sleep(2000);
 
