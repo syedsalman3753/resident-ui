@@ -71,8 +71,8 @@ public class LoginTest extends BaseClass {
 		System.out.println(otp);
 	
 		for (int i = 0; i <= otp.length() - 1; i++) {
-			
-			Commons.enter(test, driver, By.xpath("/html/body/div/div/section/div/div[2]/div/form/div[2]/div/input["+i+1+"]"),Character.toString(otp.charAt(i)));
+			int a=i+1;
+			Commons.enter(test, driver, By.xpath("/html/body/div/div/section/div/div[2]/div/form/div[2]/div/input["+a+"]"),Character.toString(otp.charAt(i)));
 		}
 
 		test.log(Status.INFO, "Extracted OTP");
