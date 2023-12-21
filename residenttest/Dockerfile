@@ -1,4 +1,4 @@
-FROM openjdk:11-jre
+FROM selenium/standalone-chrome:latest
 USER root
 ARG SOURCE
 ARG COMMIT_HASH
@@ -33,11 +33,7 @@ RUN apt-get update -y && \
     echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update -y && \
     apt-get install -y google-chrome-stable
-    
- ARG chromedriver_version= 120.0.6099.110
-RUN wget -q -O /usr/bin/chromedriver https://chromedriver.storage.googleapis.com/$chromedriver_version/chromedriver_linux64.zip \
-    && unzip -o /usr/bin/chromedriver -d /usr/bin \
-    && chmod +x /usr/bin/chromedriver
+
 # select container user for all tasks
 USER ${container_user_uid}:${container_user_gid}
 
