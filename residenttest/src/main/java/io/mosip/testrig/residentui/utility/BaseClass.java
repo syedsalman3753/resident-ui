@@ -91,10 +91,13 @@ public class BaseClass {
 		}else {
 			WebDriverManager.chromedriver().setup();
 		}
-		ChromeOptions options = new ChromeOptions();
+		
+		
+     	ChromeOptions options = new ChromeOptions();
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		if(headless.equalsIgnoreCase("yes")) {
-			options.addArguments("--headless=new");
+			options.addArguments("--headless"); // Run in headless mode
+			options.addArguments("--disable-gpu");
 		}
 		
 
