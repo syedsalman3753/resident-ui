@@ -75,10 +75,7 @@ public class ResidentBaseClass {
 //			e1.printStackTrace();
 //		}
 		String configFilePath ="/usr/bin/chromedriver";
-//		System.setProperty("webdriver.chrome.driver", configFilePath);
 		System.setProperty("webdriver.chrome.driver", configFilePath);
-		System.setProperty("webdriver.chrome.logfile", "/usr/bin/chromedriver.log");
-		System.setProperty("webdriver.chrome.verboseLogging", "true");
 		
 	//	WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();

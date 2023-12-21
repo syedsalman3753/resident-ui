@@ -85,8 +85,9 @@ public class BaseClass {
     }
 	@BeforeMethod
 	public void setUp() throws Exception {
-		
-		WebDriverManager.chromedriver().setup();
+		String configFilePath ="/usr/bin/chromedriver";
+		System.setProperty("webdriver.chrome.driver", configFilePath);
+	//	WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		if(headless.equalsIgnoreCase("yes")) {

@@ -435,12 +435,12 @@ public class EmailableReport implements IReporter {
 			for (MethodResult methodResult : classResult.getMethodResults()) {
 				List<ITestResult> results = methodResult.getResults();
 				assert !results.isEmpty();
-				ITestResult firstResult = results.iterator().next();
-				String methodName=firstResult.getName();
+			//	ITestResult firstResult = results.iterator().next();
+			//	String methodName=firstResult.getName();
 				String label = Utils
 						.escapeHtml(className + "#" + results.iterator().next().getMethod().getMethodName());
 				for (ITestResult result : results) {
-					writeScenario(scenarioIndex, methodName, result);
+					writeScenario(scenarioIndex, label, result);
 					scenarioIndex++;
 				}
 			}
