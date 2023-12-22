@@ -78,7 +78,7 @@ public class LoginTest extends BaseClass {
 //			Thread.sleep(500);
 //			
 //		}
-		logger.info(driver.findElement(By.id("verify_otp")).isDisplayed());
+		
 		
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
@@ -89,8 +89,8 @@ public class LoginTest extends BaseClass {
 
 		logger.info("enter OTP ");
 		Thread.sleep(2000);
-		logger.info(driver.findElement(By.id("verify_otp")).isDisplayed());
-		Commons.click(test, driver, By.xpath("//*[@id='verify_otp']"));
+	
+		Commons.click(test, driver, By.xpath("//*[@value='Submit']"));
 		test.log(Status.INFO, "Click on Verify");
 
 		Thread.sleep(2000);
