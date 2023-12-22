@@ -71,8 +71,10 @@ public class LoginTest extends BaseClass {
 		System.out.println(otp);
 	
 		for (int i = 0; i <= otp.length() - 1; i++) {
+			Thread.sleep(500);
+			driver.findElements( By.className("pincode-input-text")).get(i).sendKeys(Character.toString(otp.charAt(i)));
+			Thread.sleep(500);
 			
-			Commons.enter(test, driver, By.className("pincode-input-text"),i,Character.toString(otp.charAt(i)));
 		}
 
 		test.log(Status.INFO, "Extracted OTP");
