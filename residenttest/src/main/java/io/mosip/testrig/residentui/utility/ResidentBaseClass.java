@@ -68,11 +68,15 @@ public class ResidentBaseClass {
 		}else {
 			WebDriverManager.chromedriver().setup();
 		}
-		ChromeOptions options = new ChromeOptions();
-		String headless = JsonUtil.JsonObjParsing(Commons.getTestData(), "headless");
-		if (headless.equalsIgnoreCase("yes")) {
-			options.addArguments("--headless=new");
+		
+		
+     	ChromeOptions options = new ChromeOptions();
+		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		if(headless.equalsIgnoreCase("yes")) {
+			options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--log-level=DEBUG");
+			
 		}
+		
 		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();

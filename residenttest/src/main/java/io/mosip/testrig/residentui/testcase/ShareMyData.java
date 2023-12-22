@@ -17,7 +17,7 @@ public class ShareMyData extends BaseClass {
 		test = extent.createTest("shareMyData Test", "verify shareMyData");
 		Commons.clickWebelement(test, driver, By.id("uinservices/sharewithpartner"));
 
-		Commons.clickWebelement(test, driver, By.id("fullName"));
+		Commons.clickWebelement(test, driver, By.id("name"));
 		Commons.clickWebelement(test, driver, By.id("dateOfBirth"));
 		Commons.clickWebelement(test, driver, By.id("UIN"));
 		Commons.dropdown(test, driver, By.id("partnerDetails"));
