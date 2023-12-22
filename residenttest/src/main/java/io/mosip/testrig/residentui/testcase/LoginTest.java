@@ -87,10 +87,10 @@ public class LoginTest extends BaseClass {
 			i++;
 		}
 
-		test.log(Status.INFO, "Extracted OTP");
+		logger.info("enter OTP ");
 		Thread.sleep(2000);
 		
-		Commons.click(test, driver, By.cssSelector("#verify_otp"));
+		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
 		Thread.sleep(2000);
