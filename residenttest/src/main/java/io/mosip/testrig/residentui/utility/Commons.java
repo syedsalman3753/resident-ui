@@ -107,8 +107,9 @@ public class Commons extends BaseClass{
 		//logger.info("Entering " + by +value);
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
-			
+			Thread.sleep(500);
 			driver.findElements(by).get(i).sendKeys(value);
+			Thread.sleep(500);
 			try {
 				Thread.sleep(8);
 			} catch (InterruptedException e) {
