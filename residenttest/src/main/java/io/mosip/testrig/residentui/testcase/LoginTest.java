@@ -70,7 +70,7 @@ public class LoginTest extends BaseClass {
 
 		 otp = MockSMTPListener.getOtp(externalemail);
 
-		System.out.println(otp);
+		 
 	
 //		for (int i = 0; i <= otp.length() - 1; i++) {
 //			Thread.sleep(500);
@@ -83,16 +83,14 @@ public class LoginTest extends BaseClass {
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
 		for(WebElement o:e) {
-			Thread.sleep(1000);
 			o.sendKeys(Character.toString(otp.charAt(i)));
 			i++;
-			Thread.sleep(1000);
 		}
 
-		logger.info("enter OTP ");
-		Thread.sleep(2000);//button
-		driver.findElements( By.xpath("//button")).get(1).click();
-	
+		logger.info("enter OTP "+otp);
+		Thread.sleep(10000);//button
+	//	driver.findElements( By.xpath("//button")).get(1).click();
+		Commons.click(test, driver, By.id("verify_otp"));
 		logger.info("Click on Verify");
 
 		Thread.sleep(2000);
