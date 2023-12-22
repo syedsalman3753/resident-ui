@@ -70,11 +70,17 @@ public class LoginTest extends BaseClass {
 
 		System.out.println(otp);
 	
-		for (int i = 0; i <= otp.length() - 1; i++) {
-			Thread.sleep(500);
-			driver.findElements( By.className("pincode-input-text")).get(i).sendKeys(Character.toString(otp.charAt(i)));
-			Thread.sleep(500);
-			
+//		for (int i = 0; i <= otp.length() - 1; i++) {
+//			Thread.sleep(500);
+//			driver.findElements( By.className("pincode-input-text")).get(i).sendKeys(Character.toString(otp.charAt(i)));
+//			Thread.sleep(500);
+//			
+//		}
+		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
+		int i=0;
+		for(WebElement o:e) {
+			o.sendKeys(Character.toString(otp.charAt(i)));
+			i++;
 		}
 
 		test.log(Status.INFO, "Extracted OTP");
