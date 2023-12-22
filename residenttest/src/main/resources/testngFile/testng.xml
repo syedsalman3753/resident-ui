@@ -6,7 +6,8 @@
 	<test thread-count="5" name="RESIDENT-UI-AUTOMATION-RUN">
 	
 		<classes>
-			<class name="io.mosip.testrig.residentui.testcase.LoginTest" />
+			<class name="io.mosip.testrig.residentui.testcase.GetInformation" />
+			<class name="io.mosip.testrig.residentui.testcase.VerifyPhoneNumberEmailID" />
 			
 		</classes>
 	</test>
