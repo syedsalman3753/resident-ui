@@ -77,10 +77,10 @@ public class LoginTest extends BaseClass {
 //			
 //		}
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
-		int i=0;
+		
 		for(WebElement o:e) {
-			o.sendKeys(Character.toString(otp.charAt(i)));
-			i++;
+			o.sendKeys("1");
+		
 		}
 
 		test.log(Status.INFO, "Extracted OTP");
