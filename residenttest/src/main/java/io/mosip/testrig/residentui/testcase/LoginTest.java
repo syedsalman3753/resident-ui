@@ -54,7 +54,7 @@ public class LoginTest extends BaseClass {
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
+	Commons.clickWebelement(test, driver, By.id("UINservices"));
 		try {
 		
 		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
@@ -90,7 +90,7 @@ public class LoginTest extends BaseClass {
 		logger.info("enter OTP ");
 		Thread.sleep(2000);
 		
-		Commons.click(test, driver, By.id("verify_otp"));
+		Commons.click(test, driver, By.xpath("//*[@id='verify_otp']"));
 		test.log(Status.INFO, "Click on Verify");
 
 		Thread.sleep(2000);
