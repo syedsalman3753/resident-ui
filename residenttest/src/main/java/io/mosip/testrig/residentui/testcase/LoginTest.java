@@ -77,15 +77,15 @@ public class LoginTest extends BaseClass {
 //			
 //		}
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
-		
+		int i=0;
 		for(WebElement o:e) {
-			o.sendKeys("1");
-		
+			o.sendKeys(Character.toString(otp.charAt(i)));
+			i++;
 		}
 
 		test.log(Status.INFO, "Extracted OTP");
 		Thread.sleep(2000);
-
+		(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(By.id("verify_otp")));
 		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
