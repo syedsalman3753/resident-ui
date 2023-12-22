@@ -79,10 +79,7 @@ public class LoginTest extends BaseClass {
 //			
 //		}
 		
-		boolean f=driver.findElement(By.id("verify_otp")).isDisplayed();
-		boolean b=driver.findElement(By.id("verify_otp")).isEnabled();
-		logger.info("first"+f+b);
-		System.out.println("first"+f+b);
+		
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
 		for(WebElement o:e) {
@@ -92,11 +89,8 @@ public class LoginTest extends BaseClass {
 
 		test.log(Status.INFO, "Extracted OTP");
 		Thread.sleep(2000);
-		boolean c=driver.findElement(By.id("verify_otp")).isDisplayed();
-		boolean d=driver.findElement(By.id("verify_otp")).isEnabled();
-		logger.info("first"+c+d);
-		System.out.println("first"+c+d);
-		Commons.click(test, driver, By.id("verify_otp"));
+		
+		Commons.click(test, driver, By.cssSelector("#verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
 		Thread.sleep(2000);
