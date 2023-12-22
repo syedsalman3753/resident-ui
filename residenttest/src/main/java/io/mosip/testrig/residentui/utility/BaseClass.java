@@ -96,7 +96,7 @@ public class BaseClass {
      	ChromeOptions options = new ChromeOptions();
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		if(headless.equalsIgnoreCase("yes")) {
-			options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--log-level=DEBUG");
+			options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200");
 			
 		}
 		
