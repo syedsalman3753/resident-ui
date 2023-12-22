@@ -83,26 +83,28 @@ public class LoginTest extends BaseClass {
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
 		for(WebElement o:e) {
+			Thread.sleep(1000);
 			o.sendKeys(Character.toString(otp.charAt(i)));
 			i++;
+			Thread.sleep(1000);
 		}
 
 		logger.info("enter OTP ");
 		Thread.sleep(2000);//button
 		driver.findElements( By.xpath("//button")).get(1).click();
-	//	Commons.click(test, driver, By.id("verify_otp"));
+	
 		logger.info("Click on Verify");
-		driver.findElements( By.xpath("//button")).get(3).click();
+
 		Thread.sleep(2000);
-//		try {
-//			driver.findElement(By.id("dismissBtn")).click();
-//			
-//		}catch(Exception a) {
-//			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
-//			test.log(Status.INFO, "ALL Checkboxes are selected");
-//			Commons.click(test,driver, By.id("continue"));
-//			Commons.click(test,driver, By.id("dismissBtn"));
-//		}
+		try {
+			driver.findElement(By.id("dismissBtn")).click();
+			
+		}catch(Exception a) {
+			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
+			test.log(Status.INFO, "ALL Checkboxes are selected");
+			Commons.click(test,driver, By.id("continue"));
+			Commons.click(test,driver, By.id("dismissBtn"));
+		}
 	}
 
 
