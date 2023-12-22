@@ -90,7 +90,8 @@ public class LoginTest extends BaseClass {
 		logger.info("enter OTP "+otp);
 		Thread.sleep(10000);//button
 	//	driver.findElements( By.xpath("//button")).get(1).click()
-		Commons.click(test, driver, By.id("verify_otp"));
+		//Commons.click(test, driver, By.id("verify_otp"));
+		driver.findElement(By.id("verify_otp")).click();
 		logger.info("Click on Verify");
 
 		Thread.sleep(2000);
