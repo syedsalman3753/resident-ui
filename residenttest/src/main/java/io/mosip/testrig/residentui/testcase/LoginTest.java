@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -41,9 +42,10 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 // @Test(groups = "LG")
 public class LoginTest extends BaseClass {
 // 
+	private static final Logger logger = Logger.getLogger(LoginTest.class);
 	@Test(priority = 0)
 	public static void loginTest() throws Exception {
-	
+		
 		String envPath = ConfigManager.getiam_adminportal_path();
 		
 		String otp = "";
@@ -76,6 +78,10 @@ public class LoginTest extends BaseClass {
 //			Thread.sleep(500);
 //			
 //		}
+		
+		boolean f=driver.findElement(By.id("verify_otp")).isDisplayed();
+		boolean b=driver.findElement(By.id("verify_otp")).isEnabled();
+		logger.info("first"+f+b);
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
 		for(WebElement o:e) {
@@ -85,7 +91,9 @@ public class LoginTest extends BaseClass {
 
 		test.log(Status.INFO, "Extracted OTP");
 		Thread.sleep(2000);
-		(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(By.id("verify_otp")));
+		boolean c=driver.findElement(By.id("verify_otp")).isDisplayed();
+		boolean d=driver.findElement(By.id("verify_otp")).isEnabled();
+		logger.info("first"+c+d);
 		Commons.click(test, driver, By.id("verify_otp"));
 		test.log(Status.INFO, "Click on Verify");
 
