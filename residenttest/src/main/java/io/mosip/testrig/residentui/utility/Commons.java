@@ -107,7 +107,7 @@ public class Commons extends BaseClass{
 		//logger.info("Entering " + by +value);
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
-			driver.findElements(by).get(i).clear();
+			
 			driver.findElements(by).get(i).sendKeys(value);
 			try {
 				Thread.sleep(8);
@@ -121,9 +121,6 @@ public class Commons extends BaseClass{
 			// simply retry finding the element in the refreshed DOM
 
 			return test.fail(sere.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-		}finally {
-
-			driver.findElements(by).get(i).sendKeys("");
 		}
 		return test.log(Status.INFO, "Enter  "+value); 
 	}
