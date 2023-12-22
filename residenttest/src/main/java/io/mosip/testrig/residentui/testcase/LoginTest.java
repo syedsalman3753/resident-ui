@@ -88,10 +88,10 @@ public class LoginTest extends BaseClass {
 		}
 
 		logger.info("enter OTP ");
-		Thread.sleep(2000);
-	
-		Commons.click(test, driver, By.id("resend_otp"));
-		test.log(Status.INFO, "Click on Verify");
+		Thread.sleep(2000);//button
+		driver.findElements( By.xpath("//button")).get(1).click();
+	//	Commons.click(test, driver, By.id("verify_otp"));
+		logger.info("Click on Verify");
 
 		Thread.sleep(2000);
 		try {
