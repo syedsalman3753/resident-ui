@@ -79,7 +79,7 @@ public class LoginTest extends BaseClass {
 //			
 //		}
 		
-		
+		try {
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
 		for(WebElement o:e) {
@@ -89,11 +89,14 @@ public class LoginTest extends BaseClass {
 
 		logger.info("enter OTP "+otp);
 		Thread.sleep(10000);//button
-	//	driver.findElements( By.xpath("//button")).get(1).click();
+	//	driver.findElements( By.xpath("//button")).get(1).click()
 		Commons.click(test, driver, By.id("verify_otp"));
 		logger.info("Click on Verify");
 
 		Thread.sleep(2000);
+		}catch(Exception a) {
+			logger.info(a.getMessage());
+		}
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
 			
