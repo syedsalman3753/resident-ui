@@ -65,6 +65,7 @@ public class LoginTest extends BaseClass {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
 		}
+		logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"1");
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		Thread.sleep(2000);
 		Thread.sleep(2000);
@@ -81,13 +82,13 @@ public class LoginTest extends BaseClass {
 //			
 //		}
 			logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"1");
-		try {
+		
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
 		for(WebElement o:e) {
 			o.sendKeys(Character.toString(otp.charAt(i)));
 			i++;
-		}
+		
 		logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"2");
 		logger.info("enter OTP "+otp);
 		Thread.sleep(10000);//button
@@ -97,8 +98,6 @@ public class LoginTest extends BaseClass {
 		logger.info(driver.findElements( By.xpath("//button")).get(1).getText());
 
 		Thread.sleep(2000);
-		}catch(Exception a) {
-			logger.info(a.getMessage());
 		}
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
