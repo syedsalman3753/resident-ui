@@ -66,6 +66,8 @@ public class LoginTest extends BaseClass {
 			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
+		Thread.sleep(2000);
+		Thread.sleep(2000);
 		driver.findElements( By.xpath("//button")).get(1).click();
 
 		 otp = MockSMTPListener.getOtp(externalemail);
@@ -92,7 +94,7 @@ public class LoginTest extends BaseClass {
 		driver.findElements( By.xpath("//button")).get(1).click();
 		//Commons.click(test, driver, By.id("verify_otp"));
 //		driver.findElement(By.id("verify_otp")).click();
-		logger.info("Click on Verify"+driver.findElements( By.xpath("//button")).get(1).getText());
+		logger.info(driver.findElements( By.xpath("//button")).get(1).getText());
 
 		Thread.sleep(2000);
 		}catch(Exception a) {
