@@ -66,7 +66,7 @@ public class LoginTest extends BaseClass {
 			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
-		Commons.clickWebelement(test, driver, By.id("get_otp"));
+		driver.findElements( By.xpath("//button")).get(1).click();
 
 		 otp = MockSMTPListener.getOtp(externalemail);
 
