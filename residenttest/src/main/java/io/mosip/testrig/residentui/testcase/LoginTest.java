@@ -78,7 +78,7 @@ public class LoginTest extends BaseClass {
 //			Thread.sleep(500);
 //			
 //		}
-		
+			logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"1");
 		try {
 		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
 		int i=0;
@@ -86,13 +86,13 @@ public class LoginTest extends BaseClass {
 			o.sendKeys(Character.toString(otp.charAt(i)));
 			i++;
 		}
-
+		logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"2");
 		logger.info("enter OTP "+otp);
 		Thread.sleep(10000);//button
-	//	driver.findElements( By.xpath("//button")).get(1).click()
+		driver.findElements( By.xpath("//button")).get(1).click();
 		//Commons.click(test, driver, By.id("verify_otp"));
-		driver.findElement(By.id("verify_otp")).click();
-		logger.info("Click on Verify");
+//		driver.findElement(By.id("verify_otp")).click();
+		logger.info("Click on Verify"+driver.findElements( By.xpath("//button")).get(1).getText());
 
 		Thread.sleep(2000);
 		}catch(Exception a) {
