@@ -18,6 +18,7 @@ import {
   MatKeyboardService
 } from 'ngx7-material-keyboard';
 import defaultJson from "src/assets/i18n/default.json";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-viewhistory",
@@ -76,7 +77,8 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     public headerService: HeaderService,private auditService: AuditService, 
     private breakPointService: BreakpointService,
     private paginator2: MatPaginatorIntl,
-    private keyboardService: MatKeyboardService
+    private keyboardService: MatKeyboardService,
+    private fontSizeService: FontSizeService
     ) {
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
@@ -477,6 +479,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
             disableClose: true
           });
     }, 500)
+  }
+
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
   }
 
   onItemSelected(item: any) {

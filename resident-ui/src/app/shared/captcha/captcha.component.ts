@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-captcha",
@@ -13,7 +14,7 @@ export class CaptchaComponent implements OnInit {
   @Output() captchaEvent = new EventEmitter<string>();
   langCode: string = localStorage.getItem("langCode");
   captchaLangCode:any;
-  constructor(private activatedRoute: ActivatedRoute,private translateService: TranslateService,) {}
+  constructor(private activatedRoute: ActivatedRoute,private translateService: TranslateService,private fontSizeService: FontSizeService) {}
 
   changeCaptchLang(){
     if(this.captchaLangCode){
@@ -58,6 +59,11 @@ export class CaptchaComponent implements OnInit {
 
   recaptchaError(event) {
     alert(event);
+  }
+
+  get fontSize():string {
+    let captchSize =  this.fontSizeService.fontSize.capchaSize;
+    return `scale(${captchSize})`
   }
 
   handleReset() {
