@@ -11,22 +11,22 @@
       </div>
       <span class="spacer"></span>
 
-      <!-- <mat-list-item id="zoomItemBtn" *ngIf="activeUrl !== '#/dashboard/expired' ">
-        <button mat-button [matMenuTriggerFor]="zoomItem"> <span
+      <mat-list-item id="zoomItemBtn" *ngIf="activeUrl !== '#/dashboard/expired' ">
+        <button [style.font-size]="fontSize.lableText" mat-button [matMenuTriggerFor]="zoomItem"> <span
           class="mat-button-wrapper">Aa<mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
       <mat-menu class="zoommenu" [backdropClass]="'zoom'" #zoomItem="matMenu" [overlapTrigger]="false" id="zoomItem">
-        <button  mat-menu-item (click)="zoom(item)"  [style.font-size.px]="item.fontSize" [ngClass]="item.fontSize === selectedfontsize ? 'sel-font-size-btn' : 'font-size-btn'" *ngFor="let item of zoomLevel">
+        <button  mat-menu-item (click)="setFontSize(item)"  [style.font-size.px]="item.fontSize" [ngClass]="item.fontSize === selectedfontsize ? 'sel-font-size-btn' : 'font-size-btn'" *ngFor="let item of zoomLevel">
           {{item.label}}</button>
-      </mat-menu> -->
+      </mat-menu>
 
       <mat-list-item *ngIf="activeUrl !== '#/dashboard/expired' ">
-        <button id="languages" mat-button [matMenuTriggerFor]="languages"> <span class="mat-button-wrapper"><mat-icon>g_translate</mat-icon>
+        <button [style.font-size]="fontSize.lableText" id="languages" mat-button [matMenuTriggerFor]="languages"> <span class="mat-button-wrapper"><mat-icon>g_translate</mat-icon>
           <span class="selected-lang">{{selectedLanguage}}</span> <mat-icon>keyboard_arrow_down</mat-icon></span></button>
       </mat-list-item>
 
       <mat-menu class="language-menu" [backdropClass]="'zoom'"  #languages="matMenu" [overlapTrigger]="false">
-        <button mat-menu-item (click)="onlanguagechange(item)"
+        <button [style.font-size]="fontSize.lableText" mat-menu-item (click)="onlanguagechange(item)"
           *ngFor="let item of selectLanguagesArr" id="lang{{item.code}}" >{{item.value}}</button>
       </mat-menu>
 
@@ -43,7 +43,7 @@
         <div *ngIf="!notificationList" style="height:100px">
           <mat-spinner style="margin:0 auto;margin-top: 10px;" [diameter]="50"></mat-spinner>
         </div>
-        <div *ngFor="let data of notificationList; let i = index"
+        <div [style.font-size]="fontSize.lableText" *ngFor="let data of notificationList; let i = index"
           [style.background-color]="data.readStatus ? '':'#EFF0FF'" (click)="viewDetails(data)" style="cursor: pointer;">
           <div class="each-notification" style="display: flex; align-items: center; padding: 8px;">
             <div style="border:2px solid #DCDDF4; border-radius: 7px; background-color: #ffffff;">
@@ -78,17 +78,17 @@
             style="margin: 0px;color: green;">person</mat-icon></button>
       </mat-list-item>
       <mat-menu class="profile-menu" [backdropClass]="'first'" #profilemenu="matMenu" [overlapTrigger]="false" xPosition="before" id="profileMenu">
-        <div style="padding: 15px 20px;background: #03A64A;display: flex;align-items: center; overflow-wrap: break-word;"><img
+        <div  style="padding: 15px 20px;background: #03A64A;display: flex;align-items: center; overflow-wrap: break-word;"><img
             [src]="userImage" alt=""
             style="width:50px;height: 50px;border-radius: 50px;border: 2px solid white;" />&nbsp;&nbsp;&nbsp;<span
-            style="color:white; width: 80%;">{{fullName}}</span></div>
+            style="color:white; width: 80%;" [style.font-size]="fontSize.paragraph">{{fullName}}</span></div>
         <mat-divider></mat-divider>
         <div style="height: 10px;"></div>
-        <div style="height: 30px;"><span style="font-size: 12px;padding: 30px;color: rgba(0,0,0,.87);">{{'header.lastLogin' | translate}}</span>
+        <div style="height: 30px;"><span [style.font-size]="fontSize.breadcrumb" style="padding: 30px;color: rgba(0,0,0,.87);">{{'header.lastLogin' | translate}}</span>
         </div>
-        <div style="height: 30px;"><span style="font-size: 14px;padding: 28px;color: rgba(0,0,0,.87);">{{lastLogin}}</span></div>
+        <div style="height: 30px;"><span [style.font-size]="fontSize.lableText" style="padding: 28px;color: rgba(0,0,0,.87);">{{lastLogin}}</span></div>
         <mat-divider></mat-divider>
-        <button (click)="doLogout()" mat-menu-item
+        <button [style.font-size]="fontSize.lableText" (click)="doLogout()" mat-menu-item
           style="padding-left: 27px;"><mat-icon>power_settings_new</mat-icon><span>{{'header.logout' | translate}}</span>
         </button>
       </mat-menu>
