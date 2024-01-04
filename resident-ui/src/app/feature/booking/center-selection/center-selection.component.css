@@ -10,13 +10,14 @@
 }
 
 .details-card {
-  width: 95%;
+  width: 100%;
   height: 770px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 5px #00000014;
   border-radius: 10px;
   opacity: 1;
-  margin: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
   padding: .3rem 1rem .3rem 1rem;
 }
 
@@ -325,8 +326,7 @@ input[type="radio"] {
 
 .warning-message{
   margin: 5px 0px; 
-  color: red; 
-  font-size: 10px;
+  color: red;
 }
 ::ng-deep .mat-select-panel {
   margin-top: 38px !important;

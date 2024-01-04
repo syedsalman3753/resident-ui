@@ -89,12 +89,11 @@ label {
 
 .otp-infromation-text {
     text-align: center;
-    letter-spacing: NaNpx;
     color: #000000;
     opacity: 1;
     font-size: 14px;
     padding: 12px;
-    overflow-wrap: anywhere;
+    margin: 5px;
 }
 
 .mobile-number {
@@ -113,4 +112,24 @@ label {
     opacity: 1;
     border:none;
     color: #ffffff;
+}
+
+@media screen and ((min-width:530px) and (max-width:755px)){
+    .main-container{
+        padding: 0 3rem 0 3rem;
+    }
+    .otp-verify-container{
+        width: 400px;
+    }
+}
+@media screen and (max-width:529px){
+    .main-container{
+        padding: 0 1rem 0 1rem;
+    }
+    .otp-verify-container{
+        width: 95%;
+    }
+    .otp-infromation-card{
+        width: 95%;
+    }
 }
