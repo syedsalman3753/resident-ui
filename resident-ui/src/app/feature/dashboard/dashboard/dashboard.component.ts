@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { AuditService } from "src/app/core/services/audit.service";
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
 import { LoginRedirectService } from 'src/app/core/services/loginredirect.service'
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-dashboard",
@@ -21,7 +22,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   langCode = localStorage.getItem("langCode");
   cols : number;
   sitealignment:string = localStorage.getItem('direction');
-  rowHeight:any;
   
   constructor(
     private router: Router,
@@ -30,29 +30,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private appConfigService: AppConfigService,
     private auditService: AuditService,
     private breakPointService: BreakpointService,
-    private redirectService: LoginRedirectService
+    private redirectService: LoginRedirectService,
+    private fontSizeService: FontSizeService
   ) {
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
         if(active === "extraSmall"){
           this.cols = 1;
-          this.rowHeight = '235px'
         }
         if(active === "small"){
           this.cols = 1;
-          this.rowHeight = '195px'
         }
         if(active === "medium"){
           this.cols = 2;
-          this.rowHeight = '200px'
         }
         if(active === "large"){
           this.cols = 3;
-          this.rowHeight = '200px'
         }
         if(active === "ExtraLarge"){
           this.cols = 3;
-          this.rowHeight = '200px'
         }
       }
     });
@@ -65,7 +61,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     .subscribe(response => {
       this.menuItems = response.menuItems;
     });
+    
   }
+  
 
   onItemSelected(item: any) {
     if(item === "UIN Services"){
@@ -78,6 +76,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }else{
      this.router.navigate([item]); 
    }    
+  }
+
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
   }
 
   ngOnDestroy(): void {
