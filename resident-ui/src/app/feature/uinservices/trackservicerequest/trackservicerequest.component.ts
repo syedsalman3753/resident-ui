@@ -15,6 +15,7 @@ import {
   MatKeyboardService
 } from 'ngx7-material-keyboard';
 import defaultJson from "src/assets/i18n/default.json";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-trackservicerequest",
@@ -48,7 +49,7 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     private dialog: MatDialog, private appConfigService: AppConfigService, 
     private dataStorageService: DataStorageService, private translateService: TranslateService, 
     private router: Router, private route: ActivatedRoute,private auditService: AuditService,
-    private keyboardService: MatKeyboardService
+    private keyboardService: MatKeyboardService,private fontSizeService: FontSizeService
     ) {
     this.renderer.listen('window','click',(e:Event) =>{
        if(!this.iconBtnClicked){
@@ -234,6 +235,10 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
   navigateGrievance(eventId:any){
     this.router.navigateByUrl(`uinservices/grievanceRedressal?source1=viewMyHistory&source2=trackMyRequest&eid=`+eventId);
     // this.router.navigate(["grievanceRedressal"],{state:{eventId:eventId}})
+  }
+
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
   }
 
   openPopupMsg(){
