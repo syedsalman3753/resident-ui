@@ -21,6 +21,7 @@ on:
       - 1*
       - MOSIP*
 
+
 jobs:
   build-resident-ui:
     uses: syedsalman3753/kattu/.github/workflows/npm-build.yml@master
