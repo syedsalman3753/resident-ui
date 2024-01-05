@@ -23,7 +23,7 @@ on:
 
 jobs:
   build-resident-ui:
-    uses: mosip/kattu/.github/workflows/npm-build.yml@master
+    uses: syedsalman3753/kattu/.github/workflows/npm-build.yml@master
     with:
       SERVICE_LOCATION: ./resident-ui
       BUILD_ARTIFACT: resident-ui
@@ -41,7 +41,7 @@ jobs:
             BUILD_ARTIFACT: 'resident-ui'
       fail-fast: false
     name: ${{ matrix.SERVICE_NAME }}
-    uses: mosip/kattu/.github/workflows/docker-build.yml@master
+    uses: syedsalman3753/kattu/.github/workflows/docker-build.yml@master
     with:
       SERVICE_LOCATION: ${{ matrix.SERVICE_LOCATION }}
       SERVICE_NAME: ${{ matrix.SERVICE_NAME }}
