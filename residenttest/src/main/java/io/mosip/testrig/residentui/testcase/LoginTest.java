@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -39,78 +38,110 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
-// @Test(groups = "LG")
+ @Test(priority = 0)
 public class LoginTest extends BaseClass {
 // 
-	private static final Logger logger = Logger.getLogger(LoginTest.class);
-	@Test(priority = 0)
+//	@Test(priority = 0)
 	public static void loginTest() throws Exception {
-		
+	
 		String envPath = ConfigManager.getiam_adminportal_path();
 		
 		String otp = "";
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
-		Thread.sleep(2000);
+		Thread.sleep(60000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.id("UINservices"));
+	Commons.clickWebelement(test, driver, By.xpath("//div[@id='dashboardCard1']"));
 		try {
 		
 		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
 		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(2000);
+		Thread.sleep(30000);
 		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-			Thread.sleep(2000);	
+			Thread.sleep(30000);	
 		}
-		logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"1");
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
-		Thread.sleep(2000);
-		Thread.sleep(2000);
-		driver.findElements( By.xpath("//button")).get(1).click();
-
+		Commons.clickWebelement(test, driver, By.id("get_otp"));
 		 otp = MockSMTPListener.getOtp(externalemail);
-
-		 
-	
-//		for (int i = 0; i <= otp.length() - 1; i++) {
-//			Thread.sleep(500);
-//			driver.findElements( By.className("pincode-input-text")).get(i).sendKeys(Character.toString(otp.charAt(i)));
-//			Thread.sleep(500);
-//			
-//		}
-			logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"1");
-		
-		List<WebElement> e=driver.findElements( By.className("pincode-input-text"));
-		int i=0;
-		for(WebElement o:e) {
-			o.sendKeys(Character.toString(otp.charAt(i)));
-			i++;
-		
-		logger.info(driver.findElements( By.xpath("//button")).get(1).isEnabled()+"2");
-		logger.info("enter OTP "+otp);
-		Thread.sleep(10000);//button
-		driver.findElements( By.xpath("//button")).get(1).click();
-		//Commons.click(test, driver, By.id("verify_otp"));
-//		driver.findElement(By.id("verify_otp")).click();
-		logger.info(driver.findElements( By.xpath("//button")).get(1).getText());
-
-		Thread.sleep(2000);
+		System.out.println(otp);
+		for (int i = 0; i <= otp.length() - 1; i++) {
+			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
+					Character.toString(otp.charAt(i)));
 		}
+		test.log(Status.INFO, "Extracted OTP");
+		Thread.sleep(4000);
+
+		Commons.click(test, driver, By.id("verify_otp"));
+		test.log(Status.INFO, "Click on Verify");
+
+		Thread.sleep(3000);
 		try {
-			driver.findElement(By.id("dismissBtn")).click();
+			driver.findElement(By.id("confirmmessagepopup")).click();
 			
 		}catch(Exception a) {
 			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
 			test.log(Status.INFO, "ALL Checkboxes are selected");
 			Commons.click(test,driver, By.id("continue"));
-			Commons.click(test,driver, By.id("dismissBtn"));
+			Commons.click(test,driver, By.id("confirmmessagepopup"));
 		}
 	}
 
 
+//	public static void loginTest() throws Exception {
+//		
+//		String envPath = ConfigManager.getiam_adminportal_path();
+//	
+//		String otp = "111111";
+//		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
+//		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
+//		driver.get(envPath);
+//		Thread.sleep(60000);
+//		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//		String Screen=JsonUtil.JsonObjParsing(Commons.getTestData(), "screen");
+//		Commons.clickWebelement(test, driver, By.xpath("//div[@id='dashboardCard1']"));
+//		if(Screen.equals("latest")) {
+//			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+//			Thread.sleep(30000);
+//		}else if(Screen.equals("old")) {
+//			
+//			Commons.clickWebelement(test, driver, By.id("here_tab_id"));
+//			Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
+//			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+//			Thread.sleep(30000);
+//			
+//		}
+//		
+//		
+//		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
+//		Commons.clickWebelement(test, driver, By.id("get_otp"));
+//		// otp = MockSMTPListener.getOtp(10, externalemail);
+//		System.out.println(otp);
+//		for (int i = 0; i <= otp.length() - 1; i++) {
+//			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
+//					Character.toString(otp.charAt(i)));
+//		}
+//		test.log(Status.INFO, "Extracted OTP");
+//		Thread.sleep(4000);
+//
+//		Commons.click(test, driver, By.id("verify_otp"));
+//		test.log(Status.INFO, "Click on Verify");
+//
+//
+//		Thread.sleep(3000);
+//		try {
+//			driver.findElement(By.id("confirmmessagepopup")).click();
+//			
+//		}catch(Exception a) {
+//			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
+//			test.log(Status.INFO, "ALL Checkboxes are selected");
+//			Commons.click(test,driver, By.id("continue"));
+//			Commons.click(test,driver, By.id("confirmmessagepopup"));
+//		}
+//	}
+//	
 	
 	
 	
@@ -121,101 +152,234 @@ public class LoginTest extends BaseClass {
 	
 	// @Test(priority = 0)
 	public static void loginTestWithTempraryVID() throws Exception {
-String envPath = ConfigManager.getiam_adminportal_path();
-		
-		String otp = "";
+		// WebDriver driver = BaseClass.driver;
+		String envPath = System.getProperty("path");
+		String vid = System.getProperty("vid");
+		String otp = "00000";
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
-		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
+		String temporaryvid = JsonUtil.JsonObjParsing(Commons.getTestData(), "temporaryvid");
 		driver.get(envPath);
-		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
-		try {
-		
-		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(2000);
-		}catch(Exception e) {
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-			Thread.sleep(2000);	
-		}
+		test = extent.createTest("Login Test with valid Temprory Vid", "verify Login");
+		Thread.sleep(60000);
+		Commons.click(test, driver, By.xpath("//div[@id='dashboardCard1']"));
+		Commons.click(test, driver, By.id("here_tab_id"));
+		Commons.click(test, driver, By.id("more_ways_to_sign_in"));
+		Commons.click(test, driver, By.id("login_with_otp"));
+		Thread.sleep(30000);
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.temporaryVid);
-		Commons.clickWebelement(test, driver, By.id("get_otp"));
-
-		 otp = MockSMTPListener.getOtp(externalemail);
-
+		Commons.click(test, driver, By.id("get_otp"));
+		otp = MockSMTPListener.getOtp(externalemail);
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
-			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
+			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
 					Character.toString(otp.charAt(i)));
 		}
 		test.log(Status.INFO, "Extracted OTP");
-		Thread.sleep(2000);
+		Thread.sleep(4000);
+//Commons.click(test,driver, By.xpath("//button[text()='Verify']"));
+//List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+//List<String> ids =new ArrayList<>();
+//for(WebElement checkbox: checkboxes) {
+//String id = checkbox.getAttribute("id");
+//ids.add(id);
+//}
+//System.out.println(ids);
+//for(String id :ids) {
+//WebElement checkbox= driver.findElement(By.id(id));
+//js.executeScript("arguments[0].click();", checkbox);
+//}
 
-		Commons.click(test, driver, By.id("verify_otp"));
-		test.log(Status.INFO, "Click on Verify");
+		Commons.click(test, driver, By.id(""));
+		test.log(Status.INFO, "ALL Checkboxes are selected");
+		Commons.click(test, driver, By.xpath("//button[text()='Allow']"));
+		Commons.click(test, driver, By.id("confirmmessagepopup"));
 
-		Thread.sleep(2000);
-		try {
-			driver.findElement(By.id("dismissBtn")).click();
-			
-		}catch(Exception a) {
-			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
-			test.log(Status.INFO, "ALL Checkboxes are selected");
-			Commons.click(test,driver, By.id("continue"));
-			Commons.click(test,driver, By.id("dismissBtn"));
-		}
 	}
 
 	// @Test
 	public static void loginTestWithOneTimeVID() throws Exception {
-String envPath = ConfigManager.getiam_adminportal_path();
-		
-		String otp = "";
+		// WebDriver driver = BaseClass.driver;
+		String envPath = System.getProperty("path");
+		String vid = System.getProperty("vid");
+		String otp = "00000";
 		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
-		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
+		String onetimevid = JsonUtil.JsonObjParsing(Commons.getTestData(), "onetimevid");
 		driver.get(envPath);
-		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
-		try {
-		
-		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(2000);
-		}catch(Exception e) {
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-			Thread.sleep(2000);	
-		}
+		test = extent.createTest("Login Test with valid OneTimeVid", "verify Login");
+		Thread.sleep(60000);
+		Commons.click(test, driver, By.xpath("//div[@id='dashboardCard1']"));
+		Commons.click(test, driver, By.id("here_tab_id"));
+		Commons.click(test, driver, By.id("more_ways_to_sign_in"));
+		Commons.click(test, driver, By.id("login_with_otp"));
+		Thread.sleep(30000);
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.onetimeuseVid);
-		Commons.clickWebelement(test, driver, By.id("get_otp"));
-
-		 otp = MockSMTPListener.getOtp(externalemail);
-
+		Commons.click(test, driver, By.id("get_otp"));
+		otp = MockSMTPListener.getOtp(externalemail);
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
-			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
+			Commons.enter(test, driver, By.xpath("//*[@class=\"pincode-input-text\"][" + (i + 1) + "]"),
 					Character.toString(otp.charAt(i)));
 		}
 		test.log(Status.INFO, "Extracted OTP");
-		Thread.sleep(2000);
 
-		Commons.click(test, driver, By.id("verify_otp"));
-		test.log(Status.INFO, "Click on Verify");
-
-		Thread.sleep(2000);
-		try {
-			driver.findElement(By.id("dismissBtn")).click();
-			
-		}catch(Exception a) {
-			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
-			test.log(Status.INFO, "ALL Checkboxes are selected");
-			Commons.click(test,driver, By.id("continue"));
-			Commons.click(test,driver, By.id("dismissBtn"));
+		Thread.sleep(4000);
+		Commons.click(test, driver, By.xpath("//button[text()='Verify']"));
+		List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+		List<String> ids = new ArrayList<>();
+		for (WebElement checkbox : checkboxes) {
+			String id = checkbox.getAttribute("id");
+			ids.add(id);
 		}
+		System.out.println(ids);
+		for (String id : ids) {
+			WebElement checkbox = driver.findElement(By.id(id));
+			js.executeScript("arguments[0].click();", checkbox);
+		}
+		test.log(Status.INFO, "ALL Checkboxes are selected");
+		Commons.click(test, driver, By.xpath("//button[text()='Allow']"));
+		Commons.click(test, driver, By.id("confirmmessagepopup"));
+
 	}
 
+//  @Test(priority = 0)
+//  public static void loginTestWithUINRevokeVID() throws Exception {
+//		//WebDriver driver = BaseClass.driver;
+//	String envPath = System.getProperty("path");
+//	String vid = System.getProperty("vid");
+//	String otp = "00000";
+//	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+////	String UIN=JsonUtil.JsonObjParsing(Commons.getTestData(),"UIN");
+//	driver.get(envPath);
+//	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//	test=extent.createTest("Login Test with valid UIN to RevokeVid", "verify Login");
+//	Thread.sleep(60000);
+//	Commons.click(test,driver,By.xpath("//div[@id='dashboardCard1']"));
+//	Commons.click(test,driver,By.id("here_tab_id"));
+//	    Commons.click(test,driver,By.id("more_ways_to_sign_in"));
+//	    Commons.click(test,driver,By.id("login_with_otp"));
+//	Thread.sleep(30000);
+//	Commons.enter(test,driver, By.id("Otp_mosip-vid"), TestRunner.uin);
+//	Commons.click(test,driver, By.xpath("//button[text()='Get OTP']")); 
+//	otp = MockSMTPListener.getOtp(10, externalemail);
+//	System.out.println(otp);
+//	for(int i=0;i<=otp.length()-1;i++) {
+//	Commons.enter(test,driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+//	test.log(Status.INFO, "Extracted OTP");
+//	Thread.sleep(4000);
+//	Commons.click(test,driver, By.xpath("//button[text()='Verify']"));
+//	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+//	List<String> ids =new ArrayList<>();
+//	for(WebElement checkbox: checkboxes) {
+//	String id = checkbox.getAttribute("id");
+//	ids.add(id);
+//	}
+//	System.out.println(ids);
+//	for(String id :ids) {
+//	WebElement checkbox= driver.findElement(By.id(id));
+//	js.executeScript("arguments[0].click();", checkbox);
+//	}
+//	 test.log(Status.INFO, "ALL Checkboxes are selected");
+//	Commons.click(test,driver, By.xpath("//button[text()='Allow']"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup"));
+//	Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+//	Commons.click(test,driver, By.xpath("(//mat-icon[@id='delete0'])[1]"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup"));
+//	
+//	Commons.click(test,driver, By.id("confirmmessagepopup")); 
+//	}
+//  
+////  
+//  @Test(priority = 0)
+//  public static void loginTestWithUINCreatVID() throws Exception {
+//		//WebDriver driver = BaseClass.driver;
+//	String envPath = System.getProperty("path");
+//	String vid = System.getProperty("vid");
+//	String otp = "00000";
+//	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+////	String UIN=JsonUtil.JsonObjParsing(Commons.getTestData(),"UIN");
+//	driver.get(envPath);
+//	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//	test=extent.createTest("Login Test with valid UIN to Create Vid", "verify Login");
+//	Thread.sleep(60000);
+//	Commons.click(test,driver,By.xpath("//div[@id='dashboardCard1']"));
+//	Commons.click(test,driver,By.id("here_tab_id"));
+//	    Commons.click(test,driver,By.id("more_ways_to_sign_in"));
+//	    Commons.click(test,driver,By.id("login_with_otp"));
+//	Thread.sleep(30000);
+//	Commons.enter(test,driver, By.id("Otp_mosip-vid"), TestRunner.uin);
+//	Commons.click(test,driver, By.xpath("//button[text()='Get OTP']")); 
+//	otp = MockSMTPListener.getOtp(10, externalemail);
+//	System.out.println(otp);
+//	for(int i=0;i<=otp.length()-1;i++) {
+//	Commons.enter(test,driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+//	test.log(Status.INFO, "Extracted OTP");
+//	Thread.sleep(4000);
+//	Commons.click(test,driver, By.xpath("//button[text()='Verify']"));
+//	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+//	List<String> ids =new ArrayList<>();
+//	for(WebElement checkbox: checkboxes) {
+//	String id = checkbox.getAttribute("id");
+//	ids.add(id);
+//	}
+//	System.out.println(ids);
+//	for(String id :ids) {
+//	WebElement checkbox= driver.findElement(By.id(id));
+//	js.executeScript("arguments[0].click();", checkbox);
+//	}
+//	 test.log(Status.INFO, "ALL Checkboxes are selected");
+//	Commons.click(test,driver, By.xpath("//button[text()='Allow']"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup"));
+//	Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+//	Commons.click(test,driver, By.id("Perpetual"));
+//	
+//	Commons.click(test,driver, By.id("confirmmessagepopup"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup")); 
+//	}
+
+//  
+//  public static void loginTestWithVidRevokeVid() throws Exception {
+//		//WebDriver driver = BaseClass.driver;
+//	String envPath = System.getProperty("path");
+//	String otp = "00000";
+//	String externalemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"externalemail");
+//	String perpetualvid=JsonUtil.JsonObjParsing(Commons.getTestData(),"perpetualvid");
+//	driver.get(envPath);
+//	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//	test=extent.createTest("Login Test with valid Vid to Revoke same vid", "verify Login");
+//	Commons.click(test,driver,By.xpath("//div[@id='dashboardCard1']"));
+//	Commons.click(test,driver,By.id("here_tab_id"));
+//	    Commons.click(test,driver,By.id("more_ways_to_sign_in"));
+//	    Commons.click(test,driver,By.id("login_with_otp"));
+//	Commons.enter(test,driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
+//	Commons.click(test,driver, By.xpath("//button[text()='Get OTP']")); 
+//	otp = MockSMTPListener.getOtp(10, externalemail);
+//	System.out.println(otp);
+//	for(int i=0;i<=otp.length()-1;i++) {
+//	Commons.enter(test,driver, By.xpath("//*[@class=\"pincode-input-text\"]["+(i+1)+"]"), Character.toString(otp.charAt(i)));}
+//	test.log(Status.INFO, "Extracted OTP");
+//	Thread.sleep(4000);
+//	Commons.click(test,driver, By.xpath("//button[text()='Verify']"));
+//	List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+//	List<String> ids =new ArrayList<>();
+//	for(WebElement checkbox: checkboxes) {
+//	String id = checkbox.getAttribute("id");
+//	ids.add(id);
+//	}
+//	System.out.println(ids);
+//	for(String id :ids) {
+//	WebElement checkbox= driver.findElement(By.id(id));
+//	js.executeScript("arguments[0].click();", checkbox);
+//	}
+//	 test.log(Status.INFO, "ALL Checkboxes are selected");
+//	Commons.click(test,driver, By.xpath("//button[text()='Allow']"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup"));
+//	Commons.click(test,driver, By.xpath("(//mat-card[@class='mini-card mat-card'])[2]"));
+//	Commons.click(test,driver, By.xpath("(//mat-icon[@id='delete0'])[1]"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup"));
+//	Commons.click(test,driver, By.id("confirmmessagepopup")); 
+//	
+//	}
 
 }
