@@ -87,7 +87,7 @@ public class Commons extends BaseClass{
 		
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
@@ -133,7 +133,7 @@ public class Commons extends BaseClass{
 		
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			WebElement checkbox= driver.findElement(by);
 		    js.executeScript("arguments[0].click();", checkbox);
 			Thread.sleep(500);
