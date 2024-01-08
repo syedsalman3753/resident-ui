@@ -18,6 +18,7 @@ on:
       - release-*
       - master
       - develop
+      - develop-*
       - 1*
       - MOSIP*
 
