@@ -15,7 +15,7 @@
 		"11viewMyHistory":"VMH",
 		"BELOW_ARE_STATIC_KEYWORDS": "We are using this setExcludedGroups to exclude scenarios",
 		"setExcludedGroups": "GMU,VPNEEI,UMD,GI,MMV,SMI,SMD,TMR,VMH,GPC",
-		"identityGenManual":"yes",
+		"identityGenManual":"no",
 		"perpetualvid":"2572612719356852",
 		 "temporaryvid":"3048902169863853",
 		 "UIN":"7817563598",
@@ -27,6 +27,7 @@
 		 "aid":"10001100800003920230505043751",
 		 "postalcode": "14080",
 		 "headless": "yes",
+		 "Docker":"yes",
 		 "language":"eng",
 		 "loginlang":"mul",
 		"hierarchyLevel0": [
