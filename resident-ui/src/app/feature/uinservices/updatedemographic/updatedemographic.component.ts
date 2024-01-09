@@ -17,6 +17,7 @@ import {
   MatKeyboardComponent,
   MatKeyboardService
 } from 'ngx7-material-keyboard';
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-demographic",
@@ -113,7 +114,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     private translateService: TranslateService, private router: Router,
     private appConfigService: AppConfigService, private auditService: AuditService,
     private breakPointService: BreakpointService,
-    private keyboardService: MatKeyboardService) {
+    private keyboardService: MatKeyboardService,
+    private fontSizeService: FontSizeService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "updateMyData") {
         this.updateDemographicData();
@@ -1123,6 +1125,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   logChange(event: any) {
     this.matTabIndex = event.index;
     this.matTabLabel = event.tab.textLabel;
+  }
+
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
   }
 
   @HostListener("blur", ["$event"])

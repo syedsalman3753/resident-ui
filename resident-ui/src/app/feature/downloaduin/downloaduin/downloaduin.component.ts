@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { AppConfigService } from 'src/app/app-config.service';
 import { saveAs } from 'file-saver';
 import { AuditService } from 'src/app/core/services/audit.service';
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: 'app-bookappointment',
@@ -45,7 +46,8 @@ export class DownloadUinComponent implements OnInit {
     private translateService: TranslateService,
     private dialog: MatDialog,
     private appConfigService: AppConfigService,
-    private auditService: AuditService
+    private auditService: AuditService,
+    private fontSizeService: FontSizeService
   ) {
     if (this.router.getCurrentNavigation().extras.state) {
       this.data = this.router.getCurrentNavigation().extras.state.data
@@ -239,6 +241,10 @@ export class DownloadUinComponent implements OnInit {
         },
         disableClose: true
       });
+  }
+
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
   }
 
   onItemSelected(item: any) {

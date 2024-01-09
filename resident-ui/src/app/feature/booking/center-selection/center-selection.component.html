@@ -1,4 +1,5 @@
-<span class="breadcrumb">
+<div style="padding: 12px;">
+<span class="breadcrumb breadcrumb-local" [style.font-size]="fontSize.breadcrumb">
   <a (click)="onItemSelected('home')">{{'dashboard.home' | translate}} &nbsp;&nbsp;</a> >&nbsp;&nbsp;<a
     (click)="onItemSelected('home')">{{'dashboard.getinformation' | translate}}</a> &nbsp;&nbsp;>&nbsp;&nbsp;<span
     class="active">{{'dashboard.regcenter' | translate}}</span>
@@ -9,8 +10,8 @@
 <div class="details-main-card" *ngIf="isWorkingDaysAvailable">
   <div class="details-card">
     <mat-tab-group class="tabs" (selectedTabChange)="onItemSelected($event)">
-      <mat-tab label="{{'dashboard.regcenter' | translate}}"></mat-tab>
-      <mat-tab label="{{'dashboard.document' | translate}}"></mat-tab>
+      <mat-tab  label="{{'dashboard.regcenter' | translate}}"></mat-tab>
+      <mat-tab  label="{{'dashboard.document' | translate}}"></mat-tab>
     </mat-tab-group>
     <div [dir]="textDir" class="center_selection-wrapper" *ngIf="isWorkingDaysAvailable">
       <div>
@@ -21,28 +22,28 @@
           <ng-template #elseBlock>
             <div [dir]="textDir" class="center_selection-form-container">
               <!-- <div *ngIf="REGISTRATION_CENTRES" class="center_selection-center_recommendation-display"> -->
-              <button id="nearByLocations" mat-button class="center_selection-nearby-btn" (click)="getLocation()">
+              <button id="nearByLocations" [style.font-size]="fontSize.paragraph" mat-button class="center_selection-nearby-btn" (click)="getLocation()">
                 <mat-icon class="my-location-icon" matTooltip="{{ 'centerSelection.helpText' | translate }}"
                   [inline]="true">my_location</mat-icon>&nbsp;&nbsp;
                 {{ 'centerSelection.action_nearBy' | translate }}
               </button>
               <span class="or-text">{{ 'centerSelection.or' | translate }}</span>
               <!-- </div> -->
-              <form class="search-form-card">
+              <form class="search-form-card" >
                 <div class="search-form">
                   <div class="manual-loc-search-card">
                     <mat-card class="select-card">
-                      <mat-select id="locationType" disableOptionCentering name="select" class="select-input" [(ngModel)]="locationType"
+                      <mat-select id="locationType" [style.font-size]="fontSize.paragraph" disableOptionCentering name="select" class="select-input" [(ngModel)]="locationType"
                         value="locationType" (selectionChange)="onChangeLocationType()"
                         placeholder="{{ 'centerSelection.text_select' | translate }}">
-                        <mat-option class="locationType-card" *ngFor="let locationType of locationTypes; let i = index"
-                          [value]="locationType" id="hierarchyLevel{{locationType.hierarchyLevel}}">
+                        <mat-option  [style.font-size]="fontSize.paragraph" class="locationType-card" *ngFor="let locationType of locationTypes; let i = index"
+                          [value]="locationType" id="locationName{{i}}">
                           {{ locationType.hierarchyLevelName }}
                         </mat-option>
                       </mat-select>
                     </mat-card>
                     <mat-card class="search-card">
-                      <input [disabled]="!locationType" mat-input #search
+                      <input [style.font-size]="fontSize.paragraph" [disabled]="!locationType" mat-input #search
                         placeholder="{{ 'centerSelection.text_search' | translate }}" name="search" class="search-input"
                         [(ngModel)]="searchText" (input)="searchInput()" (blur)="captureValue($event)"
                         (focus)="captureVirtualKeyboard(search, 0)" id="searchLocationBox" #keyboardRef />
@@ -64,12 +65,12 @@
                 </div>
               </form>
             </div>
-            <p *ngIf="showWarningMsg" class="warning-message">{{popupMessages.centerSelection.warnMessage}}</p>
+            <p [style.font-size]="fontSize.warningMessages" *ngIf="showWarningMsg" class="warning-message">{{popupMessages.centerSelection.warnMessage}}</p>
             <hr class="horizontal-line" />
             <!-- <span class="search-text" *ngIf="searchTextFlag">{{ displayMessage }}</span> -->
           </ng-template>
           <div class="container">
-            <h4 id="noNearByCentersText" *ngIf="showMessage" class="show-message-text">{{showMesssageText}}</h4>
+            <h4 [style.font-size]="fontSize.paragraph" *ngIf="showMessage" class="show-message-text">{{showMesssageText}}</h4>
             <div *ngIf="showLocationDetails" class="centers-details-card">
               <div class="centers-list">
                 <div *ngIf="REGISTRATION_CENTRES.length >0">
@@ -79,7 +80,7 @@
                         <div style="width: 40%;cursor:pointer;" (click)="selectedEachMap(center)">
                           <div class="inline-flex" [dir]="textDir">
                             <img alt="" src="assets\address.png" />
-                            <div>
+                            <div [style.font-size]="fontSize.warningMessages" style="word-break: break-word;">
                               <strong>{{center.name}}</strong>
                               <strong *ngIf="center.addressLine1 != null && center.addressLine1 != ''">
                                 {{ ', ' + center.addressLine1}}
@@ -92,7 +93,7 @@
                               </strong>
                             </div>
                           </div>
-                          <div class="inline-flex2">
+                          <div class="inline-flex2" [style.font-size]="fontSize.warningMessages">
                             <span *ngIf="center.contactPerson !== ''"><img alt=""
                                 src="assets\contact number.png" /></span>
                             <span *ngIf="center.contactPerson !== ''">
@@ -103,8 +104,8 @@
                           </div>
                         </div>
                         <span style="width: 5%;" class="spacer"></span>
-                        <div style="width: 55%;">
-                          <div>
+                        <div style="width: 55%;" [style.font-size]="fontSize.warningMessages" >
+                          <div >
                             <span>
                               <div [dir]="textDir">
                                 {{ 'centerSelection.text_timing' | translate }} :
@@ -155,4 +156,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

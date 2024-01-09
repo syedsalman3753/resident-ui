@@ -97,7 +97,7 @@
       <img alt="" [src]="icon" height="35px" width="35px" class="pop-up-icon" />
       <div class="pop-up-header">
         <div mat-dialog-content>
-          <div style="word-break: break-word;">
+          <div [style.font-size]="fontSize.paragraph" style="word-break: break-word;">
             <p>{{input.dearResident}}</p>
             <p>{{input.message}}</p>
             <p *ngIf="input.downloadedSuccessFully2">{{input.downloadedSuccessFully2}}</p>
@@ -111,34 +111,34 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      <span><button class="ok-button" *ngIf="input.isOk === 'OK' " mat-button
+      <span><button [style.font-size]="fontSize.paragraph" class="ok-button" *ngIf="input.isOk === 'OK' " mat-button
           cdkFocusInitial id="dismissBtn" (click)="dismiss()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button class="ok-button"
+      <span><button [style.font-size]="fontSize.paragraph" class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'Vid' " mat-button cdkFocusInitial
           id="vidWarningBtn" (click)="vidWarning()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button class="ok-button"
+      <span><button [style.font-size]="fontSize.paragraph" class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'lockunlockauth' " mat-button cdkFocusInitial
           id="lockunlockauthBtn" (click)="lockunlockauthWarning()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button *ngIf="input.isDelete === 'Delete'" class="delete-button" mat-button
+      <span><button [style.font-size]="fontSize.paragraph" *ngIf="input.isDelete === 'Delete'" class="delete-button" mat-button
           cdkFocusInitial id="vidDeleteBtn" (click)="vidDelete()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button *ngIf="input.isDownload === 'Download'" class="ok-button" mat-button
+      <span><button [style.font-size]="fontSize.paragraph" *ngIf="input.isDownload === 'Download'" class="ok-button" mat-button
           cdkFocusInitial id="vidDownloadBtn" (click)="vidDownload()">
           {{ input.btnTxt }}
         </button></span>
-        <span><button class="ok-button"
+        <span><button [style.font-size]="fontSize.paragraph" class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'logOutBtn' " mat-button cdkFocusInitial
           id="logOutBtn" (click)="logOutBtn()">
           {{ input.btnTxt }}
         </button></span>
-      <span><button class="no-button" *ngIf="input.isNo === 'No' " mat-button cdkFocusInitial
+      <span><button [style.font-size]="fontSize.paragraph" class="no-button" *ngIf="input.isNo === 'No' " mat-button cdkFocusInitial
           id="NoBtn"  (click)="dismiss()">
           {{ input.btnTxtNo }}
         </button></span>
@@ -149,7 +149,7 @@
   <div *ngIf="input.case === 'errorMessageWithClickHere'" class="warning-message-container">
     <div style="display: flex; align-items: start;">
       <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
-      <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
+      <div [style.font-size]="fontSize.lableText" style="margin-left: 12px; margin-top: 8px;">
         <p>{{input.dearResident}}</p>
         <p>{{input.message}}</p>
         <p>{{input.clickHere2}} <span (click)="regCenters()"
@@ -166,7 +166,7 @@
   <div *ngIf="input.case === 'accessDenied'" class="warning-message-container">
     <div style="display: flex; align-items: start;">
       <img alt="" src="./assets/cancel_icon.png" height="35px" width="35px" class="pop-up-icon" />
-      <div style="font-size: 13px; margin-left: 12px; margin-top: 8px;">
+      <div [style.font-size]="fontSize.lableText" style="margin-left: 12px; margin-top: 8px;">
         <p>{{input.dearResident}}</p>
         <p>{{input.message}}</p>
         <p>{{input.clickHere2}} <span (click)="logOut()" class="navigate-link">{{input.clickHere.replace(".","")}}</span>{{input.relogin}}
@@ -245,7 +245,7 @@
   </div>
 
   <!-- terms and  Conditions for share with partner-->
-  <div style="padding: 1rem;" *ngIf="input.case === 'termsAndConditions'">
+  <div [style.font-size]="fontSize.paragraph" style="padding: 1rem;" *ngIf="input.case === 'termsAndConditions'">
     <h4>{{ input.title }}</h4>
     <ol class="conditions-card">
       <ng-container *ngFor="let condition of input.conditions">
@@ -257,15 +257,15 @@
         <!-- <img alt="" src="./assets/images/checkbox_sel.png" /> -->
         <input (change)="agreeConditions()" id="confirmShareInfo" name="isChecked" class="conditions-checkbox" type="checkbox" />
         &nbsp;
-        <p class="agree-text">{{input.agreeLabel}}</p>
+        <p [style.font-size]="fontSize.lableText" class="agree-text">{{input.agreeLabel}}</p>
       </div>
-      <button [disabled]="isChecked" id="shareInfoBtn" [style.color]="'#ffffff'" [style.background]=" isChecked ? '#909090':'#03A64A' "
+      <button [style.font-size]="fontSize.paragraph" [disabled]="isChecked" id="shareInfoBtn" [style.color]="'#ffffff'" [style.background]=" isChecked ? '#909090':'#03A64A' "
         mat-button (click)="shareInfoBtn(input.id)" class="share-btn">{{ input.btnTxt }}</button>
     </div>
   </div>
 
   <!-- termsAndConditionsForUpdateMyData -->
-  <div style="padding: 1rem;" *ngIf="input.case === 'termsAndConditionsForUpdateMyData'">
+  <div [style.font-size]="fontSize.paragraph" style="padding: 1rem;" *ngIf="input.case === 'termsAndConditionsForUpdateMyData'">
     <h4>{{ input.title }}</h4>
     <ol class="conditions-card">
       <ng-container *ngFor="let condition of input.conditions">
@@ -277,9 +277,9 @@
         <!-- <img alt="" src="./assets/images/checkbox_sel.png" /> -->
         <input (change)="agreeConditions()" id="confirmUpdateData" name="isChecked" class="conditions-checkbox" type="checkbox" />
         &nbsp;
-        <p class="agree-text">{{input.agreeLabel}}</p>
+        <p [style.font-size]="fontSize.lableText" class="agree-text">{{input.agreeLabel}}</p>
       </div>
-      <button [disabled]="isChecked" id="updateMyDataBtn" mat-button [style.background]=" isChecked ? '#909090':'#03A64A' "
+      <button [style.font-size]="fontSize.paragraph" [disabled]="isChecked" id="updateMyDataBtn" mat-button [style.background]=" isChecked ? '#909090':'#03A64A' "
       [style.color]="'#ffffff'" (click)="shareInfoForUpdateMyData(input.id)" class="share-btn">{{ input.btnTxt}}</button>
     </div>
   </div>

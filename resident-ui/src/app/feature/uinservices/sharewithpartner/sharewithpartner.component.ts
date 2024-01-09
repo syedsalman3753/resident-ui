@@ -19,7 +19,7 @@ import {
   MatKeyboardService
 } from 'ngx7-material-keyboard';
 import defaultJson from "src/assets/i18n/default.json";
-// import { FontSizeService } from "src/app/core/services/font-size.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-sharewithpartner",
@@ -68,7 +68,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, 
     private translateService: TranslateService, private router: Router, private auditService: AuditService, private breakPointService: BreakpointService,
     private keyboardService: MatKeyboardService,
-    // private fontSizeService: FontSizeService
+    private fontSizeService: FontSizeService
     ) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "shareWithPartner") {
@@ -598,9 +598,9 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('uinservices/viewhistory');
   }
 
-  // get fontSize(): number {
-  //   return this.fontSizeService.fontSize;
-  // }
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());

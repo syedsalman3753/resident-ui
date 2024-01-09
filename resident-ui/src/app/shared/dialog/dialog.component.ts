@@ -13,6 +13,7 @@ import { AppConfigService } from 'src/app/app-config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LogoutService } from './../../core/services/logout.service';
 import { InteractionService } from 'src/app/core/services/interaction.service';
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: 'app-dialog',
@@ -68,7 +69,8 @@ export class DialogComponent implements OnInit {
     private logoutService: LogoutService,
     private interactionService: InteractionService,
     public appConfigService: AppConfigService,
-    private redirectService: LoginRedirectService
+    private redirectService: LoginRedirectService,
+    private fontSizeService: FontSizeService
   ) {
     this.translate.use(this.primaryLangCode);
     if (this.primaryLangCode === "ara") {
@@ -239,6 +241,9 @@ export class DialogComponent implements OnInit {
   }
   logOut(){
     this.redirectService.redirect(window.location.href);
+  }
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
   }
   logOutBtn(){
     this.interactionService.sendClickEvent("logOutBtn");

@@ -9,7 +9,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
-// import { FontSizeService } from "src/app/core/services/font-size.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: 'app-getuin',
@@ -58,7 +58,7 @@ export class GetuinComponent implements OnInit {
     private dialog: MatDialog,
     private auditService: AuditService,
     private breakPointService: BreakpointService,
-    // private fontSizeService: FontSizeService
+    private fontSizeService: FontSizeService
   ) {
     this.translateService.use(localStorage.getItem("langCode"));
     this.appConfigService.getConfig();
@@ -249,9 +249,9 @@ export class GetuinComponent implements OnInit {
       });
   }
 
-  // get fontSize(): number {
-  //   return this.fontSizeService.fontSize;
-  // }
+  get fontSize(): number {
+    return this.fontSizeService.fontSize;
+  }
 
   openPopup(){
     this.infoPopUpShow = !this.infoPopUpShow

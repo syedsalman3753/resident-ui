@@ -129,6 +129,14 @@ mat-card-subtitle{
   display: flex; 
   align-items: center;
 }
+
+.vid-type-card{
+  min-width: 9rem; 
+  display: flex; 
+  align-items: center; 
+  column-gap: 5px;
+  max-width: 21rem;
+}
 @media screen and (max-width: 550px){
   .empty-vid-card{
     width: 100%;
