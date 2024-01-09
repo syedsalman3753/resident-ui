@@ -242,7 +242,7 @@ export class DialogComponent implements OnInit {
   logOut(){
     this.redirectService.redirect(window.location.href);
   }
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
   logOutBtn(){

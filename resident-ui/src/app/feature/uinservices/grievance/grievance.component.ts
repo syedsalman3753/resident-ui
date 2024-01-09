@@ -139,7 +139,7 @@ export class GrievanceComponent implements OnInit {
     }
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

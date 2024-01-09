@@ -1127,7 +1127,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     this.matTabLabel = event.tab.textLabel;
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

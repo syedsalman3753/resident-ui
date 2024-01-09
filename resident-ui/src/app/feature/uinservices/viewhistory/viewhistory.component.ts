@@ -481,7 +481,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     }, 500)
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

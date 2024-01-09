@@ -243,7 +243,7 @@ export class DownloadUinComponent implements OnInit {
       });
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

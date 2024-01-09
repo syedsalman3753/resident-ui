@@ -438,7 +438,7 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.displaySeconds = "00"
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

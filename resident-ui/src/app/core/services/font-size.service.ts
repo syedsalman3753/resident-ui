@@ -14,7 +14,7 @@ export class FontSizeService {
   fontSize: any = this.fontSizesList[this.currentFontSize];
   constructor() { }
 
-  setFontSize(size: number): void {
+  setFontSize(size: any): void {
     if (size == 12) {
       this.fontSize = this.fontSizesList['12px'];
     }
