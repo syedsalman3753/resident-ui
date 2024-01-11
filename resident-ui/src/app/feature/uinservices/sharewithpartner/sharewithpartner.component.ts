@@ -598,7 +598,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('uinservices/viewhistory');
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

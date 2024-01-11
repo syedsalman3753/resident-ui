@@ -237,7 +237,7 @@ export class TrackservicerequestComponent implements OnInit, OnDestroy {
     // this.router.navigate(["grievanceRedressal"],{state:{eventId:eventId}})
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

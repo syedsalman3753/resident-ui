@@ -454,7 +454,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
     return dialogRef;
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

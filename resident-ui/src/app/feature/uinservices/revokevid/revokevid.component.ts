@@ -465,7 +465,7 @@ export class RevokevidComponent implements OnInit, OnDestroy {
     this.selectedValue = event.source.value;
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

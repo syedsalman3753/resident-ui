@@ -340,7 +340,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
     },400)
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 

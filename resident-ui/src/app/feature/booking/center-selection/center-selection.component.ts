@@ -587,7 +587,7 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  get fontSize(): number {
+  get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
 
