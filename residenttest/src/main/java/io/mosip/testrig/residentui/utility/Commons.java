@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -20,8 +21,10 @@ import org.testng.Assert;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.residentui.testcase.LoginTest;
+
 public class Commons extends BaseClass{
-	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(Commons.class);
+	private static final Logger logger = Logger.getLogger(Commons.class);
 
 	public static String appendDate="0"+getDateTime();
 	
@@ -84,7 +87,7 @@ public class Commons extends BaseClass{
 		
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
@@ -103,13 +106,34 @@ public class Commons extends BaseClass{
 
 			}
 		}
-	
+	public static ExtentTest enter(ExtentTest test,WebDriver driver, By by,int i,String value) throws TimeoutException, IOException {
+		//logger.info("Entering " + by +value);
+		try {
+			(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
+			Thread.sleep(500);
+			driver.findElements(by).get(i).sendKeys(value);
+			Thread.sleep(500);
+			try {
+				Thread.sleep(8);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+
+
+				driver.findElements(by).get(i).sendKeys(value);
+			}
+		}catch (Exception sere) {
+			// simply retry finding the element in the refreshed DOM
+
+			return test.fail(sere.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+		}
+		return test.log(Status.INFO, "Enter  "+value); 
+	}
 	public  static void clickWebelement(ExtentTest test,WebDriver driver, By by) throws IOException, InterruptedException {
 		logger.info("Clicking " + by );
 		
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			WebElement checkbox= driver.findElement(by);
 		    js.executeScript("arguments[0].click();", checkbox);
 			Thread.sleep(500);

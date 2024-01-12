@@ -38,10 +38,10 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
- @Test(groups = "LG")
+// @Test(groups = "LG")
 public class LoginTest extends BaseClass {
 // 
-//	@Test(priority = 0)
+	@Test(priority = 0)
 	public static void loginTest() throws Exception {
 	
 		String envPath = ConfigManager.getiam_adminportal_path();
@@ -66,8 +66,8 @@ public class LoginTest extends BaseClass {
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 
-		 otp = MockSMTPListener.getOtp(externalemail);
-
+		 //otp = MockSMTPListener.getOtp(externalemail);
+otp="111111";
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),

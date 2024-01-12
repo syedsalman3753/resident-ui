@@ -88,7 +88,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	
 	public void getMyUINWithoutOtp() throws Exception {
 		test=extent.createTest("get My UIN Without Otp", "verify Login");
-		Commons.click(test, driver, By.xpath("getMyUIN"));//id
+		Commons.click(test, driver, By.id("getMyUIN"));//id
 		Commons.enter(test,driver, By.id("aidValue"), vid);//
 //		Commons.switchToFrameByIndex(test,driver, 0);
 //		Commons.click(test,driver, By.xpath("//div[@id='rc-anchor-container']"));

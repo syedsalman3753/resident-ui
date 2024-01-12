@@ -61,25 +61,22 @@ public class ResidentBaseClass {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		test = extent.createTest(env, getCommitId());
-//		System.out.println(System.getProperty("user.dir"));
-//		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
-//		System.setProperty("webdriver.chrome.driver", configFilePath);	
-//		ChromeOptions options = new ChromeOptions();
-//		try {
-//			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-//			if(headless.equalsIgnoreCase("yes")) {
-//				options.addArguments("--headless=new");
-//			}
-//		} catch (Exception e1) {
-//			
-//			e1.printStackTrace();
-//		}
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options = new ChromeOptions();
-		String headless = JsonUtil.JsonObjParsing(Commons.getTestData(), "headless");
-		if (headless.equalsIgnoreCase("yes")) {
-			options.addArguments("--headless=new");
+
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			String configFilePath ="/usr/bin/chromedriver";
+			System.setProperty("webdriver.chrome.driver", configFilePath);
+		}else {
+			WebDriverManager.chromedriver().setup();
 		}
+		
+		
+     	ChromeOptions options = new ChromeOptions();
+		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		if(headless.equalsIgnoreCase("yes")) {
+			options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--log-level=DEBUG");
+			
+		}
+		
 		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
