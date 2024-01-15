@@ -28,12 +28,12 @@ public class TestRunner {
 
 	public static void main(String[] args) throws Exception {
 		AdminTestUtil.initialize();
-		String identityGenManual=JsonUtil.JsonObjParsing(Commons.getTestData(),"identityGenManual");
+		String identityGenManual=ConfigManager.getidentityGenManual();
 		if(identityGenManual.equals("yes")) {
-			uin=JsonUtil.JsonObjParsing(Commons.getTestData(),"UIN");
-			perpetualVid=JsonUtil.JsonObjParsing(Commons.getTestData(),"perpetualvid");
-			onetimeuseVid=JsonUtil.JsonObjParsing(Commons.getTestData(),"onetimevid");
-			temporaryVid=JsonUtil.JsonObjParsing(Commons.getTestData(),"temporaryvid");
+			uin=ConfigManager.getuin();
+			perpetualVid=ConfigManager.getperpetualvid();
+			onetimeuseVid=ConfigManager.getonetimevid();
+			temporaryVid=ConfigManager.gettemporaryvid();
 		}else {
 			uin = AdminTestUtil.generateUIN();
 
@@ -73,16 +73,16 @@ public class TestRunner {
 		runner.setTestSuites(suitefiles);
 		
 	
-		String langid=JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
-		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+		
+		String language=ConfigManager.getloginlang();
 		
 			if(language.equals("sin")) {
-				langid="";
+				language="";
 			}
 		System.getProperties().setProperty("testng.outpur.dir", "testng-report");
 		runner.setOutputDirectory("testng-report");
 		System.getProperties().setProperty("emailable.report2.name", "RESIDENT-" + BaseTestCase.environment + "-"
-				+ langid + "-run-" + System.currentTimeMillis() + "-report.html");
+				+ language + "-run-" + System.currentTimeMillis() + "-report.html");
 		
 		
 		runner.run();

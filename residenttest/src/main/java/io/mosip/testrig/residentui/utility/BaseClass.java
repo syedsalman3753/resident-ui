@@ -88,7 +88,7 @@ public class BaseClass {
 		logger.info("Start set up");
 		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
 			
-			if(JsonUtil.JsonObjParsing(Commons.getTestData(),"Docker").equals("yes")) {
+			if(ConfigManager.getDocker().equals("yes")) {
 				logger.info("Docker start");
 				String configFilePath ="/usr/bin/chromedriver";
 				System.setProperty("webdriver.chrome.driver", configFilePath);
@@ -100,7 +100,7 @@ public class BaseClass {
 			logger.info("window chrome driver start");
 		}
 		ChromeOptions options = new ChromeOptions();
-		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		String headless=ConfigManager.getHeadless();
 		if(headless.equalsIgnoreCase("yes")) {
 			logger.info("Running is headless mode");
 			options.addArguments("--headless", "--disable-gpu","--no-sandbox", "--window-size=1920x1080","--disable-dev-shm-usage");
@@ -118,11 +118,11 @@ public class BaseClass {
 		driver.manage().window().maximize();
 		
 		
-		String langid="lang"+JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
-		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+		
+		String language=ConfigManager.getloginlang();
 		try {
 			if(!language.equals("sin")) {
-			Commons.dropdown( driver, By.id("languages"), By.id(langid));
+			Commons.dropdown( driver, By.id("languages"), By.id("lang"+language));
 			}
 		}
 		catch (Exception e) {

@@ -38,36 +38,30 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
-// @Test(groups = "LG")
+ @Test(groups = "LG")
 public class LoginTest extends BaseClass {
-// 
+	// 
 	@Test(priority = 0)
 	public static void loginTest() throws Exception {
-	
+
 		String envPath = ConfigManager.getiam_adminportal_path();
-		
+
 		String otp = "";
-		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
+		String externalemail = ConfigManager.getexternalemail();
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
-		try {
+		Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
 		
-		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(2000);
-		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
-		}
+		
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 
-		 //otp = MockSMTPListener.getOtp(externalemail);
-otp="111111";
+		//otp = MockSMTPListener.getOtp(externalemail);
+		otp="111111";
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
@@ -82,7 +76,7 @@ otp="111111";
 		Thread.sleep(2000);
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
-			
+
 		}catch(Exception a) {
 			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
 			test.log(Status.INFO, "ALL Checkboxes are selected");
@@ -92,31 +86,31 @@ otp="111111";
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 	// @Test(priority = 0)
 	public static void loginTestWithTempraryVID() throws Exception {
-String envPath = ConfigManager.getiam_adminportal_path();
-		
+		String envPath = ConfigManager.getiam_adminportal_path();
+
 		String otp = "";
-		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
+		String externalemail = ConfigManager.getexternalemail();
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
+		Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
-		
-		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(2000);
+
+			Commons.clickWebelement(test, driver, By.id("here_tab_id"));
+			Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
+			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Thread.sleep(2000);
 		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
@@ -124,7 +118,7 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.temporaryVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 
-		 otp = MockSMTPListener.getOtp(externalemail);
+		otp = MockSMTPListener.getOtp(externalemail);
 
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
@@ -140,7 +134,7 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		Thread.sleep(2000);
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
-			
+
 		}catch(Exception a) {
 			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
 			test.log(Status.INFO, "ALL Checkboxes are selected");
@@ -151,21 +145,21 @@ String envPath = ConfigManager.getiam_adminportal_path();
 
 	// @Test
 	public static void loginTestWithOneTimeVID() throws Exception {
-String envPath = ConfigManager.getiam_adminportal_path();
-		
+		String envPath = ConfigManager.getiam_adminportal_path();
+
 		String otp = "";
-		String externalemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "externalemail");
+		String externalemail = ConfigManager.getexternalemail();
 		test = extent.createTest("Login Test with valid Vid/UIN", "verify Login");
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
+		Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
-		
-		Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-		Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
-		Thread.sleep(2000);
+
+			Commons.clickWebelement(test, driver, By.id("here_tab_id"));
+			Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
+			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Thread.sleep(2000);
 		}catch(Exception e) {
 			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
@@ -173,7 +167,7 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.onetimeuseVid);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 
-		 otp = MockSMTPListener.getOtp(externalemail);
+		otp = MockSMTPListener.getOtp(externalemail);
 
 		System.out.println(otp);
 		for (int i = 0; i <= otp.length() - 1; i++) {
@@ -189,7 +183,7 @@ String envPath = ConfigManager.getiam_adminportal_path();
 		Thread.sleep(2000);
 		try {
 			driver.findElement(By.id("dismissBtn")).click();
-			
+
 		}catch(Exception a) {
 			Commons.click(test,driver, By.id("authorize_scope"));Commons.click(test,driver, By.id("voluntary_claims"));
 			test.log(Status.INFO, "ALL Checkboxes are selected");

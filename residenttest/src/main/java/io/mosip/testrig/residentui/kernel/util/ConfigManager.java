@@ -62,8 +62,22 @@ public class ConfigManager {
 	private static String S3_ACCOUNT = "s3-account";
 	private static String PUSH_TO_S3 = "push-reports-to-s3";
 	private static String ENABLE_DEBUG = "enableDebug";
+	private static String LOGIN_LANG = "loginlang";
 	private static String THREAD_COUNT = "threadCount";
 	private static String LANG_SELECT = "langselect";
+	private static String IdentityGenManual = "identityGenManual";
+	private static String Perpetualvid = "perpetualvid";
+	private static String Temporaryvid = "temporaryvid";
+	private static String UIN = "uin";
+	private static String Onetimevid = "onetimevid";
+	private static String Externalemail = "externalemail";
+	private static String Tempemail1 = "tempemail1";
+	private static String Tempemail = "tempemail";
+	private static String TempEID = "tempEID";
+	private static String Aid = "aid";
+	private static String Postalcode = "postalcode";
+	private static String Headless = "headless";
+	private static String Docker = "docker";
 	private static String preconfiguredOtp;
 	
 
@@ -78,6 +92,11 @@ public class ConfigManager {
 	private static String AUDIT_DB_USER = "db-su-user";
 	private static String AUDIT_DB_PASS = "postgresql-password";
 	private static String AUDIT_DB_SCHEMA = "audit_db_schema";
+	private static String HierarchyLevel0 = "hierarchyLevel0";
+	private static String HierarchyLevel1 = "hierarchyLevel1";
+	private static String HierarchyLevel2 = "hierarchyLevel2";
+	private static String HierarchyLevel3 = "hierarchyLevel3";
+	private static String HierarchyLevel4 = "hierarchyLevel4";
 
 	private static String IDA_DB_USER = "db-su-user";
 	private static String IDA_DB_PASS = "postgresql-password";
@@ -125,6 +144,11 @@ public class ConfigManager {
 	private static String idrepo_client_secret;
 	private static String idrepo_client_id;
 	private static String idrepo_app_id;
+	private static String hierarchyLevel0;
+	private static String hierarchyLevel1;
+	private static String hierarchyLevel2;
+	private static String hierarchyLevel3;
+	private static String hierarchyLevel4;
 
 	private static String admin_client_secret;
 	private static String admin_client_id;
@@ -153,6 +177,20 @@ public class ConfigManager {
 	private static String s3_secret_key;
 	private static String push_reports_to_s3;
 	private static String enableDebug;
+	private static String loginlang;
+	private static String identityGenManual;
+	private static String perpetualvid;
+	private static String temporaryvid;
+	private static String uin;
+	private static String onetimevid;
+	private static String externalemail;
+	private static String tempemail1;
+	private static String tempemail;
+	private static String tempEID;
+	private static String aid;
+	private static String postalcode;
+	private static String headless;
+	private static String docker;
 	private static String threadCount;
 	private static String langselect;
 
@@ -351,14 +389,115 @@ public class ConfigManager {
 		langselect =System.getenv(LANG_SELECT) == null ? propsKernel.getProperty(LANG_SELECT) : System.getenv(LANG_SELECT);
 		propsKernel.setProperty(LANG_SELECT, langselect);
 		
+		loginlang =System.getenv(LOGIN_LANG) == null ? propsKernel.getProperty(LOGIN_LANG) : System.getenv(LOGIN_LANG);
+		propsKernel.setProperty(LOGIN_LANG, loginlang);
+		
+		identityGenManual =System.getenv(IdentityGenManual) == null ? propsKernel.getProperty(IdentityGenManual) : System.getenv(IdentityGenManual);
+		propsKernel.setProperty(IdentityGenManual, identityGenManual);
+		perpetualvid =System.getenv(Perpetualvid) == null ? propsKernel.getProperty(Perpetualvid) : System.getenv(Perpetualvid);
+		propsKernel.setProperty(Perpetualvid, perpetualvid);
+		temporaryvid =System.getenv(Temporaryvid) == null ? propsKernel.getProperty(Temporaryvid) : System.getenv(Temporaryvid);
+		propsKernel.setProperty(Temporaryvid, temporaryvid);
+		uin =System.getenv(UIN) == null ? propsKernel.getProperty(UIN) : System.getenv(UIN);
+		propsKernel.setProperty(UIN, uin);
+		onetimevid =System.getenv(Onetimevid) == null ? propsKernel.getProperty(Onetimevid) : System.getenv(Onetimevid);
+		propsKernel.setProperty(Onetimevid, onetimevid);
+		externalemail =System.getenv(Externalemail) == null ? propsKernel.getProperty(Externalemail) : System.getenv(Externalemail);
+		propsKernel.setProperty(Externalemail, externalemail);
+		tempemail1 =System.getenv(Tempemail1) == null ? propsKernel.getProperty(Tempemail1) : System.getenv(Tempemail1);
+		propsKernel.setProperty(Tempemail1, tempemail1);
+		tempemail =System.getenv(Tempemail) == null ? propsKernel.getProperty(Tempemail) : System.getenv(Tempemail);
+		propsKernel.setProperty(Tempemail, tempemail);
+		tempEID =System.getenv(TempEID) == null ? propsKernel.getProperty(TempEID) : System.getenv(TempEID);
+		propsKernel.setProperty(TempEID, tempEID);
+		aid =System.getenv(Aid) == null ? propsKernel.getProperty(Aid) : System.getenv(Aid);
+		propsKernel.setProperty(Aid, aid);
+		postalcode =System.getenv(Postalcode) == null ? propsKernel.getProperty(Postalcode) : System.getenv(Postalcode);
+		propsKernel.setProperty(Postalcode, postalcode);
+		headless =System.getenv(Headless) == null ? propsKernel.getProperty(Headless) : System.getenv(Headless);
+		propsKernel.setProperty(Headless, headless);
+		docker =System.getenv(Docker) == null ? propsKernel.getProperty(Docker) : System.getenv(Docker);
+		propsKernel.setProperty(Docker, docker);
+		
+		hierarchyLevel0 =System.getenv(HierarchyLevel0) == null ? propsKernel.getProperty(HierarchyLevel0) : System.getenv(HierarchyLevel0);
+		propsKernel.setProperty(HierarchyLevel0, hierarchyLevel0);
+		
+		hierarchyLevel1 =System.getenv(HierarchyLevel1) == null ? propsKernel.getProperty(HierarchyLevel1) : System.getenv(HierarchyLevel1);
+		propsKernel.setProperty(HierarchyLevel1, hierarchyLevel1);
+		
+		hierarchyLevel2 =System.getenv(HierarchyLevel2) == null ? propsKernel.getProperty(HierarchyLevel2) : System.getenv(HierarchyLevel2);
+		propsKernel.setProperty(HierarchyLevel2, hierarchyLevel2);
+		
+		hierarchyLevel3 =System.getenv(HierarchyLevel3) == null ? propsKernel.getProperty(HierarchyLevel3) : System.getenv(HierarchyLevel3);
+		propsKernel.setProperty(HierarchyLevel3, hierarchyLevel3);
+		
+		hierarchyLevel4 =System.getenv(HierarchyLevel4) == null ? propsKernel.getProperty(HierarchyLevel4) : System.getenv(HierarchyLevel4);
+		propsKernel.setProperty(HierarchyLevel4, hierarchyLevel4);
+		
 		
 		
 		//enableDebug threadCount  langselect
 
 	}
-
+	public static String gethierarchyLevel0() {
+		return hierarchyLevel0;
+	}
+	public static String gethierarchyLevel1() {
+		return hierarchyLevel1;
+	}
+	public static String gethierarchyLevel2() {
+		return hierarchyLevel2;
+	}
+	public static String gethierarchyLevel3() {
+		return hierarchyLevel3;
+	}
+	public static String gethierarchyLevel4() {
+		return hierarchyLevel4;
+	}
+	public static String getDocker() {
+		return docker;
+	}
+	public static String getHeadless() {
+		return headless;
+	}
+	public static String getPostalcode() {
+		return postalcode;
+	}
+	public static String getaid() {
+		return aid;
+	}
+	public static String gettempEID() {
+		return tempEID;
+	}
+	public static String gettempemail() {
+		return tempemail;
+	}
+	public static String gettempemail1() {
+		return tempemail1;
+	}
+	public static String getexternalemail() {
+		return externalemail;
+	}
+	public static String getonetimevid() {
+		return onetimevid;
+	}
+	public static String getuin() {
+		return uin;
+	}
+	public static String gettemporaryvid() {
+		return temporaryvid;
+	}
+	public static String getperpetualvid() {
+		return perpetualvid;
+	}
+	public static String getidentityGenManual() {
+		return identityGenManual;
+	}
 	public static String getAuthDemoServicePort() {
 		return authDemoServicePort;
+	}
+	public static String getloginlang() {
+		return loginlang;
 	}
 
 	public static String getAuthDemoServiceBaseUrl() {

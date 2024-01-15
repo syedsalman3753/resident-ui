@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.utility.Commons;
 import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
@@ -20,7 +21,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	// @Test(groups = "GMU")
 	public void getMyUIN() throws Exception {
 		
-		String tempemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "tempemail");
+		String tempemail = ConfigManager.gettempemail();
 		test = extent.createTest("getMyUIN", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));
 		Commons.enter(test, driver, By.id("aidValue"), vid);//
@@ -48,7 +49,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	
 	
 	public void getMyUINWithInvalidOtp() throws Exception {
-		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
+		String tempemail = ConfigManager.gettempemail();
 		
 		test=extent.createTest("get My UIN With Invalid Otp", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));
@@ -67,7 +68,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	}
 	
 	public void getMyUINWithExpiredOtp() throws Exception {
-		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
+		String tempemail = ConfigManager.gettempemail();
 		
 		test=extent.createTest("get My UIN With Expired Otp", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));//id

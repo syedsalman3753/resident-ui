@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.utility.Commons;
 import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.ResidentBaseClass;
@@ -16,12 +16,12 @@ public class GetInformation extends ResidentBaseClass {
 
 	@Test(groups = "GI")
 	public void getInformation() throws Exception {
-		String hierarchyLevel0 = JsonUtil.JsonObjArrayListParsing2(Commons.getTestData(), "hierarchyLevel0"); //Country
-		String hierarchyLevel1 = JsonUtil.JsonObjArrayListParsing2(Commons.getTestData(), "hierarchyLevel1"); //Region
-		String hierarchyLevel2 = JsonUtil.JsonObjArrayListParsing2(Commons.getTestData(), "hierarchyLevel2");//Province
-		String hierarchyLevel3 = JsonUtil.JsonObjArrayListParsing2(Commons.getTestData(), "hierarchyLevel3");//City
-		String hierarchyLevel4 = JsonUtil.JsonObjArrayListParsing2(Commons.getTestData(), "hierarchyLevel4");//Zone
-		String postalcode = JsonUtil.JsonObjParsing(Commons.getTestData(), "postalcode");
+		String hierarchyLevel0 = JsonUtil.JsonObjArrayListParsing2( "hierarchyLevel0"); //Country
+		String hierarchyLevel1 = JsonUtil.JsonObjArrayListParsing2("hierarchyLevel1"); //Region
+		String hierarchyLevel2 = JsonUtil.JsonObjArrayListParsing2( "hierarchyLevel2");//Province
+		String hierarchyLevel3 = JsonUtil.JsonObjArrayListParsing2( "hierarchyLevel3");//City
+		String hierarchyLevel4 = JsonUtil.JsonObjArrayListParsing2("hierarchyLevel4");//Zone
+		String postalcode = ConfigManager.getPostalcode();
 
 		test = extent.createTest("GetInformation test", "verify Login");
 		Thread.sleep(2000);
@@ -79,7 +79,7 @@ public class GetInformation extends ResidentBaseClass {
 	}
 
 	public void GetInformationWithInvalidcountry() throws Exception {
-		String postalcode = JsonUtil.JsonObjParsing(Commons.getTestData(), "postalcode");
+		String postalcode =ConfigManager.getPostalcode();
 		test = extent.createTest("Get Information With Invalid country", "verify country");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("getInformation"));
@@ -91,7 +91,7 @@ public class GetInformation extends ResidentBaseClass {
 	}
 
 	public void GetInformationWithInvalidProvince() throws Exception {
-		String postalcode = JsonUtil.JsonObjParsing(Commons.getTestData(), "postalcode");
+		String postalcode = ConfigManager.getPostalcode();
 		test = extent.createTest("Get Information With Invalid Province", "verify Province");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("getInformation"));
@@ -103,7 +103,7 @@ public class GetInformation extends ResidentBaseClass {
 	}
 
 	public void GetInformationWithInvalidRegion() throws Exception {
-		String postalcode = JsonUtil.JsonObjParsing(Commons.getTestData(), "postalcode");
+		String postalcode = ConfigManager.getPostalcode();
 		test = extent.createTest("Get Information With Invalid Region", "verify Region");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("getInformation"));
@@ -115,7 +115,7 @@ public class GetInformation extends ResidentBaseClass {
 	}
 
 	public void GetInformationWithInvalidCity() throws Exception {
-		String postalcode = JsonUtil.JsonObjParsing(Commons.getTestData(), "postalcode");
+		String postalcode = ConfigManager.getPostalcode();
 		test = extent.createTest("GetI nformation With InvalidCity", "verify City");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("getInformation"));
@@ -127,7 +127,7 @@ public class GetInformation extends ResidentBaseClass {
 	}
 
 	public void GetInformationWithInvalidZone() throws Exception {
-		String postalcode = JsonUtil.JsonObjParsing(Commons.getTestData(), "postalcode");
+		String postalcode = ConfigManager.getPostalcode();
 		test = extent.createTest("Get Information With Invalid Zone", "verify Zone");
 		Thread.sleep(2000);
 		Commons.click(test, driver, By.id("getInformation"));
