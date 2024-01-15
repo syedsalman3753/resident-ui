@@ -14,7 +14,7 @@ import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.ResidentBaseClass;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
-@Test(groups = "GMU")
+@Test(groups = "GMU",dependsOnGroups="UMD")
 public class GetMyUIN extends ResidentBaseClass{
 	
 	String vid =TestRunner.perpetualVid;
