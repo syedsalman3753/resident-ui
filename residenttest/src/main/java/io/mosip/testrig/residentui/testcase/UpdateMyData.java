@@ -25,7 +25,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.enter(test, driver, By.id("proofOfIdentityvalue"), data);
 		Commons.dropdown(test, driver, By.id("proofOfIdentity"));
 		Commons.enter(test, driver, By.id("fileDropRef"),
-				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
+				TestRunner.getResourcePath() + "//BulkUploadFiles//tonyId.png");
 		Thread.sleep(2000);
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
 
@@ -55,7 +55,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.dropdown(test, driver, By.id("proofOfAddress"));
 		Commons.enter(test, driver, By.id("proofOfAddressvalue"), data);
 		Commons.enter(test, driver, By.id("fileAddRef"),
-				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
+				TestRunner.getResourcePath() + "//BulkUploadFiles//tonyId.png");
 		test.log(Status.INFO, "file Uploaded");
 		Thread.sleep(2000);
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
@@ -119,7 +119,7 @@ public class UpdateMyData extends BaseClass {
 		Commons.dropdown(test, driver, By.id("proofOfAddress"));
 		Commons.enter(test, driver, By.id("proofOfAddressvalue"), data);
 		Commons.enter(test, driver, By.id("fileAddRef"),
-				TestRunner.getResourcePath() + "\\BulkUploadFiles\\tonyId.png");
+				TestRunner.getResourcePath() + "//BulkUploadFiles//tonyId.png");
 		test.log(Status.INFO, "file Uploaded");
 		Thread.sleep(2000);
 		Commons.clickWebelement(test, driver, By.id("previewBtn"));
