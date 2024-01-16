@@ -61,7 +61,7 @@ public class LoginTest extends BaseClass {
 
 		try {
 			Commons.clickWebelement(test, driver, By.id("get_otp"));
-
+			Thread.sleep(10000);
 			otp = MockSMTPListener.getOtp(externalemail);
 			//	otp="111111";
 			System.out.println(otp);

@@ -139,6 +139,7 @@ public class Commons extends BaseClass{
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage() );
+			Assert.fail();
 		}
 	}
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
@@ -151,6 +152,7 @@ public class Commons extends BaseClass{
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage() );
+			Assert.fail();
 		}
 
 
