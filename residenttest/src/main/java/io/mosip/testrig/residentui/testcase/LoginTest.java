@@ -60,8 +60,10 @@ public class LoginTest extends BaseClass {
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 
 		try {
+			Thread.sleep(30000);
 			Commons.clickWebelement(test, driver, By.id("get_otp"));
-			Thread.sleep(10000);
+			driver.findElement(By.xpath("//*[text()='Failed to Send OTP: ']"));
+			
 			otp = MockSMTPListener.getOtp(externalemail);
 			//	otp="111111";
 			System.out.println(otp);

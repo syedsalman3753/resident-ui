@@ -133,9 +133,9 @@ public class Commons extends BaseClass{
 
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 			driver.findElement(by).click();
-			Thread.sleep(500);
+			
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage() );
