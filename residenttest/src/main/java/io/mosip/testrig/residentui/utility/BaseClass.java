@@ -86,15 +86,13 @@ public class BaseClass {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		logger.info("Start set up");
-		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux") && ConfigManager.getDocker().equals("yes") ) {
 			
-			if(ConfigManager.getDocker().equals("yes")) {
+			
 				logger.info("Docker start");
 				String configFilePath ="/usr/bin/chromedriver";
 				System.setProperty("webdriver.chrome.driver", configFilePath);
-			}else {
-				WebDriverManager.chromedriver().setup();
-			}
+			
 		}else {
 			WebDriverManager.chromedriver().setup();
 			logger.info("window chrome driver start");
