@@ -38,7 +38,7 @@ import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
-@Test(groups = "LG")
+//@Test(groups = "LG")
 public class LoginTest extends BaseClass {
 	// 
 	@Test(priority = 0)
