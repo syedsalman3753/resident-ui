@@ -61,20 +61,24 @@ public class ResidentBaseClass {
 	@BeforeMethod
 	public void setUp() throws Exception {
 		test = extent.createTest(env, getCommitId());
-
-		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux") && ConfigManager.getDocker().equals("yes") ) {
+			
+			
+			logger.info("Docker start");
 			String configFilePath ="/usr/bin/chromedriver";
 			System.setProperty("webdriver.chrome.driver", configFilePath);
-		}else {
-			WebDriverManager.chromedriver().setup();
-		}
 		
-		
-     	ChromeOptions options = new ChromeOptions();
-		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+	}else {
+		WebDriverManager.chromedriver().setup();
+		logger.info("window chrome driver start");
+	}
+		ChromeOptions options = new ChromeOptions();
+		String headless=ConfigManager.getHeadless();
 		if(headless.equalsIgnoreCase("yes")) {
-			options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--log-level=DEBUG");
+			logger.info("Running is headless mode");
+			options.addArguments("--headless", "--disable-gpu","--no-sandbox", "--window-size=1920x1080","--disable-dev-shm-usage");
 			
+
 		}
 		
 		driver = new ChromeDriver(options);
@@ -84,11 +88,10 @@ public class ResidentBaseClass {
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		String langid="lang"+JsonUtil.JsonObjParsing(Commons.getTestData(),"language");
-		String language=JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+		String language=ConfigManager.getloginlang();
 		try {
 			if(!language.equals("sin")) {
-			Commons.dropdown( driver, By.id("languages"), By.id(langid));
+			Commons.dropdown( driver, By.id("languages"), By.id("lang"+language));
 			}
 		}
 		catch (Exception e) {

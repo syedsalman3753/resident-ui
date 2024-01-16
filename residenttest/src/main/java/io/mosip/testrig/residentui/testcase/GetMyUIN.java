@@ -7,20 +7,21 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.residentui.kernel.util.ConfigManager;
 import io.mosip.testrig.residentui.utility.Commons;
 import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
 import io.mosip.testrig.residentui.utility.ResidentBaseClass;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
-@Test(groups = "GMU")
+@Test(groups = "GMU",dependsOnGroups="UMD")
 public class GetMyUIN extends ResidentBaseClass{
 	
 	String vid =TestRunner.perpetualVid;
 	// @Test(groups = "GMU")
 	public void getMyUIN() throws Exception {
 		
-		String tempemail = JsonUtil.JsonObjParsing(Commons.getTestData(), "tempemail");
+		String tempemail = ConfigManager.gettempemail();
 		test = extent.createTest("getMyUIN", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));
 		Commons.enter(test, driver, By.id("aidValue"), vid);//
@@ -48,7 +49,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	
 	
 	public void getMyUINWithInvalidOtp() throws Exception {
-		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
+		String tempemail = ConfigManager.gettempemail();
 		
 		test=extent.createTest("get My UIN With Invalid Otp", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));
@@ -67,7 +68,7 @@ public class GetMyUIN extends ResidentBaseClass{
 	}
 	
 	public void getMyUINWithExpiredOtp() throws Exception {
-		String tempemail=JsonUtil.JsonObjParsing(Commons.getTestData(),"tempemail");
+		String tempemail = ConfigManager.gettempemail();
 		
 		test=extent.createTest("get My UIN With Expired Otp", "verify Login");
 		Commons.click(test, driver, By.id("getMyUIN"));//id
@@ -78,7 +79,7 @@ public class GetMyUIN extends ResidentBaseClass{
 //		driver.switchTo().parentFrame();
 		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 		String otp = MockSMTPListener.getOtp(tempemail);
-		Thread.sleep(180020);
+		Thread.sleep(2000);
 		Commons.enter(test,driver, By.id("otp-input"), otp);
 		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
 		   Commons.click(test,driver, By.id("dismissBtn"));
