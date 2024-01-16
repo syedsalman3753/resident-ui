@@ -63,6 +63,7 @@ public class LoginTest extends BaseClass {
 
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"),"4709189623856831");
 		Thread.sleep(10000);
+		test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 		try {
 			boolean a=driver.findElement(By.xpath("//*[text()='Failed to Send OTP: ']")).isDisplayed();
@@ -80,6 +81,7 @@ public class LoginTest extends BaseClass {
 		for (int i = 0; i <= otp.length() - 1; i++) {
 			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
 					Character.toString(otp.charAt(i)));
+			test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 		}
 		
 
