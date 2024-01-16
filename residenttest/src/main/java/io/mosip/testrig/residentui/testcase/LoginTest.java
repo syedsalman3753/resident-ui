@@ -30,6 +30,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 
 import io.mosip.testrig.residentui.kernel.util.ConfigManager;
@@ -37,6 +38,7 @@ import io.mosip.testrig.residentui.utility.BaseClass;
 import io.mosip.testrig.residentui.utility.Commons;
 import io.mosip.testrig.residentui.utility.JsonUtil;
 import io.mosip.testrig.residentui.utility.MockSMTPListener;
+import io.mosip.testrig.residentui.utility.Screenshot;
 import io.mosip.testrig.residentui.utility.TestRunner;
 
 //@Test(groups = "LG")
@@ -66,8 +68,10 @@ public class LoginTest extends BaseClass {
 			boolean a=driver.findElement(By.xpath("//*[text()='Failed to Send OTP: ']")).isDisplayed();
 			boolean b=driver.findElement(By.xpath("//*[text()='User data not available']")).isDisplayed();
 		logger.info("Failed to Send OTP " + a+b);
+		test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 		}catch(Exception e){
 			logger.info("OTP SEND  ");
+			test.pass(MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 		}
 		
 		//otp = MockSMTPListener.getOtp(externalemail);
