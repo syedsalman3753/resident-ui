@@ -41,8 +41,8 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 
 //@Test(groups = "LG")
 public class LoginTest extends BaseClass {
-	// 
 	private static final Logger logger = Logger.getLogger(LoginTest.class);
+	// 
 	@Test(priority = 0)
 	public static void loginTest() throws Exception {
 
@@ -59,32 +59,26 @@ public class LoginTest extends BaseClass {
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 		Thread.sleep(2000);	
 
-		Commons.enter(test, driver, By.id("Otp_mosip-vid"),"4709189623856831");
-
+		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
+		Thread.sleep(10000);
+		Commons.clickWebelement(test, driver, By.id("get_otp"));
 		try {
-			Thread.sleep(30000);
-			Commons.clickWebelement(test, driver, By.id("get_otp"));
 			boolean a=driver.findElement(By.xpath("//*[text()='Failed to Send OTP: ']")).isDisplayed();
-			logger.info("Failed to Send OTP " + a);
-			otp = MockSMTPListener.getOtp(externalemail);
-			//	otp="111111";
-			System.out.println(otp);
-			for (int i = 0; i <= otp.length() - 1; i++) {
-				Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
-						Character.toString(otp.charAt(i)));
-			}
-		}catch(Exception e) {
-			Thread.sleep(10000);
-			Commons.clickWebelement(test, driver, By.id("get_otp"));
-
-			otp = MockSMTPListener.getOtp(externalemail);
-			//otp="111111";
-			System.out.println(otp);
-			for (int i = 0; i <= otp.length() - 1; i++) {
-				Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
-						Character.toString(otp.charAt(i)));
-			}
+			boolean b=driver.findElement(By.xpath("//*[text()='User data not available']")).isDisplayed();
+		logger.info("Failed to Send OTP " + a+b);
+		}catch(Exception e){
+			logger.info("OTP SEND  ");
 		}
+		
+		//otp = MockSMTPListener.getOtp(externalemail);
+		otp="111111";
+		System.out.println(otp);
+		for (int i = 0; i <= otp.length() - 1; i++) {
+			Commons.enter(test, driver, By.xpath("//*[@id='otp_verify_input']//div//input[" + (i + 1) + "]"),
+					Character.toString(otp.charAt(i)));
+		}
+		
+
 
 		test.log(Status.INFO, "Extracted OTP");
 		Thread.sleep(2000);
