@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -41,6 +42,7 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 //@Test(groups = "LG")
 public class LoginTest extends BaseClass {
 	// 
+	private static final Logger logger = Logger.getLogger(LoginTest.class);
 	@Test(priority = 0)
 	public static void loginTest() throws Exception {
 
@@ -62,8 +64,8 @@ public class LoginTest extends BaseClass {
 		try {
 			Thread.sleep(30000);
 			Commons.clickWebelement(test, driver, By.id("get_otp"));
-			driver.findElement(By.xpath("//*[text()='Failed to Send OTP: ']"));
-			
+			boolean a=driver.findElement(By.xpath("//*[text()='Failed to Send OTP: ']")).isDisplayed();
+			logger.info("Failed to Send OTP " + a);
 			otp = MockSMTPListener.getOtp(externalemail);
 			//	otp="111111";
 			System.out.println(otp);
