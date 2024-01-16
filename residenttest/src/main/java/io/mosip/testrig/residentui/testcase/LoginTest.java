@@ -59,7 +59,7 @@ public class LoginTest extends BaseClass {
 		Commons.clickWebelement(test, driver, By.id("login_with_otp"));
 		Thread.sleep(2000);	
 
-		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
+		Commons.enter(test, driver, By.id("Otp_mosip-vid"),"4709189623856831");
 		Thread.sleep(10000);
 		Commons.clickWebelement(test, driver, By.id("get_otp"));
 		try {
