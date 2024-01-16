@@ -37,7 +37,7 @@ public class ResidentBaseClass {
 	protected JavascriptExecutor js;
 	protected String langcode;
 	protected String env = ConfigManager.getiam_apienvuser();
-	protected String envPath = ConfigManager.getiam_adminportal_path();
+	protected String envPath = ConfigManager.getiam_residentportal_path();
 	protected String vid = System.getProperty("vid");
 	protected String externalurl = System.getProperty("externalurl");
 	protected String password = System.getProperty("password");

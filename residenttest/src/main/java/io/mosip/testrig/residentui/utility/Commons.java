@@ -27,24 +27,24 @@ public class Commons extends BaseClass{
 	private static final Logger logger = Logger.getLogger(Commons.class);
 
 	public static String appendDate="0"+getDateTime();
-
+	
 	public static String getDateTime()
-	{
-
-
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-		LocalDateTime now = LocalDateTime.now();
-		return dtf.format(now);
-	}
-
+	  {
+		
+	
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+	   LocalDateTime now = LocalDateTime.now();
+	   return dtf.format(now);
+	  }
+	
 	public  static void filter(ExtentTest test,WebDriver driver, By by,String data) {
 		logger.info("Inside Filter " + by + data);
 		try {
 			Commons.click(test,driver, By.id("Filter"));
-
-
-			Commons.enter(test,driver, by, data); 
-			Commons.click(test,driver, By.id("applyTxt")); 
+ 
+	
+		Commons.enter(test,driver, by, data); 
+		Commons.click(test,driver, By.id("applyTxt")); 
 		}
 		catch (Exception e) {
 			try {
@@ -58,15 +58,15 @@ public class Commons extends BaseClass{
 
 		}
 	}
-
+	
 	public  static void filterCenter(ExtentTest test,WebDriver driver, By by,String data) {
 		logger.info("Inside filterCenter " + by + data);
 		try {
-			click(test,driver, By.id("Filter")); 
-
-			Commons.dropdowncenter(test,driver, by, data); 
-
-			Commons.click(test,driver, By.id("applyTxt")); 
+		click(test,driver, By.id("Filter")); 
+	
+		Commons.dropdowncenter(test,driver, by, data); 
+		
+		Commons.click(test,driver, By.id("applyTxt")); 
 		}
 		catch (Exception e) {
 			try {
@@ -80,11 +80,11 @@ public class Commons extends BaseClass{
 
 		}
 	}
-
-
+	
+  
 	public  static void click(ExtentTest test,WebDriver driver, By by) throws IOException, InterruptedException {
 		logger.info("Clicking " + by );
-
+		
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
 			Thread.sleep(1000);
@@ -94,18 +94,18 @@ public class Commons extends BaseClass{
 			// simply retry finding the element in the refreshed DOM
 			driver.findElement(by).click();
 		}
-		catch (Exception e) {
-			try {
-				test.fail(e.getMessage());
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", driver.findElement(by));
+		 catch (Exception e) {
+				try {
+					test.fail(e.getMessage());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
 
+			}
 		}
-	}
 	public static ExtentTest enter(ExtentTest test,WebDriver driver, By by,int i,String value) throws TimeoutException, IOException {
 		//logger.info("Entering " + by +value);
 		try {
@@ -130,58 +130,21 @@ public class Commons extends BaseClass{
 	}
 	public  static void clickWebelement(ExtentTest test,WebDriver driver, By by) throws IOException, InterruptedException {
 		logger.info("Clicking " + by );
-
+		
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(5000);
-			driver.findElement(by).click();
-			
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage() );
-			Assert.fail();
-		}
-	}
-	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
-		logger.info("Entering " + by +value);
-		try {
-			(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
-			driver.findElement(by).clear();
-			driver.findElement(by).sendKeys(value);
-
-		}
-		catch (Exception e) {
-			logger.error(e.getMessage() );
-			Assert.fail();
-		}
-
-
-	}
-	public static void enterdate(ExtentTest test,WebDriver driver, By by,String value) {
-		logger.info("Entering " + by +value);
-		try {
-			(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
-			driver.findElement(by).clear();
-			driver.findElement(by).sendKeys(value);
-			try {
-				Thread.sleep(8);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Thread.sleep(1000);
+			WebElement checkbox= driver.findElement(by);
+		    js.executeScript("arguments[0].click();", checkbox);
+			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
 			// simply retry finding the element in the refreshed DOM
-			driver.findElement(by).sendKeys(value);
+			driver.findElement(by).click();
 		}
-		catch (TimeoutException toe) {
-			driver.findElement(by).sendKeys(value);
-			System.out.println( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
-		}
-
 		catch (Exception e) {
 			try {
-				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-			} catch (IOException e1) {
+				test.fail(e.getMessage());
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -189,51 +152,119 @@ public class Commons extends BaseClass{
 			executor.executeScript("arguments[0].click();", driver.findElement(by));
 
 		}
-	}
 
-	public static void dropdown(ExtentTest test,WebDriver driver, By by)
-	{
-		logger.info("Selecting DropDown Index Zero Value " + by );
-
-		try {
-			Thread.sleep(500);
-			click(test,driver,by);//REGION
-			Thread.sleep(500);
-
-			String att= driver.findElement(by).getAttribute("aria-owns");
-			String[] list=att.split(" ");
-			click(test,driver,By.id(list[0]));
+		}
+	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
+		logger.info("Entering " + by +value);
 			try {
+				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
+				driver.findElement(by).clear();
+				driver.findElement(by).sendKeys(value);
+				try {
+					Thread.sleep(8);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}catch (StaleElementReferenceException sere) {
+				// simply retry finding the element in the refreshed DOM
+				driver.findElement(by).sendKeys(value);
+			}
+			catch (TimeoutException toe) {
+				driver.findElement(by).sendKeys(value);
+				System.out.println( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+			}
+			catch (Exception e) {
+				try {
+					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
+
+			}
+			
+			
+	}
+	public static void enterdate(ExtentTest test,WebDriver driver, By by,String value) {
+		logger.info("Entering " + by +value);
+			try {
+				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
+				driver.findElement(by).clear();
+				driver.findElement(by).sendKeys(value);
+				try {
+					Thread.sleep(8);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}catch (StaleElementReferenceException sere) {
+				// simply retry finding the element in the refreshed DOM
+				driver.findElement(by).sendKeys(value);
+			}
+			catch (TimeoutException toe) {
+				driver.findElement(by).sendKeys(value);
+				System.out.println( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+			}
+			
+			catch (Exception e) {
+				try {
+					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
+
+			}
+	}
+	
+	public static void dropdown(ExtentTest test,WebDriver driver, By by)
+	  {
+		logger.info("Selecting DropDown Index Zero Value " + by );
+		  
+		 try {
+			 Thread.sleep(500);
+			 click(test,driver,by);//REGION
+				Thread.sleep(500);
+			
+		   String att= driver.findElement(by).getAttribute("aria-owns");
+		   String[] list=att.split(" ");
+		    click(test,driver,By.id(list[0]));
+		    try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}catch(Exception e)
+		 }catch(Exception e)
+		 
+		 {
+			 test.fail(e.getMessage());
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
 
-		{
-			test.fail(e.getMessage());
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", driver.findElement(by));
-
-		}
-
-
-
-	}
+		 }
+		 
+		 
+		 
+	  }
 	public static void dropdown(WebDriver driver, By by,By value)
-	{
+	  {
 		logger.info("Selecting DropDown By Value " + by +value );
-		try {  
-			Thread.sleep(500);
-			click(driver,by);
-			Thread.sleep(500);
-			click(driver,value);
-			Thread.sleep(500);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+		 try {  
+			 Thread.sleep(500);
+			 click(driver,by);
+			 Thread.sleep(500);
+		    click(driver,value);
+				Thread.sleep(500);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 }
 	public  static void click(WebDriver driver, By by) throws IOException, InterruptedException {
 		logger.info("Clicking " + by );
 		try {
@@ -242,91 +273,91 @@ public class Commons extends BaseClass{
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		}
-	}
 	public static void dropdown(ExtentTest test,WebDriver driver, By by,String value)
-	{
+	  {
 		logger.info("Selecting DropDown By Value " + by +value );
-
-		try {
-			Thread.sleep(500);
-			click(test,driver,by);
-			Thread.sleep(500);
-			String val="'"+value +"'";
-
-			click(test,driver,By.xpath("//span[contains(text(),"+val+")]"));
-			try {
+		  
+		 try {
+			 Thread.sleep(500);
+			 click(test,driver,by);
+				Thread.sleep(500);
+			   String val="'"+value +"'";
+		   
+		    click(test,driver,By.xpath("//span[contains(text(),"+val+")]"));
+		    try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}catch(Exception e)
+		 }catch(Exception e)
+		 
+		 {
+			 try {
+					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
 
-		{
-			try {
-				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", driver.findElement(by));
-
-		}
-	}
-
+		 }
+	  }
+	
 	public static void dropdowncenter(ExtentTest test,WebDriver driver, By by,String value)
-	{
+	  {
 		logger.info("Selecting DropDown By Value " + by +value );
-
-		try {
-			Thread.sleep(500);
-			click(test,driver,by);
-			Thread.sleep(500);
-			String val="'"+value +"'";
-
-			click(test,driver,By.id(value));
-			try {
+		  
+		 try {
+			 Thread.sleep(500);
+			 click(test,driver,by);
+				Thread.sleep(500);
+			   String val="'"+value +"'";
+		   
+		    click(test,driver,By.id(value));
+		    try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}catch(Exception e)
-
-		{
-			e.getMessage();
-		}
-	}
-
+		 }catch(Exception e)
+		 
+		 {
+			 e.getMessage();
+		 }
+	  }
+	
 	public static void dropdown(ExtentTest test,WebDriver driver, By by,By value)
-	{
+	  {
 		logger.info("Selecting DropDown By Value " + by +value );
-		try {  
-			Thread.sleep(500);
-			click(test,driver,by);
-			Thread.sleep(500);
-			click(test,driver,value);
+		 try {  
+			 Thread.sleep(500);
+			 click(test,driver,by);
+			 Thread.sleep(500);
+		    click(test,driver,value);
+		  
+				Thread.sleep(500);
+			
+		 }catch(Exception e)
+		 
+		 {
+			 try {
+					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
 
-			Thread.sleep(500);
-
-		}catch(Exception e)
-
-		{
-			try {
-				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", driver.findElement(by));
-
-		}
-	}
+		 }
+	  }
 	public static String getTestData()
 	{
 		return JsonUtil.readJsonFileText("TestData.json");
@@ -334,15 +365,15 @@ public class Commons extends BaseClass{
 	public static String getFieldData(String idfield) throws Exception
 	{
 		return	JsonUtil.JsonObjSimpleParsing(getTestData(), idfield);
-
+	
 	}
 
 	public static void clickSpan(WebDriver driver,String key) throws Exception {
-
+		
 		String val=Commons.getFieldData(key);
 		String var="//span[contains(text(),'"+ val+ "')]";
-		Commons.click(test,driver,By.xpath(var)); 
-		logger.info("clickSpan" + var );
+		  Commons.click(test,driver,By.xpath(var)); 
+		  logger.info("clickSpan" + var );
 	}
 
 
@@ -350,53 +381,53 @@ public class Commons extends BaseClass{
 
 
 
-
+	
 	public static boolean switchToFrameByIndex(ExtentTest test,WebDriver driver,int index) {
 		boolean flag = false;
 		try {
-			new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
-			driver.switchTo().frame(index);
-			flag = true;
-			return true;
+		new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe")));
+		driver.switchTo().frame(index);
+		flag = true;
+		return true;
 		} catch (Exception e) {
 
-			return false;
+		return false;
 		} finally {
-			if (flag) {
-				System.out.println("Frame with index \"" + index + "\" is selected");
-			} else {
-				System.out.println("Frame with index \"" + index + "\" is not selected");
-			}
+		if (flag) {
+		System.out.println("Frame with index \"" + index + "\" is selected");
+		} else {
+		System.out.println("Frame with index \"" + index + "\" is not selected");
 		}
-	}
-
+		}
+		}
+	
 	public static boolean switchToFrameByName(WebDriver driver,String nameValue) {
 
 		boolean flag = false;
 		try {
-			driver.switchTo().frame(nameValue);
+		driver.switchTo().frame(nameValue);
 
-			flag = true;
-			return true;
+		flag = true;
+		return true;
 		} catch (Exception e) {
 
-			return false;
+		return false;
 		} finally {
-			if (flag) {
-				System.out.println("Frame with Name \"" + nameValue + "\" is selected");
-			} else if (!flag) {
-				System.out.println("Frame with Name \"" + nameValue + "\" is not selected");
-			}
+		if (flag) {
+		System.out.println("Frame with Name \"" + nameValue + "\" is selected");
+		} else if (!flag) {
+		System.out.println("Frame with Name \"" + nameValue + "\" is not selected");
 		}
-	}
-
+		}
+		}
+	
 	public static void implicitWait(WebDriver driver, int timeOut) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);}
-
+	
 	public static void explicitWait(WebDriver driver, WebElement element, int timeOut ) {
 		WebDriverWait wait = new WebDriverWait(driver,timeOut);
 		wait.until(ExpectedConditions.visibilityOf(element));}
-
+	
 	public static boolean switchToNewWindow(WebDriver driver) {
 		boolean flag = false;
 		try {
@@ -417,7 +448,7 @@ public class Commons extends BaseClass{
 			}
 		}
 	}
-
+	
 	public static boolean switchToOldWindow(WebDriver driver) {
 		boolean flag = false;
 		try {
@@ -447,7 +478,7 @@ public class Commons extends BaseClass{
 		}
 	}
 
-
+	
 	public static boolean switchWindowByTitle(WebDriver driver,String windowTitle, int count) {
 		boolean flag = false;
 		try {
@@ -474,7 +505,7 @@ public class Commons extends BaseClass{
 			}
 		}
 	}
-
-
-
+	
+	
+	
 }
