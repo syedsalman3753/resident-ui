@@ -115,7 +115,7 @@ public class ConfigManager {
 	private static String MASTER_DB_SCHEMA = "master_db_schema";
 
 	private static String IAM_EXTERNAL_URL = "keycloak-external-url";
-	private static String IAM_ADMINPORTAL_PATH = "adminPortalPath";
+	private static String IAM_RESIDENTPORTAL_PATH = "residentPortalPath";
 	private static String IAM_APIENVUSER = "apiEnvUser";
 	private static String IAM_APIINTERNALENDPOINT = "apiInternalEndPoint";
 	private static String IAM_REALM_ID = "keycloak-realm-id";
@@ -225,7 +225,7 @@ public class ConfigManager {
 	private static String iam_external_url;
 	private static String iam_realm_id;
 	private static String iam_users_to_create;
-	private static String iam_adminportal_path;
+	private static String iam_residentportal_path;
 	private static String iam_keyclockurl;
 	private static String iam_apienvuser;
 	private static String iam_apiinternalendpoint;
@@ -290,11 +290,11 @@ public class ConfigManager {
 		s3_secret_key = getValueForKey(S3_SECRET_KEY);
 		s3_account = getValueForKey(S3_ACCOUNT);
 		
-		iam_adminportal_path =System.getenv(IAM_ADMINPORTAL_PATH) == null
-				? propsKernel.getProperty(IAM_ADMINPORTAL_PATH)
-				: System.getenv(IAM_ADMINPORTAL_PATH);
+		iam_residentportal_path =System.getenv(IAM_RESIDENTPORTAL_PATH) == null
+				? propsKernel.getProperty(IAM_RESIDENTPORTAL_PATH)
+				: System.getenv(IAM_RESIDENTPORTAL_PATH);
 		
-		LOGGER.info("adminportal_path from config manager::" + iam_adminportal_path);
+		LOGGER.info("residentportal_path from config manager::" + iam_residentportal_path);
 		iam_apienvuser = System.getenv(IAM_APIENVUSER) == null
 				? propsKernel.getProperty(IAM_APIENVUSER)
 				: System.getenv(IAM_APIENVUSER);
@@ -703,8 +703,8 @@ public class ConfigManager {
 	public static String getShowSql() {
 		return hibernate_show_sql;
 	}
-	public static String getiam_adminportal_path() {
-		return iam_adminportal_path;
+	public static String getiam_residentportal_path() {
+		return iam_residentportal_path;
 	}
 	public static String getiam_keyclockurl() {
 		iam_keyclockurl=propsKernel.getProperty("keycloakurl");

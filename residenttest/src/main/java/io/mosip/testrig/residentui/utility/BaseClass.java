@@ -60,7 +60,7 @@ public class BaseClass {
 	protected static JavascriptExecutor js;
 	protected String langcode;
 	public static LoginTest login;
-	protected String envPath = ConfigManager.getiam_adminportal_path();
+	protected String envPath = ConfigManager.getiam_residentportal_path();
 	protected String env = ConfigManager.getiam_apienvuser();
 	protected String externalurl = System.getProperty("externalurl");
 	protected String password = System.getProperty("password");

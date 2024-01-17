@@ -44,7 +44,7 @@ public class LoginTest extends BaseClass {
 	@Test(priority = 0)
 	public static void loginTest() throws Exception {
 
-		String envPath = ConfigManager.getiam_adminportal_path();
+		String envPath = ConfigManager.getiam_residentportal_path();
 
 		String otp = "";
 		String externalemail = ConfigManager.getexternalemail();
@@ -111,7 +111,7 @@ public class LoginTest extends BaseClass {
 
 	// @Test(priority = 0)
 	public static void loginTestWithTempraryVID() throws Exception {
-		String envPath = ConfigManager.getiam_adminportal_path();
+		String envPath = ConfigManager.getiam_residentportal_path();
 
 		String otp = "";
 		String externalemail = ConfigManager.getexternalemail();
@@ -160,7 +160,7 @@ public class LoginTest extends BaseClass {
 
 	// @Test
 	public static void loginTestWithOneTimeVID() throws Exception {
-		String envPath = ConfigManager.getiam_adminportal_path();
+		String envPath = ConfigManager.getiam_residentportal_path();
 
 		String otp = "";
 		String externalemail = ConfigManager.getexternalemail();
