@@ -122,21 +122,6 @@ public class EmailableReport implements IReporter {
 					} catch (Exception e) {
 						logger.error("error occured while pushing the object" + e.getMessage());
 				}
-//							try {
-//						File ExtentreportReportFile = new File(ExtentReportManager.Filepath);
-//						isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCase.testLevel, null,
-//								null, ExtentReportManager.Reportname, ExtentreportReportFile);
-//						logger.info("isStoreSuccess:: " + isStoreSuccess);
-//
-//						/* Need to figure how to handle EXTENT report handling */
-//
-//						
-//
-//						
-//
-//					} catch (Exception e) {
-//						logger.error("error occured while pushing the object" + e.getMessage());
-//					}
 					if (isStoreSuccess && isStoreSuccess2) {
 						logger.info("Pushed report to S3");
 					} else {
