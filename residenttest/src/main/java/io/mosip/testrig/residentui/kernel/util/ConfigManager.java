@@ -294,7 +294,7 @@ public class ConfigManager {
 				? propsKernel.getProperty(IAM_RESIDENTPORTAL_PATH)
 				: System.getenv(IAM_RESIDENTPORTAL_PATH);
 		
-		LOGGER.info("adminportal_path from config manager::" + iam_residentportal_path);
+		LOGGER.info("residentportal_path from config manager::" + iam_residentportal_path);
 		iam_apienvuser = System.getenv(IAM_APIENVUSER) == null
 				? propsKernel.getProperty(IAM_APIENVUSER)
 				: System.getenv(IAM_APIENVUSER);
