@@ -80,7 +80,7 @@ public class GetMyUIN extends ResidentBaseClass{
 //		driver.switchTo().parentFrame();
 		Commons.click(test,driver, By.id("getUinSendOtpBtn"));
 		String otp = MockSMTPListener.getOtp(tempemail);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		Commons.enter(test,driver, By.id("otp-input"), otp);
 		   Commons.click(test,driver, By.xpath("//button[@id='getUinsubmitBtn']"));
 		   Commons.click(test,driver, By.id("dismissBtn"));
