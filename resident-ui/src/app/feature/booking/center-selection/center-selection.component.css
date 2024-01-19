@@ -412,6 +412,16 @@ input[type="radio"] {
   font-weight: 600;
 }
 
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  font-size: var(--fs);
+}
+
+::ng-deep .mat-select-placeholder {
+  color: #6e6e6e !important;
+  font-weight: 500 !important;
+  font-size: var(--fs) !important;
+}
+
 @media screen and ((min-width:601px) and (max-width: 780px)){
   .map{
     width: 100%;

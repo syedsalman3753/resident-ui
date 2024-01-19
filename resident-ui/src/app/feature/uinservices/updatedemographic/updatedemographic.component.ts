@@ -1128,6 +1128,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   get fontSize(): any {
+    document.documentElement.style.setProperty('--fs', this.fontSizeService.fontSize.tabs)
     return this.fontSizeService.fontSize;
   }
 
