@@ -97,7 +97,7 @@ export class GrievanceComponent implements OnInit {
 
   getProfileInfo() {
     this.dataStorageService
-      .getProfileInfo()
+      .getProfileInfo(this.userPreferredLangCode)
       .subscribe((response) => {
         if (response["response"]) {
           this.userFormData.name = response["response"]['fullName'];
