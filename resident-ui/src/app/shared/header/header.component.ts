@@ -176,7 +176,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getProfileInfo(){
     let self = this;
     this.dataStorageService
-    .getProfileInfo()
+    .getProfileInfo(this.langCode)
     .subscribe((response) => {
       if(response["response"]){
         let autonotificationcall = self.appConfigService.getConfig()['resident.ui.notification.update.interval.seconds'];
