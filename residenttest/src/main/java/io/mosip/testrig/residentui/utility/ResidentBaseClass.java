@@ -85,6 +85,7 @@ public class ResidentBaseClass {
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get(envPath);
+		logger.info("launch url --"+envPath);
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();

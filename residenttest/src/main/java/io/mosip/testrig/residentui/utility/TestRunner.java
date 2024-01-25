@@ -7,6 +7,9 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import io.mosip.testrig.residentui.fw.util.AdminTestUtil;
 import io.mosip.testrig.residentui.kernel.util.ConfigManager;
@@ -53,6 +56,76 @@ public class TestRunner {
 		
 		File homeDir = null;
 		TestNG runner = new TestNG();
+		if(!ConfigManager.gettestcases().equals("")) {
+			XmlSuite suite = new XmlSuite();
+			suite.setName("MySuite");
+			suite.addListener("io.mosip.testrig.residentui.utility.EmailableReport");
+		
+			XmlClass getInformation = new XmlClass("io.mosip.testrig.residentui.testcase.GetInformation");
+			XmlClass getMyUIN = new XmlClass("io.mosip.testrig.residentui.testcase.GetMyUIN");
+			XmlClass GetPersonalisedCard = new XmlClass("io.mosip.testrig.residentui.testcase.GetPersonalisedCard");
+			XmlClass loginTest = new XmlClass("io.mosip.testrig.residentui.testcase.LoginTest");
+			XmlClass manageMyVid = new XmlClass("io.mosip.testrig.residentui.testcase.ManageMyVid");
+			XmlClass SecureMyId = new XmlClass("io.mosip.testrig.residentui.testcase.SecureMyId");
+			XmlClass shareMyData = new XmlClass("io.mosip.testrig.residentui.testcase.ShareMyData");
+			XmlClass trackMyRequest = new XmlClass("io.mosip.testrig.residentui.testcase.TrackMyRequests");
+			XmlClass updateMyDataName = new XmlClass("io.mosip.testrig.residentui.testcase.UpdateMyData");
+			XmlClass VerifyEmailIDWIthInvalidVid = new XmlClass("io.mosip.testrig.residentui.testcase.VerifyPhoneNumberEmailID");
+			XmlClass viewMyHistory = new XmlClass("io.mosip.testrig.residentui.testcase.ViewMyHistory");
+			
+
+			List<XmlClass> classes = new ArrayList<>();
+			String[] Scenarionames=ConfigManager.gettestcases().split(",");
+			for(String test:Scenarionames) {
+				String Scenarioname=test.toLowerCase();
+
+				if(Scenarioname.contains("getinformation"))
+					classes.add(getInformation);
+
+				if(Scenarioname.contains("getmyuin"))
+					classes.add(updateMyDataName);
+					classes.add(getMyUIN);
+
+				if(test.equals("GetPersonalisedCard"))
+					classes.add(GetPersonalisedCard);
+
+				if(Scenarioname.contains("logintest"))
+					classes.add(loginTest);
+
+				if(test.equals("manageMyVid"))
+					classes.add(manageMyVid);
+
+				if(test.equals("SecureMyId"))
+					classes.add(SecureMyId);
+
+				if(test.equals("shareMyData"))
+					classes.add(shareMyData);
+
+				if(Scenarioname.contains("trackmyrequest"))
+					classes.add(trackMyRequest);
+
+				if(Scenarioname.contains("update"))
+					classes.add(updateMyDataName);
+
+				if(Scenarioname.contains("verifyemailid"))
+					classes.add(VerifyEmailIDWIthInvalidVid);
+
+				if(test.equals("viewMyHistory"))
+					classes.add(viewMyHistory);
+
+			}
+
+
+			XmlTest test = new XmlTest(suite);
+			test.setName("MyTest");
+			test.setXmlClasses(classes);
+
+			List<XmlSuite> suites = new ArrayList<>();
+			suites.add(suite);
+
+			runner.setXmlSuites(suites);
+
+		}else {
 		List<String> suitefiles = new ArrayList<String>();
 		String os = System.getProperty("os.name");
 		
@@ -72,7 +145,7 @@ public class TestRunner {
 
 		runner.setTestSuites(suitefiles);
 		
-	
+		}
 		
 		String language=ConfigManager.getloginlang();
 		
