@@ -82,9 +82,10 @@ public class TestRunner {
 				if(Scenarioname.contains("getinformation"))
 					classes.add(getInformation);
 
-				if(Scenarioname.contains("getmyuin"))
+				if(Scenarioname.contains("getmyuin")) {
 					classes.add(updateMyDataName);
 					classes.add(getMyUIN);
+				}
 
 				if(test.equals("GetPersonalisedCard"))
 					classes.add(GetPersonalisedCard);
