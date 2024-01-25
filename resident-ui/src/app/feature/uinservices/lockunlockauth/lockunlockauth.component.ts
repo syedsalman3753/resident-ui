@@ -341,6 +341,7 @@ export class LockunlockauthComponent implements OnInit, OnDestroy {
   }
 
   get fontSize(): any {
+    document.documentElement.style.setProperty('--fs', this.fontSizeService.fontSize.breadcrumb)
     return this.fontSizeService.fontSize;
   }
 

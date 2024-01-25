@@ -250,6 +250,7 @@ export class GetuinComponent implements OnInit {
   }
 
   get fontSize(): any {
+    document.documentElement.style.setProperty('--fs', this.fontSizeService.fontSize.breadcrumb)
     return this.fontSizeService.fontSize;
   }
 
