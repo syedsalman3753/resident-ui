@@ -302,7 +302,7 @@ ul li:last-child hr{
 ::ng-deep .mat-tooltip {
     background-color: #ffffff !important;
     color: black !important;
-    font-size: 11px !important;
+    font-size: var(--fs) !important;
     border-radius: 8px !important;
     padding: 10px !important;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
