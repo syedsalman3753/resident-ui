@@ -313,6 +313,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
     }else{
       if(event.target){
+      this.auditService.audit('RP-003', 'View history', 'RP-View history', 'View history', 'User clicks on search button for searching "EventId"', '');
       this[formControlName] = event.target.value;
       }
     }
