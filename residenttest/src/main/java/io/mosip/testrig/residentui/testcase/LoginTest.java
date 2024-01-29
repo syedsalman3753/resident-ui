@@ -52,15 +52,15 @@ public class LoginTest extends BaseClass {
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
+		Commons.click(test, driver, By.xpath("//*[@id='UINservices']"));
 		
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Commons.click(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
 		
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.perpetualVid);
 		
 		try {
-		Commons.clickWebelement(test, driver, By.id("get_otp"));
+		Commons.click(test, driver, By.id("get_otp"));
 
 		otp = MockSMTPListener.getOtp(externalemail);
 	//	otp="111111";
@@ -71,7 +71,7 @@ public class LoginTest extends BaseClass {
 		}
 		}catch(Exception e) {
 			Thread.sleep(10000);
-			Commons.clickWebelement(test, driver, By.id("get_otp"));
+			Commons.click(test, driver, By.id("get_otp"));
 
 			//otp = MockSMTPListener.getOtp(externalemail);
 			otp="111111";
@@ -119,19 +119,19 @@ public class LoginTest extends BaseClass {
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
+		Commons.click(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
 
-			Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-			Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Commons.click(test, driver, By.id("here_tab_id"));
+			Commons.click(test, driver, By.id("more_ways_to_sign_in"));
+			Commons.click(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);
 		}catch(Exception e) {
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Commons.click(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.temporaryVid);
-		Commons.clickWebelement(test, driver, By.id("get_otp"));
+		Commons.click(test, driver, By.id("get_otp"));
 
 		otp = MockSMTPListener.getOtp(externalemail);
 
@@ -168,19 +168,19 @@ public class LoginTest extends BaseClass {
 		driver.get(envPath);
 		Thread.sleep(2000);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		Commons.clickWebelement(test, driver, By.xpath("//*[@id='UINservices']"));
+		Commons.click(test, driver, By.xpath("//*[@id='UINservices']"));
 		try {
 
-			Commons.clickWebelement(test, driver, By.id("here_tab_id"));
-			Commons.clickWebelement(test, driver, By.id("more_ways_to_sign_in"));
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Commons.click(test, driver, By.id("here_tab_id"));
+			Commons.click(test, driver, By.id("more_ways_to_sign_in"));
+			Commons.click(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);
 		}catch(Exception e) {
-			Commons.clickWebelement(test, driver, By.id("login_with_otp"));
+			Commons.click(test, driver, By.id("login_with_otp"));
 			Thread.sleep(2000);	
 		}
 		Commons.enter(test, driver, By.id("Otp_mosip-vid"), TestRunner.onetimeuseVid);
-		Commons.clickWebelement(test, driver, By.id("get_otp"));
+		Commons.click(test, driver, By.id("get_otp"));
 
 		otp = MockSMTPListener.getOtp(externalemail);
 

@@ -15,7 +15,7 @@ import io.mosip.testrig.residentui.utility.ResidentBaseClass;
 public class GetInformation extends ResidentBaseClass {
 
 	@Test(groups = "GI")
-	public void getInformation() throws Exception {
+	public void GetInformation() throws Exception {
 		String hierarchyLevel0 = JsonUtil.JsonObjArrayListParsing2( "hierarchyLevel0"); //Country
 		String hierarchyLevel1 = JsonUtil.JsonObjArrayListParsing2("hierarchyLevel1"); //Region
 		String hierarchyLevel2 = JsonUtil.JsonObjArrayListParsing2( "hierarchyLevel2");//Province
