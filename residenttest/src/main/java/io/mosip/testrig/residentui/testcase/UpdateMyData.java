@@ -1,6 +1,7 @@
 package io.mosip.testrig.residentui.testcase;
 
 import org.openqa.selenium.By;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
@@ -19,7 +20,7 @@ public class UpdateMyData extends BaseClass {
 		LoginTest.loginTest();
 		test = extent.createTest("updateMyData Test ", "verify Login");
 		Commons.clickWebelement(test, driver, By.id("uinservices/updatedemographic"));
-		Commons.enter(test, driver, By.id("fullNameeng"), data);
+		Commons.enter(test, driver, By.id("fullName"+BaseClass.envsupportlang()), data);
 		Commons.dropdown(test, driver, By.id("gender"));
 		test.log(Status.INFO, "Click on gender");
 		Commons.enter(test, driver, By.id("proofOfIdentityvalue"), data);
@@ -46,11 +47,11 @@ public class UpdateMyData extends BaseClass {
 		Commons.clickWebelement(test, driver, By.xpath("//div[@id='mat-tab-label-0-1']"));
 		
 		
-		Commons.enter(test, driver, By.id("addressLine1eng"), data);
-		Commons.dropdown(test, driver, By.id("Regioneng"));
-		Commons.dropdown(test, driver, By.id("Provinceeng"));
-		Commons.dropdown(test, driver, By.id("Cityeng"));
-		Commons.dropdown(test, driver, By.id("Zoneeng"));
+		Commons.enter(test, driver, By.id("addressLine1"+BaseClass.envsupportlang()), data);
+		Commons.dropdown(test, driver, By.id("Region"+BaseClass.envsupportlang()));
+		Commons.dropdown(test, driver, By.id("Province"+BaseClass.envsupportlang()));
+		Commons.dropdown(test, driver, By.id("City"+BaseClass.envsupportlang()));
+		Commons.dropdown(test, driver, By.id("Zone"+BaseClass.envsupportlang()));
 		Commons.dropdown(test, driver, By.id("Postal Code"));
 		Commons.dropdown(test, driver, By.id("proofOfAddress"));
 		Commons.enter(test, driver, By.id("proofOfAddressvalue"), data);
@@ -111,10 +112,10 @@ public class UpdateMyData extends BaseClass {
 		test = extent.createTest("UpdateDataWithoutAddressLine ", "verify Login");
 		Commons.clickWebelement(test, driver, By.id("uinservices/updatedemographic"));
 		Commons.clickWebelement(test, driver, By.xpath("//div[@id='mat-tab-label-0-1']"));
-		Commons.dropdown(test, driver, By.id("Regioneng"));
-		Commons.dropdown(test, driver, By.id("Provinceeng"));
-		Commons.dropdown(test, driver, By.id("Cityeng"));
-		Commons.dropdown(test, driver, By.id("Zoneeng"));
+		Commons.dropdown(test, driver, By.id("Region"+BaseClass.envsupportlang()));
+		Commons.dropdown(test, driver, By.id("Province"+BaseClass.envsupportlang()));
+		Commons.dropdown(test, driver, By.id("City"+BaseClass.envsupportlang()));
+		Commons.dropdown(test, driver, By.id("Zone"+BaseClass.envsupportlang()));
 		Commons.dropdown(test, driver, By.id("Postal Code"));
 		Commons.dropdown(test, driver, By.id("proofOfAddress"));
 		Commons.enter(test, driver, By.id("proofOfAddressvalue"), data);

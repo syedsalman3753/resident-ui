@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -154,7 +155,14 @@ public class BaseClass {
 //		extent.flush();
 //	}
 	
-	
+	public static String envsupportlang() {
+		List<String> langs=BaseTestCase.getLanguageList();
+		for(String lang:langs) {
+			return lang;
+		}
+		return "";
+		
+	}
 
 	@DataProvider(name = "data-provider")
 	public Object[] dpMethod() {
