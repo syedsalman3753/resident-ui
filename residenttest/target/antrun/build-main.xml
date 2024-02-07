@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="maven-antrun-" default="main">
   <target name="main">
-    <chmod file="D:\gitauto\resident-ui\residenttest\target/*.jar" perm="ugo+rx" />
+    <chmod file="D:\Release1201\resident-ui\residenttest\target/*.jar" perm="ugo+rx" />
   </target>
 </project>
