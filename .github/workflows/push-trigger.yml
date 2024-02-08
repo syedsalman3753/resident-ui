@@ -4,16 +4,15 @@ on:
   release:
     types: [published]
   pull_request:
-    types: [opened]
+    types: [opened, reopened, synchronize]
   push:
     branches:
-      - '!release-branch'
-      - release-1*
-      - master
-      - develop
-      - 1*
       - MOSIP*
-
+      - 1*
+      - '!release-branch'
+      - develop
+      - master
+      - release-1*
 jobs:
   build-resident-ui:
     uses: mosip/kattu/.github/workflows/npm-build.yml@master
