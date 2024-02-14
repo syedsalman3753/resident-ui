@@ -523,7 +523,7 @@
         </table>
         <div class="submit-btn-card">
           <button [disabled]="previewDisabled" (click)="previewBtn('identity')" mat-raised-button color="primary"
-            id="submit">{{langJson.preview}}</button>
+            id="previewBtn">{{langJson.preview}}</button>
         </div>
       </mat-tab>
       <mat-tab label="{{'updatedemographic.address' | translate}}">
@@ -901,7 +901,7 @@
         </div>
         <div class="submit-btn-card">
           <button [disabled]="previewDisabledInAddress || !isSelectedAllAddress" mat-raised-button
-            (click)="previewBtn('address')" color="primary" id="submit">{{langJson.preview}}</button>
+            (click)="previewBtn('address')" color="primary" id="previewBtn">{{langJson.preview}}</button>
         </div>
       </mat-tab>
 
@@ -1076,9 +1076,9 @@
 
     <div class="preview-agree-card">
       <div>
-        <button *ngIf="updatingtype === 'identity' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)"
+        <button id="submitBtn" *ngIf="updatingtype === 'identity' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)"
           (click)="updateBtn()" mat-raised-button color="primary">{{langJson.update}}</button>
-        <button *ngIf="updatingtype === 'address' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)"
+        <button id="submitBtn" *ngIf="updatingtype === 'address' " [disabled]="((finalUserCloneData | keyvalue)?.length < 1)"
           (click)="updateBtn()" mat-raised-button color="primary">{{langJson.update}}</button>
       </div>
     </div>

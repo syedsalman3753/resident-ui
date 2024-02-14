@@ -58,8 +58,8 @@
 										<tr style="word-break: break-word;">
 											<td rowspan='2' *ngIf="sharableAttributes['photo']"><img [src]="sharableAttributes['photo']['value']" alt='' width='70px' height='70px' /></td>
 											<td>
-											   <span *ngIf="sharableAttributes['fullName']">
-												  <label style="font-size: 12px;color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span style="color: #000000; font-weight: 400; font-size: 15px;">{{sharableAttributes['fullName']['value']}}</span>
+											   <span *ngIf="sharableAttributes['name']">
+												  <label style="color: #666666;">{{sharableAttributes['name']['label']}}</label><br><span style="color: #000000; font-weight: 400;">{{sharableAttributes['name']['value']}}</span>
 											   </span>
 											</td>
 											<td [ngStyle]="{'float': langCode === 'ara' ? 'left' : 'right' }"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
