@@ -190,7 +190,26 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   }
 
-  createTransactionIds(){
+  isUpdatedataInProgress(event, fieldType) {
+    if(true){
+      this.popupForInprogressData();
+      if(fieldType === 'textField'){
+        document.getElementById(event.target.id).blur();
+      }else if(fieldType === 'datePickerField'){
+        event.close()
+      }else if(fieldType === 'dropDownField'){
+        event.close()
+      }else if(fieldType === 'virtualKeyBoard'){
+        document.getElementById(event).blur();
+      }
+    }else{
+      if(fieldType === 'datePickerField'){
+        event.open()
+      }
+    }
+  }
+
+  createTransactionIds() {
     let transactionID = window.crypto.getRandomValues(new Uint32Array(1)).toString();
     if (transactionID.length < 10) {
       let diffrence = 10 - transactionID.length;
@@ -224,7 +243,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.userInfo = response["response"];
           this.userInfo['fullName'].forEach(item=>{
             this.getUserPerfLang.indexOf(item.language) === -1 ? this.getUserPerfLang.push(item.language) : ''
-          }) 
+          })
           UpdatedemographicComponent.actualData = response["response"];
           this.buildData()
           this.getSupportingLanguages()
@@ -558,7 +577,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         this[userInfoType][formControlName].push({ "language": toLang, "value": value })
         this.userInputValues[formControlName][toLang] = value;
       } else {
-        this.userInputValues[formControlName][toLang] = '';
+        this[userInfoType][formControlName].push({ "language": toLang, "value": input })
+        this.userInputValues[formControlName][toLang] = input;
       }
     })
   }
@@ -743,6 +763,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.oldKeyBoradIndex = inputId;
       this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[finalLangCode]);
       document.getElementById(inputId).focus();
+      this.isUpdatedataInProgress(inputId, 'virtualKeyBoard')
     }
   }
 
@@ -1103,6 +1124,23 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         },
         disableClose: true
       });
+  }
+
+  popupForInprogressData() {
+    setTimeout(() => {
+      this.dialog
+        .open(DialogComponent, {
+          width: '650px',
+          data: {
+            case: 'updateMyDataInprogress',
+            title: '',
+            message: 'your old translation for update data is in progress',
+            btnTxt: 'Ok',
+            isOk: 'OK'
+          },
+          disableClose: true
+        });
+    },400)
   }
 
   onItemSelected(item: any) {

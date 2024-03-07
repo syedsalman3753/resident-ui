@@ -390,3 +390,69 @@
     </div>
   </div>
 </div>
+
+<!-- updateMyDataInprogress -->
+<div [style.font-size]="fontSize.lableText" *ngIf="input.case === 'updateMyDataInprogress'" class="data-inprogress-main-card">
+  <div width="100%" >
+    <h4 class="data-inprogress-heading" style="margin: 0;">Existing request found, action required!</h4>
+    <p class="data-inprogress-description">We have found an existing request raised. In order to proceed with a new request, you have to delete the previous request. Also you can have a look at the previously raised request below.</p>
+    <div class="data-inprogress-details-card">
+      <div class="intro-details">
+        <p class="eid-date-card">
+          <span class="eid-number">EID: <span>6189433873496705</span></span>
+          <strong class="eid-date">17/8/2024 3:15:19</strong>
+        </p>
+        <p class="eid-date-card">
+          <strong class="eid-date">Description : Demographic Data Updated</strong>
+          <span (click)="showInprogressDataDetails()" *ngIf="!isInprogressDetialsShow" class="eid-number">View More</span>
+          <span (click)="showInprogressDataDetails()" *ngIf="isInprogressDetialsShow" class="eid-number">View Less</span>
+        </p>
+      </div>
+      <div *ngIf="isInprogressDetialsShow">
+        <hr class="line"/>
+        <div *ngIf="!eidDetails || !langJSON">
+          <mat-spinner style="margin: 1rem auto 1rem auto;" [diameter]="50"></mat-spinner>
+        </div>
+        <div class="event-details" *ngIf="eidDetails && langJSON">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td class="each-event-details"><span>{{langJSON.eventId}}</span></td>
+              <td class="each-event-details"><span>{{langJSON.eventType}}</span></td>
+              <td class="each-event-details"><span>{{langJSON.eventStatus}}</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid silver;">
+              <td><strong>{{eidDetails.eventId}}</strong></td>
+              <td><strong>{{eidDetails.eventType}}</strong></td>
+              <td><strong>{{eidDetails.eventStatus}}</strong></td>
+            </tr>
+            <tr>
+              <td><span>{{langJSON.individualId}}</span></td>
+              <td><span>{{langJSON.authenticationMode}}</span></td>
+              <td><span>{{langJSON.summary}}</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid silver;">
+              <td><strong>{{eidDetails.individualId}}</strong></td>
+              <td><strong>{{eidDetails.info.authenticationMode}}</strong></td>
+              <td><strong>{{eidDetails.summary}}</strong></td>
+            </tr>
+            <tr>
+              <td><span>{{langJSON.attributeList}}</span></td>
+              <td><span>{{langJSON.timestamp}}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{{eidDetails.info.attributeList}}</strong></td>
+              <td><strong>{{eidDetails.timestamp}}</strong></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="Confirmation-card">
+    <p>Are you sure you want to cancel the existing data update request to update your?</p>
+  </div>
+  <div class="button-card">
+    <button mat-button class="data-inprogress-btns cancel-btn" (click)="dismiss()">Cancel</button>
+    <button mat-button class="data-inprogress-btns confirm-btn" (click)="dismiss()">Confirm</button>
+  </div>
+</div>

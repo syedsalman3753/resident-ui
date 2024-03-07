@@ -56,6 +56,10 @@ export class DialogComponent implements OnInit {
   submitBtnBgColor: string = "#BCBCBC";
   resendBtnBgColor: string = "#BCBCBC";
   disableInput:boolean = false;
+  isInprogressDetialsShow:boolean = false;
+  eidVal:any = "6636632046342213";
+  eidDetails:any;
+  langJSON:any;
 
   constructor(
     public dialog: MatDialog,
@@ -70,7 +74,8 @@ export class DialogComponent implements OnInit {
     private interactionService: InteractionService,
     public appConfigService: AppConfigService,
     private redirectService: LoginRedirectService,
-    private fontSizeService: FontSizeService
+    private fontSizeService: FontSizeService,
+    private translateService: TranslateService
   ) {
     this.translate.use(this.primaryLangCode);
     if (this.primaryLangCode === "ara") {
@@ -99,6 +104,13 @@ export class DialogComponent implements OnInit {
 
   async ngOnInit() {
     this.input = this.data;
+
+    this.translateService
+    .getTranslation(localStorage.getItem("langCode"))
+    .subscribe(response => {
+      this.langJSON = response.trackservicerequest;
+      console.log(this.langJSON)
+    }); 
   }
 
   setOtpTime() {
@@ -245,6 +257,24 @@ export class DialogComponent implements OnInit {
   get fontSize(): any {
     return this.fontSizeService.fontSize;
   }
+
+  showInprogressDataDetails(){
+    this.isInprogressDetialsShow = !this.isInprogressDetialsShow
+    this.dataStorageService
+    .getEIDStatus(this.eidVal)
+    .subscribe((response) => {
+      if(response["response"]){
+        // this.isLoading = false;
+        this.eidDetails = response["response"];
+        console.log(this.eidDetails)
+      }else if(response["errors"]){
+        // this.isLoading = false;
+        this.eidDetails = ""
+      }
+        
+    });
+  }
+  
   logOutBtn(){
     this.interactionService.sendClickEvent("logOutBtn");
   }
