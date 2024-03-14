@@ -296,6 +296,10 @@
             "FAILED": {
                 "statusType": "Échec",
                 "checked": false
+            },
+            "CANCELED":{
+                "statusType": "Annulé",
+                "checked": false
             }
         },
         "reportIssueLabel": "Signaler un problème",

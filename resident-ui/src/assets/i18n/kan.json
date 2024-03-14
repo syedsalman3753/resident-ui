@@ -296,6 +296,10 @@
             "FAILED": {
                 "statusType": "ವಿಫಲವಾಗಿದೆ",
                 "checked": false
+            },
+            "CANCELED":{
+                "statusType": "ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ",
+                "checked": false
             }
         },
         "reportIssueLabel": "ಸಮಸ್ಯೆಯನ್ನು ಪ್ರಕಟಿಸಿ",

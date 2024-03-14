@@ -296,6 +296,10 @@
             "FAILED": {
                 "statusType": "தோல்வி",
                 "checked": false
+            },
+            "CANCELED":{
+                "statusType": "ரத்து செய்யப்பட்டது",
+                "checked": false
             }
         },
         "reportIssueLabel": "பிரச்சினையை அறிக்கையாக்கு",

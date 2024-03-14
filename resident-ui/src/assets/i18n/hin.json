@@ -296,6 +296,10 @@
             "FAILED": {
                 "statusType": "असफल",
                 "checked": false
+            },
+            "CANCELED":{
+                "statusType": "रद्द",
+                "checked": false
             }
         },
         "reportIssueLabel": "समस्या की रिपोर्ट करें",

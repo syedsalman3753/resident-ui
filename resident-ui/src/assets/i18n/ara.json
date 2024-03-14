@@ -296,6 +296,10 @@
             "FAILED": {
                 "statusType": "فشل",
                 "checked": false
+            },
+            "CANCELED":{
+                "statusType": "ألغيت",
+                "checked": false
             }
         },
         "reportIssueLabel": "الإبلاغ عن مشكلة",
