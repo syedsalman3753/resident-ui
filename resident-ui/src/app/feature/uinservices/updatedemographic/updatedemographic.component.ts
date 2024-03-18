@@ -105,6 +105,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   selectedOptionData:any;
   oldSelectedIndex:any;
   isSameData: any = {};
+  cancellable:boolean;
+  draftsDetails:any;
+  eidDetails:any;
+
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   @ViewChildren('keyboardRef', { read: ElementRef })
@@ -186,12 +190,32 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     } else {
       this.autoLogout.getValues(this.langCode);
       this.autoLogout.continueWatching();
-    }
+    }    
+    this.dataStorageService.getPendingDrafts().subscribe((response) =>{
+      if(response['response']){
+        this.cancellable = response['response'].cancellable;
+        this.draftsDetails = response['response'].drafts[0].eid;
 
-  }
+        if(this.cancellable){
+          this.dataStorageService
+            .getEIDStatus(this.draftsDetails)
+            .subscribe((response) => {
+            if(response["response"]){
+              this.eidDetails = response["response"];
+            }else if(response["errors"]){
+              this.eidDetails = ""
+            }   
+          });
+        }
 
+      }else{
+        this.showErrorPopup(response['errors']);
+      };
+    })
+  };
+ 
   isUpdatedataInProgress(event, fieldType) {
-    if(true){
+    if(this.cancellable){
       this.popupForInprogressData();
       if(fieldType === 'textField'){
         document.getElementById(event.target.id).blur();
@@ -398,7 +422,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   getDocumentType(type: string, id: string) {
     this.dataStorageService.getDataForDropDown("/proxy/masterdata/documenttypes/" + type + "/" + localStorage.getItem("langCode")).subscribe(response => {
-      this.dropDownValues[id] = response["response"]["documents"];
+      if(response["response"]){
+        this.dropDownValues[id] = response["response"]["documents"];
+      }
     });
   }
 
@@ -1128,18 +1154,31 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   popupForInprogressData() {
     setTimeout(() => {
-      this.dialog
+      let dialogRef = this.dialog
         .open(DialogComponent, {
-          width: '650px',
+          width: '750px',
           data: {
             case: 'updateMyDataInprogress',
-            title: '',
-            message: 'your old translation for update data is in progress',
-            btnTxt: 'Ok',
-            isOk: 'OK'
+            message: this.langJson.pendingDrafts,
+            transactionDetails: this.eidDetails
           },
           disableClose: true
         });
+      
+        dialogRef.afterClosed().subscribe(res =>{
+        if(res){
+          this.dataStorageService.discardPendingDrafts(this.draftsDetails)
+          .subscribe((response) =>{
+            if(response['response']){
+              this.message = this.langJson.draftCanceled  
+              this.showMessage(this.message, this.draftsDetails);
+              this.cancellable = false;
+            }else{
+              this.showErrorPopup(response['errors'])
+            }
+          })
+        }
+      })
     },400)
   }
 

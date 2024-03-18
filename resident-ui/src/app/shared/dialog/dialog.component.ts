@@ -57,8 +57,6 @@ export class DialogComponent implements OnInit {
   resendBtnBgColor: string = "#BCBCBC";
   disableInput:boolean = false;
   isInprogressDetialsShow:boolean = false;
-  eidVal:any = "6636632046342213";
-  eidDetails:any;
   langJSON:any;
 
   constructor(
@@ -109,7 +107,6 @@ export class DialogComponent implements OnInit {
     .getTranslation(localStorage.getItem("langCode"))
     .subscribe(response => {
       this.langJSON = response.trackservicerequest;
-      console.log(this.langJSON)
     }); 
   }
 
@@ -260,19 +257,6 @@ export class DialogComponent implements OnInit {
 
   showInprogressDataDetails(){
     this.isInprogressDetialsShow = !this.isInprogressDetialsShow
-    this.dataStorageService
-    .getEIDStatus(this.eidVal)
-    .subscribe((response) => {
-      if(response["response"]){
-        // this.isLoading = false;
-        this.eidDetails = response["response"];
-        console.log(this.eidDetails)
-      }else if(response["errors"]){
-        // this.isLoading = false;
-        this.eidDetails = ""
-      }
-        
-    });
   }
   
   logOutBtn(){
