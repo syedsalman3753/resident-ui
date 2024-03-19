@@ -7,7 +7,7 @@ import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { LogoutService } from 'src/app/core/services/logout.service';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { LocationStrategy } from '@angular/common';
-import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-uindashboard",
@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   menuItems: any;
   subscriptions: Subscription[] = [];
   message: any;
-  cols: number;
   userPreferredLangCode = localStorage.getItem("langCode");
   sitealignment:string = localStorage.getItem('direction');
 
@@ -31,32 +30,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private logoutService: LogoutService,
     private auditService: AuditService,
     private location: LocationStrategy,
-    private breakPointService: BreakpointService
+    private fontSizeService: FontSizeService
   ) {
     history.pushState(null, null, window.location.href);  
     this.location.onPopState(() => {
       history.pushState(null, null, window.location.href);
     });  
-
-    this.breakPointService.isBreakpointActive().subscribe(active =>{
-      if (active) {
-        if(active === "extraSmall"){
-          this.cols = 1;
-        }
-        if(active === "small"){
-          this.cols = 1;
-        }
-        if(active === "medium"){
-          this.cols = 2;
-        }
-        if(active === "large"){
-          this.cols = 3;
-        }
-        if(active === "ExtraLarge"){
-          this.cols = 4;
-        }
-      }
-    });
   }
 
   async ngOnInit() {
@@ -105,6 +84,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       history.pushState(null, null, window.location.href);
       return false;
     }
+  }
+
+  get fontSize(): any {
+    return this.fontSizeService.fontSize;
   }
   
   ngOnDestroy(): void {

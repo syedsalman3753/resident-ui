@@ -476,12 +476,12 @@ button{
   /*overflow-y: auto;*/
 }
 
-@-moz-document url-prefix() {
+/* @-moz-document url-prefix() {
   .cdk-global-overlay-wrapper {
     align-items: baseline !important;
     margin-top: 25em !important;
   }
-}
+} */
 
 .info-icon-button{
   border: none;

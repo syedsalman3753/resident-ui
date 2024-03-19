@@ -16,8 +16,9 @@ import {
   MatKeyboardRef,
   MatKeyboardComponent,
   MatKeyboardService
-} from 'ngx7-material-keyboard';
+} from 'ngx7-material-keyboard-ios';
 import defaultJson from "src/assets/i18n/default.json";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-viewhistory",
@@ -76,7 +77,8 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
     public headerService: HeaderService,private auditService: AuditService, 
     private breakPointService: BreakpointService,
     private paginator2: MatPaginatorIntl,
-    private keyboardService: MatKeyboardService
+    private keyboardService: MatKeyboardService,
+    private fontSizeService: FontSizeService
     ) {
     this.breakPointService.isBreakpointActive().subscribe(active =>{
       if (active) {
@@ -311,6 +313,7 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
 
     }else{
       if(event.target){
+      this.auditService.audit('RP-003', 'View history', 'RP-View history', 'View history', 'User clicks on search button for searching "EventId"', '');
       this[formControlName] = event.target.value;
       }
     }
@@ -477,6 +480,10 @@ export class ViewhistoryComponent implements OnInit, OnDestroy {
             disableClose: true
           });
     }, 500)
+  }
+
+  get fontSize(): any {
+    return this.fontSizeService.fontSize;
   }
 
   onItemSelected(item: any) {

@@ -12,6 +12,7 @@ import {saveAs} from 'file-saver';
 import { AuditService } from "src/app/core/services/audit.service";
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-revokevid",
@@ -44,7 +45,8 @@ export class RevokevidComponent implements OnInit, OnDestroy {
   sitealignment:string = localStorage.getItem('direction');
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService, private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,
-    private auditService: AuditService, private breakPointService: BreakpointService) {
+    private auditService: AuditService, private breakPointService: BreakpointService,
+    private fontSizeService: FontSizeService) {
     this.clickEventSubscription = this.interactionService.getClickEvent().subscribe((id) => {
       if (id === "confirmBtnForVid") {
         this.generateVID(this.newVidType)
@@ -57,18 +59,18 @@ export class RevokevidComponent implements OnInit, OnDestroy {
         }
       }else if (id === "deleteVID"){
         this.revokeVID(this.newVidValue)
-        if(this.newVidValue === "Perpetual"){
+        if(this.newVidType === "Perpetual"){
           this.auditService.audit('RP-014', 'Generate/revoke VID', 'RP-Generate/revoke VID', 'Generate/revoke VID', 'User clicks on "revoke perpetual VID" button','');
-        }else if(this.newVidValue === "Temporary"){
+        }else if(this.newVidType === "Temporary"){
           this.auditService.audit('RP-022', 'Generate/revoke VID', 'RP-Generate/revoke VID', 'Generate/revoke VID', 'User clicks on "revoke temporary VID" button', '');
         }else{
           this.auditService.audit('RP-018', 'Generate/revoke VID', 'RP-Generate/revoke VID', 'Generate/revoke VID', 'User clicks on "revoke one-time  VID" button', '');
         }
       }else if(id === "downloadVID"){
         this.vidDownloadStatus(this.newVidValue)
-        if(this.newVidValue === "Perpetual"){
+        if(this.newVidType === "Perpetual"){
           this.auditService.audit('RP-015', 'Generate/revoke VID', 'RP-Generate/revoke VID', 'Generate/revoke VID', 'User clicks on "User clicks on "download perpetual VID" button', '');
-        }else if(this.newVidValue === "Temporary"){
+        }else if(this.newVidType === "Temporary"){
           this.auditService.audit('RP-023', 'Generate/revoke VID', 'RP-Generate/revoke VID', 'Generate/revoke VID', 'User clicks on "download temporary VID" button', '');
         }else{
           this.auditService.audit('RP-019', 'Generate/revoke VID', 'RP-Generate/revoke VID', 'Generate/revoke VID', 'User clicks on "download one-time  VID" button', '');
@@ -461,6 +463,11 @@ export class RevokevidComponent implements OnInit, OnDestroy {
 
   onToggle(event: any) {
     this.selectedValue = event.source.value;
+  }
+
+  get fontSize(): any {
+    document.documentElement.style.setProperty('--fs', this.fontSizeService.fontSize.breadcrumb)
+    return this.fontSizeService.fontSize;
   }
 
   ngOnDestroy(): void {

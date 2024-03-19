@@ -14,9 +14,10 @@ import {
   MatKeyboardRef,
   MatKeyboardComponent,
   MatKeyboardService
-} from 'ngx7-material-keyboard';
+} from 'ngx7-material-keyboard-ios';
 import defaultJson from "src/assets/i18n/default.json";
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-center-selection",
@@ -88,7 +89,8 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
     private auditService: AuditService,
     private paginator: MatPaginatorIntl,
     private keyboardService: MatKeyboardService,
-    private breakPointService: BreakpointService
+    private breakPointService: BreakpointService,
+    private fontSizeService: FontSizeService
   ) {
     this.translate.use(this.langCode); 
     this.breakPointService.isBreakpointActive().subscribe(active => {
@@ -583,6 +585,11 @@ export class CenterSelectionComponent implements OnInit, OnDestroy {
         })
       }
     }
+  }
+
+  get fontSize(): any {
+    document.documentElement.style.setProperty('--fs', this.fontSizeService.fontSize.tabs)
+    return this.fontSizeService.fontSize;
   }
 
   onItemSelected(item: any) {

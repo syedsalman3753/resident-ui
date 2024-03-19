@@ -13,6 +13,7 @@ import { AuditService } from "src/app/core/services/audit.service";
 import moment from 'moment';
 import { AutoLogoutService } from "src/app/core/services/auto-logout.service";
 import { BreakpointService } from "src/app/core/services/breakpoint.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-personalisedcard",
@@ -51,7 +52,7 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
 
   constructor(private autoLogout: AutoLogoutService, private interactionService: InteractionService,
     private dialog: MatDialog, private appConfigService: AppConfigService, private dataStorageService: DataStorageService, private translateService: TranslateService, private router: Router,
-    private auditService: AuditService, private breakPointService: BreakpointService) {
+    private auditService: AuditService, private breakPointService: BreakpointService,private fontSizeService: FontSizeService) {
     this.breakPointService.isBreakpointActive().subscribe(active => {
       if (active) {
         if(active === "small" || active === "extraSmall"){
@@ -451,6 +452,10 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
       }
     });
     return dialogRef;
+  }
+
+  get fontSize(): any {
+    return this.fontSizeService.fontSize;
   }
 
   ngOnDestroy(): void {
