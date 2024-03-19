@@ -8,7 +8,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { AuditService } from "src/app/core/services/audit.service";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-// import { FontSizeService } from "src/app/core/services/font-size.service";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: "app-verify",
@@ -60,8 +60,8 @@ export class VerifyComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private renderer: Renderer2,
     private auditService: AuditService, 
-    private breakpointObserver: BreakpointObserver
-    // private fontSizeService: FontSizeService
+    private breakpointObserver: BreakpointObserver,
+    private fontSizeService: FontSizeService
   ) {
     this.appConfigService = this.appConfigService.getConfig();
     this.breakpointObserver.observe([
@@ -438,9 +438,10 @@ export class VerifyComponent implements OnInit, OnDestroy {
     this.displaySeconds = "00"
   }
 
-  // get fontSize(): number {
-  //   return this.fontSizeService.fontSize;
-  // }
+  get fontSize(): any {
+    document.documentElement.style.setProperty('--fs', this.fontSizeService.fontSize.breadcrumb)
+    return this.fontSizeService.fontSize;
+  }
 
   ngOnDestroy(): void {
   }

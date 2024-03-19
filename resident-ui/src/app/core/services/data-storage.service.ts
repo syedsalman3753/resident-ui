@@ -171,8 +171,8 @@ export class DataStorageService {
     return this.httpClient.post(this.BASE_URL + '/auth-lock-unlock', request, { observe: 'response', responseType: 'blob' as 'json' });
   }
 
-  getProfileInfo() {
-    return this.httpClient.get(this.BASE_URL + '/profile');
+  getProfileInfo(langCode) {
+    return this.httpClient.get(this.BASE_URL + '/profile?languageCode=' +  langCode);
   }
 
   getServiceHistory(request: any, filters: any,pageSize1:any) {
@@ -356,5 +356,13 @@ export class DataStorageService {
 
   getPreferredLangs(langCode:string){
     return this.httpClient.get(this.BASE_URL + '/auth-proxy/masterdata/dynamicfields/preferredLang/' + langCode + '?withValue=true' )
+  }
+
+  getPendingDrafts(){
+    return this.httpClient.get(this.BASE_URL + '/identity/get-pending-drafts')
+  }
+
+  discardPendingDrafts(eid:string){
+    return this.httpClient.post(this.BASE_URL + '/identity/discardPendingDraft/' + eid, '')
   }
 }

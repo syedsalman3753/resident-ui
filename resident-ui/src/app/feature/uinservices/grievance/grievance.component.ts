@@ -13,8 +13,9 @@ import {
   MatKeyboardRef,
   MatKeyboardComponent,
   MatKeyboardService
-} from 'ngx7-material-keyboard';
+} from 'ngx7-material-keyboard-ios';
 import defaultJson from "src/assets/i18n/default.json";
+import { FontSizeService } from "src/app/core/services/font-size.service";
 
 @Component({
   selector: 'app-grievance',
@@ -50,7 +51,8 @@ export class GrievanceComponent implements OnInit {
     private dialog: MatDialog,
     private route: ActivatedRoute,
     private autoLogout: AutoLogoutService,
-    private keyboardService: MatKeyboardService
+    private keyboardService: MatKeyboardService,
+    private fontSizeService: FontSizeService
   ) {
   }
 
@@ -95,7 +97,7 @@ export class GrievanceComponent implements OnInit {
 
   getProfileInfo() {
     this.dataStorageService
-      .getProfileInfo()
+      .getProfileInfo(this.userPreferredLangCode)
       .subscribe((response) => {
         if (response["response"]) {
           this.userFormData.name = response["response"]['fullName'];
@@ -135,6 +137,10 @@ export class GrievanceComponent implements OnInit {
       this.keyboardRef = this.keyboardService.open(defaultJson.keyboardMapping[this.userPreferredLangCode]);
       document.getElementById(inputId).focus();
     }
+  }
+
+  get fontSize(): any {
+    return this.fontSizeService.fontSize;
   }
 
   sendGrievanceRedressal() {

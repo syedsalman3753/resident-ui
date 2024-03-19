@@ -141,7 +141,6 @@ label{
    align-self: flex-end;
 }
  .files-list .single-file .name {
-   font-size: 14px;
    font-weight: 500;
    color: #353f4a;
    margin: 0;
@@ -187,7 +186,6 @@ label{
 }
 
 .files-list .uploaded-single-file .name {
-  font-size: 14px;
   font-weight: 500;
   color: #353f4a;
   margin: 0;
@@ -515,7 +513,7 @@ label{
   color: #000000 !important;
 }
 .contact-lable-dummy{
-  height: 15px; 
+  height: 20px; 
 }
 
 .mat-card-subtitle{
@@ -524,6 +522,14 @@ label{
 
 .contact-send-otp-btn{
   height: 40px;
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  font-size: var(--fs);
+}
+
+::ng-deep .mat-select-placeholder {
+  font-size: var(--fs) !important;
 }
 
 @media screen and ((min-width:950px) and (max-width:1300px)){
@@ -553,6 +559,7 @@ label{
   }
   .number-of-attems-main-card{
     width: 100%;
+    margin-bottom: -30px;
   }
   .width-of-input{
     width: 32%;
@@ -562,9 +569,6 @@ label{
   }
   .number-of-attems-left-card{
     width: 100%;
-  }
-  .number-of-attems-main-card{
-    margin-bottom: -70px;
   }
   .contact-update-each-sub-card{
     width: 35%;
