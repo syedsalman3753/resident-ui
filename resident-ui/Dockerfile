@@ -39,10 +39,6 @@ RUN apt-get -y update \
 && useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/sh -m ${container_user} \
 && mkdir -p /var/run/nginx /var/tmp/nginx \
 && chown -R ${container_user}:${container_user} /usr/share/nginx /var/run/nginx /var/tmp/nginx
-
-wget -q --show-progress "${resident_i18n_bundle_url_env}" -O "${i18n_path}"/resident-i18n-bundle.zip; \
-cd ${i18n_path} ; \
-unzip -o resident-i18n-bundle.zip ; \
    
 # set working directory for the user
 WORKDIR /home/${container_user}
@@ -61,6 +57,8 @@ USER ${container_user_uid}:${container_user_gid}
 
 EXPOSE 8080
 
-   
- CMD  nginx ; \
-      sleep infinity
+CMD wget -q --show-progress "${resident_i18n_bundle_url_env}" -O "${i18n_path}"/resident-i18n-bundle.zip; \
+   cd ${i18n_path} ; \
+   unzip -o resident-i18n-bundle.zip ; \
+   nginx ; \
+   sleep infinity
