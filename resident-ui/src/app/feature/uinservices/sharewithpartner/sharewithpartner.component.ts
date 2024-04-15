@@ -486,7 +486,6 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
       .shareInfo(request)
       .subscribe(response => {
         this.eventId = response.headers.get("eventid")
-        console.log(response.body)
         if (response.body["response"]) {
           this.isLoading = false;
           this.showMessage();
