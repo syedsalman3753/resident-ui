@@ -66,11 +66,11 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       ORG_KEY: ${{ secrets.ORG_KEY }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-  build-maven-residenttest:
+  build-maven-suitest-resident:
     uses: mosip/kattu/.github/workflows/maven-build.yml@master
     with:
-      SERVICE_LOCATION: ./residenttest
-      BUILD_ARTIFACT: residenttest
+      SERVICE_LOCATION: ./uitest-resident
+      BUILD_ARTIFACT: uitest-resident
     secrets:
       OSSRH_USER: ${{ secrets.OSSRH_USER }}
       OSSRH_SECRET: ${{ secrets.OSSRH_SECRET }}
@@ -79,13 +79,13 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
   build-residentuitests-local:
-    needs: build-maven-residenttest
+    needs: build-maven-uitest-resident
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ secrets.dev_namespace_docker_hub }}
-      SERVICE_NAME: residenttest
-      SERVICE_LOCATION: residenttest
-      BUILD_ARTIFACT: residenttest-local
+      SERVICE_NAME: uitest-resident
+      SERVICE_LOCATION: uitest-resident
+      BUILD_ARTIFACT: uitest-resident-local
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -136,14 +136,14 @@ jobs:
 
 
 
-  build-docker-residenttest:
+  build-docker-uitest-resident:
     needs: build-residentuitests-local
     strategy:
       matrix:
         include:
-          - SERVICE_LOCATION: 'residenttest'
-            SERVICE_NAME: 'residenttest'
-            BUILD_ARTIFACT: 'residenttest-local'
+          - SERVICE_LOCATION: 'uitest-resident'
+            SERVICE_NAME: 'uitest-resident'
+            BUILD_ARTIFACT: 'uitest-resident-local'
       fail-fast: false
     name: ${{ matrix.SERVICE_NAME }}
     uses: mosip/kattu/.github/workflows/docker-build.yml@master
@@ -156,12 +156,12 @@ jobs:
       ACTOR_DOCKER_HUB: ${{ secrets.ACTOR_DOCKER_HUB }}
       RELEASE_DOCKER_HUB: ${{ secrets.RELEASE_DOCKER_HUB }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-  #publish_to_nexus_residenttest:
+  #publish_to_nexus_uitest-resident:
   #  if: "${{ !contains(github.ref, 'master') && github.event_name != 'pull_request' }}"
   #  needs: build-residentuitests-local
   #  uses: mosip/kattu/.github/workflows/maven-publish-to-nexus.yml@master
   #  with:
-  #    SERVICE_LOCATION: residenttest
+  #    SERVICE_LOCATION: uitest-resident
   #  secrets:
   #    OSSRH_USER: ${{ secrets.OSSRH_USER }}
   #    OSSRH_SECRET: ${{ secrets.OSSRH_SECRET }}
@@ -169,14 +169,14 @@ jobs:
   #    OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
   #    GPG_SECRET: ${{ secrets.GPG_SECRET }}
   #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-  sonar_analysis_residenttest:
+  sonar_analysis_uitest-resident:
     needs: build-residentuitests-local
     if: "${{  github.event_name != 'pull_request' }}"
     uses: mosip/kattu/.github/workflows/maven-sonar-analysis.yml@master
     with:
-      SERVICE_LOCATION: residenttest
+      SERVICE_LOCATION: uitest-resident
       SONAR_URL: 'https://sonarcloud.io'
-      PROJECT_KEY: 'mosip_residenttest'
+      PROJECT_KEY: 'mosip_uitest-resident'
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       ORG_KEY: ${{ secrets.ORG_KEY }}
