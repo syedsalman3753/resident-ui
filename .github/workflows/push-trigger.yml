@@ -78,7 +78,7 @@ jobs:
       GPG_SECRET: ${{ secrets.GPG_SECRET }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
-  build-residentuitests-local:
+  build-uitest-resident-local:
     needs: build-maven-uitest-resident
     runs-on: ubuntu-latest
     env:
@@ -107,7 +107,7 @@ jobs:
       - name: Setup the settings file for ossrh server
         run: echo "<settings> <servers>  <server>  <id>ossrh</id>    <username>${{secrets.ossrh_user}}</username> <password>${{secrets.ossrh_secret}}</password> </server> </servers> <profiles> <profile>     <id>ossrh</id> <activation> <activeByDefault>true</activeByDefault> </activation>  <properties> <gpg.executable>gpg2</gpg.executable> <gpg.passphrase>${{secrets.gpg_secret}}</gpg.passphrase> </properties> </profile> <profile> <id>allow-snapshots</id>       <activation><activeByDefault>true</activeByDefault></activation> <repositories> <repository>        <id>snapshots-repo</id> <url>https://oss.sonatype.org/content/repositories/snapshots</url> <releases><enabled>false</enabled></releases> <snapshots><enabled>true</enabled></snapshots> </repository>  <repository>         <id>releases-repo</id>  <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>         <releases><enabled>true</enabled></releases>         <snapshots><enabled>false</enabled></snapshots> </repository> </repositories>  </profile> <profile> <id>sonar</id> <properties>  <sonar.sources>.</sonar.sources> <sonar.host.url>https://sonarcloud.io</sonar.host.url>  </properties> <activation> <activeByDefault>false</activeByDefault> </activation> </profile> </profiles> </settings>" > $GITHUB_WORKSPACE/settings.xml
 
-      - name: Build residentuitests with Maven
+      - name: Build uitest-resident with Maven
         run: |
           cd ${{ env.SERVICE_LOCATION}}
           mvn -U -B package -Dmaven.wagon.http.retryHandler.count=2 --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
@@ -137,7 +137,7 @@ jobs:
 
 
   build-docker-uitest-resident:
-    needs: build-residentuitests-local
+    needs: build-uitest-resident-local
     strategy:
       matrix:
         include:
@@ -158,7 +158,7 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
   #publish_to_nexus_uitest-resident:
   #  if: "${{ !contains(github.ref, 'master') && github.event_name != 'pull_request' }}"
-  #  needs: build-residentuitests-local
+  #  needs: build-uitest-resident-local
   #  uses: mosip/kattu/.github/workflows/maven-publish-to-nexus.yml@master
   #  with:
   #    SERVICE_LOCATION: uitest-resident
@@ -170,7 +170,7 @@ jobs:
   #    GPG_SECRET: ${{ secrets.GPG_SECRET }}
   #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
   sonar_analysis_uitest-resident:
-    needs: build-residentuitests-local
+    needs: build-uitest-resident-local
     if: "${{  github.event_name != 'pull_request' }}"
     uses: mosip/kattu/.github/workflows/maven-sonar-analysis.yml@master
     with:
