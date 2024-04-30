@@ -111,10 +111,9 @@
       </div>
     </div>
     <div mat-dialog-actions class="pop-up-footer">
-      {{input | json}}
       <span><button [style.font-size]="fontSize.paragraph" class="ok-button" *ngIf="input.isOk === 'OK' " mat-button
           cdkFocusInitial id="dismissBtn" (click)="dismiss()">
-          {{ input.btnTxt }}...
+          {{ input.btnTxt }}
         </button></span>
       <span><button [style.font-size]="fontSize.paragraph" class="ok-button"
           *ngIf="input.isYes === 'Yes' && input.yesBtnFor === 'Vid' " mat-button cdkFocusInitial
