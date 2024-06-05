@@ -66,10 +66,9 @@ input {
 }
 
 .service-input-card{
-  padding: 10px; 
   border: none; 
   outline: none;
-  height: 42px;
+  height: 100%;
 }
 
 ::placeholder {
@@ -101,7 +100,8 @@ span.label {
 }
 
 span.input {
-  width: 85%;
+  width: 100%;
+  height: 42px;
   /* text-align: left; */
   /* padding-left: 2px; */
 }
@@ -123,8 +123,18 @@ span.input {
 }
 
 .datepicker-card {
-  width: 69%;
-  height: 40px;
+  /* width: 80%; */
+  height: 100%;
+  border: none;
+}
+
+.date-calender{
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #909090;
+  padding: 2px 0 2px 2px;
+  border-radius: 5px;
+  align-items: center;
 }
 
 mat-select {
@@ -203,6 +213,7 @@ input[dir=rtl]::placeholder {
   align-items: center;
   font-size: 12px;
   font-weight: 500;
+  color: #9FA1AD;
 }
 
 .dropdown-arrow{
@@ -224,7 +235,8 @@ input[dir=rtl]::placeholder {
   align-items: center;
   border-radius: 5px; 
   border: 2px solid #909090;
-  margin-top: -6px;
+  margin-top: -5px;
+  padding-right: 5px;
 }
 
 .header-item-card{
