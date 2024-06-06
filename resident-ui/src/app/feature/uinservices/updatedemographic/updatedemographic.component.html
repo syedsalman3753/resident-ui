@@ -213,12 +213,14 @@
                               </div>
                             </td>
                           </tr>
-                          <tr *ngIf="isSameData[field.attributeName]" class="ele-for-lap-tab-card">
+                          <tr *ngIf="isSameData[field.attributeName] || enteredOnlyNumbers" class="ele-for-lap-tab-card">
                             <td></td>
                             <td></td>
                             <td>
-                              <span class="warning-message">
-                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
+                              <span class="warning-message" *ngIf="isSameData[field.attributeName]">
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}.</span>
+                                <span class="warning-message" *ngIf="enteredOnlyNumbers">
+                                  {{langJson.enteredOnlyNums}}</span>
                             </td>
                           </tr>
                           <!-- input field for mobile view -->
