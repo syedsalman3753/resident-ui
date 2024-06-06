@@ -107,6 +107,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   isSameData: any = {};
   cancellable:boolean = false;
   draftsDetails:any;
+  enteredOnlyNumbers:boolean = false;
 
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
@@ -611,8 +612,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       })
     } else {
       if (formControlName !== "proofOfIdentity") {
-        if (event.target.value !== currentValue) {
+        if (event.target.value !== currentValue && !/\d/.test(event.target.value)) {
           this.isSameData[formControlName] = false;
+          this.enteredOnlyNumbers = false;
           this.userInfoClone[formControlName] = []
           this.getUserPerfLang.forEach(item => {
             let newData
@@ -628,10 +630,12 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           if (this.userInfoClone[formControlName]) {
             delete this.userInfoClone[formControlName]
           }
-          this.getUserPerfLang.forEach(item => {
-            this.userInputValues[formControlName][item] = ''
-          })
-          this.isSameData[formControlName] = true;
+          if(event.target.value === currentValue){
+            this.isSameData[formControlName] = true;
+          }else if(/\d/.test(event.target.value)){
+            this.enteredOnlyNumbers = true;
+          }
+          
         }
       } else {
         self[formControlName]["documentreferenceId"] = event.target.value;
