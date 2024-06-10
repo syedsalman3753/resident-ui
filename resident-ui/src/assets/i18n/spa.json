@@ -651,9 +651,9 @@
         "readMoreLabel": "Leer más...",
         "readLessLabel": "Leer menos...",
         "revokevid": {
-            "Perpetual": "Un VID perpetuo no tiene fecha de vencimiento y no tiene límite en el número de transacciones que se pueden realizar con este VID. Un UIN puede estar asociado solo con un VID perpetuo $instancesVID a la vez.",
-            "Temporary": "Un VID temporal es válido por $expiryTime minutos y solo se pueden realizar $transactionLimit transacciones utilizando este VID. Un UIN puede estar asociado con $instancesVID VID temporales a la vez.",
-            "OneTimeUse": "Un VID de un solo uso no tiene fecha de vencimiento, pero solo se pueden realizar $transactionLimit transacciones utilizando este VID. Un UIN puede estar asociado con un VID de un solo uso $instancesVID a la vez."            
+            "Perpetual": "Un VID perpetuo no tiene fecha de vencimiento ni límite en la cantidad de transacciones que se pueden realizar utilizando este VID. Un UIN se puede asociar solo con $instancesVID $VID perpetuo a la vez.",
+            "Temporary": "Un VID temporal es válido por $expiryTime minutos y solo se puede realizar la transacción $transactionLimit utilizando este VID. Se puede asociar un UIN con $instancesVID $VID temporal a la vez.",
+            "OneTimeUse": "Un VID único no tiene fecha de vencimiento, pero solo se puede realizar la transacción $transactionLimit utilizando este VID. Se puede asociar un UIN con $instancesVID una vez $VID a la vez."            
         },
         "secureMyID": {
             "Email OTP Authentication": "Al bloquear/desbloquear 'Autenticación por correo electrónico con OTP', cualquier intento de autenticación realizado utilizando un OTP por correo electrónico se deshabilitará/habilitará.",

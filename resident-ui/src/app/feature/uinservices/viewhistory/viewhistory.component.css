@@ -99,8 +99,7 @@ span.label {
 }
 
 .search-input-label{
-  margin-top: 0;
-  margin-right: 8px;
+  margin: 0 8px 14px 0;
 }
 
 span.input {
