@@ -12,7 +12,7 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!isLoading && langJson" class="main-contianer">
-  <mat-card *ngIf="userInfo && !showPreviewPage && (buildJSONData | json) != '{}'">
+  <mat-card *ngIf="userInfo && !showPreviewPage && (buildJSONData | json) != '{}'" [ngStyle]="{'padding-bottom' : (keyboardService.isOpened) ? '200px' : ''}">
     <h1 [style.font-size]="fontSize.heading" style="font-weight: 600;color: #505050;">{{langJson.title}}</h1>
     <mat-tab-group animationDuration="0ms" [selectedIndex]="matTabIndex" (selectedTabChange)="logChange($event)">
       <mat-tab class="mat-tab-local" label="{{'updatedemographic.identity' | translate}}">
@@ -996,7 +996,7 @@
             </mat-grid-list>
             <div [ngClass]="langCode === 'ara' ? 'perLang-submit-btn-card-ara' :'perLang-submit-btn-card'"
               *ngIf="langJson">
-              <button [style.font-size]="fontSize.paragraph" [disabled]="!userPrefLang[field.attributeName]" mat-raised-button
+              <button [style.font-size]="fontSize.paragraph" [disabled]="!userPrefLang[field.attributeName] || !disablePrefLangBtn" mat-raised-button
                 (click)="updatenotificationLanguage()" color="primary" id="submit">{{langJson.submit}}</button>
             </div>
           </div>

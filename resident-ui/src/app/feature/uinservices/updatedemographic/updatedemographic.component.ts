@@ -108,6 +108,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   cancellable:boolean = false;
   draftsDetails:any;
   enteredOnlyNumbers:boolean = false;
+  disablePrefLangBtn:boolean = false
 
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
@@ -409,6 +410,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     }
     this.showPreviewPage = true;
     this.updatingtype = issue;
+    if(this.keyboardService.isOpened)
+      this.keyboardService.dismiss();
   }
 
 
@@ -608,7 +611,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
         delete this.userInfoClone[formControlName]
       }
       this.getUserPerfLang.forEach(item => {
-        this.userInputValues[formControlName][item] = ''
+        if(this.userInputValues[formControlName])
+          this.userInputValues[formControlName][item] = ''
       })
     } else {
       if (formControlName !== "proofOfIdentity") {
@@ -767,6 +771,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   capturePerfLang(event: any, formControlName: string) {
     this.userPrefLang[formControlName] = event.value;
+    this.disablePrefLangBtn = true;
   }
 
   captureVirtualKeyboard(element: HTMLElement, index: number) {
@@ -844,6 +849,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   updatenotificationLanguage() {
     this.auditService.audit('RP-031', 'Update my data', 'RP-Update my data', 'Update my data', 'User clicks on "submit" button in update notification language', '');
+    this.disablePrefLangBtn = false;
     const request = {
       "id": this.appConfigService.getConfig()["resident.updateuin.id"],
       "version": this.appConfigService.getConfig()["resident.vid.version.new"],
@@ -855,13 +861,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       }
     };
     this.dataStorageService.updateuin(request).subscribe(response => {
-      let eventId = response.headers.get("eventid")
+      let eventId = response.headers.get("eventid");
       this.message = this.popupMessages.genericmessage.updateMyData.updateNotificationData.replace("$eventId", eventId)
       if (response.body["response"]) {
         this.showMessage(this.message, eventId);
         this.router.navigate(['uinservices/dashboard']);
       } else {
-        this.showErrorPopup(response.body["errors"])
+        this.showErrorPopup(response.body["errors"]);
+        this.disablePrefLangBtn = true;
       }
     }, error => {
       console.log(error)
@@ -1198,6 +1205,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   logChange(event: any) {
     this.matTabIndex = event.index;
     this.matTabLabel = event.tab.textLabel;
+    if(this.keyboardService.isOpened)
+      this.keyboardService.dismiss();
   }
 
   get fontSize(): any {
@@ -1205,13 +1214,13 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     return this.fontSizeService.fontSize;
   }
 
-  @HostListener("blur", ["$event"])
-  @HostListener("focusout", ["$event"])
-  private _hideKeyboard() {
-    if (this.keyboardService.isOpened) {
-      this.keyboardService.dismiss();
-    }
-  }
+  // @HostListener("blur", ["$event"])
+  // @HostListener("focusout", ["$event"])
+  // private _hideKeyboard() {
+  //   if (this.keyboardService.isOpened) {
+  //     this.keyboardService.dismiss();
+  //   }
+  // }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
