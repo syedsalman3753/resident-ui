@@ -196,7 +196,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   getPendingDrafts(){
     this.dataStorageService.getPendingDrafts(this.langCode).subscribe((response) =>{
-      this.getUpdateMyDataSchema();
+      if(!this.schema)
+        this.getUpdateMyDataSchema();
       if(response['response']){
         if(!response['response'].drafts.length){
           this.cancellable = false;

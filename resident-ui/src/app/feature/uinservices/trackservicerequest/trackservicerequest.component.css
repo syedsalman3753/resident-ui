@@ -107,6 +107,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @media screen and (max-width:600px){
   .mat-card{
     padding: 8px;

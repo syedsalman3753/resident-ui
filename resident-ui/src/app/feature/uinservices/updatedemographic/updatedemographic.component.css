@@ -514,6 +514,7 @@ input.readonly{
 .contact-lable{
   overflow-wrap: break-word;
   color: #000000 !important;
+  margin: 0 2px 0 3px;
 }
 .contact-lable-dummy{
   height: 20px; 
