@@ -191,6 +191,10 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       this.autoLogout.continueWatching();
     }
 
+    this.getPendingDrafts();
+  };
+
+  getPendingDrafts(){
     this.dataStorageService.getPendingDrafts(this.langCode).subscribe((response) =>{
       this.getUpdateMyDataSchema();
       if(response['response']){
@@ -200,12 +204,11 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           this.cancellable = true;
           this.draftsDetails = response['response'].drafts;
         }
-
       }else{
         this.showErrorPopup(response['errors']);
       };
     })
-  };
+  }
  
   isUpdatedataInProgress(event, fieldType) {
     if(this.cancellable){
@@ -1179,6 +1182,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               this.showErrorPopup(response['errors'])
             }
           })
+        }else{
+          this.getPendingDrafts();
         }
       })
       return dialogRef;
