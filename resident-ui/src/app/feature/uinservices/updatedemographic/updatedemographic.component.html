@@ -650,7 +650,7 @@
 
                               <td width="3%" class="ele-for-lap-tab-card"></td>
                               <td class="width-of-input ele-for-lap-tab-card">
-                                <label [style.font-size]="fontSize.paragraph">{{field.labelName[langCode][1]}}</label>
+                                <label style="margin: 0 2px 0 3px;" [style.font-size]="fontSize.paragraph">{{field.labelName[langCode][1]}}</label>
                               </td>
                             </tr>
                             <ng-container *ngIf="typeOf(userInfo[field.attributeName]) !== 'string'">
@@ -974,7 +974,7 @@
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
-                  <mat-card-title [style.font-size]="fontSize.paragraph">{{field.labelName[langCode][0]}}</mat-card-title>
+                  <mat-card-title style="margin-right:3px;" [style.font-size]="fontSize.paragraph">{{field.labelName[langCode][0]}}</mat-card-title>
                   <span *ngIf="buildJSONData[field.attributeName]"><input [style.font-size]="fontSize.paragraph" style="border: none;" type="text"
                       class="readonly" readonly="true" disabled="true"
                       [value]="buildJSONData[field.attributeName].value"></span>
@@ -983,7 +983,7 @@
               <mat-grid-tile>
                 <div class="mini-card"
                   *ngIf="field.tabgroup === 'notificationLanguage' && field.controlType === 'dropdown'">
-                  <mat-card-title [style.font-size]="fontSize.paragraph">{{field.labelName[langCode][1]}}</mat-card-title>
+                  <mat-card-title style="margin-right:3px;" [style.font-size]="fontSize.paragraph">{{field.labelName[langCode][1]}}</mat-card-title>
                   <mat-select #matSelect [style.font-size]="fontSize.paragraph" [placeholder]="field.placeHolder[langCode]" disableOptionCentering class="enable-dropdown"
                     [(ngModel)]="selected2" id="{{field.attributeName}}"
                     (selectionChange)="capturePerfLang($event, field.attributeName)"
