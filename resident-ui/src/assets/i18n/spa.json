@@ -438,7 +438,7 @@
             "descriptionDetails": "Hemos encontrado una solicitud de actualización de datos existente que aún está en curso. Para generar una nueva solicitud, deberá eliminar la solicitud existente.",
             "viewMore":"Ver más",
             "viewLess":"Ver menos",
-            "warnMsg":"¿Está seguro de que desea cancelar la Solicitud de actualización de datos existente para actualizar la suya?",
+            "warnMsg":"¿Está seguro de que desea cancelar la solicitud existente para actualizar los datos elegidos?",
             "warnMsgTwo":"No puede cancelar esta solicitud ya que todavía está en estado Pendiente. Inténtalo después de un tiempo."
         },
         "draftCanceled":"Su solicitud de actualización de datos existente se canceló exitosamente. Ahora puede proceder a generar otra solicitud de Actualización de datos."
@@ -582,7 +582,7 @@
             "Eres responsable de cualquier cambio realizado en tus datos personales ya existentes o en el documento cargado para respaldarlo."
         ],
         "agreeLabel": "Acepto los términos y condiciones para compartir mis credenciales con el socio elegido",
-        "agreeLabelForUpdateData": "Acepto los términos y condiciones para actualizar los datos demográficos",
+        "agreeLabelForUpdateData": "Acepto los términos y condiciones para actualizar datos demográficos",
         "personalisedcardConditions": {
             "title": "Descarga tu tarjeta personalizada",
             "wishes": "Estimado residente,",
@@ -637,8 +637,8 @@
             "confirmationMessage": "¿Estás seguro de que quieres guardar los cambios realizados en los tipos de autenticación?"
         },
         "updateMyData": {
-            "emailSuccessMsg": "Tu ID de correo electrónico se ha actualizado correctamente para el ID de evento: $eventId.",
-            "phoneNumberSuccessMsg": "Tu número de teléfono se ha actualizado correctamente para el ID de evento: $eventId.",
+            "emailSuccessMsg": "Su solicitud para cambiar su ID de correo electrónico se envió con el ID del evento: $eventId.",
+            "phoneNumberSuccessMsg": "Su solicitud para cambiar su número de teléfono se envió con el ID del evento: $eventId.",
             "newDataUpdatedSuccessMsg": "Se ha enviado su solicitud para cambiar sus datos de $dataType con éxito. Se ha registrado con el ID del evento: $eventId.",
             "updateNotificationData": "Se ha enviado su solicitud para cambiar su idioma de notificación con éxito. Se ha registrado con el ID del evento: $eventId."
         }
@@ -651,9 +651,9 @@
         "readMoreLabel": "Leer más...",
         "readLessLabel": "Leer menos...",
         "revokevid": {
-            "Perpetual": "Un VID perpetuo no tiene fecha de vencimiento y no tiene límite en el número de transacciones que se pueden realizar con este VID. Un UIN puede estar asociado solo con un VID perpetuo $instancesVID a la vez.",
-            "Temporary": "Un VID temporal es válido por $expiryTime minutos y solo se pueden realizar $transactionLimit transacciones utilizando este VID. Un UIN puede estar asociado con $instancesVID VID temporales a la vez.",
-            "OneTimeUse": "Un VID de un solo uso no tiene fecha de vencimiento, pero solo se pueden realizar $transactionLimit transacciones utilizando este VID. Un UIN puede estar asociado con un VID de un solo uso $instancesVID a la vez."            
+            "Perpetual": "Un VID perpetuo no tiene fecha de vencimiento ni límite en la cantidad de transacciones que se pueden realizar utilizando este VID. Un UIN se puede asociar solo con $instancesVID $VID perpetuo a la vez.",
+            "Temporary": "Un VID temporal es válido por $expiryTime minutos y solo se puede realizar la transacción $transactionLimit utilizando este VID. Se puede asociar un UIN con $instancesVID $VID temporal a la vez.",
+            "OneTimeUse": "Un VID único no tiene fecha de vencimiento, pero solo se puede realizar la transacción $transactionLimit utilizando este VID. Se puede asociar un UIN con $instancesVID una vez $VID a la vez."            
         },
         "secureMyID": {
             "Email OTP Authentication": "Al bloquear/desbloquear 'Autenticación por correo electrónico con OTP', cualquier intento de autenticación realizado utilizando un OTP por correo electrónico se deshabilitará/habilitará.",
