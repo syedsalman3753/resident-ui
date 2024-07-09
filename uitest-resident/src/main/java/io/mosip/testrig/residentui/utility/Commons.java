@@ -198,6 +198,7 @@ public class Commons extends BaseClass{
 
 	public static void assertCheck(By by,String message) throws IOException {
 		try {
+			wait(2000);
 			boolean isDisplayed = Commons.isDisplayed(driver, by);
 			Assert.assertTrue(isDisplayed,message);
 
@@ -209,6 +210,7 @@ public class Commons extends BaseClass{
 	
 	public static void assertCheckString(String text,String message) throws IOException {
 		try {
+			wait(2000);
 			Assert.assertNotNull(text,message);
 
 		} catch (AssertionError e) {
