@@ -108,7 +108,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   cancellable:boolean = false;
   draftsDetails:any;
   enteredOnlyNumbers:boolean = false;
-  disablePrefLangBtn:boolean = false
+  disablePrefLangBtn:boolean = false;
+  firstInputLang:any = {};
 
 
   private keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
@@ -609,6 +610,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureValue(event: any, formControlName: string, language: string, currentValue: any) {
+    if(!this.firstInputLang[formControlName] && event.target.value)
+      this.firstInputLang[formControlName] = language;
+  
     let userNewData = event.target.value.trim();
     let self = this;
     if (userNewData === "") {
@@ -632,7 +636,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               this.userInfoClone[formControlName].push(newData)
               this.userInputValues[formControlName][language] = userNewData;
             } else {
-              this.translateUserInput(item, language, userNewData, formControlName, 'userInfoClone')
+              if(this.firstInputLang[formControlName] === language)
+                this.translateUserInput(item, language, userNewData, formControlName, 'userInfoClone')
             }
           })
         } else {
@@ -706,6 +711,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
   }
 
   captureAddressValue(event: any, formControlName: string, language: string, currentValue: string) {
+    if(!this.firstInputLang[formControlName] && event.target.value)
+      this.firstInputLang[formControlName] = language;
+    
     let self = this;
     let userNewData = event.target.value.trim();
     if (userNewData === "") {
@@ -727,7 +735,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
               this.userInfoAddressClone[formControlName].push(newData)
               this.userInputValues[formControlName][language] = userNewData;
             } else {
-              this.translateUserInput(item, language, userNewData, formControlName, 'userInfoAddressClone')
+              if(this.firstInputLang[formControlName] === language)
+                this.translateUserInput(item, language, userNewData, formControlName, 'userInfoAddressClone')
             }
           })
         } else {
