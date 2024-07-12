@@ -586,7 +586,7 @@ input.readonly{
   .contact-update-sub-card{
     display: flex; 
     flex-direction: row;
-    width: 100%;
+    width: 95%;
   }
   .contact-update-each-sub-card{
     width: 40%;
