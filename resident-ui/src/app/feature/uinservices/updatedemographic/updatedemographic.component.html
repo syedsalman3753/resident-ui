@@ -529,7 +529,7 @@
           </tr>
         </table>
         <div class="submit-btn-card">
-          <button [style.font-size]="fontSize.subHeading" [disabled]="previewDisabled" (click)="previewBtn('identity')" mat-raised-button color="primary"
+          <button [style.font-size]="fontSize.subHeading" [disabled]="previewDisabled || enteredOnlyNumbers" (click)="previewBtn('identity')" mat-raised-button color="primary"
             id="previewBtn">{{langJson.preview}}</button>
         </div>
       </mat-tab>
