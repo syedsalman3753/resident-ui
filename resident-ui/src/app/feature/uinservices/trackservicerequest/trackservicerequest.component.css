@@ -101,16 +101,6 @@ td {
   width: 100% !important;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
 @media screen and (max-width:600px){
   .mat-card{
     padding: 8px;

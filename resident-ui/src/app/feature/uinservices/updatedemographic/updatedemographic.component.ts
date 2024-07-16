@@ -616,6 +616,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     let userNewData = event.target.value.trim();
     let self = this;
     if (userNewData === "") {
+      this.enteredOnlyNumbers = false;
       if (this.userInfoClone[formControlName]) {
         delete this.userInfoClone[formControlName]
       }
@@ -625,7 +626,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       })
     } else {
       if (formControlName !== "proofOfIdentity") {
-        if (userNewData.toLowerCase() !== currentValue.toLowerCase() && !/\d/.test(userNewData) && userNewData !== this.userInputValues[formControlName][language] ) {
+        if (userNewData.toLowerCase() !== currentValue.toLowerCase() && /^[A-Za-z]+$/.test(userNewData) && userNewData !== this.userInputValues[formControlName][language] ) {
           this.isSameData[formControlName] = false;
           this.enteredOnlyNumbers = false;
           this.userInfoClone[formControlName] = []
@@ -646,7 +647,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
           }
           if(userNewData.toLowerCase() === currentValue.toLowerCase()){
             this.isSameData[formControlName] = true;
-          }else if(/\d/.test(userNewData)){
+          }else if(!/^[A-Za-z]+$/.test(userNewData)){
             this.enteredOnlyNumbers = true;
           }
           
