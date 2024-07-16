@@ -185,7 +185,7 @@
                                   (click)="isUpdatedataInProgress($event, 'textField')"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
                                   #keyboardRef />
-                                <i matSuffix class="material-icons mat-keyboard-icon"
+                                <i *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
                                   (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
                               </div>
 
@@ -218,7 +218,7 @@
                             <td></td>
                             <td>
                               <span class="warning-message" *ngIf="isSameData[field.attributeName]">
-                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}.</span>
+                                {{langJson.sameNameInputErrorMsg.replace("$NAME",langJson[field.attributeName]).replace("$NAME",langJson[field.attributeName])}}</span>
                                 <span class="warning-message" *ngIf="enteredOnlyNumbers">
                                   {{langJson.enteredOnlyNums}}</span>
                             </td>
@@ -244,7 +244,7 @@
                                   (click)="isUpdatedataInProgress($event, 'textField')"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
                                   #keyboardRef />
-                                <i matSuffix class="material-icons mat-keyboard-icon"
+                                <i *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
                                   (click)="openKeyboard(field.attributeName+item.language+'Mobile', item.language)">keyboard</i>
                               </div>
                             </td>
@@ -456,7 +456,7 @@
                                   <span [style.font-size]="fontSize.lableText" 
                                     style="margin-top: 4px;padding-left: 5px; font-weight: 600;">{{langJson.uploadImage}}</span>
                                 </label>
-                                <h3 [style.font-size]="fontSize.lableText">{{langJson.or}}</h3>
+                                <h3 style="margin-right: 8px;" [style.font-size]="fontSize.lableText">{{langJson.or}}</h3>
                                 &nbsp;
                                 <h3 [style.font-size]="fontSize.lableText">{{langJson.dropImage}}</h3>
                               </div>
@@ -529,7 +529,7 @@
           </tr>
         </table>
         <div class="submit-btn-card">
-          <button [style.font-size]="fontSize.subHeading" [disabled]="previewDisabled" (click)="previewBtn('identity')" mat-raised-button color="primary"
+          <button [style.font-size]="fontSize.subHeading" [disabled]="previewDisabled || enteredOnlyNumbers" (click)="previewBtn('identity')" mat-raised-button color="primary"
             id="previewBtn">{{langJson.preview}}</button>
         </div>
       </mat-tab>
@@ -840,7 +840,7 @@
                                     <span [style.font-size]="fontSize.lableText"
                                       style="margin-top: 4px;padding-left: 5px; font-weight: 600;">{{langJson.uploadImage}}</span>
                                   </label>
-                                  <h3 [style.font-size]="fontSize.lableText">{{langJson.or}}</h3>
+                                  <h3 style="margin-right: 5px;" [style.font-size]="fontSize.lableText">{{langJson.or}}</h3>
                                   &nbsp;
                                   <h3 [style.font-size]="fontSize.lableText">{{langJson.dropImage}}</h3>
                                 </div>

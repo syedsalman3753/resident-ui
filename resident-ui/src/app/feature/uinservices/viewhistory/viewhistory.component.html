@@ -15,7 +15,7 @@
 	          <div class="mini-card">
 	            <p class="search-input-label"><span [style.font-size]="fontSize.paragraph" class="label" >{{'viewhistory.inputsearch' |translate}}</span></p>
 	            <span class="input event-id-search-card" >
-					<input [style.font-size]="fontSize.breadcrumb" dir="{{sitealignment}}" [value]="searchText" type="text" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" 
+					<input [style.font-size]="fontSize.breadcrumb" dir="{{sitealignment}}" [value]="searchText" type="number" id="appIdValue" name="appIdValue" (blur)="captureValue($event, '', 'searchText', 'textbox')" 
 					placeholder="{{'viewhistory.inputAppId' | translate}}" class="service-input-card" (focus)="captureVirtualKeyboard(search, 0)" #keyboardRef/>
 					<i matSuffix class="material-icons mat-keyboard-icon" (click)="openKeyboard()">keyboard</i>
 				</span>
@@ -65,7 +65,7 @@
 	            <p class="search-input-label"><span [style.font-size]="fontSize.paragraph" class="label">{{'viewhistory.inputStatus' | translate}}</span></p>
 	            <!-- <mat-card-subtitle style="display: flex;"> -->
 					<span class="input">
-						<button [style.font-size]="fontSize.breadcrumb" class="dropdown-btn" id="statusTypeBtn" [matMenuTriggerFor]="basic2">{{statusHistorySelectedValue}}<mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
+						<button [style.font-size]="fontSize.breadcrumb" class="dropdown-btn" id="statusTypeBtn" [matMenuTriggerFor]="basic2"><span>{{statusHistorySelectedValue}}</span><mat-icon class="dropdown-arrow">keyboard_arrow_down</mat-icon></button>
 						<mat-menu #basic2="matMenu" [xPosition]="langCode === 'ara' ? 'before' : 'after'" [backdropClass]="'viewHistory'" >
 							<ng-container *ngFor="let status of statusTypeFilter">
 								<button mat-menu-item>
