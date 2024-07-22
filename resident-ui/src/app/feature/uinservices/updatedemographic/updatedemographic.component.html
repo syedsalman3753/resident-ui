@@ -185,8 +185,8 @@
                                   (click)="isUpdatedataInProgress($event, 'textField')"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
                                   #keyboardRef />
-                                <i *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
-                                  (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
+                                <em *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</em>
                               </div>
 
                             </td>
@@ -244,8 +244,8 @@
                                   (click)="isUpdatedataInProgress($event, 'textField')"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
                                   #keyboardRef />
-                                <i *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
-                                  (click)="openKeyboard(field.attributeName+item.language+'Mobile', item.language)">keyboard</i>
+                                <em *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName+item.language+'Mobile', item.language)">keyboard</em>
                               </div>
                             </td>
                           </tr>
@@ -424,8 +424,8 @@
                                   (blur)="captureValue($event, field.attributeName, '', '')"
                                   (focus)="captureVirtualKeyboard(field.attributeName + 'value', buildJSONData.proofOfIdentity)"
                                   #keyboardRef />
-                                <i matSuffix class="material-icons mat-keyboard-icon"
-                                  (click)="openKeyboard(field.attributeName +'value')">keyboard</i>
+                                <em matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName +'value')">keyboard</em>
                               </div>
                             </td>
                           </tr>
