@@ -318,7 +318,7 @@ export class SharewithpartnerComponent implements OnInit, OnDestroy {
                 if (item.value === type['value']) {
                   return item['checked'] = !item['checked']
                 } else {
-                  return item['checked'] = item['checked']
+                  return item['checked']
                 }
               })
             }

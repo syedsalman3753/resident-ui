@@ -18,10 +18,8 @@
     opacity: 1;
     background-color: transparent;
     text-align: left;
-    font: normal normal medium 16px/19px Roboto;
     letter-spacing: 0px;
     color: #909090;
-    opacity: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,7 +112,7 @@ label {
     color: #ffffff;
 }
 
-@media screen and ((min-width:530px) and (max-width:755px)){
+@media screen and (min-width:530px) and (max-width:755px){
     .main-container{
         padding: 0 3rem 0 3rem;
     }

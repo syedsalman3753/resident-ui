@@ -9,7 +9,6 @@ ul, li{
   background: #FAF8F8 0% 0% no-repeat padding-box;
   box-shadow: none;
   border: 1px solid silver;
-  background: #FAF8F8 0% 0% no-repeat padding-box;
 }
 .mat-card-header-text{
   display: flex;
@@ -45,7 +44,6 @@ mat-card-subtitle{
 }
 
 .intro-description {
-  font: normal normal medium 16px/22px Montserrat Medium;
   letter-spacing: 0px;
   color: #505050;
 }

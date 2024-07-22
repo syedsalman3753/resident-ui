@@ -255,13 +255,14 @@ export class PersonalisedcardComponent implements OnInit, OnDestroy {
                 if (eachItem.value === type['value']) {
                   return eachItem['checked'] = !eachItem['checked']
                 } else {
-                  return eachItem['checked'] = eachItem['checked']
+                  return eachItem['checked']
                 }
               })
             }
             return item
           })
 
+          
           if (data.attributeName === "fullAddress") {
             let selectedValuesCount = 0;
             if (type["value"] !== 'fullAddress') {
