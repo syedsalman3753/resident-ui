@@ -15,6 +15,7 @@ import io.mosip.testrig.residentui.utility.TestRunner;
 public class UpdateMyData extends BaseClass {
 
 	public void updateMyDataName() throws Exception {
+		Commons.wait(ConfigManager.packetUpdateWait()*60000);
 		LoginTest.loginTest();
 		Commons.clickWebelement( driver, By.id("uinservices/updatedemographic"));
 		Commons.enter( driver, By.id("fullName"+BaseClass.envsupportlang()), Commons.generateRandomAlphabetString());
