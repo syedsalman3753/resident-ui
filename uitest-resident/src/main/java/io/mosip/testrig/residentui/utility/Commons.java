@@ -30,7 +30,7 @@ public class Commons extends BaseClass{
 
 	public  static void click(WebDriver driver, By by) throws IOException, InterruptedException {
 		logger.info("Clicking " + by );
-
+		wait(1000);
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(by));		
