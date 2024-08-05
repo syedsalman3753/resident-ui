@@ -199,6 +199,8 @@ public class Commons extends BaseClass{
 	public static void assertCheck(By by,String message) throws IOException {
 		try {
 			wait(2000);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			wait.until(ExpectedConditions.presenceOfElementLocated(by));
 			boolean isDisplayed = Commons.isDisplayed(driver, by);
 			Assert.assertTrue(isDisplayed,message);
 

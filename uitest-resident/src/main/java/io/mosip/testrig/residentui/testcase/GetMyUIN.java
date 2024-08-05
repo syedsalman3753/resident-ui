@@ -23,7 +23,7 @@ public class GetMyUIN extends BaseClass{
 		String otp = MockSMTPListener.getOtp(externalemail);
 		Commons.enter( driver, By.id("otp-input"), otp);
 		Commons.click( driver, By.xpath("//button[@id='getUinsubmitBtn']"));
-		Commons.assertCheck(By.id("dismissBtn"),"verify if Your UIN card has been successfully downloaded against the Event ID");
+		Commons.assertCheck(By.id("messagePopup"),"verify if Your UIN card has been successfully downloaded against the Event ID");
 		Commons.click( driver, By.id("dismissBtn"));			
 	}
 
