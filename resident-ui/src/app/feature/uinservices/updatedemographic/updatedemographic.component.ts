@@ -164,7 +164,7 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.defaultJsonValue = { ...defaultJson }
-    this.initialLocationCode = "MOR";
+    this.initialLocationCode = this.appConfigService.getConfig()["resident.update-uin.machine-zone-code"];
     this.locCode = 5;
     this.translateService.use(localStorage.getItem("langCode"));
     this.supportedLanguages = ["eng"];
@@ -263,8 +263,14 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         if (response["response"]) {
           this.userInfo = response["response"];
-          this.userInfo['fullName'].forEach(item=>{
-            this.getUserPerfLang.indexOf(item.language) === -1 ? this.getUserPerfLang.push(item.language) : ''
+          Object.keys(this.userInfo).forEach(item =>{
+            if(typeof this.userInfo[item] !== 'string' && this.userInfo[item].length){
+              if(this.getUserPerfLang.length){
+                this.userInfo[item].forEach(eachItem=>{
+                  this.getUserPerfLang.indexOf(eachItem.language) === -1 ? this.getUserPerfLang.push(eachItem.language) : ''
+                })
+              }
+            }
           })
           UpdatedemographicComponent.actualData = response["response"];
           this.buildData()
@@ -487,7 +493,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       let filedNameForuserInput = (item.charAt(0).toLocaleLowerCase() + item.slice(1)).replace(" ", "")
       if (typeof this.userInputValues[filedNameForuserInput] !== 'string') {
         this.getUserPerfLang.forEach(lang => {
-          this.userInputValues[filedNameForuserInput][lang] = ''
+          if(this.userInputValues[filedNameForuserInput])
+            this.userInputValues[filedNameForuserInput][lang] = ''
         })
       } else {
         this.userInputValues[filedNameForuserInput] = ''
@@ -626,15 +633,23 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       })
     } else {
       if (formControlName !== "proofOfIdentity") {
-        if (userNewData.toLowerCase() !== currentValue.toLowerCase() && /^[A-Za-z]+$/.test(userNewData) && userNewData !== this.userInputValues[formControlName][language] ) {
+        if (userNewData.toLowerCase() !== currentValue.toLowerCase() && /^[A-Za-z]+(\s[A-Za-z]+)*$/.test(userNewData) && userNewData !== this.userInputValues[formControlName][language]) {
           this.isSameData[formControlName] = false;
           this.enteredOnlyNumbers = false;
-          this.userInfoClone[formControlName] = []
+          if(!this.userInfoClone[formControlName])
+            this.userInfoClone[formControlName] = [];
           this.getUserPerfLang.forEach(item => {
             let newData
             if (item === language) {
-              newData = { "language": language, "value": userNewData }
-              this.userInfoClone[formControlName].push(newData)
+              if(this.firstInputLang[formControlName] === language){
+                newData = { "language": language, "value": userNewData }
+                this.userInfoClone[formControlName].push(newData)
+              }else{
+                this.userInfoClone[formControlName].forEach(item =>{
+                  if(item.language === language)
+                    item.value = userNewData
+                })
+              }
               this.userInputValues[formControlName][language] = userNewData;
             } else {
               if(this.firstInputLang[formControlName] === language)
@@ -642,12 +657,9 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
             }
           })
         } else {
-          if (this.userInfoClone[formControlName]) {
-            delete this.userInfoClone[formControlName]
-          }
           if(userNewData.toLowerCase() === currentValue.toLowerCase()){
             this.isSameData[formControlName] = true;
-          }else if(!/^[A-Za-z]+$/.test(userNewData)){
+          }else if(!/^[A-Za-z]+(\s[A-Za-z]+)*$/.test(userNewData)){
             this.enteredOnlyNumbers = true;
           }
           
@@ -718,8 +730,8 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     let self = this;
     let userNewData = event.target.value.trim();
     if (userNewData === "") {
-      if (this.userInfoClone[formControlName]) {
-        delete this.userInfoClone[formControlName]
+      if (this.userInfoAddressClone[formControlName]) {
+        delete this.userInfoAddressClone[formControlName]
       }
       this.getUserPerfLang.forEach(item => {
         this.userInputValues[formControlName][item] = ''
@@ -728,12 +740,20 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
       if (formControlName !== "proofOfAddress") {
         if (userNewData.toLowerCase() !== currentValue.toLowerCase()) {
           this.isSameData[formControlName] = false;
-          this.userInfoAddressClone[formControlName] = []
+          if(!this.userInfoAddressClone[formControlName])
+            this.userInfoAddressClone[formControlName] = [];
           this.getUserPerfLang.forEach(item => {
             let newData
             if (item === language) {
-              newData = { "language": language, "value": userNewData }
-              this.userInfoAddressClone[formControlName].push(newData)
+              if(this.firstInputLang[formControlName] === language){
+                newData = { "language": language, "value": userNewData }
+                this.userInfoAddressClone[formControlName].push(newData)
+              }else{
+                this.userInfoAddressClone[formControlName].forEach(item =>{
+                  if(item.language === language)
+                    item.value = userNewData
+                })
+              }
               this.userInputValues[formControlName][language] = userNewData;
             } else {
               if(this.firstInputLang[formControlName] === language)

@@ -185,8 +185,8 @@
                                   (click)="isUpdatedataInProgress($event, 'textField')"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
                                   #keyboardRef />
-                                <i *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
-                                  (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</i>
+                                <em *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName+item.language, item.language)">keyboard</em>
                               </div>
 
                             </td>
@@ -244,8 +244,8 @@
                                   (click)="isUpdatedataInProgress($event, 'textField')"
                                   [disabled]="attributeUpdateCountRemainLimit[field.attributeName] === 0"
                                   #keyboardRef />
-                                <i *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
-                                  (click)="openKeyboard(field.attributeName+item.language+'Mobile', item.language)">keyboard</i>
+                                <em *ngIf="attributeUpdateCountRemainLimit[field.attributeName] !== 0" matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName+item.language+'Mobile', item.language)">keyboard</em>
                               </div>
                             </td>
                           </tr>
@@ -424,8 +424,8 @@
                                   (blur)="captureValue($event, field.attributeName, '', '')"
                                   (focus)="captureVirtualKeyboard(field.attributeName + 'value', buildJSONData.proofOfIdentity)"
                                   #keyboardRef />
-                                <i matSuffix class="material-icons mat-keyboard-icon"
-                                  (click)="openKeyboard(field.attributeName +'value')">keyboard</i>
+                                <em matSuffix class="material-icons mat-keyboard-icon"
+                                  (click)="openKeyboard(field.attributeName +'value')">keyboard</em>
                               </div>
                             </td>
                           </tr>
@@ -662,16 +662,16 @@
                                 </td>
                                 <td class="sub-table-row ele-for-lap-tab-card" width="3%"></td>
                                 <td class="sub-table-row each-Hierarchy-td width-of-input ele-for-lap-tab-card"
-                                  *ngIf="dynamicDropDown[field.name]">
+                                  *ngIf="dynamicDropDown[field.attributeName]">
                                   <span [ngClass]="item.language === 'ara' ? 'dir-rtl' :'dir-ltl'">
                                     <mat-select #matSelect [style.font-size]="fontSize.paragraph" disableOptionCentering
                                       placeholder="{{field.placeHolder[item.language]}}"
-                                      [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'"
+                                      [ngClass]="dynamicDropDown[field.attributeName]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'"
                                       [(value)]="userInputValues[field.attributeName][item.language]"
                                       id="{{field.name}}{{item.language}}"
                                       (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel,field.attributeName,typeOf(userInfo[field.attributeName]))"
                                       (click)="isUpdatedataInProgress(matSelect, 'dropDownField')">
-                                      <mat-option *ngFor="let data of dynamicDropDown[field.name][item.language]"
+                                      <mat-option *ngFor="let data of dynamicDropDown[field.attributeName][item.language]"
                                         [value]="data.code">
                                         {{ data.name }}
                                       </mat-option>
@@ -687,14 +687,14 @@
                               </td>
                               <td class="sub-table-row ele-for-lap-tab-card" width="3%"></td>
                               <td class="sub-table-row each-Hierarchy-td width-of-input ele-for-lap-tab-card"
-                                *ngIf="dynamicDropDown[field.name]">
+                                *ngIf="dynamicDropDown[field.attributeName]">
                                 <mat-select #matSelect [style.font-size]="fontSize.paragraph" disableOptionCentering
                                   placeholder="{{langJson.select}} {{field.labelName[langCode][1]}}"
-                                  [ngClass]="dynamicDropDown[field.name]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'"
+                                  [ngClass]="dynamicDropDown[field.attributeName]?.length === 0 ? 'disable-dropdown' : 'enable-dropdown'"
                                   [(value)]="userInputValues[field.attributeName]" id="{{field.name}}"
                                   (selectionChange)="loadLocationDataDynamically($event, field.locationHierarchyLevel,field.attributeName,typeOf(userInfo[field.attributeName]))"
                                   (click)="isUpdatedataInProgress(matSelect, 'dropDownField')">
-                                  <mat-option *ngFor="let data of dynamicDropDown[field.name].eng" [value]="data.code">
+                                  <mat-option *ngFor="let data of dynamicDropDown[field.attributeName].eng" [value]="data.code">
                                     {{ data.name }}
                                   </mat-option>
                                 </mat-select>

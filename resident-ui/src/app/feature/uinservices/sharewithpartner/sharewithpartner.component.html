@@ -58,8 +58,8 @@
 										<tr style="word-break: break-word;">
 											<td rowspan='2' *ngIf="sharableAttributes['photo']"><img [src]="sharableAttributes['photo']['value']" alt='' width='70px' height='70px' /></td>
 											<td>
-											   <span *ngIf="sharableAttributes['name']">
-												  <label [style.font-size]="fontSize.breadcrumb" style="color: #666666;">{{sharableAttributes['name']['label']}}</label><br><span [style.font-size]="fontSize.paragraph" style="color: #000000; font-weight: 400;">{{sharableAttributes['name']['value']}}</span>
+											   <span *ngIf="sharableAttributes['fullName']">
+												  <label [style.font-size]="fontSize.breadcrumb" style="color: #666666;">{{sharableAttributes['fullName']['label']}}</label><br><span [style.font-size]="fontSize.paragraph" style="color: #000000; font-weight: 400;">{{sharableAttributes['fullName']['value']}}</span>
 											   </span>
 											</td>
 											<td [ngStyle]="{'float': langCode === 'ara' ? 'left' : 'right' }"><img style="height: 50px; width: 50px;" alt="logo" src="/assets/MOSIP Vertical Black.png"/></td>
@@ -117,7 +117,7 @@
 											(input)="getpurpose($event)"
 											(blur)="getpurpose($event)"
                                             (focus)="captureVirtualKeyboard(search, 0)" #keyboardRef></textarea>
-											<i style="float: right; color: grey; cursor: pointer;" matSuffix class="material-icons" (click)="openKeyboard()">keyboard</i>
+											<em style="float: right; color: grey; cursor: pointer;" matSuffix class="material-icons" (click)="openKeyboard()">keyboard</em>
 										</span>
 											<span [style.fontSize]="fontSize.breadcrumb"
 											style="color:red; display: block;">{{'sharewithpartner.TotalCharacters'

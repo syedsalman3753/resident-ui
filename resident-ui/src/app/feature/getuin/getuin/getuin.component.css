@@ -23,7 +23,6 @@
 
 .login-heading {
     text-align: center;
-    font: normal normal medium 20px/30px Poppins;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -330,7 +329,7 @@ ul li:last-child hr{
 }
 
 
-@media screen and ((min-width:1000px) and (max-width:1450px)){
+@media screen and (min-width:1000px) and (max-width:1450px){
     ul li:last-child hr{
         width: 88%;
         left: -40%;
@@ -338,7 +337,7 @@ ul li:last-child hr{
     }
 }
 
-@media screen and ((min-width:680px) and (max-width:999px)){
+@media screen and (min-width:680px) and (max-width:999px){
     ul li:last-child hr{
         width: 88%;
         left: -34%;
