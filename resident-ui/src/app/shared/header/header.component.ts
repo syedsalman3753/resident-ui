@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   selectedfontsize:any = localStorage.getItem('selectedfontsize');
   selectedLangData:any;
   isAuthorized:boolean = false;
-  showLangDropDown:boolean;
+  showLangDropDown:any;
 
   constructor(
     private router: Router,
