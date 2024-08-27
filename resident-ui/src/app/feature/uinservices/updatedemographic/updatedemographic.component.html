@@ -923,7 +923,7 @@
         <div *ngFor="let field of schema['identity']; let i = index" dir="{{sitealignment}}">
           <div class="contact-update-card" *ngIf="field.tabgroup === 'contact'" gutterSize="7px">
             <div class="contact-update-sub-card">
-              <div class="contact-update-each-sub-card">
+              <div class="contact-update-each-sub-card" *ngIf="buildJSONData[field.attributeName]">
                 <mat-card-subtitle [style.font-size]="fontSize.paragraph" class="contact-lable">{{field.labelName[langCode][0]}}</mat-card-subtitle>
                 <input [style.font-size]="fontSize.paragraph" type="text" class="readonly" readonly="true" disabled="true"
                   [value]="buildJSONData[field.attributeName].value">

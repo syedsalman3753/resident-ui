@@ -691,19 +691,18 @@ export class UpdatedemographicComponent implements OnInit, OnDestroy {
     let genders = this.dropDownValues.gender
     let currentValueCode
     genders[language].forEach(item => {
-      if (item.value === currentValue) {
-        currentValueCode = item.code
-      }
-    })
+      currentValueCode = item.value === currentValue ? item.code : currentValue
+    });
+  
     let self = this;
     if (formControlName !== "proofOfIdentity") {
-      if (event.value.toLowerCase() !== currentValueCode.toLocaleLowerCase()) {
+      if (event.value !== currentValueCode) {
         this.isSameData[formControlName] = false;
         this.userInfoClone[formControlName] = []
         this.getUserPerfLang.forEach(item => {
           let newData
           genders[item].forEach(eachGender => {
-            if (eachGender.code === event.value) {
+            if (eachGender.code.toLowerCase() === event.value.toLowerCase()) {
               newData = { "language": item, "value": eachGender.value }
               this.userInputValues[formControlName][item] = eachGender.code;
             }
